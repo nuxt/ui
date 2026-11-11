@@ -10,7 +10,7 @@ exports[`CheckboxGroup > renders with ariaLabel correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -21,7 +21,7 @@ exports[`CheckboxGroup > renders with ariaLabel correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -32,7 +32,7 @@ exports[`CheckboxGroup > renders with ariaLabel correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -52,7 +52,7 @@ exports[`CheckboxGroup > renders with as correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -63,7 +63,7 @@ exports[`CheckboxGroup > renders with as correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -74,7 +74,7 @@ exports[`CheckboxGroup > renders with as correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -94,7 +94,7 @@ exports[`CheckboxGroup > renders with class correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -105,7 +105,7 @@ exports[`CheckboxGroup > renders with class correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -116,7 +116,7 @@ exports[`CheckboxGroup > renders with class correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -134,7 +134,7 @@ exports[`CheckboxGroup > renders with defaultValue correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -145,7 +145,7 @@ exports[`CheckboxGroup > renders with defaultValue correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -156,7 +156,7 @@ exports[`CheckboxGroup > renders with defaultValue correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -176,7 +176,7 @@ exports[`CheckboxGroup > renders with description correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <p data-slot="description" class="text-muted">Description 0</p>
       </div>
@@ -187,7 +187,7 @@ exports[`CheckboxGroup > renders with description correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <p data-slot="description" class="text-muted">Description 1</p>
       </div>
@@ -198,7 +198,7 @@ exports[`CheckboxGroup > renders with description correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <p data-slot="description" class="text-muted">Description 2</p>
       </div>
@@ -218,7 +218,7 @@ exports[`CheckboxGroup > renders with description slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <p data-slot="description" class="text-muted">Description slot</p>
       </div>
@@ -229,7 +229,7 @@ exports[`CheckboxGroup > renders with description slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <p data-slot="description" class="text-muted">Description slot</p>
       </div>
@@ -240,7 +240,7 @@ exports[`CheckboxGroup > renders with description slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <p data-slot="description" class="text-muted">Description slot</p>
       </div>
@@ -260,7 +260,7 @@ exports[`CheckboxGroup > renders with descriptionKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <p data-slot="description" class="text-muted">1</p>
       </div>
@@ -271,7 +271,7 @@ exports[`CheckboxGroup > renders with descriptionKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <p data-slot="description" class="text-muted">2</p>
       </div>
@@ -282,7 +282,7 @@ exports[`CheckboxGroup > renders with descriptionKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <p data-slot="description" class="text-muted">3</p>
       </div>
@@ -302,7 +302,7 @@ exports[`CheckboxGroup > renders with disabled correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 1</label>
         <!--v-if-->
       </div>
@@ -313,7 +313,7 @@ exports[`CheckboxGroup > renders with disabled correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 2</label>
         <!--v-if-->
       </div>
@@ -324,7 +324,7 @@ exports[`CheckboxGroup > renders with disabled correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 3</label>
         <!--v-if-->
       </div>
@@ -341,7 +341,7 @@ exports[`CheckboxGroup > renders with highlight indicator hidden correctly 1`] =
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none sr-only size-4 ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -350,7 +350,7 @@ exports[`CheckboxGroup > renders with highlight indicator hidden correctly 1`] =
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none sr-only size-4 ring-primary" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -359,7 +359,7 @@ exports[`CheckboxGroup > renders with highlight indicator hidden correctly 1`] =
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none sr-only size-4 ring-primary" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -377,7 +377,7 @@ exports[`CheckboxGroup > renders with horizontal variant card correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="horizontal"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -388,7 +388,7 @@ exports[`CheckboxGroup > renders with horizontal variant card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -399,7 +399,7 @@ exports[`CheckboxGroup > renders with horizontal variant card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -418,7 +418,7 @@ exports[`CheckboxGroup > renders with horizontal variant list correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="horizontal"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -429,7 +429,7 @@ exports[`CheckboxGroup > renders with horizontal variant list correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -440,7 +440,7 @@ exports[`CheckboxGroup > renders with horizontal variant list correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -457,7 +457,7 @@ exports[`CheckboxGroup > renders with horizontal variant table correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="horizontal"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -468,7 +468,7 @@ exports[`CheckboxGroup > renders with horizontal variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -479,7 +479,7 @@ exports[`CheckboxGroup > renders with horizontal variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -497,7 +497,7 @@ exports[`CheckboxGroup > renders with icon card correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
@@ -505,7 +505,7 @@ exports[`CheckboxGroup > renders with icon card correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
@@ -513,7 +513,7 @@ exports[`CheckboxGroup > renders with icon card correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
@@ -531,7 +531,7 @@ exports[`CheckboxGroup > renders with icon correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
     </div>
@@ -539,7 +539,7 @@ exports[`CheckboxGroup > renders with icon correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
     </div>
@@ -547,7 +547,7 @@ exports[`CheckboxGroup > renders with icon correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -563,7 +563,7 @@ exports[`CheckboxGroup > renders with icon table correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
@@ -571,7 +571,7 @@ exports[`CheckboxGroup > renders with icon table correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
@@ -579,7 +579,7 @@ exports[`CheckboxGroup > renders with icon table correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
@@ -597,7 +597,7 @@ exports[`CheckboxGroup > renders with indicator end correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full me-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline me-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -608,7 +608,7 @@ exports[`CheckboxGroup > renders with indicator end correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full me-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline me-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -619,7 +619,7 @@ exports[`CheckboxGroup > renders with indicator end correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full me-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline me-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -637,7 +637,7 @@ exports[`CheckboxGroup > renders with indicator hidden correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -646,7 +646,7 @@ exports[`CheckboxGroup > renders with indicator hidden correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -655,7 +655,7 @@ exports[`CheckboxGroup > renders with indicator hidden correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -673,7 +673,7 @@ exports[`CheckboxGroup > renders with indicator start correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -684,7 +684,7 @@ exports[`CheckboxGroup > renders with indicator start correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -695,7 +695,7 @@ exports[`CheckboxGroup > renders with indicator start correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -715,7 +715,7 @@ exports[`CheckboxGroup > renders with items correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -726,7 +726,7 @@ exports[`CheckboxGroup > renders with items correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -737,7 +737,7 @@ exports[`CheckboxGroup > renders with items correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -757,7 +757,7 @@ exports[`CheckboxGroup > renders with label slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Label slot</label>
         <!--v-if-->
       </div>
@@ -768,7 +768,7 @@ exports[`CheckboxGroup > renders with label slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Label slot</label>
         <!--v-if-->
       </div>
@@ -779,7 +779,7 @@ exports[`CheckboxGroup > renders with label slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Label slot</label>
         <!--v-if-->
       </div>
@@ -799,7 +799,7 @@ exports[`CheckboxGroup > renders with labelKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">1</label>
         <!--v-if-->
       </div>
@@ -810,7 +810,7 @@ exports[`CheckboxGroup > renders with labelKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">2</label>
         <!--v-if-->
       </div>
@@ -821,7 +821,7 @@ exports[`CheckboxGroup > renders with labelKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">3</label>
         <!--v-if-->
       </div>
@@ -841,7 +841,7 @@ exports[`CheckboxGroup > renders with legend slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -852,7 +852,7 @@ exports[`CheckboxGroup > renders with legend slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -863,7 +863,7 @@ exports[`CheckboxGroup > renders with legend slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -881,7 +881,7 @@ exports[`CheckboxGroup > renders with max correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -892,7 +892,7 @@ exports[`CheckboxGroup > renders with max correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 2</label>
         <!--v-if-->
       </div>
@@ -903,7 +903,7 @@ exports[`CheckboxGroup > renders with max correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 3</label>
         <!--v-if-->
       </div>
@@ -920,7 +920,7 @@ exports[`CheckboxGroup > renders with max variant table correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -931,7 +931,7 @@ exports[`CheckboxGroup > renders with max variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 2</div>
         <!--v-if-->
@@ -942,7 +942,7 @@ exports[`CheckboxGroup > renders with max variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 3</div>
         <!--v-if-->
@@ -961,7 +961,7 @@ exports[`CheckboxGroup > renders with modelValue correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -972,7 +972,7 @@ exports[`CheckboxGroup > renders with modelValue correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -983,7 +983,7 @@ exports[`CheckboxGroup > renders with modelValue correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1000,7 +1000,7 @@ exports[`CheckboxGroup > renders with neutral variant card correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1011,7 +1011,7 @@ exports[`CheckboxGroup > renders with neutral variant card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1022,7 +1022,7 @@ exports[`CheckboxGroup > renders with neutral variant card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1040,7 +1040,7 @@ exports[`CheckboxGroup > renders with neutral variant card highlight correctly 1
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none size-4 ring-inverted" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1051,7 +1051,7 @@ exports[`CheckboxGroup > renders with neutral variant card highlight correctly 1
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1062,7 +1062,7 @@ exports[`CheckboxGroup > renders with neutral variant card highlight correctly 1
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1081,7 +1081,7 @@ exports[`CheckboxGroup > renders with neutral variant list correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-inverted/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-inverted" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1092,7 +1092,7 @@ exports[`CheckboxGroup > renders with neutral variant list correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1103,7 +1103,7 @@ exports[`CheckboxGroup > renders with neutral variant list correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1121,7 +1121,7 @@ exports[`CheckboxGroup > renders with neutral variant list highlight correctly 1
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden size-4 outline-inverted/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-inverted ring-inverted" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1132,7 +1132,7 @@ exports[`CheckboxGroup > renders with neutral variant list highlight correctly 1
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1143,7 +1143,7 @@ exports[`CheckboxGroup > renders with neutral variant list highlight correctly 1
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1160,7 +1160,7 @@ exports[`CheckboxGroup > renders with neutral variant table correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1171,7 +1171,7 @@ exports[`CheckboxGroup > renders with neutral variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1182,7 +1182,7 @@ exports[`CheckboxGroup > renders with neutral variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1200,7 +1200,7 @@ exports[`CheckboxGroup > renders with neutral variant table highlight correctly 
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none size-4 ring-inverted" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1211,7 +1211,7 @@ exports[`CheckboxGroup > renders with neutral variant table highlight correctly 
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1222,7 +1222,7 @@ exports[`CheckboxGroup > renders with neutral variant table highlight correctly 
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1240,7 +1240,7 @@ exports[`CheckboxGroup > renders with primary variant card correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1251,7 +1251,7 @@ exports[`CheckboxGroup > renders with primary variant card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1262,7 +1262,7 @@ exports[`CheckboxGroup > renders with primary variant card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1280,7 +1280,7 @@ exports[`CheckboxGroup > renders with primary variant card highlight correctly 1
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none size-4 ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1291,7 +1291,7 @@ exports[`CheckboxGroup > renders with primary variant card highlight correctly 1
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1302,7 +1302,7 @@ exports[`CheckboxGroup > renders with primary variant card highlight correctly 1
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1321,7 +1321,7 @@ exports[`CheckboxGroup > renders with primary variant list correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1332,7 +1332,7 @@ exports[`CheckboxGroup > renders with primary variant list correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1343,7 +1343,7 @@ exports[`CheckboxGroup > renders with primary variant list correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1361,7 +1361,7 @@ exports[`CheckboxGroup > renders with primary variant list highlight correctly 1
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1372,7 +1372,7 @@ exports[`CheckboxGroup > renders with primary variant list highlight correctly 1
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1383,7 +1383,7 @@ exports[`CheckboxGroup > renders with primary variant list highlight correctly 1
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1400,7 +1400,7 @@ exports[`CheckboxGroup > renders with primary variant table correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1411,7 +1411,7 @@ exports[`CheckboxGroup > renders with primary variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1422,7 +1422,7 @@ exports[`CheckboxGroup > renders with primary variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1440,7 +1440,7 @@ exports[`CheckboxGroup > renders with primary variant table highlight correctly 
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none size-4 ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1451,7 +1451,7 @@ exports[`CheckboxGroup > renders with primary variant table highlight correctly 
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1462,7 +1462,7 @@ exports[`CheckboxGroup > renders with primary variant table highlight correctly 
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1483,7 +1483,7 @@ exports[`CheckboxGroup > renders with required correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1494,7 +1494,7 @@ exports[`CheckboxGroup > renders with required correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1505,7 +1505,7 @@ exports[`CheckboxGroup > renders with required correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1523,7 +1523,7 @@ exports[`CheckboxGroup > renders with size lg correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4.5 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1534,7 +1534,7 @@ exports[`CheckboxGroup > renders with size lg correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1545,7 +1545,7 @@ exports[`CheckboxGroup > renders with size lg correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1563,7 +1563,7 @@ exports[`CheckboxGroup > renders with size md correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1574,7 +1574,7 @@ exports[`CheckboxGroup > renders with size md correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1585,7 +1585,7 @@ exports[`CheckboxGroup > renders with size md correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1603,7 +1603,7 @@ exports[`CheckboxGroup > renders with size sm correctly 1`] = `
       <div data-slot="container" class="flex items-center h-4"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-3.5 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-xs">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-xs">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1614,7 +1614,7 @@ exports[`CheckboxGroup > renders with size sm correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-xs">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-xs">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1625,7 +1625,7 @@ exports[`CheckboxGroup > renders with size sm correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-xs">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-xs">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1643,7 +1643,7 @@ exports[`CheckboxGroup > renders with size xl correctly 1`] = `
       <div data-slot="container" class="flex items-center h-6"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-5 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-base">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-base">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1654,7 +1654,7 @@ exports[`CheckboxGroup > renders with size xl correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-base">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-base">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1665,7 +1665,7 @@ exports[`CheckboxGroup > renders with size xl correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-base">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-base">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1683,7 +1683,7 @@ exports[`CheckboxGroup > renders with size xs correctly 1`] = `
       <div data-slot="container" class="flex items-center h-4"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-3 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-2.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-xs">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-xs">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1694,7 +1694,7 @@ exports[`CheckboxGroup > renders with size xs correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-xs">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-xs">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1705,7 +1705,7 @@ exports[`CheckboxGroup > renders with size xs correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-xs">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-xs">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1725,7 +1725,7 @@ exports[`CheckboxGroup > renders with ui correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-red">Option 1</label>
         <!--v-if-->
       </div>
@@ -1736,7 +1736,7 @@ exports[`CheckboxGroup > renders with ui correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-red">Option 2</label>
         <!--v-if-->
       </div>
@@ -1747,7 +1747,7 @@ exports[`CheckboxGroup > renders with ui correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-red">Option 3</label>
         <!--v-if-->
       </div>
@@ -1765,7 +1765,7 @@ exports[`CheckboxGroup > renders with valueKey correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0:Option 1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:Option 1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1776,7 +1776,7 @@ exports[`CheckboxGroup > renders with valueKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:Option 2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1787,7 +1787,7 @@ exports[`CheckboxGroup > renders with valueKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
         <!--v-if--><label for="v-0:Option 3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
