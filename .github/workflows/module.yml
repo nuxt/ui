@@ -27,9 +27,6 @@ jobs:
         os: ${{ github.event_name == 'pull_request' && fromJSON('["ubuntu-latest"]') || fromJSON('["ubuntu-latest", "windows-latest"]') }} # macos-latest
         node: [24]
 
-    env:
-      NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -219,9 +216,6 @@ jobs:
     permissions:
       contents: read
       id-token: write # for OpenID Connect authentication with CodSpeed
-
-    env:
-      NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
 
     strategy:
       matrix:
