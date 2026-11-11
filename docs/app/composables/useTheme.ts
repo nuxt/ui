@@ -5,7 +5,7 @@ import { FONT_WEIGHT_DEFAULTS, FONTS, RADIUSES, NEUTRAL_COLORS, PRIMARY_COLORS }
 import { themeIcons, ICON_PACKS } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
 import type { SerializeOptions } from '../utils/theme/engine/serialize'
-import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
+import { SAFE_NAME, sanitizeComponentOverride, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
 // Tables only, never the engine barrel: this composable rides the entry
 // chunk on every page, and the barrel would drag presets, the palette math
 // and the serializer with it. The serializer loads on demand below.
@@ -463,7 +463,7 @@ export function useTheme() {
         // icons app-wide) and prototype-polluting keys
         if (key === 'colors' || key === 'icons' || key === '__proto__' || key === 'constructor' || key === 'prototype') continue
 
-        savedExtras.ui[key] = defu(value as Record<string, any>, savedExtras.ui[key] || {})
+        savedExtras.ui[key] = defu(sanitizeComponentOverride(value), savedExtras.ui[key] || {})
       }
     }
 

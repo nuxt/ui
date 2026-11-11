@@ -54,3 +54,35 @@ export function sanitizeCSSVariables(input: { light?: Record<string, any>, dark?
   }
   return { light: clean(input.light), dark: clean(input.dark) }
 }
+
+const UNSAFE_OVERRIDE_KEYS = new Set(['__proto__', 'constructor', 'prototype'])
+
+function cleanOverride(value: unknown, depth: number): unknown {
+  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return value
+  if (depth > 6 || !value || typeof value !== 'object') return undefined
+  if (Array.isArray(value)) return value.map(item => cleanOverride(item, depth + 1)).filter(item => item !== undefined)
+
+  const result: Record<string, unknown> = {}
+  for (const [key, item] of Object.entries(value)) {
+    if (UNSAFE_OVERRIDE_KEYS.has(key)) continue
+    const cleaned = cleanOverride(item, depth + 1)
+    if (cleaned !== undefined) result[key] = cleaned
+  }
+  return result
+}
+
+/**
+ * A component override from a link or the AI is theme data: class strings in `slots`,
+ * `variants` and `compoundVariants`, and plain values in `defaultVariants`, which
+ * components read as prop defaults.
+ */
+export function sanitizeComponentOverride(input: unknown): Record<string, any> {
+  const result = cleanOverride(input, 0)
+  if (!result || typeof result !== 'object' || Array.isArray(result)) return {}
+
+  const override = result as Record<string, any>
+  if (override.defaultVariants && typeof override.defaultVariants === 'object') {
+    override.defaultVariants = Object.fromEntries(Object.entries(override.defaultVariants).filter(([, value]) => typeof value !== 'object'))
+  }
+  return override
+}
