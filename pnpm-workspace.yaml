@@ -40,7 +40,7 @@ catalog:
   "@nuxt/ui": workspace:*
   "@nuxtjs/color-mode": ^4.1.0
   "@nuxtjs/mcp-toolkit": ^0.24.3
-  "@nuxtjs/mdc": ^0.23.2
+  "@nuxtjs/mdc": ^0.23.3
   "@nuxtjs/robots": ^7.0.2
   "@nuxtjs/sitemap": ^9.1.0
   "@octokit/rest": ^22.0.1
@@ -198,3 +198,4 @@ minimumReleaseAgeExclude:
   - nuxt-agent-discovery@0.8.1
   - "@comark/vue@0.9.1"
   - comark@0.9.1
+  - "@nuxtjs/mdc@0.23.3"
