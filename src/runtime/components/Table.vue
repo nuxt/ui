@@ -608,6 +608,21 @@ function resolveValue<T, A = undefined>(prop: T | ((arg: A) => T), arg?: A): T |
   return prop
 }
 
+function getCellClasses(cell: Cell<T, unknown>) {
+  const classes = [resolveValue(cell.column.columnDef.meta?.class?.td, cell)]
+  const defaultMeta = tableApi.options.defaultColumn?.meta
+
+  for (let column = cell.column.parent; column; column = column.parent) {
+    const meta = column.columnDef.meta
+    // TanStack applies defaultColumn to group definitions too.
+    if (meta && meta !== defaultMeta) {
+      classes.unshift(resolveValue(meta.class?.td, cell))
+    }
+  }
+
+  return classes
+}
+
 function getColumnStyles(column: Column<T>): Record<string, string> {
   const styles: Record<string, string> = {}
 
@@ -700,7 +715,7 @@ defineExpose({
         :class="ui.td({
           class: [
             props.ui?.td,
-            resolveValue(cell.column.columnDef.meta?.class?.td, cell)
+            ...getCellClasses(cell)
           ],
           pinned: !!cell.column.getIsPinned()
         })"

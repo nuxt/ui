@@ -294,6 +294,63 @@ describe('Table', () => {
     ])
   })
 
+  it('inherits cell classes from a column group', async () => {
+    const wrapper = await mountSuspended(Table<typeof data[number]>, {
+      props: {
+        data: data.slice(0, 1),
+        ui: { td: 'bg-default' },
+        columns: [{
+          accessorKey: 'id',
+          meta: { class: { td: 'font-bold' } }
+        }, {
+          header: 'Payment',
+          meta: { class: { td: 'bg-muted' }, colspan: { td: '2' }, rowspan: { td: '2' } },
+          columns: [{ accessorKey: 'email' }, { accessorKey: 'amount' }]
+        }]
+      }
+    })
+
+    const [id, ...paymentCells] = wrapper.findAll('tbody td')
+    expect(id!.classes()).toEqual(expect.arrayContaining(['bg-default', 'font-bold']))
+    expect(id!.classes()).not.toContain('bg-muted')
+    expect(paymentCells).toHaveLength(2)
+    for (const cell of paymentCells) {
+      expect(cell.classes()).toContain('bg-muted')
+      expect(cell.classes()).not.toContain('bg-default')
+      expect(cell.attributes('colspan')).toBeUndefined()
+      expect(cell.attributes('rowspan')).toBeUndefined()
+    }
+  })
+
+  it('merges dynamic cell classes from nested groups with child classes taking precedence', async () => {
+    const wrapper = await mountSuspended(Table<typeof data[number]>, {
+      props: {
+        data: [data[0]!, data[4]!],
+        columns: [{
+          header: 'Payment',
+          meta: { class: { td: ({ row }) => row.original.status === 'success' ? 'bg-default font-bold' : 'bg-default' } },
+          columns: [{
+            header: 'Details',
+            meta: { class: { td: 'bg-muted italic' } },
+            columns: [{ accessorKey: 'status' }, {
+              accessorKey: 'amount',
+              meta: { class: { td: 'bg-elevated' } }
+            }]
+          }]
+        }]
+      }
+    })
+
+    const [status, amount, failedStatus, failedAmount] = wrapper.findAll('tbody td')
+    expect(status!.classes()).toEqual(expect.arrayContaining(['bg-muted', 'font-bold', 'italic']))
+    expect(amount!.classes()).toEqual(expect.arrayContaining(['bg-elevated', 'font-bold', 'italic']))
+    expect(status!.classes()).not.toContain('bg-default')
+    expect(amount!.classes()).not.toContain('bg-default')
+    expect(amount!.classes()).not.toContain('bg-muted')
+    expect(failedStatus!.classes()).not.toContain('font-bold')
+    expect(failedAmount!.classes()).not.toContain('font-bold')
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Table, {
       props: {
@@ -605,6 +662,24 @@ describe('Table', () => {
       })
 
       expect(wrapper.find('td').text()).toBe('own')
+    })
+
+    it('applies default cell metadata only to leaves without their own metadata', async () => {
+      const wrapper = await mountSuspended(Table, {
+        props: {
+          data: [{ id: 1, amount: 10 }],
+          defaultColumn: { meta: { class: { td: 'font-bold' } } },
+          columns: [{
+            header: 'Payment',
+            columns: [{ accessorKey: 'id' }, { accessorKey: 'amount', meta: { class: { td: 'italic' } } }]
+          }]
+        }
+      })
+
+      const [id, amount] = wrapper.findAll('tbody td')
+      expect(id!.classes()).toContain('font-bold')
+      expect(amount!.classes()).toContain('italic')
+      expect(amount!.classes()).not.toContain('font-bold')
     })
   })
 
