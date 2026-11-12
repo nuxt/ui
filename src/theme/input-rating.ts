@@ -51,7 +51,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     variant: {
       solid: {
-        icon: '*:fill-current'
+        icon: '**:fill-current'
       },
       outline: {}
     },
