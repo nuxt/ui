@@ -24,7 +24,7 @@ export default defineTheme({
       top: {
         content: 'inset-x-0 top-0 origin-bottom rounded-b-lg h-(--drawer-content-height,auto) data-stacked:h-(--drawer-stack-height) max-h-[96%] flex-col-reverse translate-y-[calc(var(--drawer-snap-point-offset,0px)+var(--drawer-swipe-movement-y,0px)+var(--stack)*1rem)] after:inset-x-0 after:bottom-full after:h-(--bleed) data-[state=open]:animate-[slide-in-from-top_300ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-top_300ms_var(--ease-out)]',
         handle: 'w-full justify-center pb-2 before:inset-x-0 before:bottom-0 before:-top-4 after:w-12 after:h-1.5',
-        container: 'max-h-[calc(100%+var(--snap-offset,0px))]'
+        container: '-mt-(--snap-offset,0px)'
       },
       right: {
         content: 'inset-y-0 right-0 origin-left rounded-l-lg max-w-[calc(100%-2rem)] flex-row rtl:flex-row-reverse [--stack-shift:calc(var(--drawer-own-width,0px)-var(--drawer-stack-width,0px))] translate-x-[calc(var(--drawer-swipe-movement-x,0px)-var(--stack)*1rem+var(--stack-shift))] data-stacked:[clip-path:inset(-1rem_max(0px,var(--stack-shift))_-1rem_-1rem)] after:inset-y-0 after:left-full after:w-(--bleed) data-[state=open]:animate-[slide-in-from-right_300ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_300ms_var(--ease-out)]',
@@ -33,7 +33,7 @@ export default defineTheme({
       bottom: {
         content: 'inset-x-0 bottom-0 origin-top rounded-t-lg h-(--drawer-content-height,auto) data-stacked:h-(--drawer-stack-height) max-h-[96%] flex-col translate-y-[calc(var(--drawer-snap-point-offset,0px)+var(--drawer-swipe-movement-y,0px)-var(--stack)*1rem)] after:inset-x-0 after:top-full after:h-(--bleed) data-[state=open]:animate-[slide-in-from-bottom_300ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-bottom_300ms_var(--ease-out)]',
         handle: 'w-full justify-center pt-2 before:inset-x-0 before:top-0 before:-bottom-4 after:w-12 after:h-1.5',
-        container: 'max-h-[calc(100%-var(--snap-offset,0px))]'
+        container: 'mb-(--snap-offset,0px)'
       },
       left: {
         content: 'inset-y-0 left-0 origin-right rounded-r-lg max-w-[calc(100%-2rem)] flex-row-reverse rtl:flex-row [--stack-shift:calc(var(--drawer-own-width,0px)-var(--drawer-stack-width,0px))] translate-x-[calc(var(--drawer-swipe-movement-x,0px)+var(--stack)*1rem-var(--stack-shift))] data-stacked:[clip-path:inset(-1rem_-1rem_-1rem_max(0px,var(--stack-shift)))] after:inset-y-0 after:right-full after:w-(--bleed) data-[state=open]:animate-[slide-in-from-left_300ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-left_300ms_var(--ease-out)]',
