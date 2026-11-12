@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { Time } from '@internationalized/date'
-
-const time = shallowRef(new Time(12, 30, 0))
+const time = shallowRef(new Temporal.PlainTime(12, 30))
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 import type { VNode } from 'vue'
-import type { AcceptableValue as _AcceptableValue } from 'reka-ui'
+import type { AcceptableValue as _AcceptableValue, BaseChangeReason, ChangeEventDetails } from 'reka-ui'
 
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P] | undefined
@@ -115,10 +115,13 @@ export type GetModelValueEmits<
   I,
   VK extends GetItemKeys<I> | undefined,
   M extends boolean,
-  O extends object | undefined = undefined
+  O extends object | undefined = undefined,
+  R extends string = BaseChangeReason
 > = {
+  /** Event handler called before the value changes, `details.cancel()` keeps the current value. */
+  'beforeUpdate:modelValue': [value: GetModelValue<I, VK, M, O>, details: ChangeEventDetails<R>]
   /** Event handler called when the value changes. */
-  'update:modelValue': [value: GetModelValue<I, VK, M, O>]
+  'update:modelValue': [value: GetModelValue<I, VK, M, O>, details?: ChangeEventDetails<R>]
 }
 
 export type StringOrVNode

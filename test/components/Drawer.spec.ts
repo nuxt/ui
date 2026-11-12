@@ -69,6 +69,7 @@ describe('Drawer', () => {
     await wrapper.setProps({ open: true })
     await wrapper.setProps({ open: false })
     wrapper.find('[data-slot="drawer-content"]').element.dispatchEvent(new Event('transitionend'))
+    await new Promise(resolve => setTimeout(resolve))
     expect(wrapper.emitted('after:leave')).toHaveLength(1)
   })
 

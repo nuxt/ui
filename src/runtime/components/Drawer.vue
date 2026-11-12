@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { VNode, InjectionKey, ComputedRef } from 'vue'
-import type { DrawerRootProps, DrawerRootEmits, DrawerOpenChangeDetails, DrawerContentProps, DrawerContentEmits } from 'reka-ui'
+import type { DrawerRootProps, DrawerRootEmits, DrawerOpenChangeReason, DrawerPopupProps, DrawerPopupEmits, ChangeEventDetails } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/drawer'
 import type { ButtonProps } from './Button.vue'
@@ -38,7 +38,7 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'modal' | 'open' | 'd
    */
   inset?: boolean
   /** The content of the drawer. */
-  content?: Omit<DrawerContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DrawerContentEmits>>
+  content?: Omit<DrawerPopupProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DrawerPopupEmits>>
   /**
    * Render an overlay behind the drawer.
    * @defaultValue true
@@ -96,7 +96,7 @@ export interface DrawerSlots {
 
 <script setup lang="ts">
 import { computed, inject, onBeforeUnmount, provide, ref, shallowReactive, toRef, useTemplateRef, watch } from 'vue'
-import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle, DrawerClose, VisuallyHidden } from 'reka-ui'
+import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerBackdrop, DrawerPopup, DrawerTitle, DrawerDescription, DrawerGrabber, DrawerClose, VisuallyHidden } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useResizeObserver } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
@@ -137,17 +137,22 @@ watch(() => props.open, (value) => {
 })
 
 // A swipe closes without a DOM event, so `dismissible` is checked on the close reason.
-const ALLOWED_CLOSE_REASONS = new Set(['close-press', 'trigger-press'])
-function onOpenChange(value: boolean, details: DrawerOpenChangeDetails) {
+const ALLOWED_CLOSE_REASONS = new Set(['close-press', 'trigger-press', 'imperative-action'])
+function onBeforeOpenChange(value: boolean, details: ChangeEventDetails<DrawerOpenChangeReason>) {
   if (!value && !props.dismissible && !ALLOWED_CLOSE_REASONS.has(details.reason ?? '')) {
     details.cancel()
     emits('close:prevent')
     return
   }
 
+  // eslint-disable-next-line vue/require-explicit-emits -- `beforeUpdate:open` is declared via `DrawerEmits extends DrawerRootEmits`, which the rule doesn't resolve through
+  emits('beforeUpdate:open', value, details)
+}
+
+function onOpenChange(value: boolean, details: ChangeEventDetails<DrawerOpenChangeReason>) {
   // eslint-disable-next-line vue/require-explicit-emits -- `update:open` is declared via `DrawerEmits extends DrawerRootEmits`, which the rule doesn't resolve through
   emits('update:open', value, details)
-  if (!details.isCanceled && props.open === undefined) {
+  if (props.open === undefined) {
     isOpen.value = value
   }
 }
@@ -159,7 +164,7 @@ const stack = computed(() => frontmost.value.depth)
 
 // A stacked top or bottom drawer collapses to the frontmost height, so its own height is
 // only measured while nothing is open above it.
-const contentRef = useTemplateRef<InstanceType<typeof DrawerContent>>('contentRef')
+const contentRef = useTemplateRef<InstanceType<typeof DrawerPopup>>('contentRef')
 const size = ref({ width: 0, height: 0 })
 // `$el` isn't reactive and is a comment node while closed, so `isOpen` re-runs the target.
 useResizeObserver(() => isOpen.value && contentRef.value?.$el?.nodeType === 1 ? contentRef.value.$el : undefined, ([entry]) => {
@@ -193,9 +198,9 @@ const stackStyle = computed(() => stack.value > 0
 
 const rootProps = useForwardProps(props, ['open', 'defaultOpen', 'modal', 'snapPoints', 'snapPoint', 'defaultSnapPoint', 'snapToSequentialPoints'])
 
-function onSnapPointChange(value: NonNullable<DrawerRootProps['snapPoint']> | null) {
+function onSnapPointChange(...args: DrawerRootEmits['update:snapPoint']) {
   // eslint-disable-next-line vue/require-explicit-emits -- declared via `DrawerEmits extends DrawerRootEmits`, which the rule doesn't resolve through
-  emits('update:snapPoint', value)
+  emits('update:snapPoint', ...args)
 }
 
 // reka-ui only reports the open animation ending when the drawer reopens mid close: its watch on
@@ -245,6 +250,7 @@ const ui = computed(() => tv(theme, overrides.value)({
   <DrawerRoot
     v-bind="rootProps"
     :swipe-direction="swipeDirection"
+    @before-update:open="onBeforeOpenChange"
     @update:open="onOpenChange"
     @update:open-complete="onOpenComplete"
     @update:snap-point="onSnapPointChange"
@@ -255,9 +261,9 @@ const ui = computed(() => tv(theme, overrides.value)({
 
     <DrawerPortal v-bind="portalProps">
       <FieldGroupReset>
-        <DrawerOverlay v-if="props.overlay" data-slot="drawer-overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
+        <DrawerBackdrop v-if="props.overlay" data-slot="drawer-overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-        <DrawerContent
+        <DrawerPopup
           ref="contentRef"
           data-slot="drawer-content"
           :data-stacked="stack > 0 ? '' : undefined"
@@ -266,7 +272,7 @@ const ui = computed(() => tv(theme, overrides.value)({
           v-bind="contentProps"
           v-on="contentEvents"
         >
-          <DrawerHandle v-if="props.handle" data-slot="drawer-handle" :class="ui.handle({ class: props.ui?.handle })" />
+          <DrawerGrabber v-if="props.handle" data-slot="drawer-handle" :class="ui.handle({ class: props.ui?.handle })" />
 
           <VisuallyHidden v-if="(!props.title && !slots.title) || (!props.description && !slots.description) || !!slots.content">
             <DrawerTitle v-if="!props.title && !slots.title" />
@@ -332,7 +338,7 @@ const ui = computed(() => tv(theme, overrides.value)({
               </div>
             </div>
           </slot>
-        </DrawerContent>
+        </DrawerPopup>
       </FieldGroupReset>
     </DrawerPortal>
   </DrawerRoot>

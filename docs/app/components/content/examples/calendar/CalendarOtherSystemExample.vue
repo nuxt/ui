@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import { CalendarDate, HebrewCalendar } from '@internationalized/date'
-
-const hebrewDate = shallowRef(new CalendarDate(new HebrewCalendar(), 5781, 1, 1))
+const hebrewDate = shallowRef(Temporal.PlainDate.from({ calendar: 'hebrew', year: 5781, month: 1, day: 1 }))
 </script>
 
 <template>

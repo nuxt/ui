@@ -1,17 +1,13 @@
 <script setup lang="ts">
-import { CalendarDate, DateFormatter, getLocalTimeZone } from '@internationalized/date'
+const modelValue = shallowRef(new Temporal.PlainDate(2022, 1, 10))
 
-const df = new DateFormatter('en-US', {
-  dateStyle: 'medium'
-})
-
-const modelValue = shallowRef(new CalendarDate(2022, 1, 10))
+const label = computed(() => modelValue.value ? modelValue.value.toLocaleString('en-US', { dateStyle: 'medium' }) : 'Select a date')
 </script>
 
 <template>
   <UPopover>
     <UButton color="neutral" variant="subtle" icon="i-lucide-calendar">
-      {{ modelValue ? df.format(modelValue.toDate(getLocalTimeZone())) : 'Select a date' }}
+      {{ label }}
     </UButton>
 
     <template #content>

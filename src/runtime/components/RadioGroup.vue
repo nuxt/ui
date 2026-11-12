@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { RadioGroupRootProps, RadioGroupRootEmits } from 'reka-ui'
+import type { RadioGroupRootProps, RadioGroupRootEmits, RadioGroupChangeReason } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/radio-group'
@@ -81,9 +81,9 @@ export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], 
   ui?: RadioGroup['slots']
 }
 
-export type RadioGroupEmits<T extends RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value'> = Omit<RadioGroupRootEmits, 'update:modelValue'> & {
+export type RadioGroupEmits<T extends RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value'> = Omit<RadioGroupRootEmits, 'beforeUpdate:modelValue' | 'update:modelValue'> & {
   change: [event: Event]
-} & GetModelValueEmits<T, VK, false>
+} & GetModelValueEmits<T, VK, false, undefined, RadioGroupChangeReason>
 
 type NormalizeItem<T extends RadioGroupItem> = Exclude<T & { id: string }, RadioGroupValue>
 
