@@ -238,6 +238,13 @@ Use the `snap-points` prop to let the Drawer rest at several heights, as fractio
 prettier: true
 collapse: true
 name: 'drawer-snap-points-example'
+options:
+  - name: 'inset'
+    label: 'inset'
+    default: true
+    items:
+      - true
+      - false
 ---
 ::
 

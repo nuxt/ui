@@ -1,7 +1,10 @@
 <script setup lang="ts">
+const { inset = true } = defineProps<{
+  inset?: boolean
+}>()
+
 const snapPoints = ['20rem', 0.6, 1]
 const snapPoint = ref<number | string | null>('20rem')
-const inset = ref(true)
 
 const places = [
   { name: 'Blue Bottle Coffee', category: 'Café', distance: '120 m', icon: 'i-lucide-coffee' },
@@ -18,38 +21,34 @@ const places = [
 </script>
 
 <template>
-  <div class="flex items-center gap-4">
-    <UDrawer
-      v-model:snap-point="snapPoint"
-      :snap-points="snapPoints"
-      :inset="inset"
-      handle
-      title="Nearby places"
-      description="Drag the drawer between a peek, most of the screen and full height."
-      :ui="{ container: 'max-w-xl mx-auto' }"
-    >
-      <UButton label="Open" color="neutral" variant="subtle" />
+  <UDrawer
+    v-model:snap-point="snapPoint"
+    :snap-points="snapPoints"
+    :inset="inset"
+    handle
+    title="Nearby places"
+    description="Drag the drawer between a peek, most of the screen and full height."
+    :ui="{ container: 'max-w-xl mx-auto' }"
+  >
+    <UButton label="Open" color="neutral" variant="subtle" />
 
-      <template #body>
-        <ul class="divide-y divide-default">
-          <li v-for="place in places" :key="place.name" class="flex items-center gap-3 py-3">
-            <UIcon :name="place.icon" class="size-5 shrink-0 text-muted" />
+    <template #body>
+      <ul class="divide-y divide-default">
+        <li v-for="place in places" :key="place.name" class="flex items-center gap-3 py-3">
+          <UIcon :name="place.icon" class="size-5 shrink-0 text-muted" />
 
-            <div class="min-w-0 flex-1">
-              <p class="truncate text-sm font-medium text-strong">
-                {{ place.name }}
-              </p>
-              <p class="text-sm text-muted">
-                {{ place.category }}
-              </p>
-            </div>
+          <div class="min-w-0 flex-1">
+            <p class="truncate text-sm font-medium text-strong">
+              {{ place.name }}
+            </p>
+            <p class="text-sm text-muted">
+              {{ place.category }}
+            </p>
+          </div>
 
-            <span class="text-sm text-muted">{{ place.distance }}</span>
-          </li>
-        </ul>
-      </template>
-    </UDrawer>
-
-    <USwitch v-model="inset" label="Inset" />
-  </div>
+          <span class="text-sm text-muted">{{ place.distance }}</span>
+        </li>
+      </ul>
+    </template>
+  </UDrawer>
 </template>
