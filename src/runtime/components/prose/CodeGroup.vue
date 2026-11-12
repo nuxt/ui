@@ -26,12 +26,15 @@ export interface ProseCodeGroupSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, watch, onMounted, ref, onBeforeUpdate } from 'vue'
+import { computed, watch, onMounted, ref, onBeforeUpdate, useAttrs } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent } from 'reka-ui'
 import { useState, useAppConfig } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
+import { omitUnsafeAttrs } from '../../utils'
 import { tv } from '../../utils/tv'
 import UCodeIcon from './CodeIcon.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<ProseCodeGroupProps>(), {
   defaultValue: '0'
@@ -41,6 +44,10 @@ const slots = defineSlots<ProseCodeGroupSlots>()
 const props = useComponentProps('prose.codeGroup', _props)
 
 const model = defineModel<string>()
+
+// `TabsRoot` renders its `as` attribute, keep components compiled from a `template` string out of it
+const attrs = useAttrs()
+const rootAttrs = computed(() => omitUnsafeAttrs(attrs))
 
 const appConfig = useAppConfig() as ProseCodeGroup['AppConfig']
 
@@ -96,7 +103,7 @@ onBeforeUpdate(() => rerenderCount.value++)
 </script>
 
 <template>
-  <TabsRoot v-model="model" :default-value="props.defaultValue" :unmount-on-hide="false" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <TabsRoot v-model="model" :default-value="props.defaultValue" :unmount-on-hide="false" :class="ui.root({ class: [props.ui?.root, props.class] })" v-bind="rootAttrs">
     <TabsList :class="ui.list({ class: props.ui?.list })">
       <TabsIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
 

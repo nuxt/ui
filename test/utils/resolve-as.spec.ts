@@ -33,6 +33,12 @@ describe('resolveAs', () => {
     expect(resolveAs(component, defaults).root).toBe(component)
   })
 
+  it('drops components compiled from a template string', () => {
+    expect(resolveAs({ template: '<b />' }, defaults)).toEqual(defaults)
+    expect(resolveAs({ extends: { template: '<b />' } }, defaults)).toEqual(defaults)
+    expect(resolveAs({ root: { template: '<b />' }, title: 'h3' }, defaults)).toEqual({ root: 'div', title: 'h3' })
+  })
+
   it('applies a functional component to root', () => {
     const component = () => h('div')
     expect(resolveAs(component, defaults).root).toBe(component)
