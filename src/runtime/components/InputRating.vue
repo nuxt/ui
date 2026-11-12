@@ -91,7 +91,11 @@ defineSlots<InputRatingSlots>()
 const props = useComponentProps<InputRatingProps>('inputRating', _props)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as InputRating['AppConfig']
+const appConfig = useAppConfig() as InputRating['AppConfig'] & {
+  icon?: {
+    customize?: Exclude<IconProps['customize'], boolean | null | undefined>
+  }
+}
 
 const rootProps = useForwardProps(props, ['as', 'length', 'step', 'hoverable', 'clearable', 'required', 'modelValue', 'defaultValue'], emits)
 
@@ -118,8 +122,11 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputRating || {
 
 const starIcon = computed(() => props.icon ?? appConfig.ui.icons.star)
 
-function fillIcon(content: string) {
-  return content.replace(/fill="none"/g, 'fill="currentColor"')
+function fillIcon(content: string, name?: string, prefix?: string, provider?: string) {
+  const customized = typeof appConfig.icon?.customize === 'function'
+    ? appConfig.icon.customize(content, name, prefix, provider)
+    : content
+  return customized.replace(/fill="none"/g, 'fill="currentColor"')
 }
 
 function onUpdate(value: number) {
