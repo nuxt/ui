@@ -50,7 +50,7 @@ export default defineTheme({
     snapPoints: {
       true: {
         // Follows the swipe so the visible part grows and shrinks from its top edge, like without `inset`.
-        content: '[--drawer-content-height:100%] [--snap-clip:calc(var(--snap-offset)+var(--drawer-swipe-movement-y,0px))] after:content-[\'\']'
+        content: `[--drawer-content-height:100%] [--snap-clip:calc(var(--snap-offset)+var(--drawer-swipe-movement-y,0px))] after:content-['']`
       }
     }
   }
