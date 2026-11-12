@@ -196,6 +196,29 @@ props:
 ---
 ::
 
+Tabs are as tall as a [Button](/docs/components/button) of the same size, with the text of the size below. The `pill` track is `3px` and comes out of the vertical padding of the tabs. Set `--ui-tabs-track-padding` on the `list` slot to change the track, the height stays the same.
+
+::component-code
+---
+ignore:
+  - content
+  - items
+  - class
+external:
+  - items
+externalTypes:
+  - TabsItem[]
+props:
+  content: false
+  items:
+    - label: Account
+    - label: Password
+  ui:
+    list: '[--ui-tabs-track-padding:--spacing(0.5)]'
+  class: 'w-full'
+---
+::
+
 ### Orientation
 
 Use the `orientation` prop to change the orientation of the Tabs. Defaults to `horizontal`.

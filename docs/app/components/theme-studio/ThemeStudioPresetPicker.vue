@@ -255,9 +255,9 @@ watch(open, (isOpen) => {
       {{ asRow(item).label }}
       <UColorModeTabs
         size="sm"
-        :ui="{ list: 'bg-tint p-0.5', indicator: 'inset-y-0.5' }"
+        :ui="{ list: 'bg-tint' }"
         aria-label="Color mode"
-        class="ms-auto -my-1.5"
+        class="ms-auto -my-1"
       />
     </template>
 
