@@ -51,6 +51,28 @@ describe('Link', () => {
     expect(onError).toHaveBeenCalledOnce()
   })
 
+  it('forwards only the NuxtLink props that are passed', async () => {
+    const wrapper = await mountSuspended(Link, {
+      props: { to: '/about', replace: true }
+    })
+    // the props Link passes to the NuxtLink it renders at its root
+    const forwarded = wrapper.vm.$.subTree.props!
+
+    expect(forwarded).toMatchObject({ replace: true, ariaCurrentValue: 'page' })
+    // absent boolean props are cast to `false` on Link and must not override NuxtLink's defaults
+    expect(forwarded).not.toHaveProperty('prefetch')
+    expect(forwarded).not.toHaveProperty('external')
+  })
+
+  it('forwards hyphenated and explicitly false NuxtLink props', async () => {
+    const wrapper = await mountSuspended(Link, {
+      props: { 'to': '/about', 'exact-active-class': 'font-bold', 'replace': false }
+    })
+    const forwarded = wrapper.vm.$.subTree.props!
+
+    expect(forwarded).toMatchObject({ exactActiveClass: 'font-bold', replace: false })
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Link, {
       props: {

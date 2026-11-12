@@ -124,9 +124,8 @@ import { isEqual } from 'ohash/utils'
 import { useForwardProps, Slot } from 'reka-ui'
 import { defu } from 'defu'
 import { hasProtocol } from 'ufo'
-import { reactiveOmit } from '@vueuse/core'
 import { useRoute, useAppConfig, useNuxtApp, onNuxtReady } from '#imports'
-import { mergeClasses } from '../utils'
+import { mergeClasses, omit } from '../utils'
 import { tv } from '../utils/tv'
 import { isPartiallyEqual } from '../utils/link'
 import { requestIdleCallback, cancelIdleCallback, observeIntersection } from '../utils/prefetch'
@@ -147,7 +146,7 @@ const route = useRoute()
 const appConfig = useAppConfig() as Link['AppConfig']
 const nuxtApp = useNuxtApp()
 
-const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'locale', 'class'))
+const nuxtLinkProps = useForwardProps(computed(() => omit(props, ['as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'locale', 'class'])))
 
 const ui = computed(() => tv({
   extend: theme,

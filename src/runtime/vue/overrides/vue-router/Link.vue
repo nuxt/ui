@@ -66,12 +66,11 @@ import { computed } from 'vue'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
 import { useForwardProps, Slot } from 'reka-ui'
-import { reactiveOmit } from '@vueuse/core'
 import { hasProtocol } from 'ufo'
 import { useRoute, RouterLink } from 'vue-router'
 import { useAppConfig } from '#imports'
 import { tv } from '../../../utils/tv'
-import { mergeClasses } from '../../../utils'
+import { mergeClasses, omit } from '../../../utils'
 import { isPartiallyEqual } from '../../../utils/link'
 import ULinkBase from '../../../components/LinkBase.vue'
 
@@ -89,7 +88,7 @@ const route = useRoute()
 
 const appConfig = useAppConfig() as Link['AppConfig']
 
-const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'target', 'rel', 'noRel'))
+const routerLinkProps = useForwardProps(computed(() => omit(props, ['as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'target', 'rel', 'noRel'])))
 
 const ui = computed(() => tv({
   extend: theme,
