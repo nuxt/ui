@@ -53,10 +53,10 @@ props:
   items:
     - label: Account
       icon: 'i-lucide-user'
-      content: 'This is the account content.'
+      content: 'Manage your account.'
     - label: Password
       icon: 'i-lucide-lock'
-      content: 'This is the password content.'
+      content: 'Update your password.'
 ---
 ::
 
@@ -78,10 +78,10 @@ props:
   items:
     - label: Account
       icon: 'i-lucide-user'
-      content: 'This is the account content.'
+      content: 'Manage your account.'
     - label: Password
       icon: 'i-lucide-lock'
-      content: 'This is the password content.'
+      content: 'Update your password.'
 ---
 ::
 
@@ -103,10 +103,10 @@ props:
   items:
     - label: Account
       icon: 'i-lucide-user'
-      content: 'This is the account content.'
+      content: 'Manage your account.'
     - label: Password
       icon: 'i-lucide-lock'
-      content: 'This is the password content.'
+      content: 'Update your password.'
 ---
 ::
 
