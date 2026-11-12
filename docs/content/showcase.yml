@@ -19,6 +19,8 @@ items:
     url: https://brusnika-lms.com/
     screenshotOptions:
       cookies: ['cookie-consent=accepted']
+  - name: CitrusMail
+    url: https://faivelo.com/citrus-mail
   - name: Codemo
     url: https://codemo.dev/
   - name: CodeSnap
@@ -37,6 +39,10 @@ items:
     url: https://elevenspectacles.com/
   - name: Espace Asso by Benevolt
     url: https://asso.benevolt.fr/
+  - name: Faivelo
+    url: https://faivelo.com/
+    screenshotOptions:
+      cookies: ['faivelo-consent=denied']
   - name: FrameZero
     url: https://www.framezero.app/
   - name: Idlen - AI Ads
