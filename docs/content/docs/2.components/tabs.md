@@ -182,25 +182,8 @@ props:
 ---
 ::
 
-Tabs are as tall as a [Button](/docs/components/button) of the same size, with the text of the size below. The `pill` track is `3px` and comes out of the vertical padding of the tabs. Set `--ui-tabs-track-padding` on the `list` slot to change the track, the height stays the same.
-
-::component-code
----
-ignore:
-  - content
-  - items
-external:
-  - items
-externalTypes:
-  - TabsItem[]
-props:
-  content: false
-  items:
-    - label: Account
-    - label: Password
-  ui:
-    list: '[--ui-tabs-track-padding:--spacing(0.5)]'
----
+::tip
+Tabs are as tall as a [Button](/docs/components/button) of the same size. Set `--ui-tabs-track-padding` on the `list` slot to change the space around the active tab, the height stays the same.
 ::
 
 ### Orientation
