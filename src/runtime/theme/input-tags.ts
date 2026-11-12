@@ -20,7 +20,7 @@ export default defineTheme({
     leadingAvatar: 'shrink-0',
     trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-1',
     trailingIcon: 'shrink-0 text-faint',
-    item: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-strong bg-soft text-default data-disabled:cursor-not-allowed wrap-anywhere data-[state=active]:bg-strong',
+    item: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-strong bg-soft text-default data-disabled:cursor-not-allowed wrap-anywhere data-[state=checked]:bg-strong',
     itemText: '',
     itemDelete: 'inline-flex items-center rounded-xs text-faint hover:text-default hover:bg-strong disabled:pointer-events-none transition-colors',
     itemDeleteIcon: 'shrink-0'

@@ -11,6 +11,7 @@ import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig } from './utils/defaults'
 import { getClientBundleIcons } from './utils/icons'
 import { generateI18nPlugin, getLocaleKeys } from './utils/locales'
+import { genTemporalInstall, getTemporalShim } from './utils/temporal'
 import type { I18nLocale } from './utils/locales'
 import { findTailwindPrefix } from './utils/tailwind'
 import OptionalDepsPlugin from './plugins/optional-deps'
@@ -83,6 +84,16 @@ export interface ModuleOptions {
    * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#componentdetection
    */
   componentDetection?: boolean | string[]
+
+  /**
+   * Load a Temporal polyfill for the date components on runtimes without native Temporal, like Node.js
+   * - `true`: the ISO and Gregorian calendars
+   * - `'full'`: every calendar, for apps that use other calendars or a locale whose default one isn't Gregorian
+   * - `false`: don't load one, the app provides `Temporal`
+   * @defaultValue true
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#temporal
+   */
+  temporal?: boolean | 'full'
 
   /**
    * Additional packages to scan for components using Nuxt UI
@@ -263,6 +274,38 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     addBuildPlugin(createUnplugin(() => OptionalDepsPlugin(resolve('./runtime'))))
+
+    // Node has no `Temporal` yet, so the server always installs it. The client plugin is async, so Nuxt waits for
+    // it before hydrating, and it only fetches the polyfill on browsers without a native `Temporal`.
+    const temporalShim = getTemporalShim(options.temporal)
+    const temporalPath = temporalShim && await tryResolveModule(temporalShim, import.meta.url)
+    if (temporalPath) {
+      addPluginTemplate({
+        filename: 'ui-temporal.server.mjs',
+        mode: 'server',
+        getContents: () => `import { install } from ${JSON.stringify(temporalPath)}
+import { defineNuxtPlugin } from '#app/nuxt'
+
+install(false)
+
+export default defineNuxtPlugin({ name: 'nuxt-ui:temporal', enforce: 'pre', setup() {} })
+`
+      })
+      addPluginTemplate({
+        filename: 'ui-temporal.client.mjs',
+        mode: 'client',
+        getContents: () => `import { defineNuxtPlugin } from '#app/nuxt'
+
+export default defineNuxtPlugin({
+  name: 'nuxt-ui:temporal',
+  enforce: 'pre',
+  async setup() {
+${genTemporalInstall(temporalPath).replace(/^/gm, '    ')}
+  }
+})
+`
+      })
+    }
 
     if (hasNuxtModule('@nuxtjs/i18n')) {
       addPluginTemplate({
