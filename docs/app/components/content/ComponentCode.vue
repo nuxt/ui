@@ -3,64 +3,56 @@
 import json5 from 'json5'
 import { upperFirst, camelCase, kebabCase } from 'scule'
 import { hash } from 'ohash'
-import { CalendarDate, Time } from '@internationalized/date'
 import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
-
-interface CastImport {
-  name: string
-  from: string
-}
 
 interface Cast {
   get: (args: any) => any
   template: (args: any) => string
-  imports: CastImport[]
 }
 
 type CastDateValue = [number, number, number]
 type CastTimeValue = [number, number, number]
 type CastTimeRangeValue = { start: CastTimeValue, end: CastTimeValue }
 
+// `Temporal` is a global, so the generated code needs no import
+const dateTemplate = (date: Temporal.PlainDate) => `new Temporal.PlainDate(${date.year}, ${date.month}, ${date.day})`
+const timeTemplate = (time: Temporal.PlainTime) => `new Temporal.PlainTime(${time.hour}, ${time.minute}${time.second ? `, ${time.second}` : ''})`
+
 const castMap: Record<string, Cast> = {
   'DateValue': {
-    get: (args: CastDateValue) => new CalendarDate(...args),
-    template: (value: CalendarDate) => {
-      return value ? `new CalendarDate(${value.year}, ${value.month}, ${value.day})` : 'null'
-    },
-    imports: [{ name: 'CalendarDate', from: '@internationalized/date' }]
+    get: (args: CastDateValue) => new Temporal.PlainDate(...args),
+    template: (value: Temporal.PlainDate) => {
+      return value ? dateTemplate(value) : 'null'
+    }
   },
   'DateValue[]': {
-    get: (args: CastDateValue[]) => args.map(date => new CalendarDate(...date)),
-    template: (value: CalendarDate[]) => {
-      return value ? `[${value.map(date => `new CalendarDate(${date.year}, ${date.month}, ${date.day})`).join(', ')}]` : '[]'
-    },
-    imports: [{ name: 'CalendarDate', from: '@internationalized/date' }]
+    get: (args: CastDateValue[]) => args.map(date => new Temporal.PlainDate(...date)),
+    template: (value: Temporal.PlainDate[]) => {
+      return value ? `[${value.map(dateTemplate).join(', ')}]` : '[]'
+    }
   },
   'DateRange': {
-    get: (args: { start: CastDateValue, end: CastDateValue }) => ({ start: new CalendarDate(...args.start), end: new CalendarDate(...args.end) }),
-    template: (value: { start: CalendarDate, end: CalendarDate }) => {
+    get: (args: { start: CastDateValue, end: CastDateValue }) => ({ start: new Temporal.PlainDate(...args.start), end: new Temporal.PlainDate(...args.end) }),
+    template: (value: { start: Temporal.PlainDate, end: Temporal.PlainDate }) => {
       if (!value.start || !value.end) {
         return `{ start: null, end: null }`
       }
 
-      return `{ start: new CalendarDate(${value.start.year}, ${value.start.month}, ${value.start.day}), end: new CalendarDate(${value.end.year}, ${value.end.month}, ${value.end.day}) }`
-    },
-    imports: [{ name: 'CalendarDate', from: '@internationalized/date' }]
+      return `{ start: ${dateTemplate(value.start)}, end: ${dateTemplate(value.end)} }`
+    }
   },
   'TimeValue': {
-    get: (args: CastTimeValue) => new Time(...args),
-    template: (value: Time) => {
-      return value ? `new Time(${value.hour}, ${value.minute}, ${value.second})` : 'null'
-    },
-    imports: [{ name: 'Time', from: '@internationalized/date' }]
+    get: (args: CastTimeValue) => new Temporal.PlainTime(...args),
+    template: (value: Temporal.PlainTime) => {
+      return value ? timeTemplate(value) : 'null'
+    }
   },
   'TimeRangeValue': {
-    get: (args: CastTimeRangeValue) => ({ start: new Time(...args.start), end: new Time(...args.end) }),
-    template: (value: { start: Time, end: Time }) => {
-      return value ? `{ start: new Time(${value.start.hour}, ${value.start.minute}, ${value.start.second}), end: new Time(${value.end.hour}, ${value.end.minute}, ${value.end.second}) }` : 'null'
-    },
-    imports: [{ name: 'Time', from: '@internationalized/date' }]
+    get: (args: CastTimeRangeValue) => ({ start: new Temporal.PlainTime(...args.start), end: new Temporal.PlainTime(...args.end) }),
+    template: (value: { start: Temporal.PlainTime, end: Temporal.PlainTime }) => {
+      return value ? `{ start: ${timeTemplate(value.start)}, end: ${timeTemplate(value.end)} }` : 'null'
+    }
   }
 }
 
@@ -262,37 +254,12 @@ ${props.slots.default}`
     code += `
 <script setup lang="ts">
 `
-    const importsBySource = new Map<string, Set<string>>()
-
-    // Collect imports from cast types
-    for (const key of props.external) {
-      const cast = props.cast?.[key]
-      if (cast && castMap[cast]) {
-        for (const imp of castMap[cast].imports) {
-          if (!importsBySource.has(imp.from)) {
-            importsBySource.set(imp.from, new Set())
-          }
-          importsBySource.get(imp.from)!.add(imp.name)
-        }
-      }
-    }
-
-    // Generate import statements
-    for (const [source, names] of importsBySource) {
-      code += `import { ${Array.from(names).join(', ')} } from '${source}'
-`
-    }
-
     if (props.externalTypes?.length) {
       const removeArrayBrackets = (type: string): string => type.endsWith('[]') ? removeArrayBrackets(type.slice(0, -2)) : type
 
       const types = props.externalTypes.map(type => removeArrayBrackets(type))
       code += `import type { ${types.join(', ')} } from '@nuxt/ui'
-`
-    }
 
-    if (importsBySource.size > 0 || props.externalTypes?.length) {
-      code += `
 `
     }
 

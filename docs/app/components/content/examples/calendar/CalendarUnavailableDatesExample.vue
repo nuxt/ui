@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import type { DateValue } from '@internationalized/date'
-import { CalendarDate } from '@internationalized/date'
+import type { DateValue } from 'reka-ui'
 
 const modelValue = shallowRef({
-  start: new CalendarDate(2022, 1, 1),
-  end: new CalendarDate(2022, 1, 9)
+  start: new Temporal.PlainDate(2022, 1, 1),
+  end: new Temporal.PlainDate(2022, 1, 9)
 })
 
 const isDateUnavailable = (date: DateValue) => {

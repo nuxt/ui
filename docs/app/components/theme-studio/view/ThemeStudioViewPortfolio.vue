@@ -350,7 +350,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
             root: 'flex items-center gap-4 w-full',
             list: 'relative flex bg-transparent dark:bg-transparent gap-2 px-0',
             indicator: 'absolute duration-200 ease-out focus:outline-none rounded-lg bg-soft/60',
-            trigger: 'px-3 py-2 rounded-lg hover:bg-tint data-[state=active]:text-strong data-[state=inactive]:text-muted',
+            trigger: 'px-3 py-2 rounded-lg hover:bg-tint data-[state=checked]:text-strong data-[state=unchecked]:text-muted',
             label: 'truncate'
           }"
         >

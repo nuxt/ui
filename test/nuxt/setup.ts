@@ -3,6 +3,10 @@ import type { AxeMatchers } from 'vitest-axe/matchers'
 
 import { expect } from 'vitest'
 import { configureAxe } from 'vitest-axe'
+import { install } from 'temporal-polyfill-lite/shim'
+
+// The app plugins install it in apps, components mounted on their own need it here
+install(false)
 
 declare module 'vitest' {
   export interface Assertion extends AxeMatchers {}

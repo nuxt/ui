@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Time } from '@internationalized/date'
 import theme from '#build/ui/input-time'
 
 const colors = Object.keys(theme.variants.color)
@@ -12,11 +11,16 @@ const attrs = reactive({
   variant: [theme.defaultVariants.variant]
 })
 
-const value = shallowRef(new Time(12, 30))
+const value = shallowRef(new Temporal.PlainTime(12, 30))
 const range = shallowRef({
-  start: new Time(8, 0),
-  end: new Time(16, 30)
+  start: new Temporal.PlainTime(8, 0),
+  end: new Temporal.PlainTime(16, 30)
 })
+const defaultValue = new Temporal.PlainTime(12, 30)
+const defaultRange = {
+  start: new Temporal.PlainTime(8, 0),
+  end: new Temporal.PlainTime(16, 30)
+}
 </script>
 
 <template>
@@ -28,9 +32,9 @@ const range = shallowRef({
 
   <Matrix v-slot="props" :attrs="attrs">
     <UInputTime v-model="value" autofocus v-bind="props" />
-    <UInputTime :default-value="new Time(12, 30)" v-bind="props" />
+    <UInputTime :default-value="defaultValue" v-bind="props" />
     <UInputTime v-model="range" range v-bind="props" />
-    <UInputTime :default-value="{ start: new Time(8, 0), end: new Time(16, 30) }" range v-bind="props" />
+    <UInputTime :default-value="defaultRange" range v-bind="props" />
     <UInputTime highlight v-bind="props" />
     <UInputTime disabled v-bind="props" />
     <UInputTime required v-bind="props" />

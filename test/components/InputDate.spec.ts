@@ -3,7 +3,6 @@ import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises } from '@vue/test-utils'
 import { renderEach } from '../component-render'
-import { CalendarDate } from '@internationalized/date'
 import InputDate from '../../src/runtime/components/InputDate.vue'
 import type { FormInputEvents } from '../../src/module'
 import { renderForm } from '../utils/form'
@@ -26,25 +25,25 @@ describe('InputDate', () => {
 
   renderEach(InputDate, [
     // Props
-    ['with modelValue', { props: { modelValue: new CalendarDate(2025, 1, 1) } }],
-    ['with default value', { props: { defaultValue: new CalendarDate(2025, 1, 1) } }],
+    ['with modelValue', { props: { modelValue: new Temporal.PlainDate(2025, 1, 1) } }],
+    ['with default value', { props: { defaultValue: new Temporal.PlainDate(2025, 1, 1) } }],
     ['with range', { props: { range: true } }],
-    ['with range and modelValue', { props: { range: true, modelValue: { start: new CalendarDate(2025, 1, 1), end: new CalendarDate(2025, 1, 15) } } }],
-    ['with range and defaultValue', { props: { range: true, defaultValue: { start: new CalendarDate(2025, 1, 1), end: new CalendarDate(2025, 1, 15) } } }],
+    ['with range and modelValue', { props: { range: true, modelValue: { start: new Temporal.PlainDate(2025, 1, 1), end: new Temporal.PlainDate(2025, 1, 15) } } }],
+    ['with range and defaultValue', { props: { range: true, defaultValue: { start: new Temporal.PlainDate(2025, 1, 1), end: new Temporal.PlainDate(2025, 1, 15) } } }],
     ['with disabled', { props: { disabled: true } }],
     ['with readonly', { props: { readonly: true } }],
     ['with isDateUnavailable', { props: { isDateUnavailable: () => true } }],
-    ['with minValue', { props: { minValue: new CalendarDate(2025, 1, 1) } }],
-    ['with maxValue', { props: { maxValue: new CalendarDate(2025, 1, 31) } }],
+    ['with minValue', { props: { minValue: new Temporal.PlainDate(2025, 1, 1) } }],
+    ['with maxValue', { props: { maxValue: new Temporal.PlainDate(2025, 1, 31) } }],
     ['with icon', { props: { icon: 'i-lucide-clock' } }],
     ['with leadingIcon', { props: { leadingIcon: 'i-lucide-arrow-left' } }],
     ['with trailingIcon', { props: { trailingIcon: 'i-lucide-arrow-right' } }],
     ['with separatorIcon', { props: { range: true, separatorIcon: 'i-lucide-arrow-right' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
-    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant, defaultValue: new CalendarDate(2025, 1, 15) } }]),
-    ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { variant, highlight: true, defaultValue: new CalendarDate(2025, 1, 15) } }]),
-    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral', defaultValue: new CalendarDate(2025, 1, 15) } }]),
-    ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { variant, color: 'neutral', highlight: true, defaultValue: new CalendarDate(2025, 1, 15) } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant, defaultValue: new Temporal.PlainDate(2025, 1, 15) } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { variant, highlight: true, defaultValue: new Temporal.PlainDate(2025, 1, 15) } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral', defaultValue: new Temporal.PlainDate(2025, 1, 15) } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { variant, color: 'neutral', highlight: true, defaultValue: new Temporal.PlainDate(2025, 1, 15) } }]),
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'max-w-sm' } }],
@@ -59,7 +58,7 @@ describe('InputDate', () => {
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = await mountSuspended(InputDate)
-      const date = new CalendarDate(2025, 1, 1)
+      const date = new Temporal.PlainDate(2025, 1, 1)
 
       await wrapper.setValue(date)
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[date]] })
@@ -67,7 +66,7 @@ describe('InputDate', () => {
 
     test('update:modelValue event range', async () => {
       const wrapper = await mountSuspended(InputDate, { props: { range: true } })
-      const date = { start: new CalendarDate(2025, 1, 1), end: new CalendarDate(2025, 1, 2) }
+      const date = { start: new Temporal.PlainDate(2025, 1, 1), end: new Temporal.PlainDate(2025, 1, 2) }
 
       await wrapper.setValue(date)
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[date]] })
@@ -127,7 +126,7 @@ describe('InputDate', () => {
       await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
-      await input.vm.$emit('update:modelValue', new CalendarDate(2025, 1, 1))
+      await input.vm.$emit('update:modelValue', new Temporal.PlainDate(2025, 1, 1))
       last.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }))
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
@@ -146,7 +145,7 @@ describe('InputDate', () => {
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(InputDate, {
       props: {
-        modelValue: new CalendarDate(2025, 1, 1),
+        modelValue: new Temporal.PlainDate(2025, 1, 1),
         range: true
       }
     })

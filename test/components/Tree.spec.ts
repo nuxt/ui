@@ -5,6 +5,7 @@ import { renderEach } from '../component-render'
 import Tree from '../../src/runtime/components/Tree.vue'
 import type { TreeItem } from '../../src/runtime/components/Tree.vue'
 import theme from '#build/ui/tree'
+import type { ChangeEventDetails, TreeChangeReason } from 'reka-ui'
 import { expectEmitPayloadType } from '../utils/types'
 
 describe('Tree', () => {
@@ -229,7 +230,7 @@ describe('Tree', () => {
 
     await wrapper.get('[role="treeitem"]').trigger('click')
 
-    expect(wrapper.emitted('update:expanded')).toEqual([[['custom-key']]])
+    expect(wrapper.emitted('update:expanded')).toMatchObject([[['custom-key'], expect.anything()]])
   })
 
   it('keeps an empty string getKey result as the item key', async () => {
@@ -248,17 +249,17 @@ describe('Tree', () => {
 
     await wrapper.get('[role="treeitem"]').trigger('click')
 
-    expect(wrapper.emitted('update:expanded')).toEqual([[['']]])
+    expect(wrapper.emitted('update:expanded')).toMatchObject([[[''], expect.anything()]])
   })
 
   test('should have the correct types', () => {
     expectEmitPayloadType('update:modelValue', () => Tree({
       items: [{ label: 'foo' }, { label: 'baz' }]
-    })).toEqualTypeOf<[{ label: string }]>()
+    })).toEqualTypeOf<[{ label: string }, ChangeEventDetails<TreeChangeReason>]>()
 
     expectEmitPayloadType('update:modelValue', () => Tree({
       items: [{ label: 'foo', id: 'one' }, { label: 'baz', id: 'two' }],
       getKey: i => i.id
-    })).toEqualTypeOf<[{ label: string, id: string }]>()
+    })).toEqualTypeOf<[{ label: string, id: string }, ChangeEventDetails<TreeChangeReason>]>()
   })
 })

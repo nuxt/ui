@@ -5,6 +5,7 @@ import { globSync } from 'tinyglobby'
 import type { UnpluginOptions } from 'unplugin'
 import { runtimeDir, runtimeUrl } from '../unplugin'
 import type { NuxtUIOptions } from '../unplugin'
+import { genTemporalInstall, getTemporalShim } from '../utils/temporal'
 
 /**
  * This plugin installs the Vue plugins that stand in for what Nuxt provides
@@ -22,6 +23,10 @@ export default function PluginsPlugin(options: NuxtUIOptions) {
   if (options.colorMode) {
     plugins.push(resolvePathSync('./vue/plugins/color-mode', { extensions: ['.ts', '.mjs', '.js'], url: runtimeUrl }))
   }
+
+  // `@nuxt/ui/vue-plugin` waits for the polyfill, so the entry that imports it runs once `Temporal` exists
+  const temporalShim = getTemporalShim(options.temporal)
+  const temporalPath = temporalShim && resolvePathSync(temporalShim, { url: runtimeUrl })
 
   const proseComponents = options.prose
     ? globSync(['**/*.vue'], { cwd: join(runtimeDir, 'components/prose'), absolute: true })
@@ -45,6 +50,7 @@ export default function PluginsPlugin(options: NuxtUIOptions) {
       return `
         ${plugins.map(p => `import ${genSafeVariableName(p)} from "${p}"`).join('\n')}
         ${proseImports.map(c => `import ${c.name} from "${c.path}"`).join('\n')}
+${temporalPath ? genTemporalInstall(temporalPath) : ''}
 
 export default {
   install (app, pluginOptions = {}) {

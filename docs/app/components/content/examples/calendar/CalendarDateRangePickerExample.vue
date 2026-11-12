@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import { DateFormatter, getLocalTimeZone, today } from '@internationalized/date'
 
-const df = new DateFormatter('en-US', { dateStyle: 'medium' })
-const tz = getLocalTimeZone()
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isDesktop = breakpoints.greaterOrEqual('sm')
 
@@ -16,28 +13,30 @@ const ranges = [
   { label: 'Last year', years: 1 }
 ]
 
-const initialEnd = today(tz)
+const initialEnd = Temporal.Now.plainDateISO()
 const modelValue = shallowRef({
   start: initialEnd.subtract({ days: 14 }),
   end: initialEnd
 })
 
+const format = (date: Temporal.PlainDate) => date.toLocaleString('en-US', { dateStyle: 'medium' })
+
 const label = computed(() => {
   const { start, end } = modelValue.value
   if (!start) return 'Pick a date'
-  if (!end) return df.format(start.toDate(tz))
-  return `${df.format(start.toDate(tz))} - ${df.format(end.toDate(tz))}`
+  if (!end) return format(start)
+  return `${format(start)} - ${format(end)}`
 })
 
 function computeStart(range: typeof ranges[number]) {
-  const end = today(tz)
+  const end = Temporal.Now.plainDateISO()
   return { start: end.subtract({ days: range.days, months: range.months, years: range.years }), end }
 }
 
 function isRangeSelected(range: typeof ranges[number]) {
   if (!modelValue.value?.start || !modelValue.value?.end) return false
   const { start, end } = computeStart(range)
-  return modelValue.value.start.compare(start) === 0 && modelValue.value.end.compare(end) === 0
+  return modelValue.value.start.equals(start) && modelValue.value.end.equals(end)
 }
 
 function selectRange(range: typeof ranges[number]) {

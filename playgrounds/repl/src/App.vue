@@ -26,7 +26,6 @@ const builtinImportMap = computed(() => ({
     'zod': 'https://esm.sh/zod@4?external=vue',
     '@vueuse/core': 'https://esm.sh/@vueuse/core?external=vue',
     '@tanstack/vue-table': 'https://esm.sh/@tanstack/vue-table?external=vue',
-    '@internationalized/date': 'https://esm.sh/@internationalized/date',
     'scule': 'https://esm.sh/scule'
   }
 }))

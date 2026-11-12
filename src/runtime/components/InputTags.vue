@@ -66,7 +66,7 @@ export interface InputTagsSlots<T extends InputTagItem = InputTagItem> {
 </script>
 
 <script setup lang="ts" generic="T extends InputTagItem">
-import { computed, useTemplateRef, onMounted, onScopeDispose, toRaw, toRef } from 'vue'
+import { computed, useTemplateRef, onMounted, onScopeDispose, toRef } from 'vue'
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
@@ -142,9 +142,6 @@ onMounted(() => {
 onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 function onUpdate(value: T[]) {
-  if (toRaw(props.modelValue) === value) {
-    return
-  }
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)

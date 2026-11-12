@@ -48,13 +48,25 @@ props:
 
 ::framework-only
 #nuxt
+:::note{to="/docs/getting-started/installation/nuxt#temporal"}
+This component takes and emits Temporal values such as `Temporal.PlainDate`. On runtimes without native Temporal, Nuxt UI loads a polyfill for you through the `temporal` option.
+:::
+
+#vue
+:::note{to="/docs/getting-started/installation/vue#temporal"}
+This component takes and emits Temporal values such as `Temporal.PlainDate`. On runtimes without native Temporal, Nuxt UI loads a polyfill for you through the `temporal` option.
+:::
+::
+
+::framework-only
+#nuxt
 :::note{to="/docs/getting-started/integrations/i18n/nuxt#locale"}
-This component uses the `@internationalized/date` package for locale-aware formatting. The date format is determined by the `locale` prop of the App component.
+This component uses `Intl.DateTimeFormat` for locale-aware formatting. The date format is determined by the `locale` prop of the App component.
 :::
 
 #vue
 :::note{to="/docs/getting-started/integrations/i18n/vue#locale"}
-This component uses the `@internationalized/date` package for locale-aware formatting. The date format is determined by the `locale` prop of the App component.
+This component uses `Intl.DateTimeFormat` for locale-aware formatting. The date format is determined by the `locale` prop of the App component.
 :::
 ::
 
@@ -237,7 +249,7 @@ props:
 
 ### View Control :badge{label="4.9+" class="align-text-top"}
 
-Use the `view-control` prop to make the heading a button that switches between the day, month and year views. Defaults to `true`.
+Use the `view-control` prop to make the heading a button that switches to the next coarser view, from days to months then years. Defaults to `true`.
 
 ::component-code
 ---
@@ -262,6 +274,21 @@ props:
   viewControl:
     color: primary
     variant: soft
+---
+::
+
+### Max View
+
+Use the `max-view` prop to set the coarsest view the heading button switches to. Defaults to `year`.
+
+::component-code
+---
+items:
+  maxView:
+    - month
+    - year
+props:
+  maxView: month
 ---
 ::
 
@@ -382,7 +409,7 @@ name: 'calendar-events-example'
 
 ### With disabled dates
 
-Use the `is-date-disabled` prop with a function to mark specific dates as disabled. When using `type="month"` or `type="year"`, use the `is-month-disabled` or `is-year-disabled` prop instead.
+Use the `is-date-disabled` prop with a function to mark specific dates as disabled. When using `type="month"` or `type="year"`, the function is called for each month or year with the unit as a second argument.
 
 ::component-example
 ---
@@ -392,7 +419,7 @@ name: 'calendar-disabled-dates-example'
 
 ### With unavailable dates
 
-Use the `is-date-unavailable` prop with a function to mark specific dates as unavailable. When using `type="month"` or `type="year"`, use the `is-month-unavailable` or `is-year-unavailable` prop instead.
+Use the `is-date-unavailable` prop with a function to mark specific dates as unavailable. When using `type="month"` or `type="year"`, the function is called for each month or year with the unit as a second argument.
 
 ::component-example
 ---
@@ -412,7 +439,7 @@ name: 'calendar-min-max-dates-example'
 
 ### With other calendar systems
 
-You can use other calenders from `@internationalized/date` to implement a different calendar system.
+Use the `calendar` option of a Temporal date to implement a different calendar system.
 
 ::component-example
 ---
@@ -420,8 +447,8 @@ name: 'calendar-other-system-example'
 ---
 ::
 
-::note{to="https://react-spectrum.adobe.com/internationalized/date/Calendar.html#implementations"}
-You can check all the available calendars on `@internationalized/date` docs.
+::note{to="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_calendar_types"}
+You can check all the available calendars on MDN. On runtimes without native Temporal, set the `temporal` option to `'full'` for calendars other than ISO and Gregorian.
 ::
 
 ### With external controls
@@ -436,7 +463,7 @@ name: 'calendar-external-controls-example'
 
 ### With today's date
 
-Use the `today` function from `@internationalized/date` with `getLocalTimeZone` to set the value to the current date.
+Use `Temporal.Now.plainDateISO()` to set the value to the current date.
 
 ::component-example
 ---

@@ -196,7 +196,7 @@ describe('Toast', () => {
     expect(wrapper.findComponent(Toast).emitted('update:open')).toBeUndefined()
 
     await close!.trigger('click')
-    expect(wrapper.findComponent(Toast).emitted('update:open')).toEqual([[false]])
+    expect(wrapper.findComponent(Toast).emitted('update:open')).toMatchObject([[false, expect.anything()]])
   })
 
   it('passes accessibility tests', async () => {
