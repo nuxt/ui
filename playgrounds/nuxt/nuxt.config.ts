@@ -37,7 +37,6 @@ export default defineNuxtConfig({
         '@ai-sdk/vue',
         '@comark/vue',
         '@comark/vue/plugins/shiki',
-        '@internationalized/date',
         '@tanstack/charts',
         '@tanstack/charts/crosshair',
         '@tanstack/charts/mark/decorative',

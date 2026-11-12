@@ -4,6 +4,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderEach } from '../component-render'
 import { renderForm } from '../utils/form'
+import type { ChangeEventDetails, ListboxChangeReason } from 'reka-ui'
 import { expectEmitPayloadType } from '../utils/types'
 import theme from '#build/ui/listbox'
 import type { FormInputEvents } from '../../src/module'
@@ -201,50 +202,50 @@ describe('Listbox', () => {
       // with object item
       expectEmitPayloadType('update:modelValue', () => Listbox({
         items: [{ label: 'foo', value: 'bar' }]
-      })).toEqualTypeOf<[{ label: string, value: string }]>()
+      })).toEqualTypeOf<[{ label: string, value: string }, ChangeEventDetails<ListboxChangeReason>?]>()
 
       // with object item and multiple
       expectEmitPayloadType('update:modelValue', () => Listbox({
         items: [{ label: 'foo', value: 1 }],
         multiple: true
-      })).toEqualTypeOf<[{ label: string, value: number }[]]>()
+      })).toEqualTypeOf<[{ label: string, value: number }[], ChangeEventDetails<ListboxChangeReason>?]>()
 
       // with object item and valueKey
       expectEmitPayloadType('update:modelValue', () => Listbox({
         items: [{ label: 'foo', value: 'bar' }],
         valueKey: 'value'
-      })).toEqualTypeOf<[string]>()
+      })).toEqualTypeOf<[string, ChangeEventDetails<ListboxChangeReason>?]>()
 
       // with object item and multiple and valueKey
       expectEmitPayloadType('update:modelValue', () => Listbox({
         items: [{ label: 'foo', value: 1 }],
         multiple: true,
         valueKey: 'value'
-      })).toEqualTypeOf<[number[]]>()
+      })).toEqualTypeOf<[number[], ChangeEventDetails<ListboxChangeReason>?]>()
 
       // with object item and object valueKey
       expectEmitPayloadType('update:modelValue', () => Listbox({
         items: [{ label: 'foo', value: { id: 1, name: 'bar' } }],
         valueKey: 'value'
-      })).toEqualTypeOf<[{ id: number, name: string }]>()
+      })).toEqualTypeOf<[{ id: number, name: string }, ChangeEventDetails<ListboxChangeReason>?]>()
 
       // with groups
       expectEmitPayloadType('update:modelValue', () => Listbox({
         items: [[{ label: 'foo', value: 'bar' }]]
-      })).toEqualTypeOf<[{ label: string, value: string }]>()
+      })).toEqualTypeOf<[{ label: string, value: string }, ChangeEventDetails<ListboxChangeReason>?]>()
 
       // with groups and multiple
       expectEmitPayloadType('update:modelValue', () => Listbox({
         items: [[{ label: 'foo', value: 1 }]],
         multiple: true
-      })).toEqualTypeOf<[{ label: string, value: number }[]]>()
+      })).toEqualTypeOf<[{ label: string, value: number }[], ChangeEventDetails<ListboxChangeReason>?]>()
 
       // with groups, multiple and valueKey
       expectEmitPayloadType('update:modelValue', () => Listbox({
         items: [[{ label: 'foo', value: 'bar' }]],
         multiple: true,
         valueKey: 'value'
-      })).toEqualTypeOf<[string[]]>()
+      })).toEqualTypeOf<[string[], ChangeEventDetails<ListboxChangeReason>?]>()
     })
   })
 })
