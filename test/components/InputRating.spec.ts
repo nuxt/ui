@@ -12,6 +12,7 @@ import theme from '#build/ui/input-rating'
 describe('InputRating', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const colors = Object.keys(theme.variants.color) as any
+  const variants = Object.keys(theme.variants.variant) as any
 
   it.each([
     // Props
@@ -30,6 +31,7 @@ describe('InputRating', () => {
     ['with required', { props: { required: true, modelValue: 3 } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size, modelValue: 3 } }]),
     ...colors.map((color: string) => [`with color ${color}`, { props: { color, modelValue: 3 } }]),
+    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant, modelValue: 3 } }]),
     ['with as', { props: { as: 'span', modelValue: 3 } }],
     ['with class', { props: { class: 'inline-flex', modelValue: 3 } }],
     ['with ui', { props: { ui: { root: 'gap-1' }, modelValue: 3 } }],
