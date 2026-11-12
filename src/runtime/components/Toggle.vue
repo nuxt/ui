@@ -41,6 +41,7 @@ export interface ToggleSlots extends ButtonSlots {}
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Toggle } from 'reka-ui'
+import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -48,7 +49,6 @@ import { useFormField } from '../composables/useFormField'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
-import { omit } from '../utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -66,7 +66,7 @@ const props = useComponentProps('toggle', _props)
 const appConfig = useAppConfig() as Toggle['AppConfig']
 
 const rootProps = useForwardProps(props, ['modelValue', 'defaultValue', 'required'], emits)
-const buttonProps = useForwardProps(computed(() => omit(props, ['id', 'modelValue', 'defaultValue', 'disabled', 'name', 'required', 'color', 'size', 'class'])))
+const buttonProps = useForwardProps(reactiveOmit(props, 'id', 'modelValue', 'defaultValue', 'disabled', 'name', 'required', 'color', 'size', 'class'))
 
 const { id, name, size: formFieldSize, color: formFieldColor, disabled: formFieldDisabled, ariaAttrs, emitFormChange, emitFormInput } = useFormField<ToggleProps>(_props)
 

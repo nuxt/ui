@@ -103,6 +103,7 @@ import { computed, inject } from 'vue'
 import { Primitive, Separator } from 'reka-ui'
 import { defu } from 'defu'
 import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
+import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -139,7 +140,7 @@ const Component = computed(() => {
   }[props.layout!])
 })
 
-const rootProps = useForwardProps(computed(() => omit(props, ['as', 'color', 'variant', 'activeColor', 'activeVariant', 'size', 'items', 'layout', 'editor', 'class', 'ui'])))
+const rootProps = useForwardProps(reactiveOmit(props, 'as', 'color', 'variant', 'activeColor', 'activeVariant', 'size', 'items', 'layout', 'editor', 'class', 'ui'))
 
 const options = computed(() => defu((props as any).options, {
   offset: 8,

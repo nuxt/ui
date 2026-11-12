@@ -98,6 +98,7 @@ import Placeholder from '@tiptap/extension-placeholder'
 import { Markdown } from '@tiptap/markdown'
 import StarterKit from '@tiptap/starter-kit'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
+import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -127,7 +128,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editor || {}) })
   placeholderMode: typeof props.placeholder === 'object' ? props.placeholder.mode : undefined
 }))
 
-const rootProps = useForwardProps(computed(() => omit(props, ['starterKit', 'extensions', 'editorProps', 'contentType', 'class', 'placeholder', 'markdown', 'image', 'mention', 'handlers'])))
+const rootProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'editorProps', 'contentType', 'class', 'placeholder', 'markdown', 'image', 'mention', 'handlers'))
 
 const editorProps = computed(() => defu(props.editorProps, {
   attributes: {

@@ -16,7 +16,7 @@ export interface ColorModeButtonProps extends Omit<ButtonProps, LinkPropsKeys | 
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useMounted } from '@vueuse/core'
+import { reactiveOmit, useMounted } from '@vueuse/core'
 import { useColorMode, useAppConfig } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
@@ -24,7 +24,6 @@ import { useLocale } from '../../composables/useLocale'
 import { usePrefix } from '../../composables/usePrefix'
 import UButton from '../Button.vue'
 import UIcon from '../Icon.vue'
-import { omit } from '../../utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -40,7 +39,7 @@ const colorMode = useColorMode()
 const appConfig = useAppConfig()
 const prefix = usePrefix()
 
-const buttonProps = useForwardProps(computed(() => omit(props, ['icon'])))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon'))
 
 // The resolved color mode is only known on the client, so the label matches the server until mounted.
 const mounted = useMounted()

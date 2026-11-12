@@ -73,7 +73,7 @@ export interface InputDateSlots {
 import { computed, onMounted, onScopeDispose, ref } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
 import { DateFieldRoot, DateFieldInput, DateRangeFieldRoot, DateRangeFieldInput } from 'reka-ui'
-import { createReusableTemplate } from '@vueuse/core'
+import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
@@ -83,7 +83,6 @@ import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
-import { omit } from '../utils'
 
 const SingleDateField = { Root: DateFieldRoot, Input: DateFieldInput }
 const RangeDateField = { Root: DateRangeFieldRoot, Input: DateRangeFieldInput }
@@ -101,7 +100,7 @@ const props = useComponentProps<InputDateProps<R>>('inputDate', _props)
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputDate['AppConfig']
 
-const rootProps = useForwardProps(computed(() => omit(props, ['id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'])), emits)
+const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputDateProps<R>>(_props)
 
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(_props)
