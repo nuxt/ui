@@ -197,9 +197,6 @@ catalogs:
     '@iconify/vue':
       specifier: ^5.0.5
       version: 5.0.5
-    '@internationalized/date':
-      specifier: ^3.12.4
-      version: 3.12.4
     '@internationalized/number':
       specifier: ^3.6.9
       version: 3.6.9
@@ -483,8 +480,8 @@ catalogs:
       specifier: ^3.9.10
       version: 3.9.10
     reka-ui:
-      specifier: 2.11.0
-      version: 2.11.0
+      specifier: 3.0.0-alpha.0
+      version: 3.0.0-alpha.0
     release-it:
       specifier: ^21.1.2
       version: 21.1.2
@@ -509,6 +506,9 @@ catalogs:
     tailwindcss:
       specifier: ^4.3.3
       version: 4.3.3
+    temporal-polyfill-lite:
+      specifier: ^1.0.0
+      version: 1.0.1
     tinyglobby:
       specifier: ^0.2.17
       version: 0.2.17
@@ -586,9 +586,6 @@ importers:
       '@inertiajs/vue3':
         specifier: ^2.0.7 || ^3
         version: 3.1.1(axios@1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(vue@3.5.44(typescript@6.0.3))
-      '@internationalized/date':
-        specifier: 'catalog:'
-        version: 3.12.4
       '@internationalized/number':
         specifier: 'catalog:'
         version: 3.6.9
@@ -675,7 +672,7 @@ importers:
         version: 2.0.3
       reka-ui:
         specifier: 'catalog:'
-        version: 2.11.0(vue@3.5.44(typescript@6.0.3))
+        version: 3.0.0-alpha.0(vue@3.5.44(typescript@6.0.3))
       scule:
         specifier: 'catalog:'
         version: 1.3.0
@@ -685,6 +682,9 @@ importers:
       tailwindcss:
         specifier: 'catalog:'
         version: 4.3.3
+      temporal-polyfill-lite:
+        specifier: 'catalog:'
+        version: 1.0.1
       tinyglobby:
         specifier: 'catalog:'
         version: 0.2.17
@@ -1137,9 +1137,6 @@ importers:
       '@iconify-json/vscode-icons':
         specifier: 'catalog:'
         version: 1.2.95
-      '@internationalized/date':
-        specifier: 'catalog:'
-        version: 3.12.4
       '@nuxt/content':
         specifier: 'catalog:'
         version: 3.16.2(@nuxt/schema@4.6.4)(@oxc-project/types@0.155.0)(@valibot/to-json-schema@1.7.1(valibot@1.5.0(typescript@6.0.3)))(better-sqlite3@12.11.1)(confbox@0.3.1)(dotenv@17.4.2)(esbuild@0.28.2)(giget@3.3.1)(magic-string@1.4.5)(magicast@0.5.5)(mlly@1.8.2)(oxc-parser@0.154.0)(rolldown@1.2.15)(rollup@4.67.4)(supports-color@10.2.2)(valibot@1.5.0(typescript@6.0.3))(vite@8.3.5(@types/node@25.9.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))
@@ -2552,9 +2549,6 @@ packages:
     peerDependenciesMeta:
       '@types/node':
         optional: true
-
-  '@internationalized/date@3.12.4':
-    resolution: {integrity: sha512-M1dEn4c1U1HsSlaVR8upZtSqvXrTkHDfv18H01uCSJyjVLDxnBR38v/fMxecmlwXKR4i9HeZcmgQAPE6A+aGJQ==}
 
   '@internationalized/number@3.6.9':
     resolution: {integrity: sha512-GgWy2caO/+hV9sT/oCTWGHvbjmJMPT9kkXzoKRLnkEq7adghhR7UprhvY9sXrKfrp3NcDfhF6QQHXR1KfQbB8g==}
@@ -8756,8 +8750,8 @@ packages:
   rehype-sort-attributes@5.0.1:
     resolution: {integrity: sha512-Bxo+AKUIELcnnAZwJDt5zUDDRpt4uzhfz9d0PVGhcxYWsbFj5Cv35xuWxu5r1LeYNFNhgGqsr9Q2QiIOM/Qctg==}
 
-  reka-ui@2.11.0:
-    resolution: {integrity: sha512-ilkpm4bIAol4jwzm4tpm3WVcffyGOpqksNZL1k1qO9QmIwAA+q8jroxjkUGLEn/GddfdExFfvofWfQiKZszUeQ==}
+  reka-ui@3.0.0-alpha.0:
+    resolution: {integrity: sha512-pZENOHw2lptDtLwkgEdvoUbVxQK08pjGWmmNp4zJRBCevZswa48aYloMaqeMDtQSO0G6a18WD8d0MMe1mijZzg==}
     peerDependencies:
       vue: '>= 3.4.0'
 
@@ -9275,6 +9269,9 @@ packages:
 
   teex@1.0.1:
     resolution: {integrity: sha512-eYE6iEI62Ni1H8oIa7KlDU6uQBtqr4Eajni3wX7rpfXD8ysFx8z0+dri+KWEPWpBsxXfxu58x/0jvTVT1ekOSg==}
+
+  temporal-polyfill-lite@1.0.1:
+    resolution: {integrity: sha512-uXUfW8sdaal9FZebZHj1hTZ3Biotl3P2rHJoR1lvLLqe+/8SbKr5QomCa7bSAEQxO7dJHyWiLM2k16fP1J3Lfw==}
 
   terser@5.51.2:
     resolution: {integrity: sha512-bWnjSNscmuI+GJze6ZupnHP8G/cTcsJF+bXCeQknk2SHQsgbNJnLrqiH9jZ2W4STPVXH2mDKKRX3iwPhc9Cn/Q==}
@@ -11225,10 +11222,6 @@ snapshots:
   '@inquirer/type@4.2.0(@types/node@25.9.0)':
     optionalDependencies:
       '@types/node': 25.9.0
-
-  '@internationalized/date@3.12.4':
-    dependencies:
-      '@swc/helpers': 0.5.21
 
   '@internationalized/number@3.6.9':
     dependencies:
@@ -20618,10 +20611,9 @@ snapshots:
       '@types/hast': 3.0.5
       unist-util-visit: 5.1.0
 
-  reka-ui@2.11.0(vue@3.5.44(typescript@6.0.3)):
+  reka-ui@3.0.0-alpha.0(vue@3.5.44(typescript@6.0.3)):
     dependencies:
       '@floating-ui/vue': 2.0.1(vue@3.5.44(typescript@6.0.3))
-      '@internationalized/date': 3.12.4
       '@internationalized/number': 3.6.9
       '@tanstack/vue-virtual': 3.13.50(vue@3.5.44(typescript@6.0.3))
       '@vueuse/core': 14.4.0(vue@3.5.44(typescript@6.0.3))
@@ -21317,6 +21309,8 @@ snapshots:
     transitivePeerDependencies:
       - bare-abort-controller
       - react-native-b4a
+
+  temporal-polyfill-lite@1.0.1: {}
 
   terser@5.51.2:
     dependencies:

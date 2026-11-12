@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { CalendarDate } from '@internationalized/date'
-
-const date = shallowRef(new CalendarDate(2025, 4, 2))
+const date = shallowRef(new Temporal.PlainDate(2025, 4, 2))
 </script>
 
 <template>
