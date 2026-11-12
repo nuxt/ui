@@ -23,8 +23,6 @@ Use the Tabs component to display a list of items in tabs.
 collapse: true
 prettier: true
 name: 'tabs-example'
-props:
-  class: 'w-full'
 ---
 ::
 
