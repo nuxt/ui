@@ -664,13 +664,18 @@ describe('Table', () => {
       expect(wrapper.find('td').text()).toBe('own')
     })
 
-    it('applies default cell metadata only to leaves without their own metadata', async () => {
+    it.each([
+      { name: 'applies default cell metadata only to leaves without their own metadata', explicitGroupMeta: false },
+      { name: 'inherits explicit group metadata shared with defaultColumn', explicitGroupMeta: true }
+    ])('$name', async ({ explicitGroupMeta }) => {
+      const meta = { class: { td: 'font-bold' } }
       const wrapper = await mountSuspended(Table, {
         props: {
           data: [{ id: 1, amount: 10 }],
-          defaultColumn: { meta: { class: { td: 'font-bold' } } },
+          defaultColumn: { meta },
           columns: [{
             header: 'Payment',
+            ...(explicitGroupMeta && { meta }),
             columns: [{ accessorKey: 'id' }, { accessorKey: 'amount', meta: { class: { td: 'italic' } } }]
           }]
         }
@@ -679,7 +684,7 @@ describe('Table', () => {
       const [id, amount] = wrapper.findAll('tbody td')
       expect(id!.classes()).toContain('font-bold')
       expect(amount!.classes()).toContain('italic')
-      expect(amount!.classes()).not.toContain('font-bold')
+      expect(amount!.classes().includes('font-bold')).toBe(explicitGroupMeta)
     })
   })
 

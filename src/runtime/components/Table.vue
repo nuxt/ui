@@ -262,6 +262,10 @@ const appConfig = useAppConfig() as Table['AppConfig']
 const data = createRef(props.data ?? [], props.watchOptions?.deep !== false)
 // eslint-disable-next-line vue/no-dupe-keys
 const meta = computed(() => props.meta ?? {})
+
+const explicitGroupMeta = Symbol('explicitGroupMeta')
+type ProcessedColumn = TableColumn<T> & { [explicitGroupMeta]?: true }
+
 // TanStack resolves each column as `{ ...defaultColumn, ...columnDef }`, so any key set here shadows `defaultColumn`.
 // The fallback `header` and `cell` are only injected when `defaultColumn` doesn't provide its own.
 // eslint-disable-next-line vue/no-dupe-keys
@@ -272,10 +276,14 @@ const columns = computed<TableColumn<T>[]>(() => processColumns(props.columns ??
 
 function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
   return columns.map((column) => {
-    const col = { ...column } as TableColumn<T>
+    const col: ProcessedColumn = { ...column }
 
     if ('columns' in col && col.columns) {
       col.columns = processColumns(col.columns as TableColumn<T>[])
+      // Record group metadata before TanStack fills in defaults.
+      if (col.meta) {
+        col[explicitGroupMeta] = true
+      }
     }
 
     if (!col.cell && !props.defaultColumn?.cell) {
@@ -610,13 +618,11 @@ function resolveValue<T, A = undefined>(prop: T | ((arg: A) => T), arg?: A): T |
 
 function getCellClasses(cell: Cell<T, unknown>) {
   const classes = [resolveValue(cell.column.columnDef.meta?.class?.td, cell)]
-  const defaultMeta = tableApi.options.defaultColumn?.meta
 
   for (let column = cell.column.parent; column; column = column.parent) {
-    const meta = column.columnDef.meta
-    // TanStack applies defaultColumn to group definitions too.
-    if (meta && meta !== defaultMeta) {
-      classes.unshift(resolveValue(meta.class?.td, cell))
+    const columnDef = column.columnDef as ProcessedColumn
+    if (columnDef[explicitGroupMeta]) {
+      classes.unshift(resolveValue(columnDef.meta?.class?.td, cell))
     }
   }
 
