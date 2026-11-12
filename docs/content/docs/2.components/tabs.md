@@ -47,7 +47,6 @@ Use the `items` prop as an array of objects with the following properties:
 ---
 ignore:
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -60,7 +59,6 @@ props:
     - label: Password
       icon: 'i-lucide-lock'
       content: 'This is the password content.'
-  class: 'w-full'
 ---
 ::
 
@@ -73,7 +71,6 @@ Set the `content` prop to `false` to render the triggers without any panels. Def
 ignore:
   - content
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -87,7 +84,6 @@ props:
     - label: Password
       icon: 'i-lucide-lock'
       content: 'This is the password content.'
-  class: 'w-full'
 ---
 ::
 
@@ -100,7 +96,6 @@ Use the `unmount-on-hide` prop to prevent the content from being unmounted when 
 ignore:
   - content
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -114,7 +109,6 @@ props:
     - label: Password
       icon: 'i-lucide-lock'
       content: 'This is the password content.'
-  class: 'w-full'
 ---
 ::
 
@@ -131,7 +125,6 @@ Use the `color` prop to change the color of the Tabs.
 ignore:
   - content
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -142,7 +135,6 @@ props:
   items:
     - label: Account
     - label: Password
-  class: 'w-full'
 ---
 ::
 
@@ -155,7 +147,6 @@ Use the `variant` prop to change the variant of the Tabs.
 ignore:
   - content
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -167,7 +158,6 @@ props:
   items:
     - label: Account
     - label: Password
-  class: 'w-full'
 ---
 ::
 
@@ -180,7 +170,6 @@ Use the `size` prop to change the size of the Tabs.
 ignore:
   - content
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -192,7 +181,6 @@ props:
   items:
     - label: Account
     - label: Password
-  class: 'w-full'
 ---
 ::
 
@@ -203,7 +191,6 @@ Tabs are as tall as a [Button](/docs/components/button) of the same size, with t
 ignore:
   - content
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -215,7 +202,6 @@ props:
     - label: Password
   ui:
     list: '[--ui-tabs-track-padding:--spacing(0.5)]'
-  class: 'w-full'
 ---
 ::
 
@@ -228,7 +214,6 @@ Use the `orientation` prop to change the orientation of the Tabs. Defaults to `h
 ignore:
   - content
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -240,7 +225,6 @@ props:
   items:
     - label: Account
     - label: Password
-  class: 'w-full'
 ---
 ::
 
