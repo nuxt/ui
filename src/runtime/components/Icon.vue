@@ -13,6 +13,7 @@ export interface IconProps {
 import { useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import NuxtIcon from '@nuxt/icon/runtime/components/index.js'
+import { isUnsafeComponent } from '../utils'
 
 const props = defineProps<IconProps>()
 
@@ -21,5 +22,5 @@ const iconProps = useForwardProps(reactivePick(props, 'mode', 'size', 'customize
 
 <template>
   <NuxtIcon v-if="typeof name === 'string'" :name="name" v-bind="iconProps" />
-  <component :is="name" v-else />
+  <component :is="name" v-else-if="!isUnsafeComponent(name)" />
 </template>

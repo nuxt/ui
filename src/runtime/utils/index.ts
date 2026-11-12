@@ -218,10 +218,53 @@ export function resolveBaseURL(path?: string, baseURL?: string): string | undefi
 }
 
 /**
+ * Whether a value is a plain object Vue would compile from a `template` string at render time,
+ * or a forged VNode, like one parsed from JSON in untrusted markdown (`:as='{"template":"..."}'`).
+ * Components built by the app always carry a `render`, `ssrRender` or `setup` function.
+ */
+export function isUnsafeComponent(value: unknown): boolean {
+  if (!value || typeof value !== 'object') return false
+
+  const component = value as Record<string, any>
+  if (typeof component.render === 'function' || typeof component.ssrRender === 'function' || typeof component.setup === 'function') return false
+
+  // A VNode or built-in (Teleport, Suspense, KeepAlive) marker is never valid `as` or icon data:
+  // a forged one would render its `type` and `props` as is, `innerHTML` included.
+  // The built-ins themselves carry functions (`process`), JSON never does.
+  if ((component.__v_isVNode || component.__isTeleport || component.__isSuspense || component.__isKeepAlive) && !Object.values(component).some(item => typeof item === 'function')) return true
+
+  return typeof component.template === 'string'
+    || isUnsafeComponent(component.extends)
+    || (Array.isArray(component.mixins) && component.mixins.some(isUnsafeComponent))
+}
+
+// Elements that run or load code from their content or attributes (`srcdoc`, `data`, …)
+const UNSAFE_TAGS = new Set(['script', 'style', 'iframe', 'frame', 'frameset', 'object', 'embed', 'applet', 'base', 'link', 'meta', 'noscript'])
+
+/**
+ * Whether a value is unsafe to render as an element or component through `as`:
+ * an unsafe component object, or a tag like `script` or `iframe`.
+ */
+export function isUnsafeAs(value: unknown): boolean {
+  if (typeof value === 'string') return UNSAFE_TAGS.has(value.trim().toLowerCase())
+  return isUnsafeComponent(value)
+}
+
+/**
+ * Drops attributes holding a value `isUnsafeComponent` rejects (or an `as` that `isUnsafeAs`
+ * rejects), for components forwarding `$attrs` to a Reka part that renders its `as`.
+ */
+export function omitUnsafeAttrs(attrs: Record<string, unknown>): Record<string, unknown> {
+  return Object.fromEntries(Object.entries(attrs).filter(([key, value]) => key === 'as' ? !isUnsafeAs(value) : !isUnsafeComponent(value)))
+}
+
+/**
  * Resolves an `as` prop that accepts either a single element / component (applied to `root`)
  * or an object targeting multiple elements, e.g. `{ root: 'div', title: 'h3' }`.
  */
 export function resolveAs<T extends { root: any }>(as: any, defaults: T): T {
+  if (isUnsafeAs(as)) return defaults
+
   if (
     typeof as === 'string'
     || typeof as === 'function'
@@ -231,7 +274,7 @@ export function resolveAs<T extends { root: any }>(as: any, defaults: T): T {
     return { ...defaults, root: as }
   }
 
-  return defu(as, defaults) as T
+  return defu(Object.fromEntries(Object.entries(as ?? {}).filter(([, value]) => !isUnsafeAs(value))), defaults) as T
 }
 
 export * from './content'

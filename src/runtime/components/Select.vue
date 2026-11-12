@@ -164,7 +164,7 @@ import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { usePortal } from '../composables/usePortal'
-import { get, getDisplayValue, isArrayOfArray, looseToNumber } from '../utils'
+import { get, getDisplayValue, isArrayOfArray, looseToNumber, omitUnsafeAttrs } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -370,7 +370,7 @@ defineExpose({
       ref="triggerRef"
       data-slot="base"
       :class="ui.base({ class: [props.ui?.base, props.class] })"
-      v-bind="{ ...$attrs, ...ariaAttrs }"
+      v-bind="{ ...omitUnsafeAttrs($attrs), ...ariaAttrs }"
       @click="onTriggerClick(open)"
     >
       <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">

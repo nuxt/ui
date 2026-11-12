@@ -17,6 +17,7 @@ export interface LinkBaseProps {
 <script setup lang="ts">
 import { Primitive } from 'reka-ui'
 import { Link as InertiaLink } from '@inertiajs/vue3'
+import { isUnsafeAs } from '../../../utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -69,8 +70,8 @@ function onClickWrapper(e: MouseEvent) {
       'rel': rel,
       'target': target,
       ...$attrs
-    } : as === 'button' ? {
-      as,
+    } : as === 'button' || isUnsafeAs(as) ? {
+      as: 'button',
       type,
       disabled,
       ...$attrs

@@ -17,6 +17,7 @@ export interface LinkBaseProps {
 
 <script setup lang="ts">
 import { Primitive } from 'reka-ui'
+import { isUnsafeAs } from '../utils'
 
 const props = withDefaults(defineProps<LinkBaseProps>(), {
   as: 'button',
@@ -55,8 +56,8 @@ function onClickWrapper(e: MouseEvent) {
       'aria-disabled': disabled ? 'true' : undefined,
       'role': disabled ? 'link' : undefined,
       'tabindex': disabled ? -1 : undefined
-    } : as === 'button' ? {
-      as,
+    } : as === 'button' || isUnsafeAs(as) ? {
+      as: 'button',
       type,
       disabled
     } : {

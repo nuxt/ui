@@ -3,7 +3,7 @@ import { computed, getCurrentInstance } from 'vue'
 import defu from 'defu'
 import { createContext } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { get } from '../utils'
+import { get, isUnsafeAs } from '../utils'
 
 export type ThemeContext = {
   defaults: ComputedRef<Record<string, Record<string, any> | undefined>>
@@ -42,6 +42,15 @@ function propIsDefined(vnode: VNode | null | undefined, prop: string): boolean {
   if (!vnode || !vnode.props) return false
   return vnode.props[camelCase(prop)] !== undefined
     || vnode.props[kebabCase(prop)] !== undefined
+}
+
+/**
+ * Object props forwarded to a Reka part (`content`, `avatar`, …) carry their own `as`.
+ * Drops it when it's a component Vue would compile from a `template` string.
+ */
+function withoutUnsafeAs<T>(value: T): T {
+  if (!value || typeof value !== 'object' || Array.isArray(value) || !isUnsafeAs((value as any).as)) return value
+  return { ...value, as: undefined }
 }
 
 /**
@@ -101,10 +110,17 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
         return [themeClass, raw]
       }
 
-      if (vm && propIsDefined(vm.vnode, prop)) return raw
+      // Never hand out an `as` component Vue would compile from a `template` string,
+      // so `:as` bound in untrusted markdown can't run code on render. It is treated
+      // as unset and falls back to the defaults below. Icons are guarded in `UIcon`.
+      const unsafe = prop === 'as' && isUnsafeAs(raw)
 
+      if (!unsafe && vm && propIsDefined(vm.vnode, prop)) return withoutUnsafeAs(raw)
+
+      // `<UTheme :props>` and `app.config` defaults can carry untrusted data too
+      // (a shared theme link), so the same check applies to them.
       const themeValue = themeEntry?.[prop]
-      if (themeValue !== undefined) return themeValue
+      if (themeValue !== undefined && !(prop === 'as' && isUnsafeAs(themeValue))) return withoutUnsafeAs(themeValue)
 
       // A global `app.config.ui.<name>.defaultVariants` value takes priority over
       // the component's `withDefaults` fallback. This keeps `defaultVariants`
@@ -113,7 +129,7 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
       // always renders a value).
       const appConfigEntry = name.includes('.') ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
       const appConfigValue = appConfigEntry?.defaultVariants?.[prop]
-      if (appConfigValue !== undefined) return appConfigValue
+      if (appConfigValue !== undefined && !(prop === 'as' && isUnsafeAs(appConfigValue))) return withoutUnsafeAs(appConfigValue)
 
       // Only fall back to `raw` when `withDefaults` set an explicit default for
       // this prop. Otherwise Vue's runtime would auto-cast unset Boolean props
@@ -122,7 +138,8 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
       // props are forwarded downstream.
       const propDef = (vm?.type as any)?.props?.[prop]
       if (propDef && Object.prototype.hasOwnProperty.call(propDef, 'default')) {
-        return raw
+        if (unsafe) return typeof propDef.default === 'function' ? propDef.default(target) : propDef.default
+        return withoutUnsafeAs(raw)
       }
 
       return undefined
