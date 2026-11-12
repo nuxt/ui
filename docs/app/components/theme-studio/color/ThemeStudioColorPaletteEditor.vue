@@ -451,7 +451,7 @@ function resetEffects() {
       v-model="tab"
       :items="tabs"
       :content="false"
-      size="sm"
+      size="xs"
       color="neutral"
     />
 

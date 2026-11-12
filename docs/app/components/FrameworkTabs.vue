@@ -26,7 +26,7 @@ function onFrameworkChange(newFramework: string) {
     :content="false"
     color="neutral"
     :ui="{ trigger: 'px-1 w-full' }"
-    size="sm"
+    size="xs"
     @update:model-value="onFrameworkChange($event as string)"
   />
 </template>

@@ -124,6 +124,8 @@ const shareOpen = ref(false)
       <template #right>
         <!-- below `lg`, where the footer bar that carries it is hidden -->
         <UColorModeTabs
+          size="sm"
+          :ui="{ list: 'p-0.5', indicator: 'inset-y-0.5' }"
           aria-label="Color mode"
           class="lg:hidden"
         />
@@ -246,7 +248,8 @@ const shareOpen = ref(false)
       <template #right>
         <UTooltip text="Switch color mode" :kbds="['d']">
           <UColorModeTabs
-            :ui="{ list: 'bg-tint ring ring-default' }"
+            size="sm"
+            :ui="{ list: 'bg-tint ring ring-default p-0.5', indicator: 'inset-y-0.5' }"
             aria-label="Color mode"
             data-keep-panels
             class="shrink-0"

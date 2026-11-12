@@ -24,6 +24,7 @@ const items: TabsItem[] = [{
       <UTabs
         :items="items"
         default-value="all"
+        size="sm"
         class="w-40"
         :content="false"
       />
