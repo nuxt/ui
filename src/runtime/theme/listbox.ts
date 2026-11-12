@@ -4,8 +4,9 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     root: 'flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width) has-focus-visible:ring-accent',
-    // A field inset like the items: its padding is theirs, so its text lines up with them
-    filter: 'mx-1 mt-1 bg-soft ring ring-inset ring-default',
+    // A field as large as the highlight of an item, 1px inside the item: its padding
+    // is theirs less that 1px, so its icon and text line up with them
+    filter: 'mx-[calc(--spacing(1)+1px)] mt-[calc(--spacing(1)+1px)]',
     content: 'relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none',
     group: 'p-1 isolate',
     label: 'font-semibold text-strong',
@@ -27,7 +28,7 @@ export default defineTheme({
     size: {
       xs: {
         content: '[--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)]',
-        filter: '[--ui-control-px:var(--ui-control-py-xs)]',
+        filter: '[--ui-control-px:calc(var(--ui-control-py-xs)-1px)] [--ui-control-py:calc(var(--ui-control-py-xs)-1px-var(--ui-control-text-step,0px)/2)]',
         label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-xs--leading)-var(--ui-control-text-xs--line-height))/2)] text-[calc(var(--ui-control-text-xs)-0.125rem)]/[calc(var(--ui-control-text-xs--leading)-0.25rem)] gap-(--ui-control-gap)',
         empty: 'py-3 text-xs',
         loading: 'py-3',
@@ -40,7 +41,7 @@ export default defineTheme({
       },
       sm: {
         content: '[--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)]',
-        filter: '[--ui-control-px:var(--ui-control-py-sm)]',
+        filter: '[--ui-control-px:calc(var(--ui-control-py-sm)-1px)] [--ui-control-py:calc(var(--ui-control-py-sm)-1px-var(--ui-control-text-step,0px)/2)]',
         label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-sm--leading)-var(--ui-control-text-sm--line-height))/2)] text-[calc(var(--ui-control-text-sm)-0.125rem)]/[calc(var(--ui-control-text-sm--leading)-0.25rem)] gap-(--ui-control-gap)',
         empty: 'py-4 text-xs',
         loading: 'py-4',
@@ -53,7 +54,7 @@ export default defineTheme({
       },
       md: {
         content: '[--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)]',
-        filter: '[--ui-control-px:var(--ui-control-py-md)]',
+        filter: '[--ui-control-px:calc(var(--ui-control-py-md)-1px)] [--ui-control-py:calc(var(--ui-control-py-md)-1px-var(--ui-control-text-step,0px)/2)]',
         label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-md--leading)-var(--ui-control-text-md--line-height))/2)] text-[calc(var(--ui-control-text-md)-0.125rem)]/[calc(var(--ui-control-text-md--leading)-0.25rem)] gap-(--ui-control-gap)',
         empty: 'py-6 text-sm',
         loading: 'py-6',
@@ -66,7 +67,7 @@ export default defineTheme({
       },
       lg: {
         content: '[--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)]',
-        filter: '[--ui-control-px:var(--ui-control-py-lg)]',
+        filter: '[--ui-control-px:calc(var(--ui-control-py-lg)-1px)] [--ui-control-py:calc(var(--ui-control-py-lg)-1px-var(--ui-control-text-step,0px)/2)]',
         label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-lg--leading)-var(--ui-control-text-lg--line-height))/2)] text-[calc(var(--ui-control-text-lg)-0.125rem)]/[calc(var(--ui-control-text-lg--leading)-0.25rem)] gap-(--ui-control-gap)',
         empty: 'py-7 text-sm',
         loading: 'py-7',
@@ -79,7 +80,7 @@ export default defineTheme({
       },
       xl: {
         content: '[--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)]',
-        filter: '[--ui-control-px:var(--ui-control-py-xl)]',
+        filter: '[--ui-control-px:calc(var(--ui-control-py-xl)-1px)] [--ui-control-py:calc(var(--ui-control-py-xl)-1px)]',
         label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-xl--leading)-var(--ui-control-text-xl--line-height))/2)] text-[calc(var(--ui-control-text-xl)-0.125rem)]/[calc(var(--ui-control-text-xl--leading)-0.25rem)] gap-(--ui-control-gap)',
         empty: 'py-8 text-base',
         loading: 'py-8',
