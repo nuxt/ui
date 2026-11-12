@@ -183,7 +183,7 @@ props:
 ::
 
 ::tip
-Tabs are as tall as a [Button](/docs/components/button) of the same size. Set `--ui-tabs-track-padding` on the `list` slot to change the space around the active tab, the height stays the same.
+Horizontal Tabs are as tall as a [Button](/docs/components/button) of the same size. Set `--ui-tabs-track-padding` on the `list` slot to change the space around the active tab, the height stays the same up to the vertical padding of the size.
 ::
 
 ### Orientation
