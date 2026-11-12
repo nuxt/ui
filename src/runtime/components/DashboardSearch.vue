@@ -19,7 +19,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
   size?: DashboardSearch['variants']['size']
   /**
    * Display a close button in the input (useful when inside a Modal for example).
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @emits 'update:open'
    * @defaultValue true
    */

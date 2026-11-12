@@ -90,7 +90,7 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
   childrenIcon?: IconProps['name']
   /**
    * Display a close button in the input (useful when inside a Modal for example).
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @emits 'update:open'
    * @defaultValue false
    */
@@ -622,7 +622,7 @@ function onSelect(e: Event, item: T) {
               :size="props.size"
               :icon="props.closeIcon || appConfig.ui.icons.close"
               color="neutral"
-              variant="ghost"
+              variant="link"
               :aria-label="t('commandPalette.close')"
               v-bind="(typeof props.close === 'object' ? props.close : {})"
               data-slot="command-palette-close"

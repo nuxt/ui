@@ -43,7 +43,6 @@ const label = ref([])
         multiple
         :filter="{ placeholder: 'Search labels...' }"
         :groups="[{ id: 'labels', items }]"
-        :ui="{ filter: '[&>input]:h-8 [&>input]:text-sm' }"
       />
     </template>
   </UPopover>
