@@ -150,6 +150,20 @@ props:
 ---
 ::
 
+### Variant :badge{label="Soon" class="align-text-top"}
+
+Use the `variant` prop to change the style of the filled stars.
+
+::component-code
+---
+ignore:
+  - defaultValue
+props:
+  variant: solid
+  defaultValue: 4
+---
+::
+
 ### Size
 
 Use the `size` prop to change the size of the stars.
