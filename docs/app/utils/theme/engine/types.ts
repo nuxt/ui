@@ -204,21 +204,21 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-info', label: 'Info', ramp: 'info', group: 'colors', defaults: { light: 500, dark: 400 } },
   { token: '--ui-warning', label: 'Warning', ramp: 'warning', group: 'colors', defaults: { light: 500, dark: 400 } },
   { token: '--ui-error', label: 'Error', ramp: 'error', group: 'colors', defaults: { light: 500, dark: 400 } },
-  { token: '--ui-bg-default', label: 'Default', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 } },
-  { token: '--ui-bg-soft', label: 'Soft', ramp: 'neutral', group: 'background', defaults: { light: 100, dark: 800 } },
-  { token: '--ui-bg-strong', label: 'Strong', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 } },
+  { token: '--ui-bg-default', label: 'Default', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 950 } },
+  { token: '--ui-bg-soft', label: 'Soft', ramp: 'neutral', group: 'background', defaults: { light: 100, dark: 900 } },
+  { token: '--ui-bg-strong', label: 'Strong', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 800 } },
   // The surface of the floating layers, `bg-default` until a shade is picked
-  { token: '--ui-bg-overlay', label: 'Overlay', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 }, follows: '--ui-bg-default' },
+  { token: '--ui-bg-overlay', label: 'Overlay', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 950 }, follows: '--ui-bg-default' },
   { token: '--ui-neutral', label: 'Neutral', ramp: 'neutral', group: 'colors', defaults: { light: 900, dark: 50 } },
   { token: '--ui-text-faint', label: 'Faint', ramp: 'neutral', group: 'text', defaults: { light: 400, dark: 500 } },
   { token: '--ui-text-muted', label: 'Muted', ramp: 'neutral', group: 'text', defaults: { light: 500, dark: 400 } },
   { token: '--ui-text-default', label: 'Default', ramp: 'neutral', group: 'text', defaults: { light: 700, dark: 200 } },
   { token: '--ui-text-strong', label: 'Strong', ramp: 'neutral', group: 'text', defaults: { light: 900, dark: 'white' } },
   { token: '--ui-text-contrast', label: 'Contrast', ramp: 'neutral', group: 'text', defaults: { light: 'white', dark: 900 } },
-  { token: '--ui-border-default', label: 'Default', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 800 } },
-  { token: '--ui-border-strong', label: 'Strong', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } },
+  { token: '--ui-border-default', label: 'Default', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 900 } },
+  { token: '--ui-border-strong', label: 'Strong', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 800 } },
   // The ring and separators of menus, popovers and modals, `border-strong` once `--ui-bg-overlay` lifts them
-  { token: '--ui-overlay-border-default', label: 'Overlay', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 }, follows: '--ui-border-strong' },
+  { token: '--ui-overlay-border-default', label: 'Overlay', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 800 }, follows: '--ui-border-strong' },
   // The text of each color, `--ui-<color>-text-default` and its muted step
   ...(['primary', ...SEMANTIC_ALIASES] as const).flatMap(alias => [
     { token: `--ui-${alias}-text-default`, label: 'Text', ramp: alias, group: 'colors' as const, defaults: { light: 500, dark: 400 } as const, follows: `--ui-${alias}` },

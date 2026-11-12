@@ -256,12 +256,12 @@
     --ui-text-strong: white;
     --ui-text-contrast: var(--ui-color-neutral-900);
 
-    --ui-bg-default: var(--ui-color-neutral-900);
-    --ui-bg-soft: var(--ui-color-neutral-800);
-    --ui-bg-strong: var(--ui-color-neutral-700);
+    --ui-bg-default: var(--ui-color-neutral-950);
+    --ui-bg-soft: var(--ui-color-neutral-900);
+    --ui-bg-strong: var(--ui-color-neutral-800);
 
-    --ui-border-default: var(--ui-color-neutral-800);
-    --ui-border-strong: var(--ui-color-neutral-700);
+    --ui-border-default: var(--ui-color-neutral-900);
+    --ui-border-strong: var(--ui-color-neutral-800);
 
     --ui-chart-1: var(--ui-primary);
     --ui-chart-2: var(--color-blue-400, oklch(70.7% 0.165 254.624));

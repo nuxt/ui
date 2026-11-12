@@ -25,7 +25,7 @@
 
 /* The studio's canvas sits recessed behind the preview card. Mixed off
    --ui-bg-default so editing that token moves the canvas too; the weights land the
-   stock theme on neutral-50 / neutral-950. */
+   stock theme on neutral-50 in light and below the neutral-950 page in dark. */
 body.theme-studio {
   background-color: color-mix(in oklab, var(--ui-bg-default) 98%, var(--ui-color-neutral-950));
 }

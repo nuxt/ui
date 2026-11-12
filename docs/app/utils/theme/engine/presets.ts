@@ -57,10 +57,6 @@ export const presets: ThemePreset[] = [{
     style: {
       tokenShades: {
         '--ui-primary': { light: 'black', dark: 200 },
-        // dark surfaces step from the 950 page like Crimson's
-        '--ui-bg-default': { dark: 950 },
-        '--ui-bg-soft': { dark: 900 },
-        '--ui-bg-strong': { dark: 800 },
         '--ui-text-default': { light: 'black', dark: 50 },
         '--ui-text-strong': { light: 'black', dark: 50 },
         '--ui-text-contrast': { light: 50 },
@@ -205,7 +201,6 @@ export const presets: ThemePreset[] = [{
     style: {
       // ink's 900 sits barely above its 950, so dark surfaces skip a step
       tokenShades: {
-        '--ui-bg-default': { dark: 950 },
         '--ui-bg-soft': { dark: 800 },
         '--ui-bg-strong': { dark: 700 },
         // field outlines match the border in light, ink's 300 is a big step darker
