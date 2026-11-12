@@ -19,7 +19,7 @@ export default defineTheme({
       // The track comes out of the block padding of the triggers, so the list is as tall
       // as a Button of the same size
       pill: {
-        list: 'bg-soft rounded-lg [--ui-tabs-track-padding:--spacing(0.75)] p-(--ui-tabs-track-padding)',
+        list: 'bg-soft rounded-lg [--ui-tabs-track-padding:min(--spacing(0.75),var(--ui-control-py))] p-(--ui-tabs-track-padding)',
         trigger: 'grow data-[state=checked]:text-accent',
         indicator: 'bg-default rounded-md shadow-xs'
       },
