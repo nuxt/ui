@@ -5,7 +5,8 @@ export default extendTheme(select, {
   slots: {
     // A field as large as the highlight of an item, 1px inside the item: its padding
     // is theirs less that 1px, so its icon and text line up with them
-    filter: 'mx-[calc(--spacing(1)+1px)] mt-[calc(--spacing(1)+1px)]',
+    // It holds the focus as long as the menu is open, so it shows no focus outline
+    filter: 'mx-[calc(--spacing(1)+1px)] mt-[calc(--spacing(1)+1px)] has-[>:focus-visible]:outline-0',
     focusScope: 'flex flex-col min-h-0 focus:outline-none',
     viewport: () => 'relative scroll-py-1 overflow-y-auto flex-1',
     content: (content: string) => [content, 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)'],

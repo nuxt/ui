@@ -5,7 +5,8 @@ export default defineTheme({
     root: 'flex flex-col min-h-0 min-w-0',
     // A field as large as the highlight of an item, 1px inside the item: its padding
     // is theirs less that 1px, so its icon and text line up with them
-    filter: 'mx-[calc(--spacing(1)+1px)] mt-[calc(--spacing(1)+1px)]',
+    // It holds the focus as long as the menu is open, so it shows no focus outline
+    filter: 'mx-[calc(--spacing(1)+1px)] mt-[calc(--spacing(1)+1px)] has-[>:focus-visible]:outline-0',
     // The buttons take back the inset of the field and lose the same 1px, so they keep
     // its height and their icon sits where the search icon does
     close: '-me-1 p-[calc(var(--ui-control-py)-1px)]',

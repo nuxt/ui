@@ -6,7 +6,8 @@ export default defineTheme({
     root: 'flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width) has-focus-visible:ring-accent',
     // A field as large as the highlight of an item, 1px inside the item: its padding
     // is theirs less that 1px, so its icon and text line up with them
-    filter: 'mx-[calc(--spacing(1)+1px)] mt-[calc(--spacing(1)+1px)]',
+    // The root shows the focus outline, so the field shows none
+    filter: 'mx-[calc(--spacing(1)+1px)] mt-[calc(--spacing(1)+1px)] has-[>:focus-visible]:outline-0',
     content: 'relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none',
     group: 'p-1 isolate',
     label: 'font-semibold text-strong',

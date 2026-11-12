@@ -6,7 +6,8 @@ export default defineTheme({
     content: 'min-w-32 max-h-(--reka-dropdown-menu-content-available-height) bg-overlay shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col',
     // A field as large as the highlight of an item, 1px inside the item: its padding
     // is theirs less that 1px, so its icon and text line up with them
-    filter: 'mx-[calc(--spacing(1)+1px)] mt-[calc(--spacing(1)+1px)]',
+    // It holds the focus as long as the menu is open, so it shows no focus outline
+    filter: 'mx-[calc(--spacing(1)+1px)] mt-[calc(--spacing(1)+1px)] has-[>:focus-visible]:outline-0',
     empty: 'p-[calc(var(--ui-control-py)+(--spacing(1)))] text-center text-muted',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
     arrow: 'fill-bg stroke-default',
