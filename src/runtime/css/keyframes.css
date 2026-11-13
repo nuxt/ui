@@ -639,7 +639,7 @@
  */
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*.ui-prose-img) {
-    animation: none;
+    animation-name: none;
   }
 
   @keyframes scale-in {

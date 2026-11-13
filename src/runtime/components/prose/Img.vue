@@ -66,7 +66,15 @@ const transitioning = ref(false)
 
 const transitionStyle = computed(() => transitioning.value ? { viewTransitionName: transitionName, viewTransitionClass: 'ui-prose-img' } : undefined)
 
+// A request made while the zoom runs is applied once it ends, another transition would clear the name under it
+let pending: boolean | undefined
+
 async function setOpen(value: boolean) {
+  if (transitioning.value) {
+    pending = value
+    return
+  }
+
   if (value === open.value) {
     return
   }
@@ -76,13 +84,14 @@ async function setOpen(value: boolean) {
     return
   }
 
-  // A second click or Escape while the zoom runs would start another transition and clear the name under it
-  if (transitioning.value) {
-    return
-  }
-
   const reset = () => {
     transitioning.value = false
+
+    if (pending !== undefined) {
+      const next = pending
+      pending = undefined
+      setOpen(next)
+    }
   }
 
   transitioning.value = true
