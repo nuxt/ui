@@ -72,7 +72,7 @@ describe('Stepper', () => {
     await wrapper.findAll('[data-slot="stepper-trigger"]')[1]!.trigger('mousedown', { button: 0 })
 
     expect(wrapper.emitted('update:modelValue')).toEqual([[1]])
-    expect(wrapper.findAll('[data-slot="stepper-item"]')[1]!.attributes('data-state')).toBe('current')
+    expect(wrapper.findAll('[data-slot="stepper-item"]')[1]!.attributes('data-state')).toBe('active')
   })
 
   it('passes accessibility tests', async () => {

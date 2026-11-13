@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { NumberFieldRootProps, ChangeEventDetails, NumberFieldChangeReason } from 'reka-ui'
+import type { NumberFieldRootProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/input-number'
@@ -72,8 +72,7 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue,
 }
 
 export interface InputNumberEmits<T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>> {
-  'beforeUpdate:modelValue': [value: T | undefined, details: ChangeEventDetails<NumberFieldChangeReason>]
-  'update:modelValue': [value: ApplyModifiers<T, Mod>, details?: ChangeEventDetails<NumberFieldChangeReason>]
+  'update:modelValue': [value: ApplyModifiers<T, Mod>]
   'blur': [event: FocusEvent]
   'change': [event: Event]
 }
@@ -152,7 +151,7 @@ const decrementIcon = computed(() => props.decrementIcon || (props.orientation =
 
 const inputRef = useTemplateRef('inputRef')
 
-function onUpdate(value: ApplyModifiers<T, Mod> | undefined, details?: ChangeEventDetails<NumberFieldChangeReason>) {
+function onUpdate(value: ApplyModifiers<T, Mod> | undefined) {
   if (props.modelModifiers?.optional) {
     value = value ?? undefined
   }
@@ -162,7 +161,7 @@ function onUpdate(value: ApplyModifiers<T, Mod> | undefined, details?: ChangeEve
     return
   }
 
-  emits('update:modelValue', value as ApplyModifiers<T, Mod>, details)
+  emits('update:modelValue', value as ApplyModifiers<T, Mod>)
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -219,8 +218,7 @@ defineExpose({
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :name="name"
     :disabled="disabled"
-    @before-update:model-value="(val: number | undefined, details: ChangeEventDetails<NumberFieldChangeReason>) => emits('beforeUpdate:modelValue', val as T | undefined, details)"
-    @update:model-value="(val: number | undefined, details: ChangeEventDetails<NumberFieldChangeReason>) => onUpdate(val as ApplyModifiers<T, Mod>, details)"
+    @update:model-value="(val) => onUpdate(val as ApplyModifiers<T, Mod>)"
     @click="onRootClick"
   >
     <NumberFieldInput

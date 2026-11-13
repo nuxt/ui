@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { CalendarDate } from '@internationalized/date'
 import theme from '#build/ui/input-date'
 
 const colors = Object.keys(theme.variants.color)
@@ -11,16 +12,11 @@ const attrs = reactive({
   size: [theme.defaultVariants.size]
 })
 
-const value = shallowRef(new Temporal.PlainDate(2022, 1, 10))
+const value = shallowRef(new CalendarDate(2022, 1, 10))
 const range = shallowRef({
-  start: new Temporal.PlainDate(2022, 1, 10),
-  end: new Temporal.PlainDate(2022, 1, 20)
+  start: new CalendarDate(2022, 1, 10),
+  end: new CalendarDate(2022, 1, 20)
 })
-const defaultValue = new Temporal.PlainDate(2022, 1, 10)
-const defaultRange = {
-  start: new Temporal.PlainDate(2022, 1, 10),
-  end: new Temporal.PlainDate(2022, 1, 20)
-}
 </script>
 
 <template>
@@ -32,9 +28,9 @@ const defaultRange = {
 
   <Matrix v-slot="props" :attrs="attrs">
     <UInputDate v-model="value" autofocus v-bind="props" />
-    <UInputDate :default-value="defaultValue" v-bind="props" />
+    <UInputDate :default-value="new CalendarDate(2022, 1, 10)" v-bind="props" />
     <UInputDate v-model="range" range v-bind="props" />
-    <UInputDate :default-value="defaultRange" range v-bind="props" />
+    <UInputDate :default-value="{ start: new CalendarDate(2022, 1, 10), end: new CalendarDate(2022, 1, 20) }" range v-bind="props" />
     <UInputDate highlight v-bind="props" />
     <UInputDate disabled v-bind="props" />
     <UInputDate required v-bind="props" />

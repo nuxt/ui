@@ -8,7 +8,6 @@ import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
 import { flushPromises, mount } from '@vue/test-utils'
 import type { FormInputEvents } from '../../src/module'
-import type { ChangeEventDetails, ComboboxChangeReason } from 'reka-ui'
 import { expectEmitPayloadType } from '../utils/types'
 
 describe('SelectMenu', () => {
@@ -244,7 +243,7 @@ describe('SelectMenu', () => {
       await wrapper.find('[data-slot="select-menu"]').trigger('keydown', { key })
       await flushPromises()
 
-      expect(wrapper.emitted('update:open')).toMatchObject([[true, expect.anything()]])
+      expect(wrapper.emitted('update:open')).toMatchObject([[true]])
 
       wrapper.unmount()
     })
@@ -305,7 +304,7 @@ describe('SelectMenu', () => {
 
       await focusScope.trigger('keydown', { key: 'Enter' })
       await flushPromises()
-      expect(wrapper.emitted('update:modelValue')).toMatchObject([[items[1], expect.anything()]])
+      expect(wrapper.emitted('update:modelValue')).toMatchObject([[items[1]]])
 
       wrapper.unmount()
     })
@@ -506,67 +505,67 @@ describe('SelectMenu', () => {
       // with object item
       expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [{ label: 'foo', value: 'bar' }]
-      })).toEqualTypeOf<[{ label: string, value: string }, ChangeEventDetails<ComboboxChangeReason>?]>()
+      })).toEqualTypeOf<[{ label: string, value: string }]>()
 
       // with object item and multiple
       expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [{ label: 'foo', value: 1 }],
         multiple: true
-      })).toEqualTypeOf<[{ label: string, value: number }[], ChangeEventDetails<ComboboxChangeReason>?]>()
+      })).toEqualTypeOf<[{ label: string, value: number }[]]>()
 
       // with object item and valueKey
       expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [{ label: 'foo', value: 'bar' }],
         valueKey: 'value'
-      })).toEqualTypeOf<[string, ChangeEventDetails<ComboboxChangeReason>?]>()
+      })).toEqualTypeOf<[string]>()
 
       // with object item and multiple and valueKey
       expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [{ label: 'foo', value: 1 }],
         multiple: true,
         valueKey: 'value'
-      })).toEqualTypeOf<[number[], ChangeEventDetails<ComboboxChangeReason>?]>()
+      })).toEqualTypeOf<[number[]]>()
 
       // with object item and object valueKey
       expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [{ label: 'foo', value: { id: 1, name: 'bar' } }],
         valueKey: 'value'
-      })).toEqualTypeOf<[{ id: number, name: string }, ChangeEventDetails<ComboboxChangeReason>?]>()
+      })).toEqualTypeOf<[{ id: number, name: string }]>()
 
       // with string item
       expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: ['foo']
-      })).toEqualTypeOf<[string, ChangeEventDetails<ComboboxChangeReason>?]>()
+      })).toEqualTypeOf<[string]>()
 
       // with string item and multiple
       expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: ['foo'],
         multiple: true
-      })).toEqualTypeOf<[string[], ChangeEventDetails<ComboboxChangeReason>?]>()
+      })).toEqualTypeOf<[string[]]>()
 
       // with groups
       expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [['foo']]
-      })).toEqualTypeOf<[string, ChangeEventDetails<ComboboxChangeReason>?]>()
+      })).toEqualTypeOf<[string]>()
 
       // with groups and multiple
       expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [['foo']],
         multiple: true
-      })).toEqualTypeOf<[string[], ChangeEventDetails<ComboboxChangeReason>?]>()
+      })).toEqualTypeOf<[string[]]>()
 
       // with groups, multiple and mixed types
       expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
         multiple: true
-      })).toEqualTypeOf<[(string | number | { value: string } | { value: number })[], ChangeEventDetails<ComboboxChangeReason>?]>()
+      })).toEqualTypeOf<[(string | number | { value: string } | { value: number })[]]>()
 
       // with groups, multiple, mixed types and valueKey
       expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
         multiple: true,
         valueKey: 'value'
-      })).toEqualTypeOf<[(string | number)[], ChangeEventDetails<ComboboxChangeReason>?]>()
+      })).toEqualTypeOf<[(string | number)[]]>()
     })
   })
 })

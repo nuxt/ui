@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { NavigationMenuRootProps, NavigationMenuContentProps, NavigationMenuContentEmits, NavigationMenuViewportProps, AccordionRootProps, ChangeEventDetails, NavigationMenuChangeReason, AccordionChangeReason } from 'reka-ui'
+import type { NavigationMenuRootProps, NavigationMenuContentProps, NavigationMenuContentEmits, NavigationMenuViewportProps, AccordionRootProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/navigation-menu'
@@ -216,8 +216,7 @@ export type NavigationMenuEmits<
    * - In vertical orientation with `type="single"`: emits `string | undefined`
    * - In vertical orientation with `type="multiple"`: emits `string[] | undefined`
    */
-  'update:modelValue': [value: NavigationMenuModelValue<K, O> | undefined, details?: ChangeEventDetails<NavigationMenuChangeReason | AccordionChangeReason>]
-  'beforeUpdate:modelValue': [value: NavigationMenuModelValue<K, O> | undefined, details: ChangeEventDetails<NavigationMenuChangeReason | AccordionChangeReason>]
+  'update:modelValue': [value: NavigationMenuModelValue<K, O> | undefined]
 }
 
 type SlotProps<T extends NavigationMenuItem> = (props: { item: T, index: number, active: boolean, ui: NavigationMenu['ui'] }) => VNode[]
