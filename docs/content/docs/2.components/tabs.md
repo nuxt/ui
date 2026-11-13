@@ -23,8 +23,6 @@ Use the Tabs component to display a list of items in tabs.
 collapse: true
 prettier: true
 name: 'tabs-example'
-props:
-  class: 'w-full'
 ---
 ::
 
@@ -47,7 +45,6 @@ Use the `items` prop as an array of objects with the following properties:
 ---
 ignore:
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -56,11 +53,10 @@ props:
   items:
     - label: Account
       icon: 'i-lucide-user'
-      content: 'This is the account content.'
+      content: 'Manage your account.'
     - label: Password
       icon: 'i-lucide-lock'
-      content: 'This is the password content.'
-  class: 'w-full'
+      content: 'Update your password.'
 ---
 ::
 
@@ -73,7 +69,6 @@ Set the `content` prop to `false` to render the triggers without any panels. Def
 ignore:
   - content
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -83,11 +78,10 @@ props:
   items:
     - label: Account
       icon: 'i-lucide-user'
-      content: 'This is the account content.'
+      content: 'Manage your account.'
     - label: Password
       icon: 'i-lucide-lock'
-      content: 'This is the password content.'
-  class: 'w-full'
+      content: 'Update your password.'
 ---
 ::
 
@@ -100,7 +94,6 @@ Use the `unmount-on-hide` prop to prevent the content from being unmounted when 
 ignore:
   - content
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -110,11 +103,10 @@ props:
   items:
     - label: Account
       icon: 'i-lucide-user'
-      content: 'This is the account content.'
+      content: 'Manage your account.'
     - label: Password
       icon: 'i-lucide-lock'
-      content: 'This is the password content.'
-  class: 'w-full'
+      content: 'Update your password.'
 ---
 ::
 
@@ -131,7 +123,6 @@ Use the `color` prop to change the color of the Tabs.
 ignore:
   - content
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -142,7 +133,6 @@ props:
   items:
     - label: Account
     - label: Password
-  class: 'w-full'
 ---
 ::
 
@@ -155,7 +145,6 @@ Use the `variant` prop to change the variant of the Tabs.
 ignore:
   - content
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -167,7 +156,6 @@ props:
   items:
     - label: Account
     - label: Password
-  class: 'w-full'
 ---
 ::
 
@@ -180,7 +168,6 @@ Use the `size` prop to change the size of the Tabs.
 ignore:
   - content
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -192,31 +179,11 @@ props:
   items:
     - label: Account
     - label: Password
-  class: 'w-full'
 ---
 ::
 
-Tabs are as tall as a [Button](/docs/components/button) of the same size. The `pill` track takes half of the vertical padding of the tabs. Set `--ui-tabs-track-padding` on the `list` slot to change the track, the height stays the same.
-
-::component-code
----
-ignore:
-  - content
-  - items
-  - class
-external:
-  - items
-externalTypes:
-  - TabsItem[]
-props:
-  content: false
-  items:
-    - label: Account
-    - label: Password
-  ui:
-    list: '[--ui-tabs-track-padding:--spacing(0.5)]'
-  class: 'w-full'
----
+::tip
+Horizontal Tabs are as tall as a [Button](/docs/components/button) of the same size. Set `--ui-tabs-track-padding` on the `list` slot to change the space around the active tab, the height stays the same up to the vertical padding of the size.
 ::
 
 ### Orientation
@@ -228,7 +195,6 @@ Use the `orientation` prop to change the orientation of the Tabs. Defaults to `h
 ignore:
   - content
   - items
-  - class
 external:
   - items
 externalTypes:
@@ -240,7 +206,6 @@ props:
   items:
     - label: Account
     - label: Password
-  class: 'w-full'
 ---
 ::
 
