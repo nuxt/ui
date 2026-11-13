@@ -58,6 +58,16 @@ describe('Carousel', () => {
     expect(wrapper.emitted('update:modelValue')?.[1]?.[0]).toBe(4)
   })
 
+  it.each([false, true])('clamps the current slide when items shrink (fade: %s)', async (fade) => {
+    const wrapper = await mountSuspended(Carousel, {
+      props: { items, fade, defaultValue: 5 }
+    })
+
+    await wrapper.setProps({ items: items.slice(0, 2) })
+    await flushPromises()
+    expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBe(1)
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CarouselWrapper, {
       props: {
