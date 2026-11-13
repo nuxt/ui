@@ -454,10 +454,6 @@ function onUpdate(value: any) {
   emits('change', event)
   emitFormChange()
   emitFormInput()
-
-  if (props.resetSearchTermOnSelect) {
-    searchTerm.value = ''
-  }
 }
 
 const isOpen = ref(false)
@@ -512,16 +508,19 @@ function onCreate(e: Event) {
 }
 
 function onSelect(e: Event, item: SelectMenuItem) {
-  if (!isSelectItem(item)) {
-    return
+  if (isSelectItem(item)) {
+    if (item.disabled) {
+      e.preventDefault()
+      return
+    }
+
+    item.onSelect?.(e)
   }
 
-  if (item.disabled) {
-    e.preventDefault()
-    return
+  // Reset on select rather than on update, since selecting the current item updates nothing.
+  if (!e.defaultPrevented && props.resetSearchTermOnSelect) {
+    searchTerm.value = ''
   }
-
-  item.onSelect?.(e)
 }
 
 function isSelectItem(item: SelectMenuItem): item is Exclude<SelectMenuItem, SelectMenuValue> {
@@ -538,6 +537,10 @@ function isModelValueEmpty(modelValue: ApplyModifiers<GetModelValue<T, VK, M, Ex
 function onClear() {
   if (disabled.value) {
     return
+  }
+
+  if (props.resetSearchTermOnSelect) {
+    searchTerm.value = ''
   }
 
   emits('clear')
