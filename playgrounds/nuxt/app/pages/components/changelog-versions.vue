@@ -46,7 +46,6 @@ const versions = ref([
 
   <div ref="container" class="relative w-full h-96 overflow-auto">
     <UChangelogVersions
-      v-if="container"
       :versions="versions"
       :indicator="{
         container

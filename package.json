@@ -155,6 +155,7 @@
   "dependencies": {
     "@floating-ui/dom": "catalog:",
     "@iconify/vue": "catalog:",
+    "@internationalized/date": "catalog:",
     "@internationalized/number": "catalog:",
     "@nuxt/fonts": "catalog:",
     "@nuxt/icon": "catalog:",
@@ -178,13 +179,11 @@
     "knitwork": "catalog:",
     "magic-string": "catalog:",
     "mlly": "catalog:",
-    "motion-v": "catalog:",
     "ohash": "catalog:",
     "pathe": "catalog:",
     "reka-ui": "catalog:",
     "scule": "catalog:",
     "tailwindcss": "catalog:",
-    "temporal-polyfill-lite": "catalog:",
     "tinyglobby": "catalog:",
     "ufo": "catalog:",
     "unplugin": "catalog:",
@@ -243,6 +242,7 @@
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7 || ^3",
+    "@internationalized/date": "^3",
     "@internationalized/number": "^3",
     "@nuxt/content": "^3",
     "@tanstack/charts": "^1",
@@ -283,6 +283,9 @@
   },
   "peerDependenciesMeta": {
     "@inertiajs/vue3": {
+      "optional": true
+    },
+    "@internationalized/date": {
       "optional": true
     },
     "@internationalized/number": {

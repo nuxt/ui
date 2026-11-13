@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
+import { CalendarDate, DateFormatter } from '@internationalized/date'
 import type { DropdownMenuItem, NavigationMenuItem, TableColumn } from '@nuxt/ui'
 import type { RowSelectionState } from '@tanstack/vue-table'
 
@@ -106,13 +107,13 @@ const newItems = computed<DropdownMenuItem[][]>(() => [[
 const periodItems = ['daily', 'weekly', 'monthly']
 
 /**
- * The template's HomeDateRangePicker, over Temporal.PlainDate directly since nothing
- * downstream wants a `Date`. The reference day is fixed rather than today:
+ * The template's HomeDateRangePicker, over CalendarDate directly since nothing
+ * downstream wants a `Date`. The reference day is fixed rather than `today()`:
  * the studio renders on the server too, and a live date risks a hydration
  * mismatch across timezones.
  */
-const formatDate = (date: Temporal.PlainDate) => date.toLocaleString('en-US', { dateStyle: 'medium' })
-const referenceDate = new Temporal.PlainDate(2026, 7, 6)
+const dateFormatter = new DateFormatter('en-US', { dateStyle: 'medium' })
+const referenceDate = new CalendarDate(2026, 7, 6)
 
 const dateRanges = [
   { label: 'Last 7 days', days: 7 },
@@ -129,18 +130,20 @@ function rangeStart(range: DateRangePreset) {
   return referenceDate.subtract({ days: range.days, months: range.months, years: range.years })
 }
 
+// shallowRef, not ref: a deep ref unwraps the CalendarDate instances and they
+// stop matching the calendar's DateValue.
 const selectedDateRange = shallowRef({ start: rangeStart(dateRanges[1]!), end: referenceDate })
 
 const dateRangeLabel = computed(() => {
   const { start, end } = selectedDateRange.value
   if (!start) return 'Pick a date'
-  if (!end) return formatDate(start)
-  return `${formatDate(start)} - ${formatDate(end)}`
+  if (!end) return dateFormatter.format(start.toDate('UTC'))
+  return `${dateFormatter.format(start.toDate('UTC'))} - ${dateFormatter.format(end.toDate('UTC'))}`
 })
 
 function isDateRangeSelected(range: DateRangePreset) {
   const { start, end } = selectedDateRange.value
-  return !!start && !!end && start.equals(rangeStart(range)) && end.equals(referenceDate)
+  return !!start && !!end && start.compare(rangeStart(range)) === 0 && end.compare(referenceDate) === 0
 }
 
 function selectDateRange(range: DateRangePreset) {

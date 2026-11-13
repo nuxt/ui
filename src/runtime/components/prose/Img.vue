@@ -21,9 +21,8 @@ export interface ProseImgProps {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, useAttrs, useId } from 'vue'
+import { ref, computed, nextTick, useAttrs, useId } from 'vue'
 import { DialogRoot, DialogPortal, DialogTrigger } from 'reka-ui'
-import { AnimatePresence, Motion } from 'motion-v'
 import { useEventListener, createReusableTemplate } from '@vueuse/core'
 import { useRuntimeConfig } from '#imports'
 import ImageComponent, { useImage } from '#build/ui-image-component'
@@ -61,16 +60,57 @@ const refinedSrc = computed(() => {
   return provider === 'ipx' || provider === 'ipxStatic' ? props.src : resolveBaseURL(props.src, useRuntimeConfig().app.baseURL)
 })
 
-const layoutId = computed(() => `${refinedSrc.value}::${useId()}`)
+// The name is only set while the zoom transition runs, so the image doesn't take part in page view transitions
+const transitionName = `ui-prose-img-${useId().replace(/[^\w-]/g, '')}`
+const transitioning = ref(false)
+
+const transitionStyle = computed(() => transitioning.value ? { viewTransitionName: transitionName, viewTransitionClass: 'ui-prose-img' } : undefined)
+
+// A request made while the zoom runs is applied once it ends, another transition would clear the name under it
+let pending: boolean | undefined
+
+async function setOpen(value: boolean) {
+  if (transitioning.value) {
+    pending = value
+    return
+  }
+
+  if (value === open.value) {
+    return
+  }
+
+  if (!document.startViewTransition) {
+    open.value = value
+    return
+  }
+
+  const reset = () => {
+    transitioning.value = false
+
+    if (pending !== undefined) {
+      const next = pending
+      pending = undefined
+      setOpen(next)
+    }
+  }
+
+  transitioning.value = true
+  await nextTick()
+
+  document.startViewTransition(async () => {
+    open.value = value
+    await nextTick()
+  }).finished.then(reset, reset)
+}
 
 if (props.zoom) {
   useEventListener(window, 'scroll', () => {
-    open.value = false
-  })
+    setOpen(false)
+  }, { passive: true })
 
   useEventListener(window, 'keydown', (e: KeyboardEvent) => {
     if (e.key === 'Escape' && open.value) {
-      open.value = false
+      setOpen(false)
     }
   })
 }
@@ -85,6 +125,7 @@ if (props.zoom) {
       :width="props.width"
       :height="props.height"
       v-bind="$attrs"
+      :style="open ? undefined : transitionStyle"
       :class="ui.base({ class: [props.ui?.base, props.class] })"
     />
   </DefineImageTemplate>
@@ -95,27 +136,24 @@ if (props.zoom) {
       :src="refinedSrc"
       :alt="props.alt"
       v-bind="$attrs"
+      :style="transitionStyle"
       :class="ui.zoomedImage({ class: [props.ui?.zoomedImage] })"
     />
   </DefineZoomedImageTemplate>
 
-  <DialogRoot v-if="props.zoom" v-slot="{ close }" v-model:open="open" :modal="false">
+  <DialogRoot v-if="props.zoom" v-slot="{ close }" :open="open" :modal="false" @update:open="setOpen">
     <DialogTrigger as-child>
-      <Motion :layout-id="layoutId" as-child :transition="{ type: 'spring', bounce: 0.15, duration: 0.5, ease: 'easeInOut' }">
-        <ReuseImageTemplate />
-      </Motion>
+      <ReuseImageTemplate />
     </DialogTrigger>
 
     <DialogPortal>
-      <AnimatePresence>
-        <Motion v-if="open" :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :exit="{ opacity: 0 }" :class="ui.overlay({ class: [props.ui?.overlay] })" />
+      <template v-if="open">
+        <div :class="ui.overlay({ class: [props.ui?.overlay] })" />
 
-        <div v-if="open" :class="ui.content({ class: [props.ui?.content] })" @click="close">
-          <Motion as-child :layout-id="layoutId" :transition="{ type: 'spring', bounce: 0.15, duration: 0.5, ease: 'easeInOut' }">
-            <ReuseZoomedImageTemplate />
-          </Motion>
+        <div :class="ui.content({ class: [props.ui?.content] })" @click="close">
+          <ReuseZoomedImageTemplate />
         </div>
-      </AnimatePresence>
+      </template>
     </DialogPortal>
   </DialogRoot>
 

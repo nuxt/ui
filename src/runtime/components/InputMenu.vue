@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps, ChangeEventDetails, ComboboxChangeReason, AutocompleteChangeReason, ComboboxInputChangeReason } from 'reka-ui'
+import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/input-menu'
@@ -204,8 +204,7 @@ export interface InputMenuEmits<
   } | undefined]
   'remove-tag': [item: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>]
   /** Event handler called when the value changes. */
-  'beforeUpdate:modelValue': [value: GetModelValue<A, VK, M, ExcludeItem> | IsClearUsed<M, C>, details: ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>]
-  'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, details?: ChangeEventDetails<ComboboxChangeReason | AutocompleteChangeReason>]
+  'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>]
 }
 
 type SlotProps<T extends InputMenuItem> = (props: { item: T, index: number, ui: InputMenu['ui'] }) => VNode[]
@@ -236,7 +235,7 @@ export interface InputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { computed, ref, useAttrs, useTemplateRef, toRef, onMounted, onScopeDispose, nextTick, watch, shallowRef, watchPostEffect } from 'vue'
+import { computed, ref, useAttrs, useTemplateRef, toRef, onMounted, onScopeDispose, toRaw, nextTick, watch, shallowRef, watchPostEffect } from 'vue'
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, ComboboxRoot, ComboboxInput, ComboboxAnchor, ComboboxEmpty, ComboboxTrigger, ComboboxCancel, ComboboxGroup, ComboboxLabel, ComboboxContent, ComboboxVirtualizer, ComboboxItem, ComboboxItemIndicator, ComboboxSeparator, ComboboxArrow, ComboboxPortal, AutocompleteRoot, AutocompleteInput, AutocompleteAnchor, AutocompleteEmpty, AutocompleteTrigger, AutocompleteCancel, AutocompleteGroup, AutocompleteLabel, AutocompleteContent, AutocompleteVirtualizer, AutocompleteItem, AutocompleteItemIndicator, AutocompleteSeparator, AutocompleteArrow, AutocompletePortal } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
@@ -459,6 +458,10 @@ watch(() => props.modelValue, (newValue) => {
 })
 
 function onUpdate(value: any) {
+  if (toRaw(props.modelValue) === value) {
+    return
+  }
+
   if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
     value = value?.trim() ?? null
   }
@@ -488,9 +491,8 @@ function onUpdate(value: any) {
   }
 }
 
-function onInputUpdate(value: string, details?: ChangeEventDetails<ComboboxInputChangeReason>) {
-  // `ComboboxInput` also reports the selected label it writes into the input, which isn't a search.
-  if (!isAutocomplete.value && (details?.reason === 'input-change' || !value)) {
+function onInputUpdate(value: string) {
+  if (!isAutocomplete.value) {
     searchTerm.value = value
   }
 }
@@ -715,7 +717,7 @@ defineExpose({
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input-menu'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :as-child="isMultiple"
-    :filter="null"
+    ignore-filter
     @click="onRootClick"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"

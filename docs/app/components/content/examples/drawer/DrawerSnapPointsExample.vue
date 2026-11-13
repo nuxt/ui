@@ -1,4 +1,8 @@
 <script setup lang="ts">
+const { inset = true } = defineProps<{
+  inset?: boolean
+}>()
+
 const snapPoints = ['20rem', 0.6, 1]
 const snapPoint = ref<number | string | null>('20rem')
 
@@ -20,6 +24,7 @@ const places = [
   <UDrawer
     v-model:snap-point="snapPoint"
     :snap-points="snapPoints"
+    :inset="inset"
     handle
     title="Nearby places"
     description="Drag the drawer between a peek, most of the screen and full height."
