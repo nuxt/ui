@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
+import type { Component } from 'vue'
 import { defineComponent, h, ref } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -243,7 +244,7 @@ describe('SelectMenu', () => {
       const Parent = defineComponent(() => {
         const searchTerm = ref('Option')
         const modelValue = ref<any>(initial)
-        return () => h(SelectMenu, {
+        return () => h(SelectMenu as Component, {
           'items': ['Option 1', 'Option 2'],
           multiple,
           'modelValue': modelValue.value,
