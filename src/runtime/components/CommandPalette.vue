@@ -90,7 +90,7 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
   childrenIcon?: IconProps['name']
   /**
    * Display a close button in the input (useful when inside a Modal for example).
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @emits 'update:open'
    * @defaultValue false
    */
@@ -116,7 +116,7 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
   /**
    * Whether to display a filter input or not.
    * Can be an object to pass additional props to the input, set `icon: false` to hide its icon.
-   * `{ placeholder: t('commandPalette.filterPlaceholder'), icon: appConfig.ui.icons.search, autofocus: true, variant: 'none' }`{lang="ts-type"}
+   * `{ placeholder: t('commandPalette.filterPlaceholder'), icon: appConfig.ui.icons.search, autofocus: true, variant: 'soft' }`{lang="ts-type"}
    * @defaultValue true
    */
   filter?: boolean | (Omit<InputProps, 'modelValue' | 'defaultValue' | 'icon'> & { icon?: IconProps['name'] | false })
@@ -312,7 +312,7 @@ const history = ref<(CommandPaletteGroup & { placeholder?: string })[]>([])
 const filterProps = computed(() => {
   const filter = typeof props.filter === 'object' ? props.filter : {}
 
-  return defu({ ...filter, icon: filter.icon === false ? undefined : (filter.icon ?? appConfig.ui.icons.search) }, { autofocus: true, variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>
+  return defu({ ...filter, icon: filter.icon === false ? undefined : (filter.icon ?? appConfig.ui.icons.search) }, { autofocus: true, variant: 'soft' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>
 })
 
 const placeholder = computed(() => history.value[history.value.length - 1]?.placeholder || filterProps.value.placeholder || t('commandPalette.filterPlaceholder'))
@@ -622,7 +622,7 @@ function onSelect(e: Event, item: T) {
               :size="props.size"
               :icon="props.closeIcon || appConfig.ui.icons.close"
               color="neutral"
-              variant="ghost"
+              variant="link"
               :aria-label="t('commandPalette.close')"
               v-bind="(typeof props.close === 'object' ? props.close : {})"
               data-slot="command-palette-close"

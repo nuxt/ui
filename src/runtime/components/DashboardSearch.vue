@@ -19,7 +19,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
   size?: DashboardSearch['variants']['size']
   /**
    * Display a close button in the input (useful when inside a Modal for example).
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @emits 'update:open'
    * @defaultValue true
    */
@@ -27,7 +27,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
   /**
    * Whether to display a filter input or not.
    * Can be an object to pass additional props to the input, set `icon: false` to hide its icon.
-   * `{ placeholder: t('commandPalette.filterPlaceholder'), icon: appConfig.ui.icons.search, autofocus: true, variant: 'none' }`{lang="ts-type"}
+   * `{ placeholder: t('commandPalette.filterPlaceholder'), icon: appConfig.ui.icons.search, autofocus: true, variant: 'soft' }`{lang="ts-type"}
    * @defaultValue true
    */
   filter?: CommandPaletteProps['filter']
