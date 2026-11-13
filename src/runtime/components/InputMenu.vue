@@ -488,13 +488,13 @@ function onUpdate(value: any) {
   }
 }
 
-function onInputUpdate(value: string) {
+function onInputUpdate(value: string, open: boolean, modelValue: unknown) {
   if (isAutocomplete.value) {
     return
   }
 
   // While closed, reka resets the input to the label of the selected item, which isn't a search.
-  if (!isOpen.value && value && value === displayValue(props.modelValue as GetItemValue<T, VK, ExcludeItem>)) {
+  if (!open && value && value === displayValue(modelValue as GetItemValue<T, VK, ExcludeItem>)) {
     return
   }
 
@@ -511,12 +511,7 @@ function onFocus(event: FocusEvent) {
   emitFormFocus()
 }
 
-const isOpen = ref(props.open ?? props.defaultOpen ?? false)
-watch(() => props.open, (value) => {
-  if (value !== undefined) {
-    isOpen.value = value
-  }
-})
+const isOpen = ref(false)
 let timeoutId: ReturnType<typeof setTimeout> | undefined
 
 onScopeDispose(() => clearTimeout(timeoutId))
@@ -770,7 +765,7 @@ defineExpose({
         @blur="onBlur"
         @focus="onFocus"
         @change.stop
-        @update:model-value="onInputUpdate"
+        @update:model-value="onInputUpdate($event, open, modelValue)"
       />
 
       <slot :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui" />
