@@ -114,7 +114,7 @@ const periodItems = ['daily', 'weekly', 'monthly']
  * the studio renders on the server too, and a live date risks a hydration
  * mismatch across timezones.
  */
-const dateFormatter = new DateFormatter('en-US', { dateStyle: 'medium' })
+const dateFormatter = new DateFormatter('en-US', { dateStyle: 'medium', timeZone: 'UTC' })
 const referenceDate = new CalendarDate(2026, 7, 6)
 
 const dateRanges = [
