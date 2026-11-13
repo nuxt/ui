@@ -47,6 +47,21 @@ describe('Drawer', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
+  it('clips the popup at the snap line only with `inset` and snap points', async () => {
+    const classes = async (extra: Record<string, any>) => {
+      const wrapper = await mountSuspended(Drawer, { props: { ...props, title: 'Title', ...extra } })
+      return wrapper.find('[data-slot="drawer-content"]').classes()
+    }
+
+    const insetSnap = await classes({ snapPoints: [0.4, 1] })
+    expect(insetSnap).toContain('after:content-[\'\']')
+    expect(insetSnap).not.toContain('after:content-none')
+    expect(insetSnap.some(c => c.startsWith('[--snap-clip:'))).toBe(true)
+
+    expect(await classes({})).toContain('after:content-none')
+    expect((await classes({ snapPoints: [0.4, 1], inset: false })).some(c => c.startsWith('[clip-path:'))).toBe(false)
+  })
+
   it('emits `after:leave` once the animation ends', async () => {
     const wrapper = await mountSuspended(Drawer, { props: { open: false, portal: false } })
     expect(wrapper.emitted('after:leave')).toBeUndefined()
