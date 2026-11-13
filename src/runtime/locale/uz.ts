@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Oldinga',
       prev: 'Ortga',
       roledescription: 'karusel',
-      slide: 'slayd'
+      slide: 'slayd',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'Yuklanmoqda',

@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Далей',
       prev: 'Назад',
       roledescription: 'карусель',
-      slide: 'слайд'
+      slide: 'слайд',
+      slideLabel: '{slide} з {total}'
     },
     chatAttachment: {
       uploading: 'Запампоўваецца',

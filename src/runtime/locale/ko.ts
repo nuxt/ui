@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: '다음',
       prev: '이전',
       roledescription: '캐러셀',
-      slide: '슬라이드'
+      slide: '슬라이드',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: '업로드 중',

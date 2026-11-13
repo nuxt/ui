@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Næsta',
       prev: 'Fyrri',
       roledescription: 'hringekja',
-      slide: 'mynd'
+      slide: 'mynd',
+      slideLabel: '{slide} af {total}'
     },
     chatAttachment: {
       uploading: 'Hleður upp',

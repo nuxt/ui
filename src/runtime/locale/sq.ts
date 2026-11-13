@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Tjetri',
       prev: 'Para',
       roledescription: 'karusel',
-      slide: 'slajd'
+      slide: 'slajd',
+      slideLabel: '{slide} nga {total}'
     },
     chatAttachment: {
       uploading: 'Po ngarkohet',

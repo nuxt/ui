@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'পরবর্তী',
       prev: 'পূর্ববর্তী',
       roledescription: 'ক্যারোসেল',
-      slide: 'স্লাইড'
+      slide: 'স্লাইড',
+      slideLabel: '{total} এর মধ্যে {slide}'
     },
     chatAttachment: {
       uploading: 'আপলোড হচ্ছে',

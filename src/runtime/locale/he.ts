@@ -35,7 +35,8 @@ export default defineLocale<Messages>({
       next: 'הבא',
       prev: 'הקודם',
       roledescription: 'קרוסלה',
-      slide: 'שקופית'
+      slide: 'שקופית',
+      slideLabel: '{slide} מתוך {total}'
     },
     chatAttachment: {
       uploading: 'מעלה',

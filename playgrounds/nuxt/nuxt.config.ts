@@ -54,13 +54,6 @@ export default defineNuxtConfig({
         'cn/engine',
         'cn/tables',
         'colortranslator',
-        'embla-carousel-auto-height',
-        'embla-carousel-auto-scroll',
-        'embla-carousel-autoplay',
-        'embla-carousel-class-names',
-        'embla-carousel-fade',
-        'embla-carousel-vue',
-        'embla-carousel-wheel-gestures',
         'tailwindcss/colors',
         'zod'
       ]

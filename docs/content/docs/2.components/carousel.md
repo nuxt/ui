@@ -1,5 +1,5 @@
 ---
-description: A carousel with motion and swipe built using Embla.
+description: A carousel with motion and swipe.
 category: data
 keywords:
   - swiper
@@ -7,9 +7,9 @@ keywords:
   - image slider
   - slideshow
 links:
-  - label: Embla
-    to: https://www.embla-carousel.com/docs/v8/api
-    icon: i-custom-embla-carousel
+  - label: Carousel
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/carousel
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Carousel.vue
@@ -18,28 +18,6 @@ links:
 ## Usage
 
 Use the Carousel component to display a list of items in a carousel.
-
-Embla is an optional peer dependency, install it first:
-
-::code-group{sync="pm"}
-
-```bash [pnpm]
-pnpm add embla-carousel embla-carousel-auto-height embla-carousel-auto-scroll embla-carousel-autoplay embla-carousel-class-names embla-carousel-fade embla-carousel-vue embla-carousel-wheel-gestures
-```
-
-```bash [yarn]
-yarn add embla-carousel embla-carousel-auto-height embla-carousel-auto-scroll embla-carousel-autoplay embla-carousel-class-names embla-carousel-fade embla-carousel-vue embla-carousel-wheel-gestures
-```
-
-```bash [npm]
-npm install embla-carousel embla-carousel-auto-height embla-carousel-auto-scroll embla-carousel-autoplay embla-carousel-class-names embla-carousel-fade embla-carousel-vue embla-carousel-wheel-gestures
-```
-
-```bash [bun]
-bun add embla-carousel embla-carousel-auto-height embla-carousel-auto-scroll embla-carousel-autoplay embla-carousel-class-names embla-carousel-fade embla-carousel-vue embla-carousel-wheel-gestures
-```
-
-::
 
 ::component-example
 ---
@@ -81,7 +59,7 @@ class: 'p-8 px-16'
 
 ### Orientation
 
-Use the `orientation` prop to change the orientation of the Progress. Defaults to `horizontal`.
+Use the `orientation` prop to change the orientation of the Carousel. Defaults to `horizontal`.
 
 ::note
 Use your mouse to drag the carousel vertically on desktop.
@@ -170,15 +148,9 @@ class: 'p-8 px-16 pb-12'
 ---
 ::
 
-## Plugins
-
-The Carousel component implements the official [Embla Carousel plugins](https://www.embla-carousel.com/docs/v8/plugins).
-
 ### Autoplay
 
-This plugin is used to extend Embla Carousel with **autoplay** functionality.
-
-Use the `autoplay` prop as a boolean or an object to configure the [Autoplay plugin](https://www.embla-carousel.com/docs/v8/plugins/autoplay).
+Use the `autoplay` prop as a boolean or an object to move to the next slide on an interval. It pauses while the mouse is over the carousel and stops when a slide gets keyboard focus.
 
 ::component-example
 ---
@@ -191,11 +163,13 @@ class: 'p-8 px-16 pb-12'
 In this example, we're using the `loop` prop for an infinite carousel.
 ::
 
+::tip
+Use `v-model:playing` to start or stop the rotation from your own controls.
+::
+
 ### Auto Scroll
 
-This plugin is used to extend Embla Carousel with **auto scroll** functionality.
-
-Use the `auto-scroll` prop as a boolean or an object to configure the [Auto Scroll plugin](https://www.embla-carousel.com/docs/v8/plugins/auto-scroll).
+Use the `auto-scroll` prop as a boolean or an object to scroll the carousel continuously. Its `speed` is in pixels per second.
 
 ::component-example
 ---
@@ -210,9 +184,7 @@ In this example, we're using the `loop` prop for an infinite carousel.
 
 ### Auto Height
 
-This plugin is used to extend Embla Carousel with **auto height** functionality. It changes the height of the carousel container to fit the height of the highest slide in view.
-
-Use the `auto-height` prop as a boolean or an object to configure the [Auto Height plugin](https://www.embla-carousel.com/docs/v8/plugins/auto-height).
+Use the `auto-height` prop to give the viewport the height of the slides in view.
 
 ::component-example
 ---
@@ -222,31 +194,12 @@ class: 'p-8 pt-16'
 ::
 
 ::note
-In this example, we add the `transition-[height]` class on the container to animate the height change.
-::
-
-### Class Names
-
-Class Names is a **class name toggle** utility plugin for Embla Carousel that enables you to automate the toggling of class names on your carousel.
-
-Use the `class-names` prop as a boolean or an object to configure the [Class Names plugin](https://www.embla-carousel.com/docs/v8/plugins/class-names).
-
-::component-example
----
-name: 'carousel-class-names-example'
-class: 'p-8'
----
-::
-
-::note
-In this example, we add the `transition-opacity [&:not(.is-snapped)]:opacity-10` classes on the `item` to animate the opacity change.
+In this example, we add the `transition-[height]` class on the `viewport` to animate the height change.
 ::
 
 ### Fade
 
-This plugin is used to replace the Embla Carousel scroll functionality with **fade transitions**.
-
-Use the `fade` prop as a boolean or an object to configure the [Fade plugin](https://www.embla-carousel.com/docs/v8/plugins/fade).
+Use the `fade` prop to stack the slides and cross-fade between them instead of sliding.
 
 ::component-example
 ---
@@ -257,9 +210,7 @@ class: 'p-8 pb-12'
 
 ### Wheel Gestures
 
-This plugin is used to extend Embla Carousel with the ability to **use the mouse/trackpad wheel** to navigate the carousel.
-
-Use the `wheel-gestures` prop as a boolean or an object to configure the [Wheel Gestures plugin](https://www.embla-carousel.com/docs/v8/plugins/wheel-gestures).
+Use the `wheel-gestures` prop to navigate the carousel with the mouse wheel.
 
 ::note
 Use your mouse wheel to scroll the carousel.
@@ -274,9 +225,24 @@ class: 'p-8 px-16'
 
 ## Examples
 
+### With active slide
+
+The current slides get a `data-active` attribute and the slides in view a `data-in-view` attribute, so you can style them with the `data-active:` and `data-in-view:` variants.
+
+::component-example
+---
+name: 'carousel-active-example'
+class: 'p-8'
+---
+::
+
+::note
+In this example, we add the `transition-opacity not-data-active:opacity-10` classes on the `item` to fade out the other slides. The `active` and `inView` props of the default slot carry the same state.
+::
+
 ### With thumbnails
 
-You can use the [`scrollTo`](https://www.embla-carousel.com/docs/v8/api/methods#scrollto) method on [`emblaApi`](#expose) to display thumbnails under the carousel that navigate to a specific slide.
+Use the `v-model` directive to control the current slide and display thumbnails under the carousel that navigate to it.
 
 ::component-example
 ---
@@ -298,27 +264,6 @@ class: 'p-8 px-16'
 ### Emits
 
 :component-emits
-
-### Expose
-
-You can access the typed component instance using [`useTemplateRef`](https://vuejs.org/api/composition-api-helpers.html#usetemplateref).
-
-```vue
-<script setup lang="ts">
-const carousel = useTemplateRef('carousel')
-</script>
-
-<template>
-  <UCarousel ref="carousel" />
-</template>
-```
-
-This will give you access to the following:
-
-| Name | Type |
-| ---- | ---- |
-| `emblaRef`{lang="ts-type"} | `Ref<HTMLElement \| null>`{lang="ts-type"} |
-| `emblaApi`{lang="ts-type"} | [`Ref<EmblaCarouselType \| null>`{lang="ts-type"}](https://www.embla-carousel.com/docs/v8/api/methods#typescript) |
 
 ## Theme
 

@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: '下一頁',
       prev: '上一頁',
       roledescription: '輪播',
-      slide: '投影片'
+      slide: '投影片',
+      slideLabel: '第 {slide} 張，共 {total} 張'
     },
     chatAttachment: {
       uploading: '正在上傳',

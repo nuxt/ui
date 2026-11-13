@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Дараах',
       prev: 'Өмнөх',
       roledescription: 'карусель',
-      slide: 'слайд'
+      slide: 'слайд',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'Байршуулж байна',
