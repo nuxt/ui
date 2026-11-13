@@ -429,11 +429,6 @@ onMounted(() => {
 onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 function onUpdate(value: any) {
-  // Selecting the current item emits it again, which still resets the search.
-  if (props.resetSearchTermOnSelect) {
-    searchTerm.value = ''
-  }
-
   if (toRaw(props.modelValue) === value) {
     return
   }
@@ -459,6 +454,10 @@ function onUpdate(value: any) {
   emits('change', event)
   emitFormChange()
   emitFormInput()
+
+  if (props.resetSearchTermOnSelect) {
+    searchTerm.value = ''
+  }
 }
 
 const isOpen = ref(false)
@@ -513,16 +512,19 @@ function onCreate(e: Event) {
 }
 
 function onSelect(e: Event, item: SelectMenuItem) {
-  if (!isSelectItem(item)) {
-    return
+  if (isSelectItem(item)) {
+    if (item.disabled) {
+      e.preventDefault()
+      return
+    }
+
+    item.onSelect?.(e)
   }
 
-  if (item.disabled) {
-    e.preventDefault()
-    return
+  // Selecting the current item updates nothing, so the search is reset here too.
+  if (!e.defaultPrevented && props.resetSearchTermOnSelect) {
+    searchTerm.value = ''
   }
-
-  item.onSelect?.(e)
 }
 
 function isSelectItem(item: SelectMenuItem): item is Exclude<SelectMenuItem, SelectMenuValue> {
