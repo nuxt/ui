@@ -10,7 +10,10 @@ export default (options: Required<ModuleOptions>) => ({
     container: 'flex items-center',
     base: 'rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none',
     indicator: 'flex items-center justify-center size-full after:bg-default after:rounded-full',
-    wrapper: 'w-full',
+    // Baseline-align the text so the item's baseline comes from its label rather than the
+    // control, whose content (and synthesized baseline) changes as the indicator mounts
+    // on check. Otherwise parents aligning on it, like a horizontal `FormField`, jump around.
+    wrapper: 'w-full self-baseline',
     label: 'block font-medium text-default',
     icon: 'shrink-0',
     description: 'text-muted'
