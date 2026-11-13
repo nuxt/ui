@@ -110,6 +110,18 @@ describe('Calendar', () => {
       expect(wrapper.find('[data-reka-calendar-cell-trigger][data-selected]').attributes('data-value')).toBe('2025-01-15')
     })
 
+    test('does not bring back a selection cleared by the parent after cycling through the views', async () => {
+      const wrapper = await mountSuspended(Calendar, { props: { 'placeholder': new CalendarDate(2025, 1, 1), 'onUpdate:modelValue': (value: any) => wrapper.setProps({ modelValue: value }) } })
+
+      await wrapper.find('[data-reka-calendar-cell-trigger][data-value="2025-01-15"]').trigger('click')
+      await wrapper.setProps({ modelValue: undefined })
+      for (let i = 0; i < 3; i++) {
+        await wrapper.find('[data-slot="heading"] button').trigger('click')
+      }
+
+      expect(wrapper.find('[data-reka-calendar-cell-trigger][data-selected]').exists()).toBe(false)
+    })
+
     test('keeps focus inside the calendar when switching views', async () => {
       const wrapper = await mountSuspended(Calendar, { props: { placeholder: new CalendarDate(2025, 1, 1) }, attachTo: document.body })
 

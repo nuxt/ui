@@ -258,7 +258,10 @@ function setPlaceholder(date: DateValue) {
 }
 
 // The picker keeps an uncontrolled value internally and is replaced on each view change.
-const uncontrolledValue = shallowRef(props.defaultValue)
+const uncontrolledValue = shallowRef(props.modelValue ?? props.defaultValue)
+watch(() => props.modelValue, (value) => {
+  uncontrolledValue.value = value
+})
 
 function onSelect(value: DateValue | DateRange) {
   if (isMinView.value) {
@@ -272,7 +275,8 @@ function onSelect(value: DateValue | DateRange) {
     setPlaceholder(resolved)
   }
   setView(VIEWS[VIEWS.indexOf(view.value) - 1]!)
-  keepFocus(['[data-selected]:not([data-disabled])', '[data-today]:not([data-disabled])', '[data-value]:not([data-disabled]):not([data-outside-view])'])
+  const cell = ':not([data-disabled]):not([data-outside-view])'
+  keepFocus([`[data-selected]${cell}`, `[data-today]${cell}`, `[data-value]${cell}`])
 }
 
 function paginateYear(date: DateValue, sign: -1 | 1) {
