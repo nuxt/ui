@@ -539,6 +539,10 @@ function onClear() {
     return
   }
 
+  if (props.resetSearchTermOnSelect) {
+    searchTerm.value = ''
+  }
+
   emits('clear')
 }
 

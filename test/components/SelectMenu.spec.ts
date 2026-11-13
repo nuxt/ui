@@ -236,6 +236,13 @@ describe('SelectMenu', () => {
       wrapper.unmount()
     })
 
+    test('resets the search term when clearing', async () => {
+      const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'], modelValue: 'Option 1', clear: true, searchTerm: 'Option', resetSearchTermOnBlur: false } })
+      await wrapper.find('[data-slot="trailingClear"]').trigger('click')
+
+      expect(wrapper.emitted('update:searchTerm')).toEqual([['']])
+    })
+
     test.each([
       ['single', false, 'Option 1'],
       ['multiple', true, []]
