@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Επόμενο',
       prev: 'Προηγούμενο',
       roledescription: 'καρουζέλ',
-      slide: 'διαφάνεια'
+      slide: 'διαφάνεια',
+      slideLabel: '{slide} από {total}'
     },
     chatAttachment: {
       uploading: 'Μεταφόρτωση',

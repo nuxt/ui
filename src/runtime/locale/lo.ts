@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'ຕໍ່ໄປ',
       prev: 'ກ່ອນໜ້າ',
       roledescription: 'ຄາຣູເຊວ',
-      slide: 'ສະໄລ້'
+      slide: 'ສະໄລ້',
+      slideLabel: '{slide} ຈາກ {total}'
     },
     chatAttachment: {
       uploading: 'ກຳລັງອັບໂຫຼດ',

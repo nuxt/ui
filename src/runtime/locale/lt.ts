@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Pirmyn',
       prev: 'Atgal',
       roledescription: 'karuselė',
-      slide: 'skaidrė'
+      slide: 'skaidrė',
+      slideLabel: '{slide} iš {total}'
     },
     chatAttachment: {
       uploading: 'Įkeliama',

@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Weider',
       prev: 'Zréck',
       roledescription: 'Karussell',
-      slide: 'Dia'
+      slide: 'Dia',
+      slideLabel: '{slide} vun {total}'
     },
     chatAttachment: {
       uploading: 'Gëtt eropgelueden',

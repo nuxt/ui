@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Järgmine',
       prev: 'Eelmine',
       roledescription: 'karussell',
-      slide: 'slaid'
+      slide: 'slaid',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'Üleslaadimine',

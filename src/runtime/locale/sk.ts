@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Nasledujúci',
       prev: 'Predchádzajúci',
       roledescription: 'karusel',
-      slide: 'snímka'
+      slide: 'snímka',
+      slideLabel: '{slide} z {total}'
     },
     chatAttachment: {
       uploading: 'Nahrávanie',

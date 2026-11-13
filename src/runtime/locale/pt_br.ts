@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Próximo',
       prev: 'Anterior',
       roledescription: 'carrossel',
-      slide: 'slide'
+      slide: 'slide',
+      slideLabel: '{slide} de {total}'
     },
     chatAttachment: {
       uploading: 'Enviando',

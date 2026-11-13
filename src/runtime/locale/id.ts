@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Berikutnya',
       prev: 'Sebelumnya',
       roledescription: 'korsel',
-      slide: 'slide'
+      slide: 'slide',
+      slideLabel: '{slide} dari {total}'
     },
     chatAttachment: {
       uploading: 'Mengunggah',

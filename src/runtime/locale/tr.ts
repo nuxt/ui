@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Sonraki',
       prev: 'Önceki',
       roledescription: 'karusel',
-      slide: 'slayt'
+      slide: 'slayt',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'Yükleniyor',

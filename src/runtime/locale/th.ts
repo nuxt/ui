@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'ถัดไป',
       prev: 'ย้อนกลับ',
       roledescription: 'ภาพหมุนเวียน',
-      slide: 'สไลด์'
+      slide: 'สไลด์',
+      slideLabel: '{slide} จาก {total}'
     },
     chatAttachment: {
       uploading: 'กำลังอัปโหลด',

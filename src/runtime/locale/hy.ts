@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Առաջ',
       prev: 'Հետ',
       roledescription: 'կարուսել',
-      slide: 'սլայդ'
+      slide: 'սլայդ',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'Վերբեռնվում է',

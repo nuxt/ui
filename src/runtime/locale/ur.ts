@@ -35,7 +35,8 @@ export default defineLocale<Messages>({
       next: 'اگلا',
       prev: 'پچھلا',
       roledescription: 'کیروسل',
-      slide: 'سلائیڈ'
+      slide: 'سلائیڈ',
+      slideLabel: '{total} میں سے {slide}'
     },
     chatAttachment: {
       uploading: 'اپ لوڈ ہو رہا ہے',

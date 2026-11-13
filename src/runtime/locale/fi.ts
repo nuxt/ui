@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Seuraava',
       prev: 'Edellinen',
       roledescription: 'karuselli',
-      slide: 'dia'
+      slide: 'dia',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'Ladataan',

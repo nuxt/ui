@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Sljedeći',
       prev: 'Prethodni',
       roledescription: 'vrtuljak',
-      slide: 'slajd'
+      slide: 'slajd',
+      slideLabel: '{slide} od {total}'
     },
     chatAttachment: {
       uploading: 'Prijenos',

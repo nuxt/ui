@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: '次へ',
       prev: '前へ',
       roledescription: 'カルーセル',
-      slide: 'スライド'
+      slide: 'スライド',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'アップロード中',

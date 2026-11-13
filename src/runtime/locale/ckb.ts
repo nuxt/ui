@@ -35,7 +35,8 @@ export default defineLocale<Messages>({
       next: 'دواتر',
       prev: 'پێشتر',
       roledescription: 'کارۆسێل',
-      slide: 'سلاید'
+      slide: 'سلاید',
+      slideLabel: '{slide} لە {total}'
     },
     chatAttachment: {
       uploading: 'بارکردن',

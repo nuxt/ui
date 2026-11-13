@@ -35,7 +35,8 @@ export default defineLocale<Messages>({
       next: 'التالي',
       prev: 'السابق',
       roledescription: 'عرض شرائح',
-      slide: 'شريحة'
+      slide: 'شريحة',
+      slideLabel: '{slide} من {total}'
     },
     chatAttachment: {
       uploading: 'جارٍ الرفع',
