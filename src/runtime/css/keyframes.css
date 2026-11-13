@@ -139,6 +139,23 @@
   }
 }
 
+/* ChangelogVersions: the scroll progress is animated on the indicator and inherited by the beam, which eases towards it with a transition. */
+@property --ui-changelog-versions-progress {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+@keyframes changelog-versions-progress {
+  from {
+    --ui-changelog-versions-progress: 0;
+  }
+
+  to {
+    --ui-changelog-versions-progress: 1;
+  }
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -610,6 +627,12 @@
   }
 }
 
+/* ProseImg zoom: the image moves between its place in the page and the zoomed view through a view transition. */
+::view-transition-group(*.ui-prose-img) {
+  animation-duration: 300ms;
+  animation-timing-function: var(--ease-out);
+}
+
 /*
  * Reduced motion: keep the fade for comprehension, drop scale/slide movement
  * on enter/exit presence animations. Redefining the keyframes here covers every
@@ -620,6 +643,10 @@
  * site) are intentionally left untouched.
  */
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*.ui-prose-img) {
+    animation-name: none;
+  }
+
   @keyframes scale-in {
     from { opacity: 0; }
     to { opacity: 1; }
