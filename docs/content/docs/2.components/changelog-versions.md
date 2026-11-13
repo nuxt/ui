@@ -111,7 +111,7 @@ props:
 
 ### Indicator Motion
 
-Use the `indicator-motion` prop to customize or hide the motion effect on the indicator bar. Defaults to `true` with `{ damping: 30, restDelta: 0.001 }` [spring transition options](https://motion.dev/docs/vue-transitions#spring).
+Use the `indicator-motion` prop to hide the beam that fills the indicator bar as the page scrolls. Defaults to `true`.
 
 ::component-code
 ---
@@ -214,7 +214,7 @@ props:
 
 ### With scroll container :badge{label="4.4+" class="align-text-top"}
 
-Pass an object to the `indicator` prop to configure the scroll container. By default, the indicator tracks the window/page scroll (https://motion.dev/docs/vue-use-scroll#page-scroll).
+Pass an object with a `container` to the `indicator` prop to track the scroll of the container the component sits in. By default, the indicator tracks the scroll of the page.
 
 ```vue
 <script setup lang="ts">
@@ -223,14 +223,10 @@ const scrollContainer = ref<HTMLElement>()
 
 <template>
   <div ref="scrollContainer" class="max-h-96 overflow-y-auto">
-    <UChangelogVersions v-if="scrollContainer" :indicator="{ container: scrollContainer }" />
+    <UChangelogVersions :indicator="{ container: scrollContainer }" />
   </div>
 </template>
 ```
-
-::warning
-When using a custom `container`, make sure the container element is mounted before `UChangelogVersions`.
-::
 
 ## API
 
