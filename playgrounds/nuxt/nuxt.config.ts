@@ -54,7 +54,6 @@ export default defineNuxtConfig({
         'cn/engine',
         'cn/tables',
         'colortranslator',
-        'motion-v',
         'tailwindcss/colors',
         'zod'
       ]
