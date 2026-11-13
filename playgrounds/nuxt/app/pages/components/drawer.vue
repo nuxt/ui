@@ -31,7 +31,7 @@ const snapPoint = ref<string | number | null>(0.4)
       <UButton color="neutral" variant="outline" label="Open with v-model" />
 
       <template #body>
-        <Placeholder class="h-48 w-full" />
+        <Placeholder class="min-h-48 size-full" />
       </template>
 
       <template #footer>
@@ -51,7 +51,7 @@ const snapPoint = ref<string | number | null>(0.4)
       <UButton color="neutral" variant="outline" label="Open nested" />
 
       <template #body>
-        <Placeholder class="h-48 w-full" />
+        <Placeholder class="min-h-48 size-full" />
       </template>
 
       <template #footer>
@@ -66,7 +66,7 @@ const snapPoint = ref<string | number | null>(0.4)
           <UButton color="neutral" variant="outline" label="Open nested" class="justify-center" />
 
           <template #body>
-            <Placeholder class="h-48 w-full" />
+            <Placeholder class="min-h-48 size-full" />
           </template>
 
           <template #footer>
@@ -81,7 +81,7 @@ const snapPoint = ref<string | number | null>(0.4)
               <UButton color="neutral" variant="outline" label="Open third" class="justify-center" />
 
               <template #body>
-                <Placeholder class="h-48 w-full" />
+                <Placeholder class="min-h-48 size-full" />
               </template>
 
               <template #footer>
@@ -96,7 +96,7 @@ const snapPoint = ref<string | number | null>(0.4)
                   <UButton color="neutral" variant="outline" label="Open fourth" class="justify-center" />
 
                   <template #body>
-                    <Placeholder class="h-48 w-full" />
+                    <Placeholder class="min-h-48 size-full" />
                   </template>
                 </UDrawer>
               </template>
@@ -136,7 +136,7 @@ const snapPoint = ref<string | number | null>(0.4)
       <UButton label="Open unclosable" color="neutral" variant="outline" />
 
       <template #body>
-        <Placeholder class="h-96 w-full" />
+        <Placeholder class="min-h-96 size-full" />
       </template>
     </UDrawer>
 
@@ -152,7 +152,7 @@ const snapPoint = ref<string | number | null>(0.4)
       <UButton label="Open without overlay" color="neutral" variant="outline" />
 
       <template #body>
-        <Placeholder class="h-96 w-full" />
+        <Placeholder class="min-h-96 size-full" />
       </template>
     </UDrawer>
   </div>
