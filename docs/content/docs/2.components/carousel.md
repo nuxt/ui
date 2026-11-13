@@ -237,7 +237,7 @@ class: 'p-8'
 ::
 
 ::note
-In this example, we add the `transition-opacity not-data-active:opacity-10` classes on the `item` to fade out the other slides. The `active` and `in-view` props of the default slot carry the same state.
+In this example, we add the `transition-opacity not-data-active:opacity-10` classes on the `item` to fade out the other slides. The `active` and `inView` props of the default slot carry the same state.
 ::
 
 ### With thumbnails
