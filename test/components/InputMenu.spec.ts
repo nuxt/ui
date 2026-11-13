@@ -232,6 +232,17 @@ describe('InputMenu', () => {
 
       expect(wrapper.emitted('update:searchTerm')?.flat() ?? []).not.toContain('Option 2')
     })
+
+    test('searchTerm follows typing the selected label in a menu that starts open', async () => {
+      const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], modelValue: 'Option 2', defaultOpen: true, portal: false } })
+      await flushPromises()
+
+      const input = wrapper.find('input')
+      await input.setValue('Option ')
+      await input.setValue('Option 2')
+
+      expect(wrapper.emitted('update:searchTerm')?.at(-1)).toEqual(['Option 2'])
+    })
   })
 
   describe('clear', () => {

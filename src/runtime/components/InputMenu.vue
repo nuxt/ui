@@ -511,7 +511,12 @@ function onFocus(event: FocusEvent) {
   emitFormFocus()
 }
 
-const isOpen = ref(false)
+const isOpen = ref(props.open ?? props.defaultOpen ?? false)
+watch(() => props.open, (value) => {
+  if (value !== undefined) {
+    isOpen.value = value
+  }
+})
 let timeoutId: ReturnType<typeof setTimeout> | undefined
 
 onScopeDispose(() => clearTimeout(timeoutId))
