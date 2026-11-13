@@ -124,6 +124,14 @@ describe('Listbox', () => {
       await input.setValue(items[0])
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
     })
+
+    test('change event on uncontrolled deselect', async () => {
+      const wrapper = mount(Listbox, { props: { items: ['A', 'B'], defaultValue: 'A' } })
+      await wrapper.findAll('[role="option"]')[0]!.trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
+      expect(wrapper.emitted('change')).toHaveLength(1)
+    })
   })
 
   describe('form integration', async () => {

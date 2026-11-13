@@ -248,7 +248,8 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.listbox || {}) }
 }))
 
 function onUpdate(value: any) {
-  if (toRaw(props.modelValue) === value) {
+  // An uncontrolled deselect emits `undefined` too, so only skip unchanged controlled values.
+  if (props.modelValue !== undefined && toRaw(props.modelValue) === value) {
     return
   }
 
