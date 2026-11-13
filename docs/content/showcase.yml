@@ -19,6 +19,8 @@ items:
     url: https://brusnika-lms.com/
     screenshotOptions:
       cookies: ['cookie-consent=accepted']
+  - name: Capacities
+    url: https://capacities.io/
   - name: CitrusMail
     url: https://faivelo.com/citrus-mail
   - name: Codemo
