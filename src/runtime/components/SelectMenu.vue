@@ -454,10 +454,6 @@ function onUpdate(value: any) {
   emits('change', event)
   emitFormChange()
   emitFormInput()
-
-  if (props.resetSearchTermOnSelect) {
-    searchTerm.value = ''
-  }
 }
 
 const isOpen = ref(false)
@@ -521,7 +517,7 @@ function onSelect(e: Event, item: SelectMenuItem) {
     item.onSelect?.(e)
   }
 
-  // Selecting the current item updates nothing, so the search is reset here too.
+  // Reset on select rather than on update, since selecting the current item updates nothing.
   if (!e.defaultPrevented && props.resetSearchTermOnSelect) {
     searchTerm.value = ''
   }
