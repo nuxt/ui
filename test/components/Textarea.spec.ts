@@ -1,4 +1,4 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect, test, beforeEach, afterEach } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -101,6 +101,131 @@ describe('Textarea', () => {
 
     await input.trigger('change')
     expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['']] })
+  })
+
+  test('with autoresize keeps its rows while typing at maxrows', async () => {
+    // happy-dom has no layout: give each line of text a 20px height
+    Object.defineProperty(HTMLTextAreaElement.prototype, 'scrollHeight', {
+      configurable: true,
+      get() {
+        return this.value.split('\n').length * 20
+      }
+    })
+
+    const wrapper = mount(Textarea, {
+      props: { autoresize: true, rows: 1, maxrows: 6 },
+      attrs: { style: 'line-height: 20px; padding: 0px' },
+      attachTo: document.body
+    })
+
+    try {
+      const textarea = wrapper.find('textarea')
+      await textarea.setValue('line\n'.repeat(8) + 'line')
+      await flushPromises()
+      expect(Number(textarea.element.rows)).toBe(6)
+
+      // happy-dom returns `rows` as a string, so read it as a number like browsers do
+      const rows = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'rows')!
+      const writes: number[] = []
+      Object.defineProperty(textarea.element, 'rows', {
+        configurable: true,
+        get() {
+          return Number(rows.get!.call(this))
+        },
+        set(value) {
+          writes.push(Number(value))
+          rows.set!.call(this, value)
+        }
+      })
+
+      await textarea.setValue(textarea.element.value + 'x')
+      await flushPromises()
+      expect(writes).toEqual([])
+    } finally {
+      wrapper.unmount()
+      delete (HTMLTextAreaElement.prototype as any).scrollHeight
+    }
+  })
+
+  describe('with autoresize measures once per keystroke', () => {
+    let measures = 0
+
+    beforeEach(() => {
+      measures = 0
+      Object.defineProperty(HTMLTextAreaElement.prototype, 'scrollHeight', {
+        configurable: true,
+        get() {
+          measures++
+          return this.value.split('\n').length * 20
+        }
+      })
+    })
+
+    afterEach(() => {
+      delete (HTMLTextAreaElement.prototype as any).scrollHeight
+    })
+
+    test.each([
+      ['with v-model', { modelValue: '' }],
+      ['without v-model', {}],
+      ['with .lazy modifier', { modelValue: '', modelModifiers: { lazy: true } }],
+      ['with .trim modifier and an unchanged value', { modelValue: 'line', modelModifiers: { trim: true } }]
+    ])('%s', async (_, props: Record<string, any>) => {
+      const wrapper = mount(Textarea, {
+        props: {
+          autoresize: true,
+          rows: 1,
+          ...props,
+          ...('modelValue' in props ? { 'onUpdate:modelValue': (modelValue: string) => wrapper.setProps({ modelValue }) } : {})
+        },
+        attrs: { style: 'line-height: 20px; padding: 0px' },
+        attachTo: document.body
+      })
+
+      try {
+        // Let the mount measurement run first
+        await new Promise(resolve => setTimeout(resolve))
+        measures = 0
+
+        // A keystroke fires `input` only, `setValue` would also fire `change`
+        const textarea = wrapper.find('textarea')
+        textarea.element.value = 'line\n'
+        await textarea.trigger('input')
+        await flushPromises()
+        expect(measures).toBe(1)
+        expect(Number(textarea.element.rows)).toBe(2)
+      } finally {
+        wrapper.unmount()
+      }
+    })
+  })
+
+  test('with autoresize measures with styles that only match the textarea', async () => {
+    // The measuring copy has no id, so `#autoresize` doesn't match it
+    const style = document.createElement('style')
+    style.textContent = 'textarea { line-height: 20px; padding: 0px } #autoresize { line-height: 40px }'
+    document.head.append(style)
+    Object.defineProperty(HTMLTextAreaElement.prototype, 'scrollHeight', {
+      configurable: true,
+      get() {
+        return this.value.split('\n').length * Number.parseFloat(window.getComputedStyle(this).lineHeight)
+      }
+    })
+
+    try {
+      const wrapper = mount(Textarea, {
+        props: { autoresize: true, rows: 1, id: 'autoresize' },
+        attachTo: document.body
+      })
+      const textarea = wrapper.find('textarea')
+      await textarea.setValue('line\nline\nline')
+      await flushPromises()
+      expect(Number(textarea.element.rows)).toBe(3)
+      wrapper.unmount()
+    } finally {
+      delete (HTMLTextAreaElement.prototype as any).scrollHeight
+      style.remove()
+    }
   })
 
   describe('emits', () => {
