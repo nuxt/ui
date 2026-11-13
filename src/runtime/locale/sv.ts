@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Nästa',
       prev: 'Föregående',
       roledescription: 'karusell',
-      slide: 'bild'
+      slide: 'bild',
+      slideLabel: '{slide} av {total}'
     },
     chatAttachment: {
       uploading: 'Laddar upp',

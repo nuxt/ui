@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Баъдӣ',
       prev: 'Қаблӣ',
       roledescription: 'карусел',
-      slide: 'слайд'
+      slide: 'слайд',
+      slideLabel: '{slide} аз {total}'
     },
     chatAttachment: {
       uploading: 'Боргузорӣ',

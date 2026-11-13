@@ -386,30 +386,6 @@ catalogs:
     defu:
       specifier: ^6.1.7
       version: 6.1.7
-    embla-carousel:
-      specifier: ^8.6.0
-      version: 8.6.0
-    embla-carousel-auto-height:
-      specifier: ^8.6.0
-      version: 8.6.0
-    embla-carousel-auto-scroll:
-      specifier: ^8.6.0
-      version: 8.6.0
-    embla-carousel-autoplay:
-      specifier: ^8.6.0
-      version: 8.6.0
-    embla-carousel-class-names:
-      specifier: ^8.6.0
-      version: 8.6.0
-    embla-carousel-fade:
-      specifier: ^8.6.0
-      version: 8.6.0
-    embla-carousel-vue:
-      specifier: ^8.6.0
-      version: 8.6.0
-    embla-carousel-wheel-gestures:
-      specifier: ^8.1.0
-      version: 8.1.0
     eslint:
       specifier: ^10.14.0
       version: 10.14.0
@@ -483,8 +459,8 @@ catalogs:
       specifier: ^3.9.10
       version: 3.9.10
     reka-ui:
-      specifier: 2.11.0
-      version: 2.11.0
+      specifier: https://pkg.pr.new/reka-ui@85c5670
+      version: https://pkg.pr.new/reka-ui@85c5670
     release-it:
       specifier: ^21.1.2
       version: 21.1.2
@@ -675,7 +651,7 @@ importers:
         version: 2.0.3
       reka-ui:
         specifier: 'catalog:'
-        version: 2.11.0(vue@3.5.44(typescript@6.0.3))
+        version: https://pkg.pr.new/reka-ui@85c5670(vue@3.5.44(typescript@6.0.3))
       scule:
         specifier: 'catalog:'
         version: 1.3.0
@@ -800,30 +776,6 @@ importers:
       ai:
         specifier: 'catalog:'
         version: 7.0.159(zod@4.6.7)
-      embla-carousel:
-        specifier: 'catalog:'
-        version: 8.6.0
-      embla-carousel-auto-height:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-auto-scroll:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-autoplay:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-class-names:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-fade:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-vue:
-        specifier: 'catalog:'
-        version: 8.6.0(vue@3.5.44(typescript@6.0.3))
-      embla-carousel-wheel-gestures:
-        specifier: 'catalog:'
-        version: 8.1.0(embla-carousel@8.6.0)
       eslint:
         specifier: 'catalog:'
         version: 10.14.0(jiti@2.7.0)(supports-color@10.2.2)
@@ -1010,30 +962,6 @@ importers:
       capture-website:
         specifier: 'catalog:'
         version: 5.1.0(supports-color@10.2.2)(typescript@6.0.3)
-      embla-carousel:
-        specifier: 'catalog:'
-        version: 8.6.0
-      embla-carousel-auto-height:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-auto-scroll:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-autoplay:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-class-names:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-fade:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-vue:
-        specifier: 'catalog:'
-        version: 8.6.0(vue@3.5.44(typescript@6.0.3))
-      embla-carousel-wheel-gestures:
-        specifier: 'catalog:'
-        version: 8.1.0(embla-carousel@8.6.0)
       fflate:
         specifier: 'catalog:'
         version: 0.8.3
@@ -1209,30 +1137,6 @@ importers:
       ai:
         specifier: 'catalog:'
         version: 7.0.159(zod@4.6.7)
-      embla-carousel:
-        specifier: 'catalog:'
-        version: 8.6.0
-      embla-carousel-auto-height:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-auto-scroll:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-autoplay:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-class-names:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-fade:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-vue:
-        specifier: 'catalog:'
-        version: 8.6.0(vue@3.5.44(typescript@6.0.3))
-      embla-carousel-wheel-gestures:
-        specifier: 'catalog:'
-        version: 8.1.0(embla-carousel@8.6.0)
       nuxt:
         specifier: 'catalog:'
         version: 4.6.4(@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.0(supports-color@10.2.2)))(@babel/plugin-syntax-typescript@7.29.7(@babel/core@7.29.0(supports-color@10.2.2)))(@oxc-project/types@0.155.0)(@parcel/watcher@2.5.6)(@types/node@25.9.0)(@vue/compiler-sfc@3.5.44)(acorn@8.18.0)(better-sqlite3@12.11.1)(confbox@0.3.1)(db0@0.3.4(better-sqlite3@12.11.1))(dotenv@17.4.2)(esbuild@0.28.2)(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))(giget@3.3.1)(ioredis@5.11.1(supports-color@10.2.2))(lightningcss@1.33.0)(meow@13.2.0)(mlly@1.8.2)(optionator@0.9.4)(oxc-parser@0.154.0)(rolldown@1.2.15)(rollup-plugin-visualizer@7.1.1(rolldown@1.2.15)(rollup@4.67.4))(rollup@4.67.4)(srvx@1.0.8)(supports-color@10.2.2)(terser@5.51.2)(typescript@6.0.3)(vite@8.3.5(@types/node@25.9.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))(vue-tsc@3.3.11(typescript@6.0.3))(yaml@2.9.1)
@@ -1340,30 +1244,6 @@ importers:
       '@tiptap/vue-3':
         specifier: 'catalog:'
         version: 3.32.2(@floating-ui/dom@1.8.0)(@tiptap/core@3.32.2(@tiptap/pm@3.32.2))(@tiptap/pm@3.32.2)(vue@3.5.44(typescript@6.0.3))
-      embla-carousel:
-        specifier: 'catalog:'
-        version: 8.6.0
-      embla-carousel-auto-height:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-auto-scroll:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-autoplay:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-class-names:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-fade:
-        specifier: 'catalog:'
-        version: 8.6.0(embla-carousel@8.6.0)
-      embla-carousel-vue:
-        specifier: 'catalog:'
-        version: 8.6.0(vue@3.5.44(typescript@6.0.3))
-      embla-carousel-wheel-gestures:
-        specifier: 'catalog:'
-        version: 8.1.0(embla-carousel@8.6.0)
       tailwindcss:
         specifier: 'catalog:'
         version: 4.3.3
@@ -6059,50 +5939,6 @@ packages:
   electron-to-chromium@1.5.444:
     resolution: {integrity: sha512-5ss/uJfoDYDHT0lfJzT6FbcskIzROIOPf0BbbFkGcvDzoJU7i//9GDrwwIHQVmIsrAGiF3ihpADBRIsrEFt1rQ==}
 
-  embla-carousel-auto-height@8.6.0:
-    resolution: {integrity: sha512-/HrJQOEM6aol/oF33gd2QlINcXy3e19fJWvHDuHWp2bpyTa+2dm9tVVJak30m2Qy6QyQ6Fc8DkImtv7pxWOJUQ==}
-    peerDependencies:
-      embla-carousel: 8.6.0
-
-  embla-carousel-auto-scroll@8.6.0:
-    resolution: {integrity: sha512-WT9fWhNXFpbQ6kP+aS07oF5IHYLZ1Dx4DkwgCY8Hv2ZyYd2KMCPfMV1q/cA3wFGuLO7GMgKiySLX90/pQkcOdQ==}
-    peerDependencies:
-      embla-carousel: 8.6.0
-
-  embla-carousel-autoplay@8.6.0:
-    resolution: {integrity: sha512-OBu5G3nwaSXkZCo1A6LTaFMZ8EpkYbwIaH+bPqdBnDGQ2fh4+NbzjXjs2SktoPNKCtflfVMc75njaDHOYXcrsA==}
-    peerDependencies:
-      embla-carousel: 8.6.0
-
-  embla-carousel-class-names@8.6.0:
-    resolution: {integrity: sha512-l1hm1+7GxQ+zwdU2sea/LhD946on7XO2qk3Xq2XWSwBaWfdgchXdK567yzLtYSHn4sWYdiX+x4nnaj+saKnJkw==}
-    peerDependencies:
-      embla-carousel: 8.6.0
-
-  embla-carousel-fade@8.6.0:
-    resolution: {integrity: sha512-qaYsx5mwCz72ZrjlsXgs1nKejSrW+UhkbOMwLgfRT7w2LtdEB03nPRI06GHuHv5ac2USvbEiX2/nAHctcDwvpg==}
-    peerDependencies:
-      embla-carousel: 8.6.0
-
-  embla-carousel-reactive-utils@8.6.0:
-    resolution: {integrity: sha512-fMVUDUEx0/uIEDM0Mz3dHznDhfX+znCCDCeIophYb1QGVM7YThSWX+wz11zlYwWFOr74b4QLGg0hrGPJeG2s4A==}
-    peerDependencies:
-      embla-carousel: 8.6.0
-
-  embla-carousel-vue@8.6.0:
-    resolution: {integrity: sha512-v8UO5UsyLocZnu/LbfQA7Dn2QHuZKurJY93VUmZYP//QRWoCWOsionmvLLAlibkET3pGPs7++03VhJKbWD7vhQ==}
-    peerDependencies:
-      vue: ^3.2.37
-
-  embla-carousel-wheel-gestures@8.1.0:
-    resolution: {integrity: sha512-J68jkYrxbWDmXOm2n2YHl+uMEXzkGSKjWmjaEgL9xVvPb3HqVmg6rJSKfI3sqIDVvm7mkeTy87wtG/5263XqHQ==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      embla-carousel: ^8.0.0 || ~8.0.0-rc03
-
-  embla-carousel@8.6.0:
-    resolution: {integrity: sha512-SjWyZBHJPbqxHOzckOfo8lHisEaJWmwd23XppYFYVh10bU66/Pn5tkVkbkCMZVdbUE5eTCI2nD8OyIP4Z+uwkA==}
-
   emoji-regex@10.6.0:
     resolution: {integrity: sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==}
 
@@ -8756,8 +8592,9 @@ packages:
   rehype-sort-attributes@5.0.1:
     resolution: {integrity: sha512-Bxo+AKUIELcnnAZwJDt5zUDDRpt4uzhfz9d0PVGhcxYWsbFj5Cv35xuWxu5r1LeYNFNhgGqsr9Q2QiIOM/Qctg==}
 
-  reka-ui@2.11.0:
-    resolution: {integrity: sha512-ilkpm4bIAol4jwzm4tpm3WVcffyGOpqksNZL1k1qO9QmIwAA+q8jroxjkUGLEn/GddfdExFfvofWfQiKZszUeQ==}
+  reka-ui@https://pkg.pr.new/reka-ui@85c5670:
+    resolution: {integrity: sha512-XgnXAdcquu/UBWdjznB/FNRwD7QV1M1PXWWhY4RHv2pEFY/edGhDP9WDQ/KEwv6qntSgq2uyFAUM3AG8jHKhUg==, tarball: https://pkg.pr.new/reka-ui@85c5670}
+    version: 2.11.0
     peerDependencies:
       vue: '>= 3.4.0'
 
@@ -10051,10 +9888,6 @@ packages:
 
   whatwg-url@5.0.0:
     resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
-
-  wheel-gestures@2.2.48:
-    resolution: {integrity: sha512-f+Gy33Oa5Z14XY9679Zze+7VFhbsQfBFXodnU2x589l4kxGM9L5Y8zETTmcMR5pWOPQyRv4Z0lNax6xCO0NSlA==}
-    engines: {node: '>=18'}
 
   which-typed-array@1.1.20:
     resolution: {integrity: sha512-LYfpUkmqwl0h9A2HL09Mms427Q1RZWuOHsukfVcKRq9q95iQxdw0ix1JQrqbcDR9PH1QDwf5Qo8OZb5lksZ8Xg==}
@@ -16324,43 +16157,6 @@ snapshots:
 
   electron-to-chromium@1.5.444: {}
 
-  embla-carousel-auto-height@8.6.0(embla-carousel@8.6.0):
-    dependencies:
-      embla-carousel: 8.6.0
-
-  embla-carousel-auto-scroll@8.6.0(embla-carousel@8.6.0):
-    dependencies:
-      embla-carousel: 8.6.0
-
-  embla-carousel-autoplay@8.6.0(embla-carousel@8.6.0):
-    dependencies:
-      embla-carousel: 8.6.0
-
-  embla-carousel-class-names@8.6.0(embla-carousel@8.6.0):
-    dependencies:
-      embla-carousel: 8.6.0
-
-  embla-carousel-fade@8.6.0(embla-carousel@8.6.0):
-    dependencies:
-      embla-carousel: 8.6.0
-
-  embla-carousel-reactive-utils@8.6.0(embla-carousel@8.6.0):
-    dependencies:
-      embla-carousel: 8.6.0
-
-  embla-carousel-vue@8.6.0(vue@3.5.44(typescript@6.0.3)):
-    dependencies:
-      embla-carousel: 8.6.0
-      embla-carousel-reactive-utils: 8.6.0(embla-carousel@8.6.0)
-      vue: 3.5.44(typescript@6.0.3)
-
-  embla-carousel-wheel-gestures@8.1.0(embla-carousel@8.6.0):
-    dependencies:
-      embla-carousel: 8.6.0
-      wheel-gestures: 2.2.48
-
-  embla-carousel@8.6.0: {}
-
   emoji-regex@10.6.0: {}
 
   emoji-regex@8.0.0: {}
@@ -20618,7 +20414,7 @@ snapshots:
       '@types/hast': 3.0.5
       unist-util-visit: 5.1.0
 
-  reka-ui@2.11.0(vue@3.5.44(typescript@6.0.3)):
+  reka-ui@https://pkg.pr.new/reka-ui@85c5670(vue@3.5.44(typescript@6.0.3)):
     dependencies:
       '@floating-ui/vue': 2.0.1(vue@3.5.44(typescript@6.0.3))
       '@internationalized/date': 3.12.4
@@ -22267,8 +22063,6 @@ snapshots:
     dependencies:
       tr46: 0.0.3
       webidl-conversions: 3.0.1
-
-  wheel-gestures@2.2.48: {}
 
   which-typed-array@1.1.20:
     dependencies:

@@ -35,7 +35,8 @@ export default defineLocale<Messages>({
       next: 'بعدی',
       prev: 'قبلی',
       roledescription: 'کاروسل',
-      slide: 'اسلاید'
+      slide: 'اسلاید',
+      slideLabel: '{slide} از {total}'
     },
     chatAttachment: {
       uploading: 'در حال بارگذاری',

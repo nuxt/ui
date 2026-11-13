@@ -35,7 +35,8 @@ export default defineLocale<Messages>({
       next: 'كېيىنكى بەت',
       prev: 'ئالدىنقى بەت',
       roledescription: 'ئايلانما كۆرسەتكۈچ',
-      slide: 'سلايد'
+      slide: 'سلايد',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'يۈكلەۋاتىدۇ',

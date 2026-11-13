@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Következő',
       prev: 'Előző',
       roledescription: 'körhinta',
-      slide: 'dia'
+      slide: 'dia',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'Feltöltés',

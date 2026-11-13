@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'შემდეგი',
       prev: 'წინა',
       roledescription: 'კარუსელი',
-      slide: 'სლაიდი'
+      slide: 'სლაიდი',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'იტვირთება',

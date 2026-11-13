@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'បន្ទាប់',
       prev: 'មុន',
       roledescription: 'ការ៉ូសែល',
-      slide: 'ស្លាយ'
+      slide: 'ស្លាយ',
+      slideLabel: '{slide} នៃ {total}'
     },
     chatAttachment: {
       uploading: 'កំពុងផ្ទុកឡើង',

@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Hurrengoa',
       prev: 'Aurretikoa',
       roledescription: 'karrusela',
-      slide: 'diapositiba'
+      slide: 'diapositiba',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'Igotzen',

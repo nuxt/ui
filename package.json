@@ -220,14 +220,6 @@
     "@vitejs/plugin-vue": "catalog:",
     "@vue/test-utils": "catalog:",
     "ai": "catalog:",
-    "embla-carousel": "catalog:",
-    "embla-carousel-auto-height": "catalog:",
-    "embla-carousel-auto-scroll": "catalog:",
-    "embla-carousel-autoplay": "catalog:",
-    "embla-carousel-class-names": "catalog:",
-    "embla-carousel-fade": "catalog:",
-    "embla-carousel-vue": "catalog:",
-    "embla-carousel-wheel-gestures": "catalog:",
     "eslint": "catalog:",
     "eslint-plugin-better-tailwindcss": "catalog:",
     "happy-dom": "catalog:",
@@ -264,14 +256,6 @@
     "@tiptap/suggestion": "^3",
     "@tiptap/vue-3": "^3",
     "ai": "^6 || ^7",
-    "embla-carousel": "^8",
-    "embla-carousel-auto-height": "^8",
-    "embla-carousel-auto-scroll": "^8",
-    "embla-carousel-autoplay": "^8",
-    "embla-carousel-class-names": "^8",
-    "embla-carousel-fade": "^8",
-    "embla-carousel-vue": "^8",
-    "embla-carousel-wheel-gestures": "^8",
     "eslint-plugin-better-tailwindcss": "^4.10",
     "joi": "^18",
     "superstruct": "^2",
@@ -347,30 +331,6 @@
       "optional": true
     },
     "ai": {
-      "optional": true
-    },
-    "embla-carousel": {
-      "optional": true
-    },
-    "embla-carousel-auto-height": {
-      "optional": true
-    },
-    "embla-carousel-auto-scroll": {
-      "optional": true
-    },
-    "embla-carousel-autoplay": {
-      "optional": true
-    },
-    "embla-carousel-class-names": {
-      "optional": true
-    },
-    "embla-carousel-fade": {
-      "optional": true
-    },
-    "embla-carousel-vue": {
-      "optional": true
-    },
-    "embla-carousel-wheel-gestures": {
       "optional": true
     },
     "eslint-plugin-better-tailwindcss": {

@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Sau',
       prev: 'Trước',
       roledescription: 'băng chuyền',
-      slide: 'slide'
+      slide: 'slide',
+      slideLabel: '{slide} trên {total}'
     },
     chatAttachment: {
       uploading: 'Đang tải lên',

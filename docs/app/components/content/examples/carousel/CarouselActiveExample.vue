@@ -12,11 +12,10 @@ const items = [
 <template>
   <UCarousel
     v-slot="{ item }"
-    class-names
     arrows
     :items="items"
     :ui="{
-      item: 'basis-[70%] transition-opacity [&:not(.is-snapped)]:opacity-10'
+      item: 'basis-[70%] transition-opacity not-data-active:opacity-10'
     }"
     class="mx-auto max-w-sm"
   >

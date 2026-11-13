@@ -34,7 +34,8 @@ export default defineLocale<Messages>({
       next: 'Nākamais',
       prev: 'Iepriekšējais',
       roledescription: 'karuselis',
-      slide: 'slaids'
+      slide: 'slaids',
+      slideLabel: '{slide} no {total}'
     },
     chatAttachment: {
       uploading: 'Augšupielādē',
