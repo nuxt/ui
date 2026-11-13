@@ -7,7 +7,6 @@ import Select from '../../src/runtime/components/Select.vue'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '../../src/module'
-import type { ChangeEventDetails, SelectChangeReason } from 'reka-ui'
 import { expectEmitPayloadType } from '../utils/types'
 
 describe('Select', () => {
@@ -337,28 +336,28 @@ describe('Select', () => {
       // with object item
       expectEmitPayloadType('update:modelValue', () => Select({
         items: [{ label: 'foo', value: 'bar' }]
-      })).toEqualTypeOf<[string, ChangeEventDetails<SelectChangeReason>?]>()
+      })).toEqualTypeOf<[string]>()
 
       // with string item
       expectEmitPayloadType('update:modelValue', () => Select({
         items: ['foo']
-      })).toEqualTypeOf<[string, ChangeEventDetails<SelectChangeReason>?]>()
+      })).toEqualTypeOf<[string]>()
 
       // with groups
       expectEmitPayloadType('update:modelValue', () => Select({
         items: [['foo']]
-      })).toEqualTypeOf<[string, ChangeEventDetails<SelectChangeReason>?]>()
+      })).toEqualTypeOf<[string]>()
 
       // with groups and mixed types
       expectEmitPayloadType('update:modelValue', () => Select({
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]]
-      })).toEqualTypeOf<[string | number, ChangeEventDetails<SelectChangeReason>?]>()
+      })).toEqualTypeOf<[string | number]>()
 
       // with groups, multiple, mixed types and valueKey
       expectEmitPayloadType('update:modelValue', () => Select({
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
         valueKey: 'value' // TODO: value is already the default valueKey
-      })).toEqualTypeOf<[string | number, ChangeEventDetails<SelectChangeReason>?]>()
+      })).toEqualTypeOf<[string | number]>()
     })
   })
 })

@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps, ChangeEventDetails, ComboboxChangeReason } from 'reka-ui'
+import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/select-menu'
@@ -190,8 +190,7 @@ export interface SelectMenuEmits<
     ref: HTMLElement
     value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
   } | undefined]
-  'beforeUpdate:modelValue': [value: GetModelValue<A, VK, M, ExcludeItem> | IsClearUsed<M, C>, details: ChangeEventDetails<ComboboxChangeReason>]
-  'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, details?: ChangeEventDetails<ComboboxChangeReason>]
+  'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>]
 }
 
 type SlotProps<T extends SelectMenuItem> = (props: { item: T, index: number, ui: SelectMenu['ui'] }) => VNode[]
@@ -232,7 +231,7 @@ export interface SelectMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { useTemplateRef, useId, computed, ref, onMounted, onScopeDispose, toRef, watch, nextTick } from 'vue'
+import { useTemplateRef, useId, computed, ref, onMounted, onScopeDispose, toRef, toRaw, watch, nextTick } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
@@ -431,6 +430,10 @@ onMounted(() => {
 onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 function onUpdate(value: any) {
+  if (toRaw(props.modelValue) === value) {
+    return
+  }
+
   if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
     value = value?.trim() ?? null
   }
@@ -696,7 +699,7 @@ defineExpose({
     ref="comboboxRootRef"
     v-slot="{ modelValue, open }"
     v-bind="(rootProps as any)"
-    :filter="null"
+    ignore-filter
     as-child
     :name="name"
     :disabled="disabled"
