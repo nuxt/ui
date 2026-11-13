@@ -222,6 +222,16 @@ describe('InputMenu', () => {
       expect(emissions).toBeTruthy()
       expect(emissions![emissions!.length - 1]).toEqual(['Option 2'])
     })
+
+    test('searchTerm ignores the label when parent updates modelValue', async () => {
+      const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], modelValue: 'Option 1' } })
+      await flushPromises()
+
+      await wrapper.setProps({ modelValue: 'Option 2' })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:searchTerm')?.flat() ?? []).not.toContain('Option 2')
+    })
   })
 
   describe('clear', () => {

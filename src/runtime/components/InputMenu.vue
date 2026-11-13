@@ -489,9 +489,16 @@ function onUpdate(value: any) {
 }
 
 function onInputUpdate(value: string) {
-  if (!isAutocomplete.value) {
-    searchTerm.value = value
+  if (isAutocomplete.value) {
+    return
   }
+
+  // While closed, reka resets the input to the label of the selected item, which isn't a search.
+  if (!isOpen.value && value && value === displayValue(props.modelValue as GetItemValue<T, VK, ExcludeItem>)) {
+    return
+  }
+
+  searchTerm.value = value
 }
 
 function onBlur(event: FocusEvent) {
