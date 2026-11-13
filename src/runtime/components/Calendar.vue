@@ -272,7 +272,7 @@ function onSelect(value: DateValue | DateRange) {
     setPlaceholder(resolved)
   }
   setView(VIEWS[VIEWS.indexOf(view.value) - 1]!)
-  keepFocus(['[data-selected]', '[data-today]', '[data-value]:not([data-disabled]):not([data-outside-view])'])
+  keepFocus(['[data-selected]:not([data-disabled])', '[data-today]:not([data-disabled])', '[data-value]:not([data-disabled]):not([data-outside-view])'])
 }
 
 function paginateYear(date: DateValue, sign: -1 | 1) {
