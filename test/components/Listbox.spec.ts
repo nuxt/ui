@@ -126,7 +126,7 @@ describe('Listbox', () => {
     })
 
     test('change event on uncontrolled deselect', async () => {
-      const wrapper = mount(Listbox, { props: { items: ['A', 'B'], defaultValue: 'A' } })
+      const wrapper = mount(Listbox, { props: { items, valueKey: 'value', defaultValue: 'FR' } })
       await wrapper.findAll('[role="option"]')[0]!.trigger('click')
 
       expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
