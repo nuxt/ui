@@ -220,6 +220,15 @@ describe('SelectMenu', () => {
       input.vm.$emit('update:open', false)
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
     })
+
+    test('resets the search term when selecting the current item', async () => {
+      const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'], modelValue: 'Option 1', searchTerm: 'Option', resetSearchTermOnBlur: false } })
+      const input = wrapper.findComponent({ name: 'ComboboxRoot' })
+      await input.setValue('Option 1')
+
+      expect(wrapper.emitted('update:searchTerm')).toEqual([['']])
+      expect(wrapper.emitted('change')).toBeUndefined()
+    })
   })
 
   describe('clear', () => {

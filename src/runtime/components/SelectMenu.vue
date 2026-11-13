@@ -429,6 +429,11 @@ onMounted(() => {
 onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 function onUpdate(value: any) {
+  // Selecting the current item emits it again, which still resets the search.
+  if (props.resetSearchTermOnSelect) {
+    searchTerm.value = ''
+  }
+
   if (toRaw(props.modelValue) === value) {
     return
   }
@@ -454,10 +459,6 @@ function onUpdate(value: any) {
   emits('change', event)
   emitFormChange()
   emitFormInput()
-
-  if (props.resetSearchTermOnSelect) {
-    searchTerm.value = ''
-  }
 }
 
 const isOpen = ref(false)
