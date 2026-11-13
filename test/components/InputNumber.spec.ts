@@ -53,7 +53,7 @@ describe('InputNumber', () => {
     await button.trigger('pointerdown', { button: 0, pointerType: 'mouse' })
     await button.trigger('pointerup', { button: 0, pointerType: 'mouse' })
 
-    expect(wrapper.emitted('update:modelValue')).toMatchObject([[18, expect.anything()]])
+    expect(wrapper.emitted('update:modelValue')).toEqual([[18]])
   })
 
   it('keeps an out of range typed value with allowInvalid', async () => {
@@ -63,7 +63,7 @@ describe('InputNumber', () => {
     await input.setValue('15')
     await input.trigger('blur')
 
-    expect(wrapper.emitted('update:modelValue')).toMatchObject([[15, expect.anything()]])
+    expect(wrapper.emitted('update:modelValue')).toEqual([[15]])
   })
 
   it('passes accessibility tests', async () => {
@@ -84,7 +84,7 @@ describe('InputNumber', () => {
       const wrapper = await mountSuspended(InputNumber)
       const input = wrapper.findComponent({ name: 'NumberFieldRoot' })
       await input.setValue(1)
-      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1, undefined]] })
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1]] })
       expect(1).toBe(1)
     })
 
@@ -97,7 +97,7 @@ describe('InputNumber', () => {
       await wrapper.find('input').trigger('blur')
       await flushPromises()
 
-      expect(wrapper.emitted('update:modelValue')).toMatchObject([[6, expect.anything()]])
+      expect(wrapper.emitted('update:modelValue')).toEqual([[6]])
       expect((wrapper.find('input').element as HTMLInputElement).value).toBe('6')
 
       wrapper.unmount()
@@ -119,7 +119,7 @@ describe('InputNumber', () => {
       await wrapper.find('input').trigger('blur')
       await flushPromises()
 
-      expect(wrapper.emitted('update:modelValue')).toMatchObject([[6, expect.anything()]])
+      expect(wrapper.emitted('update:modelValue')).toEqual([[6]])
       expect(wrapper.emitted('change')).toHaveLength(1)
 
       wrapper.unmount()
@@ -141,7 +141,7 @@ describe('InputNumber', () => {
       await input.trigger('blur')
       await flushPromises()
 
-      expect(wrapper.emitted('update:modelValue')).toMatchObject([[undefined, expect.anything()]])
+      expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
     })
 
     test('does not emit when blurred with a null modelValue', async () => {

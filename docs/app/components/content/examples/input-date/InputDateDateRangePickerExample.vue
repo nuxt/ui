@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { CalendarDate } from '@internationalized/date'
+
 const inputDate = useTemplateRef('inputDate')
 
 const modelValue = shallowRef({
-  start: new Temporal.PlainDate(2022, 1, 10),
-  end: new Temporal.PlainDate(2022, 1, 20)
+  start: new CalendarDate(2022, 1, 10),
+  end: new CalendarDate(2022, 1, 20)
 })
 </script>
 

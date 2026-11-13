@@ -158,8 +158,6 @@ describe('NavigationMenu', () => {
       }
     })
 
-    await new Promise(resolve => setTimeout(resolve))
-
     const event = new MouseEvent('click', { bubbles: true, cancelable: true })
     wrapper.find('[data-slot="navigation-menu-linkTrailing"]').element.dispatchEvent(event)
     await nextTick()

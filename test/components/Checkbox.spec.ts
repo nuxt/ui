@@ -78,12 +78,12 @@ describe('Checkbox', () => {
 
       await button.trigger('click')
       await flushPromises()
-      expect(wrapper.emitted('update:modelValue')?.[0]?.[0]).toBe('yes')
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['yes'])
       expect(wrapper.emitted('change')).toHaveLength(1)
 
       await button.trigger('click')
       await flushPromises()
-      expect(wrapper.emitted('update:modelValue')?.[1]?.[0]).toBe('no')
+      expect(wrapper.emitted('update:modelValue')?.[1]).toEqual(['no'])
       expect(wrapper.emitted('change')).toHaveLength(2)
     })
   })

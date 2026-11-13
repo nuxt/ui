@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { CalendarDate } from '@internationalized/date'
+
 const inputDate = useTemplateRef('inputDate')
 
-const modelValue = shallowRef(new Temporal.PlainDate(2022, 1, 10))
+const modelValue = shallowRef(new CalendarDate(2022, 1, 10))
 </script>
 
 <template>

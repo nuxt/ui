@@ -93,10 +93,6 @@ export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((
     return comparator(value, currentValue)
   }
 
-  if (typeof value === 'string') {
-    return value === currentValue
-  }
-
   if (typeof comparator === 'string') {
     return get(value!, comparator) === get(currentValue!, comparator)
   }

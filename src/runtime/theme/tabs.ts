@@ -6,7 +6,7 @@ export default defineTheme({
     root: 'flex items-center gap-2',
     list: 'relative flex group',
     indicator: 'absolute [[data-slot=tabs-indicator]~&]:hidden transition-[translate,width] duration-200 ease-out motion-reduce:transition-none',
-    trigger: 'group relative inline-flex items-center min-w-0 data-[state=checked]:[anchor-name:--tabs-trigger] data-[state=unchecked]:text-muted hover:data-[state=unchecked]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width)',
+    trigger: 'group relative inline-flex items-center min-w-0 data-[state=active]:[anchor-name:--tabs-trigger] data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width)',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     label: 'truncate',
@@ -20,13 +20,13 @@ export default defineTheme({
       // as a Button of the same size
       pill: {
         list: 'bg-soft rounded-lg [--ui-tabs-track-padding:min(--spacing(0.75),var(--ui-control-py))] p-(--ui-tabs-track-padding)',
-        trigger: 'grow data-[state=checked]:text-accent',
+        trigger: 'grow data-[state=active]:text-accent',
         indicator: 'bg-default rounded-md shadow-xs'
       },
       link: {
         list: 'border-default',
         indicator: 'bg-accent rounded-full',
-        trigger: 'data-[state=checked]:text-accent'
+        trigger: 'data-[state=active]:text-accent'
       }
     },
     orientation: {

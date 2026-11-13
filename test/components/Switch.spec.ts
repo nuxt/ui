@@ -77,12 +77,12 @@ describe('Switch', () => {
 
       await button.trigger('click')
       await flushPromises()
-      expect(wrapper.emitted('update:modelValue')?.[0]?.[0]).toBe('on')
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['on'])
       expect(wrapper.emitted('change')).toHaveLength(1)
 
       await button.trigger('click')
       await flushPromises()
-      expect(wrapper.emitted('update:modelValue')?.[1]?.[0]).toBe('off')
+      expect(wrapper.emitted('update:modelValue')?.[1]).toEqual(['off'])
       expect(wrapper.emitted('change')).toHaveLength(2)
     })
   })

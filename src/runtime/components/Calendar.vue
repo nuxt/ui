@@ -27,22 +27,22 @@ type CalendarModelValue<R extends boolean = false, M extends boolean = false> = 
     ? (DateValue[] | undefined)
     : (DateValue | undefined)
 
-type CalendarChangeDetails = ChangeEventDetails<CalendarChangeReason | RangeCalendarChangeReason>
+type _CalendarRootProps = Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'calendarLabel' | 'multiple'>
+type _RangeCalendarRootProps = Omit<RangeCalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'calendarLabel' | 'multiple'>
+type _MonthPickerRootProps = Pick<MonthPickerRootProps, 'isMonthDisabled' | 'isMonthUnavailable'>
+type _YearPickerRootProps = Pick<YearPickerRootProps, 'isYearDisabled' | 'isYearUnavailable' | 'yearsPerPage'>
 
-type _CalendarRootProps = Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'calendarLabel' | 'multiple' | 'granularity'>
-type _RangeCalendarRootProps = Omit<RangeCalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'calendarLabel' | 'multiple' | 'granularity'>
-
-export interface CalendarProps<R extends boolean = false, M extends boolean = false> extends _RangeCalendarRootProps, _CalendarRootProps {
+export interface CalendarProps<R extends boolean = false, M extends boolean = false> extends _RangeCalendarRootProps, _CalendarRootProps, _MonthPickerRootProps, _YearPickerRootProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
   /**
-   * The type of picker, the unit a selection commits.
+   * The type of picker.
    * - `date` renders a day calendar whose heading can switch to a month then year view.
-   * - `month` renders a month picker whose heading can switch to a year view.
-   * - `year` renders a year picker.
+   * - `month` renders a standalone month picker.
+   * - `year` renders a standalone year picker.
    * @defaultValue 'date'
    */
   type?: CalendarType
@@ -91,7 +91,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    */
   prevMonth?: Omit<ButtonProps, LinkPropsKeys>
   /**
-   * Whether to make the heading a button that switches to the next coarser view, up to `maxView`.
+   * Whether to make the heading a button that switches between the day, month and year views.
    * Has no effect when `type` is `year`. Can be an object to override the button props.
    * `{ color: 'neutral', variant: 'ghost', block: true }`{lang="ts-type"}
    * @defaultValue true
@@ -124,20 +124,16 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
   ui?: Calendar['slots']
 }
 
-export interface CalendarEmits<R extends boolean = false, M extends boolean = false> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'beforeUpdate:modelValue' | 'update:modelValue' | 'beforeUpdate:placeholder' | 'update:placeholder' | 'beforeUpdate:view' | 'update:view' | 'update:startValue'> {
-  'beforeUpdate:modelValue': [value: CalendarModelValue<R, M>, details: CalendarChangeDetails]
-  'update:modelValue': [value: CalendarModelValue<R, M>, details: CalendarChangeDetails]
-  'beforeUpdate:placeholder': [date: DateValue, details: CalendarChangeDetails]
-  'update:placeholder': [date: DateValue, details?: CalendarChangeDetails]
-  'beforeUpdate:view': [view: CalendarView, details: CalendarChangeDetails]
-  'update:view': [view: CalendarView, details?: CalendarChangeDetails]
-  'update:startValue': [date: DateValue | undefined, details: CalendarChangeDetails]
+export interface CalendarEmits<R extends boolean = false, M extends boolean = false> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
+  'update:modelValue': [value: CalendarModelValue<R, M>]
+  'update:placeholder': [date: DateValue]
+  'update:startValue': [date: DateValue | undefined]
   'update:validModelValue': [date: DateRange]
 }
 
 export interface CalendarSlots {
   'heading'?: (props: { value: string, view: CalendarView, date: DateValue, setView: (view: CalendarView) => void, setPlaceholder: (date: DateValue) => void }) => VNode[]
-  'day'?: (props: { day: DateValue }) => VNode[]
+  'day'?: (props: Pick<CalendarCellTriggerProps, 'day'>) => VNode[]
   'week-day'?: (props: { day: string }) => VNode[]
   'month-cell'?: (props: { month: DateValue, selected: boolean, disabled: boolean }) => VNode[]
   'year-cell'?: (props: { year: DateValue, selected: boolean, disabled: boolean }) => VNode[]
@@ -147,15 +143,19 @@ export interface CalendarSlots {
 <script setup lang="ts" generic="R extends boolean, M extends boolean">
 import { computed, nextTick, ref, shallowRef, useTemplateRef, watch } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
-import { CalendarRoot, CalendarHeader, CalendarHeading, CalendarViewTrigger, CalendarGrid, CalendarCell, CalendarHeadCell, CalendarNext, CalendarPrev, CalendarGridHead, CalendarGridBody, CalendarGridRow, CalendarCellTrigger, RangeCalendarRoot, RangeCalendarHeader, RangeCalendarHeading, RangeCalendarViewTrigger, RangeCalendarGrid, RangeCalendarCell, RangeCalendarHeadCell, RangeCalendarNext, RangeCalendarPrev, RangeCalendarGridHead, RangeCalendarGridBody, RangeCalendarGridRow, RangeCalendarCellTrigger } from 'reka-ui'
+import { CalendarRoot, CalendarHeader, CalendarHeading, CalendarGrid, CalendarCell, CalendarHeadCell, CalendarNext, CalendarPrev, CalendarGridHead, CalendarGridBody, CalendarGridRow, CalendarCellTrigger, RangeCalendarRoot, RangeCalendarHeader, RangeCalendarHeading, RangeCalendarGrid, RangeCalendarCell, RangeCalendarHeadCell, RangeCalendarNext, RangeCalendarPrev, RangeCalendarGridHead, RangeCalendarGridBody, RangeCalendarGridRow, RangeCalendarCellTrigger, MonthPickerRoot, MonthPickerHeader, MonthPickerHeading, MonthPickerGrid, MonthPickerCell, MonthPickerNext, MonthPickerPrev, MonthPickerGridBody, MonthPickerGridRow, MonthPickerCellTrigger, MonthRangePickerRoot, MonthRangePickerHeader, MonthRangePickerHeading, MonthRangePickerGrid, MonthRangePickerCell, MonthRangePickerNext, MonthRangePickerPrev, MonthRangePickerGridBody, MonthRangePickerGridRow, MonthRangePickerCellTrigger, YearPickerRoot, YearPickerHeader, YearPickerHeading, YearPickerGrid, YearPickerCell, YearPickerNext, YearPickerPrev, YearPickerGridBody, YearPickerGridRow, YearPickerCellTrigger, YearRangePickerRoot, YearRangePickerHeader, YearRangePickerHeading, YearRangePickerGrid, YearRangePickerCell, YearRangePickerNext, YearRangePickerPrev, YearRangePickerGridBody, YearRangePickerGridRow, YearRangePickerCellTrigger } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
-const SingleCalendar = { Root: CalendarRoot, Header: CalendarHeader, Heading: CalendarHeading, ViewTrigger: CalendarViewTrigger, Grid: CalendarGrid, Cell: CalendarCell, HeadCell: CalendarHeadCell, Next: CalendarNext, Prev: CalendarPrev, GridHead: CalendarGridHead, GridBody: CalendarGridBody, GridRow: CalendarGridRow, CellTrigger: CalendarCellTrigger }
-const RangeCalendar = { Root: RangeCalendarRoot, Header: RangeCalendarHeader, Heading: RangeCalendarHeading, ViewTrigger: RangeCalendarViewTrigger, Grid: RangeCalendarGrid, Cell: RangeCalendarCell, HeadCell: RangeCalendarHeadCell, Next: RangeCalendarNext, Prev: RangeCalendarPrev, GridHead: RangeCalendarGridHead, GridBody: RangeCalendarGridBody, GridRow: RangeCalendarGridRow, CellTrigger: RangeCalendarCellTrigger }
+const SingleCalendar = { Root: CalendarRoot, Header: CalendarHeader, Heading: CalendarHeading, Grid: CalendarGrid, Cell: CalendarCell, HeadCell: CalendarHeadCell, Next: CalendarNext, Prev: CalendarPrev, GridHead: CalendarGridHead, GridBody: CalendarGridBody, GridRow: CalendarGridRow, CellTrigger: CalendarCellTrigger }
+const RangeCalendar = { Root: RangeCalendarRoot, Header: RangeCalendarHeader, Heading: RangeCalendarHeading, Grid: RangeCalendarGrid, Cell: RangeCalendarCell, HeadCell: RangeCalendarHeadCell, Next: RangeCalendarNext, Prev: RangeCalendarPrev, GridHead: RangeCalendarGridHead, GridBody: RangeCalendarGridBody, GridRow: RangeCalendarGridRow, CellTrigger: RangeCalendarCellTrigger }
+const MonthPicker = { Root: MonthPickerRoot, Header: MonthPickerHeader, Heading: MonthPickerHeading, Grid: MonthPickerGrid, Cell: MonthPickerCell, Next: MonthPickerNext, Prev: MonthPickerPrev, GridBody: MonthPickerGridBody, GridRow: MonthPickerGridRow, CellTrigger: MonthPickerCellTrigger }
+const MonthRangePicker = { Root: MonthRangePickerRoot, Header: MonthRangePickerHeader, Heading: MonthRangePickerHeading, Grid: MonthRangePickerGrid, Cell: MonthRangePickerCell, Next: MonthRangePickerNext, Prev: MonthRangePickerPrev, GridBody: MonthRangePickerGridBody, GridRow: MonthRangePickerGridRow, CellTrigger: MonthRangePickerCellTrigger }
+const YearPicker = { Root: YearPickerRoot, Header: YearPickerHeader, Heading: YearPickerHeading, Grid: YearPickerGrid, Cell: YearPickerCell, Next: YearPickerNext, Prev: YearPickerPrev, GridBody: YearPickerGridBody, GridRow: YearPickerGridRow, CellTrigger: YearPickerCellTrigger }
+const YearRangePicker = { Root: YearRangePickerRoot, Header: YearRangePickerHeader, Heading: YearRangePickerHeading, Grid: YearRangePickerGrid, Cell: YearRangePickerCell, Next: YearRangePickerNext, Prev: YearRangePickerPrev, GridBody: YearRangePickerGridBody, GridRow: YearRangePickerGridRow, CellTrigger: YearRangePickerCellTrigger }
 
 const _props = withDefaults(defineProps<CalendarProps<R, M>>(), {
   type: 'date',
@@ -176,27 +176,26 @@ const overrides = useComponentOverrides((ui: Calendar['AppConfig']['ui']) => ui.
 
 const VIEWS: CalendarView[] = ['day', 'month', 'year']
 
-const granularity = computed<CalendarView>(() => props.type === 'year' ? 'year' : props.type === 'month' ? 'month' : 'day')
-const maxView = computed<CalendarView>(() => props.maxView ?? 'year')
+const minView = computed<CalendarView>(() => props.type === 'year' ? 'year' : props.type === 'month' ? 'month' : 'day')
+const maxView: CalendarView = 'year'
+
+const view = ref<CalendarView>(minView.value)
+watch(() => props.type, () => {
+  view.value = minView.value
+})
+
+const switchable = computed(() => minView.value !== maxView)
+const isMinView = computed(() => view.value === minView.value)
 
 function clampView(value: CalendarView): CalendarView {
-  const min = VIEWS.indexOf(granularity.value)
-  const max = Math.max(VIEWS.indexOf(maxView.value), min)
+  const min = VIEWS.indexOf(minView.value)
+  const max = VIEWS.indexOf(maxView)
   return VIEWS[Math.min(Math.max(VIEWS.indexOf(value), min), max)]!
 }
 
-const view = ref<CalendarView>(clampView(props.view ?? props.defaultView ?? granularity.value))
-// A controlled `view` stays the source of truth, a `type` change resets an uncontrolled one, and the result is
-// clamped between the granularity and `maxView`. A parent whose `view` gets clamped hears about it.
-watch([() => props.view, granularity, maxView], ([value], [, prevGranularity]) => {
-  const next = clampView(value ?? (granularity.value !== prevGranularity ? granularity.value : view.value))
-  if (next !== view.value) {
-    view.value = next
-  }
-  if (value && next !== value) {
-    emits('update:view', next)
-  }
-})
+function setView(value: CalendarView) {
+  view.value = clampView(value)
+}
 
 function cycleView() {
   const max = VIEWS.indexOf(maxView)
@@ -243,7 +242,7 @@ watch(() => props.placeholder, (value) => {
   }
 })
 
-function setPlaceholder(date: DateValue, details?: CalendarChangeDetails) {
+function setPlaceholder(date: DateValue) {
   placeholder.value = date
   emits('update:placeholder', date)
 }
@@ -273,9 +272,43 @@ function paginateYear(date: DateValue, sign: -1 | 1) {
   return sign === -1 ? date.subtract({ years: 1 }) : date.add({ years: 1 })
 }
 
-const Picker = computed(() => props.range ? RangeCalendar : SingleCalendar) as unknown as ComputedRef<Record<string, Component>>
+const Picker = computed(() => {
+  // Only commit a range at the terminal view; drilling above it just navigates the placeholder.
+  const range = props.range && isMinView.value
+  if (view.value === 'year') {
+    return range ? YearRangePicker : YearPicker
+  }
+  if (view.value === 'month') {
+    return range ? MonthRangePicker : MonthPicker
+  }
+  return props.range ? RangeCalendar : SingleCalendar
+}) as unknown as ComputedRef<Record<string, Component>>
 
-const rootProps = useForwardProps(reactiveOmit(props, 'type', 'placeholder', 'view', 'defaultView', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'viewControl', 'class', 'ui'))
+const omittedProps = ['type', 'placeholder', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'viewControl', 'class', 'ui']
+// Only declared by the day `Calendar` / `RangeCalendar` primitives, omitted in other views to avoid fallthrough attributes.
+const dayOnlyProps = ['pagedNavigation', 'weekStartsOn', 'weekdayFormat', 'fixedWeeks', 'numberOfMonths', 'isDateDisabled', 'isDateUnavailable', 'isDateHighlightable', 'disableDaysOutsideCurrentView', 'maximumDays']
+const monthOnlyProps = ['isMonthDisabled', 'isMonthUnavailable']
+const yearOnlyProps = ['isYearDisabled', 'isYearUnavailable', 'yearsPerPage']
+// Only declared by the range pickers, omitted when drilling above the terminal view since the picker is not a range picker there.
+const rangeOnlyProps = ['allowNonContiguousRanges', 'fixedDate']
+
+const rootProps = useForwardProps(reactiveOmit(props, (_, key) =>
+  omittedProps.includes(key as string)
+  || (view.value !== 'day' && dayOnlyProps.includes(key as string))
+  || (view.value !== 'month' && monthOnlyProps.includes(key as string))
+  || (view.value !== 'year' && yearOnlyProps.includes(key as string))
+  || (!isMinView.value && rangeOnlyProps.includes(key as string))
+))
+
+function cellProps(cellDate: DateValue, monthValue: DateValue) {
+  if (view.value === 'month') {
+    return { month: cellDate }
+  }
+  if (view.value === 'year') {
+    return { year: cellDate }
+  }
+  return { day: cellDate, month: monthValue }
+}
 
 // eslint-disable-next-line vue/no-dupe-keys
 const nextYearIcon = computed(() => props.nextYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight))
@@ -305,21 +338,15 @@ const ui = computed(() => tv(theme, overrides.value)({
     ref="rootRef"
     v-slot="{ weekDays, grid, date }"
     v-bind="rootProps"
-    :granularity="granularity"
-    :view="view"
     :calendar-label="calendarLabel"
     :model-value="(isMinView ? (props.modelValue as DateValue | DateValue[] | DateRange) : undefined)"
     :default-value="(isMinView ? (uncontrolledValue as DateValue | DateValue[] | DateRange) : undefined)"
     :placeholder="placeholder"
     data-slot="calendar"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    @before-update:model-value="(value: CalendarModelValue<R, M>, details: CalendarChangeDetails) => emits('beforeUpdate:modelValue', value, details)"
-    @update:model-value="(value: CalendarModelValue<R, M>, details: CalendarChangeDetails) => emits('update:modelValue', value, details)"
-    @before-update:placeholder="(value: DateValue, details: CalendarChangeDetails) => emits('beforeUpdate:placeholder', value, details)"
     @update:placeholder="setPlaceholder"
-    @before-update:view="(value: CalendarView, details: CalendarChangeDetails) => emits('beforeUpdate:view', value, details)"
-    @update:view="setView"
-    @update:start-value="(value: DateValue | undefined, details: CalendarChangeDetails) => emits('update:startValue', value, details)"
+    @update:model-value="onSelect"
+    @update:start-value="(value: DateValue | undefined) => emits('update:startValue', value)"
     @update:valid-model-value="(value: DateRange) => emits('update:validModelValue', value)"
   >
     <Picker.Header data-slot="calendar-header" :class="ui.header({ class: props.ui?.header })">
@@ -338,16 +365,16 @@ const ui = computed(() => tv(theme, overrides.value)({
           :set-view="setView"
           :set-placeholder="setPlaceholder"
         >
-          <Picker.ViewTrigger v-if="switchable && props.viewControl" as-child>
-            <UButton
-              :label="headingValue"
-              :size="props.size"
-              color="neutral"
-              variant="ghost"
-              block
-              v-bind="(typeof props.viewControl === 'object' ? props.viewControl : {})"
-            />
-          </Picker.ViewTrigger>
+          <UButton
+            v-if="switchable && props.viewControl"
+            :label="headingValue"
+            :size="props.size"
+            color="neutral"
+            variant="ghost"
+            block
+            v-bind="(typeof props.viewControl === 'object' ? props.viewControl : {})"
+            @click="cycleView"
+          />
           <span v-else data-slot="calendar-headingLabel" :class="ui.headingLabel({ class: props.ui?.headingLabel })">{{ headingValue }}</span>
         </slot>
       </Picker.Heading>
@@ -360,13 +387,12 @@ const ui = computed(() => tv(theme, overrides.value)({
     </Picker.Header>
     <div data-slot="calendar-body" :class="ui.body({ class: props.ui?.body })">
       <Picker.Grid
-        v-for="month in grid"
+        v-for="month in (Array.isArray(grid) ? grid : [grid])"
         :key="month.value.toString()"
-        :value="month.value"
         data-slot="calendar-grid"
         :class="ui.grid({ class: props.ui?.grid })"
       >
-        <Picker.GridHead v-if="view === 'day'">
+        <Picker.GridHead v-if="'GridHead' in Picker">
           <Picker.GridRow data-slot="calendar-gridWeekDaysRow" :class="ui.gridWeekDaysRow({ class: props.ui?.gridWeekDaysRow })">
             <Picker.HeadCell
               v-for="day in weekDays"
@@ -398,13 +424,13 @@ const ui = computed(() => tv(theme, overrides.value)({
             <Picker.Cell
               v-for="cellDate in row"
               :key="cellDate.toString()"
-              :value="cellDate"
+              :date="cellDate"
               data-slot="calendar-cell"
               :class="ui.cell({ class: props.ui?.cell })"
             >
               <Picker.CellTrigger
                 v-slot="cell"
-                :value="cellDate"
+                v-bind="cellProps(cellDate, month.value)"
                 data-slot="calendar-cellTrigger"
                 :class="ui.cellTrigger({ class: props.ui?.cellTrigger })"
               >
@@ -412,10 +438,10 @@ const ui = computed(() => tv(theme, overrides.value)({
                   {{ cellDate.day }}
                 </slot>
                 <slot v-else-if="view === 'month'" name="month-cell" :month="cellDate" :selected="cell.selected" :disabled="cell.disabled">
-                  {{ cell.cellValue }}
+                  {{ cell.monthValue }}
                 </slot>
                 <slot v-else name="year-cell" :year="cellDate" :selected="cell.selected" :disabled="cell.disabled">
-                  {{ cell.cellValue }}
+                  {{ cell.yearValue }}
                 </slot>
               </Picker.CellTrigger>
             </Picker.Cell>

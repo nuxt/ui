@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { ComponentPublicInstance, VNode } from 'vue'
-import type { DateFieldRootProps, DateFieldRootEmits, DateRangeFieldRootProps, DateRangeFieldRootEmits, DateValue, SegmentPart, ChangeEventDetails, DateFieldChangeReason, DateRangeFieldChangeReason } from 'reka-ui'
+import type { DateFieldRootProps, DateFieldRootEmits, DateRangeFieldRootProps, DateRangeFieldRootEmits, DateValue, SegmentPart } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { IconProps } from './Icon.vue'
@@ -51,9 +51,8 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
   ui?: InputDate['slots']
 }
 
-export interface InputDateEmits<R extends boolean = false> extends Omit<DateFieldRootEmits & DateRangeFieldRootEmits, 'beforeUpdate:modelValue' | 'update:modelValue'> {
-  'beforeUpdate:modelValue': [value: InputDateModelValue<R>, details: ChangeEventDetails<DateFieldChangeReason | DateRangeFieldChangeReason>]
-  'update:modelValue': [value: InputDateModelValue<R>, details?: ChangeEventDetails<DateFieldChangeReason | DateRangeFieldChangeReason>]
+export interface InputDateEmits<R extends boolean = false> extends Omit<DateFieldRootEmits & DateRangeFieldRootEmits, 'update:modelValue'> {
+  'update:modelValue': [value: InputDateModelValue<R>]
   'change': [event: Event]
   'blur': [event: FocusEvent]
   'focus': [event: FocusEvent]

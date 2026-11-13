@@ -50,28 +50,28 @@ const CAST_TEMPLATES: Record<string, (raw: any) => string> = {
   'DateValue': (raw) => {
     if (!raw || !Array.isArray(raw)) return 'null'
     const [y, m, d] = raw
-    return `new Temporal.PlainDate(${y}, ${m}, ${d})`
+    return `new CalendarDate(${y}, ${m}, ${d})`
   },
   'DateValue[]': (raw) => {
     if (!Array.isArray(raw)) return '[]'
-    return `[${raw.map(([y, m, d]: number[]) => `new Temporal.PlainDate(${y}, ${m}, ${d})`).join(', ')}]`
+    return `[${raw.map(([y, m, d]: number[]) => `new CalendarDate(${y}, ${m}, ${d})`).join(', ')}]`
   },
   'DateRange': (raw) => {
     if (!raw?.start || !raw?.end) return '{ start: null, end: null }'
     const [sy, sm, sd] = raw.start
     const [ey, em, ed] = raw.end
-    return `{ start: new Temporal.PlainDate(${sy}, ${sm}, ${sd}), end: new Temporal.PlainDate(${ey}, ${em}, ${ed}) }`
+    return `{ start: new CalendarDate(${sy}, ${sm}, ${sd}), end: new CalendarDate(${ey}, ${em}, ${ed}) }`
   },
   'TimeValue': (raw) => {
     if (!raw || !Array.isArray(raw)) return 'null'
     const [h, m, s] = raw
-    return `new Temporal.PlainTime(${h}, ${m}${s ? `, ${s}` : ''})`
+    return `new Time(${h}, ${m}, ${s})`
   },
   'TimeRangeValue': (raw) => {
     if (!raw?.start || !raw?.end) return 'null'
     const [sh, sm, ss] = raw.start
     const [eh, em, es] = raw.end
-    return `{ start: new Temporal.PlainTime(${sh}, ${sm}${ss ? `, ${ss}` : ''}), end: new Temporal.PlainTime(${eh}, ${em}${es ? `, ${es}` : ''}) }`
+    return `{ start: new Time(${sh}, ${sm}, ${ss}), end: new Time(${eh}, ${em}, ${es}) }`
   }
 }
 
@@ -106,6 +106,14 @@ const KBD_LABELS: Record<string, string> = {
 
 // Inline components with nothing to say in markdown.
 const DROPPED_INLINE = new Set(['icon', 'prose-icon', 'u-color-mode-select'])
+
+const CAST_IMPORTS: Record<string, { name: string, from: string }> = {
+  'DateValue': { name: 'CalendarDate', from: '@internationalized/date' },
+  'DateValue[]': { name: 'CalendarDate', from: '@internationalized/date' },
+  'DateRange': { name: 'CalendarDate', from: '@internationalized/date' },
+  'TimeValue': { name: 'Time', from: '@internationalized/date' },
+  'TimeRangeValue': { name: 'Time', from: '@internationalized/date' }
+}
 
 function stringifyValue(value: any, quote: string = '"'): string {
   return json5.stringify(value, { quote, space: 2 })?.replace(/,([ |\t\n]+[}|\]])/g, '$1') ?? ''
@@ -472,6 +480,17 @@ const generateComponentCode = ({
   // Build <script setup>
   const importsBySource = new Map<string, Set<string>>()
   const refDeclarations: string[] = []
+
+  if (cast) {
+    for (const key of external) {
+      const castType = cast[key]
+      if (castType && CAST_IMPORTS[castType]) {
+        const imp = CAST_IMPORTS[castType]
+        if (!importsBySource.has(imp.from)) importsBySource.set(imp.from, new Set())
+        importsBySource.get(imp.from)!.add(imp.name)
+      }
+    }
+  }
 
   const typeImports: string[] = []
   if (externalTypes?.length) {

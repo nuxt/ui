@@ -63,7 +63,7 @@ describe('InputRating', () => {
       await flushPromises()
 
       expect(wrapper.emitted()).toHaveProperty('update:modelValue')
-      expect(wrapper.emitted('update:modelValue')?.[0]?.[0]).toBe(3)
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([3])
     })
 
     test('change event on click', async () => {

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { ComponentPublicInstance, VNode } from 'vue'
-import type { TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, TimeRangeFieldRootProps, TimeValue, SegmentPart, ChangeEventDetails, TimeFieldChangeReason, TimeRangeFieldChangeReason } from 'reka-ui'
+import type { TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, TimeRangeFieldRootProps, TimeValue, SegmentPart } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '../theme/input-time'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -61,9 +61,8 @@ export interface InputTimeProps<R extends boolean = false> extends UseComponentI
   ui?: InputTime['slots']
 }
 
-export interface InputTimeEmits<R extends boolean = false> extends Omit<TimeFieldRootEmits & TimeRangeFieldRootEmits, 'beforeUpdate:modelValue' | 'update:modelValue'> {
-  'beforeUpdate:modelValue': [value: InputTimeModelValue<R>, details: ChangeEventDetails<TimeFieldChangeReason | TimeRangeFieldChangeReason>]
-  'update:modelValue': [value: InputTimeModelValue<R>, details?: ChangeEventDetails<TimeFieldChangeReason | TimeRangeFieldChangeReason>]
+export interface InputTimeEmits<R extends boolean = false> extends Omit<TimeFieldRootEmits & TimeRangeFieldRootEmits, 'update:modelValue'> {
+  'update:modelValue': [value: InputTimeModelValue<R>]
   'change': [event: Event]
   'blur': [event: FocusEvent]
   'focus': [event: FocusEvent]
