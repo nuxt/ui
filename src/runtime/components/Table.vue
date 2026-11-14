@@ -93,7 +93,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    * @defaultValue 'div'
    */
   as?: any
-  data?: T[]
+  data?: readonly T[]
   columns?: TableColumn<T>[]
   caption?: string
   meta?: TableMeta<T>
@@ -259,7 +259,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as Table['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const data = createRef(props.data ?? [], props.watchOptions?.deep !== false)
+const data = createRef(props.data ? [...props.data] : [], props.watchOptions?.deep !== false)
 // eslint-disable-next-line vue/no-dupe-keys
 const meta = computed(() => props.meta ?? {})
 // TanStack resolves each column as `{ ...defaultColumn, ...columnDef }`, so any key set here shadows `defaultColumn`.
