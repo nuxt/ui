@@ -277,6 +277,95 @@ describe('Select', () => {
       expect(pointerDowns).toBe(1)
     })
 
+    test('a press released on the trigger still counts as a real click', async () => {
+      // Attached so the trigger's `pointerup` reaches the document-level listener.
+      const wrapper = await mountSuspended(Select, {
+        props: { items: ['Option 1', 'Option 2'], open: false, portal: false },
+        attachTo: document.body
+      })
+
+      const trigger = wrapper.find('[data-slot="base"]')
+      const el = trigger.element
+
+      let pointerDowns = 0
+      el.addEventListener('pointerdown', () => {
+        pointerDowns++
+      })
+
+      // Releasing on the trigger is followed by a `click` on it, so the flag
+      // has to survive the `pointerup` for the click to be seen as real.
+      await trigger.trigger('pointerdown')
+      await trigger.trigger('pointerup')
+      await trigger.trigger('click')
+      await flushPromises()
+
+      expect(pointerDowns).toBe(1)
+
+      wrapper.unmount()
+    })
+
+    test('a right-click does not block a later label click', async () => {
+      const wrapper = await renderForm({
+        slotVars: {
+          items: ['Option 1', 'Option 2']
+        },
+        slotTemplate: `
+        <UFormField name="value" label="Label">
+          <USelect :items="items" :open="false" :portal="false" />
+        </UFormField>
+        `
+      })
+
+      const trigger = wrapper.find('[data-slot="base"]')
+      const el = trigger.element
+
+      let pointerDowns = 0
+      el.addEventListener('pointerdown', () => {
+        pointerDowns++
+      })
+
+      // A right-click fires `pointerdown` and `pointerup` but no `click`, so it
+      // must not count as the start of a real click.
+      await trigger.trigger('pointerdown', { button: 2 })
+      await trigger.trigger('pointerup', { button: 2 })
+      await trigger.trigger('click')
+      await flushPromises()
+
+      // The right-click plus the one synthesized for the label-style click.
+      expect(pointerDowns).toBe(2)
+    })
+
+    test('a press released outside the trigger does not block a later label click', async () => {
+      const wrapper = await renderForm({
+        slotVars: {
+          items: ['Option 1', 'Option 2']
+        },
+        slotTemplate: `
+        <UFormField name="value" label="Label">
+          <USelect :items="items" :open="false" :portal="false" />
+        </UFormField>
+        `
+      })
+
+      const trigger = wrapper.find('[data-slot="base"]')
+      const el = trigger.element
+
+      let pointerDowns = 0
+      el.addEventListener('pointerdown', () => {
+        pointerDowns++
+      })
+
+      // Pressing the trigger and releasing elsewhere ends the gesture with no
+      // `click` on the trigger.
+      await trigger.trigger('pointerdown')
+      document.body.dispatchEvent(new PointerEvent('pointerup', { bubbles: true }))
+      await trigger.trigger('click')
+      await flushPromises()
+
+      // The press plus the one synthesized for the label-style click.
+      expect(pointerDowns).toBe(2)
+    })
+
     test('a cancelled pointer sequence does not block a later label click', async () => {
       const wrapper = await renderForm({
         slotVars: {

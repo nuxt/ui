@@ -327,9 +327,30 @@ function isSelectItem(item: SelectItem): item is Exclude<SelectItem, SelectValue
 // `click`, never a `pointerdown`, and that absence is what tells the two apart.
 let triggerSawPointerDown = false
 
-function onTriggerPointerDown() {
+function onTriggerPointerDown(event: PointerEvent) {
+  // Only a primary press without Ctrl ends in a `click` on the trigger. A right-click,
+  // or Ctrl+click on macOS, opens the context menu instead and fires no `click`.
+  if (event.button !== 0 || event.ctrlKey) {
+    return
+  }
+
   triggerSawPointerDown = true
+  document.addEventListener('pointerup', onDocumentPointerUp, { capture: true, once: true })
 }
+
+// A press released outside the trigger fires no `click` on it either, so the flag
+// has to be cleared here or it would make the next label click look like a real press.
+function onDocumentPointerUp(event: PointerEvent) {
+  if (!triggerRef.value?.$el?.contains(event.target as Node | null)) {
+    triggerSawPointerDown = false
+  }
+}
+
+onScopeDispose(() => {
+  if (typeof document !== 'undefined') {
+    document.removeEventListener('pointerup', onDocumentPointerUp, { capture: true })
+  }
+})
 
 // A cancelled sequence (touch scrolling, the browser taking over the gesture)
 // fires no `click`, so without this the flag would outlive the interaction and
