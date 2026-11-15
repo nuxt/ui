@@ -1098,6 +1098,21 @@ Use the `value-key` prop to change the key used to match items when a `v-model` 
 In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can switch the active item by pressing :kbd{value="1"}, :kbd{value="2"}, or :kbd{value="3"}.
 ::
 
+### Control active item based on nested children routes
+
+You can control the active item based on nested children routes also. Menu item of parent route can be set active when its children routes are being visited.
+
+::component-example
+---
+collapse: true
+name: 'navigation-menu-active-state-example'
+---
+::
+
+::tip
+Remember that `items` is an array evaluated during component setup. In order to update the active link whenever the user navigates between routes `items` array must be wrapped inside a `computed()` property so Vue's reactivity system recalculates the active status automatically
+::
+
 ### With tooltip in items
 
 When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/docs/components/tooltip) around items with their label but you can also use the `tooltip` property on each item to override the default tooltip. In `horizontal` orientation, you can use the `tooltip` property on each item to display a [Tooltip](/docs/components/tooltip) around items.
