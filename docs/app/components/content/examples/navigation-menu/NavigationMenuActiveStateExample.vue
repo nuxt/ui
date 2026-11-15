@@ -4,7 +4,7 @@ const route = useRoute()
 function setLinkActive(){
     // Some complex logic that can't fit in one line
     // Return true or false
-    return true
+    return route.path.startsWith('/docs/components'),
 }
 
 const items = computed(() =>
@@ -47,7 +47,7 @@ const items = computed(() =>
             label: 'Composables',
             icon: 'i-lucide-database',
             to: '/docs/composables',
-            active: route.path == '/docs/composables',
+            active: route.path.startsWith('/docs/composables'),
             children: [
                 {
                     label: 'defineShortcuts',
