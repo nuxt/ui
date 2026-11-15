@@ -4,7 +4,7 @@ const route = useRoute()
 function setLinkActive(){
     // Some complex logic that can't fit in one line
     // Return true or false
-    return route.path.startsWith('/docs/components'),
+    return route.path.startsWith('/docs/components');
 }
 
 const items = computed(() =>
