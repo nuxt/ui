@@ -12,8 +12,8 @@ const password = ref('')
     <template #trailing>
       <UButton
         color="neutral"
-        variant="link"
-        size="sm"
+        variant="ghost"
+        size="xs"
         :icon="show ? 'i-lucide-eye-off' : 'i-lucide-eye'"
         :aria-label="show ? 'Hide password' : 'Show password'"
         :aria-pressed="show"

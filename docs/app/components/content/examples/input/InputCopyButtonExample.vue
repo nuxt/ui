@@ -14,8 +14,8 @@ const { copy, copied } = useClipboard()
       <UTooltip text="Copy to clipboard" :content="{ side: 'right' }">
         <UButton
           :color="copied ? 'success' : 'neutral'"
-          variant="link"
-          size="sm"
+          variant="ghost"
+          size="xs"
           :icon="copied ? 'i-lucide-copy-check' : 'i-lucide-copy'"
           aria-label="Copy to clipboard"
           @click="copy(value)"

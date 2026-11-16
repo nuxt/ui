@@ -10,8 +10,8 @@ const value = ref('Click to clear')
     <template v-if="value?.length" #trailing>
       <UButton
         color="neutral"
-        variant="link"
-        size="sm"
+        variant="ghost"
+        size="xs"
         icon="i-lucide-circle-x"
         aria-label="Clear input"
         @click="value = ''"

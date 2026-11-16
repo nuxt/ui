@@ -15,8 +15,8 @@ const modelValue = shallowRef({
       <UPopover :reference="inputDate?.inputsRef[0]?.$el">
         <UButton
           color="neutral"
-          variant="link"
-          size="sm"
+          variant="ghost"
+          size="xs"
           icon="i-lucide-calendar"
           aria-label="Select a date range"
         />

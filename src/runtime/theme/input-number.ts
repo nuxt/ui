@@ -38,11 +38,13 @@ export default defineTheme({
       }
     },
     orientation: {
-      // The decrement comes after the input in the DOM, so the input keeps the first tab stop
+      // The decrement comes after the input in the DOM, so the input keeps the first tab stop.
+      // The buttons sit 4px inside the box, like the other buttons of a field, and their
+      // hover is a step above the fill of the box
       horizontal: {
         base: 'text-center',
-        increment: 'pe-1',
-        decrement: `order-first ps-1 before:content-['x'] before:w-0 before:invisible`
+        increment: 'pe-1 [&>button]:p-[calc(var(--ui-control-py)-4px)] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong',
+        decrement: `order-first ps-1 before:content-['x'] before:w-0 before:invisible [&>button]:p-[calc(var(--ui-control-py)-4px)] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong`
       },
       // Both buttons share a column at the end. Each is taller than its half of the
       // box, so a negative margin lets them overlap without making the box taller.
