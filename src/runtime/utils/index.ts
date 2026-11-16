@@ -230,8 +230,9 @@ export function isUnsafeComponent(value: unknown): boolean {
 
   // A VNode or built-in (Teleport, Suspense, KeepAlive) marker is never valid `as` or icon data:
   // a forged one would render its `type` and `props` as is, `innerHTML` included.
-  // The built-ins themselves carry functions (`process`), JSON never does.
-  if ((component.__v_isVNode || component.__isTeleport || component.__isSuspense || component.__isKeepAlive) && !Object.values(component).some(item => typeof item === 'function')) return true
+  // Vue also unwraps a `__v_raw` key in development, after this check (a real reactive proxy
+  // doesn't own it). The built-ins themselves carry functions (`process`), JSON never does.
+  if ((component.__v_isVNode || component.__isTeleport || component.__isSuspense || component.__isKeepAlive || Object.hasOwn(component, '__v_raw')) && !Object.values(component).some(item => typeof item === 'function')) return true
 
   // Vue's full build also compiles an element-like `template` (`nodeType` + `innerHTML`)
   return typeof component.template === 'string'
