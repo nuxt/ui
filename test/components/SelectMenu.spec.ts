@@ -1,6 +1,7 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
-import { h } from 'vue'
+import type { Component } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import SelectMenu from '../../src/runtime/components/SelectMenu.vue'
@@ -219,6 +220,59 @@ describe('SelectMenu', () => {
       const input = wrapper.findComponent({ name: 'ComboboxRoot' })
       input.vm.$emit('update:open', false)
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
+    })
+
+    test.each([
+      ['controlled', { modelValue: 'Option 1' }],
+      ['uncontrolled', { defaultValue: 'Option 1' }]
+    ])('resets the search term when selecting the current item %s', async (_, model) => {
+      const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'], ...model, searchTerm: 'Option', resetSearchTermOnBlur: false, defaultOpen: true, portal: false }, attachTo: document.body })
+      await flushPromises()
+      await wrapper.find('[role="option"][data-state="checked"]').trigger('click')
+
+      expect(wrapper.emitted('update:searchTerm')).toEqual([['']])
+      expect(wrapper.emitted('change')).toBeUndefined()
+
+      wrapper.unmount()
+    })
+
+    test('resets the search term when clearing', async () => {
+      const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'], modelValue: 'Option 1', clear: true, searchTerm: 'Option', resetSearchTermOnBlur: false } })
+      await wrapper.find('[data-slot="trailingClear"]').trigger('click')
+
+      expect(wrapper.emitted('update:searchTerm')).toEqual([['']])
+    })
+
+    test.each([
+      ['single', false, 'Option 1'],
+      ['multiple', true, []]
+    ])('resets a controlled search term once when selecting a new item %s', async (_, multiple, initial) => {
+      const searchTerms: string[] = []
+      const Parent = defineComponent(() => {
+        const searchTerm = ref('Option')
+        const modelValue = ref<any>(initial)
+        return () => h(SelectMenu as Component, {
+          'items': ['Option 1', 'Option 2'],
+          multiple,
+          'modelValue': modelValue.value,
+          'onUpdate:modelValue': (value: any) => { modelValue.value = value },
+          'searchTerm': searchTerm.value,
+          'onUpdate:searchTerm': (value: string) => {
+            searchTerms.push(value)
+            searchTerm.value = value
+          },
+          'defaultOpen': true,
+          'portal': false
+        })
+      })
+      const wrapper = mount(Parent, { attachTo: document.body })
+      await flushPromises()
+      await wrapper.findAll('[role="option"]')[1]!.trigger('click')
+      await flushPromises()
+
+      expect(searchTerms).toEqual([''])
+
+      wrapper.unmount()
     })
   })
 
