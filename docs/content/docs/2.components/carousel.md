@@ -242,7 +242,7 @@ In this example, we add the `transition-opacity not-data-active:opacity-10` clas
 
 ### With thumbnails
 
-Use the `v-model` directive to control the current slide and display thumbnails under the carousel that navigate to it.
+Use the `dot` slot to render a thumbnail in each dot. They keep the keyboard and screen reader support of the dots.
 
 ::component-example
 ---
@@ -264,6 +264,33 @@ class: 'p-8 px-16'
 ### Emits
 
 :component-emits
+
+### Expose
+
+You can access the typed component instance using [`useTemplateRef`](https://vuejs.org/api/composition-api-helpers.html#usetemplateref).
+
+```vue
+<script setup lang="ts">
+const carousel = useTemplateRef('carousel')
+</script>
+
+<template>
+  <UCarousel ref="carousel" />
+</template>
+```
+
+This will give you access to the following:
+
+| Name | Type |
+| ---- | ---- |
+| `snapCount`{lang="ts-type"} | `number`{lang="ts-type"} |
+| `canScrollPrev`{lang="ts-type"} | `boolean`{lang="ts-type"} |
+| `canScrollNext`{lang="ts-type"} | `boolean`{lang="ts-type"} |
+| `scrollPrev()`{lang="ts-type"} | `() => boolean`{lang="ts-type"} |
+| `scrollNext()`{lang="ts-type"} | `() => boolean`{lang="ts-type"} |
+| `scrollTo(index)`{lang="ts-type"} | `(index: number) => boolean`{lang="ts-type"} |
+| `play()`{lang="ts-type"} | `() => boolean`{lang="ts-type"} |
+| `stop()`{lang="ts-type"} | `() => boolean`{lang="ts-type"} |
 
 ## Theme
 

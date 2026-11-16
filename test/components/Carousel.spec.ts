@@ -68,6 +68,32 @@ describe('Carousel', () => {
     expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBe(1)
   })
 
+  it('renders the dot slot in each dot', async () => {
+    const wrapper = await mountSuspended(Carousel, {
+      props: { items, dots: true },
+      slots: { dot: ({ index, active }: { index: number, active: boolean }) => `${index}:${active}` }
+    })
+
+    expect(wrapper.findAll('[data-slot="carousel-dot"]').map(dot => dot.text())).toEqual(['0:true', '1:false', '2:false', '3:false', '4:false', '5:false'])
+  })
+
+  it('exposes navigation methods', async () => {
+    const wrapper = await mountSuspended(Carousel, {
+      props: { items }
+    })
+    const vm = wrapper.vm as unknown as { snapCount: number, canScrollPrev: boolean, scrollNext: () => boolean, scrollTo: (index: number) => boolean }
+
+    expect(vm.snapCount).toBe(6)
+    expect(vm.canScrollPrev).toBe(false)
+    expect(vm.scrollNext()).toBe(true)
+    await flushPromises()
+    expect(wrapper.emitted('update:modelValue')?.[0]?.[0]).toBe(1)
+    expect(vm.canScrollPrev).toBe(true)
+    expect(vm.scrollTo(4)).toBe(true)
+    await flushPromises()
+    expect(wrapper.emitted('update:modelValue')?.[1]?.[0]).toBe(4)
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CarouselWrapper, {
       props: {

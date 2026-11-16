@@ -2,6 +2,7 @@
 
 exports[`Carousel > renders with arrows correctly 1`] = `
 "<div dir="ltr" role="region" aria-roledescription="carousel" data-orientation="horizontal" data-slot="carousel" class="relative">
+  <!---->
   <div data-slot="carousel-viewport" class="focus:outline-none" tabindex="0" style="overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;" data-orientation="horizontal">
     <div data-orientation="horizontal" id="reka-carousel-v-0-content" aria-live="polite" aria-atomic="false" style="display: flex; flex-direction: row;" data-slot="carousel-container" class="items-start -ms-4">
       <div data-index="0" data-active="" data-orientation="horizontal" role="group" aria-roledescription="slide" aria-label="1 of 6" style="flex-shrink: 0; scroll-snap-align: center; scroll-snap-stop: always;" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
@@ -27,6 +28,7 @@ exports[`Carousel > renders with arrows correctly 1`] = `
 
 exports[`Carousel > renders with as correctly 1`] = `
 "<nav dir="ltr" role="region" aria-roledescription="carousel" data-orientation="horizontal" data-slot="carousel" class="relative">
+  <!---->
   <div data-slot="carousel-viewport" class="focus:outline-none" tabindex="0" style="overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;" data-orientation="horizontal">
     <div data-orientation="horizontal" id="reka-carousel-v-0-content" aria-live="polite" aria-atomic="false" style="display: flex; flex-direction: row;" data-slot="carousel-container" class="items-start -ms-4">
       <div data-index="0" data-active="" data-orientation="horizontal" role="group" aria-roledescription="slide" aria-label="1 of 6" style="flex-shrink: 0; scroll-snap-align: center; scroll-snap-stop: always;" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
@@ -43,6 +45,7 @@ exports[`Carousel > renders with as correctly 1`] = `
 
 exports[`Carousel > renders with class correctly 1`] = `
 "<div dir="ltr" role="region" aria-roledescription="carousel" data-orientation="horizontal" data-slot="carousel" class="relative w-full max-w-xs">
+  <!---->
   <div data-slot="carousel-viewport" class="focus:outline-none" tabindex="0" style="overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;" data-orientation="horizontal">
     <div data-orientation="horizontal" id="reka-carousel-v-0-content" aria-live="polite" aria-atomic="false" style="display: flex; flex-direction: row;" data-slot="carousel-container" class="items-start -ms-4">
       <div data-index="0" data-active="" data-orientation="horizontal" role="group" aria-roledescription="slide" aria-label="1 of 6" style="flex-shrink: 0; scroll-snap-align: center; scroll-snap-stop: always;" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
@@ -59,6 +62,7 @@ exports[`Carousel > renders with class correctly 1`] = `
 
 exports[`Carousel > renders with defaultValue correctly 1`] = `
 "<div dir="ltr" role="region" aria-roledescription="carousel" data-orientation="horizontal" data-slot="carousel" class="relative">
+  <!---->
   <div data-slot="carousel-viewport" class="focus:outline-none" tabindex="0" style="overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;" data-orientation="horizontal">
     <div data-orientation="horizontal" id="reka-carousel-v-0-content" aria-live="polite" aria-atomic="false" style="display: flex; flex-direction: row;" data-slot="carousel-container" class="items-start -ms-4">
       <div data-index="0" data-orientation="horizontal" role="group" aria-roledescription="slide" aria-label="1 of 6" style="flex-shrink: 0; scroll-snap-align: center; scroll-snap-stop: always;" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
@@ -78,6 +82,7 @@ exports[`Carousel > renders with defaultValue correctly 1`] = `
 
 exports[`Carousel > renders with dots correctly 1`] = `
 "<div dir="ltr" role="region" aria-roledescription="carousel" data-orientation="horizontal" data-slot="carousel" class="relative">
+  <!---->
   <div data-slot="carousel-viewport" class="focus:outline-none" tabindex="0" style="overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;" data-orientation="horizontal">
     <div data-orientation="horizontal" id="reka-carousel-v-0-content" aria-live="polite" aria-atomic="false" style="display: flex; flex-direction: row;" data-slot="carousel-container" class="items-start -ms-4">
       <div data-index="0" data-active="" data-orientation="horizontal" role="group" aria-roledescription="slide" aria-label="1 of 6" style="flex-shrink: 0; scroll-snap-align: center; scroll-snap-stop: always;" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
@@ -97,6 +102,7 @@ exports[`Carousel > renders with dots correctly 1`] = `
 
 exports[`Carousel > renders with fade correctly 1`] = `
 "<div dir="ltr" role="region" aria-roledescription="carousel" data-orientation="horizontal" data-slot="carousel" class="relative">
+  <!---->
   <div data-slot="carousel-viewport" class="focus:outline-none" tabindex="0" style="overflow: hidden; touch-action: pan-y;" data-orientation="horizontal">
     <div data-orientation="horizontal" id="reka-carousel-v-0-content" aria-live="polite" aria-atomic="false" style="display: grid;" data-slot="carousel-container" class="items-start -ms-4">
       <div data-index="0" data-active="" data-in-view="" data-orientation="horizontal" role="group" aria-roledescription="slide" aria-label="1 of 6" style="grid-area: 1 / 1; opacity: 1;" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4 transition-opacity duration-300 ease-out"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
@@ -113,6 +119,7 @@ exports[`Carousel > renders with fade correctly 1`] = `
 
 exports[`Carousel > renders with items correctly 1`] = `
 "<div dir="ltr" role="region" aria-roledescription="carousel" data-orientation="horizontal" data-slot="carousel" class="relative">
+  <!---->
   <div data-slot="carousel-viewport" class="focus:outline-none" tabindex="0" style="overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;" data-orientation="horizontal">
     <div data-orientation="horizontal" id="reka-carousel-v-0-content" aria-live="polite" aria-atomic="false" style="display: flex; flex-direction: row;" data-slot="carousel-container" class="items-start -ms-4">
       <div data-index="0" data-active="" data-orientation="horizontal" role="group" aria-roledescription="slide" aria-label="1 of 6" style="flex-shrink: 0; scroll-snap-align: center; scroll-snap-stop: always;" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
@@ -129,6 +136,7 @@ exports[`Carousel > renders with items correctly 1`] = `
 
 exports[`Carousel > renders with next correctly 1`] = `
 "<div dir="ltr" role="region" aria-roledescription="carousel" data-orientation="horizontal" data-slot="carousel" class="relative">
+  <!---->
   <div data-slot="carousel-viewport" class="focus:outline-none" tabindex="0" style="overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;" data-orientation="horizontal">
     <div data-orientation="horizontal" id="reka-carousel-v-0-content" aria-live="polite" aria-atomic="false" style="display: flex; flex-direction: row;" data-slot="carousel-container" class="items-start -ms-4">
       <div data-index="0" data-active="" data-orientation="horizontal" role="group" aria-roledescription="slide" aria-label="1 of 6" style="flex-shrink: 0; scroll-snap-align: center; scroll-snap-stop: always;" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
@@ -154,6 +162,7 @@ exports[`Carousel > renders with next correctly 1`] = `
 
 exports[`Carousel > renders with nextIcon correctly 1`] = `
 "<div dir="ltr" role="region" aria-roledescription="carousel" data-orientation="horizontal" data-slot="carousel" class="relative">
+  <!---->
   <div data-slot="carousel-viewport" class="focus:outline-none" tabindex="0" style="overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;" data-orientation="horizontal">
     <div data-orientation="horizontal" id="reka-carousel-v-0-content" aria-live="polite" aria-atomic="false" style="display: flex; flex-direction: row;" data-slot="carousel-container" class="items-start -ms-4">
       <div data-index="0" data-active="" data-orientation="horizontal" role="group" aria-roledescription="slide" aria-label="1 of 6" style="flex-shrink: 0; scroll-snap-align: center; scroll-snap-stop: always;" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
@@ -179,6 +188,7 @@ exports[`Carousel > renders with nextIcon correctly 1`] = `
 
 exports[`Carousel > renders with orientation vertical correctly 1`] = `
 "<div dir="ltr" role="region" aria-roledescription="carousel" data-orientation="vertical" data-slot="carousel" class="relative">
+  <!---->
   <div data-slot="carousel-viewport" class="focus:outline-none" tabindex="0" style="overflow-x: hidden; overflow-y: auto; scroll-snap-type: y mandatory; overscroll-behavior-y: contain; scrollbar-width: none;" data-orientation="vertical">
     <div data-orientation="vertical" id="reka-carousel-v-0-content" aria-live="polite" aria-atomic="false" style="display: flex; flex-direction: column;" data-slot="carousel-container" class="items-start -mt-4">
       <div data-index="0" data-active="" data-orientation="vertical" role="group" aria-roledescription="slide" aria-label="1 of 6" style="flex-shrink: 0; scroll-snap-align: center; scroll-snap-stop: always;" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
@@ -195,6 +205,7 @@ exports[`Carousel > renders with orientation vertical correctly 1`] = `
 
 exports[`Carousel > renders with prev correctly 1`] = `
 "<div dir="ltr" role="region" aria-roledescription="carousel" data-orientation="horizontal" data-slot="carousel" class="relative">
+  <!---->
   <div data-slot="carousel-viewport" class="focus:outline-none" tabindex="0" style="overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;" data-orientation="horizontal">
     <div data-orientation="horizontal" id="reka-carousel-v-0-content" aria-live="polite" aria-atomic="false" style="display: flex; flex-direction: row;" data-slot="carousel-container" class="items-start -ms-4">
       <div data-index="0" data-active="" data-orientation="horizontal" role="group" aria-roledescription="slide" aria-label="1 of 6" style="flex-shrink: 0; scroll-snap-align: center; scroll-snap-stop: always;" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
@@ -220,6 +231,7 @@ exports[`Carousel > renders with prev correctly 1`] = `
 
 exports[`Carousel > renders with prevIcon correctly 1`] = `
 "<div dir="ltr" role="region" aria-roledescription="carousel" data-orientation="horizontal" data-slot="carousel" class="relative">
+  <!---->
   <div data-slot="carousel-viewport" class="focus:outline-none" tabindex="0" style="overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;" data-orientation="horizontal">
     <div data-orientation="horizontal" id="reka-carousel-v-0-content" aria-live="polite" aria-atomic="false" style="display: flex; flex-direction: row;" data-slot="carousel-container" class="items-start -ms-4">
       <div data-index="0" data-active="" data-orientation="horizontal" role="group" aria-roledescription="slide" aria-label="1 of 6" style="flex-shrink: 0; scroll-snap-align: center; scroll-snap-stop: always;" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
@@ -245,6 +257,7 @@ exports[`Carousel > renders with prevIcon correctly 1`] = `
 
 exports[`Carousel > renders with ui correctly 1`] = `
 "<div dir="ltr" role="region" aria-roledescription="carousel" data-orientation="horizontal" data-slot="carousel" class="relative">
+  <!---->
   <div data-slot="carousel-viewport" class="focus:outline-none h-[320px]" tabindex="0" style="overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;" data-orientation="horizontal">
     <div data-orientation="horizontal" id="reka-carousel-v-0-content" aria-live="polite" aria-atomic="false" style="display: flex; flex-direction: row;" data-slot="carousel-container" class="items-start -ms-4">
       <div data-index="0" data-active="" data-orientation="horizontal" role="group" aria-roledescription="slide" aria-label="1 of 6" style="flex-shrink: 0; scroll-snap-align: center; scroll-snap-stop: always;" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
