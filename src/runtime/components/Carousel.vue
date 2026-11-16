@@ -164,12 +164,14 @@ export type CarouselSlots<T extends CarouselItem = CarouselItem> = {
 export interface CarouselEmits {
   'update:modelValue': [value: number]
   'update:playing': [value: boolean]
+  /** Emitted once the slides rest on the current snap after a change. */
+  'settle': [value: number]
 }
 </script>
 
 <script setup lang="ts" generic="T extends CarouselItem">
 import { computed, defineComponent, shallowRef } from 'vue'
-import { CarouselRoot, CarouselViewport, CarouselContent, CarouselItem as RCarouselItem, CarouselPrevious, CarouselNext, CarouselIndicator, injectCarouselRootContext } from 'reka-ui'
+import { CarouselRoot, CarouselViewport, CarouselContent, CarouselItem as RCarouselItem, CarouselPrevious, CarouselNext, CarouselIndicator, CarouselIndicatorGroup, injectCarouselRootContext } from 'reka-ui'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
@@ -302,7 +304,7 @@ defineExpose({
         </CarouselNext>
       </div>
 
-      <div v-if="props.dots" role="group" :aria-label="t('carousel.dots')" data-slot="carousel-dots" :class="ui.dots({ class: props.ui?.dots })">
+      <CarouselIndicatorGroup v-if="props.dots" :aria-label="t('carousel.dots')" data-slot="carousel-dots" :class="ui.dots({ class: props.ui?.dots })">
         <CarouselIndicator
           v-for="index in snapCount"
           :key="index"
@@ -314,7 +316,7 @@ defineExpose({
         >
           <slot name="dot" :index="index - 1" :active="current === index - 1" />
         </CarouselIndicator>
-      </div>
+      </CarouselIndicatorGroup>
     </div>
   </CarouselRoot>
 </template>

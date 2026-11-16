@@ -68,6 +68,27 @@ describe('Carousel', () => {
     expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBe(1)
   })
 
+  it('renders the dots as tabs with one tab stop', async () => {
+    const wrapper = await mountSuspended(Carousel, {
+      props: { items, dots: true }
+    })
+
+    expect(wrapper.find('[data-slot="carousel-dots"]').attributes('role')).toBe('tablist')
+    const dots = wrapper.findAll('[data-slot="carousel-dot"]')
+    expect(dots.map(dot => dot.attributes('tabindex'))).toEqual(['0', '-1', '-1', '-1', '-1', '-1'])
+    expect(dots[0]!.attributes('aria-selected')).toBe('true')
+  })
+
+  it('emits settle once the slides rest', async () => {
+    const wrapper = await mountSuspended(Carousel, {
+      props: { items, arrows: true, fade: true }
+    })
+
+    await wrapper.find('[data-slot="carousel-next"]').trigger('click')
+    await flushPromises()
+    expect(wrapper.emitted('settle')?.at(-1)?.[0]).toBe(1)
+  })
+
   it('renders the dot slot in each dot', async () => {
     const wrapper = await mountSuspended(Carousel, {
       props: { items, dots: true },
