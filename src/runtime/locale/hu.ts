@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Válassza ki a megjelenítendő diát',
-      goto: '{slide}. dia megjelenítése',
       next: 'Következő',
       prev: 'Előző',
       roledescription: 'körhinta',

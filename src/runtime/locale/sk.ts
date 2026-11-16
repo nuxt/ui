@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Vyberte snímku na zobrazenie',
-      goto: 'Prejsť na snímku {slide}',
       next: 'Nasledujúci',
       prev: 'Predchádzajúci',
       roledescription: 'karusel',

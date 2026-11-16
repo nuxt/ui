@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Pilih slaid untuk dipaparkan',
-      goto: 'Pergi ke slaid {slide}',
       next: 'Seterusnya',
       prev: 'Sebelumnya',
       roledescription: 'karusel',

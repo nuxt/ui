@@ -31,7 +31,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'اسلاید مورد نظر برای نمایش را انتخاب کنید',
-      goto: 'رفتن به اسلاید {slide}',
       next: 'بعدی',
       prev: 'قبلی',
       roledescription: 'کاروسل',

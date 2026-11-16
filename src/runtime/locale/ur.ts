@@ -31,7 +31,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'دکھانے کے لیے سلائیڈ منتخب کریں',
-      goto: 'سلائیڈ {slide} پر جائیں',
       next: 'اگلا',
       prev: 'پچھلا',
       roledescription: 'کیروسل',

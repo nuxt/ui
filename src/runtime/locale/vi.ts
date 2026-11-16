@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Chọn slide để hiển thị',
-      goto: 'Đi tới slide {slide}',
       next: 'Sau',
       prev: 'Trước',
       roledescription: 'băng chuyền',

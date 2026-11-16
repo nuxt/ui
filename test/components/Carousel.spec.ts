@@ -77,6 +77,14 @@ describe('Carousel', () => {
     const dots = wrapper.findAll('[data-slot="carousel-dot"]')
     expect(dots.map(dot => dot.attributes('tabindex'))).toEqual(['0', '-1', '-1', '-1', '-1', '-1'])
     expect(dots[0]!.attributes('aria-selected')).toBe('true')
+    expect(dots[0]!.attributes('aria-label')).toBe('1 of 6')
+
+    const slides = wrapper.findAll('[data-slot="carousel-item"]')
+    slides.forEach((slide, index) => {
+      expect(slide.attributes('role')).toBe('tabpanel')
+      expect(dots[index]!.attributes('aria-controls')).toBe(slide.attributes('id'))
+      expect(slide.attributes('aria-labelledby')).toBe(dots[index]!.attributes('id'))
+    })
   })
 
   it('emits settle once the slides rest', async () => {

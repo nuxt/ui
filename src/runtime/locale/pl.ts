@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Wybierz slajd do wyświetlenia',
-      goto: 'Przejdź do slajdu {slide}',
       next: 'Następny',
       prev: 'Poprzedni',
       roledescription: 'karuzela',

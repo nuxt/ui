@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Izvēlies slaidu, ko rādīt',
-      goto: 'Pāriet uz slaidu {slide}',
       next: 'Nākamais',
       prev: 'Iepriekšējais',
       roledescription: 'karuselis',

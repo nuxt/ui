@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: '選擇要顯示的投影片',
-      goto: '跳到第 {slide} 張投影片',
       next: '下一張',
       prev: '上一張',
       roledescription: '輪播',

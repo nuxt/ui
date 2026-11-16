@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Göstərmək üçün slayd seçin',
-      goto: '{slide} nömrəli slayda keç',
       next: 'Növbəti',
       prev: 'Əvvəlki',
       roledescription: 'karusel',

@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'ជ្រើសរើស​ស្លាយ​ដើម្បី​បង្ហាញ',
-      goto: 'ទៅកាន់ស្លាយ {slide}',
       next: 'បន្ទាប់',
       prev: 'មុន',
       roledescription: 'ការ៉ូសែល',

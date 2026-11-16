@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Odaberite slajd za prikaz',
-      goto: 'Idi na slajd {slide}',
       next: 'Sljedeći',
       prev: 'Prethodni',
       roledescription: 'vrtuljak',

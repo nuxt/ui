@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: '표시할 슬라이드 선택',
-      goto: '{slide}번 슬라이드로 이동',
       next: '다음',
       prev: '이전',
       roledescription: '캐러셀',

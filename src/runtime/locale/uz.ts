@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Koʻrsatish uchun slaydni tanlang',
-      goto: '{slide}-slaydga oʻtish',
       next: 'Oldinga',
       prev: 'Ortga',
       roledescription: 'karusel',
