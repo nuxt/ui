@@ -8,6 +8,9 @@ export default defineTheme({
   },
   variants: {
     size: {
+      '4xs': {
+        base: 'ring -me-0.5'
+      },
       '3xs': {
         base: 'ring -me-0.5'
       },

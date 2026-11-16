@@ -1,7 +1,7 @@
 import type { AvatarProps, ChipProps, KbdProps } from '../types'
 
-const avatarSizes = { xs: '3xs', sm: '3xs', md: '3xs', lg: '3xs', xl: '2xs' } as const
-const itemSizes = { xs: 'sm', sm: 'sm', md: 'sm', lg: 'sm', xl: 'md' } as const
+const avatarSizes = { xs: '4xs', sm: '4xs', md: '3xs', lg: '3xs', xl: '2xs' } as const
+const itemSizes = { xs: 'xs', sm: 'xs', md: 'sm', lg: 'sm', xl: 'md' } as const
 
 /**
  * The size of the avatar a component renders next to its label, for the

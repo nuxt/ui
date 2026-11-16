@@ -42,17 +42,20 @@ export default defineTheme({
       }
     },
     // The label takes the text of the size below, so it fits in the `pill` indicator, and
-    // keeps the line height of its size so the height stays a Button's
+    // keeps the line height of its size so the height stays a Button's. At `xs` and `sm`
+    // the badge is 2px taller than the line, so it eats into the padding
     size: {
       xs: {
         list: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)]',
         trigger: 'px-(--ui-control-px) py-[calc(var(--ui-control-py)-var(--ui-tabs-track-padding,0px))] text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) gap-(--ui-control-gap)',
-        leadingIcon: 'size-(--ui-control-icon-size)'
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingBadge: '-my-px'
       },
       sm: {
         list: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)]',
         trigger: 'px-(--ui-control-px) py-[calc(var(--ui-control-py)-var(--ui-tabs-track-padding,0px))] text-(length:--ui-control-text-xs)/(--ui-control-text-sm--line-height) gap-(--ui-control-gap)',
-        leadingIcon: 'size-(--ui-control-icon-size)'
+        leadingIcon: 'size-(--ui-control-icon-size)',
+        trailingBadge: '-my-px'
       },
       md: {
         list: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)]',

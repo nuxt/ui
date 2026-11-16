@@ -9,6 +9,7 @@ export default defineTheme({
   variants: {
     color: colorVariant({ base: '' }),
     size: {
+      '4xs': { base: 'h-0.75 min-w-0.75 text-[0.1875rem]' },
       '3xs': { base: 'h-1 min-w-1 text-[0.25rem]' },
       '2xs': { base: 'h-1.25 min-w-1.25 text-[0.3125rem]' },
       'xs': { base: 'h-1.5 min-w-1.5 text-[0.375rem]' },
