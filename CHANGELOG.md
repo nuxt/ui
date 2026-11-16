@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.12.2](https://github.com/nuxt/ui/compare/v4.12.1...v4.12.2) (2026-11-16)
+
+### Bug Fixes
+
+* **components:** ignore malformed tag names and element-like templates ([bbd4e6e](https://github.com/nuxt/ui/commit/bbd4e6e98fbc40bb1942cc85674d09f02142c022))
+* **components:** keep attributes added after mount ([b93b4d2](https://github.com/nuxt/ui/commit/b93b4d2b643b65fedb2e2e38a96379d50ba70023))
+
 ## [4.12.1](https://github.com/nuxt/ui/compare/v4.12.0...v4.12.1) (2026-11-16)
 
 ### Bug Fixes
