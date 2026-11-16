@@ -10,7 +10,7 @@ export default defineLocale<Messages>({
     },
     authForm: {
       hidePassword: 'Parolni yashirish',
-      showPassword: 'Parolni ko\'rsatish',
+      showPassword: 'Parolni koʻrsatish',
       submit: 'Davom etish'
     },
     banner: {
@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Koʻrsatish uchun slaydni tanlang',
-      goto: '{slide}-slaydga o\'tish',
+      goto: '{slide}-slaydga oʻtish',
       next: 'Oldinga',
       prev: 'Ortga',
       roledescription: 'karusel',
@@ -41,7 +41,7 @@ export default defineLocale<Messages>({
       error: 'Yuklab boʻlmadi'
     },
     chatMessages: {
-      autoScroll: 'Pastga aylantirish'
+      autoScroll: 'Pastga oʻtish'
     },
     chatPrompt: {
       placeholder: 'Bu yerda savolingizni yozing…',
@@ -51,20 +51,20 @@ export default defineLocale<Messages>({
       remove: 'Oʻchirish'
     },
     chatPromptSubmit: {
-      label: 'Jo\'natish',
+      label: 'Joʻnatish',
       reload: 'Qayta urinish',
-      stop: 'Generatsiyani to\'xtatish'
+      stop: 'Generatsiyani toʻxtatish'
     },
     chatReasoning: {
-      thinking: 'O\'ylayapti…',
-      thought: 'O\'yladi',
-      thoughtFor: '{duration} o\'yladi'
+      thinking: 'Oʻylayapti…',
+      thought: 'Oʻyladi',
+      thoughtFor: '{duration} davomida oʻyladi'
     },
     colorMode: {
-      dark: 'Qorong\'i',
-      light: 'Yorug\'',
-      switchToDark: 'Qorong\'i rejimga o\'tish',
-      switchToLight: 'Yorug\' rejimga o\'tish',
+      dark: 'Qorongʻi',
+      light: 'Yorugʻ',
+      switchToDark: 'Qorongʻi rejimga oʻtish',
+      switchToLight: 'Yorugʻ rejimga oʻtish',
       system: 'Tizim'
     },
     commandPalette: {
@@ -97,7 +97,7 @@ export default defineLocale<Messages>({
       label: 'Qidirish…'
     },
     dashboardSidebarCollapse: {
-      collapse: 'Yon panelni yig\'ish',
+      collapse: 'Yon panelni yigʻish',
       expand: 'Yon panelni kengaytirish'
     },
     dashboardSidebarToggle: {
@@ -135,12 +135,12 @@ export default defineLocale<Messages>({
       trigger: 'Variantlarni koʻrsatish'
     },
     inputNumber: {
-      decrement: 'Ayirish',
-      increment: 'Qoʻshish',
+      decrement: 'Kamaytirish',
+      increment: 'Oshirish',
       roledescription: 'raqamli maydon'
     },
     inputRating: {
-      rate: '{length} dan {value} baho qoʻyish'
+      rate: '{length} balldan {value} baho qoʻyish'
     },
     inputTime: {
       dayPeriod: 'AM/PM',
@@ -168,24 +168,24 @@ export default defineLocale<Messages>({
       input: 'PIN-kod, {index}-belgi, jami {length}'
     },
     pricingTable: {
-      caption: 'Narx planlarini taqqoslash'
+      caption: 'Tarif rejalarini taqqoslash'
     },
     prose: {
       codeCollapse: {
-        closeText: 'Yig\'ish',
+        closeText: 'Yigʻish',
         name: 'kod',
         openText: 'Kengaytirish'
       },
       collapsible: {
         closeText: 'Yashirish',
         name: 'xususiyatlar',
-        openText: 'Ko\'rsatish'
+        openText: 'Koʻrsatish'
       },
       pre: {
-        copy: 'Koddan buferga nusxa olish'
+        copy: 'Kodni buferga nusxalash'
       },
       prompt: {
-        copy: 'So\'rovni nusxalash',
+        copy: 'Soʻrovni nusxalash',
         openIn: '{name}da ochish'
       }
     },
