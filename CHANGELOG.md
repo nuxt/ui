@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.12.1](https://github.com/nuxt/ui/compare/v4.12.0...v4.12.1) (2026-11-16)
+
+### Bug Fixes
+
+* **components:** ignore components compiled from a template string ([7e07a52](https://github.com/nuxt/ui/commit/7e07a529fe0d7e176ae0deab07835dd66afd39ab))
+* **ContentSearch:** stop escaping result text twice ([#7374](https://github.com/nuxt/ui/issues/7374)) ([21ee243](https://github.com/nuxt/ui/commit/21ee24361252a5e3100ca52cdcd2c3bebadc9cf4))
+
 ## [4.12.0](https://github.com/nuxt/ui/compare/v4.11.3...v4.12.0) (2026-10-15)
 
 ### Features
