@@ -1,0 +1,38 @@
+name: issue-opened
+
+on:
+  issues:
+    types: [opened]
+
+permissions: {}
+
+jobs:
+  triage:
+    runs-on: ubuntu-slim
+    if: ${{ !contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) }}
+
+    permissions:
+      issues: write
+
+    steps:
+      # Issues created through the API skip the issue forms, so they get no type and no `triage` label
+      - uses: actions/github-script@v9
+        with:
+          script: |
+            const issue = context.payload.issue
+            const body = issue.body || ''
+            const params = { ...context.repo, issue_number: issue.number }
+
+            if (!issue.type) {
+              const type = /^###\s+(Environment|Reproduction)\s*$/m.test(body)
+                ? 'Bug'
+                : /^###\s+Package\s*$/m.test(body) ? 'Enhancement' : null
+
+              if (type) {
+                await github.rest.issues.update({ ...params, type })
+              }
+            }
+
+            if (!issue.labels.some(label => label.name === 'triage')) {
+              await github.rest.issues.addLabels({ ...params, labels: ['triage'] })
+            }
