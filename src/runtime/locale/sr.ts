@@ -114,7 +114,7 @@ export default defineLocale<Messages>({
     },
     inputDate: {
       day: 'дан',
-      dayPeriod: 'AM/PM',
+      dayPeriod: 'пре подне/по подне',
       era: 'ера',
       hour: 'сат',
       minute: 'минут',
@@ -138,7 +138,7 @@ export default defineLocale<Messages>({
       rate: 'Оцени {value} од {length}'
     },
     inputTime: {
-      dayPeriod: 'AM/PM',
+      dayPeriod: 'пре подне/по подне',
       hour: 'сат',
       minute: 'минут',
       second: 'секунд',
