@@ -7,10 +7,12 @@ export default defineTheme({
     // is theirs less that 1px, so its icon and text line up with them
     // It holds the focus as long as the menu is open, so it shows no focus outline
     filter: 'mx-[calc(--spacing(1)+1px)] mt-[calc(--spacing(1)+1px)] has-[>:focus-visible]:outline-0',
-    // The buttons take back the inset of the field and lose the same 1px, so they keep
-    // its height and their icon sits where the search icon does
-    close: '-me-1 p-[calc(var(--ui-control-py)-1px)]',
+    // The back takes back the inset of the field and loses the same 1px, so it keeps its
+    // height and its icon sits where the search icon does
     back: '-ms-1 p-[calc(var(--ui-control-py)-1px)]',
+    // The close sits 2px inside the field, its icon mirrors the search icon, and its hover
+    // is a step above the fill of the focused field
+    close: '-me-0.5 p-[calc(var(--ui-control-py)-3px)] rounded-sm hover:bg-accent-strong active:bg-accent-strong',
     content: 'relative overflow-hidden flex flex-col',
     footer: 'p-1 border-t border-default',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
