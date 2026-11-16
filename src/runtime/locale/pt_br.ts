@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Escolher slide para exibir',
-      goto: 'Ir para a slide {slide}',
+      goto: 'Ir para o slide {slide}',
       next: 'Próximo',
       prev: 'Anterior',
       roledescription: 'carrossel',

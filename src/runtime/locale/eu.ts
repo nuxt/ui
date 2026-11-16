@@ -30,9 +30,9 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Erakutsi beharreko diapositiba aukeratu',
-      goto: 'Joan diapositibara {slide}',
+      goto: 'Joan {slide}. diapositibara',
       next: 'Hurrengoa',
-      prev: 'Aurretikoa',
+      prev: 'Aurrekoa',
       roledescription: 'karrusela',
       slide: 'diapositiba'
     },

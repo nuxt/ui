@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Valitse näytettävä dia',
-      goto: 'Siirry sivulle {slide}',
+      goto: 'Siirry diaan {slide}',
       next: 'Seuraava',
       prev: 'Edellinen',
       roledescription: 'karuselli',

@@ -31,7 +31,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'اختر الشريحة المراد عرضها',
-      goto: 'الذهاب إلى شريحة {slide}',
+      goto: 'الذهاب إلى الشريحة {slide}',
       next: 'التالي',
       prev: 'السابق',
       roledescription: 'عرض شرائح',

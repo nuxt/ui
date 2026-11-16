@@ -32,7 +32,7 @@ export default defineLocale<Messages>({
       dots: 'Zgjidh slajdin për të shfaqur',
       goto: 'Shko te slajdi {slide}',
       next: 'Tjetri',
-      prev: 'Para',
+      prev: 'I mëparshmi',
       roledescription: 'karusel',
       slide: 'slajd'
     },
