@@ -234,8 +234,15 @@ function setPlaceholder(date: DateValue) {
   emits('update:placeholder', date)
 }
 
+// The picker keeps an uncontrolled value internally and is replaced on each view change.
+const uncontrolledValue = shallowRef(props.modelValue ?? props.defaultValue)
+watch(() => props.modelValue, (value) => {
+  uncontrolledValue.value = value
+})
+
 function onSelect(value: DateValue | DateRange) {
   if (isMinView.value) {
+    uncontrolledValue.value = value as CalendarDefaultValue<R, M>
     emits('update:modelValue', value as CalendarModelValue<R, M>)
     return
   }
@@ -318,7 +325,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.calendar || {}) 
     v-bind="rootProps"
     :calendar-label="calendarLabel"
     :model-value="(isMinView ? (props.modelValue as DateValue | DateValue[] | DateRange) : undefined)"
-    :default-value="(isMinView ? (props.defaultValue as DateValue | DateValue[] | DateRange) : undefined)"
+    :default-value="(isMinView ? (uncontrolledValue as DateValue | DateValue[] | DateRange) : undefined)"
     :placeholder="placeholder"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
