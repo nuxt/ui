@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: '收起',
+        label: '{text}{name}',
         name: '程式碼',
         openText: '展開'
       },
       collapsible: {
         closeText: '隱藏',
+        label: '{text}{name}',
         name: '屬性',
         openText: '顯示'
       },

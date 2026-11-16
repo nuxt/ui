@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Reduzieren',
+        closeText: 'einklappen',
+        label: '{name} {text}',
         name: 'Code',
-        openText: 'Erweitern'
+        openText: 'ausklappen'
       },
       collapsible: {
-        closeText: 'Ausblenden',
+        closeText: 'ausblenden',
+        label: '{name} {text}',
         name: 'Eigenschaften',
-        openText: 'Anzeigen'
+        openText: 'anzeigen'
       },
       pre: {
         copy: 'Code in die Zwischenablage kopieren'

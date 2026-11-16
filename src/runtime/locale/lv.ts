@@ -168,11 +168,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Sakļaut',
-        name: 'kods',
+        label: '{text} {name}',
+        name: 'kodu',
         openText: 'Izvērst'
       },
       collapsible: {
         closeText: 'Paslēpt',
+        label: '{text} {name}',
         name: 'īpašības',
         openText: 'Rādīt'
       },

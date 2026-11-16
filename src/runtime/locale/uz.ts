@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Yigʻish',
-        name: 'kod',
-        openText: 'Kengaytirish'
+        closeText: 'yigʻish',
+        label: '{name} {text}',
+        name: 'Kodni',
+        openText: 'kengaytirish'
       },
       collapsible: {
-        closeText: 'Yashirish',
-        name: 'xususiyatlar',
-        openText: 'Koʻrsatish'
+        closeText: 'yashirish',
+        label: '{name} {text}',
+        name: 'Xususiyatlarni',
+        openText: 'koʻrsatish'
       },
       pre: {
         copy: 'Kodni buferga nusxalash'

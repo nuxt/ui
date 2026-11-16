@@ -173,14 +173,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'داخستن',
+        closeText: 'داخستنی',
+        label: '{text} {name}',
         name: 'کۆد',
-        openText: 'فراوانکردن'
+        openText: 'فراوانکردنی'
       },
       collapsible: {
-        closeText: 'شاردنەوە',
+        closeText: 'شاردنەوەی',
+        label: '{text} {name}',
         name: 'تایبەتمەندییەکان',
-        openText: 'پیشاندان'
+        openText: 'پیشاندانی'
       },
       pre: {
         copy: 'لەبەرگرتنەوەی کۆد'

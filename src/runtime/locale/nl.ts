@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Invouwen',
-        name: 'code',
-        openText: 'Uitvouwen'
+        closeText: 'invouwen',
+        label: '{name} {text}',
+        name: 'Code',
+        openText: 'uitvouwen'
       },
       collapsible: {
-        closeText: 'Verbergen',
-        name: 'eigenschappen',
-        openText: 'Tonen'
+        closeText: 'verbergen',
+        label: '{name} {text}',
+        name: 'Eigenschappen',
+        openText: 'tonen'
       },
       pre: {
         copy: 'Code naar klembord kopiëren'

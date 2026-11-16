@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Replega',
+        closeText: 'Replegar',
+        label: '{text} {name}',
         name: 'codi',
-        openText: 'Desplega'
+        openText: 'Desplegar'
       },
       collapsible: {
-        closeText: 'Amaga',
+        closeText: 'Amagar',
+        label: '{text} {name}',
         name: 'propietats',
-        openText: 'Mostra'
+        openText: 'Mostrar'
       },
       pre: {
         copy: 'Copiar codi al portapapers'

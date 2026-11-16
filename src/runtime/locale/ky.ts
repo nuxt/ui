@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Жыйноо',
-        name: 'код',
-        openText: 'Кеңейтүү'
+        closeText: 'жыйноо',
+        label: '{name} {text}',
+        name: 'Кодду',
+        openText: 'кеңейтүү'
       },
       collapsible: {
-        closeText: 'Жашыруу',
-        name: 'касиеттер',
-        openText: 'Көрсөтүү'
+        closeText: 'жашыруу',
+        label: '{name} {text}',
+        name: 'Касиеттерди',
+        openText: 'көрсөтүү'
       },
       pre: {
         copy: 'Кодду алмашуу буферине көчүрүү'

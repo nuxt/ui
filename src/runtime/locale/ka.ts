@@ -175,12 +175,14 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'ჩაკეცვა',
-        name: 'კოდი',
+        label: '{name} {text}',
+        name: 'კოდის',
         openText: 'გაშლა'
       },
       collapsible: {
-        closeText: 'დახურვა',
-        name: 'თვისებები',
+        closeText: 'დამალვა',
+        label: '{name} {text}',
+        name: 'თვისებების',
         openText: 'ჩვენება'
       },
       pre: {

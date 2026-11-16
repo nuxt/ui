@@ -174,11 +174,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'سکیڑیں',
+        label: '{name} {text}',
         name: 'کوڈ',
         openText: 'پھیلائیں'
       },
       collapsible: {
         closeText: 'چھپائیں',
+        label: '{name} {text}',
         name: 'خصوصیات',
         openText: 'دکھائیں'
       },

@@ -68,7 +68,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.collapsib
         <UIcon :name="props.icon || appConfig.ui.icons.chevronDown" :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" />
 
         <span :class="ui.triggerLabel({ class: props.ui?.triggerLabel })">
-          {{ open ? (props.closeText || t('prose.collapsible.closeText')) : (props.openText || t('prose.collapsible.openText')) }} {{ props.name || t('prose.collapsible.name') }}
+          {{ t('prose.collapsible.label', { text: open ? (props.closeText || t('prose.collapsible.closeText')) : (props.openText || t('prose.collapsible.openText')), name: props.name || t('prose.collapsible.name') }) }}
         </span>
       </button>
     </template>
