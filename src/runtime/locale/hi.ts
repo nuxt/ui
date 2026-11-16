@@ -175,7 +175,7 @@ export default defineLocale<Messages>({
         closeText: 'संकुचित करें',
         label: '{name} {text}',
         name: 'कोड',
-        openText: 'विस्तार करें'
+        openText: 'विस्तृत करें'
       },
       collapsible: {
         closeText: 'छिपाएँ',
