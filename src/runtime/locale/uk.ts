@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Виберіть слайд для відображення',
-      goto: 'Перейти до {slide}',
       next: 'Далі',
       prev: 'Назад',
       roledescription: 'карусель',

@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Valige kuvatav slaid',
-      goto: 'Mine slaidile {slide}',
       next: 'Järg',
       prev: 'Eel',
       roledescription: 'karussell',

@@ -309,7 +309,7 @@ defineExpose({
           v-for="index in snapCount"
           :key="index"
           :index="index - 1"
-          :aria-label="t('carousel.goto', { slide: index })"
+          :aria-label="t('carousel.slideLabel', { slide: index, total: snapCount })"
           :data-state="current === index - 1 ? 'active' : undefined"
           data-slot="carousel-dot"
           :class="ui.dot({ class: props.ui?.dot, active: current === index - 1 })"

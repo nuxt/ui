@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Pasirinkite skaidrę rodymui',
-      goto: 'Eiti į skaidrę {slide}',
       next: 'Pirmyn',
       prev: 'Atgal',
       roledescription: 'karuselė',

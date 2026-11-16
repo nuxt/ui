@@ -30,7 +30,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Görüntülenecek slaydı seçin',
-      goto: '{slide}. slayda git',
       next: 'Sonraki',
       prev: 'Önceki',
       roledescription: 'karusel',

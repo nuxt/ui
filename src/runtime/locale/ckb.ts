@@ -31,7 +31,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'سلایدێک هەڵبژێرە بۆ پیشاندان',
-      goto: 'بڕۆ بۆ سلایدی {slide}',
       next: 'دواتر',
       prev: 'پێشتر',
       roledescription: 'کارۆسێل',

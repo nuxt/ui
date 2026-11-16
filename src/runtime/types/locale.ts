@@ -24,7 +24,6 @@ export type Messages = {
   }
   carousel: {
     dots: string
-    goto: string
     next: string
     prev: string
     roledescription: string

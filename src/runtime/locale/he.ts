@@ -31,7 +31,6 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'בחר שקופית להצגה',
-      goto: 'מעבר ל {slide}',
       next: 'הבא',
       prev: 'הקודם',
       roledescription: 'קרוסלה',
