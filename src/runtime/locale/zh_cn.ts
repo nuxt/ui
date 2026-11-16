@@ -23,9 +23,9 @@ export default defineLocale<Messages>({
       label: '事件日期',
       monthPicker: '月份选择器',
       nextMonth: '下个月',
-      nextYear: '明年',
+      nextYear: '下一年',
       prevMonth: '上个月',
-      prevYear: '去年',
+      prevYear: '上一年',
       yearPicker: '年份选择器'
     },
     carousel: {
@@ -168,7 +168,7 @@ export default defineLocale<Messages>({
       input: 'PIN 码，第 {index} 位，共 {length} 位'
     },
     pricingTable: {
-      caption: '价格计划比较'
+      caption: '价格方案比较'
     },
     prose: {
       codeCollapse: {

@@ -163,7 +163,7 @@ export default defineLocale<Messages>({
       input: 'PIN kods, rakstzīme {index} no {length}'
     },
     pricingTable: {
-      caption: 'Cenu salīdzinājums'
+      caption: 'Cenu plānu salīdzinājums'
     },
     prose: {
       codeCollapse: {
@@ -181,7 +181,7 @@ export default defineLocale<Messages>({
       },
       prompt: {
         copy: 'Kopēt vaicājumu',
-        openIn: 'Atvērt iekš {name}'
+        openIn: 'Atvērt ar {name}'
       }
     },
     chatReasoning: {

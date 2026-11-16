@@ -44,14 +44,14 @@ export default defineLocale<Messages>({
       autoScroll: 'រំកិលចុះក្រោម'
     },
     chatPrompt: {
-      placeholder: 'សួរស្រឡាញ់មួយបីនេះមានប្រភេទបានទាមទារទេ…',
+      placeholder: 'វាយសាររបស់អ្នកនៅទីនេះ…',
       queue: 'សារក្នុងជួរ',
       sendNow: 'ផ្ញើឥឡូវនេះ',
       edit: 'កែសម្រួល',
       remove: 'ដកចេញ'
     },
     chatPromptSubmit: {
-      label: 'សាក់',
+      label: 'ផ្ញើ',
       reload: 'ព្យាយាមម្តងទៀត',
       stop: 'បញ្ឈប់ការបង្កើត'
     },
@@ -168,7 +168,7 @@ export default defineLocale<Messages>({
       input: 'លេខកូដ PIN តួអក្សរទី {index} នៃ {length}'
     },
     pricingTable: {
-      caption: 'បញ្ជីតម្លៃបន្ទប់បន្ទប់'
+      caption: 'ការប្រៀបធៀបគម្រោងតម្លៃ'
     },
     prose: {
       codeCollapse: {

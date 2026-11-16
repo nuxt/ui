@@ -168,7 +168,7 @@ export default defineLocale<Messages>({
       input: 'PIN-код, сімвал {index} з {length}'
     },
     pricingTable: {
-      caption: 'Параўнанне платных планаў'
+      caption: 'Параўнанне тарыфных планаў'
     },
     prose: {
       codeCollapse: {

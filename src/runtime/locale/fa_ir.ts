@@ -47,7 +47,7 @@ export default defineLocale<Messages>({
     chatPrompt: {
       placeholder: 'اینجا پیام خود را بنویسید…',
       queue: 'پیام‌های در صف',
-      sendNow: 'اکنون ارسال شود',
+      sendNow: 'ارسال فوری',
       edit: 'ویرایش',
       remove: 'حذف'
     },

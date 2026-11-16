@@ -168,7 +168,7 @@ export default defineLocale<Messages>({
       input: 'mã PIN, ký tự {index} trên {length}'
     },
     pricingTable: {
-      caption: 'So sánh các kế hoạch giá'
+      caption: 'So sánh các gói giá'
     },
     prose: {
       codeCollapse: {
@@ -191,7 +191,7 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'Đóng',
-      toggle: 'Chuyển đổi'
+      toggle: 'Bật/tắt'
     },
     selectMenu: {
       create: 'Tạo "{label}"',

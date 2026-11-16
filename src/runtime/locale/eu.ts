@@ -24,8 +24,8 @@ export default defineLocale<Messages>({
       monthPicker: 'Hilabete-hautatzailea',
       nextMonth: 'Hurrengo hilabetea',
       nextYear: 'Hurrengo urtea',
-      prevMonth: 'Aurretiko hilabetea',
-      prevYear: 'Aurretiko urtea',
+      prevMonth: 'Aurreko hilabetea',
+      prevYear: 'Aurreko urtea',
       yearPicker: 'Urte-hautatzailea'
     },
     carousel: {
@@ -58,7 +58,7 @@ export default defineLocale<Messages>({
     chatReasoning: {
       thinking: 'Pentsatzen…',
       thought: 'Pentsatu du',
-      thoughtFor: '{duration} pentsatzen'
+      thoughtFor: '{duration} pentsatu du'
     },
     colorMode: {
       dark: 'Iluna',
@@ -97,7 +97,7 @@ export default defineLocale<Messages>({
       label: 'Bilatu…'
     },
     dashboardSidebarCollapse: {
-      collapse: 'Alboko barra itxi',
+      collapse: 'Alboko barra tolestu',
       expand: 'Alboko barra zabaldu'
     },
     dashboardSidebarToggle: {
@@ -168,7 +168,7 @@ export default defineLocale<Messages>({
       input: 'PIN kodea, {length}(e)tik {index}. karakterea'
     },
     pricingTable: {
-      caption: 'Prezio-plana alderatzea'
+      caption: 'Prezio-planen alderaketa'
     },
     prose: {
       codeCollapse: {
@@ -182,10 +182,10 @@ export default defineLocale<Messages>({
         openText: 'Erakutsi'
       },
       pre: {
-        copy: 'Kopiatu kodea clipboard-era'
+        copy: 'Kopiatu kodea arbelera'
       },
       prompt: {
-        copy: 'Kopiatu prompt',
+        copy: 'Kopiatu prompta',
         openIn: '{name}(e)n ireki'
       }
     },

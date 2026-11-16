@@ -24,8 +24,8 @@ export default defineLocale<Messages>({
       monthPicker: 'Zgjedhësi i muajit',
       nextMonth: 'Muaji tjetër',
       nextYear: 'Viti tjetër',
-      prevMonth: 'Muaji i kaluar',
-      prevYear: 'Viti i kaluar',
+      prevMonth: 'Muaji i mëparshëm',
+      prevYear: 'Viti i mëparshëm',
       yearPicker: 'Zgjedhësi i vitit'
     },
     carousel: {
@@ -61,14 +61,14 @@ export default defineLocale<Messages>({
       thoughtFor: 'Mendoi për {duration}'
     },
     colorMode: {
-      dark: 'Errët',
-      light: 'Ndritshëm',
+      dark: 'I errët',
+      light: 'I ndritshëm',
       switchToDark: 'Kalo në modalitetin e errët',
       switchToLight: 'Kalo në modalitetin e ndritshëm',
       system: 'Sistem'
     },
     commandPalette: {
-      back: 'Pas',
+      back: 'Prapa',
       close: 'Mbyll',
       noData: 'Nuk ka të dhëna',
       noMatch: 'Nuk ka të dhëna që përputhen',

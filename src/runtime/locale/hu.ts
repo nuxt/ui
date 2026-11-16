@@ -44,7 +44,7 @@ export default defineLocale<Messages>({
       autoScroll: 'Görgetés az aljára'
     },
     chatPrompt: {
-      placeholder: 'Írd be a kérdésedet itt…',
+      placeholder: 'Írja be ide az üzenetét…',
       queue: 'Várakozó üzenetek',
       sendNow: 'Küldés most',
       edit: 'Szerkesztés',
@@ -135,8 +135,8 @@ export default defineLocale<Messages>({
       trigger: 'Lehetőségek megjelenítése'
     },
     inputNumber: {
-      decrement: 'Csökkent',
-      increment: 'Növel',
+      decrement: 'Csökkentés',
+      increment: 'Növelés',
       roledescription: 'számmező'
     },
     inputRating: {

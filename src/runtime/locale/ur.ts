@@ -45,7 +45,7 @@ export default defineLocale<Messages>({
       autoScroll: 'نیچے سکرول کریں'
     },
     chatPrompt: {
-      placeholder: 'یہاں اپنا پیغام لکھیں',
+      placeholder: 'یہاں اپنا پیغام لکھیں…',
       queue: 'قطار میں پیغامات',
       sendNow: 'ابھی بھیجیں',
       edit: 'ترمیم کریں',
@@ -169,7 +169,7 @@ export default defineLocale<Messages>({
       input: 'PIN کوڈ، {length} میں سے حرف {index}'
     },
     pricingTable: {
-      caption: 'قیمت پلنز کی مقایسہ'
+      caption: 'قیمت کے پلانز کا موازنہ'
     },
     prose: {
       codeCollapse: {

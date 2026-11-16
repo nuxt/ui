@@ -9,8 +9,8 @@ export default defineLocale<Messages>({
       close: 'Fechar'
     },
     authForm: {
-      hidePassword: 'Ocultar senha',
-      showPassword: 'Mostrar senha',
+      hidePassword: 'Ocultar palavra-passe',
+      showPassword: 'Mostrar palavra-passe',
       submit: 'Continuar'
     },
     banner: {
@@ -72,7 +72,7 @@ export default defineLocale<Messages>({
       close: 'Fechar',
       noData: 'Sem dados',
       noMatch: 'Nenhum dado correspondente',
-      placeholder: 'Digite um comando ou pesquise…',
+      placeholder: 'Escreva um comando ou pesquise…',
       results: 'Resultados'
     },
     contentSearch: {

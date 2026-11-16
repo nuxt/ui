@@ -47,7 +47,7 @@ export default defineLocale<Messages>({
     chatPrompt: {
       placeholder: 'خەت كىرگۈزۈڭ…',
       queue: 'ئۆچىرەتتىكى ئۇچۇرلار',
-      sendNow: 'ھازىرلا يوللا',
+      sendNow: 'ھازىرلا يوللاش',
       edit: 'تەھرىرلەش',
       remove: 'چىقىرىۋېتىش'
     },
@@ -82,7 +82,7 @@ export default defineLocale<Messages>({
       theme: 'تېما'
     },
     contentSearchButton: {
-      label: 'ئىزدەش'
+      label: 'ئىزدەش…'
     },
     contentToc: {
       title: 'مەزمۇن'
@@ -95,7 +95,7 @@ export default defineLocale<Messages>({
       theme: 'تېما'
     },
     dashboardSearchButton: {
-      label: 'ئىزدەش'
+      label: 'ئىزدەش…'
     },
     dashboardSidebarCollapse: {
       collapse: 'تارايتىش',
@@ -109,10 +109,10 @@ export default defineLocale<Messages>({
       close: 'تاقاش'
     },
     error: {
-      clear: 'تازىلاش'
+      clear: 'باش بەتكە قايتىش'
     },
     fileUpload: {
-      removeFile: '{filename} ئۆچۈرۈش'
+      removeFile: '{filename} نى ئۆچۈرۈش'
     },
     header: {
       close: 'تاقاش',

@@ -23,9 +23,9 @@ export default defineLocale<Messages>({
       label: '事件日期',
       monthPicker: '月份選擇器',
       nextMonth: '下個月',
-      nextYear: '明年',
+      nextYear: '下一年',
       prevMonth: '上個月',
-      prevYear: '去年',
+      prevYear: '上一年',
       yearPicker: '年份選擇器'
     },
     carousel: {
@@ -44,14 +44,14 @@ export default defineLocale<Messages>({
       autoScroll: '捲動到底部'
     },
     chatPrompt: {
-      placeholder: '在這裡輸入你的消息…',
+      placeholder: '在這裡輸入你的訊息…',
       queue: '排隊中的訊息',
       sendNow: '立即傳送',
       edit: '編輯',
       remove: '移除'
     },
     chatPromptSubmit: {
-      label: '發送',
+      label: '傳送',
       reload: '重試',
       stop: '停止生成'
     },
@@ -168,7 +168,7 @@ export default defineLocale<Messages>({
       input: 'PIN 碼，第 {index} 位，共 {length} 位'
     },
     pricingTable: {
-      caption: '價格計畫比較'
+      caption: '價格方案比較'
     },
     prose: {
       codeCollapse: {

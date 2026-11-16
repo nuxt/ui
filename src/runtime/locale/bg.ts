@@ -6,7 +6,7 @@ export default defineLocale<Messages>({
   code: 'bg',
   messages: {
     alert: {
-      close: 'Затворете'
+      close: 'Затвори'
     },
     authForm: {
       hidePassword: 'Скрий паролата',
@@ -69,9 +69,9 @@ export default defineLocale<Messages>({
     },
     commandPalette: {
       back: 'Назад',
-      close: 'Затворете',
+      close: 'Затвори',
       noData: 'Няма данни',
-      noMatch: 'Няма съвпадение на данни',
+      noMatch: 'Няма съвпадения',
       placeholder: 'Въведете команда или потърсете…',
       results: 'Резултати'
     },
@@ -81,41 +81,41 @@ export default defineLocale<Messages>({
       theme: 'Тема'
     },
     contentSearchButton: {
-      label: 'Търсене'
+      label: 'Търсене…'
     },
     contentToc: {
       title: 'Съдържание'
     },
     dropdownMenu: {
-      noMatch: 'Няма съвпадение на данни',
+      noMatch: 'Няма съвпадения',
       search: 'Потърсете…'
     },
     dashboardSearch: {
       theme: 'Тема'
     },
     dashboardSearchButton: {
-      label: 'Търсене'
+      label: 'Търсене…'
     },
     dashboardSidebarCollapse: {
-      collapse: 'Свий',
-      expand: 'Разшири'
+      collapse: 'Свий страничната лента',
+      expand: 'Разгъни страничната лента'
     },
     dashboardSidebarToggle: {
-      close: 'Затвори',
-      open: 'Отвори'
+      close: 'Затвори страничната лента',
+      open: 'Отвори страничната лента'
     },
     drawer: {
-      close: 'Затворете'
+      close: 'Затвори'
     },
     error: {
-      clear: 'Изчисти'
+      clear: 'Към началната страница'
     },
     fileUpload: {
       removeFile: 'Премахни {filename}'
     },
     header: {
-      close: 'Затвори',
-      open: 'Отвори'
+      close: 'Затвори менюто',
+      open: 'Отвори менюто'
     },
     inputDate: {
       day: 'ден',
@@ -131,7 +131,7 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'Създайте "{label}"',
       noData: 'Няма данни',
-      noMatch: 'Няма съвпадение на данни',
+      noMatch: 'Няма съвпадения',
       trigger: 'Показване на опциите'
     },
     inputNumber: {
@@ -151,11 +151,11 @@ export default defineLocale<Messages>({
     },
     listbox: {
       noData: 'Няма данни',
-      noMatch: 'Няма съвпадение на данни',
+      noMatch: 'Няма съвпадения',
       search: 'Потърсете…'
     },
     modal: {
-      close: 'Затворете'
+      close: 'Затвори'
     },
     pagination: {
       first: 'Първа страница',
@@ -185,25 +185,25 @@ export default defineLocale<Messages>({
         copy: 'Копирай кода в клипборда'
       },
       prompt: {
-        copy: 'Копирай подсказката',
+        copy: 'Копирай промпта',
         openIn: 'Отвори в {name}'
       }
     },
     sidebar: {
-      close: 'Затворете',
+      close: 'Затвори',
       toggle: 'Превключване'
     },
     selectMenu: {
       create: 'Създайте "{label}"',
       noData: 'Няма данни',
-      noMatch: 'Няма съвпадение на данни',
+      noMatch: 'Няма съвпадения',
       search: 'Потърсете…'
     },
     skeleton: {
       label: 'зареждане'
     },
     slideover: {
-      close: 'Затворете'
+      close: 'Затвори'
     },
     slider: {
       max: 'Максимум',
@@ -218,7 +218,7 @@ export default defineLocale<Messages>({
       noData: 'Няма данни'
     },
     toast: {
-      close: 'Затворете'
+      close: 'Затвори'
     },
     toaster: {
       label: 'Известие',

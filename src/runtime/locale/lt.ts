@@ -45,7 +45,7 @@ export default defineLocale<Messages>({
     },
     chatPrompt: {
       placeholder: 'Įveskite savo žinutę čia…',
-      queue: 'Eilėje esantys pranešimai',
+      queue: 'Eilėje esančios žinutės',
       sendNow: 'Siųsti dabar',
       edit: 'Redaguoti',
       remove: 'Pašalinti'
@@ -129,7 +129,7 @@ export default defineLocale<Messages>({
       year: 'metai'
     },
     inputMenu: {
-      create: 'Sukurti „{label}"',
+      create: 'Sukurti „{label}“',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
       trigger: 'Rodyti parinktis'
@@ -194,7 +194,7 @@ export default defineLocale<Messages>({
       toggle: 'Perjungti'
     },
     selectMenu: {
-      create: 'Sukurti „{label}"',
+      create: 'Sukurti „{label}“',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
       search: 'Ieškoti…'

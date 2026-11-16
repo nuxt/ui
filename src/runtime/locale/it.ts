@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       stop: 'Interrompi generazione'
     },
     chatReasoning: {
-      thinking: 'Pensando…',
+      thinking: 'Sto pensando…',
       thought: 'Ha pensato',
       thoughtFor: 'Ha pensato per {duration}'
     },
