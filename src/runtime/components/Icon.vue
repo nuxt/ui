@@ -13,6 +13,7 @@ export interface IconProps {
 import { computed } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import NuxtIcon from '@nuxt/icon/runtime/components/index.js'
+import { isUnsafeComponent } from '../utils'
 
 const props = defineProps<IconProps>()
 
@@ -21,5 +22,5 @@ const iconProps = useForwardProps(computed(() => ({ mode: props.mode, size: prop
 
 <template>
   <NuxtIcon v-if="typeof name === 'string'" :name="name" v-bind="iconProps" />
-  <component :is="name" v-else />
+  <component :is="name" v-else-if="!isUnsafeComponent(name)" />
 </template>

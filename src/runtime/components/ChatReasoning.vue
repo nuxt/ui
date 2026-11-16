@@ -73,11 +73,14 @@ import { ref, computed, watch, onUnmounted, nextTick, useTemplateRef } from 'vue
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { omitUnsafeAttrs } from '../utils'
 import { useLocale } from '../composables/useLocale'
 import { useScrollShadow } from '../composables/useScrollShadow'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UChatShimmer from './ChatShimmer.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<ChatReasoningProps>(), {
   open: undefined,
@@ -207,6 +210,7 @@ watch(() => props.text, () => {
     :unmount-on-hide="props.unmountOnHide"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
+    v-bind="omitUnsafeAttrs($attrs)"
     @update:open="onUpdateOpen"
   >
     <CollapsibleTrigger as-child :disabled="!hasContent">

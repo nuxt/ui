@@ -246,7 +246,7 @@ import { useFormField } from '../composables/useFormField'
 import { useFilter } from '../composables/useFilter'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
-import { compare, get, getDisplayValue, isArrayOfArray, looseToNumber } from '../utils'
+import { compare, get, getDisplayValue, isArrayOfArray, looseToNumber, omitUnsafeAttrs } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -715,7 +715,7 @@ defineExpose({
         data-slot="base"
         :class="ui.base({ class: [props.ui?.base, props.class] })"
         tabindex="0"
-        v-bind="{ 'aria-label': undefined, ...$attrs, ...ariaAttrs }"
+        v-bind="{ 'aria-label': undefined, ...omitUnsafeAttrs($attrs), ...ariaAttrs }"
         :aria-controls="listboxId"
         @keydown.down="onTriggerKeydown"
         @keydown.up="onTriggerKeydown"

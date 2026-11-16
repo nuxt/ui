@@ -95,10 +95,13 @@ import { ref, computed, watch } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { omitUnsafeAttrs } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 import UIcon from './Icon.vue'
 import UChatShimmer from './ChatShimmer.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<ChatToolProps>(), {
   open: undefined,
@@ -163,6 +166,7 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
     :unmount-on-hide="props.unmountOnHide"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
+    v-bind="omitUnsafeAttrs($attrs)"
     @update:open="setOpen"
   >
     <CollapsibleTrigger as-child :disabled="!hasContent()">

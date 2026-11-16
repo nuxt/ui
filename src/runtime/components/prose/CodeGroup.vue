@@ -30,8 +30,11 @@ import { computed, watch, onMounted, ref, onBeforeUpdate } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent } from 'reka-ui'
 import { useState, useAppConfig } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
+import { omitUnsafeAttrs } from '../../utils'
 import { tv } from '../../utils/tv'
 import UCodeIcon from './CodeIcon.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<ProseCodeGroupProps>(), {
   defaultValue: '0'
@@ -96,7 +99,7 @@ onBeforeUpdate(() => rerenderCount.value++)
 </script>
 
 <template>
-  <TabsRoot v-model="model" :default-value="props.defaultValue" :unmount-on-hide="false" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <TabsRoot v-model="model" :default-value="props.defaultValue" :unmount-on-hide="false" :class="ui.root({ class: [props.ui?.root, props.class] })" v-bind="omitUnsafeAttrs($attrs)">
     <TabsList :class="ui.list({ class: props.ui?.list })">
       <TabsIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
 

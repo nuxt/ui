@@ -9,6 +9,7 @@ type CustomizeFn = Exclude<IconProps['customize'], boolean | null | undefined>
 import { computed } from 'vue'
 import { Icon as IconifyIcon, iconLoaded } from '@iconify/vue'
 import { useAppConfig } from '#imports'
+import { isUnsafeComponent } from '../../utils'
 
 const props = defineProps<IconProps>()
 
@@ -50,5 +51,5 @@ const ssr = computed(() => iconLoaded(icon.value))
     :customise="customize"
     :ssr="ssr"
   />
-  <component :is="name" v-else />
+  <component :is="name" v-else-if="!isUnsafeComponent(name)" />
 </template>
