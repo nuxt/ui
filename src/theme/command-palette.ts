@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     input: '',
     close: '',
     back: 'p-0',
-    content: 'relative overflow-hidden flex flex-col',
+    content: 'relative overflow-hidden flex flex-col focus:outline-none',
     footer: 'p-1',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
     group: 'p-1 isolate',
