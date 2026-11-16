@@ -158,6 +158,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> {
 
 export type CarouselSlots<T extends CarouselItem = CarouselItem> = {
   default?(props: { item: T, index: number, active: boolean, inView: boolean }): VNode[]
+  dot?(props: { index: number, active: boolean }): VNode[]
 }
 
 export interface CarouselEmits {
@@ -167,8 +168,8 @@ export interface CarouselEmits {
 </script>
 
 <script setup lang="ts" generic="T extends CarouselItem">
-import { computed } from 'vue'
-import { CarouselRoot, CarouselViewport, CarouselContent, CarouselItem as RCarouselItem, CarouselPrevious, CarouselNext, CarouselIndicator } from 'reka-ui'
+import { computed, defineComponent, shallowRef } from 'vue'
+import { CarouselRoot, CarouselViewport, CarouselContent, CarouselItem as RCarouselItem, CarouselPrevious, CarouselNext, CarouselIndicator, injectCarouselRootContext } from 'reka-ui'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
@@ -216,11 +217,39 @@ const ui = computed(() => tv(theme, overrides.value)({
 function isCarouselItem(item: CarouselItem): item is Exclude<CarouselItem, CarouselValue> {
   return typeof item === 'object' && item !== null
 }
+
+// The root context only exists below `CarouselRoot`, so a child hands it up for the exposed API.
+const rootContext = shallowRef<ReturnType<typeof injectCarouselRootContext>>()
+const RootContext = defineComponent({
+  setup() {
+    rootContext.value = injectCarouselRootContext()
+    return () => null
+  }
+})
+
+defineExpose({
+  /** The number of snaps, which is the number of dots. */
+  snapCount: computed(() => rootContext.value?.snapCount.value ?? 0),
+  /** Whether there is a snap before the current one. */
+  canScrollPrev: computed(() => rootContext.value?.canScrollPrev.value ?? false),
+  /** Whether there is a snap after the current one. */
+  canScrollNext: computed(() => rootContext.value?.canScrollNext.value ?? false),
+  /** Go to the previous snap. */
+  scrollPrev: () => rootContext.value?.scrollPrev() ?? false,
+  /** Go to the next snap. */
+  scrollNext: () => rootContext.value?.scrollNext() ?? false,
+  /** Go to the snap at `index`. */
+  scrollTo: (index: number) => rootContext.value?.changeModelValue(index) ?? false,
+  /** Start `autoplay` or `autoScroll`. */
+  play: () => rootContext.value?.setPlaying(true) ?? false,
+  /** Stop `autoplay` or `autoScroll`. */
+  stop: () => rootContext.value?.setPlaying(false) ?? false
+})
 </script>
 
 <template>
   <CarouselRoot
-    v-slot="{ modelValue, snapCount }"
+    v-slot="{ modelValue: current, snapCount }"
     v-bind="rootProps"
     :dir="dir"
     :wheel="props.wheelGestures"
@@ -229,6 +258,8 @@ function isCarouselItem(item: CarouselItem): item is Exclude<CarouselItem, Carou
     data-slot="carousel"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
+    <RootContext />
+
     <CarouselViewport data-slot="carousel-viewport" :class="ui.viewport({ class: props.ui?.viewport })">
       <CarouselContent data-slot="carousel-container" :class="ui.container({ class: props.ui?.container })">
         <RCarouselItem
@@ -277,10 +308,12 @@ function isCarouselItem(item: CarouselItem): item is Exclude<CarouselItem, Carou
           :key="index"
           :index="index - 1"
           :aria-label="t('carousel.goto', { slide: index })"
-          :data-state="modelValue === index - 1 ? 'active' : undefined"
+          :data-state="current === index - 1 ? 'active' : undefined"
           data-slot="carousel-dot"
-          :class="ui.dot({ class: props.ui?.dot, active: modelValue === index - 1 })"
-        />
+          :class="ui.dot({ class: props.ui?.dot, active: current === index - 1 })"
+        >
+          <slot name="dot" :index="index - 1" :active="current === index - 1" />
+        </CarouselIndicator>
       </div>
     </div>
   </CarouselRoot>
