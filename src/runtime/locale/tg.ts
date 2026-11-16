@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Слайдро барои намоиш интихоб кунед',
-      goto: 'Ба слайди {slide} гузаред',
+      goto: 'Гузаштан ба слайди {slide}',
       next: 'Баъдӣ',
       prev: 'Қаблӣ',
       roledescription: 'карусел',

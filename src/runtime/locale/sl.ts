@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Izberite diapozitiv za prikaz',
-      goto: 'Pojdi na {slide}',
+      goto: 'Pojdi na diapozitiv {slide}',
       next: 'Naprej',
       prev: 'Nazaj',
       roledescription: 'vrtiljak',

@@ -29,10 +29,10 @@ export default defineLocale<Messages>({
       yearPicker: 'Aasta valik'
     },
     carousel: {
-      dots: 'Valige kuvatav slaid',
+      dots: 'Vali kuvatav slaid',
       goto: 'Mine slaidile {slide}',
-      next: 'Järg',
-      prev: 'Eel',
+      next: 'Järgmine',
+      prev: 'Eelmine',
       roledescription: 'karussell',
       slide: 'slaid'
     },

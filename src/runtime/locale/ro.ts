@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       yearPicker: 'Selector de an'
     },
     carousel: {
-      dots: 'Alegeți diapozitivul de afișat',
+      dots: 'Alege diapozitivul de afișat',
       goto: 'Mergi la diapozitivul {slide}',
       next: 'Următor',
       prev: 'Anterior',

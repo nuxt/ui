@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       yearPicker: 'Selector d\'any'
     },
     carousel: {
-      dots: 'Tria la diapositiva a mostrar',
+      dots: 'Triar la diapositiva a mostrar',
       goto: 'Anar a la diapositiva {slide}',
       next: 'Següent',
       prev: 'Anterior',

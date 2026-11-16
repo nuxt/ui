@@ -31,9 +31,9 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'كۆرسىتىدىغان سلايدنى تاللاڭ',
-      goto: '{slide}-بەتكە ئاتلاش',
-      next: 'كېيىنكى بەت',
-      prev: 'ئالدىنقى بەت',
+      goto: '{slide}-سلايدقا ئاتلاش',
+      next: 'كېيىنكى',
+      prev: 'ئالدىنقى',
       roledescription: 'ئايلانما كۆرسەتكۈچ',
       slide: 'سلايد'
     },
