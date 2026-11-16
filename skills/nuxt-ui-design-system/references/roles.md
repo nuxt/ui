@@ -92,8 +92,8 @@ Shadows: menus, popovers, modals and toasts use `shadow-lg`, tooltips `shadow-sm
 
 | Size | Height | `py` | `px` | `gap` | Icon | Text / line height |
 | --- | --- | --- | --- | --- | --- | --- |
-| `xs` | 24px | `--spacing(1)` | `--spacing(2)` | `--spacing(1)` | `--spacing(4)` | `--text-xs` / `--spacing(4)` |
-| `sm` | 28px | `--spacing(1.5)` | `--spacing(2.5)` | `--spacing(1.5)` | `--spacing(4)` | `--text-xs` / `--spacing(4)` |
+| `xs` | 24px | `--spacing(1.25)` | `--spacing(2)` | `--spacing(1)` | `--spacing(3.5)` | `--text-xs` / `--spacing(3.5)` |
+| `sm` | 28px | `--spacing(1.75)` | `--spacing(2.5)` | `--spacing(1.5)` | `--spacing(3.5)` | `--text-xs` / `--spacing(3.5)` |
 | `md` | 32px | `--spacing(2)` | `--spacing(2.5)` | `--spacing(1.5)` | `--spacing(4)` | `--text-sm` / `--spacing(4)` |
 | `lg` | 36px | `--spacing(2.5)` | `--spacing(3)` | `--spacing(2)` | `--spacing(4)` | `--text-sm` / `--spacing(4)` |
 | `xl` | 40px | `--spacing(2.5)` | `--spacing(3)` | `--spacing(2)` | `--spacing(5)` | `--text-base` / `--spacing(5)` |
