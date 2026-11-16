@@ -26,12 +26,16 @@ export default defineTheme({
         root: '[--ui-control-px:--spacing(2)] [--ui-control-py:calc(--spacing(1.25)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:--spacing(0.25)] [--ui-control-icon-size:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-xs--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
+        // The separator of a range follows the 14px line, so it doesn't grow the box
+        separatorIcon: 'size-(--ui-control-icon-size)',
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       sm: {
         root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:calc(--spacing(1.75)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon-size:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-sm--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
+        // The separator of a range follows the 14px line, so it doesn't grow the box
+        separatorIcon: 'size-(--ui-control-icon-size)',
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       md: {
