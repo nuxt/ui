@@ -24,7 +24,7 @@ class MockIntersectionObserver {
 }
 
 describe('useSpotlight', () => {
-  const events = ['pointermove', 'scroll', 'resize']
+  const events = ['pointerdown', 'pointermove', 'scroll', 'resize']
 
   let frames: FrameRequestCallback[]
   let scopes: EffectScope[]
@@ -79,6 +79,18 @@ describe('useSpotlight', () => {
     movePointer(130, 90, 'pen')
     nextFrame()
     expect(position()).toEqual([30, 40])
+  })
+
+  it('stops following the mouse once a touch starts', () => {
+    const { getBoundingClientRect } = track()
+
+    movePointer(10, 20)
+    window.dispatchEvent(new PointerEvent('pointerdown', { pointerType: 'touch' }))
+    nextFrame()
+    expect(getBoundingClientRect).not.toHaveBeenCalled()
+
+    window.dispatchEvent(new Event('scroll'))
+    expect(frames).toHaveLength(0)
   })
 
   it('only measures elements on or near the screen, once per frame', () => {

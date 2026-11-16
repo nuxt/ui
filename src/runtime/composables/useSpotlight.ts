@@ -12,11 +12,12 @@ const _useSpotlightTracker = () => {
 
   function measure() {
     frame = 0
+    if (!pointer) return
 
     // Read every box before any update writes, so one element never forces a layout for the next.
     const rects = Array.from(near, element => [element, element.getBoundingClientRect()] as const)
     for (const [element, rect] of rects) {
-      updates.get(element)?.(pointer!.x - rect.left, pointer!.y - rect.top)
+      updates.get(element)?.(pointer.x - rect.left, pointer.y - rect.top)
     }
   }
 
@@ -39,12 +40,10 @@ const _useSpotlightTracker = () => {
     schedule()
   }, { rootMargin: '300px', scrollMargin: '300px' })
 
-  useEventListener('pointermove', (event) => {
-    // Touch cannot hover: the spotlight would stay wherever the finger last was.
-    if (event.pointerType !== 'touch') {
-      pointer = { x: event.clientX, y: event.clientY }
-      schedule()
-    }
+  useEventListener(['pointerdown', 'pointermove'], (event) => {
+    // Touch cannot hover, and forgets the mouse: a touch scroll on a hybrid device measures nothing.
+    pointer = event.pointerType === 'touch' ? undefined : { x: event.clientX, y: event.clientY }
+    schedule()
   }, { passive: true })
   // Elements also move under a resting pointer.
   useEventListener(['scroll', 'resize'], schedule, { capture: true, passive: true })
