@@ -3,8 +3,7 @@ import { defineTheme } from '../utils/theme'
 export default defineTheme({
   slots: {
     modal: '',
-    // The search keeps the larger text of a field on every breakpoint
-    filter: '[--ui-control-text-step:0.125rem]'
+    filter: ''
   },
   variants: {
     fullscreen: {
