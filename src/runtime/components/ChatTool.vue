@@ -80,7 +80,7 @@ export interface ChatToolSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch, useAttrs } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -104,10 +104,6 @@ const emits = defineEmits<ChatToolEmits>()
 const slots = defineSlots<ChatToolSlots>()
 
 const props = useComponentProps('chatTool', _props)
-
-// `CollapsibleRoot` renders its `as` attribute, keep components compiled from a `template` string out of it
-const attrs = useAttrs()
-const rootAttrs = computed(() => omitUnsafeAttrs(attrs))
 
 const appConfig = useAppConfig() as ChatTool['AppConfig']
 
@@ -151,7 +147,7 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
     :unmount-on-hide="props.unmountOnHide"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    v-bind="rootAttrs"
+    v-bind="omitUnsafeAttrs($attrs)"
     @update:open="setOpen"
   >
     <CollapsibleTrigger as-child :disabled="!hasContent">

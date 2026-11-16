@@ -69,7 +69,7 @@ export interface ChatReasoningSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch, onUnmounted, nextTick, useTemplateRef, useAttrs } from 'vue'
+import { ref, computed, watch, onUnmounted, nextTick, useTemplateRef } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -95,10 +95,6 @@ const emits = defineEmits<ChatReasoningEmits>()
 defineSlots<ChatReasoningSlots>()
 
 const props = useComponentProps('chatReasoning', _props)
-
-// `CollapsibleRoot` renders its `as` attribute, keep components compiled from a `template` string out of it
-const attrs = useAttrs()
-const rootAttrs = computed(() => omitUnsafeAttrs(attrs))
 
 const { t, code } = useLocale()
 const appConfig = useAppConfig() as ChatReasoning['AppConfig']
@@ -204,7 +200,7 @@ watch(() => props.text, () => {
     :unmount-on-hide="props.unmountOnHide"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    v-bind="rootAttrs"
+    v-bind="omitUnsafeAttrs($attrs)"
     @update:open="setOpen"
   >
     <CollapsibleTrigger as-child :disabled="!hasContent">
