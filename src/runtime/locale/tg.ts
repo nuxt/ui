@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Кам кардан',
-        name: 'код',
-        openText: 'Васеъ кардан'
+        closeText: 'кам кардан',
+        label: '{name} {text}',
+        name: 'Кодро',
+        openText: 'васеъ кардан'
       },
       collapsible: {
-        closeText: 'Пинҳон кардан',
-        name: 'хусусиятҳо',
-        openText: 'Намоиш додан'
+        closeText: 'пинҳон кардан',
+        label: '{name} {text}',
+        name: 'Хусусиятҳоро',
+        openText: 'намоиш додан'
       },
       pre: {
         copy: 'Нусха бардоштан'

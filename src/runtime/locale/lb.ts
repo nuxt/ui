@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Zouklappen',
-        name: 'code',
-        openText: 'Opklappen'
+        closeText: 'zouklappen',
+        label: '{name} {text}',
+        name: 'Code',
+        openText: 'opklappen'
       },
       collapsible: {
-        closeText: 'Verstoppen',
-        name: 'eegenschaften',
-        openText: 'Uweisen'
+        closeText: 'verstoppen',
+        label: '{name} {text}',
+        name: 'Eegenschaften',
+        openText: 'uweisen'
       },
       pre: {
         copy: 'Code an d\'Zwëschspäicher kopéieren'

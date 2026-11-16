@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Contraer',
+        label: '{text} {name}',
         name: 'código',
         openText: 'Despregar'
       },
       collapsible: {
         closeText: 'Ocultar',
+        label: '{text} {name}',
         name: 'propiedades',
         openText: 'Amosar'
       },

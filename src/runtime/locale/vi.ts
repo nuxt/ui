@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Thu gọn',
+        label: '{text} {name}',
         name: 'mã',
         openText: 'Mở rộng'
       },
       collapsible: {
         closeText: 'Ẩn',
+        label: '{text} {name}',
         name: 'thuộc tính',
         openText: 'Hiển thị'
       },

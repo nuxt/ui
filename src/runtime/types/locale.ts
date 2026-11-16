@@ -172,11 +172,13 @@ export type Messages = {
   prose: {
     codeCollapse: {
       closeText: string
+      label: string
       name: string
       openText: string
     }
     collapsible: {
       closeText: string
+      label: string
       name: string
       openText: string
     }

@@ -173,12 +173,14 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Σύμπτυξη',
-        name: 'κώδικας',
+        label: '{text} {name}',
+        name: 'κώδικα',
         openText: 'Επέκταση'
       },
       collapsible: {
         closeText: 'Απόκρυψη',
-        name: 'ιδιότητες',
+        label: '{text} {name}',
+        name: 'ιδιοτήτων',
         openText: 'Εμφάνιση'
       },
       pre: {

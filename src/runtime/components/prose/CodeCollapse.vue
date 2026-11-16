@@ -72,7 +72,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.codeColla
         color="neutral"
         variant="outline"
         :data-state="open ? 'open' : 'closed'"
-        :label="`${open ? (props.closeText || t('prose.codeCollapse.closeText')) : (props.openText || t('prose.codeCollapse.openText'))} ${props.name || t('prose.codeCollapse.name')}`"
+        :label="t('prose.codeCollapse.label', { text: open ? (props.closeText || t('prose.codeCollapse.closeText')) : (props.openText || t('prose.codeCollapse.openText')), name: props.name || t('prose.codeCollapse.name') })"
         :class="ui.trigger({ class: props.ui?.trigger })"
         :ui="{ leadingIcon: ui.triggerIcon({ class: props.ui?.triggerIcon }) }"
         @click="open = !open"

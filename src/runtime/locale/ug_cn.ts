@@ -174,12 +174,14 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'تارايتىش',
-        name: 'كود',
+        label: '{name} {text}',
+        name: 'كودنى',
         openText: 'كېڭەيتىش'
       },
       collapsible: {
         closeText: 'يوشۇرۇش',
-        name: 'خاسلىقلار',
+        label: '{name} {text}',
+        name: 'خاسلىقلارنى',
         openText: 'كۆرسىتىش'
       },
       pre: {

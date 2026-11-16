@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Хураах',
-        name: 'код',
-        openText: 'Дэлгэх'
+        closeText: 'хураах',
+        label: '{name} {text}',
+        name: 'Кодыг',
+        openText: 'дэлгэх'
       },
       collapsible: {
-        closeText: 'Нуух',
-        name: 'шинж чанарууд',
-        openText: 'Харуулах'
+        closeText: 'нуух',
+        label: '{name} {text}',
+        name: 'Шинж чанаруудыг',
+        openText: 'харуулах'
       },
       pre: {
         copy: 'Кодыг санах ойд хуулах'

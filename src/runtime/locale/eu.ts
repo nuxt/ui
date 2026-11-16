@@ -172,12 +172,14 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Murriztu',
+        closeText: 'Tolestu',
+        label: '{text} {name}',
         name: 'kodea',
         openText: 'Zabaldu'
       },
       collapsible: {
         closeText: 'Ezkutatu',
+        label: '{text} {name}',
         name: 'propietateak',
         openText: 'Erakutsi'
       },

@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Összecsuk',
-        name: 'kód',
-        openText: 'Kinyit'
+        closeText: 'összecsukása',
+        label: '{name} {text}',
+        name: 'Kód',
+        openText: 'kibontása'
       },
       collapsible: {
-        closeText: 'Elrejt',
-        name: 'tulajdonságok',
-        openText: 'Mutat'
+        closeText: 'elrejtése',
+        label: '{name} {text}',
+        name: 'Tulajdonságok',
+        openText: 'megjelenítése'
       },
       pre: {
         copy: 'Kód másolása a vágólapra'

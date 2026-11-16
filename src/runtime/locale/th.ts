@@ -168,11 +168,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'ย่อ',
+        label: '{text} {name}',
         name: 'โค้ด',
         openText: 'ขยาย'
       },
       collapsible: {
         closeText: 'ซ่อน',
+        label: '{text} {name}',
         name: 'คุณสมบัติ',
         openText: 'แสดง'
       },

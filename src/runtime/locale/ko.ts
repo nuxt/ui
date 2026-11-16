@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: '접기',
+        label: '{name} {text}',
         name: '코드',
         openText: '펼치기'
       },
       collapsible: {
         closeText: '숨기기',
+        label: '{name} {text}',
         name: '속성',
         openText: '보기'
       },

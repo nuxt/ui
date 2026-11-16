@@ -173,12 +173,14 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Fella saman',
-        name: 'kóði',
+        label: '{text} {name}',
+        name: 'kóða',
         openText: 'Stækka'
       },
       collapsible: {
         closeText: 'Fela',
-        name: 'eiginleikar',
+        label: '{text} {name}',
+        name: 'eiginleika',
         openText: 'Sýna'
       },
       pre: {

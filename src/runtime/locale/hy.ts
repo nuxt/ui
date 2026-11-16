@@ -172,13 +172,15 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Կոլապսել',
-        name: 'կոդ',
+        closeText: 'Ծալել',
+        label: '{text} {name}',
+        name: 'կոդը',
         openText: 'Ընդլայնել'
       },
       collapsible: {
         closeText: 'Թաքցնել',
-        name: 'հատկություններ',
+        label: '{text} {name}',
+        name: 'հատկությունները',
         openText: 'Ցույց տալ'
       },
       pre: {
