@@ -172,6 +172,23 @@ describe('Calendar', () => {
   })
 
   describe('focus', () => {
+    test('leaves focus moved outside by a listener', async () => {
+      const input = document.createElement('input')
+      document.body.appendChild(input)
+      const wrapper = await mountSuspended(Calendar, { props: { 'placeholder': new CalendarDate(2025, 6, 15), 'onUpdate:placeholder': () => nextTick(() => input.focus()) }, attachTo: document.body })
+
+      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      const month = wrapper.find('[data-reka-month-picker-cell-trigger][data-value="2025-03-01"]')
+      ;(month.element as HTMLElement).focus()
+      await month.trigger('click')
+      await nextTick()
+
+      expect(document.activeElement).toBe(input)
+
+      wrapper.unmount()
+      input.remove()
+    })
+
     test('keeps focus on the heading when switching views', async () => {
       const wrapper = await mountSuspended(Calendar, { attachTo: document.body })
 

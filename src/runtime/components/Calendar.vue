@@ -210,6 +210,9 @@ const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 async function keepFocus(selector: string) {
   if (!rootRef.value?.$el.contains(document.activeElement)) return
   await nextTick()
+  // Focus falls back to the body when the old picker goes, anywhere else means something else took it
+  const active = document.activeElement
+  if (active && active !== document.body && !rootRef.value?.$el.contains(active)) return
   rootRef.value?.$el.querySelector(selector)?.focus()
 }
 
