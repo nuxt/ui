@@ -9,8 +9,8 @@ export default defineTheme({
     filter: 'mx-1 mt-1 has-[>:focus-visible]:outline-0',
     // The back and the close sit 4px inside the field with a smaller corner, their icon
     // where the search icon is, and their hover is a step above the fill of the focused field
-    back: 'p-[calc(var(--ui-control-py)-4px)] rounded-sm hover:bg-accent-strong active:bg-accent-strong',
-    close: 'p-[calc(var(--ui-control-py)-4px)] rounded-sm hover:bg-accent-strong active:bg-accent-strong',
+    back: 'p-[calc(var(--ui-control-py)-(--spacing(1)))] rounded-sm hover:bg-accent-strong active:bg-accent-strong',
+    close: 'p-[calc(var(--ui-control-py)-(--spacing(1)))] rounded-sm hover:bg-accent-strong active:bg-accent-strong',
     content: 'relative overflow-hidden flex flex-col',
     footer: 'p-1 border-t border-default',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none',

@@ -43,8 +43,8 @@ export default defineTheme({
       // hover is a step above the fill of the box
       horizontal: {
         base: 'text-center',
-        increment: 'pe-1 [&>button]:p-[calc(var(--ui-control-py)-4px)] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong',
-        decrement: `order-first ps-1 before:content-['x'] before:w-0 before:invisible [&>button]:p-[calc(var(--ui-control-py)-4px)] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong`
+        increment: 'pe-1 [&>button]:p-[calc(var(--ui-control-py)-(--spacing(1)))] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong',
+        decrement: `order-first ps-1 before:content-['x'] before:w-0 before:invisible [&>button]:p-[calc(var(--ui-control-py)-(--spacing(1)))] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong`
       },
       // Both buttons share a column at the end. Each is taller than its half of the
       // box, so a negative margin lets them overlap without making the box taller.
