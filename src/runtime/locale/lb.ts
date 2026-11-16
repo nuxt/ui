@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     },
     colorMode: {
       dark: 'Donkel',
-      light: 'Liicht',
+      light: 'Hell',
       switchToDark: 'Op de Donkelmodus wiesselen',
-      switchToLight: 'Op de Liichtmodus wiesselen',
+      switchToLight: 'Op den hellen Modus wiesselen',
       system: 'System'
     },
     commandPalette: {
@@ -135,8 +135,8 @@ export default defineLocale<Messages>({
       trigger: 'Optiounen uweisen'
     },
     inputNumber: {
-      decrement: 'Dekrementéieren',
-      increment: 'Inkrementéieren',
+      decrement: 'Reduzéieren',
+      increment: 'Erhéijen',
       roledescription: 'Zuelefeld'
     },
     inputRating: {

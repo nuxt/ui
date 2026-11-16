@@ -44,7 +44,7 @@ export default defineLocale<Messages>({
       autoScroll: 'Nach unten scrollen'
     },
     chatPrompt: {
-      placeholder: 'Hier schreiben Sie Ihre Nachricht…',
+      placeholder: 'Schreiben Sie hier Ihre Nachricht…',
       queue: 'Nachrichten in der Warteschlange',
       sendNow: 'Jetzt senden',
       edit: 'Bearbeiten',
@@ -78,7 +78,7 @@ export default defineLocale<Messages>({
     contentSearch: {
       links: 'Links',
       search: 'Ergebnisse',
-      theme: 'Thema'
+      theme: 'Design'
     },
     contentSearchButton: {
       label: 'Suchen…'
@@ -91,7 +91,7 @@ export default defineLocale<Messages>({
       search: 'Suchen…'
     },
     dashboardSearch: {
-      theme: 'Thema'
+      theme: 'Design'
     },
     dashboardSearchButton: {
       label: 'Suchen…'

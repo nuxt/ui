@@ -132,7 +132,7 @@ export default defineLocale<Messages>({
       create: 'Crear "{label}"',
       noData: 'Sen datos',
       noMatch: 'Non hai datos coincidentes',
-      trigger: 'Mostrar opcións'
+      trigger: 'Amosar opcións'
     },
     inputNumber: {
       decrement: 'Diminuír',

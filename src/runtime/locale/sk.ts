@@ -44,7 +44,7 @@ export default defineLocale<Messages>({
       autoScroll: 'Posunúť nadol'
     },
     chatPrompt: {
-      placeholder: 'Tu napíšte svoje správu…',
+      placeholder: 'Tu napíšte svoju správu…',
       queue: 'Správy vo fronte',
       sendNow: 'Odoslať teraz',
       edit: 'Upraviť',
@@ -69,7 +69,7 @@ export default defineLocale<Messages>({
     },
     commandPalette: {
       back: 'Späť',
-      close: 'Zavrieť',
+      close: 'Zatvoriť',
       noData: 'Žiadne dáta',
       noMatch: 'Žiadna zhoda',
       placeholder: 'Zadajte príkaz alebo vyhľadajte…',

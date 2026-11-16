@@ -44,7 +44,7 @@ export default defineLocale<Messages>({
       autoScroll: 'ქვემოთ გადახვევა'
     },
     chatPrompt: {
-      placeholder: 'დაწერეთ თქვენი მესიჯი აქ…',
+      placeholder: 'დაწერეთ თქვენი შეტყობინება აქ…',
       queue: 'რიგში მყოფი შეტყობინებები',
       sendNow: 'ახლავე გაგზავნა',
       edit: 'რედაქტირება',
@@ -63,8 +63,8 @@ export default defineLocale<Messages>({
     colorMode: {
       dark: 'ბნელი',
       light: 'ნათელი',
-      switchToDark: 'ბნელ რეჯიმზე გადასვლა',
-      switchToLight: 'ნათელ რეჯიმზე გადასვლა',
+      switchToDark: 'ბნელ რეჟიმზე გადასვლა',
+      switchToLight: 'ნათელ რეჟიმზე გადასვლა',
       system: 'სისტემური'
     },
     commandPalette: {
@@ -72,7 +72,7 @@ export default defineLocale<Messages>({
       close: 'დახურვა',
       noData: 'მონაცემები არ არის',
       noMatch: 'შესატყვისი მონაცემები არ არის',
-      placeholder: 'ჩაწერეთ ბრძანება ან ძიება…',
+      placeholder: 'ჩაწერეთ ბრძანება ან მოძებნეთ…',
       results: 'შედეგები'
     },
     contentSearch: {
@@ -113,7 +113,7 @@ export default defineLocale<Messages>({
       clear: 'მთავარზე დაბრუნება'
     },
     fileUpload: {
-      removeFile: 'მოაშორე {filename}'
+      removeFile: '{filename}-ის წაშლა'
     },
     header: {
       close: 'მენიუს დახურვა',
@@ -131,7 +131,7 @@ export default defineLocale<Messages>({
       year: 'წელი'
     },
     inputMenu: {
-      create: 'შექმენი "{label}"',
+      create: 'დაამატე "{label}"',
       noData: 'მონაცემები არ არის',
       noMatch: 'შესატყვისი მონაცემები არ არის',
       trigger: 'ვარიანტების ჩვენება'

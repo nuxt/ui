@@ -46,9 +46,9 @@ export default defineLocale<Messages>({
     chatPrompt: {
       placeholder: 'Escriu el teu missatge aquí…',
       queue: 'Missatges a la cua',
-      sendNow: 'Envia ara',
-      edit: 'Edita',
-      remove: 'Elimina'
+      sendNow: 'Enviar ara',
+      edit: 'Editar',
+      remove: 'Eliminar'
     },
     chatPromptSubmit: {
       label: 'Enviar',
@@ -88,7 +88,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      search: 'Cercar…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -132,7 +132,7 @@ export default defineLocale<Messages>({
       create: 'Crear "{label}"',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      trigger: 'Mostra les opcions'
+      trigger: 'Mostrar les opcions'
     },
     inputNumber: {
       decrement: 'Decrementar',
@@ -152,7 +152,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      search: 'Cercar…'
     },
     modal: {
       close: 'Tancar'
@@ -191,13 +191,13 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'Tancar',
-      toggle: 'Canviar'
+      toggle: 'Alternar'
     },
     selectMenu: {
       create: 'Crear "{label}"',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      search: 'Cercar…'
     },
     skeleton: {
       label: 'carregant'

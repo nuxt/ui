@@ -22,8 +22,8 @@ export default defineLocale<Messages>({
     calendar: {
       label: 'Data wydarzenia',
       monthPicker: 'Wybór miesiąca',
-      nextMonth: 'Przyszły miesiąc',
-      nextYear: 'Przyszły rok',
+      nextMonth: 'Następny miesiąc',
+      nextYear: 'Następny rok',
       prevMonth: 'Poprzedni miesiąc',
       prevYear: 'Poprzedni rok',
       yearPicker: 'Wybór roku'

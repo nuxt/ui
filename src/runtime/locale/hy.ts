@@ -44,14 +44,14 @@ export default defineLocale<Messages>({
       autoScroll: 'Ոլորել ներքև'
     },
     chatPrompt: {
-      placeholder: 'Շարունակել',
+      placeholder: 'Մուտքագրեք ձեր հաղորդագրությունը…',
       queue: 'Հերթում գտնվող հաղորդագրություններ',
       sendNow: 'Ուղարկել հիմա',
       edit: 'Խմբագրել',
       remove: 'Հեռացնել'
     },
     chatPromptSubmit: {
-      label: 'Շարունակել',
+      label: 'Ուղարկել',
       reload: 'Կրկին փորձել',
       stop: 'Դադարեցնել ստեղծումը'
     },
@@ -97,7 +97,7 @@ export default defineLocale<Messages>({
       label: 'Որոնել…'
     },
     dashboardSidebarCollapse: {
-      collapse: 'Կոլապսել կողային վահանակը',
+      collapse: 'Ծալել կողային վահանակը',
       expand: 'Ընդլայնել կողային վահանակը'
     },
     dashboardSidebarToggle: {
@@ -168,7 +168,7 @@ export default defineLocale<Messages>({
       input: 'PIN կոդ, նիշ {index}՝ {length}-ից'
     },
     pricingTable: {
-      caption: 'Գնումների համեմատություն'
+      caption: 'Սակագնային պլանների համեմատություն'
     },
     prose: {
       codeCollapse: {

@@ -168,7 +168,7 @@ export default defineLocale<Messages>({
       input: 'PIN-kode, tegn {index} av {length}'
     },
     pricingTable: {
-      caption: 'Prisplaneringssammenligning'
+      caption: 'Sammenligning av prisplaner'
     },
     prose: {
       codeCollapse: {

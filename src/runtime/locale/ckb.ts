@@ -130,7 +130,7 @@ export default defineLocale<Messages>({
       year: 'ساڵ'
     },
     inputMenu: {
-      create: '"{label}" زیادکردنی',
+      create: 'زیادکردنی "{label}"',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
       trigger: 'پیشاندانی هەڵبژاردەکان'
@@ -195,7 +195,7 @@ export default defineLocale<Messages>({
       toggle: 'گۆڕین'
     },
     selectMenu: {
-      create: '"{label}" زیادکردنی',
+      create: 'زیادکردنی "{label}"',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
       search: 'گەڕان…'

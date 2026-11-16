@@ -168,7 +168,7 @@ export default defineLocale<Messages>({
       input: 'PIN-koodi, merkki {index}/{length}'
     },
     pricingTable: {
-      caption: 'Hinnoitellut suunnitelmat'
+      caption: 'Hinnoittelupakettien vertailu'
     },
     prose: {
       codeCollapse: {

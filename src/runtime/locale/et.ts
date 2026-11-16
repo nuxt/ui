@@ -44,7 +44,7 @@ export default defineLocale<Messages>({
       autoScroll: 'Keri alla'
     },
     chatPrompt: {
-      placeholder: 'Siia kirjutage oma sõnum…',
+      placeholder: 'Kirjuta oma sõnum siia…',
       queue: 'Järjekorras sõnumid',
       sendNow: 'Saada kohe',
       edit: 'Muuda',
@@ -168,7 +168,7 @@ export default defineLocale<Messages>({
       input: 'PIN-kood, märk {index} {length}-st'
     },
     pricingTable: {
-      caption: 'Hinna plaanide võrdlus'
+      caption: 'Hinnaplaanide võrdlus'
     },
     prose: {
       codeCollapse: {

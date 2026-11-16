@@ -24,8 +24,8 @@ export default defineLocale<Messages>({
       monthPicker: 'Pemilih bulan',
       nextMonth: 'Bulan seterusnya',
       nextYear: 'Tahun seterusnya',
-      prevMonth: 'Bulan sebelum',
-      prevYear: 'Tahun sebelum',
+      prevMonth: 'Bulan sebelumnya',
+      prevYear: 'Tahun sebelumnya',
       yearPicker: 'Pemilih tahun'
     },
     carousel: {

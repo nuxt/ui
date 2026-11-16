@@ -168,7 +168,7 @@ export default defineLocale<Messages>({
       input: 'PIN-код, символ {index} з {length}'
     },
     pricingTable: {
-      caption: 'Порівняння планів цін'
+      caption: 'Порівняння тарифних планів'
     },
     prose: {
       codeCollapse: {
@@ -191,7 +191,7 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'Закрити',
-      toggle: 'Перемикнути'
+      toggle: 'Перемкнути'
     },
     selectMenu: {
       create: 'Створити "{label}"',

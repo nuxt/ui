@@ -72,7 +72,7 @@ export default defineLocale<Messages>({
       close: 'Хаах',
       noData: 'Мэдээлэл байхгүй',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
-      placeholder: 'Комманд бичих эсвэл хайлт хийх…',
+      placeholder: 'Команд бичих эсвэл хайлт хийх…',
       results: 'Үр дүн'
     },
     contentSearch: {
