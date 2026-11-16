@@ -9,9 +9,9 @@ export default defineTheme({
     filter: 'mx-1 mt-1 has-[>:focus-visible]:outline-0',
     // The back takes back the inset of the field, so its icon sits where the search icon does
     back: '-ms-1',
-    // The close sits 2px inside the field and its icon mirrors the search icon. Its soft
-    // fill moves a step up, so a ghost hover shows on the fill of the focused field
-    close: '-me-0.5 p-[calc(var(--ui-control-py)-2px)] rounded-sm [--ui-accent-bg-soft:var(--ui-accent-bg-strong,color-mix(in_oklab,var(--ui-accent)_15%,transparent))]',
+    // The close sits 2px inside the field, its icon mirrors the search icon, and its hover
+    // is a step above the fill of the focused field
+    close: '-me-0.5 p-[calc(var(--ui-control-py)-2px)] rounded-sm hover:bg-accent-strong active:bg-accent-strong',
     content: 'relative overflow-hidden flex flex-col',
     footer: 'p-1 border-t border-default',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
