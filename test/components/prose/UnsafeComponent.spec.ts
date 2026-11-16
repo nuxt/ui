@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, nextTick, ref } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
 import Button from '../../../src/runtime/components/Button.vue'
@@ -35,6 +35,7 @@ describe('unsafe components from markdown', () => {
     ['SelectMenu `as` fallthrough', SelectMenu, { props: { items: ['a'] }, attrs: { as: payload() } }],
     ['Field forged VNode `as`', Field, { props: { as: vnode() } }],
     ['Icon forged VNode `name`', Icon, { props: { name: vnode() } }],
+    ['Icon element-like `template`', Icon, { props: { name: { template: { nodeType: 1, innerHTML: '<b>{{ 7 * 191 }}</b>' } } } }],
     ['Popover `content.as`', Popover, { props: { open: true, portal: false, content: { as: payload() } }, slots: { content: () => 'Content' } }]
   ])('does not render a template from %s', async (_, component: any, options) => {
     const wrapper = await mountSuspended(component, options)
@@ -44,10 +45,20 @@ describe('unsafe components from markdown', () => {
   it.each([
     ['Field `as`', Field, { props: { as: 'script' } }],
     ['Badge `as` fallthrough', Badge, { attrs: { as: 'iframe' } }],
-    ['Select `as` fallthrough', Select, { props: { items: ['a'] }, attrs: { as: 'script' } }]
+    ['Select `as` fallthrough', Select, { props: { items: ['a'] }, attrs: { as: 'script' } }],
+    ['Field `as` with attributes', Field, { props: { as: 'img src=x onerror=alert(1)' } }],
+    ['Badge `as` fallthrough with attributes', Badge, { attrs: { as: 'img src=x onerror=alert(1)' } }]
   ])('does not render a script or iframe from %s', async (_, component: any, options) => {
     const wrapper = await mountSuspended(component, options)
-    expect(wrapper.html()).not.toMatch(/<(script|iframe)/)
+    expect(wrapper.html()).not.toMatch(/<(script|iframe)|onerror/)
+  })
+
+  it.each([['ChatTool', ChatTool], ['ChatReasoning', ChatReasoning]])('keeps attributes added after mount on %s', async (_, component: any) => {
+    const attrs = ref<Record<string, string>>({})
+    const wrapper = await mountSuspended(defineComponent({ render: () => h(component, { text: 'x', ...attrs.value }) }))
+    attrs.value = { 'data-late': 'yes' }
+    await nextTick()
+    expect(wrapper.html()).toContain('data-late="yes"')
   })
 
   it('falls back to the default element', async () => {

@@ -233,7 +233,9 @@ export function isUnsafeComponent(value: unknown): boolean {
   // The built-ins themselves carry functions (`process`), JSON never does.
   if ((component.__v_isVNode || component.__isTeleport || component.__isSuspense || component.__isKeepAlive) && !Object.values(component).some(item => typeof item === 'function')) return true
 
+  // Vue's full build also compiles an element-like `template` (`nodeType` + `innerHTML`)
   return typeof component.template === 'string'
+    || (typeof component.template === 'object' && component.template !== null)
     || isUnsafeComponent(component.extends)
     || (Array.isArray(component.mixins) && component.mixins.some(isUnsafeComponent))
 }
@@ -246,7 +248,8 @@ const UNSAFE_TAGS = new Set(['script', 'style', 'iframe', 'frame', 'frameset', '
  * an unsafe component object, or a tag like `script` or `iframe`.
  */
 export function isUnsafeAs(value: unknown): boolean {
-  if (typeof value === 'string') return UNSAFE_TAGS.has(value.trim().toLowerCase())
+  // A string that isn't a plain tag name (`img src=x onerror=…`) ends up as raw markup in the opening tag
+  if (typeof value === 'string') return !/^[a-z][a-z0-9-]*$/i.test(value) || UNSAFE_TAGS.has(value.toLowerCase())
   return isUnsafeComponent(value)
 }
 
