@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { ListboxRootProps, ListboxRootEmits, ListboxItemSelectEvent } from 'reka-ui'
+import type { ListboxRootProps, ListboxRootEmits, ListboxItemSelectEvent, AcceptableValue as _AcceptableValue } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { FuseResult } from 'fuse.js'
 import type { AppConfig } from '@nuxt/schema'
@@ -40,7 +40,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
    */
   placeholder?: string
   children?: CommandPaletteItem[]
-  onSelect?: (e: ListboxItemSelectEvent<unknown>) => void
+  onSelect?: (e: ListboxItemSelectEvent<_AcceptableValue>) => void
   class?: any
   ui?: Partial<Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>>
   [key: string]: any
@@ -504,7 +504,7 @@ function onBackspace() {
   }
 }
 
-function onSelect(e: ListboxItemSelectEvent<unknown>, item: T) {
+function onSelect(e: ListboxItemSelectEvent<_AcceptableValue>, item: T) {
   if (item.children?.length) {
     e.preventDefault()
 
