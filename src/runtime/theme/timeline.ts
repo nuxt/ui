@@ -33,6 +33,7 @@ export default defineTheme({
     color: colorVariant({ root: '', indicator: '' }),
 
     size: {
+      '4xs': { root: '[--ui-control-size:--spacing(3.5)]' },
       '3xs': { root: '[--ui-control-size:--spacing(4)]' },
       '2xs': { root: '[--ui-control-size:--spacing(5)]' },
       'xs': { root: '[--ui-control-size:--spacing(6)]' },
@@ -41,7 +42,8 @@ export default defineTheme({
       'lg': { root: '[--ui-control-size:--spacing(9)]' },
       'xl': { root: '[--ui-control-size:--spacing(10)]' },
       '2xl': { root: '[--ui-control-size:--spacing(11)]' },
-      '3xl': { root: '[--ui-control-size:--spacing(12)]' }
+      '3xl': { root: '[--ui-control-size:--spacing(12)]' },
+      '4xl': { root: '[--ui-control-size:--spacing(13)]' }
     },
 
     reverse: {

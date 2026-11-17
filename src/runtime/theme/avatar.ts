@@ -11,6 +11,9 @@ export default defineTheme({
   variants: {
     color: colorVariant({ root: '' }),
     size: {
+      '4xs': {
+        root: 'size-3.5 text-[0.4375rem]'
+      },
       '3xs': {
         root: 'size-4 text-[0.5rem]'
       },
@@ -37,6 +40,9 @@ export default defineTheme({
       },
       '3xl': {
         root: 'size-12 text-2xl'
+      },
+      '4xl': {
+        root: 'size-13 text-[1.625rem]'
       }
     }
   },
