@@ -7,8 +7,7 @@ export default defineTheme({
     base: 'font-medium inline-flex items-center',
     label: 'truncate',
     leadingIcon: 'shrink-0',
-    // The avatar is the size of the icons, the line of the badge
-    leadingAvatar: 'shrink-0 size-(--ui-control-icon-size)',
+    leadingAvatar: 'shrink-0',
     trailingIcon: 'shrink-0'
   },
   variants: {
@@ -32,26 +31,32 @@ export default defineTheme({
       xs: {
         base: 'text-[0.5rem]/3 [--ui-control-px:--spacing(1)] [--ui-control-py:--spacing(0.25)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm',
         leadingIcon: 'size-(--ui-control-icon-size)',
+        // The avatar is the size of the icons, the line of the badge
+        leadingAvatar: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)'
       },
       sm: {
         base: 'text-[0.625rem]/3 [--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(0.5)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm',
         leadingIcon: 'size-(--ui-control-icon-size)',
+        leadingAvatar: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)'
       },
       md: {
         base: 'text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md',
         leadingIcon: 'size-(--ui-control-icon-size)',
+        leadingAvatar: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)'
       },
       lg: {
         base: 'text-sm/4 [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md',
         leadingIcon: 'size-(--ui-control-icon-size)',
+        leadingAvatar: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)'
       },
       xl: {
         base: 'text-base/5 [--ui-control-px:--spacing(2.5)] [--ui-control-py:--spacing(1.5)] [--ui-control-gap:--spacing(1.5)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md',
         leadingIcon: 'size-(--ui-control-icon-size)',
+        leadingAvatar: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)'
       }
     },
