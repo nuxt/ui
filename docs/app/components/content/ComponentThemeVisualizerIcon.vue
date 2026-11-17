@@ -1,91 +1,11 @@
 <script setup lang="ts">
-import { motion } from 'motion-v'
-
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
   size?: number
   open?: boolean
 }>(), {
   size: 16,
   open: false
 })
-
-// X lines: rotate to form X when open, rotate back and scale down when closing
-const line1Variants = {
-  open: {
-    rotate: 45,
-    scale: 1,
-    opacity: 1,
-    transition: { duration: 0.25, ease: 'easeOut' as const }
-  },
-  closed: {
-    rotate: 0,
-    scale: 0,
-    opacity: 0,
-    transition: { duration: 0.2, ease: 'easeIn' as const }
-  }
-}
-
-const line2Variants = {
-  open: {
-    rotate: -45,
-    scale: 1,
-    opacity: 1,
-    transition: { duration: 0.25, ease: 'easeOut' as const }
-  },
-  closed: {
-    rotate: 0,
-    scale: 0,
-    opacity: 0,
-    transition: { duration: 0.2, ease: 'easeIn' as const }
-  }
-}
-
-// Eye: scale up when appearing, scale down when X appears
-const eyeVariants = {
-  open: {
-    scale: 0,
-    opacity: 0,
-    scaleY: 1,
-    transition: { duration: 0.15, ease: 'easeIn' as const }
-  },
-  closed: {
-    scale: 1,
-    opacity: 1,
-    scaleY: [1, 1, 0.1, 1, 1],
-    transition: {
-      scale: { duration: 0.25, delay: 0.1, ease: 'easeOut' as const },
-      opacity: { duration: 0.2, delay: 0.1, ease: 'easeOut' as const },
-      scaleY: {
-        duration: 3,
-        repeat: Infinity,
-        ease: 'easeInOut' as const,
-        times: [0, 0.45, 0.5, 0.55, 1],
-        delay: 0.5
-      }
-    }
-  }
-}
-
-const pupilVariants = {
-  open: {
-    scale: 0,
-    opacity: 0,
-    transition: { duration: 0.15, ease: 'easeIn' as const }
-  },
-  closed: {
-    opacity: [1, 1, 0, 1, 1],
-    scale: [1, 1, 0, 1, 1],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: 'easeInOut' as const,
-      times: [0, 0.45, 0.5, 0.55, 1],
-      delay: 0.5
-    }
-  }
-}
-
-const currentState = computed(() => props.open ? 'open' : 'closed')
 </script>
 
 <template>
@@ -99,53 +19,112 @@ const currentState = computed(() => props.open ? 'open' : 'closed')
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
+    :data-open="open || undefined"
   >
     <!-- X icon (two lines) -->
-    <motion.line
+    <line
       x1="4"
       y1="12"
       x2="20"
       y2="12"
-      :variants="line1Variants"
-      :animate="currentState"
-      :style="{ transformOrigin: 'center' }"
       class="outline-none"
       tabindex="-1"
     />
-    <motion.line
+    <line
       x1="4"
       y1="12"
       x2="20"
       y2="12"
-      :variants="line2Variants"
-      :animate="currentState"
-      :style="{ transformOrigin: 'center' }"
       class="outline-none"
       tabindex="-1"
     />
 
     <!-- Eye shape (with blink) -->
-    <motion.path
+    <path
       d="M2.062 12.348a1 1 0 0 1 0-.696a10.75 10.75 0 0 1 19.876 0a1 1 0 0 1 0 .696a10.75 10.75 0 0 1-19.876 0"
       fill="none"
-      :variants="eyeVariants"
-      :animate="currentState"
-      :style="{ transformOrigin: 'center' }"
       class="outline-none"
       tabindex="-1"
     />
 
     <!-- Pupil -->
-    <motion.circle
+    <circle
       cx="12"
       cy="12"
       r="3"
       fill="none"
-      :variants="pupilVariants"
-      :animate="currentState"
-      :style="{ transformOrigin: 'center' }"
       class="outline-none"
       tabindex="-1"
     />
   </svg>
 </template>
+
+<style scoped>
+line,
+path,
+circle {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Closed: the X lines shrink away while the eye and pupil come back, then blink every 3s. */
+line {
+  scale: 0;
+  opacity: 0;
+  transition: rotate 0.2s ease-in, scale 0.2s ease-in, opacity 0.2s ease-in;
+}
+
+path,
+circle {
+  transition: scale 0.25s ease-out 0.1s, opacity 0.2s ease-out 0.1s;
+}
+
+/* The blink runs on `transform`, so it stacks on the `scale` the transitions move. */
+path {
+  animation: eye-blink 3s ease-in-out 0.5s infinite;
+}
+
+circle {
+  animation: pupil-blink 3s ease-in-out 0.5s infinite;
+}
+
+/* Open: the eye and pupil shrink away and the lines turn into an X. */
+[data-open] line {
+  scale: 1;
+  opacity: 1;
+  transition: rotate 0.25s ease-out, scale 0.25s ease-out, opacity 0.25s ease-out;
+}
+
+[data-open] line:first-of-type {
+  rotate: 45deg;
+}
+
+[data-open] line:last-of-type {
+  rotate: -45deg;
+}
+
+[data-open] path,
+[data-open] circle {
+  scale: 0;
+  opacity: 0;
+  animation: none;
+  transition: scale 0.15s ease-in, opacity 0.15s ease-in;
+}
+
+@keyframes eye-blink {
+  0%, 45%, 55%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.1); }
+}
+
+@keyframes pupil-blink {
+  0%, 45%, 55%, 100% { transform: scale(1); }
+  50% { transform: scale(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  path,
+  circle {
+    animation: none;
+  }
+}
+</style>
