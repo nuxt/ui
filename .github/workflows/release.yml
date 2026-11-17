@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       prerelease:
-        description: 'Cut a prerelease instead of a normal release, e.g. `alpha`, `beta` or `rc`'
+        description: 'Cut a prerelease instead of a normal release, e.g. `beta` or `rc`. Defaults to `beta` on `v5`'
         required: false
         default: ''
       npm-tag:
@@ -61,7 +61,8 @@ jobs:
           checkout: false
           # a dispatch from `v5` opens the release PR against `v5`
           base-branch: ${{ github.ref_name }}
-          prerelease: ${{ inputs.prerelease }}
+          # `v5` stays on the beta line until 5.0.0
+          prerelease: ${{ inputs.prerelease || (github.ref_name == 'v5' && 'beta' || '') }}
           # same subject as past releases, and a valid conventional PR title
           title: 'chore(release): v{version}'
 
@@ -117,4 +118,5 @@ jobs:
       - uses: danielroe/uppt/publish@427b736befa839b403dd145f2a7c16dbf3fd4482 # v0.6.13
         with:
           files: ${{ needs.pack.outputs.files }}
-          npm-tag: ${{ inputs.npm-tag }}
+          # v5 prereleases go to `next` rather than `beta`
+          npm-tag: ${{ inputs.npm-tag || (startsWith(github.ref_name, 'v5.') && contains(github.ref_name, '-') && 'next' || '') }}
