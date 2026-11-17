@@ -105,7 +105,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
-import { getAvatarSize } from '../utils/size'
+import { getAvatarSize, getBadgeSize } from '../utils/size'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UBadge from './Badge.vue'
@@ -128,6 +128,7 @@ const overrides = useComponentOverrides((ui: Tabs['AppConfig']['ui']) => ui.tabs
 const rootProps = useForwardProps(props, ['as', 'unmountOnHide'], emits)
 
 const avatarSize = computed(() => getAvatarSize(props.size))
+const badgeSize = computed(() => getBadgeSize(props.size))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
@@ -195,7 +196,7 @@ defineExpose({
             v-if="item.badge || item.badge === 0"
             color="neutral"
             variant="outline"
-            size="sm"
+            :size="badgeSize"
             v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
             data-slot="tabs-trailingBadge"
             :class="ui.trailingBadge({ class: [props.ui?.trailingBadge, item.ui?.trailingBadge] })"

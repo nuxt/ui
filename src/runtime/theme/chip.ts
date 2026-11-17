@@ -9,6 +9,7 @@ export default defineTheme({
   variants: {
     color: colorVariant({ base: '' }),
     size: {
+      '4xs': { base: 'h-0.75 min-w-0.75 text-[0.1875rem]' },
       '3xs': { base: 'h-1 min-w-1 text-[0.25rem]' },
       '2xs': { base: 'h-1.25 min-w-1.25 text-[0.3125rem]' },
       'xs': { base: 'h-1.5 min-w-1.5 text-[0.375rem]' },
@@ -17,7 +18,8 @@ export default defineTheme({
       'lg': { base: 'h-2.25 min-w-2.25 text-[0.5625rem]' },
       'xl': { base: 'h-2.5 min-w-2.5 text-[0.625rem]' },
       '2xl': { base: 'h-2.75 min-w-2.75 text-[0.6875rem]' },
-      '3xl': { base: 'h-3 min-w-3 text-[0.75rem]' }
+      '3xl': { base: 'h-3 min-w-3 text-[0.75rem]' },
+      '4xl': { base: 'h-3.25 min-w-3.25 text-[0.8125rem]' }
     },
     position: {
       'top-right': { base: 'top-0 right-0' },
