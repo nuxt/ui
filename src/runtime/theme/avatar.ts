@@ -40,6 +40,9 @@ export default defineTheme({
       },
       '3xl': {
         root: 'size-12 text-2xl'
+      },
+      '4xl': {
+        root: 'size-13 text-[1.625rem]'
       }
     }
   },

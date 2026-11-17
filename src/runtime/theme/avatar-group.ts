@@ -37,6 +37,9 @@ export default defineTheme({
       },
       '3xl': {
         base: 'ring-3 -me-2'
+      },
+      '4xl': {
+        base: 'ring-3 -me-2'
       }
     },
     color: colorVariant({})
