@@ -21,6 +21,8 @@ describe('Badge', () => {
     ['with trailing and icon', { props: { trailing: true, icon: 'i-lucide-arrow-right' } }],
     ['with trailingIcon', { props: { trailingIcon: 'i-lucide-arrow-right' } }],
     ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
+    ...sizes.map((size: string) => [`with avatar and size ${size}`, { props: { label: 'Badge', avatar: { src: 'https://github.com/benjamincanac.png' }, size } }]),
+    ...sizes.map((size: string) => [`with avatar square and size ${size}`, { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, square: true, size } }]),
     ['with avatar and leadingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, leadingIcon: 'i-lucide-arrow-left' } }],
     ['with avatar and trailingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, trailingIcon: 'i-lucide-arrow-right' } }],
     ['with square', { props: { label: 'Badge', square: true } }],
