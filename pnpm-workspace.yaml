@@ -27,7 +27,7 @@ catalog:
   "@iconify/vue": ^5.0.5
   "@internationalized/date": ^3.12.4
   "@internationalized/number": ^3.6.9
-  "@nuxt/content": ^3.16.2
+  "@nuxt/content": ^3.17.0
   "@nuxt/eslint-config": ^1.17.0
   "@nuxt/fonts": ^1.2.0
   "@nuxt/icon": ^2.6.2
@@ -40,7 +40,7 @@ catalog:
   "@nuxt/ui": workspace:*
   "@nuxtjs/color-mode": ^4.1.0
   "@nuxtjs/mcp-toolkit": ^0.24.3
-  "@nuxtjs/mdc": ^0.23.3
+  "@nuxtjs/mdc": ^0.23.4
   "@nuxtjs/robots": ^7.0.2
   "@nuxtjs/sitemap": ^9.1.0
   "@octokit/rest": ^22.0.1
@@ -198,4 +198,7 @@ minimumReleaseAgeExclude:
   - nuxt-agent-discovery@0.8.1
   - "@comark/vue@0.9.1"
   - comark@0.9.1
-  - "@nuxtjs/mdc@0.23.3"
+  - "@nuxtjs/mdc@0.23.3 || 0.23.4"
+  - "@nuxt/content@3.17.0"
+  - isomorphic-git@1.44.16
+  - minimatch@11.0.9
