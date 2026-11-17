@@ -8,11 +8,11 @@ export default defineTheme({
     base: 'w-full min-w-0 flex-1 self-stretch border-0 bg-transparent text-strong outline-none placeholder:text-faint px-(--ui-control-px) py-(--ui-control-py) disabled:cursor-not-allowed',
     // After the input in the DOM, so the input keeps the first tab stop. The invisible
     // character gives the leading the baseline of the text, see `input.ts`
-    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
+    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
     // A button in the leading or the trailing is square whatever its size, 4px from the
     // top and the bottom, and its icon sits where an icon of the field would: the slot
     // keeps the padding and the icon of the field, the button reads them
-    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm',
+    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm',
     increment: 'flex items-center',
     decrement: 'flex items-center'
   },
