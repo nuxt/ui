@@ -3,7 +3,7 @@ import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
   name: 'Srpski (latinica)',
-  code: 'sr-LATN',
+  code: 'sr-Latn',
   messages: {
     alert: {
       close: 'Zatvori'
@@ -114,7 +114,7 @@ export default defineLocale<Messages>({
     },
     inputDate: {
       day: 'dan',
-      dayPeriod: 'AM/PM',
+      dayPeriod: 'pre podne/po podne',
       era: 'era',
       hour: 'sat',
       minute: 'minut',
@@ -138,7 +138,7 @@ export default defineLocale<Messages>({
       rate: 'Oceni {value} od {length}'
     },
     inputTime: {
-      dayPeriod: 'AM/PM',
+      dayPeriod: 'pre podne/po podne',
       hour: 'sat',
       minute: 'minut',
       second: 'sekund',
@@ -168,11 +168,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Skupi',
+        label: '{text} {name}',
         name: 'kod',
         openText: 'Proširi'
       },
       collapsible: {
         closeText: 'Sakrij',
+        label: '{text} {name}',
         name: 'svojstva',
         openText: 'Prikaži'
       },
