@@ -162,7 +162,7 @@ export function getSelectedItem<T extends Array<any>>(
   const { multiple, ...findOptions } = options
 
   // Without `valueKey` the model value is the item itself, so keep it when `items` no longer contains it (e.g. async items).
-  const resolve = (v: unknown) => findItem(items, v, findOptions) ?? (findOptions.valueKey || v == null ? undefined : v)
+  const resolve = (v: unknown) => findItem(items, v, findOptions) ?? ((findOptions.valueKey || v == null) ? undefined : v)
 
   if (multiple) {
     return Array.isArray(value) ? value.map(resolve).filter(item => item !== undefined) : []

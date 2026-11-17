@@ -163,7 +163,8 @@ describe('InputMenu', () => {
       ['without modelValue', {}, undefined],
       ['with multiple and valueKey', { multiple: true, valueKey: 'value', modelValue: ['backlog', 'done'] }, [items[0], items[3]]],
       ['with multiple and no selection', { multiple: true, valueKey: 'value', modelValue: [] }, []],
-      ['with autocomplete mode', { mode: 'autocomplete', valueKey: 'value', modelValue: 'todo' }, undefined]
+      ['with autocomplete mode', { mode: 'autocomplete', valueKey: 'value', modelValue: 'todo' }, undefined],
+      ['with autocomplete mode and multiple', { mode: 'autocomplete', multiple: true, valueKey: 'value', modelValue: 'todo' }, []]
     ])('%s', (_, mountProps, expected) => {
       expect(renderTriggerSlots(mountProps)).toStrictEqual({ leading: expected, default: expected, trailing: expected })
     })

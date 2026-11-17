@@ -389,10 +389,14 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputMenu || {})
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
-// In autocomplete mode `modelValue` is the typed text, so nothing is selected.
 function resolveSelectedItem(slot: 'leading' | 'default' | 'trailing', value: unknown) {
-  if (!slots[slot] || isAutocomplete.value) {
+  if (!slots[slot]) {
     return undefined as GetSelectedItem<T, M, ExcludeItem>
+  }
+
+  // In autocomplete mode `modelValue` is the typed text, so nothing is selected.
+  if (isAutocomplete.value) {
+    return (props.multiple ? [] : undefined) as GetSelectedItem<T, M, ExcludeItem>
   }
 
   return getSelectedItem(items.value, value, {
