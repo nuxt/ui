@@ -1,5 +1,7 @@
 # Changelog
 
+Releases after v4.12.2 are listed on [GitHub Releases](https://github.com/nuxt/ui/releases).
+
 ## [4.12.2](https://github.com/nuxt/ui/compare/v4.12.1...v4.12.2) (2026-11-16)
 
 ### Bug Fixes

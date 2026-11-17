@@ -2,51 +2,110 @@ name: release
 
 on:
   push:
-    tags:
-      - 'v4*'
+    # release/v* picks up hand edits to an open release PR
+    branches: [v4, 'release/v*']
+  pull_request:
+    types: [closed]
+    branches: [v4, v5]
+  # merged release PRs, publish reruns, and prereleases all arrive here
+  workflow_dispatch:
+    inputs:
+      prerelease:
+        description: 'Cut a prerelease instead of a normal release, e.g. `alpha`, `beta` or `rc`'
+        required: false
+        default: ''
+      npm-tag:
+        description: 'npm dist-tag to publish to. Set by uppt/release for maintenance lines, leave blank otherwise'
+        required: false
+        default: ''
+
+permissions: {}
 
 jobs:
-  publish:
-    runs-on: ${{ matrix.os }}
-
+  # open or update a draft release PR from conventional commits
+  pr:
+    if: |
+      github.repository == 'nuxt/ui'
+      && (
+        (
+          github.event_name == 'push'
+          && (
+            github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+            || startsWith(github.ref, 'refs/heads/release/v')
+          )
+        ) || (
+          github.event_name == 'workflow_dispatch'
+          && !startsWith(github.ref, 'refs/tags/')
+        )
+      )
+    runs-on: ubuntu-latest
+    # one updater at a time, so an older run can't finish last and overwrite the release branch
+    concurrency:
+      group: release-pr
+      cancel-in-progress: false
     permissions:
-      contents: read
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [24]
-
+      contents: write
+      pull-requests: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7
+      - uses: danielroe/uppt/pr@427b736befa839b403dd145f2a7c16dbf3fd4482 # v0.6.13
         with:
-          persist-credentials: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # a dispatch from `v5` opens the release PR against `v5`
+          base-branch: ${{ github.ref_name }}
+          prerelease: ${{ inputs.prerelease }}
+          # same subject as past releases, and a valid conventional PR title
+          title: 'chore(release): v{version}'
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Install node
-        uses: actions/setup-node@v7
+  # release PR merged: tag it, cut a GitHub release, dispatch the publish run
+  release:
+    if: |
+      github.event_name == 'pull_request'
+      && github.event.pull_request.merged == true
+      && startsWith(github.event.pull_request.head.ref, 'release/v')
+      && github.event.pull_request.head.repo.full_name == github.repository
+      && github.repository == 'nuxt/ui'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: release-${{ github.event.pull_request.number }}
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: danielroe/uppt/release@427b736befa839b403dd145f2a7c16dbf3fd4482 # v0.6.13
         with:
-          node-version: ${{ matrix.node }}
-          cache: pnpm
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install dependencies
-        run: pnpm install
+  # the chained dispatch lands here on the vX.Y.Z tag, build the tarball
+  pack:
+    if: github.event_name == 'workflow_dispatch' && startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pack-${{ github.ref }}
+      cancel-in-progress: false
+    permissions: {}
+    outputs:
+      files: ${{ steps.pack.outputs.files }}
+    steps:
+      - id: pack
+        uses: danielroe/uppt/pack@427b736befa839b403dd145f2a7c16dbf3fd4482 # v0.6.13
 
-      - name: Prepare
-        run: pnpm run dev:prepare
-
-      - parallel:
-          - name: Lint
-            run: pnpm run lint
-          - name: Typecheck
-            run: pnpm run typecheck
-          - name: Test
-            run: pnpm run test run
-
-      - name: Publish
-        run: ./scripts/release.sh
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+  # stage the prebuilt tarball to npm via OIDC
+  publish:
+    if: |
+      github.event_name == 'workflow_dispatch'
+      && startsWith(github.ref, 'refs/tags/v')
+      && needs.pack.outputs.files != '[]'
+    needs: pack
+    runs-on: ubuntu-latest
+    concurrency:
+      group: publish-${{ github.ref }}
+      cancel-in-progress: false
+    permissions:
+      id-token: write
+    environment: npm
+    steps:
+      - uses: danielroe/uppt/publish@427b736befa839b403dd145f2a7c16dbf3fd4482 # v0.6.13
+        with:
+          files: ${{ needs.pack.outputs.files }}
+          npm-tag: ${{ inputs.npm-tag }}

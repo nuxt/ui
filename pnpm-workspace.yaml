@@ -46,7 +46,6 @@ catalog:
   "@octokit/rest": ^22.0.1
   "@regle/core": ^1.29.5
   "@regle/rules": ^1.29.5
-  "@release-it/conventional-changelog": ^12.0.2
   "@shikijs/types": ^4.6.0
   "@standard-schema/spec": ^1.1.0
   "@tailwindcss/postcss": ^4.3.5
@@ -125,7 +124,6 @@ catalog:
   pathe: ^2.0.3
   prettier: ^3.9.10
   reka-ui: 2.11.0
-  release-it: ^21.1.2
   scule: ^1.3.0
   shiki: ^4.6.0
   shiki-transformer-color-highlight: ^1.1.0
