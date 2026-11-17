@@ -40,7 +40,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
    */
   placeholder?: string
   children?: CommandPaletteItem[]
-  onSelect?: (e: ListboxItemSelectEvent<_AcceptableValue>) => void
+  onSelect?: (e: ListboxItemSelectEvent<_AcceptableValue | boolean>) => void
   class?: any
   ui?: Partial<Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>>
   [key: string]: any
@@ -504,7 +504,7 @@ function onBackspace() {
   }
 }
 
-function onSelect(e: ListboxItemSelectEvent<_AcceptableValue>, item: T) {
+function onSelect(e: ListboxItemSelectEvent<_AcceptableValue | boolean>, item: T) {
   if (item.children?.length) {
     e.preventDefault()
 

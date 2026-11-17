@@ -34,7 +34,7 @@ export type SelectMenuItem = SelectMenuValue | {
    */
   type?: 'label' | 'separator' | 'item'
   disabled?: boolean
-  onSelect?: (e: ListboxItemSelectEvent<_AcceptableValue>) => void
+  onSelect?: (e: ListboxItemSelectEvent<_AcceptableValue | boolean>) => void
   class?: any
   ui?: Partial<Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>>
   [key: string]: any
@@ -511,7 +511,7 @@ function onCreate(e: Event) {
   emits('create', searchTerm.value)
 }
 
-function onSelect(e: ListboxItemSelectEvent<_AcceptableValue>, item: SelectMenuItem) {
+function onSelect(e: ListboxItemSelectEvent<_AcceptableValue | boolean>, item: SelectMenuItem) {
   if (!isSelectItem(item)) {
     return
   }

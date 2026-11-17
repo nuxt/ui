@@ -29,7 +29,7 @@ export interface ListboxItem {
    */
   type?: 'label' | 'separator' | 'item'
   disabled?: boolean
-  onSelect?: (e: ListboxItemSelectEvent<_AcceptableValue>) => void
+  onSelect?: (e: ListboxItemSelectEvent<_AcceptableValue | boolean>) => void
   class?: any
   ui?: Partial<Pick<Listbox['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatar' | 'itemLeadingAvatarSize' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>>
   [key: string]: any
@@ -275,7 +275,7 @@ function onUpdate(value: any) {
   emitFormInput()
 }
 
-function onSelect(e: ListboxItemSelectEvent<_AcceptableValue>, item: ListboxItem) {
+function onSelect(e: ListboxItemSelectEvent<_AcceptableValue | boolean>, item: ListboxItem) {
   if (item.disabled) {
     e.preventDefault()
     return

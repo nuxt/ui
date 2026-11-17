@@ -33,7 +33,7 @@ export type SelectItem = SelectValue | {
   type?: 'label' | 'separator' | 'item'
   value?: SelectValue
   disabled?: boolean
-  onSelect?: (e: SelectItemSelectEvent<_AcceptableValue>) => void
+  onSelect?: (e: SelectItemSelectEvent<_AcceptableValue | boolean>) => void
   class?: any
   ui?: Partial<Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>>
   [key: string]: any
