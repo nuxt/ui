@@ -39,7 +39,7 @@ body:
     attributes:
       label: Package
       options:
-        - v5.0.0-alpha.x
+        - v5.0.0-beta.x
         - v4.x
         - v3.x
         - v2.x

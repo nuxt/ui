@@ -8,7 +8,7 @@ Nuxt UI is a component library built on [Reka UI](https://reka-ui.com/) and [Tai
 
 ## v5 Branch
 
-This is the `v5` branch, where breaking changes land. Non-breaking work targets `v4`, and `v5` is rebased on top of `v4` regularly. The rebase rewrites the history of `v5`, so a branch opened against it has to be rebased after each sync. Releases from this branch are alphas and betas published under the `next` npm tag.
+This is the `v5` branch, where breaking changes land. Non-breaking work targets `v4`, and `v5` is rebased on top of `v4` regularly. The rebase rewrites the history of `v5`, so a branch opened against it has to be rebased after each sync. Releases from this branch are betas published under the `next` npm tag.
 
 Every breaking change must keep three places in sync in the same PR:
 
@@ -16,7 +16,7 @@ Every breaking change must keep three places in sync in the same PR:
 - **Tracking issue**: link the PR in the checklist of [nuxt/ui#6918](https://github.com/nuxt/ui/issues/6918).
 - **Roadmap**: tick the matching item in the [v5 roadmap discussion](https://github.com/nuxt/ui/discussions/6610), or add it if it was not planned.
 
-The docs of this branch go live with the first alpha, so the `Soon` badge convention below does not apply here. Don't add one to a docs heading, and drop it when a `v4` docs change that carries one lands on `v5`.
+The docs of this branch go live with the first beta, so the `Soon` badge convention below does not apply here. Don't add one to a docs heading, and drop it when a `v4` docs change that carries one lands on `v5`.
 
 ## Project Structure
 
