@@ -16,7 +16,6 @@ const modelValue = shallowRef({
         <UButton
           color="neutral"
           variant="ghost"
-          size="xs"
           icon="i-lucide-calendar"
           aria-label="Select a date range"
         />

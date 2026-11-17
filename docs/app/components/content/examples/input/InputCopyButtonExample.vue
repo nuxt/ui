@@ -15,7 +15,6 @@ const { copy, copied } = useClipboard()
         <UButton
           :color="copied ? 'success' : 'neutral'"
           variant="ghost"
-          size="xs"
           :icon="copied ? 'i-lucide-copy-check' : 'i-lucide-copy'"
           aria-label="Copy to clipboard"
           @click="copy(value)"

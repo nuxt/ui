@@ -15,10 +15,12 @@ export default defineTheme({
     tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
     // After the input in the DOM, so the input keeps the first tab stop. The
     // invisible character gives the leading the baseline of the text, see `input.ts`
-    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-1 before:content-['x'] before:w-0 before:invisible`,
+    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-1 [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
-    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-1',
+    // A button in the leading or the trailing sits 4px inside the box whatever its size:
+    // the slot keeps the padding and the icon of the field, the button reads them
+    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-1 [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm',
     trailingIcon: 'shrink-0 text-faint',
     item: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-strong bg-soft text-default data-disabled:cursor-not-allowed wrap-anywhere data-[state=active]:bg-strong',
     itemText: '',

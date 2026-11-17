@@ -11,7 +11,6 @@ const value = ref('Click to clear')
       <UButton
         color="neutral"
         variant="ghost"
-        size="xs"
         icon="i-lucide-circle-x"
         aria-label="Clear input"
         @click="value = ''"
