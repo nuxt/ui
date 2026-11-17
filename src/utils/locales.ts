@@ -12,7 +12,12 @@ export function getLocaleKeys(localeDir: string): string[] {
 
 export function resolveLocaleKey(locale: I18nLocale, keys: string[]): string | undefined {
   const tags = (typeof locale === 'string' ? [locale] : [locale.language, locale.code]).filter((tag): tag is string => !!tag)
-  const candidates = [...tags, ...tags.map(tag => tag.replace(/[-_][a-z]{4}(?=[-_]|$)/i, '')), ...tags.map(tag => tag.split(/[-_]/)[0]!)].map(tag => tag.toLowerCase().replace(/-/g, '_'))
+  const candidates = [
+    ...tags,
+    // Without the script subtag (`zh-Hant-TW` uses `zh_tw`)
+    ...tags.map(tag => tag.replace(/[-_][a-z]{4}(?=[-_]|$)/i, '')),
+    ...tags.map(tag => tag.split(/[-_]/)[0]!)
+  ].map(tag => tag.toLowerCase().replace(/-/g, '_'))
 
   const key = candidates.find(key => keys.includes(key))
   if (key) {

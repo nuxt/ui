@@ -16,6 +16,7 @@ describe('i18n plugin', () => {
     ['fa', 'fa_ir'],
     ['nb', 'nb_no'],
     ['zh', undefined],
+    ['zh-Hant', undefined],
     ['xx', undefined]
   ])('resolves %j to %s', (locale, key) => {
     expect(resolveLocaleKey(locale, keys)).toBe(key)
