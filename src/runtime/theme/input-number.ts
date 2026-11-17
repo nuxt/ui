@@ -8,11 +8,11 @@ export default defineTheme({
     base: 'w-full min-w-0 flex-1 self-stretch border-0 bg-transparent text-strong outline-none placeholder:text-faint px-(--ui-control-px) py-(--ui-control-py) disabled:cursor-not-allowed',
     // After the input in the DOM, so the input keeps the first tab stop. The invisible
     // character gives the leading the baseline of the text, see `input.ts`
-    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-1 [--ui-field-px:var(--ui-control-px)] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:px-[calc(var(--ui-field-px)-(--spacing(1)))] [&>button]:py-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
-    // A button in the leading or the trailing sits 4px inside the box whatever its size,
-    // its icon where an icon of the field would be: the slot keeps the padding and the
-    // icon of the field, the button reads them
-    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-1 [--ui-field-px:var(--ui-control-px)] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:px-[calc(var(--ui-field-px)-(--spacing(1)))] [&>button]:py-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm',
+    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
+    // A button in the leading or the trailing is square whatever its size, 4px from the
+    // top and the bottom, and its icon sits where an icon of the field would: the slot
+    // keeps the padding and the icon of the field, the button reads them
+    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm',
     increment: 'flex items-center',
     decrement: 'flex items-center'
   },
@@ -46,8 +46,8 @@ export default defineTheme({
       // and their hover is a step above the fill of the box
       horizontal: {
         base: 'text-center',
-        increment: 'pe-1 [--ui-field-px:var(--ui-control-px)] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:px-[calc(var(--ui-field-px)-(--spacing(1)))] [&>button]:py-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong',
-        decrement: `order-first ps-1 before:content-['x'] before:w-0 before:invisible [--ui-field-px:var(--ui-control-px)] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:px-[calc(var(--ui-field-px)-(--spacing(1)))] [&>button]:py-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong`
+        increment: 'pe-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong',
+        decrement: `order-first ps-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] before:content-['x'] before:w-0 before:invisible [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong`
       },
       // Both buttons share a column at the end. Each is taller than its half of the
       // box, so a negative margin lets them overlap without making the box taller.

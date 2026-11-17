@@ -12,7 +12,7 @@ export default extendTheme(input, {
     tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
     // The trigger is the button of the field, 4px inside the box, and holds the clear or the
     // chevron: its hover is a step above the fill of the box
-    trailing: () => 'group flex items-center me-1 [--ui-accent:var(--ui-neutral)] px-[calc(var(--ui-control-px)-(--spacing(1)))] py-[calc(var(--ui-control-py)-(--spacing(1)))] rounded-sm enabled:hover:bg-accent-strong enabled:active:bg-accent-strong disabled:cursor-not-allowed focus:outline-none transition-colors',
+    trailing: () => 'group flex items-center me-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-accent:var(--ui-neutral)] p-[calc(var(--ui-control-py)-(--spacing(1)))] rounded-sm enabled:hover:bg-accent-strong enabled:active:bg-accent-strong disabled:cursor-not-allowed focus:outline-none transition-colors',
     trailingClear: 'p-0',
     // The chevron turns over while the menu is open
     trailingIcon: (prev: string) => [prev, 'group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none'],
