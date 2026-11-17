@@ -31,12 +31,16 @@ export default defineTheme({
       xs: {
         base: 'text-[0.5rem]/3 [--ui-control-px:--spacing(1)] [--ui-control-py:--spacing(0.5)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm',
         leadingIcon: 'size-(--ui-control-icon-size)',
-        trailingIcon: 'size-(--ui-control-icon-size)'
+        trailingIcon: 'size-(--ui-control-icon-size)',
+        // The 14px avatar is taller than the 12px line, so it eats into the padding
+        leadingAvatar: '-my-px'
       },
       sm: {
         base: 'text-[0.625rem]/3 [--ui-control-px:--spacing(1.5)] [--ui-control-py:--spacing(0.5)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(3)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-sm',
         leadingIcon: 'size-(--ui-control-icon-size)',
-        trailingIcon: 'size-(--ui-control-icon-size)'
+        trailingIcon: 'size-(--ui-control-icon-size)',
+        // The 14px avatar is taller than the 12px line, so it eats into the padding
+        leadingAvatar: '-my-px'
       },
       md: {
         base: 'text-xs [--ui-control-px:--spacing(2)] [--ui-control-py:--spacing(1)] [--ui-control-gap:--spacing(1)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) rounded-md',
