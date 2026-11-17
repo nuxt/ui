@@ -2,8 +2,7 @@ name: release
 
 on:
   push:
-    # release/v* picks up hand edits to an open release PR
-    branches: [v4, 'release/v*']
+    branches: [v4]
   pull_request:
     types: [closed]
     branches: [v4, v5]
@@ -11,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       prerelease:
-        description: 'Cut a prerelease instead of a normal release, e.g. `alpha`, `beta` or `rc`'
+        description: 'Cut a prerelease instead of a normal release, e.g. `beta` or `rc`. Defaults to `beta` on `v5`'
         required: false
         default: ''
       npm-tag:
@@ -29,30 +28,41 @@ jobs:
       && (
         (
           github.event_name == 'push'
-          && (
-            github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-            || startsWith(github.ref, 'refs/heads/release/v')
-          )
+          && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         ) || (
           github.event_name == 'workflow_dispatch'
-          && !startsWith(github.ref, 'refs/tags/')
+          && (github.ref == 'refs/heads/v4' || github.ref == 'refs/heads/v5')
         )
       )
     runs-on: ubuntu-latest
-    # one updater at a time, so an older run can't finish last and overwrite the release branch
+    # one updater at a time per branch, so an older run can't finish last and overwrite the release branch
     concurrency:
-      group: release-pr
+      group: release-pr-${{ github.ref_name }}
       cancel-in-progress: false
     permissions:
       contents: write
       pull-requests: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # uppt starts the changelog at the newest tag by date on any branch, so a tag
+      # cut elsewhere (4.12.1 and 4.12.2 from a side branch, v5 betas for v4)
+      # would drop every commit older than it
+      - name: Keep only tags reachable from the branch
+        run: git tag --no-merged HEAD | xargs -r git tag -d
+
       - uses: danielroe/uppt/pr@427b736befa839b403dd145f2a7c16dbf3fd4482 # v0.6.13
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          checkout: false
           # a dispatch from `v5` opens the release PR against `v5`
           base-branch: ${{ github.ref_name }}
-          prerelease: ${{ inputs.prerelease }}
+          # `v5` stays on the beta line until 5.0.0
+          prerelease: ${{ inputs.prerelease || (github.ref_name == 'v5' && 'beta' || '') }}
           # same subject as past releases, and a valid conventional PR title
           title: 'chore(release): v{version}'
 
@@ -90,13 +100,48 @@ jobs:
       - id: pack
         uses: danielroe/uppt/pack@427b736befa839b403dd145f2a7c16dbf3fd4482 # v0.6.13
 
+  # lint, typecheck and test the tag before anything reaches npm
+  check:
+    if: github.event_name == 'workflow_dispatch' && startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Install node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Prepare
+        run: pnpm run dev:prepare
+
+      - parallel:
+          - name: Lint
+            run: pnpm run lint
+          - name: Typecheck
+            run: pnpm run typecheck
+          - name: Test
+            run: pnpm run test run
+
   # stage the prebuilt tarball to npm via OIDC
   publish:
     if: |
       github.event_name == 'workflow_dispatch'
       && startsWith(github.ref, 'refs/tags/v')
       && needs.pack.outputs.files != '[]'
-    needs: pack
+    needs: [pack, check]
     runs-on: ubuntu-latest
     concurrency:
       group: publish-${{ github.ref }}
@@ -108,4 +153,5 @@ jobs:
       - uses: danielroe/uppt/publish@427b736befa839b403dd145f2a7c16dbf3fd4482 # v0.6.13
         with:
           files: ${{ needs.pack.outputs.files }}
-          npm-tag: ${{ inputs.npm-tag }}
+          # v5 prereleases go to `next` rather than `beta`
+          npm-tag: ${{ inputs.npm-tag || (startsWith(github.ref_name, 'v5.') && contains(github.ref_name, '-') && 'next' || '') }}
