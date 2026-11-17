@@ -30,6 +30,8 @@ exports[`Kbd > renders with size md correctly 1`] = `"<kbd data-slot="kbd" class
 
 exports[`Kbd > renders with size sm correctly 1`] = `"<kbd data-slot="kbd" class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase [--ui-accent:var(--ui-neutral)] ring ring-inset ring-accent-strong text-accent-default bg-default h-4 min-w-4 text-[0.625rem]">K</kbd>"`;
 
+exports[`Kbd > renders with size xl correctly 1`] = `"<kbd data-slot="kbd" class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase [--ui-accent:var(--ui-neutral)] ring ring-inset ring-accent-strong text-accent-default bg-default h-7 min-w-7 text-[0.8125rem]">K</kbd>"`;
+
 exports[`Kbd > renders with size xs correctly 1`] = `"<kbd data-slot="kbd" class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase [--ui-accent:var(--ui-neutral)] ring ring-inset ring-accent-strong text-accent-default bg-default h-3.5 min-w-3.5 text-[0.5625rem]">K</kbd>"`;
 
 exports[`Kbd > renders with value correctly 1`] = `"<kbd data-slot="kbd" class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase [--ui-accent:var(--ui-neutral)] ring ring-inset ring-accent-strong text-accent-default bg-default h-5 min-w-5 text-[0.6875rem]">K</kbd>"`;
