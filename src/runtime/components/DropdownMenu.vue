@@ -101,7 +101,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
   /**
    * Whether to display a filter input or not.
    * Can be an object to pass additional props to the input.
-   * `{ placeholder: t('dropdownMenu.filterPlaceholder'), autofocus: true, variant: 'none' }`{lang="ts-type"}
+   * `{ placeholder: t('dropdownMenu.filterPlaceholder'), autofocus: true, variant: 'soft' }`{lang="ts-type"}
    * @defaultValue false
    */
   filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
@@ -230,7 +230,7 @@ watch(() => props.open, (open) => {
 })
 
 const childrenIcon = computed(() => dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight)
-const getFilterProps = (filter: DropdownMenuItem['filter']) => defu(filter, { placeholder: t('dropdownMenu.filterPlaceholder'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>
+const getFilterProps = (filter: DropdownMenuItem['filter']) => defu(filter, { placeholder: t('dropdownMenu.filterPlaceholder'), variant: 'soft' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>
 const isStructuralItem = (item: DropdownMenuItem) => !!item.type && ['label', 'separator'].includes(item.type)
 
 function getFilteredGroups({ items, path, filter, filterFields, ignoreFilter }: { items?: ArrayOrNested<DropdownMenuItem>, path: string, filter?: DropdownMenuItem['filter'], filterFields?: string[], ignoreFilter?: boolean }) {
