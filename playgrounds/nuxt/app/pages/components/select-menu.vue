@@ -59,6 +59,9 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
 
 const value = ref('Apple')
 const valueMultiple = ref([fruits[0]!, vegetables[0]!])
+
+const statusKey = ref('todo')
+const statusKeys = ref(['todo', 'done'])
 </script>
 
 <template>
@@ -127,5 +130,18 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
       :items="[Array(1000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i }))]"
       v-bind="props"
     />
+    <USelectMenu v-model="statusKey" :items="statuses" value-key="value" v-bind="props">
+      <template #leading="{ item, ui }">
+        <UIcon v-if="item" :name="item.icon" :class="ui.leadingIcon()" />
+      </template>
+      <template #default="{ modelValue, item }">
+        {{ item?.label }} ({{ modelValue }})
+      </template>
+    </USelectMenu>
+    <USelectMenu v-model="statusKeys" :items="statuses" value-key="value" multiple v-bind="props">
+      <template #default="{ item }">
+        {{ item.map(i => i.label).join(' + ') }}
+      </template>
+    </USelectMenu>
   </Matrix>
 </template>

@@ -180,6 +180,10 @@ props:
 Use the `by` prop to compare objects by a field instead of reference when the `model-value` is an object.
 ::
 
+::tip
+The `#leading`, `#default` and `#trailing` slots receive the selected item as `item`, so you can still read its other properties when `model-value` only holds its key.
+::
+
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections, the selected items will be separated by a comma in the trigger.

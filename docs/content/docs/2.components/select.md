@@ -168,6 +168,10 @@ props:
 ---
 ::
 
+::tip
+The `#leading`, `#default` and `#trailing` slots receive the selected item as `item`, so you can still read its other properties when `model-value` only holds its key.
+::
+
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections, the selected items will be separated by a comma in the trigger.
@@ -692,7 +696,7 @@ In this example, the icon is computed from the `value` property of the selected 
 ::
 
 ::tip
-You can also use the `#leading` slot to display the selected icon.
+You can also use the `#leading` slot and its `item` prop to display the selected icon.
 ::
 
 ### With avatar in items
@@ -711,7 +715,7 @@ In this example, the avatar is computed from the `value` property of the selecte
 ::
 
 ::tip
-You can also use the `#leading` slot to display the selected avatar.
+You can also use the `#leading` slot and its `item` prop to display the selected avatar.
 ::
 
 ### With chip in items
@@ -726,7 +730,7 @@ name: 'select-items-chip-example'
 ::
 
 ::note
-In this example, the `#leading` slot is used to display the selected chip.
+In this example, the `#leading` slot uses its `item` prop to display the chip of the selected item.
 ::
 
 ### Control open state

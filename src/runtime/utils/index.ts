@@ -132,6 +132,45 @@ export function isEmpty(value: unknown): boolean {
   return false
 }
 
+export function findItem<T extends Array<any>, V>(
+  items: T,
+  value: V | undefined | null,
+  options: {
+    valueKey?: GetItemKeys<T>
+    by?: string | ((a: any, b: any) => boolean)
+  } = {}
+): T[number] | undefined {
+  const { valueKey, by } = options
+
+  return items.find((item) => {
+    const itemValue = (typeof item === 'object' && item !== null && valueKey)
+      ? get(item, valueKey as string)
+      : item
+    return compare(itemValue, value, by)
+  })
+}
+
+export function getSelectedItem<T extends Array<any>>(
+  items: T,
+  value: unknown,
+  options: {
+    valueKey?: GetItemKeys<T>
+    by?: string | ((a: any, b: any) => boolean)
+    multiple?: boolean
+  } = {}
+): T[number] | T[number][] | undefined {
+  const { multiple, ...findOptions } = options
+
+  // Without `valueKey` the model value is the item itself, so keep it when `items` no longer contains it (e.g. async items).
+  const resolve = (v: unknown) => findItem(items, v, findOptions) ?? (findOptions.valueKey || v == null ? undefined : v)
+
+  if (multiple) {
+    return Array.isArray(value) ? value.map(resolve).filter(item => item !== undefined) : []
+  }
+
+  return resolve(value)
+}
+
 export function getDisplayValue<T extends Array<any>, V>(
   items: T,
   value: V | undefined | null,
@@ -143,12 +182,7 @@ export function getDisplayValue<T extends Array<any>, V>(
 ): string | undefined {
   const { valueKey, labelKey, by } = options
 
-  const foundItem = items.find((item) => {
-    const itemValue = (typeof item === 'object' && item !== null && valueKey)
-      ? get(item, valueKey as string)
-      : item
-    return compare(itemValue, value, by)
-  })
+  const foundItem = findItem(items, value, { valueKey, by })
 
   if (isEmpty(value) && foundItem) {
     return labelKey ? get(foundItem as Record<string, any>, labelKey as string) : undefined

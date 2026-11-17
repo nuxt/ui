@@ -111,6 +111,14 @@ export type GetModelValue<
   ? GetItemValue<I, VK, O>[]
   : GetItemValue<I, VK, O>
 
+export type GetSelectedItem<
+  I,
+  M extends boolean,
+  O extends object | undefined = undefined
+> = M extends true
+  ? Exclude<NestedItem<I>, O>[]
+  : Exclude<NestedItem<I>, O> | undefined
+
 export type GetModelValueEmits<
   I,
   VK extends GetItemKeys<I> | undefined,

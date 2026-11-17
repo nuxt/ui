@@ -8,6 +8,8 @@ import {
   compare,
   isEmpty,
   getDisplayValue,
+  findItem,
+  getSelectedItem,
   isArrayOfArray,
   mergeClasses,
   getSlotChildrenText,
@@ -194,6 +196,47 @@ describe('getDisplayValue', () => {
     const users = [{ id: 1, name: 'A' }]
     expect(getDisplayValue(users, { id: 1 }, { labelKey: 'name', by: 'id' })).toBe('A')
     expect(getDisplayValue(users, { id: 1 }, { labelKey: 'name', by: (a, b) => a.id === b.id })).toBe('A')
+  })
+})
+
+describe('findItem', () => {
+  const items = [{ value: 1, label: 'One' }, { value: 2, label: 'Two' }]
+
+  it('finds primitive items', () => {
+    expect(findItem(['a', 'b'], 'b')).toBe('b')
+    expect(findItem(['a'], 'z')).toBeUndefined()
+  })
+
+  it('finds the item with `valueKey`', () => {
+    expect(findItem(items, 2, { valueKey: 'value' })).toBe(items[1])
+  })
+
+  it('finds the item with `by`', () => {
+    expect(findItem(items, { value: 2 }, { by: 'value' })).toBe(items[1])
+  })
+
+  it('returns undefined without a value', () => {
+    expect(findItem(items, undefined, { valueKey: 'value' })).toBeUndefined()
+  })
+})
+
+describe('getSelectedItem', () => {
+  const items = [{ value: 1, label: 'One' }, { value: 2, label: 'Two' }]
+
+  it('returns the matching item', () => {
+    expect(getSelectedItem(items, 2, { valueKey: 'value' })).toBe(items[1])
+    expect(getSelectedItem(items, 3, { valueKey: 'value' })).toBeUndefined()
+  })
+
+  it('keeps an object value missing from items when there is no `valueKey`', () => {
+    const value = { value: 3, label: 'Three' }
+    expect(getSelectedItem(items, value)).toBe(value)
+    expect(getSelectedItem(items, null)).toBeUndefined()
+  })
+
+  it('returns the matching items with `multiple`', () => {
+    expect(getSelectedItem(items, [2, 3, 1], { valueKey: 'value', multiple: true })).toEqual([items[1], items[0]])
+    expect(getSelectedItem(items, undefined, { valueKey: 'value', multiple: true })).toEqual([])
   })
 })
 

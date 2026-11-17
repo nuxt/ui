@@ -132,6 +132,41 @@ describe('SelectMenu', () => {
     expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
   })
 
+  describe('`item` slot prop', () => {
+    const triggerSlots = ['leading', 'default', 'trailing'] as const
+
+    function renderTriggerSlots(mountProps: Record<string, any>) {
+      const received: Record<string, unknown> = {}
+
+      mount(SelectMenu, {
+        props: { items, ...mountProps },
+        slots: Object.fromEntries(triggerSlots.map(name => [name, (slotProps: any) => {
+          received[name] = slotProps.item
+          return ''
+        }]))
+      })
+
+      return received
+    }
+
+    test.each([
+      ['with valueKey', { valueKey: 'value', modelValue: 'todo' }, items[1]],
+      ['with object modelValue', { modelValue: items[1] }, items[1]],
+      ['with by and a copied object', { by: 'value', modelValue: { ...items[1] } }, items[1]],
+      ['with object modelValue missing from items', { items: [], modelValue: items[1] }, items[1]],
+      ['with valueKey and modelValue missing from items', { items: [], valueKey: 'value', modelValue: 'todo' }, undefined],
+      ['without modelValue', {}, undefined],
+      ['with multiple and valueKey', { multiple: true, valueKey: 'value', modelValue: ['backlog', 'done'] }, [items[0], items[3]]],
+      ['with multiple and no selection', { multiple: true, valueKey: 'value', modelValue: [] }, []]
+    ])('%s', (_, mountProps, expected) => {
+      expect(renderTriggerSlots(mountProps)).toStrictEqual({ leading: expected, default: expected, trailing: expected })
+    })
+
+    test('finds the item inside groups', () => {
+      expect(renderTriggerSlots({ items: [[{ label: 'Status', type: 'label' }, ...items.slice(0, 2)], items.slice(2)], valueKey: 'value', modelValue: 'done' }).default).toStrictEqual(items[3])
+    })
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(SelectMenu, {
       props: {
