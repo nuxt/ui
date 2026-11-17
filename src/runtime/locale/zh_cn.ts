@@ -23,16 +23,16 @@ export default defineLocale<Messages>({
       label: '事件日期',
       monthPicker: '月份选择器',
       nextMonth: '下个月',
-      nextYear: '明年',
+      nextYear: '下一年',
       prevMonth: '上个月',
-      prevYear: '去年',
+      prevYear: '上一年',
       yearPicker: '年份选择器'
     },
     carousel: {
       dots: '选择要显示的幻灯片',
-      goto: '跳转到第 {slide} 页',
-      next: '下一页',
-      prev: '上一页',
+      goto: '跳转到第 {slide} 张幻灯片',
+      next: '下一张',
+      prev: '上一张',
       roledescription: '轮播',
       slide: '幻灯片'
     },
@@ -168,16 +168,18 @@ export default defineLocale<Messages>({
       input: 'PIN 码，第 {index} 位，共 {length} 位'
     },
     pricingTable: {
-      caption: '价格计划比较'
+      caption: '价格方案比较'
     },
     prose: {
       codeCollapse: {
         closeText: '收起',
+        label: '{text}{name}',
         name: '代码',
         openText: '展开'
       },
       collapsible: {
         closeText: '隐藏',
+        label: '{text}{name}',
         name: '属性',
         openText: '显示'
       },

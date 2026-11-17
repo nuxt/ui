@@ -23,15 +23,15 @@ export default defineLocale<Messages>({
     calendar: {
       label: 'תאריך האירוע',
       monthPicker: 'בורר חודש',
-      nextMonth: 'חודש הבא',
-      nextYear: 'שנה הבאה',
-      prevMonth: 'חודש קודם',
-      prevYear: 'שנה קודמת',
+      nextMonth: 'החודש הבא',
+      nextYear: 'השנה הבאה',
+      prevMonth: 'החודש הקודם',
+      prevYear: 'השנה הקודמת',
       yearPicker: 'בורר שנה'
     },
     carousel: {
       dots: 'בחר שקופית להצגה',
-      goto: 'מעבר ל {slide}',
+      goto: 'מעבר לשקופית {slide}',
       next: 'הבא',
       prev: 'הקודם',
       roledescription: 'קרוסלה',
@@ -71,9 +71,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'חזור',
       close: 'סגור',
-      noData: 'אין נתונים זמינים',
+      noData: 'אין נתונים',
       noMatch: 'לא נמצאה התאמה',
-      placeholder: 'הקלד פקודה…',
+      placeholder: 'הקלד פקודה או חפש…',
       results: 'תוצאות'
     },
     contentSearch: {
@@ -132,7 +132,7 @@ export default defineLocale<Messages>({
     inputMenu: {
       create: 'צור "{label}"',
       noData: 'אין נתונים',
-      noMatch: 'אין התאמה',
+      noMatch: 'לא נמצאה התאמה',
       trigger: 'הצגת אפשרויות'
     },
     inputNumber: {
@@ -161,24 +161,26 @@ export default defineLocale<Messages>({
     pagination: {
       first: 'עמוד ראשון',
       last: 'עמוד אחרון',
-      next: 'עמוד הבא',
+      next: 'העמוד הבא',
       page: 'עמוד {page}',
-      prev: 'עמוד הקודם'
+      prev: 'העמוד הקודם'
     },
     pinInput: {
       input: 'קוד PIN, תו {index} מתוך {length}'
     },
     pricingTable: {
-      caption: 'שיפור מחירון'
+      caption: 'השוואת תוכניות מחיר'
     },
     prose: {
       codeCollapse: {
         closeText: 'כווץ',
+        label: '{text} {name}',
         name: 'קוד',
         openText: 'הרחב'
       },
       collapsible: {
         closeText: 'הסתר',
+        label: '{text} {name}',
         name: 'מאפיינים',
         openText: 'הצג'
       },
@@ -192,7 +194,7 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'סגור',
-      toggle: 'החלף'
+      toggle: 'פתיחה/סגירה'
     },
     selectMenu: {
       create: 'צור "{label}"',
@@ -216,7 +218,7 @@ export default defineLocale<Messages>({
       label: 'התקדמות'
     },
     table: {
-      noData: 'אין נתונים להצגה'
+      noData: 'אין נתונים'
     },
     toast: {
       close: 'סגור'

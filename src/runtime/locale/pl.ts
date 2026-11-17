@@ -22,15 +22,15 @@ export default defineLocale<Messages>({
     calendar: {
       label: 'Data wydarzenia',
       monthPicker: 'Wybór miesiąca',
-      nextMonth: 'Przyszły miesiąc',
-      nextYear: 'Przyszły rok',
+      nextMonth: 'Następny miesiąc',
+      nextYear: 'Następny rok',
       prevMonth: 'Poprzedni miesiąc',
       prevYear: 'Poprzedni rok',
       yearPicker: 'Wybór roku'
     },
     carousel: {
       dots: 'Wybierz slajd do wyświetlenia',
-      goto: 'Idź do {slide}',
+      goto: 'Przejdź do slajdu {slide}',
       next: 'Następny',
       prev: 'Poprzedni',
       roledescription: 'karuzela',
@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Zwiń',
+        label: '{text} {name}',
         name: 'kod',
         openText: 'Rozwiń'
       },
       collapsible: {
         closeText: 'Ukryj',
+        label: '{text} {name}',
         name: 'właściwości',
         openText: 'Pokaż'
       },

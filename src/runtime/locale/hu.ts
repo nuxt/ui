@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Válassza ki a megjelenítendő diát',
-      goto: 'Ugrás ide {slide}',
+      goto: '{slide}. dia megjelenítése',
       next: 'Következő',
       prev: 'Előző',
       roledescription: 'körhinta',
@@ -44,7 +44,7 @@ export default defineLocale<Messages>({
       autoScroll: 'Görgetés az aljára'
     },
     chatPrompt: {
-      placeholder: 'Írd be a kérdésedet itt…',
+      placeholder: 'Írja be ide az üzenetét…',
       queue: 'Várakozó üzenetek',
       sendNow: 'Küldés most',
       edit: 'Szerkesztés',
@@ -135,8 +135,8 @@ export default defineLocale<Messages>({
       trigger: 'Lehetőségek megjelenítése'
     },
     inputNumber: {
-      decrement: 'Csökkent',
-      increment: 'Növel',
+      decrement: 'Csökkentés',
+      increment: 'Növelés',
       roledescription: 'számmező'
     },
     inputRating: {
@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Összecsuk',
-        name: 'kód',
-        openText: 'Kinyit'
+        closeText: 'összecsukása',
+        label: '{name} {text}',
+        name: 'Kód',
+        openText: 'kibontása'
       },
       collapsible: {
-        closeText: 'Elrejt',
-        name: 'tulajdonságok',
-        openText: 'Mutat'
+        closeText: 'elrejtése',
+        label: '{name} {text}',
+        name: 'Tulajdonságok',
+        openText: 'megjelenítése'
       },
       pre: {
         copy: 'Kód másolása a vágólapra'

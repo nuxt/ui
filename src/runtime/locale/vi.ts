@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Chọn slide để hiển thị',
-      goto: 'Đi tới ô {slide}',
+      goto: 'Đi tới slide {slide}',
       next: 'Sau',
       prev: 'Trước',
       roledescription: 'băng chuyền',
@@ -168,16 +168,18 @@ export default defineLocale<Messages>({
       input: 'mã PIN, ký tự {index} trên {length}'
     },
     pricingTable: {
-      caption: 'So sánh các kế hoạch giá'
+      caption: 'So sánh các gói giá'
     },
     prose: {
       codeCollapse: {
         closeText: 'Thu gọn',
+        label: '{text} {name}',
         name: 'mã',
         openText: 'Mở rộng'
       },
       collapsible: {
         closeText: 'Ẩn',
+        label: '{text} {name}',
         name: 'thuộc tính',
         openText: 'Hiển thị'
       },
@@ -191,7 +193,7 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'Đóng',
-      toggle: 'Chuyển đổi'
+      toggle: 'Mở/đóng'
     },
     selectMenu: {
       create: 'Tạo "{label}"',

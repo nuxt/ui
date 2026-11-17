@@ -9,8 +9,8 @@ export default defineLocale<Messages>({
       close: 'Fechar'
     },
     authForm: {
-      hidePassword: 'Ocultar senha',
-      showPassword: 'Mostrar senha',
+      hidePassword: 'Ocultar palavra-passe',
+      showPassword: 'Mostrar palavra-passe',
       submit: 'Continuar'
     },
     banner: {
@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       yearPicker: 'Seletor de ano'
     },
     carousel: {
-      dots: 'Escolher slide para exibir',
+      dots: 'Escolher diapositivo a mostrar',
       goto: 'Ir ao diapositivo {slide}',
       next: 'Próximo',
       prev: 'Anterior',
@@ -72,7 +72,7 @@ export default defineLocale<Messages>({
       close: 'Fechar',
       noData: 'Sem dados',
       noMatch: 'Nenhum dado correspondente',
-      placeholder: 'Digite um comando ou pesquise…',
+      placeholder: 'Escreva um comando ou pesquise…',
       results: 'Resultados'
     },
     contentSearch: {
@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Recolher',
+        label: '{text} {name}',
         name: 'código',
         openText: 'Expandir'
       },
       collapsible: {
         closeText: 'Ocultar',
+        label: '{text} {name}',
         name: 'propriedades',
         openText: 'Mostrar'
       },

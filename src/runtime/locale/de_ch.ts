@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Folie zur Anzeige auswählen',
-      goto: 'Gehe zu {slide}',
+      goto: 'Zu Folie {slide} wechseln',
       next: 'Weiter',
       prev: 'Zurück',
       roledescription: 'Karussell',
@@ -44,7 +44,7 @@ export default defineLocale<Messages>({
       autoScroll: 'Nach unten scrollen'
     },
     chatPrompt: {
-      placeholder: 'Hier schreiben Sie Ihre Nachricht…',
+      placeholder: 'Schreiben Sie hier Ihre Nachricht…',
       queue: 'Nachrichten in der Warteschlange',
       sendNow: 'Jetzt senden',
       edit: 'Bearbeiten',
@@ -78,7 +78,7 @@ export default defineLocale<Messages>({
     contentSearch: {
       links: 'Links',
       search: 'Ergebnisse',
-      theme: 'Thema'
+      theme: 'Design'
     },
     contentSearchButton: {
       label: 'Suchen…'
@@ -91,7 +91,7 @@ export default defineLocale<Messages>({
       search: 'Suchen…'
     },
     dashboardSearch: {
-      theme: 'Thema'
+      theme: 'Design'
     },
     dashboardSearchButton: {
       label: 'Suchen…'
@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Reduzieren',
+        closeText: 'einklappen',
+        label: '{name} {text}',
         name: 'Code',
-        openText: 'Erweitern'
+        openText: 'ausklappen'
       },
       collapsible: {
-        closeText: 'Ausblenden',
+        closeText: 'ausblenden',
+        label: '{name} {text}',
         name: 'Eigenschaften',
-        openText: 'Anzeigen'
+        openText: 'anzeigen'
       },
       pre: {
         copy: 'Code in die Zwischenablage kopieren'

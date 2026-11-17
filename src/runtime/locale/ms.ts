@@ -24,15 +24,15 @@ export default defineLocale<Messages>({
       monthPicker: 'Pemilih bulan',
       nextMonth: 'Bulan seterusnya',
       nextYear: 'Tahun seterusnya',
-      prevMonth: 'Bulan sebelum',
-      prevYear: 'Tahun sebelum',
+      prevMonth: 'Bulan sebelumnya',
+      prevYear: 'Tahun sebelumnya',
       yearPicker: 'Pemilih tahun'
     },
     carousel: {
       dots: 'Pilih slaid untuk dipaparkan',
       goto: 'Pergi ke slaid {slide}',
       next: 'Seterusnya',
-      prev: 'Sebelum',
+      prev: 'Sebelumnya',
       roledescription: 'karusel',
       slide: 'slaid'
     },
@@ -173,12 +173,14 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Runtuhkan',
+        label: '{text} {name}',
         name: 'kod',
         openText: 'Kembangkan'
       },
       collapsible: {
         closeText: 'Sembunyikan',
-        name: 'ciri',
+        label: '{text} {name}',
+        name: 'sifat',
         openText: 'Tunjukkan'
       },
       pre: {

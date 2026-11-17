@@ -47,7 +47,7 @@ export default defineLocale<Messages>({
     chatPrompt: {
       placeholder: 'اینجا پیام خود را بنویسید…',
       queue: 'پیام‌های در صف',
-      sendNow: 'اکنون ارسال شود',
+      sendNow: 'ارسال فوری',
       edit: 'ویرایش',
       remove: 'حذف'
     },
@@ -174,11 +174,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'جمع کردن',
+        label: '{text} {name}',
         name: 'کد',
         openText: 'گسترش'
       },
       collapsible: {
-        closeText: 'پنهان',
+        closeText: 'پنهان کردن',
+        label: '{text} {name}',
         name: 'ویژگی‌ها',
         openText: 'نمایش'
       },

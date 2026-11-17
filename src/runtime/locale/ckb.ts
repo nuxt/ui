@@ -130,7 +130,7 @@ export default defineLocale<Messages>({
       year: 'ساڵ'
     },
     inputMenu: {
-      create: '"{label}" زیادکردنی',
+      create: 'زیادکردنی "{label}"',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
       trigger: 'پیشاندانی هەڵبژاردەکان'
@@ -173,14 +173,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'داخستن',
+        closeText: 'داخستنی',
+        label: '{text} {name}',
         name: 'کۆد',
-        openText: 'فراوانکردن'
+        openText: 'فراوانکردنی'
       },
       collapsible: {
-        closeText: 'شاردنەوە',
+        closeText: 'شاردنەوەی',
+        label: '{text} {name}',
         name: 'تایبەتمەندییەکان',
-        openText: 'پیشاندان'
+        openText: 'پیشاندانی'
       },
       pre: {
         copy: 'لەبەرگرتنەوەی کۆد'
@@ -195,7 +197,7 @@ export default defineLocale<Messages>({
       toggle: 'گۆڕین'
     },
     selectMenu: {
-      create: '"{label}" زیادکردنی',
+      create: 'زیادکردنی "{label}"',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
       search: 'گەڕان…'

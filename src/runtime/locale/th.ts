@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'เลือกสไลด์ที่จะแสดง',
-      goto: 'ไปที่ {slide}',
+      goto: 'ไปที่สไลด์ {slide}',
       next: 'ถัดไป',
       prev: 'ย้อนกลับ',
       roledescription: 'ภาพหมุนเวียน',
@@ -168,11 +168,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'ย่อ',
+        label: '{text} {name}',
         name: 'โค้ด',
         openText: 'ขยาย'
       },
       collapsible: {
         closeText: 'ซ่อน',
+        label: '{text} {name}',
         name: 'คุณสมบัติ',
         openText: 'แสดง'
       },

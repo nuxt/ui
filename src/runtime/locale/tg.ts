@@ -14,7 +14,7 @@ export default defineLocale<Messages>({
       submit: 'Идома додан'
     },
     banner: {
-      close: 'Пӯшидан'
+      close: 'Бастан'
     },
     breadcrumb: {
       label: 'занҷираи навигатсия'
@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Слайдро барои намоиш интихоб кунед',
-      goto: 'Ба слайди {slide} гузаред',
+      goto: 'Гузаштан ба слайди {slide}',
       next: 'Баъдӣ',
       prev: 'Қаблӣ',
       roledescription: 'карусел',
@@ -44,7 +44,7 @@ export default defineLocale<Messages>({
       autoScroll: 'Ба поён ҳаракат додан'
     },
     chatPrompt: {
-      placeholder: 'Пайём ворид кунед…',
+      placeholder: 'Паём ворид кунед…',
       queue: 'Паёмҳо дар навбат',
       sendNow: 'Ҳозир фиристодан',
       edit: 'Таҳрир',
@@ -81,7 +81,7 @@ export default defineLocale<Messages>({
       theme: 'Мавзӯъ'
     },
     contentSearchButton: {
-      label: 'Ҷустуҷӯ'
+      label: 'Ҷустуҷӯ…'
     },
     contentToc: {
       title: 'Мундариҷа'
@@ -94,7 +94,7 @@ export default defineLocale<Messages>({
       theme: 'Мавзӯъ'
     },
     dashboardSearchButton: {
-      label: 'Ҷустуҷӯ'
+      label: 'Ҷустуҷӯ…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Кам кардан',
@@ -108,10 +108,10 @@ export default defineLocale<Messages>({
       close: 'Бастан'
     },
     error: {
-      clear: 'Тоза кардан'
+      clear: 'Бозгашт ба саҳифаи асосӣ'
     },
     fileUpload: {
-      removeFile: '{filename}-ро хориҷ кунед'
+      removeFile: 'Хориҷ кардани {filename}'
     },
     header: {
       close: 'Пӯшидан',
@@ -129,7 +129,7 @@ export default defineLocale<Messages>({
       year: 'сол'
     },
     inputMenu: {
-      create: '"{label}" созед',
+      create: 'Сохтани "{label}"',
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
       trigger: 'Нишон додани имконот'
@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Кам кардан',
-        name: 'код',
-        openText: 'Васеъ кардан'
+        closeText: 'кам кардан',
+        label: '{name} {text}',
+        name: 'Кодро',
+        openText: 'васеъ кардан'
       },
       collapsible: {
-        closeText: 'Пинҳон кардан',
-        name: 'хусусиятҳо',
-        openText: 'Намоиш додан'
+        closeText: 'пинҳон кардан',
+        label: '{name} {text}',
+        name: 'Хусусиятҳоро',
+        openText: 'намоиш додан'
       },
       pre: {
         copy: 'Нусха бардоштан'
@@ -191,10 +193,10 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'Бастан',
-      toggle: 'Иваз кардан'
+      toggle: 'Кушодан/бастан'
     },
     selectMenu: {
-      create: '"{label}" созед',
+      create: 'Сохтани "{label}"',
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
       search: 'Ҷустуҷӯ…'

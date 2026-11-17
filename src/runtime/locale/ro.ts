@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       yearPicker: 'Selector de an'
     },
     carousel: {
-      dots: 'Alegeți diapozitivul de afișat',
+      dots: 'Alege diapozitivul de afișat',
       goto: 'Mergi la diapozitivul {slide}',
       next: 'Următor',
       prev: 'Anterior',
@@ -44,7 +44,7 @@ export default defineLocale<Messages>({
       autoScroll: 'Derulează în jos'
     },
     chatPrompt: {
-      placeholder: 'Scrieți mesajul dvs. aici…',
+      placeholder: 'Scrie mesajul aici…',
       queue: 'Mesaje în așteptare',
       sendNow: 'Trimite acum',
       edit: 'Editează',
@@ -58,7 +58,7 @@ export default defineLocale<Messages>({
     chatReasoning: {
       thinking: 'Se gândește…',
       thought: 'A gândit',
-      thoughtFor: 'A gândit {duration}'
+      thoughtFor: 'A gândit timp de {duration}'
     },
     colorMode: {
       dark: 'Întunecat',
@@ -173,12 +173,14 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Restrânge',
-        name: 'cod',
+        label: '{text} {name}',
+        name: 'codul',
         openText: 'Extinde'
       },
       collapsible: {
         closeText: 'Ascunde',
-        name: 'proprietăți',
+        label: '{text} {name}',
+        name: 'proprietățile',
         openText: 'Afișează'
       },
       pre: {
@@ -191,7 +193,7 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'Închide',
-      toggle: 'Comutare'
+      toggle: 'Comută'
     },
     selectMenu: {
       create: 'Creează "{label}"',

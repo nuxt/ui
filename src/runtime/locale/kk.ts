@@ -81,7 +81,7 @@ export default defineLocale<Messages>({
       theme: 'Тақырып'
     },
     contentSearchButton: {
-      label: 'Іздеу'
+      label: 'Іздеу…'
     },
     contentToc: {
       title: 'Мазмұны'
@@ -94,7 +94,7 @@ export default defineLocale<Messages>({
       theme: 'Тақырып'
     },
     dashboardSearchButton: {
-      label: 'Іздеу'
+      label: 'Іздеу…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Жию',
@@ -108,7 +108,7 @@ export default defineLocale<Messages>({
       close: 'Жабу'
     },
     error: {
-      clear: 'Тазалау'
+      clear: 'Басты бетке оралу'
     },
     fileUpload: {
       removeFile: '{filename} жою'
@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Жиыру',
-        name: 'код',
-        openText: 'Кеңейту'
+        closeText: 'жиыру',
+        label: '{name} {text}',
+        name: 'Кодты',
+        openText: 'кеңейту'
       },
       collapsible: {
-        closeText: 'Жасыру',
-        name: 'қасиеттер',
-        openText: 'Көрсету'
+        closeText: 'жасыру',
+        label: '{name} {text}',
+        name: 'Қасиеттерді',
+        openText: 'көрсету'
       },
       pre: {
         copy: 'Кодты алмасу буферіне көшіру'
@@ -191,7 +193,7 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'Жабу',
-      toggle: 'Ауыстыру'
+      toggle: 'Ашу/жабу'
     },
     selectMenu: {
       create: '"{label}" жасау',

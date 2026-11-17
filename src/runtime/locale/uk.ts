@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Виберіть слайд для відображення',
-      goto: 'Перейти до {slide}',
+      goto: 'Перейти до слайда {slide}',
       next: 'Далі',
       prev: 'Назад',
       roledescription: 'карусель',
@@ -168,16 +168,18 @@ export default defineLocale<Messages>({
       input: 'PIN-код, символ {index} з {length}'
     },
     pricingTable: {
-      caption: 'Порівняння планів цін'
+      caption: 'Порівняння тарифних планів'
     },
     prose: {
       codeCollapse: {
         closeText: 'Згорнути',
+        label: '{text} {name}',
         name: 'код',
         openText: 'Розгорнути'
       },
       collapsible: {
         closeText: 'Сховати',
+        label: '{text} {name}',
         name: 'властивості',
         openText: 'Показати'
       },
@@ -191,7 +193,7 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'Закрити',
-      toggle: 'Перемикнути'
+      toggle: 'Перемкнути'
     },
     selectMenu: {
       create: 'Створити "{label}"',

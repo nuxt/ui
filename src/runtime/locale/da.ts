@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Vælg dias til visning',
-      goto: 'Gå til slide {slide}',
+      goto: 'Gå til dias {slide}',
       next: 'Næste',
       prev: 'Forrige',
       roledescription: 'karrusel',
@@ -168,16 +168,18 @@ export default defineLocale<Messages>({
       input: 'pinkode, tegn {index} af {length}'
     },
     pricingTable: {
-      caption: 'Prisplaneringssammenligning'
+      caption: 'Sammenligning af prisplaner'
     },
     prose: {
       codeCollapse: {
         closeText: 'Sammenfold',
+        label: '{text} {name}',
         name: 'kode',
         openText: 'Udvid'
       },
       collapsible: {
         closeText: 'Skjul',
+        label: '{text} {name}',
         name: 'egenskaber',
         openText: 'Vis'
       },

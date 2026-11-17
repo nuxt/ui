@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Vyberte snímek k zobrazení',
-      goto: 'Přejít na {slide}',
+      goto: 'Přejít na snímek {slide}',
       next: 'Další',
       prev: 'Předchozí',
       roledescription: 'karusel',
@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Sbalit',
+        label: '{text} {name}',
         name: 'kód',
         openText: 'Rozbalit'
       },
       collapsible: {
         closeText: 'Skrýt',
+        label: '{text} {name}',
         name: 'vlastnosti',
         openText: 'Zobrazit'
       },

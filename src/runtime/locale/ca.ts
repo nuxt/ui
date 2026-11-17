@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       yearPicker: 'Selector d\'any'
     },
     carousel: {
-      dots: 'Tria la diapositiva a mostrar',
+      dots: 'Triar la diapositiva a mostrar',
       goto: 'Anar a la diapositiva {slide}',
       next: 'Següent',
       prev: 'Anterior',
@@ -46,9 +46,9 @@ export default defineLocale<Messages>({
     chatPrompt: {
       placeholder: 'Escriu el teu missatge aquí…',
       queue: 'Missatges a la cua',
-      sendNow: 'Envia ara',
-      edit: 'Edita',
-      remove: 'Elimina'
+      sendNow: 'Enviar ara',
+      edit: 'Editar',
+      remove: 'Eliminar'
     },
     chatPromptSubmit: {
       label: 'Enviar',
@@ -88,7 +88,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      search: 'Cercar…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -132,7 +132,7 @@ export default defineLocale<Messages>({
       create: 'Crear "{label}"',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      trigger: 'Mostra les opcions'
+      trigger: 'Mostrar les opcions'
     },
     inputNumber: {
       decrement: 'Decrementar',
@@ -152,7 +152,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      search: 'Cercar…'
     },
     modal: {
       close: 'Tancar'
@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Replega',
+        closeText: 'Replegar',
+        label: '{text} {name}',
         name: 'codi',
-        openText: 'Desplega'
+        openText: 'Desplegar'
       },
       collapsible: {
-        closeText: 'Amaga',
+        closeText: 'Amagar',
+        label: '{text} {name}',
         name: 'propietats',
-        openText: 'Mostra'
+        openText: 'Mostrar'
       },
       pre: {
         copy: 'Copiar codi al portapapers'
@@ -191,13 +193,13 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'Tancar',
-      toggle: 'Canviar'
+      toggle: 'Alternar'
     },
     selectMenu: {
       create: 'Crear "{label}"',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      search: 'Cercar…'
     },
     skeleton: {
       label: 'carregant'

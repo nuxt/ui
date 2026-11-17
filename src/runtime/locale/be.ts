@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Выберыце слайд для адлюстравання',
-      goto: 'Перайсці да {slide}',
+      goto: 'Перайсці да слайда {slide}',
       next: 'Далей',
       prev: 'Назад',
       roledescription: 'карусель',
@@ -168,16 +168,18 @@ export default defineLocale<Messages>({
       input: 'PIN-код, сімвал {index} з {length}'
     },
     pricingTable: {
-      caption: 'Параўнанне платных планаў'
+      caption: 'Параўнанне тарыфных планаў'
     },
     prose: {
       codeCollapse: {
         closeText: 'Згарнуць',
+        label: '{text} {name}',
         name: 'код',
         openText: 'Разгарнуць'
       },
       collapsible: {
         closeText: 'Схаваць',
+        label: '{text} {name}',
         name: 'уласцівасці',
         openText: 'Паказаць'
       },

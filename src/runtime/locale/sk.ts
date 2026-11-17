@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Vyberte snímku na zobrazenie',
-      goto: 'Prejsť na {slide}',
+      goto: 'Prejsť na snímku {slide}',
       next: 'Nasledujúci',
       prev: 'Predchádzajúci',
       roledescription: 'karusel',
@@ -44,7 +44,7 @@ export default defineLocale<Messages>({
       autoScroll: 'Posunúť nadol'
     },
     chatPrompt: {
-      placeholder: 'Tu napíšte svoje správu…',
+      placeholder: 'Tu napíšte svoju správu…',
       queue: 'Správy vo fronte',
       sendNow: 'Odoslať teraz',
       edit: 'Upraviť',
@@ -69,7 +69,7 @@ export default defineLocale<Messages>({
     },
     commandPalette: {
       back: 'Späť',
-      close: 'Zavrieť',
+      close: 'Zatvoriť',
       noData: 'Žiadne dáta',
       noMatch: 'Žiadna zhoda',
       placeholder: 'Zadajte príkaz alebo vyhľadajte…',
@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Zbaliť',
+        label: '{text} {name}',
         name: 'kód',
         openText: 'Rozbaliť'
       },
       collapsible: {
         closeText: 'Skryť',
+        label: '{text} {name}',
         name: 'vlastnosti',
         openText: 'Zobraziť'
       },

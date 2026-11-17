@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       stop: 'Генерацияны токтотуу'
     },
     chatReasoning: {
-      thinking: 'Ойлонуда…',
+      thinking: 'Ойлонууда…',
       thought: 'Ойлонду',
       thoughtFor: '{duration} ойлонду'
     },
@@ -72,7 +72,7 @@ export default defineLocale<Messages>({
       close: 'Жабуу',
       noData: 'Маалымат жок',
       noMatch: 'Эч нерсе табылган жок',
-      placeholder: 'Буйрук киргизиңиз же издөө…',
+      placeholder: 'Буйрук киргизиңиз же издеңиз…',
       results: 'Жыйынтыктар'
     },
     contentSearch: {
@@ -87,7 +87,7 @@ export default defineLocale<Messages>({
       title: 'Бул бетте'
     },
     dropdownMenu: {
-      noMatch: 'Сүйлөшкөн маалыматтар жок',
+      noMatch: 'Эч нерсе табылган жок',
       search: 'Издөө…'
     },
     dashboardSearch: {
@@ -151,7 +151,7 @@ export default defineLocale<Messages>({
     },
     listbox: {
       noData: 'Маалымат жок',
-      noMatch: 'Сүйлөшкөн маалыматтар жок',
+      noMatch: 'Эч нерсе табылган жок',
       search: 'Издөө…'
     },
     modal: {
@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Жыйноо',
-        name: 'код',
-        openText: 'Кеңейтүү'
+        closeText: 'жыйноо',
+        label: '{name} {text}',
+        name: 'Кодду',
+        openText: 'кеңейтүү'
       },
       collapsible: {
-        closeText: 'Жашыруу',
-        name: 'касиеттер',
-        openText: 'Көрсөтүү'
+        closeText: 'жашыруу',
+        label: '{name} {text}',
+        name: 'Касиеттерди',
+        openText: 'көрсөтүү'
       },
       pre: {
         copy: 'Кодду алмашуу буферине көчүрүү'
@@ -191,12 +193,12 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'Жабуу',
-      toggle: 'Которуу'
+      toggle: 'Ачуу/жабуу'
     },
     selectMenu: {
       create: '"{label}" жасоо',
       noData: 'Маалымат жок',
-      noMatch: 'Сүйлөшкөн маалыматтар жок',
+      noMatch: 'Эч нерсе табылган жок',
       search: 'Издөө…'
     },
     skeleton: {

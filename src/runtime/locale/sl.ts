@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Izberite diapozitiv za prikaz',
-      goto: 'Pojdi na {slide}',
+      goto: 'Pojdi na diapozitiv {slide}',
       next: 'Naprej',
       prev: 'Nazaj',
       roledescription: 'vrtiljak',
@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Strni',
-        name: 'koda',
+        label: '{text} {name}',
+        name: 'kodo',
         openText: 'Razširi'
       },
       collapsible: {
         closeText: 'Skrij',
+        label: '{text} {name}',
         name: 'lastnosti',
         openText: 'Prikaži'
       },

@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Göstərmək üçün slayd seçin',
-      goto: 'Slayd {slide} keç',
+      goto: '{slide} nömrəli slayda keç',
       next: 'Növbəti',
       prev: 'Əvvəlki',
       roledescription: 'karusel',
@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Daralt',
-        name: 'kod',
-        openText: 'Genişlət'
+        closeText: 'daralt',
+        label: '{name} {text}',
+        name: 'Kodu',
+        openText: 'genişlət'
       },
       collapsible: {
-        closeText: 'Gizlət',
-        name: 'xüsusiyyətlər',
-        openText: 'Göstər'
+        closeText: 'gizlət',
+        label: '{name} {text}',
+        name: 'Xüsusiyyətləri',
+        openText: 'göstər'
       },
       pre: {
         copy: 'Kodu buferə kopyala'
@@ -191,7 +193,7 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'Bağla',
-      toggle: 'Dəyişdir'
+      toggle: 'Aç/bağla'
     },
     selectMenu: {
       create: '"{label}" yarat',

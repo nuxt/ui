@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Valitse näytettävä dia',
-      goto: 'Siirry sivulle {slide}',
+      goto: 'Siirry diaan {slide}',
       next: 'Seuraava',
       prev: 'Edellinen',
       roledescription: 'karuselli',
@@ -168,16 +168,18 @@ export default defineLocale<Messages>({
       input: 'PIN-koodi, merkki {index}/{length}'
     },
     pricingTable: {
-      caption: 'Hinnoitellut suunnitelmat'
+      caption: 'Hinnoittelupakettien vertailu'
     },
     prose: {
       codeCollapse: {
         closeText: 'Supista',
+        label: '{text} {name}',
         name: 'koodi',
         openText: 'Laajenna'
       },
       collapsible: {
         closeText: 'Piilota',
+        label: '{text} {name}',
         name: 'ominaisuudet',
         openText: 'Näytä'
       },

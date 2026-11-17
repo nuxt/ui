@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'ជ្រើសរើស​ស្លាយ​ដើម្បី​បង្ហាញ',
-      goto: 'ឡើងទៅស្លាយ {slide}',
+      goto: 'ទៅកាន់ស្លាយ {slide}',
       next: 'បន្ទាប់',
       prev: 'មុន',
       roledescription: 'ការ៉ូសែល',
@@ -44,14 +44,14 @@ export default defineLocale<Messages>({
       autoScroll: 'រំកិលចុះក្រោម'
     },
     chatPrompt: {
-      placeholder: 'សួរស្រឡាញ់មួយបីនេះមានប្រភេទបានទាមទារទេ…',
+      placeholder: 'វាយសាររបស់អ្នកនៅទីនេះ…',
       queue: 'សារក្នុងជួរ',
       sendNow: 'ផ្ញើឥឡូវនេះ',
       edit: 'កែសម្រួល',
       remove: 'ដកចេញ'
     },
     chatPromptSubmit: {
-      label: 'សាក់',
+      label: 'ផ្ញើ',
       reload: 'ព្យាយាមម្តងទៀត',
       stop: 'បញ្ឈប់ការបង្កើត'
     },
@@ -168,16 +168,18 @@ export default defineLocale<Messages>({
       input: 'លេខកូដ PIN តួអក្សរទី {index} នៃ {length}'
     },
     pricingTable: {
-      caption: 'បញ្ជីតម្លៃបន្ទប់បន្ទប់'
+      caption: 'ការប្រៀបធៀបគម្រោងតម្លៃ'
     },
     prose: {
       codeCollapse: {
         closeText: 'បង្រួម',
+        label: '{text} {name}',
         name: 'កូដ',
         openText: 'ពង្រីក'
       },
       collapsible: {
         closeText: 'លាក់',
+        label: '{text} {name}',
         name: 'លក្ខណៈសម្បត្តិ',
         openText: 'បង្ហាញ'
       },

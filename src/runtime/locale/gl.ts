@@ -132,7 +132,7 @@ export default defineLocale<Messages>({
       create: 'Crear "{label}"',
       noData: 'Sen datos',
       noMatch: 'Non hai datos coincidentes',
-      trigger: 'Mostrar opcións'
+      trigger: 'Amosar opcións'
     },
     inputNumber: {
       decrement: 'Diminuír',
@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Contraer',
+        label: '{text} {name}',
         name: 'código',
         openText: 'Despregar'
       },
       collapsible: {
         closeText: 'Ocultar',
+        label: '{text} {name}',
         name: 'propiedades',
         openText: 'Amosar'
       },

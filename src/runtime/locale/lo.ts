@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'ຫຍໍ້',
+        label: '{text} {name}',
         name: 'ໂຄ້ດ',
         openText: 'ຂະຫຍາຍ'
       },
       collapsible: {
         closeText: 'ເຊື່ອງ',
+        label: '{text} {name}',
         name: 'ຄຸນສົມບັດ',
         openText: 'ສະແດງ'
       },

@@ -23,16 +23,16 @@ export default defineLocale<Messages>({
       label: '事件日期',
       monthPicker: '月份選擇器',
       nextMonth: '下個月',
-      nextYear: '明年',
+      nextYear: '下一年',
       prevMonth: '上個月',
-      prevYear: '去年',
+      prevYear: '上一年',
       yearPicker: '年份選擇器'
     },
     carousel: {
       dots: '選擇要顯示的投影片',
-      goto: '跳轉到第 {slide} 頁',
-      next: '下一頁',
-      prev: '上一頁',
+      goto: '跳到第 {slide} 張投影片',
+      next: '下一張',
+      prev: '上一張',
       roledescription: '輪播',
       slide: '投影片'
     },
@@ -44,14 +44,14 @@ export default defineLocale<Messages>({
       autoScroll: '捲動到底部'
     },
     chatPrompt: {
-      placeholder: '在這裡輸入你的消息…',
+      placeholder: '在這裡輸入你的訊息…',
       queue: '排隊中的訊息',
       sendNow: '立即傳送',
       edit: '編輯',
       remove: '移除'
     },
     chatPromptSubmit: {
-      label: '發送',
+      label: '傳送',
       reload: '重試',
       stop: '停止生成'
     },
@@ -168,16 +168,18 @@ export default defineLocale<Messages>({
       input: 'PIN 碼，第 {index} 位，共 {length} 位'
     },
     pricingTable: {
-      caption: '價格計畫比較'
+      caption: '價格方案比較'
     },
     prose: {
       codeCollapse: {
         closeText: '收起',
+        label: '{text}{name}',
         name: '程式碼',
         openText: '展開'
       },
       collapsible: {
         closeText: '隱藏',
+        label: '{text}{name}',
         name: '屬性',
         openText: '顯示'
       },

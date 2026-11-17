@@ -30,9 +30,9 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Wielt Dia fir ze weisen',
-      goto: 'Gitt op d\'Slide {slide}',
-      next: 'Näch.',
-      prev: 'Präz.',
+      goto: 'Gitt op d\'Dia {slide}',
+      next: 'Weider',
+      prev: 'Zréck',
       roledescription: 'Karussell',
       slide: 'Dia'
     },
@@ -62,9 +62,9 @@ export default defineLocale<Messages>({
     },
     colorMode: {
       dark: 'Donkel',
-      light: 'Liicht',
+      light: 'Hell',
       switchToDark: 'Op de Donkelmodus wiesselen',
-      switchToLight: 'Op de Liichtmodus wiesselen',
+      switchToLight: 'Op den hellen Modus wiesselen',
       system: 'System'
     },
     commandPalette: {
@@ -135,8 +135,8 @@ export default defineLocale<Messages>({
       trigger: 'Optiounen uweisen'
     },
     inputNumber: {
-      decrement: 'Dekrementéieren',
-      increment: 'Inkrementéieren',
+      decrement: 'Reduzéieren',
+      increment: 'Erhéijen',
       roledescription: 'Zuelefeld'
     },
     inputRating: {
@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Zouklappen',
-        name: 'code',
-        openText: 'Opklappen'
+        closeText: 'zouklappen',
+        label: '{name} {text}',
+        name: 'Code',
+        openText: 'opklappen'
       },
       collapsible: {
-        closeText: 'Verstoppen',
-        name: 'eegenschaften',
-        openText: 'Uweisen'
+        closeText: 'verstoppen',
+        label: '{name} {text}',
+        name: 'Eegenschaften',
+        openText: 'uweisen'
       },
       pre: {
         copy: 'Code an d\'Zwëschspäicher kopéieren'

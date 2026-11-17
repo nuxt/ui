@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'প্রদর্শনের জন্য স্লাইড নির্বাচন করুন',
-      goto: 'স্লাইড {slide} এ যান',
+      goto: 'স্লাইড {slide}-এ যান',
       next: 'পরবর্তী',
       prev: 'পূর্ববর্তী',
       roledescription: 'ক্যারোসেল',
@@ -47,7 +47,7 @@ export default defineLocale<Messages>({
       placeholder: 'এখানে আপনার বার্তা লিখুন…',
       queue: 'সারিতে থাকা বার্তা',
       sendNow: 'এখনই পাঠান',
-      edit: 'সম্পাদনা',
+      edit: 'সম্পাদনা করুন',
       remove: 'সরান'
     },
     chatPromptSubmit: {
@@ -68,10 +68,10 @@ export default defineLocale<Messages>({
       system: 'সিস্টেম'
     },
     commandPalette: {
-      back: 'পেছনে',
+      back: 'ফিরে যান',
       close: 'বন্ধ করুন',
-      noData: 'কোন তথ্য নেই',
-      noMatch: 'কোন মিল পাওয়া যায়নি',
+      noData: 'কোনো তথ্য নেই',
+      noMatch: 'কোনো মিল পাওয়া যায়নি',
       placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন…',
       results: 'ফলাফল'
     },
@@ -87,7 +87,7 @@ export default defineLocale<Messages>({
       title: 'এই পৃষ্ঠায়'
     },
     dropdownMenu: {
-      noMatch: 'কোন মিল পাওয়া যায়নি',
+      noMatch: 'কোনো মিল পাওয়া যায়নি',
       search: 'অনুসন্ধান করুন…'
     },
     dashboardSearch: {
@@ -130,8 +130,8 @@ export default defineLocale<Messages>({
     },
     inputMenu: {
       create: '"{label}" তৈরি করুন',
-      noData: 'কোন তথ্য নেই',
-      noMatch: 'কোন মিল পাওয়া যায়নি',
+      noData: 'কোনো তথ্য নেই',
+      noMatch: 'কোনো মিল পাওয়া যায়নি',
       trigger: 'বিকল্পগুলি দেখান'
     },
     inputNumber: {
@@ -150,8 +150,8 @@ export default defineLocale<Messages>({
       timeZoneName: 'সময় অঞ্চল'
     },
     listbox: {
-      noData: 'কোন তথ্য নেই',
-      noMatch: 'কোন মিল পাওয়া যায়নি',
+      noData: 'কোনো তথ্য নেই',
+      noMatch: 'কোনো মিল পাওয়া যায়নি',
       search: 'অনুসন্ধান করুন…'
     },
     modal: {
@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'সংকুচিত করুন',
+        label: '{name} {text}',
         name: 'কোড',
         openText: 'প্রসারিত করুন'
       },
       collapsible: {
         closeText: 'লুকান',
+        label: '{name} {text}',
         name: 'বৈশিষ্ট্যসমূহ',
         openText: 'দেখান'
       },
@@ -195,8 +197,8 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" তৈরি করুন',
-      noData: 'কোন তথ্য নেই',
-      noMatch: 'কোন মিল পাওয়া যায়নি',
+      noData: 'কোনো তথ্য নেই',
+      noMatch: 'কোনো মিল পাওয়া যায়নি',
       search: 'অনুসন্ধান করুন…'
     },
     skeleton: {
@@ -215,7 +217,7 @@ export default defineLocale<Messages>({
       label: 'অগ্রগতি'
     },
     table: {
-      noData: 'কোন তথ্য নেই'
+      noData: 'কোনো তথ্য নেই'
     },
     toast: {
       close: 'বন্ধ করুন'

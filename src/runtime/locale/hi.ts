@@ -44,7 +44,7 @@ export default defineLocale<Messages>({
       autoScroll: 'नीचे स्क्रॉल करें'
     },
     chatPrompt: {
-      placeholder: 'यहाँ आपका संदेश लिखें…',
+      placeholder: 'यहाँ अपना संदेश लिखें…',
       queue: 'कतार में संदेश',
       sendNow: 'अभी भेजें',
       edit: 'संपादित करें',
@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'संकुचित करें',
+        label: '{name} {text}',
         name: 'कोड',
-        openText: 'विस्तार करें'
+        openText: 'विस्तृत करें'
       },
       collapsible: {
         closeText: 'छिपाएँ',
+        label: '{name} {text}',
         name: 'गुण',
         openText: 'दिखाएँ'
       },

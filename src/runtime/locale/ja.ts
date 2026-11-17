@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: '折りたたむ',
+        label: '{name}を{text}',
         name: 'コード',
         openText: '展開'
       },
       collapsible: {
         closeText: '非表示',
+        label: '{name}を{text}',
         name: 'プロパティ',
         openText: '表示'
       },

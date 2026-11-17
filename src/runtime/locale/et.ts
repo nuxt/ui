@@ -29,10 +29,10 @@ export default defineLocale<Messages>({
       yearPicker: 'Aasta valik'
     },
     carousel: {
-      dots: 'Valige kuvatav slaid',
+      dots: 'Vali kuvatav slaid',
       goto: 'Mine slaidile {slide}',
-      next: 'Järg',
-      prev: 'Eel',
+      next: 'Järgmine',
+      prev: 'Eelmine',
       roledescription: 'karussell',
       slide: 'slaid'
     },
@@ -44,7 +44,7 @@ export default defineLocale<Messages>({
       autoScroll: 'Keri alla'
     },
     chatPrompt: {
-      placeholder: 'Siia kirjutage oma sõnum…',
+      placeholder: 'Kirjuta oma sõnum siia…',
       queue: 'Järjekorras sõnumid',
       sendNow: 'Saada kohe',
       edit: 'Muuda',
@@ -168,16 +168,18 @@ export default defineLocale<Messages>({
       input: 'PIN-kood, märk {index} {length}-st'
     },
     pricingTable: {
-      caption: 'Hinna plaanide võrdlus'
+      caption: 'Hinnaplaanide võrdlus'
     },
     prose: {
       codeCollapse: {
         closeText: 'Ahenda',
+        label: '{text} {name}',
         name: 'kood',
         openText: 'Laienda'
       },
       collapsible: {
         closeText: 'Peida',
+        label: '{text} {name}',
         name: 'omadused',
         openText: 'Näita'
       },

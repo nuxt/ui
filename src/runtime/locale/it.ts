@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Scegli diapositiva da visualizzare',
-      goto: 'Vai alla slide {slide}',
+      goto: 'Vai alla diapositiva {slide}',
       next: 'Successiva',
       prev: 'Precedente',
       roledescription: 'carosello',
@@ -56,7 +56,7 @@ export default defineLocale<Messages>({
       stop: 'Interrompi generazione'
     },
     chatReasoning: {
-      thinking: 'Pensando…',
+      thinking: 'Sto pensando…',
       thought: 'Ha pensato',
       thoughtFor: 'Ha pensato per {duration}'
     },
@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Comprimi',
+        label: '{text} {name}',
         name: 'codice',
         openText: 'Espandi'
       },
       collapsible: {
         closeText: 'Nascondi',
+        label: '{text} {name}',
         name: 'proprietà',
         openText: 'Mostra'
       },

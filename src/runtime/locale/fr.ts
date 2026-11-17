@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Choisir la diapositive à afficher',
-      goto: 'Aller à {slide}',
+      goto: 'Aller à la diapositive {slide}',
       next: 'Suivant',
       prev: 'Précédent',
       roledescription: 'carrousel',
@@ -173,12 +173,14 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Réduire',
-        name: 'code',
+        label: '{text} {name}',
+        name: 'le code',
         openText: 'Développer'
       },
       collapsible: {
         closeText: 'Masquer',
-        name: 'propriétés',
+        label: '{text} {name}',
+        name: 'les propriétés',
         openText: 'Afficher'
       },
       pre: {

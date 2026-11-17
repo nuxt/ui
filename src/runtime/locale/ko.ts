@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: '표시할 슬라이드 선택',
-      goto: '{slide} 페이지로 이동',
+      goto: '{slide}번 슬라이드로 이동',
       next: '다음',
       prev: '이전',
       roledescription: '캐러셀',
@@ -173,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: '접기',
+        label: '{name} {text}',
         name: '코드',
         openText: '펼치기'
       },
       collapsible: {
         closeText: '숨기기',
+        label: '{name} {text}',
         name: '속성',
         openText: '보기'
       },

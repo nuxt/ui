@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Харуулах слайдыг сонгоно уу',
-      goto: '{slide}-р хуудсанд шилжих',
+      goto: '{slide}-р слайд руу шилжих',
       next: 'Дараах',
       prev: 'Өмнөх',
       roledescription: 'карусель',
@@ -72,7 +72,7 @@ export default defineLocale<Messages>({
       close: 'Хаах',
       noData: 'Мэдээлэл байхгүй',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
-      placeholder: 'Комманд бичих эсвэл хайлт хийх…',
+      placeholder: 'Команд бичих эсвэл хайлт хийх…',
       results: 'Үр дүн'
     },
     contentSearch: {
@@ -172,14 +172,16 @@ export default defineLocale<Messages>({
     },
     prose: {
       codeCollapse: {
-        closeText: 'Хураах',
-        name: 'код',
-        openText: 'Дэлгэх'
+        closeText: 'хураах',
+        label: '{name} {text}',
+        name: 'Кодыг',
+        openText: 'дэлгэх'
       },
       collapsible: {
-        closeText: 'Нуух',
-        name: 'шинж чанарууд',
-        openText: 'Харуулах'
+        closeText: 'нуух',
+        label: '{name} {text}',
+        name: 'Шинж чанаруудыг',
+        openText: 'харуулах'
       },
       pre: {
         copy: 'Кодыг санах ойд хуулах'

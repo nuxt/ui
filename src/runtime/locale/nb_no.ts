@@ -168,16 +168,18 @@ export default defineLocale<Messages>({
       input: 'PIN-kode, tegn {index} av {length}'
     },
     pricingTable: {
-      caption: 'Prisplaneringssammenligning'
+      caption: 'Sammenligning av prisplaner'
     },
     prose: {
       codeCollapse: {
         closeText: 'Skjul',
+        label: '{text} {name}',
         name: 'kode',
         openText: 'Utvid'
       },
       collapsible: {
         closeText: 'Skjul',
+        label: '{text} {name}',
         name: 'egenskaper',
         openText: 'Vis'
       },
