@@ -1,21 +1,26 @@
 import { defineNuxtModule } from '@nuxt/kit'
+import pkg from '../../package.json' with { type: 'json' }
 
 type MinimarkNode = string | [string, Record<string, unknown>, ...MinimarkNode[]]
 
+// `Soon` for unreleased changes, `4.12+` for the ones shipped in the current minor
+const [major, minor] = pkg.version.split('.')
+const labels = ['Soon', `${major}.${minor}+`]
+
 // a `badge` element, so the syntax shown inside a code block doesn't count
-function hasSoonBadge(nodes: MinimarkNode[]): boolean {
+function hasRecentBadge(nodes: MinimarkNode[]): boolean {
   return nodes.some(node => typeof node !== 'string' && (
-    (node[0] === 'badge' && node[1]?.label === 'Soon') || hasSoonBadge(node.slice(2) as MinimarkNode[])
+    (node[0] === 'badge' && labels.includes(node[1]?.label as string)) || hasRecentBadge(node.slice(2) as MinimarkNode[])
   ))
 }
 
-// Flags the pages that document an unreleased change with a `Soon` badge so the sidebar
-// can mark them. The release-badges skill turns those badges into versions on release,
-// which clears the flag without any manual step.
+// Flags the pages with a change that is unreleased or part of the current minor so the
+// sidebar can mark them. The flag moves on with the badges and the version on each minor
+// release, without any manual step.
 export default defineNuxtModule((_, nuxt) => {
   nuxt.hook('content:file:afterParse', ({ content, collection }) => {
     const body = content.body as { value?: MinimarkNode[] } | undefined
-    if (collection.name !== 'docs' || !hasSoonBadge(body?.value || [])) {
+    if (collection.name !== 'docs' || !hasRecentBadge(body?.value || [])) {
       return
     }
     if (content.navigation === false) {
