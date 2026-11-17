@@ -11,10 +11,10 @@ export default defineTheme({
     // After the segments in the DOM, so they keep the first tab stops. The invisible
     // character gives the leading the baseline of the text, see `input.ts`. The box
     // has the padding here, so a button eats into it to sit as it does in an input
-    leading: `order-first flex items-center before:content-['x'] before:w-0 before:invisible has-[>button]:-my-(--ui-control-py) has-[>button]:-ms-[calc(var(--ui-control-px)-var(--spacing))] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm`,
+    leading: `order-first flex items-center before:content-['x'] before:w-0 before:invisible has-[>button]:-my-(--ui-control-py) has-[>button]:-ms-[calc(var(--ui-control-px)-var(--spacing))] [--ui-field-px:var(--ui-control-px)] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:px-[calc(var(--ui-field-px)-(--spacing(1)))] [&>button]:py-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
-    trailing: 'ms-auto flex items-center has-[>button]:-my-(--ui-control-py) has-[>button]:-me-[calc(var(--ui-control-px)-var(--spacing))] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm',
+    trailing: 'ms-auto flex items-center has-[>button]:-my-(--ui-control-py) has-[>button]:-me-[calc(var(--ui-control-px)-var(--spacing))] [--ui-field-px:var(--ui-control-px)] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:px-[calc(var(--ui-field-px)-(--spacing(1)))] [&>button]:py-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm',
     trailingIcon: 'shrink-0 text-faint',
     separatorIcon: 'shrink-0 size-4 text-muted'
   },

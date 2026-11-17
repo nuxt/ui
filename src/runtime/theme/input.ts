@@ -14,12 +14,13 @@ export default defineTheme({
     // After the input in the DOM, so the input keeps the first tab stop. An inline
     // box sits on a line of text by its first item: the invisible character gives
     // the leading the baseline of the text, so an icon doesn't move the box
-    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-1 [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
+    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-1 [--ui-field-px:var(--ui-control-px)] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:px-[calc(var(--ui-field-px)-(--spacing(1)))] [&>button]:py-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
-    // A button in the leading or the trailing sits 4px inside the box whatever its size:
-    // the slot keeps the padding and the icon of the field, the button reads them
-    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-1 [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm',
+    // A button in the leading or the trailing sits 4px inside the box whatever its size,
+    // its icon where an icon of the field would be: the slot keeps the padding and the
+    // icon of the field, the button reads them
+    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-1 [--ui-field-px:var(--ui-control-px)] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:px-[calc(var(--ui-field-px)-(--spacing(1)))] [&>button]:py-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm',
     trailingIcon: 'shrink-0 text-faint'
   },
   variants: {
