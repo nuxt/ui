@@ -39,6 +39,10 @@ jobs:
         )
       )
     runs-on: ubuntu-latest
+    # one updater at a time, so an older run can't finish last and overwrite the release branch
+    concurrency:
+      group: release-pr
+      cancel-in-progress: false
     permissions:
       contents: write
       pull-requests: write
