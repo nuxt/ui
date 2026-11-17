@@ -49,6 +49,8 @@ jobs:
           # a dispatch from `v5` opens the release PR against `v5`
           base-branch: ${{ github.ref_name }}
           prerelease: ${{ inputs.prerelease }}
+          # same subject as past releases, and a valid conventional PR title
+          title: 'chore(release): v{version}'
 
   # release PR merged: tag it, cut a GitHub release, dispatch the publish run
   release:
