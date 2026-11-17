@@ -37,6 +37,7 @@ function getEmojiFlag(locale: string): string {
     nb: 'no', // Norwegian Bokmål -> Norway
     sl: 'si', // Slovenian -> Slovenia
     sq: 'al', // Albanian -> Albania
+    sr: 'rs', // Serbian -> Serbia
     sv: 'se', // Swedish -> Sweden
     tg: 'tj', // Tajik -> Tajikistan
     uk: 'ua', // Ukrainian -> Ukraine
@@ -44,15 +45,18 @@ function getEmojiFlag(locale: string): string {
     vi: 'vn' // Vietnamese -> Vietnam
   }
 
-  // If locale has a country code (e.g., en-GB), extract and use it
-  if (locale.includes('-')) {
-    const countryCode = locale.split('-')[1]?.toLowerCase()
-    if (countryCode) {
-      return countryCode.toUpperCase()
-        .split('')
-        .map(char => String.fromCodePoint(0x1F1A5 + char.charCodeAt(0)))
-        .join('')
-    }
+  // If locale has a country code (e.g., en-GB or sr-Latn-BA), extract and use it
+  let region: string | undefined
+  try {
+    region = new Intl.Locale(locale).region
+  } catch {
+    // Not a valid language tag, fall back to the language mapping
+  }
+  if (region?.length === 2) {
+    return region
+      .split('')
+      .map(char => String.fromCodePoint(0x1F1A5 + char.charCodeAt(0)))
+      .join('')
   }
 
   // Otherwise, use the language-to-country mapping

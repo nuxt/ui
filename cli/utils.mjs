@@ -54,7 +54,8 @@ export function normalizeLocale(locale) {
 
   if (locale.includes('_')) {
     return locale.split('_')
-      .map((part, index) => index === 0 ? part.toLowerCase() : part.toUpperCase())
+      // A four-letter subtag is a script (`sr-Latn`), anything else a region (`pt-BR`)
+      .map((part, index) => index === 0 ? part.toLowerCase() : part.length === 4 ? part[0].toUpperCase() + part.slice(1).toLowerCase() : part.toUpperCase())
       .join('-')
   }
 
