@@ -62,10 +62,10 @@ function getEmojiFlag(locale: string): string {
     vi: 'vn' // Vietnamese -> Vietnam
   }
 
-  // If locale has a country code (e.g., en-GB), extract and use it, a four-letter subtag is a script (e.g., sr-Latn)
+  // If locale has a country code (e.g., en-GB or sr-Latn-BA), extract and use it, a four-letter subtag is a script
   if (locale.includes('-')) {
-    const countryCode = locale.split('-')[1]?.toLowerCase()
-    if (countryCode?.length === 2) {
+    const countryCode = locale.split('-').slice(1).find(part => part.length === 2)?.toLowerCase()
+    if (countryCode) {
       return countryCode.toUpperCase()
         .split('')
         .map(char => String.fromCodePoint(0x1F1A5 + char.charCodeAt(0)))
