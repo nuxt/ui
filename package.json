@@ -119,7 +119,7 @@
   ],
   "scripts": {
     "build": "nuxt-module-build build",
-    "prepack": "pnpm build",
+    "prepack": "nuxt-module-build prepare && pnpm build",
     "cli": "node ./cli/index.mjs",
     "dev": "nuxt dev playgrounds/nuxt --uiDev",
     "dev:build": "nuxt build playgrounds/nuxt",
@@ -139,8 +139,7 @@
     "test:vue": "vitest --project vue",
     "test:nuxt": "vitest --project nuxt",
     "bench": "vitest bench --project 'vue (bench)'",
-    "size": "node test/bundle/size.mjs",
-    "release": "release-it"
+    "size": "node test/bundle/size.mjs"
   },
   "dependencies": {
     "@floating-ui/dom": "catalog:",
@@ -215,7 +214,6 @@
     "@nuxt/image": "catalog:",
     "@nuxt/module-builder": "catalog:",
     "@nuxt/test-utils": "catalog:",
-    "@release-it/conventional-changelog": "catalog:",
     "@tanstack/charts": "catalog:",
     "@tanstack/table-core": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
@@ -227,7 +225,6 @@
     "happy-dom": "catalog:",
     "jiti": "catalog:",
     "nuxt": "catalog:",
-    "release-it": "catalog:",
     "unbuild": "catalog:",
     "vitest": "catalog:",
     "vitest-axe": "catalog:",
