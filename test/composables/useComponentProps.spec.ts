@@ -3,7 +3,7 @@ import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll, vi } fro
 import { defineComponent, h, isReadonly, isRef, isShallow } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
-import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput, UKbd } from '#components'
+import { UFormField, UFieldGroup, UAvatarGroup, UTheme, UButton, UAvatar, UInput } from '#components'
 import type * as ui from '#build/ui'
 import { useComponentProps, useComponentOverrides } from '../../src/runtime/composables/useComponentProps'
 import type { ThemeDefaults } from '../../src/runtime/types/theme'
@@ -160,17 +160,17 @@ describe('\'*\' default variants', () => {
 
   it('skips a value the component does not have', async () => {
     const wrapper = await mountSuspended({
-      components: { UTheme, UButton, UKbd },
+      components: { UTheme, UButton, UAvatar },
       template: `
-        <UTheme :props="{ '*': { size: 'xl' } }">
+        <UTheme :props="{ '*': { size: '4xl' } }">
           <UButton label="Button" />
-          <UKbd value="K" />
+          <UAvatar alt="Benjamin Canac" />
         </UTheme>
       `
     })
 
-    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)')
-    expect(wrapper.find('[data-slot="kbd"]').classes()).toContain('h-5')
+    expect(wrapper.find('[data-slot="avatar"]').classes()).toContain('size-13')
+    expect(wrapper.find('[data-slot="button"]').classes()).toContain('text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)')
   })
 
   it('reaches components with generic props', async () => {

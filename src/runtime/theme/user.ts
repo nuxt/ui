@@ -30,6 +30,12 @@ export default defineTheme({
       }
     },
     size: {
+      '4xs': {
+        root: 'gap-1',
+        wrapper: 'flex items-center gap-1',
+        name: 'text-xs',
+        description: 'text-xs'
+      },
       '3xs': {
         root: 'gap-1',
         wrapper: 'flex items-center gap-1',
@@ -74,6 +80,11 @@ export default defineTheme({
         description: 'text-base'
       },
       '3xl': {
+        root: 'gap-3',
+        name: 'text-lg',
+        description: 'text-base'
+      },
+      '4xl': {
         root: 'gap-3',
         name: 'text-lg',
         description: 'text-base'

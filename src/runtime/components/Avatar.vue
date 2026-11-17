@@ -76,7 +76,7 @@ const ui = computed(() => tv(theme, overrides.value)({
 const rootClass = computed(() => ui.value.root({ class: [props.ui?.root, props.class] }))
 
 const sizePx = computed(() => {
-  const sizeClass = (rootClass.value || '').split(' ').find(c => /^size-\d+$/.test(c))
+  const sizeClass = (rootClass.value || '').split(' ').find(c => /^size-\d+(?:\.\d+)?$/.test(c))
   if (sizeClass) {
     const num = Number.parseFloat(sizeClass.split('-')[1] ?? '')
     if (!Number.isNaN(num)) return num * 4
