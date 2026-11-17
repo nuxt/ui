@@ -49,16 +49,17 @@ export default defineTheme({
         increment: 'pe-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong',
         decrement: `order-first ps-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] before:content-['x'] before:w-0 before:invisible [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-[calc(var(--ui-field-py)-(--spacing(1)))] [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong`
       },
-      // Both buttons share a column at the end. Each is taller than its half of the
-      // box, so a negative margin lets them overlap without making the box taller.
-      // The leading and the trailing take a column each, empty when they are not there
+      // Both buttons share a column at the end, stacked 4px inside the box: each takes
+      // half of it with an icon as tall, as wide as a button of the field and centered
+      // where an icon of the field would be. The leading and the trailing take a column
+      // each, empty when they are not there
       vertical: {
         root: 'inline-grid grid-cols-[auto_1fr_auto_auto] grid-rows-2',
         leading: 'col-start-1 row-span-2',
         base: 'col-start-2 row-span-2',
         trailing: 'col-start-3 row-span-2',
-        increment: 'col-start-4 row-start-1 self-start mb-[calc(var(--ui-control-py)-var(--ui-control-icon-size)/2)] pe-1 [&>button]:py-0 scale-80',
-        decrement: 'col-start-4 row-start-2 self-end mt-[calc(var(--ui-control-py)-var(--ui-control-icon-size)/2)] pe-1 [&>button]:py-0 scale-80'
+        increment: 'col-start-4 row-start-1 flex pt-1 pe-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:w-[calc(2*var(--ui-field-py)+var(--ui-field-icon-size)-(--spacing(2)))] [&>button]:p-0 [&>button]:justify-center [&>button]:[--ui-control-icon-size:calc(var(--ui-field-py)+var(--ui-field-icon-size)/2-(--spacing(1)))] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong',
+        decrement: 'col-start-4 row-start-2 flex pb-1 pe-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-field-py:var(--ui-control-py)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:w-[calc(2*var(--ui-field-py)+var(--ui-field-icon-size)-(--spacing(2)))] [&>button]:p-0 [&>button]:justify-center [&>button]:[--ui-control-icon-size:calc(var(--ui-field-py)+var(--ui-field-icon-size)/2-(--spacing(1)))] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong'
       }
     },
     highlight: {

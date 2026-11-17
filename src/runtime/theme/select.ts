@@ -11,8 +11,7 @@ export default defineTheme({
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
     trailing: 'ms-auto flex items-center',
-    // The chevron turns over while the menu is open
-    trailingIcon: 'shrink-0 text-faint group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
+    trailingIcon: 'shrink-0 text-faint',
     value: 'truncate pointer-events-none',
     placeholder: 'truncate text-faint',
     arrow: 'fill-bg stroke-default',
