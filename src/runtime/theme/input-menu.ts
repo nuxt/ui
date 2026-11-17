@@ -12,6 +12,8 @@ export default extendTheme(input, {
     tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
     trailing: () => 'group flex items-center pe-(--ui-control-px) disabled:cursor-not-allowed focus:outline-none',
     trailingClear: 'p-0',
+    // The chevron turns over while the menu is open
+    trailingIcon: (prev: string) => [prev, 'group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none'],
     arrow: 'fill-bg stroke-default',
     content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-overlay shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col cursor-default',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1',

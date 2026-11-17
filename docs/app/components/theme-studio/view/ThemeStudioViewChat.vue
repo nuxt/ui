@@ -288,7 +288,6 @@ const ui = {
                           variant="ghost"
                           size="sm"
                           class="data-[state=open]:bg-soft"
-                          :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
                         />
                       </div>
 
