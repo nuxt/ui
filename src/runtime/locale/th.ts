@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'ปิด'
     },
+    breadcrumb: {
+      label: 'เส้นทางนำทาง'
+    },
     calendar: {
+      label: 'วันที่ของกิจกรรม',
+      monthPicker: 'ตัวเลือกเดือน',
       nextMonth: 'เดือนถัดไป',
       nextYear: 'ปีถัดไป',
       prevMonth: 'เดือนก่อนหน้า',
-      prevYear: 'ปีก่อนหน้า'
+      prevYear: 'ปีก่อนหน้า',
+      yearPicker: 'ตัวเลือกปี'
     },
     carousel: {
       dots: 'เลือกสไลด์ที่จะแสดง',
-      goto: 'ไปที่ {slide}',
+      goto: 'ไปที่สไลด์ {slide}',
       next: 'ถัดไป',
-      prev: 'ย้อนกลับ'
+      prev: 'ย้อนกลับ',
+      roledescription: 'ภาพหมุนเวียน',
+      slide: 'สไลด์'
+    },
+    chatAttachment: {
+      uploading: 'กำลังอัปโหลด',
+      error: 'อัปโหลดไม่สำเร็จ'
+    },
+    chatMessages: {
+      autoScroll: 'เลื่อนลงล่างสุด'
     },
     chatPrompt: {
-      placeholder: 'กรุณาป้อนข้อความของคุณที่นี่…'
+      placeholder: 'กรุณาป้อนข้อความของคุณที่นี่…',
+      queue: 'ข้อความที่รอคิว',
+      sendNow: 'ส่งเลย',
+      edit: 'แก้ไข',
+      remove: 'ลบ'
     },
     chatPromptSubmit: {
-      label: 'ส่ง'
+      label: 'ส่ง',
+      reload: 'ลองอีกครั้ง',
+      stop: 'หยุดการสร้าง'
     },
     colorMode: {
       dark: 'มืด',
@@ -46,7 +67,8 @@ export default defineLocale<Messages>({
       close: 'ปิด',
       noData: 'ไม่มีข้อมูล',
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      placeholder: 'พิมพ์คำสั่งหรือค้นหา…'
+      placeholder: 'พิมพ์คำสั่งหรือค้นหา…',
+      results: 'ผลลัพธ์'
     },
     contentSearch: {
       links: 'ลิงก์',
@@ -90,14 +112,37 @@ export default defineLocale<Messages>({
       close: 'ปิดเมนู',
       open: 'เปิดเมนู'
     },
+    inputDate: {
+      day: 'วัน',
+      dayPeriod: 'ก่อนเที่ยง/หลังเที่ยง',
+      era: 'สมัย',
+      hour: 'ชั่วโมง',
+      minute: 'นาที',
+      month: 'เดือน',
+      second: 'วินาที',
+      timeZoneName: 'เขตเวลา',
+      year: 'ปี'
+    },
     inputMenu: {
       create: 'สร้าง "{label}"',
       noData: 'ไม่มีข้อมูล',
-      noMatch: 'ไม่พบข้อมูลที่ตรงกัน'
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      trigger: 'แสดงตัวเลือก'
     },
     inputNumber: {
       decrement: 'ลด',
-      increment: 'เพิ่ม'
+      increment: 'เพิ่ม',
+      roledescription: 'ช่องตัวเลข'
+    },
+    inputRating: {
+      rate: 'ให้คะแนน {value} จาก {length}'
+    },
+    inputTime: {
+      dayPeriod: 'ก่อนเที่ยง/หลังเที่ยง',
+      hour: 'ชั่วโมง',
+      minute: 'นาที',
+      second: 'วินาที',
+      timeZoneName: 'เขตเวลา'
     },
     listbox: {
       noData: 'ไม่มีข้อมูล',
@@ -107,17 +152,29 @@ export default defineLocale<Messages>({
     modal: {
       close: 'ปิด'
     },
+    pagination: {
+      first: 'หน้าแรก',
+      last: 'หน้าสุดท้าย',
+      next: 'หน้าต่อไป',
+      page: 'หน้า {page}',
+      prev: 'หน้าที่แล้ว'
+    },
+    pinInput: {
+      input: 'รหัส PIN ตัวที่ {index} จาก {length}'
+    },
     pricingTable: {
       caption: 'การเปรียบเทียบราคา'
     },
     prose: {
       codeCollapse: {
         closeText: 'ย่อ',
+        label: '{text} {name}',
         name: 'โค้ด',
         openText: 'ขยาย'
       },
       collapsible: {
         closeText: 'ซ่อน',
+        label: '{text} {name}',
         name: 'คุณสมบัติ',
         openText: 'แสดง'
       },
@@ -144,14 +201,30 @@ export default defineLocale<Messages>({
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
       search: 'ค้นหา…'
     },
+    skeleton: {
+      label: 'กำลังโหลด'
+    },
     slideover: {
       close: 'ปิด'
+    },
+    slider: {
+      max: 'สูงสุด',
+      min: 'ต่ำสุด',
+      thumb: 'ตัวเลื่อน',
+      value: 'ค่าที่ {index} จาก {total}'
+    },
+    stepper: {
+      label: 'ความคืบหน้า'
     },
     table: {
       noData: 'ไม่มีข้อมูล'
     },
     toast: {
       close: 'ปิด'
+    },
+    toaster: {
+      label: 'การแจ้งเตือน',
+      viewport: 'การแจ้งเตือน ({hotkey})'
     }
   }
 })

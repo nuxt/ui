@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Жабу'
     },
+    breadcrumb: {
+      label: 'навигациялық жол'
+    },
     calendar: {
+      label: 'Оқиға күні',
+      monthPicker: 'Айды таңдау',
       nextMonth: 'Келесі ай',
       nextYear: 'Келесі жыл',
       prevMonth: 'Алдыңғы ай',
-      prevYear: 'Алдыңғы жыл'
+      prevYear: 'Алдыңғы жыл',
+      yearPicker: 'Жылды таңдау'
     },
     carousel: {
       dots: 'Көрсету үшін слайдты таңдаңыз',
       goto: '{slide} слайдқа өту',
       next: 'Келесі',
-      prev: 'Алдыңғы'
+      prev: 'Алдыңғы',
+      roledescription: 'карусель',
+      slide: 'слайд'
+    },
+    chatAttachment: {
+      uploading: 'Жүктелуде',
+      error: 'Жүктеу сәтсіз аяқталды'
+    },
+    chatMessages: {
+      autoScroll: 'Төмен айналдыру'
     },
     chatPrompt: {
-      placeholder: 'Хабар енгізіңіз…'
+      placeholder: 'Хабар енгізіңіз…',
+      queue: 'Кезектегі хабарламалар',
+      sendNow: 'Қазір жіберу',
+      edit: 'Өңдеу',
+      remove: 'Жою'
     },
     chatPromptSubmit: {
-      label: 'Жіберу'
+      label: 'Жіберу',
+      reload: 'Қайталау',
+      stop: 'Генерацияны тоқтату'
     },
     chatReasoning: {
       thinking: 'Ойлануда…',
@@ -51,7 +72,8 @@ export default defineLocale<Messages>({
       close: 'Жабу',
       noData: 'Деректер жоқ',
       noMatch: 'Сәйкес келетін деректер жоқ',
-      placeholder: 'Команда енгізіңіз немесе іздеңіз…'
+      placeholder: 'Команда енгізіңіз немесе іздеңіз…',
+      results: 'Нәтижелер'
     },
     contentSearch: {
       links: 'Сілтемелер',
@@ -59,7 +81,7 @@ export default defineLocale<Messages>({
       theme: 'Тақырып'
     },
     contentSearchButton: {
-      label: 'Іздеу'
+      label: 'Іздеу…'
     },
     contentToc: {
       title: 'Мазмұны'
@@ -72,7 +94,7 @@ export default defineLocale<Messages>({
       theme: 'Тақырып'
     },
     dashboardSearchButton: {
-      label: 'Іздеу'
+      label: 'Іздеу…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Жию',
@@ -86,7 +108,7 @@ export default defineLocale<Messages>({
       close: 'Жабу'
     },
     error: {
-      clear: 'Тазалау'
+      clear: 'Басты бетке оралу'
     },
     fileUpload: {
       removeFile: '{filename} жою'
@@ -95,14 +117,37 @@ export default defineLocale<Messages>({
       close: 'Жабу',
       open: 'Ашу'
     },
+    inputDate: {
+      day: 'күн',
+      dayPeriod: 'AM/PM',
+      era: 'дәуір',
+      hour: 'сағат',
+      minute: 'минут',
+      month: 'ай',
+      second: 'секунд',
+      timeZoneName: 'уақыт белдеуі',
+      year: 'жыл'
+    },
     inputMenu: {
       create: '"{label}" жасау',
       noData: 'Деректер жоқ',
-      noMatch: 'Сәйкес келетін деректер жоқ'
+      noMatch: 'Сәйкес келетін деректер жоқ',
+      trigger: 'Нұсқаларды көрсету'
     },
     inputNumber: {
       decrement: 'Азайту',
-      increment: 'Арттыру'
+      increment: 'Арттыру',
+      roledescription: 'сандық өріс'
+    },
+    inputRating: {
+      rate: '{length} ішінен {value} деп бағалау'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'сағат',
+      minute: 'минут',
+      second: 'секунд',
+      timeZoneName: 'уақыт белдеуі'
     },
     listbox: {
       noData: 'Деректер жоқ',
@@ -112,19 +157,31 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Жабу'
     },
+    pagination: {
+      first: 'Бірінші бет',
+      last: 'Соңғы бет',
+      next: 'Келесі бет',
+      page: '{page}-бет',
+      prev: 'Алдыңғы бет'
+    },
+    pinInput: {
+      input: 'PIN код, {length} ішінен {index}-таңба'
+    },
     pricingTable: {
       caption: 'Баға кестесі'
     },
     prose: {
       codeCollapse: {
-        closeText: 'Жиыру',
-        name: 'код',
-        openText: 'Кеңейту'
+        closeText: 'жиыру',
+        label: '{name} {text}',
+        name: 'Кодты',
+        openText: 'кеңейту'
       },
       collapsible: {
-        closeText: 'Жасыру',
-        name: 'қасиеттер',
-        openText: 'Көрсету'
+        closeText: 'жасыру',
+        label: '{name} {text}',
+        name: 'Қасиеттерді',
+        openText: 'көрсету'
       },
       pre: {
         copy: 'Кодты алмасу буферіне көшіру'
@@ -136,7 +193,7 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'Жабу',
-      toggle: 'Ауыстыру'
+      toggle: 'Ашу/жабу'
     },
     selectMenu: {
       create: '"{label}" жасау',
@@ -144,14 +201,30 @@ export default defineLocale<Messages>({
       noMatch: 'Сәйкес келетін деректер жоқ',
       search: 'Іздеу…'
     },
+    skeleton: {
+      label: 'жүктелуде'
+    },
     slideover: {
       close: 'Жабу'
+    },
+    slider: {
+      max: 'Максимум',
+      min: 'Минимум',
+      thumb: 'Жүгірткі',
+      value: '{total} ішінен {index}-мән'
+    },
+    stepper: {
+      label: 'прогресс'
     },
     table: {
       noData: 'Деректер жоқ'
     },
     toast: {
       close: 'Жабу'
+    },
+    toaster: {
+      label: 'Хабарландыру',
+      viewport: 'Хабарландырулар ({hotkey})'
     }
   }
 })

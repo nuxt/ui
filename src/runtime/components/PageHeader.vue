@@ -12,7 +12,7 @@ export interface PageHeaderProps {
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
+  as?: any | { root?: any, title?: any }
   headline?: string
   title?: string
   description?: string
@@ -39,6 +39,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { resolveAs } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -50,13 +51,16 @@ const props = useComponentProps('pageHeader', _props)
 const appConfig = useAppConfig() as PageHeader['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
+const as = computed(() => resolveAs(props.as, { root: 'div', title: 'h1' }))
+
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageHeader || {}) })({
   title: !!props.title || !!slots.title
 }))
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as.root" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="props.headline || !!slots.headline" data-slot="headline" :class="ui.headline({ class: props.ui?.headline })">
       <slot name="headline">
         {{ props.headline }}
@@ -65,11 +69,11 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageHeader || {}
 
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-        <h1 v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ props.title }}
           </slot>
-        </h1>
+        </Primitive>
 
         <div v-if="props.links?.length || !!slots.links" data-slot="links" :class="ui.links({ class: props.ui?.links })">
           <slot name="links">

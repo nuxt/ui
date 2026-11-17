@@ -14,7 +14,7 @@ name: 'use-tour-example'
 ---
 ::
 
-Each step requires a `target` that the popover anchors to. It accepts a CSS selector, an element, a virtual element (anything with `getBoundingClientRect`), or a ref/getter returning one of those. Pass `null` to anchor the step to the center of the viewport. Any other field on a step (`title`, `body`, `side`, …) is passed through untouched and available via `current`.
+Each step requires a `target` that the popover anchors to. It accepts a bare id (a plain word is always treated as an id, never as a tag selector) or any CSS selector, an element, a virtual element (anything with `getBoundingClientRect`), or a ref/getter returning one of those. Pass `null` to anchor the step to the center of the viewport. Any other field on a step (`title`, `body`, `side`, …) is passed through untouched and available via `current`.
 
 ```vue
 <script setup lang="ts">
@@ -59,7 +59,7 @@ const tour = useTour([
 
       ::field-group
         ::field{name="target" type="MaybeRefOrGetter<string | ReferenceElement | null | undefined>"}
-        The element the step anchors to. Accepts a CSS selector (`'#id'`, `'.class'`, or a bare id resolved as `#id`), an element, a virtual element, or a ref/getter returning one. Use `null` to center the step in the viewport.
+        The element the step anchors to. Accepts a bare id (`'id'` — a plain word is always treated as an id, never as a tag selector) or any CSS selector (`'#id'`, `'.class'`, `'[data-tour="step"]'`, …), an element, a virtual element, or a ref/getter returning one. Use `null` to center the step in the viewport.
         ::
 
         ::field{name="[key: string]" type="any"}
@@ -142,4 +142,29 @@ const tour = useTour([
   ::field{name="finish" type="() => void"}
   Close the tour.
   ::
+::
+
+## Examples
+
+### Spotlight
+
+This example demonstrates how to dim the page around the current target by combining `reference` with VueUse's [`useElementBounding`](https://vueuse.org/core/useElementBounding/). The target stays clickable while the rest of the page is blocked, and a step without a target dims the whole page. Setting it up takes three steps:
+
+1. Copy the overlay component below into your app. It measures the target with `useElementBounding` and draws a `clip-path` backdrop with a cutout and a ring around it.
+2. Render `<UseTourSpotlight :tour="tour" />` next to your `<UPopover>`. Keep the measuring inside the overlay: the box updates on every scroll frame, so reading it in the parent template would re-render the whole parent while scrolling.
+3. Give the popover `:ui="{ content: 'z-50' }"` so it stays above the backdrop (`z-40`), and a `sideOffset` of `16` so it clears the cutout padding.
+
+::component-example
+---
+collapse: true
+name: 'use-tour-spotlight'
+preview: false
+---
+::
+
+::component-example
+---
+collapse: true
+name: 'use-tour-spotlight-example'
+---
 ::

@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Tutup'
     },
+    breadcrumb: {
+      label: 'jejak navigasi'
+    },
     calendar: {
+      label: 'Tarikh acara',
+      monthPicker: 'Pemilih bulan',
       nextMonth: 'Bulan seterusnya',
       nextYear: 'Tahun seterusnya',
-      prevMonth: 'Bulan sebelum',
-      prevYear: 'Tahun sebelum'
+      prevMonth: 'Bulan sebelumnya',
+      prevYear: 'Tahun sebelumnya',
+      yearPicker: 'Pemilih tahun'
     },
     carousel: {
       dots: 'Pilih slaid untuk dipaparkan',
       goto: 'Pergi ke slaid {slide}',
       next: 'Seterusnya',
-      prev: 'Sebelum'
+      prev: 'Sebelumnya',
+      roledescription: 'karusel',
+      slide: 'slaid'
+    },
+    chatAttachment: {
+      uploading: 'Memuat naik',
+      error: 'Gagal memuat naik'
+    },
+    chatMessages: {
+      autoScroll: 'Tatal ke bawah'
     },
     chatPrompt: {
-      placeholder: 'Taip mesej anda di sini…'
+      placeholder: 'Taip mesej anda di sini…',
+      queue: 'Mesej dalam baris gilir',
+      sendNow: 'Hantar sekarang',
+      edit: 'Sunting',
+      remove: 'Alih keluar'
     },
     chatPromptSubmit: {
-      label: 'Hantar mesej'
+      label: 'Hantar mesej',
+      reload: 'Cuba lagi',
+      stop: 'Hentikan penjanaan'
     },
     chatReasoning: {
       thinking: 'Berfikir…',
@@ -51,7 +72,8 @@ export default defineLocale<Messages>({
       close: 'Tutup',
       noData: 'Tiada data',
       noMatch: 'Tiada data yang sepadan',
-      placeholder: 'Taip arahan atau carian…'
+      placeholder: 'Taip arahan atau carian…',
+      results: 'Keputusan'
     },
     contentSearch: {
       links: 'Pautan',
@@ -95,14 +117,37 @@ export default defineLocale<Messages>({
       close: 'Tutup menu',
       open: 'Buka menu'
     },
+    inputDate: {
+      day: 'hari',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'jam',
+      minute: 'minit',
+      month: 'bulan',
+      second: 'saat',
+      timeZoneName: 'zon waktu',
+      year: 'tahun'
+    },
     inputMenu: {
       create: 'Cipta "{label}"',
       noData: 'Tiada data',
-      noMatch: 'Tiada data yang sepadan'
+      noMatch: 'Tiada data yang sepadan',
+      trigger: 'Tunjukkan pilihan'
     },
     inputNumber: {
       decrement: 'Kurangkan',
-      increment: 'Naikkan'
+      increment: 'Naikkan',
+      roledescription: 'medan nombor'
+    },
+    inputRating: {
+      rate: 'Beri nilai {value} daripada {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'jam',
+      minute: 'minit',
+      second: 'saat',
+      timeZoneName: 'zon waktu'
     },
     listbox: {
       noData: 'Tiada data',
@@ -112,18 +157,30 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Tutup'
     },
+    pagination: {
+      first: 'Halaman pertama',
+      last: 'Halaman terakhir',
+      next: 'Halaman seterusnya',
+      page: 'Halaman {page}',
+      prev: 'Halaman sebelumnya'
+    },
+    pinInput: {
+      input: 'kod PIN, aksara {index} daripada {length}'
+    },
     pricingTable: {
       caption: 'Perbandingan pelan harga'
     },
     prose: {
       codeCollapse: {
         closeText: 'Runtuhkan',
+        label: '{text} {name}',
         name: 'kod',
         openText: 'Kembangkan'
       },
       collapsible: {
         closeText: 'Sembunyikan',
-        name: 'ciri',
+        label: '{text} {name}',
+        name: 'sifat',
         openText: 'Tunjukkan'
       },
       pre: {
@@ -144,14 +201,30 @@ export default defineLocale<Messages>({
       noMatch: 'Tiada data yang sepadan',
       search: 'Cari…'
     },
+    skeleton: {
+      label: 'memuatkan'
+    },
     slideover: {
       close: 'Tutup'
+    },
+    slider: {
+      max: 'Maksimum',
+      min: 'Minimum',
+      thumb: 'Peluncur',
+      value: 'Nilai {index} daripada {total}'
+    },
+    stepper: {
+      label: 'kemajuan'
     },
     table: {
       noData: 'Tiada data'
     },
     toast: {
       close: 'Tutup'
+    },
+    toaster: {
+      label: 'Pemberitahuan',
+      viewport: 'Pemberitahuan ({hotkey})'
     }
   }
 })

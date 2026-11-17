@@ -1,3 +1,4 @@
+import { collectionNames } from '@nuxt/icon/utils'
 import defaultIcons from '../theme/icons'
 
 /**
@@ -38,17 +39,14 @@ export function parseIconName(icon: string, collections: Iterable<string> = [], 
   }
 }
 
-// Collections Nuxt UI ships its default icons in (currently just `lucide`). We only
-// auto-bundle icons from these collections because they convert unambiguously; icons
-// from other collections may use multi-word collection names that can't be split
-// reliably, so they're left to runtime loading rather than emit a wrong name `@nuxt/icon`
-// would drop and warn about. Derived from the defaults (known to be single-word, hence
-// the first-dash fallback) so it stays correct if they ever change.
-const trustedCollections = new Set(
-  Object.values(defaultIcons)
+// The collections `@nuxt/icon` knows, plus the ones of the default icons, matched
+// longest-first so multi-word names like `material-symbols` split correctly.
+const knownCollections = new Set([
+  ...collectionNames,
+  ...Object.values(defaultIcons)
     .map(icon => parseIconName(icon, [], true)?.[0])
     .filter((collection): collection is string => !!collection)
-)
+])
 
 /**
  * Resolve the icons Nuxt UI uses into `@nuxt/icon` client-bundle names so they're
@@ -58,9 +56,10 @@ const trustedCollections = new Set(
  * Nuxt UI's components (chevrons, the loading spinner, close buttons, etc.) can't be
  * discovered on their own and would otherwise be loaded on demand on every page.
  *
- * Restricted to {@link trustedCollections} so multi-word collection names can't be
- * mis-split; any name `@nuxt/icon` still can't resolve (collection not installed, icon
- * missing) is dropped and falls back to runtime loading instead of failing the build.
+ * A dashed icon from a collection outside {@link knownCollections} can't be split
+ * reliably, so it's skipped. Any name `@nuxt/icon` still can't resolve (collection
+ * not installed, icon missing) is dropped and falls back to runtime loading instead
+ * of failing the build.
  */
 export function getClientBundleIcons(icons: Record<string, string> = {}): string[] {
   const names = new Set<string>()
@@ -70,8 +69,8 @@ export function getClientBundleIcons(icons: Record<string, string> = {}): string
       continue
     }
 
-    const parsed = parseIconName(icon, trustedCollections)
-    if (parsed && trustedCollections.has(parsed[0])) {
+    const parsed = parseIconName(icon, knownCollections)
+    if (parsed) {
       names.add(`${parsed[0]}:${parsed[1]}`)
     }
   }

@@ -6,7 +6,7 @@ export default defineLocale<Messages>({
   code: 'bg',
   messages: {
     alert: {
-      close: 'Затворете'
+      close: 'Затвори'
     },
     authForm: {
       hidePassword: 'Скрий паролата',
@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Затвори'
     },
+    breadcrumb: {
+      label: 'навигационна пътека'
+    },
     calendar: {
+      label: 'Дата на събитието',
+      monthPicker: 'Избор на месец',
       nextMonth: 'Следващ месец',
       nextYear: 'Следваща година',
       prevMonth: 'Предишен месец',
-      prevYear: 'Предишна година'
+      prevYear: 'Предишна година',
+      yearPicker: 'Избор на година'
     },
     carousel: {
       dots: 'Изберете слайд за показване',
       goto: 'Отидете на слайд {slide}',
       next: 'Напред',
-      prev: 'Назад'
+      prev: 'Назад',
+      roledescription: 'карусел',
+      slide: 'слайд'
+    },
+    chatAttachment: {
+      uploading: 'Качване',
+      error: 'Неуспешно качване'
+    },
+    chatMessages: {
+      autoScroll: 'Превърти надолу'
     },
     chatPrompt: {
-      placeholder: 'Въведете съобщение…'
+      placeholder: 'Въведете съобщение…',
+      queue: 'Съобщения на опашката',
+      sendNow: 'Изпрати сега',
+      edit: 'Редактиране',
+      remove: 'Премахване'
     },
     chatPromptSubmit: {
-      label: 'Изпрати'
+      label: 'Изпрати',
+      reload: 'Опитай отново',
+      stop: 'Спри генерирането'
     },
     chatReasoning: {
       thinking: 'Мисли…',
@@ -48,10 +69,11 @@ export default defineLocale<Messages>({
     },
     commandPalette: {
       back: 'Назад',
-      close: 'Затворете',
+      close: 'Затвори',
       noData: 'Няма данни',
-      noMatch: 'Няма съвпадение на данни',
-      placeholder: 'Въведете команда или потърсете…'
+      noMatch: 'Няма съвпадения',
+      placeholder: 'Въведете команда или потърсете…',
+      results: 'Резултати'
     },
     contentSearch: {
       links: 'Връзки',
@@ -59,58 +81,91 @@ export default defineLocale<Messages>({
       theme: 'Тема'
     },
     contentSearchButton: {
-      label: 'Търсене'
+      label: 'Търсене…'
     },
     contentToc: {
       title: 'Съдържание'
     },
     dropdownMenu: {
-      noMatch: 'Няма съвпадение на данни',
+      noMatch: 'Няма съвпадения',
       search: 'Потърсете…'
     },
     dashboardSearch: {
       theme: 'Тема'
     },
     dashboardSearchButton: {
-      label: 'Търсене'
+      label: 'Търсене…'
     },
     dashboardSidebarCollapse: {
-      collapse: 'Свий',
-      expand: 'Разшири'
+      collapse: 'Свий страничната лента',
+      expand: 'Разгъни страничната лента'
     },
     dashboardSidebarToggle: {
-      close: 'Затвори',
-      open: 'Отвори'
+      close: 'Затвори страничната лента',
+      open: 'Отвори страничната лента'
     },
     drawer: {
-      close: 'Затворете'
+      close: 'Затвори'
     },
     error: {
-      clear: 'Изчисти'
+      clear: 'Към началната страница'
     },
     fileUpload: {
       removeFile: 'Премахни {filename}'
     },
     header: {
-      close: 'Затвори',
-      open: 'Отвори'
+      close: 'Затвори менюто',
+      open: 'Отвори менюто'
+    },
+    inputDate: {
+      day: 'ден',
+      dayPeriod: 'AM/PM',
+      era: 'ера',
+      hour: 'час',
+      minute: 'минута',
+      month: 'месец',
+      second: 'секунда',
+      timeZoneName: 'часова зона',
+      year: 'година'
     },
     inputMenu: {
       create: 'Създайте "{label}"',
       noData: 'Няма данни',
-      noMatch: 'Няма съвпадение на данни'
+      noMatch: 'Няма съвпадения',
+      trigger: 'Показване на опциите'
     },
     inputNumber: {
       decrement: 'Намаляване',
-      increment: 'Увеличаване'
+      increment: 'Увеличаване',
+      roledescription: 'числово поле'
+    },
+    inputRating: {
+      rate: 'Оценка {value} от {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'час',
+      minute: 'минута',
+      second: 'секунда',
+      timeZoneName: 'часова зона'
     },
     listbox: {
       noData: 'Няма данни',
-      noMatch: 'Няма съвпадение на данни',
+      noMatch: 'Няма съвпадения',
       search: 'Потърсете…'
     },
     modal: {
-      close: 'Затворете'
+      close: 'Затвори'
+    },
+    pagination: {
+      first: 'Първа страница',
+      last: 'Последна страница',
+      next: 'Следваща страница',
+      page: 'Страница {page}',
+      prev: 'Предишна страница'
+    },
+    pinInput: {
+      input: 'ПИН код, символ {index} от {length}'
     },
     pricingTable: {
       caption: 'Ценова таблица'
@@ -118,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'Сгъни',
+        label: '{text} {name}',
         name: 'код',
         openText: 'Разгъни'
       },
       collapsible: {
         closeText: 'Скрий',
+        label: '{text} {name}',
         name: 'свойства',
         openText: 'Покажи'
       },
@@ -130,28 +187,44 @@ export default defineLocale<Messages>({
         copy: 'Копирай кода в клипборда'
       },
       prompt: {
-        copy: 'Копирай подсказката',
+        copy: 'Копирай промпта',
         openIn: 'Отвори в {name}'
       }
     },
     sidebar: {
-      close: 'Затворете',
+      close: 'Затвори',
       toggle: 'Превключване'
     },
     selectMenu: {
       create: 'Създайте "{label}"',
       noData: 'Няма данни',
-      noMatch: 'Няма съвпадение на данни',
+      noMatch: 'Няма съвпадения',
       search: 'Потърсете…'
     },
+    skeleton: {
+      label: 'зареждане'
+    },
     slideover: {
-      close: 'Затворете'
+      close: 'Затвори'
+    },
+    slider: {
+      max: 'Максимум',
+      min: 'Минимум',
+      thumb: 'Плъзгач',
+      value: 'Стойност {index} от {total}'
+    },
+    stepper: {
+      label: 'напредък'
     },
     table: {
       noData: 'Няма данни'
     },
     toast: {
-      close: 'Затворете'
+      close: 'Затвори'
+    },
+    toaster: {
+      label: 'Известие',
+      viewport: 'Известия ({hotkey})'
     }
   }
 })

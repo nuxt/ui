@@ -308,4 +308,142 @@ describe('tv slot memoization', () => {
     expect(ui.label(Object.create({ class: 'font-bold' }))).toBe('truncate font-bold')
     expect(ui.label({})).toBe('truncate')
   })
+
+  it('does not key inputs carrying non-enumerable props', () => {
+    const ui = build()
+    expect(ui.label({})).toBe('truncate')
+    expect(ui.label(Object.defineProperty({}, 'class', { value: 'font-bold' }))).toBe('truncate font-bold')
+  })
+})
+
+describe('tv invocation memoization', () => {
+  const theme = {
+    slots: { base: 'inline-flex text-sm', label: 'truncate' },
+    variants: {
+      active: {
+        true: { base: 'font-bold' },
+        false: { base: 'font-light' }
+      }
+    }
+  }
+
+  const slotless = {
+    base: 'inline-flex text-sm',
+    variants: {
+      active: { true: 'font-bold', false: 'font-light' }
+    }
+  }
+
+  it('shares the result across invocations with equal variant props', () => {
+    const component = tvt(theme)
+    expect(component({ active: true, class: ['p-2'] })).toBe(component({ active: true, class: ['p-2'] }))
+    expect(component({ active: true }).base()).toContain('font-bold')
+  })
+
+  it('does not share results across distinct variant props', () => {
+    const component = tvt(theme)
+    const active = component({ active: true })
+    expect(component({ active: true })).toBe(active)
+    expect(component({ active: false })).not.toBe(active)
+    expect(component({ active: false }).base()).toContain('font-light')
+  })
+
+  it('does not share results for variant props that cannot be keyed', () => {
+    const component = tvt(theme)
+    expect(component({ class: ['p-2'] })).toBe(component({ class: ['p-2'] }))
+    expect(component({ class: { 'p-2': true } })).not.toBe(component({ class: { 'p-2': true } }))
+    expect(component(Object.defineProperty({}, 'active', { value: true })).base()).toContain('font-bold')
+
+    const slotlessComponent = tvt(slotless) as any
+    expect(slotlessComponent({ class: () => 'block' })).toBe('block')
+    expect(slotlessComponent({ active: true })).toBe('inline-flex text-sm font-bold')
+  })
+
+  it('keeps a shared result independent of the caller props once keyed', () => {
+    const component = tvt(theme)
+    let active = true
+    const result = component({
+      get active() {
+        return active
+      }
+    })
+    active = false
+    expect(component({ active: true })).toBe(result)
+    expect(result.base()).toContain('font-bold')
+  })
+
+  it('keeps the shared results bounded', () => {
+    const component = tvt(theme)
+    const first = component({ index: 0 })
+    for (let i = 1; i < 600; i++) {
+      component({ index: i })
+    }
+    expect(component({ index: 599 })).toBe(component({ index: 599 }))
+    expect(component({ index: 0 })).not.toBe(first)
+  })
+})
+
+describe('tv factory memoization', () => {
+  const theme = {
+    slots: { base: 'inline-flex text-sm', label: 'truncate' },
+    variants: {
+      color: {
+        primary: { base: 'bg-primary' },
+        secondary: { base: 'bg-secondary' }
+      }
+    },
+    defaultVariants: { color: 'primary' }
+  }
+
+  it('reuses the component for equal configs', () => {
+    expect(tvt({ extend: theme, slots: { base: 'p-2' } })).toBe(tvt({ extend: theme, slots: { base: 'p-2' } }))
+  })
+
+  it('does not share a component across configs', () => {
+    expect(tvt({ extend: theme, slots: { base: 'p-2' } })().base()).toContain('p-2')
+    expect(tvt({ extend: theme, slots: { base: 'p-4' } })().base()).toContain('p-4')
+  })
+
+  it('does not share a component across themes', () => {
+    expect(tvt({ extend: theme })().base()).toContain('inline-flex')
+    expect(tvt({ extend: { ...theme, slots: { base: 'block' } } })().base()).toContain('block')
+  })
+
+  it('keeps an undefined config value distinct from a missing one', () => {
+    expect(tvt({ extend: theme, defaultVariants: {} })().base()).toContain('bg-primary')
+    expect(tvt({ extend: theme, defaultVariants: { color: undefined } })().base()).not.toContain('bg-primary')
+  })
+
+  it('does not share a component between undefined and a string matching its key marker', () => {
+    expect(tvt({ extend: theme, slots: { label: undefined } })().label()).toBe('truncate')
+    expect(tvt({ extend: theme, slots: { label: '\0undefined' } })().label()).toBe('truncate \0undefined')
+  })
+
+  it('falls back to the uncached path for configs that cannot be serialized', () => {
+    const cyclic: any = {}
+    cyclic.self = cyclic
+    expect(tvt({ extend: theme, slots: { label: 10n } })().label()).toBe('truncate 10')
+    expect(tvt({ extend: theme, meta: cyclic })().label()).toBe('truncate')
+  })
+
+  it('does not key configs through `toJSON`', () => {
+    const variants = Object.defineProperty({ color: { primary: { base: 'p-4' } } }, 'toJSON', { value: () => ({}) })
+    expect(tvt({ extend: theme, variants: {} })().base()).not.toContain('p-4')
+    expect(tvt({ extend: theme, variants })().base()).toContain('p-4')
+  })
+
+  it('does not share a component across configs containing functions', () => {
+    expect(tvt({ extend: theme, slots: { label: () => 'text-xl' } })().label()).toBe('text-xl')
+    expect(tvt({ extend: theme, slots: { label: () => 'text-2xl' } })().label()).toBe('text-2xl')
+  })
+
+  it('does not share a component between non-finite numbers and null', () => {
+    expect(tvt({ extend: theme, slots: { label: null } })().label()).toBe('truncate')
+    expect(tvt({ extend: theme, slots: { label: Number.POSITIVE_INFINITY } })().label()).toBe('truncate Infinity')
+  })
+
+  it('does not key configs carrying inherited enumerable props as plain ones', () => {
+    expect(tvt({ extend: theme, variants: {} })().base()).not.toContain('p-4')
+    expect(tvt({ extend: theme, variants: Object.create({ color: { primary: { base: 'p-4' } } }) })().base()).toContain('p-4')
+  })
 })

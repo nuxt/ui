@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Uždaryti'
     },
+    breadcrumb: {
+      label: 'naršymo kelias'
+    },
     calendar: {
+      label: 'Įvykio data',
+      monthPicker: 'Mėnesio parinkiklis',
       nextMonth: 'Kitas mėnuo',
       nextYear: 'Kiti metai',
       prevMonth: 'Ankstesnis mėnuo',
-      prevYear: 'Ankstesni metai'
+      prevYear: 'Ankstesni metai',
+      yearPicker: 'Metų parinkiklis'
     },
     carousel: {
       dots: 'Pasirinkite skaidrę rodymui',
       goto: 'Eiti į skaidrę {slide}',
       next: 'Pirmyn',
-      prev: 'Atgal'
+      prev: 'Atgal',
+      roledescription: 'karuselė',
+      slide: 'skaidrė'
+    },
+    chatAttachment: {
+      uploading: 'Įkeliama',
+      error: 'Nepavyko įkelti'
+    },
+    chatMessages: {
+      autoScroll: 'Slinkti žemyn'
     },
     chatPrompt: {
-      placeholder: 'Įveskite savo žinutę čia…'
+      placeholder: 'Įveskite savo žinutę čia…',
+      queue: 'Eilėje esančios žinutės',
+      sendNow: 'Siųsti dabar',
+      edit: 'Redaguoti',
+      remove: 'Pašalinti'
     },
     chatPromptSubmit: {
-      label: 'Siųsti žinutę'
+      label: 'Siųsti žinutę',
+      reload: 'Bandyti dar kartą',
+      stop: 'Sustabdyti generavimą'
     },
     chatReasoning: {
       thinking: 'Mąsto…',
@@ -51,7 +72,8 @@ export default defineLocale<Messages>({
       close: 'Uždaryti',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
-      placeholder: 'Įveskite komandą arba ieškokite…'
+      placeholder: 'Įveskite komandą arba ieškokite…',
+      results: 'Rezultatai'
     },
     contentSearch: {
       links: 'Nuorodos',
@@ -95,14 +117,37 @@ export default defineLocale<Messages>({
       close: 'Uždaryti meniu',
       open: 'Atidaryti meniu'
     },
+    inputDate: {
+      day: 'diena',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'valanda',
+      minute: 'minutė',
+      month: 'mėnuo',
+      second: 'sekundė',
+      timeZoneName: 'laiko juosta',
+      year: 'metai'
+    },
     inputMenu: {
-      create: 'Sukurti „{label}"',
+      create: 'Sukurti „{label}“',
       noData: 'Nėra duomenų',
-      noMatch: 'Nėra atitinkančių duomenų'
+      noMatch: 'Nėra atitinkančių duomenų',
+      trigger: 'Rodyti parinktis'
     },
     inputNumber: {
       decrement: 'Sumažinti',
-      increment: 'Padidinti'
+      increment: 'Padidinti',
+      roledescription: 'skaičių laukas'
+    },
+    inputRating: {
+      rate: 'Įvertinti {value} iš {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'valanda',
+      minute: 'minutė',
+      second: 'sekundė',
+      timeZoneName: 'laiko juosta'
     },
     listbox: {
       noData: 'Nėra duomenų',
@@ -112,18 +157,30 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Uždaryti'
     },
+    pagination: {
+      first: 'Pirmas puslapis',
+      last: 'Paskutinis puslapis',
+      next: 'Kitas puslapis',
+      page: 'Puslapis {page}',
+      prev: 'Ankstesnis puslapis'
+    },
+    pinInput: {
+      input: 'PIN kodas, simbolis {index} iš {length}'
+    },
     pricingTable: {
       caption: 'Kainų planų palyginimas'
     },
     prose: {
       codeCollapse: {
         closeText: 'Suskleisti',
-        name: 'kodas',
+        label: '{text} {name}',
+        name: 'kodą',
         openText: 'Išplėsti'
       },
       collapsible: {
         closeText: 'Slėpti',
-        name: 'savybės',
+        label: '{text} {name}',
+        name: 'savybes',
         openText: 'Rodyti'
       },
       pre: {
@@ -139,19 +196,35 @@ export default defineLocale<Messages>({
       toggle: 'Perjungti'
     },
     selectMenu: {
-      create: 'Sukurti „{label}"',
+      create: 'Sukurti „{label}“',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
       search: 'Ieškoti…'
     },
+    skeleton: {
+      label: 'įkeliama'
+    },
     slideover: {
       close: 'Uždaryti'
+    },
+    slider: {
+      max: 'Maksimumas',
+      min: 'Minimumas',
+      thumb: 'Slankiklis',
+      value: 'Reikšmė {index} iš {total}'
+    },
+    stepper: {
+      label: 'eiga'
     },
     table: {
       noData: 'Nėra duomenų'
     },
     toast: {
       close: 'Uždaryti'
+    },
+    toaster: {
+      label: 'Pranešimas',
+      viewport: 'Pranešimai ({hotkey})'
     }
   }
 })

@@ -314,7 +314,7 @@ Set the `toaster.expand` prop to `false` on the [App](/docs/components/app#props
 
 ```vue [app.vue]
 <script setup lang="ts">
-const toaster = { expand: true }
+const toaster = { expand: false }
 </script>
 
 <template>
@@ -358,6 +358,17 @@ Pass an `onUpdateOpen` field to execute a callback when the toast is closed (eit
 ---
 collapse: true
 name: 'toast-callback-example'
+---
+::
+
+### With promise :badge{label="Soon" class="align-text-top"}
+
+Use `toast.promise` to display a loading toast that updates when the promise resolves or rejects.
+
+::component-example
+---
+collapse: true
+name: 'toast-promise-example'
 ---
 ::
 

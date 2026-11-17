@@ -10,7 +10,7 @@ export default (options: Required<ModuleOptions>) => ({
     title: 'truncate',
     trailing: 'ms-auto inline-flex gap-1.5 items-center',
     trailingIcon: 'size-5 transform transition-transform duration-200 ease-out motion-reduce:transition-none shrink-0 group-data-[state=open]:rotate-180 lg:hidden',
-    content: 'relative data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden focus:outline-none lg:min-h-[min(var(--list-height,8rem),8rem)] lg:overflow-y-auto lg:scrollbar-none',
+    content: 'relative data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden focus:outline-none lg:min-h-[min(var(--list-height,8rem),16rem)] lg:overflow-y-auto lg:scrollbar-none',
     list: 'min-w-0',
     listWithChildren: 'ms-3',
     item: 'min-w-0',
@@ -70,7 +70,7 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       list: 'ms-2.5 ps-4 border-s border-default',
       item: '-ms-px',
-      indicator: 'absolute ms-2.5 transition-[translate,height] duration-200 ease-out motion-reduce:transition-none h-(--indicator-size) translate-y-(--indicator-position) w-px rounded-full',
+      indicator: 'absolute ms-2.5 transition-[top,height] duration-200 ease-out motion-reduce:transition-none top-(--indicator-position) h-(--indicator-size) w-px rounded-full',
       indicatorLine: 'hidden',
       indicatorActive: 'w-full h-full'
     }
@@ -83,7 +83,7 @@ export default (options: Required<ModuleOptions>) => ({
       itemWithChildren: 'ps-px',
       indicator: 'absolute ms-2.5 start-0 top-0 rtl:-scale-x-100',
       indicatorLine: 'absolute inset-0 bg-(--ui-border)',
-      indicatorActive: 'absolute w-full h-(--indicator-size) translate-y-(--indicator-position) transition-[translate,height] duration-200 ease-out motion-reduce:transition-none'
+      indicatorActive: 'absolute w-full top-(--indicator-position) h-(--indicator-size) transition-[top,height] duration-200 ease-out motion-reduce:transition-none'
     }
   }],
   defaultVariants: {

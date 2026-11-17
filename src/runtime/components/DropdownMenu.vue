@@ -43,7 +43,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   onSelect?: (e: Event) => void
   onUpdateChecked?: (checked: boolean) => void
   class?: any
-  ui?: Pick<DropdownMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>
+  ui?: Partial<Pick<DropdownMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>>
   [key: string]: any
 }
 
@@ -147,7 +147,6 @@ export type DropdownMenuSlots<
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -173,7 +172,7 @@ const props = useComponentProps<DropdownMenuProps<T>>('dropdownMenu', _props)
 
 const appConfig = useAppConfig() as DropdownMenu['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
+const rootProps = useForwardProps(props, ['defaultOpen', 'open', 'modal'], emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as DropdownMenuArrowProps)
 const getProxySlots = () => omit(slots, ['default'])

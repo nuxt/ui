@@ -17,23 +17,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'סגור'
     },
+    breadcrumb: {
+      label: 'פירורי לחם'
+    },
     calendar: {
-      nextMonth: 'חודש הבא',
-      nextYear: 'שנה הבאה',
-      prevMonth: 'חודש קודם',
-      prevYear: 'שנה קודמת'
+      label: 'תאריך האירוע',
+      monthPicker: 'בורר חודש',
+      nextMonth: 'החודש הבא',
+      nextYear: 'השנה הבאה',
+      prevMonth: 'החודש הקודם',
+      prevYear: 'השנה הקודמת',
+      yearPicker: 'בורר שנה'
     },
     carousel: {
       dots: 'בחר שקופית להצגה',
-      goto: 'מעבר ל {slide}',
+      goto: 'מעבר לשקופית {slide}',
       next: 'הבא',
-      prev: 'הקודם'
+      prev: 'הקודם',
+      roledescription: 'קרוסלה',
+      slide: 'שקופית'
+    },
+    chatAttachment: {
+      uploading: 'מעלה',
+      error: 'ההעלאה נכשלה'
+    },
+    chatMessages: {
+      autoScroll: 'גלול למטה'
     },
     chatPrompt: {
-      placeholder: 'כתוב את ההודעה שלך כאן…'
+      placeholder: 'כתוב את ההודעה שלך כאן…',
+      queue: 'הודעות בתור',
+      sendNow: 'שלח עכשיו',
+      edit: 'עריכה',
+      remove: 'הסרה'
     },
     chatPromptSubmit: {
-      label: 'שלח'
+      label: 'שלח',
+      reload: 'נסה שוב',
+      stop: 'עצור את היצירה'
     },
     chatReasoning: {
       thinking: 'חושב…',
@@ -50,9 +71,10 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'חזור',
       close: 'סגור',
-      noData: 'אין נתונים זמינים',
+      noData: 'אין נתונים',
       noMatch: 'לא נמצאה התאמה',
-      placeholder: 'הקלד פקודה…'
+      placeholder: 'הקלד פקודה או חפש…',
+      results: 'תוצאות'
     },
     contentSearch: {
       links: 'קישורים',
@@ -96,14 +118,37 @@ export default defineLocale<Messages>({
       close: 'סגור תפריט',
       open: 'פתח תפריט'
     },
+    inputDate: {
+      day: 'יום',
+      dayPeriod: 'לפנה״צ/אחה״צ',
+      era: 'תקופה',
+      hour: 'שעה',
+      minute: 'דקה',
+      month: 'חודש',
+      second: 'שנייה',
+      timeZoneName: 'אזור זמן',
+      year: 'שנה'
+    },
     inputMenu: {
       create: 'צור "{label}"',
       noData: 'אין נתונים',
-      noMatch: 'אין התאמה'
+      noMatch: 'לא נמצאה התאמה',
+      trigger: 'הצגת אפשרויות'
     },
     inputNumber: {
       decrement: 'הפחת',
-      increment: 'הוסף'
+      increment: 'הוסף',
+      roledescription: 'שדה מספרי'
+    },
+    inputRating: {
+      rate: 'דירוג {value} מתוך {length}'
+    },
+    inputTime: {
+      dayPeriod: 'לפנה״צ/אחה״צ',
+      hour: 'שעה',
+      minute: 'דקה',
+      second: 'שנייה',
+      timeZoneName: 'אזור זמן'
     },
     listbox: {
       noData: 'אין נתונים',
@@ -113,17 +158,29 @@ export default defineLocale<Messages>({
     modal: {
       close: 'סגור'
     },
+    pagination: {
+      first: 'עמוד ראשון',
+      last: 'עמוד אחרון',
+      next: 'העמוד הבא',
+      page: 'עמוד {page}',
+      prev: 'העמוד הקודם'
+    },
+    pinInput: {
+      input: 'קוד PIN, תו {index} מתוך {length}'
+    },
     pricingTable: {
-      caption: 'שיפור מחירון'
+      caption: 'השוואת תוכניות מחיר'
     },
     prose: {
       codeCollapse: {
         closeText: 'כווץ',
+        label: '{text} {name}',
         name: 'קוד',
         openText: 'הרחב'
       },
       collapsible: {
         closeText: 'הסתר',
+        label: '{text} {name}',
         name: 'מאפיינים',
         openText: 'הצג'
       },
@@ -137,7 +194,7 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'סגור',
-      toggle: 'החלף'
+      toggle: 'פתיחה/סגירה'
     },
     selectMenu: {
       create: 'צור "{label}"',
@@ -145,14 +202,30 @@ export default defineLocale<Messages>({
       noMatch: 'לא נמצאה התאמה',
       search: 'חפש…'
     },
+    skeleton: {
+      label: 'טוען'
+    },
     slideover: {
       close: 'סגור'
     },
+    slider: {
+      max: 'מקסימום',
+      min: 'מינימום',
+      thumb: 'מחוון',
+      value: 'ערך {index} מתוך {total}'
+    },
+    stepper: {
+      label: 'התקדמות'
+    },
     table: {
-      noData: 'אין נתונים להצגה'
+      noData: 'אין נתונים'
     },
     toast: {
       close: 'סגור'
+    },
+    toaster: {
+      label: 'התראה',
+      viewport: 'התראות ({hotkey})'
     }
   }
 })

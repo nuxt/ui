@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'বন্ধ করুন'
     },
+    breadcrumb: {
+      label: 'ব্রেডক্রাম্ব'
+    },
     calendar: {
+      label: 'ইভেন্টের তারিখ',
+      monthPicker: 'মাস নির্বাচক',
       nextMonth: 'পরবর্তী মাস',
       nextYear: 'পরবর্তী বছর',
       prevMonth: 'পূর্ববর্তী মাস',
-      prevYear: 'পূর্ববর্তী বছর'
+      prevYear: 'পূর্ববর্তী বছর',
+      yearPicker: 'বছর নির্বাচক'
     },
     carousel: {
       dots: 'প্রদর্শনের জন্য স্লাইড নির্বাচন করুন',
-      goto: 'স্লাইড {slide} এ যান',
+      goto: 'স্লাইড {slide}-এ যান',
       next: 'পরবর্তী',
-      prev: 'পূর্ববর্তী'
+      prev: 'পূর্ববর্তী',
+      roledescription: 'ক্যারোসেল',
+      slide: 'স্লাইড'
+    },
+    chatAttachment: {
+      uploading: 'আপলোড হচ্ছে',
+      error: 'আপলোড ব্যর্থ হয়েছে'
+    },
+    chatMessages: {
+      autoScroll: 'নিচে স্ক্রোল করুন'
     },
     chatPrompt: {
-      placeholder: 'এখানে আপনার বার্তা লিখুন…'
+      placeholder: 'এখানে আপনার বার্তা লিখুন…',
+      queue: 'সারিতে থাকা বার্তা',
+      sendNow: 'এখনই পাঠান',
+      edit: 'সম্পাদনা করুন',
+      remove: 'সরান'
     },
     chatPromptSubmit: {
-      label: 'প্রেরণ করুন'
+      label: 'প্রেরণ করুন',
+      reload: 'আবার চেষ্টা করুন',
+      stop: 'তৈরি করা বন্ধ করুন'
     },
     chatReasoning: {
       thinking: 'ভাবছে…',
@@ -47,11 +68,12 @@ export default defineLocale<Messages>({
       system: 'সিস্টেম'
     },
     commandPalette: {
-      back: 'পেছনে',
+      back: 'ফিরে যান',
       close: 'বন্ধ করুন',
-      noData: 'কোন তথ্য নেই',
-      noMatch: 'কোন মিল পাওয়া যায়নি',
-      placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন…'
+      noData: 'কোনো তথ্য নেই',
+      noMatch: 'কোনো মিল পাওয়া যায়নি',
+      placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন…',
+      results: 'ফলাফল'
     },
     contentSearch: {
       links: 'লিংকসমূহ',
@@ -65,7 +87,7 @@ export default defineLocale<Messages>({
       title: 'এই পৃষ্ঠায়'
     },
     dropdownMenu: {
-      noMatch: 'কোন মিল পাওয়া যায়নি',
+      noMatch: 'কোনো মিল পাওয়া যায়নি',
       search: 'অনুসন্ধান করুন…'
     },
     dashboardSearch: {
@@ -95,22 +117,55 @@ export default defineLocale<Messages>({
       close: 'মেনু বন্ধ করুন',
       open: 'মেনু খুলুন'
     },
+    inputDate: {
+      day: 'দিন',
+      dayPeriod: 'AM/PM',
+      era: 'যুগ',
+      hour: 'ঘণ্টা',
+      minute: 'মিনিট',
+      month: 'মাস',
+      second: 'সেকেন্ড',
+      timeZoneName: 'সময় অঞ্চল',
+      year: 'বছর'
+    },
     inputMenu: {
       create: '"{label}" তৈরি করুন',
-      noData: 'কোন তথ্য নেই',
-      noMatch: 'কোন মিল পাওয়া যায়নি'
+      noData: 'কোনো তথ্য নেই',
+      noMatch: 'কোনো মিল পাওয়া যায়নি',
+      trigger: 'বিকল্পগুলি দেখান'
     },
     inputNumber: {
       decrement: 'হ্রাস করুন',
-      increment: 'বৃদ্ধি করুন'
+      increment: 'বৃদ্ধি করুন',
+      roledescription: 'সংখ্যা ক্ষেত্র'
+    },
+    inputRating: {
+      rate: '{length}-এর মধ্যে {value} রেটিং দিন'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'ঘণ্টা',
+      minute: 'মিনিট',
+      second: 'সেকেন্ড',
+      timeZoneName: 'সময় অঞ্চল'
     },
     listbox: {
-      noData: 'কোন তথ্য নেই',
-      noMatch: 'কোন মিল পাওয়া যায়নি',
+      noData: 'কোনো তথ্য নেই',
+      noMatch: 'কোনো মিল পাওয়া যায়নি',
       search: 'অনুসন্ধান করুন…'
     },
     modal: {
       close: 'বন্ধ করুন'
+    },
+    pagination: {
+      first: 'প্রথম পৃষ্ঠা',
+      last: 'শেষ পৃষ্ঠা',
+      next: 'পরবর্তী পৃষ্ঠা',
+      page: 'পৃষ্ঠা {page}',
+      prev: 'পূর্ববর্তী পৃষ্ঠা'
+    },
+    pinInput: {
+      input: 'পিন কোড, {length}-এর মধ্যে অক্ষর {index}'
     },
     pricingTable: {
       caption: 'প্রাইসিং প্ল্যানের তুলনা'
@@ -118,11 +173,13 @@ export default defineLocale<Messages>({
     prose: {
       codeCollapse: {
         closeText: 'সংকুচিত করুন',
+        label: '{name} {text}',
         name: 'কোড',
         openText: 'প্রসারিত করুন'
       },
       collapsible: {
         closeText: 'লুকান',
+        label: '{name} {text}',
         name: 'বৈশিষ্ট্যসমূহ',
         openText: 'দেখান'
       },
@@ -140,18 +197,34 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: '"{label}" তৈরি করুন',
-      noData: 'কোন তথ্য নেই',
-      noMatch: 'কোন মিল পাওয়া যায়নি',
+      noData: 'কোনো তথ্য নেই',
+      noMatch: 'কোনো মিল পাওয়া যায়নি',
       search: 'অনুসন্ধান করুন…'
+    },
+    skeleton: {
+      label: 'লোড হচ্ছে'
     },
     slideover: {
       close: 'বন্ধ করুন'
     },
+    slider: {
+      max: 'সর্বোচ্চ',
+      min: 'সর্বনিম্ন',
+      thumb: 'হ্যান্ডেল',
+      value: '{total}-এর মধ্যে মান {index}'
+    },
+    stepper: {
+      label: 'অগ্রগতি'
+    },
     table: {
-      noData: 'কোন তথ্য নেই'
+      noData: 'কোনো তথ্য নেই'
     },
     toast: {
       close: 'বন্ধ করুন'
+    },
+    toaster: {
+      label: 'বিজ্ঞপ্তি',
+      viewport: 'বিজ্ঞপ্তিসমূহ ({hotkey})'
     }
   }
 })

@@ -13,7 +13,7 @@ export interface PageFeatureProps {
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
+  as?: any | { root?: any, title?: any }
   /**
    * The icon displayed next to the title when `orientation` is `horizontal` and above the title when `orientation` is `vertical`.
    * @IconifyIcon
@@ -47,7 +47,7 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
-import { getSlotChildrenText } from '../utils'
+import { getSlotChildrenText, resolveAs } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
 import UIcon from './Icon.vue'
@@ -65,6 +65,9 @@ const appConfig = useAppConfig() as PageFeature['AppConfig']
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
+const as = computed(() => resolveAs(props.as, { root: 'div', title: 'div' }))
+
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageFeature || {}) })({
   orientation: props.orientation,
   title: !!props.title || !!slots.title,
@@ -79,7 +82,7 @@ const ariaLabel = computed(() => {
 
 <template>
   <Primitive
-    :as="props.as"
+    :as="as.root"
     v-bind="!props.to ? $attrs : {}"
     :data-orientation="props.orientation"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
@@ -104,11 +107,11 @@ const ariaLabel = computed(() => {
       </ULink>
 
       <slot>
-        <div v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ props.title }}
           </slot>
-        </div>
+        </Primitive>
 
         <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
           <slot name="description">

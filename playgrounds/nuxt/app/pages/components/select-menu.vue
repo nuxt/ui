@@ -50,7 +50,7 @@ const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
-  params: { q: searchTermDebounced },
+  query: { q: searchTermDebounced },
   transform: (data: User[]) => {
     return data?.map(user => ({ id: user.id, label: user.name, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } }))
   },

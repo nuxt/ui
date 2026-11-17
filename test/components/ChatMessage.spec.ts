@@ -1,4 +1,6 @@
+import { createCommentVNode, defineComponent, h } from 'vue'
 import { describe, it, expect } from 'vitest'
+import { TooltipProvider } from 'reka-ui'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -32,6 +34,7 @@ describe('ChatMessage', () => {
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
     ['with files slot', { props: { ...props, parts: [...props.parts, { type: 'file' as const, mediaType: 'text/plain', url: 'https://example.com/test.txt', filename: 'test.txt' }] }, slots: { files: () => 'Files slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
+    ['with part slot', { props, slots: { part: () => 'Part slot' } }],
     ['with actions slot', { props, slots: { actions: () => 'Actions slot' } }]
   ])
 
@@ -40,6 +43,17 @@ describe('ChatMessage', () => {
       props
     })
 
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('uses the action label as aria-label', async () => {
+    const wrapper = await mountSuspended(defineComponent({
+      setup() {
+        return () => h(TooltipProvider, () => h(ChatMessage, { ...props, actions: [{ icon: 'i-lucide-copy', label: 'Copy' }] }))
+      }
+    }))
+
+    expect(wrapper.find('[data-slot="actions"] button').attributes('aria-label')).toBe('Copy')
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
@@ -91,5 +105,27 @@ describe('ChatMessage', () => {
     for (const key of ['as', 'icon', 'avatar', 'variant', 'color', 'side', 'actions', 'compact', 'class', 'ui']) {
       expect(captured[0]).not.toHaveProperty(key)
     }
+  })
+
+  it('renders the part slot once per part and falls back for parts it does not render', async () => {
+    const parts = [
+      { type: 'reasoning' as const, text: 'Thinking' },
+      { type: 'text' as const, text: 'Hello' }
+    ]
+    const captured: Parameters<Exclude<ChatMessageSlots['part'], undefined>>[0][] = []
+    const wrapper = await mountSuspended(ChatMessage, {
+      props: { ...props, role: 'assistant', parts },
+      slots: {
+        part: (slotProps) => {
+          captured.push(slotProps)
+          return slotProps.part.type === 'reasoning' ? h('span', { class: 'reasoning' }, slotProps.part.text) : createCommentVNode('v-if')
+        }
+      }
+    })
+
+    expect(captured.map(({ part, index }) => [part.type, index])).toEqual([['reasoning', 0], ['text', 1]])
+    expect(captured[0]!.message).toMatchObject({ id: props.id, role: 'assistant', parts })
+    expect(wrapper.find('.reasoning').text()).toBe('Thinking')
+    expect(wrapper.find('[data-slot="content"]').text()).toBe('ThinkingHello')
   })
 })

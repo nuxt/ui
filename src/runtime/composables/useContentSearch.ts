@@ -24,7 +24,7 @@ function _useContentSearch() {
     return {
       prefix: prefix?.length ? (prefix.join(' > ') + ' >') : undefined,
       label: file.id === link.path ? link.title : file.title,
-      suffix: file.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
+      suffix: file.content,
       to: file.id,
       icon: (link.icon || ancestorIcon || (file.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
       level: file.level
@@ -138,7 +138,7 @@ function _useContentSearch() {
         label: result.title,
         labelHtml: result.snippets?.title ? sanitizeSnippet(result.snippets.title) : undefined,
         prefix,
-        description: result.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
+        description: result.content,
         descriptionHtml: result.snippets?.content ? sanitizeSnippet(result.snippets.content) : undefined,
         to: result.id,
         icon: (link?.icon || ancestorIcon || (result.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,

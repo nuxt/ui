@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Mbyll'
     },
+    breadcrumb: {
+      label: 'shtegu i navigimit'
+    },
     calendar: {
+      label: 'Data e ngjarjes',
+      monthPicker: 'Zgjedhësi i muajit',
       nextMonth: 'Muaji tjetër',
       nextYear: 'Viti tjetër',
-      prevMonth: 'Muaji i kaluar',
-      prevYear: 'Viti i kaluar'
+      prevMonth: 'Muaji i mëparshëm',
+      prevYear: 'Viti i mëparshëm',
+      yearPicker: 'Zgjedhësi i vitit'
     },
     carousel: {
       dots: 'Zgjidh slajdin për të shfaqur',
       goto: 'Shko te slajdi {slide}',
       next: 'Tjetri',
-      prev: 'Para'
+      prev: 'I mëparshmi',
+      roledescription: 'karusel',
+      slide: 'slajd'
+    },
+    chatAttachment: {
+      uploading: 'Po ngarkohet',
+      error: 'Ngarkimi dështoi'
+    },
+    chatMessages: {
+      autoScroll: 'Lëviz poshtë'
     },
     chatPrompt: {
-      placeholder: 'Shkruaj mesazhin tënd këtu…'
+      placeholder: 'Shkruaj mesazhin tënd këtu…',
+      queue: 'Mesazhe në radhë',
+      sendNow: 'Dërgo tani',
+      edit: 'Ndrysho',
+      remove: 'Hiq'
     },
     chatPromptSubmit: {
-      label: 'Dërgo mesazhin'
+      label: 'Dërgo mesazhin',
+      reload: 'Provo përsëri',
+      stop: 'Ndalo gjenerimin'
     },
     chatReasoning: {
       thinking: 'Po mendon…',
@@ -40,18 +61,19 @@ export default defineLocale<Messages>({
       thoughtFor: 'Mendoi për {duration}'
     },
     colorMode: {
-      dark: 'Errët',
-      light: 'Ndritshëm',
+      dark: 'I errët',
+      light: 'I ndritshëm',
       switchToDark: 'Kalo në modalitetin e errët',
       switchToLight: 'Kalo në modalitetin e ndritshëm',
       system: 'Sistem'
     },
     commandPalette: {
-      back: 'Pas',
+      back: 'Prapa',
       close: 'Mbyll',
       noData: 'Nuk ka të dhëna',
       noMatch: 'Nuk ka të dhëna që përputhen',
-      placeholder: 'Shkruaj një komandë ose kërko…'
+      placeholder: 'Shkruaj një komandë ose kërko…',
+      results: 'Rezultatet'
     },
     contentSearch: {
       links: 'Lidhje',
@@ -95,14 +117,37 @@ export default defineLocale<Messages>({
       close: 'Mbyll menunë',
       open: 'Hap menunë'
     },
+    inputDate: {
+      day: 'ditë',
+      dayPeriod: 'AM/PM',
+      era: 'epokë',
+      hour: 'orë',
+      minute: 'minutë',
+      month: 'muaj',
+      second: 'sekondë',
+      timeZoneName: 'zona kohore',
+      year: 'vit'
+    },
     inputMenu: {
       create: 'Krijo "{label}"',
       noData: 'Nuk ka të dhëna',
-      noMatch: 'Nuk ka të dhëna që përputhen'
+      noMatch: 'Nuk ka të dhëna që përputhen',
+      trigger: 'Shfaq opsionet'
     },
     inputNumber: {
       decrement: 'Zvogëlo',
-      increment: 'Rrit'
+      increment: 'Rrit',
+      roledescription: 'fushë numerike'
+    },
+    inputRating: {
+      rate: 'Vlerëso me {value} nga {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'orë',
+      minute: 'minutë',
+      second: 'sekondë',
+      timeZoneName: 'zona kohore'
     },
     listbox: {
       noData: 'Nuk ka të dhëna',
@@ -112,17 +157,29 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Mbyll'
     },
+    pagination: {
+      first: 'Faqja e parë',
+      last: 'Faqja e fundit',
+      next: 'Faqja tjetër',
+      page: 'Faqja {page}',
+      prev: 'Faqja e mëparshme'
+    },
+    pinInput: {
+      input: 'kodi PIN, karakteri {index} nga {length}'
+    },
     pricingTable: {
       caption: 'Krahasimi i planeve të çmimeve'
     },
     prose: {
       codeCollapse: {
         closeText: 'Palos',
-        name: 'kodi',
+        label: '{text} {name}',
+        name: 'kodin',
         openText: 'Zgjero'
       },
       collapsible: {
         closeText: 'Fshih',
+        label: '{text} {name}',
         name: 'vetitë',
         openText: 'Shfaq'
       },
@@ -144,14 +201,30 @@ export default defineLocale<Messages>({
       noMatch: 'Nuk ka të dhëna që përputhen',
       search: 'Kërko…'
     },
+    skeleton: {
+      label: 'po ngarkohet'
+    },
     slideover: {
       close: 'Mbyll'
+    },
+    slider: {
+      max: 'Maksimumi',
+      min: 'Minimumi',
+      thumb: 'Rrëshqitësi',
+      value: 'Vlera {index} nga {total}'
+    },
+    stepper: {
+      label: 'përparimi'
     },
     table: {
       noData: 'Nuk ka të dhëna'
     },
     toast: {
       close: 'Mbyll'
+    },
+    toaster: {
+      label: 'Njoftim',
+      viewport: 'Njoftime ({hotkey})'
     }
   }
 })

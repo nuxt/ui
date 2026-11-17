@@ -96,14 +96,17 @@ describe('Listbox', () => {
         modelValue: items[0]
       },
       attrs: {
-        ariaLabel: 'Countries'
+        'aria-label': 'Countries',
+        'aria-describedby': 'countries-hint'
       }
     })
-    expect(await axe(wrapper.element, {
-      rules: {
-        'aria-input-field-name': { enabled: false }
-      }
-    })).toHaveNoViolations()
+
+    const listbox = wrapper.find('[role="listbox"]')
+    expect(listbox.attributes('aria-label')).toBe('Countries')
+    expect(listbox.attributes('aria-describedby')).toBe('countries-hint')
+    expect(wrapper.attributes('aria-label')).toBeUndefined()
+    expect(wrapper.attributes('aria-describedby')).toBeUndefined()
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {
@@ -120,6 +123,14 @@ describe('Listbox', () => {
       const input = wrapper.findComponent({ name: 'ListboxRoot' })
       await input.setValue(items[0])
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
+    })
+
+    test('change event on uncontrolled deselect', async () => {
+      const wrapper = mount(Listbox, { props: { items, valueKey: 'value', defaultValue: 'FR' } })
+      await wrapper.findAll('[role="option"]')[0]!.trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
+      expect(wrapper.emitted('change')).toHaveLength(1)
     })
   })
 
@@ -173,6 +184,25 @@ describe('Listbox', () => {
       input.setValue([item2])
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('is labelled by the form field label', async () => {
+      const { wrapper } = await createForm(['change'])
+
+      const label = wrapper.find('label')
+      expect(label.attributes('id')).toBeTruthy()
+      expect(wrapper.find('[role="listbox"]').attributes('aria-labelledby')).toBe(label.attributes('id'))
+    })
+
+    test('is described by the form field error', async () => {
+      const { input, wrapper } = await createForm(['change'])
+
+      input.setValue([item1])
+      await flushPromises()
+
+      const listbox = wrapper.find('[role="listbox"]')
+      expect(listbox.attributes('aria-invalid')).toBe('true')
+      expect(wrapper.find(`[id="${listbox.attributes('aria-describedby')}"]`).text()).toBe('Error message')
     })
 
     test('should have the correct types', () => {

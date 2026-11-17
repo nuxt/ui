@@ -1,0 +1,18 @@
+{
+  "name": "@nuxt/ui-bundle-vue-detection",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node ../build.mjs"
+  },
+  "dependencies": {
+    "@nuxt/ui": "catalog:",
+    "tailwindcss": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:",
+    "vite": "catalog:"
+  }
+}

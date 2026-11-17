@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -45,5 +45,33 @@ describe('Drawer', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('does not disable outside pointer events with `noBodyStyles`', async () => {
+    const wrapper = await mountSuspended(Drawer, { props: { open: true, portal: false } })
+    expect(wrapper.findComponent({ name: 'DialogContent' }).props('disableOutsidePointerEvents')).toBeUndefined()
+
+    await wrapper.setProps({ noBodyStyles: true })
+    expect(wrapper.findComponent({ name: 'DialogContent' }).props('disableOutsidePointerEvents')).toBe(false)
+
+    await wrapper.setProps({ content: { disableOutsidePointerEvents: true } })
+    expect(wrapper.findComponent({ name: 'DialogContent' }).props('disableOutsidePointerEvents')).toBe(true)
+  })
+
+  it('emits `after:enter` and `after:leave` once the animation ends', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+    const wrapper = await mountSuspended(Drawer, { props: { open: false, portal: false } })
+
+    vi.advanceTimersByTime(500)
+    expect(wrapper.emitted('after:leave')).toBeUndefined()
+
+    await wrapper.setProps({ open: true })
+    vi.advanceTimersByTime(500)
+    expect(wrapper.emitted('after:enter')).toHaveLength(1)
+
+    await wrapper.setProps({ open: false })
+    vi.advanceTimersByTime(500)
+    expect(wrapper.emitted('after:leave')).toHaveLength(1)
+    vi.useRealTimers()
   })
 })

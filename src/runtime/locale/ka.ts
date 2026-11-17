@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'დახურვა'
     },
+    breadcrumb: {
+      label: 'ნავიგაციის ბილიკი'
+    },
     calendar: {
+      label: 'მოვლენის თარიღი',
+      monthPicker: 'თვის ამრჩევი',
       nextMonth: 'შემდეგი თვე',
       nextYear: 'შემდეგი წელი',
       prevMonth: 'წინა თვე',
-      prevYear: 'წინა წელი'
+      prevYear: 'წინა წელი',
+      yearPicker: 'წლის ამრჩევი'
     },
     carousel: {
       dots: 'აირჩიეთ სლაიდი საჩვენებლად',
       goto: 'გადასვლა სლაიდ {slide}-ზე',
       next: 'შემდეგი',
-      prev: 'წინა'
+      prev: 'წინა',
+      roledescription: 'კარუსელი',
+      slide: 'სლაიდი'
+    },
+    chatAttachment: {
+      uploading: 'იტვირთება',
+      error: 'ატვირთვა ვერ მოხერხდა'
+    },
+    chatMessages: {
+      autoScroll: 'ქვემოთ გადახვევა'
     },
     chatPrompt: {
-      placeholder: 'დაწერეთ თქვენი მესიჯი აქ…'
+      placeholder: 'დაწერეთ თქვენი შეტყობინება აქ…',
+      queue: 'რიგში მყოფი შეტყობინებები',
+      sendNow: 'ახლავე გაგზავნა',
+      edit: 'რედაქტირება',
+      remove: 'წაშლა'
     },
     chatPromptSubmit: {
-      label: 'შეტყობინების გაგზავნა'
+      label: 'შეტყობინების გაგზავნა',
+      reload: 'ხელახლა ცდა',
+      stop: 'გენერირების შეჩერება'
     },
     chatReasoning: {
       thinking: 'ფიქრობს…',
@@ -42,8 +63,8 @@ export default defineLocale<Messages>({
     colorMode: {
       dark: 'ბნელი',
       light: 'ნათელი',
-      switchToDark: 'ბნელ რეჯიმზე გადასვლა',
-      switchToLight: 'ნათელ რეჯიმზე გადასვლა',
+      switchToDark: 'ბნელ რეჟიმზე გადასვლა',
+      switchToLight: 'ნათელ რეჟიმზე გადასვლა',
       system: 'სისტემური'
     },
     commandPalette: {
@@ -51,7 +72,8 @@ export default defineLocale<Messages>({
       close: 'დახურვა',
       noData: 'მონაცემები არ არის',
       noMatch: 'შესატყვისი მონაცემები არ არის',
-      placeholder: 'ჩაწერეთ ბრძანება ან ძიება…'
+      placeholder: 'ჩაწერეთ ბრძანება ან მოძებნეთ…',
+      results: 'შედეგები'
     },
     contentSearch: {
       links: 'ბმულები',
@@ -91,20 +113,43 @@ export default defineLocale<Messages>({
       clear: 'მთავარზე დაბრუნება'
     },
     fileUpload: {
-      removeFile: 'მოაშორე {filename}'
+      removeFile: '{filename}-ის წაშლა'
     },
     header: {
       close: 'მენიუს დახურვა',
       open: 'მენიუს გახსნა'
     },
+    inputDate: {
+      day: 'დღე',
+      dayPeriod: 'AM/PM',
+      era: 'ეპოქა',
+      hour: 'საათი',
+      minute: 'წუთი',
+      month: 'თვე',
+      second: 'წამი',
+      timeZoneName: 'სასაათო სარტყელი',
+      year: 'წელი'
+    },
     inputMenu: {
-      create: 'შექმენი "{label}"',
+      create: 'დაამატე "{label}"',
       noData: 'მონაცემები არ არის',
-      noMatch: 'შესატყვისი მონაცემები არ არის'
+      noMatch: 'შესატყვისი მონაცემები არ არის',
+      trigger: 'ვარიანტების ჩვენება'
     },
     inputNumber: {
       decrement: 'დაკლება',
-      increment: 'დამატება'
+      increment: 'დამატება',
+      roledescription: 'რიცხვითი ველი'
+    },
+    inputRating: {
+      rate: 'შეფასება {value} {length}-დან'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'საათი',
+      minute: 'წუთი',
+      second: 'წამი',
+      timeZoneName: 'სასაათო სარტყელი'
     },
     listbox: {
       noData: 'მონაცემები არ არის',
@@ -114,18 +159,30 @@ export default defineLocale<Messages>({
     modal: {
       close: 'დახურვა'
     },
+    pagination: {
+      first: 'პირველი გვერდი',
+      last: 'ბოლო გვერდი',
+      next: 'შემდეგი გვერდი',
+      page: 'გვერდი {page}',
+      prev: 'წინა გვერდი'
+    },
+    pinInput: {
+      input: 'PIN კოდი, სიმბოლო {index} {length}-დან'
+    },
     pricingTable: {
       caption: 'ფასის გეგმების შედარება'
     },
     prose: {
       codeCollapse: {
         closeText: 'ჩაკეცვა',
-        name: 'კოდი',
+        label: '{name} {text}',
+        name: 'კოდის',
         openText: 'გაშლა'
       },
       collapsible: {
-        closeText: 'დახურვა',
-        name: 'თვისებები',
+        closeText: 'დამალვა',
+        label: '{name} {text}',
+        name: 'თვისებების',
         openText: 'ჩვენება'
       },
       pre: {
@@ -146,14 +203,30 @@ export default defineLocale<Messages>({
       noMatch: 'შესატყვისი მონაცემები არ არის',
       search: 'ძიება…'
     },
+    skeleton: {
+      label: 'იტვირთება'
+    },
     slideover: {
       close: 'დახურვა'
+    },
+    slider: {
+      max: 'მაქსიმუმი',
+      min: 'მინიმუმი',
+      thumb: 'სახელური',
+      value: 'მნიშვნელობა {index} {total}-დან'
+    },
+    stepper: {
+      label: 'პროგრესი'
     },
     table: {
       noData: 'მონაცემები არ არის'
     },
     toast: {
       close: 'დახურვა'
+    },
+    toaster: {
+      label: 'შეტყობინება',
+      viewport: 'შეტყობინებები ({hotkey})'
     }
   }
 })

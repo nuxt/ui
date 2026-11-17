@@ -39,7 +39,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
   onSelect?: (e: Event) => void
   onUpdateChecked?: (checked: boolean) => void
   class?: any
-  ui?: Pick<ContextMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>
+  ui?: Partial<Pick<ContextMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>>
   [key: string]: any
 }
 
@@ -116,7 +116,6 @@ export type ContextMenuSlots<
 import { computed, toRef } from 'vue'
 import { ContextMenuRoot, ContextMenuTrigger } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { omit } from '../utils'
@@ -137,7 +136,7 @@ const props = useComponentProps<ContextMenuProps<T>>('contextMenu', _props)
 
 const appConfig = useAppConfig() as ContextMenu['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'modal'), emits)
+const rootProps = useForwardProps(props, ['open', 'pressOpenDelay', 'modal'], emits)
 const contentProps = toRef(() => props.content)
 const getProxySlots = () => omit(slots, ['default'])
 

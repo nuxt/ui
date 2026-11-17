@@ -1,7 +1,7 @@
 import { defuFn } from 'defu'
 import type { ModuleOptions } from '../module'
 import input from './input'
-import { fieldGroupVariant } from './field-group'
+import { fieldGroupVariantWithHiddenInput } from './field-group'
 
 export default (options: Required<ModuleOptions>) => {
   return defuFn({
@@ -11,7 +11,7 @@ export default (options: Required<ModuleOptions>) => {
       value: 'truncate pointer-events-none',
       placeholder: 'truncate text-dimmed',
       arrow: 'fill-bg stroke-default',
-      content: 'max-h-[min(15rem,var(--reka-select-content-available-height,15rem))] w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto flex flex-col',
+      content: 'max-h-[min(15rem,var(--reka-select-content-available-height,15rem))] w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto data-[state=closed]:pointer-events-none! flex flex-col',
       viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
       group: 'p-1 isolate',
       empty: 'text-center text-muted',
@@ -30,7 +30,7 @@ export default (options: Required<ModuleOptions>) => {
       itemDescription: 'truncate text-muted'
     },
     variants: {
-      ...fieldGroupVariant,
+      ...fieldGroupVariantWithHiddenInput,
       variant: (prev: Record<string, string>) => ({
         ...prev,
         outline: [prev.outline, 'hover:bg-elevated disabled:bg-default'].join(' '),

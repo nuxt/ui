@@ -2,9 +2,12 @@
 const logoRef = ref()
 
 const toast = useToast()
+const appConfig = useAppConfig()
 const { copy } = useClipboard()
 
-const items = [
+const studioIcons = useStudioIcons()
+
+const items = computed(() => [
   [{
     label: 'Copy logo as SVG',
     icon: 'i-simple-icons-nuxtdotjs',
@@ -18,18 +21,18 @@ const items = [
       toast.add({
         title: 'Nuxt logo copied as SVG',
         description: 'You can now paste it into your project',
-        icon: 'i-lucide-circle-check',
+        icon: appConfig.ui.icons.success,
         color: 'success'
       })
     }
   }],
   [{
     label: 'Browse design kit',
-    icon: 'i-lucide-shapes',
+    icon: studioIcons.shapes,
     to: 'https://nuxt.com/design-kit',
     target: '_blank'
   }]
-]
+])
 </script>
 
 <template>

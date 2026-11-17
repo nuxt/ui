@@ -19,6 +19,7 @@ describe('Empty', () => {
   renderEach(Empty, [
     // Props
     ['with as', { props: { as: 'section' } }],
+    ['with as object', { props: { title: 'Title', as: { root: 'section', title: 'h3' } } }],
     ['with icon', { props: { icon: 'i-lucide-file' } }],
     ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with title', { props: { icon: 'i-lucide-file', title: 'Title' } }],

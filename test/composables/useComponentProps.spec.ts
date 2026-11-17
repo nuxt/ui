@@ -1,8 +1,10 @@
-import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll } from 'vitest'
+import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll, vi } from 'vitest'
+import { defineComponent, h, isReadonly, isRef, isShallow } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useAppConfig } from '#imports'
 import { UFormField } from '#components'
 import type * as ui from '#build/ui'
+import { useComponentProps } from '../../src/runtime/composables/useComponentProps'
 import type { ThemeDefaults } from '../../src/runtime/types/theme'
 
 /**
@@ -75,5 +77,57 @@ describe('app.config defaultVariants', () => {
 
     const root = wrapper.find('[data-slot="root"]')
     expect(root.attributes('data-orientation')).toBe('vertical')
+  })
+})
+
+describe('Vue internal flags', () => {
+  it('reads `__v_*` flags without resolving theme defaults', async () => {
+    let calls = -1
+    let flags: boolean[] = []
+
+    const Probe = defineComponent({
+      props: { color: String },
+      setup(rawProps) {
+        const props = useComponentProps('button', rawProps)
+        const replace = vi.spyOn(String.prototype, 'replace')
+        try {
+          flags = [isReadonly(props), isShallow(props), isRef(props)]
+          calls = replace.mock.calls.length
+        } finally {
+          replace.mockRestore()
+        }
+        return () => h('i')
+      }
+    })
+
+    await mountSuspended(Probe)
+    expect(calls).toBe(0)
+    // the proxy only advertises itself as reactive, not readonly or shallow
+    expect(flags).toEqual([false, false, false])
+  })
+})
+
+describe('prop name conversion cache', () => {
+  const Probe = defineComponent({
+    props: { cachedProp: String },
+    setup(rawProps) {
+      const p = useComponentProps('button', rawProps)
+      return { p }
+    },
+    render: () => h('i')
+  })
+
+  it('does not re-convert a prop name on repeated reads', async () => {
+    const wrapper = await mountSuspended(Probe, { props: { cachedProp: 'a' } })
+    const p = (wrapper.vm as any).p as { cachedProp: string }
+    expect(p.cachedProp).toBe('a')
+
+    const replace = vi.spyOn(String.prototype, 'replace')
+    try {
+      expect(p.cachedProp).toBe('a')
+      expect(replace).not.toHaveBeenCalled()
+    } finally {
+      replace.mockRestore()
+    }
   })
 })

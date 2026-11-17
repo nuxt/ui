@@ -42,7 +42,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   children?: CommandPaletteItem[]
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>
+  ui?: Partial<Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>>
   [key: string]: any
 }
 
@@ -66,7 +66,7 @@ export interface CommandPaletteGroup<T extends CommandPaletteItem = CommandPalet
   highlightedIcon?: IconProps['name']
 }
 
-export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover' | 'selectionBehavior' | 'by'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover' | 'loop' | 'selectionBehavior' | 'by'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -193,6 +193,12 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   preserveGroupOrder?: boolean
   /**
+   * When `true`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
+   * Applies to every group, unless the group sets its own `ignoreFilter` field.
+   * @defaultValue false
+   */
+  ignoreFilter?: boolean
+  /**
    * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
    * Useful when indexing large datasets where fuzzy search becomes the bottleneck — the input stays responsive while Fuse and the result pipeline only re-run after typing settles.
    * Set to `0` (the default) to disable.
@@ -233,7 +239,7 @@ import { computed, ref, useTemplateRef, toRef, watch, nextTick } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
-import { reactivePick, createReusableTemplate, refDebounced, refThrottled } from '@vueuse/core'
+import { createReusableTemplate, refDebounced, refThrottled } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -275,7 +281,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover', 'by'), emits)
+const rootProps = useForwardProps(props, ['as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover', 'loop', 'by'], emits)
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
@@ -326,12 +332,16 @@ const placeholder = computed(() => history.value[history.value.length - 1]?.plac
 // eslint-disable-next-line vue/no-dupe-keys
 const groups = computed(() => history.value?.length ? [history.value[history.value.length - 1] as G] : props.groups)
 
+function isFilterIgnored(group: G) {
+  return group.ignoreFilter ?? props.ignoreFilter
+}
+
 const items = computed(() => groups.value?.filter((group) => {
   if (!group.id) {
     console.warn(`[@nuxt/ui] CommandPalette group is missing an \`id\` property`)
     return false
   }
-  if (group.ignoreFilter) {
+  if (isFilterIgnored(group)) {
     return false
   }
   return true
@@ -389,7 +399,7 @@ const filteredGroups = computed(() => {
         continue
       }
 
-      const items = group.ignoreFilter ? group.items : groupsById[group.id]
+      const items = isFilterIgnored(group) ? group.items : groupsById[group.id]
       if (!items?.length) {
         continue
       }
@@ -419,7 +429,7 @@ const filteredGroups = computed(() => {
   const result = [...fuseGroups]
 
   for (const group of currentGroups || []) {
-    if (!group.ignoreFilter || !group.items?.length) {
+    if (!isFilterIgnored(group) || !group.items?.length) {
       continue
     }
 
@@ -640,7 +650,7 @@ function onSelect(e: Event, item: T) {
       </UInput>
     </ListboxFilter>
 
-    <ListboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
+    <ListboxContent data-slot="content" :aria-label="t('commandPalette.results')" :class="ui.content({ class: props.ui?.content })">
       <div v-if="filteredGroups?.length" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
         <ListboxVirtualizer
           v-if="!!props.virtualize"

@@ -38,6 +38,7 @@ function getEmojiFlag(locale: string): string {
     sl: 'si', // Slovenian -> Slovenia
     sq: 'al', // Albanian -> Albania
     sv: 'se', // Swedish -> Sweden
+    tg: 'tj', // Tajik -> Tajikistan
     uk: 'ua', // Ukrainian -> Ukraine
     ur: 'pk', // Urdu -> Pakistan
     vi: 'vn' // Vietnamese -> Vietnam
@@ -89,9 +90,9 @@ function getEmojiFlag(locale: string): string {
       If you need additional languages, you can contribute by creating a PR to add a new locale in <ProseCode>src/runtime/locale/</ProseCode>.
     </ProseNote>
     <ProseTip>
-      You can use the <ProseCode>nuxt-ui</ProseCode> CLI to create a new locale:
+      You can use the CLI to create a new locale:
 
-      <ProsePre language="bash">{{ 'nuxt-ui make locale --code <code>' }}</ProsePre>
+      <ProsePre language="bash">{{ 'pnpm cli make locale --code <code>' }}</ProsePre>
     </ProseTip>
   </div>
 </template>

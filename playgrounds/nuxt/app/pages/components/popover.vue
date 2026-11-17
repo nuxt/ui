@@ -74,6 +74,28 @@ function send() {
     </div>
 
     <div class="mt-24">
+      <div class="flex flex-col gap-2 mb-4">
+        <UPopover mode="hover">
+          <UCheckbox label="Accept terms" />
+
+          <template #content>
+            <p class="p-4">
+              Read the terms before continuing.
+            </p>
+          </template>
+        </UPopover>
+
+        <UPopover mode="hover">
+          <USwitch label="Email notifications" />
+
+          <template #content>
+            <p class="p-4">
+              Receive occasional product updates.
+            </p>
+          </template>
+        </UPopover>
+      </div>
+
       <UPopover mode="hover" arrow :content="{ side: 'top' }">
         <UButton label="Hover me top" color="neutral" variant="outline" />
 

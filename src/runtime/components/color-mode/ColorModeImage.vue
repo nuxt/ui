@@ -8,9 +8,9 @@ export interface ColorModeImageProps extends /** @vue-ignore */ Omit<ImgHTMLAttr
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useAttrs } from 'vue'
 import { useRuntimeConfig } from '#imports'
-import ImageComponent from '#build/ui-image-component'
+import ImageComponent, { useImage } from '#build/ui-image-component'
 import { usePrefix } from '../../composables/usePrefix'
 import { resolveBaseURL } from '../../utils'
 
@@ -18,8 +18,12 @@ defineOptions({ inheritAttrs: false })
 
 const props = defineProps<ColorModeImageProps>()
 
-const refinedLight = computed(() => resolveBaseURL(props.light, useRuntimeConfig().app.baseURL))
-const refinedDark = computed(() => resolveBaseURL(props.dark, useRuntimeConfig().app.baseURL))
+const attrs = useAttrs()
+const image = useImage?.()
+
+const provider = computed(() => (attrs.provider as string | undefined) || image?.options.provider)
+const refinedLight = computed(() => provider.value === 'ipx' || provider.value === 'ipxStatic' ? props.light : resolveBaseURL(props.light, useRuntimeConfig().app.baseURL))
+const refinedDark = computed(() => provider.value === 'ipx' || provider.value === 'ipxStatic' ? props.dark : resolveBaseURL(props.dark, useRuntimeConfig().app.baseURL))
 const prefix = usePrefix()
 </script>
 

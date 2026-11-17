@@ -5,6 +5,9 @@ import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
+import security from '@comark/vue/plugins/security'
+
+const plugins = [shiki(), security({ blockedTags: ['script', 'style', 'iframe', 'object', 'embed', 'form'] })]
 
 const open = ref(true)
 const input = ref('')
@@ -80,23 +83,17 @@ const ui = {
           :messages="messages"
           :status="status"
           compact
+          :user="{ ui: { text: 'text-sm/6' } }"
           class="px-0"
         >
-          <template #content="{ message }">
-            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
-              <template v-if="isTextUIPart(part)">
-                <Markdown
-                  v-if="message.role === 'assistant'"
-                  :value="part.text"
-                  :streaming="isPartStreaming(part)"
-                  :plugins="[shiki()]"
-                  class="*:first:mt-0 *:last:mb-0"
-                />
-                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
-                  {{ part.text }}
-                </p>
-              </template>
-            </template>
+          <template #part="{ part, message, streaming }">
+            <Markdown
+              v-if="isTextUIPart(part) && message.role === 'assistant'"
+              :value="part.text"
+              :streaming="isPartStreaming(part, streaming)"
+              :plugins="plugins"
+              class="*:first:mt-0 *:last:mb-0"
+            />
           </template>
         </UChatMessages>
       </UTheme>
@@ -104,6 +101,7 @@ const ui = {
       <template #footer>
         <UChatPrompt
           v-model="input"
+          :status="status"
           :error="error"
           :autofocus="false"
           variant="subtle"

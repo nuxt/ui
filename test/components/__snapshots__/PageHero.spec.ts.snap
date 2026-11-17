@@ -6,6 +6,23 @@ exports[`PageHero > renders with as correctly 1`] = `
 </section>"
 `;
 
+exports[`PageHero > renders with as object correctly 1`] = `
+"<section data-orientation="vertical" data-slot="root" class="relative isolate">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24" data-slot="container">
+    <div data-slot="wrapper" class="text-center">
+      <div data-slot="header" class="">
+        <!--v-if-->
+        <h2 data-slot="title" class="text-5xl sm:text-7xl text-pretty tracking-tight font-bold text-highlighted">Title</h2>
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</section>"
+`;
+
 exports[`PageHero > renders with body slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="relative isolate">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24" data-slot="container">

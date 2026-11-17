@@ -1,2 +1,3 @@
 experimental.normalizeComponentNames=false
 modules[]=@nuxt/content
+content.experimental.sqliteConnector=native

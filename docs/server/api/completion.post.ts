@@ -1,10 +1,15 @@
+import { defineEventHandler, readBody, createError } from 'nuxt/server'
 import { streamText, createTextStreamResponse } from 'ai'
 import type { GatewayProviderOptions } from '@ai-sdk/gateway'
+import { getChatUser } from '../utils/chatUser'
 
 export default defineEventHandler(async (event) => {
-  const { prompt, mode, language } = await readBody(event)
+  const { prompt, mode, language } = await readBody<{ prompt?: string, mode?: string, language?: string }>(event)
   if (!prompt) {
-    throw createError({ statusCode: 400, message: 'Prompt is required' })
+    throw createError({ status: 400, message: 'Prompt is required' })
+  }
+  if (prompt.length > 10_000) {
+    throw createError({ status: 413, message: 'Prompt is too long' })
   }
 
   let instructions: string
@@ -45,19 +50,23 @@ CRITICAL RULES:
 - NEVER repeat any words from the end of the user's text
 - Keep completions short (1 sentence max)
 - Match the tone and style of the existing text
-- ${preserveMarkdown}`
+- Output plain text only, never use markdown syntax`
       maxOutputTokens = 25
       break
   }
 
   const result = streamText({
-    model: 'anthropic/claude-haiku-4.5',
+    model: 'deepseek/deepseek-v4.1-flash',
     instructions,
     prompt,
     maxOutputTokens,
+    reasoning: 'none',
     providerOptions: {
       gateway: {
         caching: 'auto',
+        order: ['baseten'],
+        zeroDataRetention: true,
+        disallowPromptTraining: true,
         user: getChatUser(event),
         tags: ['docs-completion']
       } satisfies GatewayProviderOptions

@@ -15,7 +15,7 @@ If `needs reproduction` labeled issues don't receive any substantial activity (e
 
 ### How can I create a reproduction?
 
-We have templates to create a minimal reproduction:
+The quickest way is the [playground](https://play.ui.nuxt.com/), it runs in the browser and shares with a single link. When the bug can't be reproduced there (SSR, module options, build or Nuxt specific issues), use one of our templates:
 
 * **Nuxt**: https://codesandbox.io/p/devbox/nuxt-ui-xgrzw5
 * **Vue**: https://codesandbox.io/p/devbox/nuxt-ui-vue-f2qp34

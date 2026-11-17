@@ -3,7 +3,7 @@ import { normalize } from 'pathe'
 import { resolvePathSync } from 'mlly'
 import type { UnpluginOptions } from 'unplugin'
 import type { NuxtUIOptions } from '../unplugin'
-import { runtimeDir } from '../unplugin'
+import { runtimeDir, runtimeUrl } from '../unplugin'
 import { resolveRouterMode } from '../utils/router'
 
 /**
@@ -11,9 +11,7 @@ import { resolveRouterMode } from '../utils/router'
  */
 export default function NuxtEnvironmentPlugin(options: NuxtUIOptions) {
   const routerMode = resolveRouterMode(options)
-  const stubsPath = `../runtime/vue/stubs/${routerMode}`
-
-  const stubPath = resolvePathSync(stubsPath, { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url })
+  const stubPath = resolvePathSync(`./vue/stubs/${routerMode}`, { extensions: ['.ts', '.mjs', '.js'], url: runtimeUrl })
 
   return {
     name: 'nuxt:ui',

@@ -31,6 +31,8 @@ describe('CheckboxGroup', () => {
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
     ['with descriptionKey', { props: { ...props, descriptionKey: 'value' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
+    ['with max', { props: { ...props, max: 1, defaultValue: ['1'] } }],
+    ['with max variant table', { props: { ...props, variant: 'table', max: 1, defaultValue: ['1'] } }],
     ['with description', { props: { items: items.map((opt, count) => ({ ...opt, description: `Description ${count}` })) } }],
     ['with icon', { props: { items: items.map(opt => ({ ...opt, icon: 'i-lucide-rocket' })), indicator: 'hidden' } }],
     ['with icon card', { props: { items: items.map(opt => ({ ...opt, icon: 'i-lucide-rocket' })), indicator: 'hidden', variant: 'card', defaultValue: ['1'] } }],
@@ -53,6 +55,19 @@ describe('CheckboxGroup', () => {
     ['with label slot', { props, slots: { label: () => 'Label slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }]
   ])
+
+  it.each([
+    ['without value', null, 'on'],
+    ['with a null value', { label: 'Null', value: null }, null]
+  ])('keeps a checked item %s enabled when max is reached', async (_, item, value) => {
+    const wrapper = await mountSuspended(CheckboxGroup, {
+      props: { items: [item, 'a'] as any, max: 1, defaultValue: [value] as any }
+    })
+
+    const [checked, blocked] = wrapper.findAll('[data-slot="item"]')
+    expect(checked!.classes()).not.toContain('opacity-75')
+    expect(blocked!.classes()).toContain('opacity-75')
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CheckboxGroup, {
@@ -191,6 +206,29 @@ describe('CheckboxGroup', () => {
       const { wrapper } = await createForm()
       const formFieldLabel = wrapper.findAll('label').map(label => label.attributes()).filter(label => !label.for?.includes(':'))[0]
       expect(formFieldLabel?.for).toBeUndefined()
+    })
+  })
+
+  // https://github.com/nuxt/ui/issues/6033
+  describe('label element', () => {
+    const items = [{ value: '1', label: 'Option 1' }]
+
+    test('is a <label> in the default (list) variant', async () => {
+      const wrapper = await mountSuspended(CheckboxGroup, { props: { items, defaultValue: ['1'] } })
+      const label = wrapper.find('[data-slot="label"]')
+
+      expect(label.exists()).toBe(true)
+      expect(label.element.tagName).toBe('LABEL')
+      expect(label.attributes('for')).toBeTruthy()
+    })
+
+    test.each(['card', 'table'] as const)('is a <div> in the %s variant', async (variant) => {
+      const wrapper = await mountSuspended(CheckboxGroup, { props: { items, defaultValue: ['1'], variant } })
+      const label = wrapper.find('[data-slot="label"]')
+
+      expect(label.exists()).toBe(true)
+      expect(label.element.tagName).toBe('DIV')
+      expect(label.attributes('for')).toBeUndefined()
     })
   })
 })

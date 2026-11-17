@@ -1,3 +1,5 @@
+import { defineMcpResource } from '@nuxtjs/mcp-toolkit/server'
+import { useEvent } from 'nitropack/runtime'
 import { queryCollection } from '@nuxt/content/server'
 
 export default defineMcpResource({
@@ -9,7 +11,8 @@ export default defineMcpResource({
 
     const pages = await queryCollection(event, 'docs').all()
 
-    const result = pages.map(doc => ({
+    // an entry with its own `to` (Figma) links out, there is no page to read
+    const result = pages.filter(doc => !doc.to).map(doc => ({
       title: doc.title,
       description: doc.description,
       path: doc.path

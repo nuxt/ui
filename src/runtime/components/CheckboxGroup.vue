@@ -23,11 +23,11 @@ export type CheckboxGroupItem = CheckboxGroupValue | {
    */
   icon?: IconProps['name']
   class?: any
-  ui?: Pick<CheckboxGroup['slots'], 'item'> & Omit<Required<CheckboxProps>['ui'], 'root'>
+  ui?: Partial<Pick<CheckboxGroup['slots'], 'item'>> & Omit<Required<CheckboxProps>['ui'], 'root'>
   [key: string]: any
 }
 
-export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<CheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'highlight' | 'indicator' | 'icon'> {
+export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<CheckboxGroupRootProps, 'disabled' | 'loop' | 'max' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'highlight' | 'indicator' | 'icon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -88,7 +88,6 @@ export interface CheckboxGroupSlots<T extends CheckboxGroupItem[] = CheckboxGrou
 import { computed, useId } from 'vue'
 import { CheckboxGroupRoot } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
@@ -109,8 +108,8 @@ const props = useComponentProps<CheckboxGroupProps<T, VK>>('checkboxGroup', _pro
 
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
-const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator'))
+const rootProps = useForwardProps(props, ['as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'max', 'required'], emits)
+const checkboxProps = useForwardProps(props, ['variant', 'indicator'])
 const getProxySlots = () => omit(slots, ['legend'])
 
 const { emitFormChange, emitFormInput, color: formFieldColor, highlight: formFieldHighlight, name, size: formFieldSize, id: _id, disabled: formFieldDisabled, ariaAttrs } = useFormField<CheckboxGroupProps<T>>(_props, { bind: false })

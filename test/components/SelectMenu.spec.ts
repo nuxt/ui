@@ -1,5 +1,7 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
+import type { Component } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import SelectMenu from '../../src/runtime/components/SelectMenu.vue'
@@ -138,15 +140,63 @@ describe('SelectMenu', () => {
 
       }
     })
-    expect(await axe(wrapper.element, {
-      rules: {
-        // "Certain ARIA roles must contain particular children (aria-required-children)"
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
 
-        // Fix any of the following:
-        //   Element has children which are not allowed: div[tabindex]
-        'aria-required-children': { enabled: false }
+  describe('listbox semantics', () => {
+    it.each([
+      { searchInput: true, multiple: false },
+      { searchInput: false, multiple: false },
+      { searchInput: true, multiple: true },
+      { searchInput: false, multiple: true }
+    ])('keeps controls outside the listbox with %j', async (options) => {
+      const wrapper = await mountSuspended(SelectMenu, {
+        props: { ...props, ...options, placeholder: 'Select a status' },
+        slots: { 'content-top': () => h('button', 'Extra action') }
+      })
+
+      const listbox = wrapper.get('[role="listbox"]')
+      expect(wrapper.findAll('[role="listbox"]')).toHaveLength(1)
+      expect(listbox.attributes('id')).toBeTruthy()
+      expect(listbox.attributes('aria-multiselectable')).toBe(String(options.multiple))
+      expect(listbox.find('input, button').exists()).toBe(false)
+      expect(wrapper.get('[data-slot="base"]').attributes('aria-controls')).toBe(listbox.attributes('id'))
+
+      if (options.searchInput) {
+        expect(wrapper.get('input').attributes('aria-controls')).toBe(listbox.attributes('id'))
       }
-    })).toHaveNoViolations()
+
+      expect(await axe(wrapper.element)).toHaveNoViolations()
+    })
+  })
+
+  // Reka's `ComboboxTrigger` hard-codes `aria-label="Show popup"`, which would win over the `FormField` label.
+  describe('accessible name', () => {
+    test('does not inherit the Reka trigger label', () => {
+      const wrapper = mount(SelectMenu, { props })
+
+      expect(wrapper.get('[data-slot="base"]').attributes('aria-label')).toBeUndefined()
+    })
+
+    test('keeps a caller label', () => {
+      const wrapper = mount(SelectMenu, { props, attrs: { 'aria-label': 'Aria label' } })
+
+      expect(wrapper.get('[data-slot="base"]').attributes('aria-label')).toBe('Aria label')
+    })
+
+    test('is named by the form field label', async () => {
+      const wrapper = await renderForm({
+        slotTemplate: `
+        <UFormField label="Sort order">
+          <USelectMenu :items="['Newest', 'Oldest']" />
+        </UFormField>
+        `
+      })
+
+      const trigger = wrapper.get('[data-slot="base"]')
+      expect(trigger.attributes('aria-label')).toBeUndefined()
+      expect(wrapper.get('label').attributes('for')).toBe(trigger.attributes('id'))
+    })
   })
 
   describe('emits', () => {
@@ -170,6 +220,99 @@ describe('SelectMenu', () => {
       const input = wrapper.findComponent({ name: 'ComboboxRoot' })
       input.vm.$emit('update:open', false)
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
+    })
+
+    test.each([
+      ['controlled', { modelValue: 'Option 1' }],
+      ['uncontrolled', { defaultValue: 'Option 1' }]
+    ])('resets the search term when selecting the current item %s', async (_, model) => {
+      const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'], ...model, searchTerm: 'Option', resetSearchTermOnBlur: false, defaultOpen: true, portal: false }, attachTo: document.body })
+      await flushPromises()
+      await wrapper.find('[role="option"][data-state="checked"]').trigger('click')
+
+      expect(wrapper.emitted('update:searchTerm')).toEqual([['']])
+      expect(wrapper.emitted('change')).toBeUndefined()
+
+      wrapper.unmount()
+    })
+
+    test('resets the search term when clearing', async () => {
+      const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'], modelValue: 'Option 1', clear: true, searchTerm: 'Option', resetSearchTermOnBlur: false } })
+      await wrapper.find('[data-slot="trailingClear"]').trigger('click')
+
+      expect(wrapper.emitted('update:searchTerm')).toEqual([['']])
+    })
+
+    test.each([
+      ['single', false, 'Option 1'],
+      ['multiple', true, []]
+    ])('resets a controlled search term once when selecting a new item %s', async (_, multiple, initial) => {
+      const searchTerms: string[] = []
+      const Parent = defineComponent(() => {
+        const searchTerm = ref('Option')
+        const modelValue = ref<any>(initial)
+        return () => h(SelectMenu as Component, {
+          'items': ['Option 1', 'Option 2'],
+          multiple,
+          'modelValue': modelValue.value,
+          'onUpdate:modelValue': (value: any) => { modelValue.value = value },
+          'searchTerm': searchTerm.value,
+          'onUpdate:searchTerm': (value: string) => {
+            searchTerms.push(value)
+            searchTerm.value = value
+          },
+          'defaultOpen': true,
+          'portal': false
+        })
+      })
+      const wrapper = mount(Parent, { attachTo: document.body })
+      await flushPromises()
+      await wrapper.findAll('[role="option"]')[1]!.trigger('click')
+      await flushPromises()
+
+      expect(searchTerms).toEqual([''])
+
+      wrapper.unmount()
+    })
+  })
+
+  describe('clear', () => {
+    it('does not render the clear button when disabled', () => {
+      const wrapper = mount(SelectMenu, { props: { items, modelValue: items[0]!, clear: true, disabled: true } })
+
+      expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(false)
+    })
+
+    it('renders the clear button when not disabled', () => {
+      const wrapper = mount(SelectMenu, { props: { items, modelValue: items[0]!, clear: true } })
+
+      expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(true)
+    })
+  })
+
+  describe('keyboard', () => {
+    test.each(['ArrowDown', 'ArrowUp'])('opens the menu on %s', async (key) => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { portal: false, items } })
+
+      await wrapper.find('[data-slot="base"]').trigger('keydown', { key })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:open')).toMatchObject([[true]])
+
+      wrapper.unmount()
+    })
+
+    test('does not toggle the menu on ArrowDown when already open', async () => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { portal: false, items } })
+      const root = wrapper.findComponent({ name: 'ComboboxRoot' })
+
+      await root.vm.$emit('update:open', true)
+      await wrapper.find('[data-slot="base"]').trigger('keydown', { key: 'ArrowDown' })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:open')).toMatchObject([[true]])
+
+      wrapper.unmount()
     })
   })
 
@@ -195,8 +338,72 @@ describe('SelectMenu', () => {
 
       const input = wrapper.find('[data-slot="input"] input')
       expect(document.activeElement).not.toBe(input.element)
+      expect(wrapper.find('[data-slot="focusScope"]').element.contains(document.activeElement)).toBe(true)
 
       wrapper.unmount()
+    })
+
+    test('navigates the items with the keyboard with searchInput autofocus disabled', async () => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { open: true, portal: false, items, searchInput: { autofocus: false } } })
+
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      const focusScope = wrapper.find('[data-slot="focusScope"]')
+      const options = wrapper.findAll('[role="option"]')
+      expect(options[0]!.attributes('data-highlighted')).toBeDefined()
+
+      await focusScope.trigger('keydown', { key: 'ArrowDown' })
+      expect(options[1]!.attributes('data-highlighted')).toBeDefined()
+
+      await focusScope.trigger('keydown', { key: 'Enter' })
+      await flushPromises()
+      expect(wrapper.emitted('update:modelValue')).toMatchObject([[items[1]]])
+
+      wrapper.unmount()
+    })
+  })
+
+  describe('focus', () => {
+    test('keeps the focus moved on select', async () => {
+      const input = document.createElement('input')
+      document.body.appendChild(input)
+
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { 'defaultOpen': true, 'portal': false, items, 'onUpdate:modelValue': () => input.focus() } })
+
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      await wrapper.findAll('[role="option"]')[1]!.trigger('click')
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      expect(document.activeElement).toBe(input)
+
+      wrapper.unmount()
+      input.remove()
+    })
+
+    test('stays open when focus moves outside', async () => {
+      const button = document.createElement('button')
+      document.body.appendChild(button)
+
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { defaultOpen: true, portal: false, items } })
+
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      const input = wrapper.find('[data-slot="input"] input')
+
+      button.focus()
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      expect(wrapper.findAll('[role="option"]').length).toBe(items.length)
+      expect(document.activeElement).toBe(input.element)
+
+      wrapper.unmount()
+      button.remove()
     })
   })
 

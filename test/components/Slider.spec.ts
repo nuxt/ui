@@ -77,7 +77,7 @@ describe('Slider', () => {
       expect(thumbs.map(thumb => thumb.attributes('aria-label'))).toStrictEqual(['Minimum', 'Maximum'])
     })
 
-    test('keeps Reka UI default labels for three or more thumbs', async () => {
+    test('labels three or more thumbs by position', async () => {
       const { thumbs } = await renderThumbs({ props: { modelValue: [0, 10, 20] } })
 
       expect(thumbs.map(thumb => thumb.attributes('aria-label'))).toStrictEqual(['Value 1 of 3', 'Value 2 of 3', 'Value 3 of 3'])

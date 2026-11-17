@@ -26,6 +26,10 @@ const items: DropdownMenuItem[][] = [[{
       avatar: { src: 'https://github.com/HugoRCD.png', loading: 'lazy' as const }
     },
     {
+      label: 'atinux',
+      avatar: { src: 'https://github.com/atinux.png', loading: 'lazy' as const }
+    },
+    {
       label: 'romhml',
       avatar: { src: 'https://github.com/romhml.png', loading: 'lazy' as const }
     },
@@ -34,16 +38,12 @@ const items: DropdownMenuItem[][] = [[{
       avatar: { src: 'https://github.com/sandros94.png', loading: 'lazy' as const }
     },
     {
-      label: 'hywax',
-      avatar: { src: 'https://github.com/hywax.png', loading: 'lazy' as const }
-    },
-    {
       label: 'J-Michalek',
       avatar: { src: 'https://github.com/J-Michalek.png', loading: 'lazy' as const }
     },
     {
-      label: 'genu',
-      avatar: { src: 'https://github.com/genu.png', loading: 'lazy' as const }
+      label: 'hywax',
+      avatar: { src: 'https://github.com/hywax.png', loading: 'lazy' as const }
     }
   ]
 }, {

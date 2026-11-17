@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Aizvērt'
     },
+    breadcrumb: {
+      label: 'navigācijas ceļš'
+    },
     calendar: {
+      label: 'Notikuma datums',
+      monthPicker: 'Mēneša atlasītājs',
       nextMonth: 'Nākamais mēnesis',
       nextYear: 'Nākamais gads',
       prevMonth: 'Iepriekšējais mēnesis',
-      prevYear: 'Iepriekšējais gads'
+      prevYear: 'Iepriekšējais gads',
+      yearPicker: 'Gada atlasītājs'
     },
     carousel: {
       dots: 'Izvēlies slaidu, ko rādīt',
       goto: 'Pāriet uz slaidu {slide}',
       next: 'Nākamais',
-      prev: 'Iepriekšējais'
+      prev: 'Iepriekšējais',
+      roledescription: 'karuselis',
+      slide: 'slaids'
+    },
+    chatAttachment: {
+      uploading: 'Augšupielādē',
+      error: 'Augšupielāde neizdevās'
+    },
+    chatMessages: {
+      autoScroll: 'Ritināt uz leju'
     },
     chatPrompt: {
-      placeholder: 'Raksti savu ziņu šeit…'
+      placeholder: 'Raksti savu ziņu šeit…',
+      queue: 'Rindā esošās ziņas',
+      sendNow: 'Sūtīt tagad',
+      edit: 'Rediģēt',
+      remove: 'Noņemt'
     },
     chatPromptSubmit: {
-      label: 'Sūtīt ziņu'
+      label: 'Sūtīt ziņu',
+      reload: 'Mēģināt vēlreiz',
+      stop: 'Apturēt ģenerēšanu'
     },
     colorMode: {
       dark: 'Tumšs',
@@ -46,7 +67,8 @@ export default defineLocale<Messages>({
       close: 'Aizvērt',
       noData: 'Nav datu',
       noMatch: 'Nav atbilstošu datu',
-      placeholder: 'Ievadi komandu vai meklē…'
+      placeholder: 'Ievadi komandu vai meklē…',
+      results: 'Rezultāti'
     },
     contentSearch: {
       links: 'Saites',
@@ -90,14 +112,37 @@ export default defineLocale<Messages>({
       close: 'Aizvērt izvēlni',
       open: 'Atvērt izvēlni'
     },
+    inputDate: {
+      day: 'diena',
+      dayPeriod: 'AM/PM',
+      era: 'ēra',
+      hour: 'stunda',
+      minute: 'minūte',
+      month: 'mēnesis',
+      second: 'sekunde',
+      timeZoneName: 'laika josla',
+      year: 'gads'
+    },
     inputMenu: {
       create: 'Izveidot "{label}"',
       noData: 'Nav datu',
-      noMatch: 'Nav atbilstošu datu'
+      noMatch: 'Nav atbilstošu datu',
+      trigger: 'Rādīt opcijas'
     },
     inputNumber: {
       decrement: 'Samazināt',
-      increment: 'Palielināt'
+      increment: 'Palielināt',
+      roledescription: 'skaitļu lauks'
+    },
+    inputRating: {
+      rate: 'Novērtēt ar {value} no {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'stunda',
+      minute: 'minūte',
+      second: 'sekunde',
+      timeZoneName: 'laika josla'
     },
     listbox: {
       noData: 'Nav datu',
@@ -107,17 +152,29 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Aizvērt'
     },
+    pagination: {
+      first: 'Pirmā lapa',
+      last: 'Pēdējā lapa',
+      next: 'Nākamā lapa',
+      page: 'Lapa {page}',
+      prev: 'Iepriekšējā lapa'
+    },
+    pinInput: {
+      input: 'PIN kods, rakstzīme {index} no {length}'
+    },
     pricingTable: {
-      caption: 'Cenu salīdzinājums'
+      caption: 'Cenu plānu salīdzinājums'
     },
     prose: {
       codeCollapse: {
         closeText: 'Sakļaut',
-        name: 'kods',
+        label: '{text} {name}',
+        name: 'kodu',
         openText: 'Izvērst'
       },
       collapsible: {
         closeText: 'Paslēpt',
+        label: '{text} {name}',
         name: 'īpašības',
         openText: 'Rādīt'
       },
@@ -126,7 +183,7 @@ export default defineLocale<Messages>({
       },
       prompt: {
         copy: 'Kopēt vaicājumu',
-        openIn: 'Atvērt iekš {name}'
+        openIn: 'Atvērt ar {name}'
       }
     },
     chatReasoning: {
@@ -144,14 +201,30 @@ export default defineLocale<Messages>({
       noMatch: 'Nav atbilstošu datu',
       search: 'Meklēt…'
     },
+    skeleton: {
+      label: 'ielādē'
+    },
     slideover: {
       close: 'Aizvērt'
+    },
+    slider: {
+      max: 'Maksimums',
+      min: 'Minimums',
+      thumb: 'Slīdnis',
+      value: 'Vērtība {index} no {total}'
+    },
+    stepper: {
+      label: 'norise'
     },
     table: {
       noData: 'Nav datu'
     },
     toast: {
       close: 'Aizvērt'
+    },
+    toaster: {
+      label: 'Paziņojums',
+      viewport: 'Paziņojumi ({hotkey})'
     }
   }
 })

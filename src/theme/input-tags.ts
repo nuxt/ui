@@ -8,7 +8,7 @@ export default (options: Required<ModuleOptions>) => {
     slots: {
       root: (prev: string) => [prev, 'flex-wrap'],
       base: () => ['rounded-md', options.theme.transitions && 'transition-colors'],
-      item: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-accented bg-elevated text-default data-disabled:cursor-not-allowed data-disabled:opacity-75 wrap-anywhere data-[state="active"]:bg-accented',
+      item: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-accented bg-elevated text-default data-disabled:cursor-not-allowed data-disabled:opacity-75 wrap-anywhere data-[state=active]:bg-accented',
       itemText: '',
       itemDelete: ['inline-flex items-center rounded-xs text-dimmed hover:text-default hover:bg-accented/75 disabled:pointer-events-none', options.theme.transitions && 'transition-colors'],
       itemDeleteIcon: 'shrink-0',

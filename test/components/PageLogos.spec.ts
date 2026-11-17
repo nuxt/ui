@@ -12,6 +12,7 @@ describe('PageLogos', () => {
   renderEach(PageLogos, [
     // Props
     ['with as', { props: { as: 'section' } }],
+    ['with as object', { props: { title: 'Title', as: { root: 'section', title: 'h3' } } }],
     ['with class', { props: { class: 'text-xl' } }],
     ['with title', { props: { title: 'Title' } }],
     ['with items', { props: { items } }],

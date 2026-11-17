@@ -35,7 +35,7 @@ export type SelectItem = SelectValue | {
   disabled?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
+  ui?: Partial<Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>>
   [key: string]: any
 }
 
@@ -156,7 +156,6 @@ export interface SelectSlots<
 import { useTemplateRef, computed, onMounted, onScopeDispose, toRef } from 'vue'
 import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectValue as RSelectValue, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator } from 'reka-ui'
 import { defu } from 'defu'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
@@ -164,7 +163,7 @@ import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { usePortal } from '../composables/usePortal'
-import { get, getDisplayValue, isArrayOfArray, looseToNumber } from '../utils'
+import { get, getDisplayValue, isArrayOfArray, looseToNumber, omitUnsafeAttrs } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -186,7 +185,7 @@ const props = useComponentProps<SelectProps<T, VK, M, Mod>>('select', _props)
 
 const appConfig = useAppConfig() as Select['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple', 'nullableValue'), emits)
+const rootProps = useForwardProps(props, ['open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple', 'nullableValue'], emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const position = computed(() => props.content?.position ?? appConfig.ui?.select?.defaultVariants?.position ?? theme.defaultVariants?.position)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: position.value }) as SelectContentProps)
@@ -379,6 +378,14 @@ function onTriggerClick(open: boolean) {
   triggerSawPointerDown = false
 }
 
+function onCloseAutoFocus(event: Event) {
+  // Keep the focus where it was moved on select instead of restoring it to the trigger after the close animation.
+  const activeElement = document.activeElement
+  if (activeElement && activeElement !== document.body && !(event.target as HTMLElement).contains(activeElement)) {
+    event.preventDefault()
+  }
+}
+
 const viewportRef = useTemplateRef('viewportRef')
 
 defineExpose({
@@ -408,7 +415,7 @@ defineExpose({
       ref="triggerRef"
       data-slot="base"
       :class="ui.base({ class: [props.ui?.base, props.class] })"
-      v-bind="{ ...$attrs, ...ariaAttrs }"
+      v-bind="{ ...omitUnsafeAttrs($attrs), ...ariaAttrs }"
       @pointerdown="onTriggerPointerDown"
       @pointercancel="onTriggerPointerCancel"
       @click="onTriggerClick(open)"
@@ -433,14 +440,14 @@ defineExpose({
 
       <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
         <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-          <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+          <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, leading: isLeading })" />
         </slot>
       </span>
     </SelectTrigger>
 
     <SelectPortal v-bind="portalProps">
       <FieldGroupReset>
-        <SelectContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
+        <SelectContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps" @close-auto-focus="onCloseAutoFocus">
           <slot name="content-top" />
 
           <component :is="isItemAligned ? SelectViewport : 'div'" ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">

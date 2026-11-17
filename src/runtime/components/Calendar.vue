@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootProps, RangeCalendarRootEmits, MonthPickerRootProps, YearPickerRootProps, DateRange, CalendarCellTriggerProps } from 'reka-ui'
 import { getWeekNumber } from 'reka-ui/date'
-import type { Component, ComputedRef, VNode } from 'vue'
+import type { Component, ComponentPublicInstance, ComputedRef, VNode } from 'vue'
 import type { DateValue } from '@internationalized/date'
 import { getLocalTimeZone, today } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
@@ -30,7 +30,7 @@ type CalendarModelValue<R extends boolean = false, M extends boolean = false> = 
 type _CalendarRootProps = Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'calendarLabel' | 'multiple'>
 type _RangeCalendarRootProps = Omit<RangeCalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'calendarLabel' | 'multiple'>
 type _MonthPickerRootProps = Pick<MonthPickerRootProps, 'isMonthDisabled' | 'isMonthUnavailable'>
-type _YearPickerRootProps = Pick<YearPickerRootProps, 'isYearDisabled' | 'isYearUnavailable'>
+type _YearPickerRootProps = Pick<YearPickerRootProps, 'isYearDisabled' | 'isYearUnavailable' | 'yearsPerPage'>
 
 export interface CalendarProps<R extends boolean = false, M extends boolean = false> extends _RangeCalendarRootProps, _CalendarRootProps, _MonthPickerRootProps, _YearPickerRootProps {
   /**
@@ -141,15 +141,22 @@ export interface CalendarSlots {
 </script>
 
 <script setup lang="ts" generic="R extends boolean, M extends boolean">
-import { computed, ref, shallowRef, watch } from 'vue'
+import { computed, nextTick, ref, shallowRef, useTemplateRef, watch } from 'vue'
 import { useForwardProps } from '../composables/useForwardProps'
-import { Calendar as SingleCalendar, RangeCalendar, MonthPicker, MonthRangePicker, YearPicker, YearRangePicker } from 'reka-ui/namespaced'
+import { CalendarRoot, CalendarHeader, CalendarHeading, CalendarGrid, CalendarCell, CalendarHeadCell, CalendarNext, CalendarPrev, CalendarGridHead, CalendarGridBody, CalendarGridRow, CalendarCellTrigger, RangeCalendarRoot, RangeCalendarHeader, RangeCalendarHeading, RangeCalendarGrid, RangeCalendarCell, RangeCalendarHeadCell, RangeCalendarNext, RangeCalendarPrev, RangeCalendarGridHead, RangeCalendarGridBody, RangeCalendarGridRow, RangeCalendarCellTrigger, MonthPickerRoot, MonthPickerHeader, MonthPickerHeading, MonthPickerGrid, MonthPickerCell, MonthPickerNext, MonthPickerPrev, MonthPickerGridBody, MonthPickerGridRow, MonthPickerCellTrigger, MonthRangePickerRoot, MonthRangePickerHeader, MonthRangePickerHeading, MonthRangePickerGrid, MonthRangePickerCell, MonthRangePickerNext, MonthRangePickerPrev, MonthRangePickerGridBody, MonthRangePickerGridRow, MonthRangePickerCellTrigger, YearPickerRoot, YearPickerHeader, YearPickerHeading, YearPickerGrid, YearPickerCell, YearPickerNext, YearPickerPrev, YearPickerGridBody, YearPickerGridRow, YearPickerCellTrigger, YearRangePickerRoot, YearRangePickerHeader, YearRangePickerHeading, YearRangePickerGrid, YearRangePickerCell, YearRangePickerNext, YearRangePickerPrev, YearRangePickerGridBody, YearRangePickerGridRow, YearRangePickerCellTrigger } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
+
+const SingleCalendar = { Root: CalendarRoot, Header: CalendarHeader, Heading: CalendarHeading, Grid: CalendarGrid, Cell: CalendarCell, HeadCell: CalendarHeadCell, Next: CalendarNext, Prev: CalendarPrev, GridHead: CalendarGridHead, GridBody: CalendarGridBody, GridRow: CalendarGridRow, CellTrigger: CalendarCellTrigger }
+const RangeCalendar = { Root: RangeCalendarRoot, Header: RangeCalendarHeader, Heading: RangeCalendarHeading, Grid: RangeCalendarGrid, Cell: RangeCalendarCell, HeadCell: RangeCalendarHeadCell, Next: RangeCalendarNext, Prev: RangeCalendarPrev, GridHead: RangeCalendarGridHead, GridBody: RangeCalendarGridBody, GridRow: RangeCalendarGridRow, CellTrigger: RangeCalendarCellTrigger }
+const MonthPicker = { Root: MonthPickerRoot, Header: MonthPickerHeader, Heading: MonthPickerHeading, Grid: MonthPickerGrid, Cell: MonthPickerCell, Next: MonthPickerNext, Prev: MonthPickerPrev, GridBody: MonthPickerGridBody, GridRow: MonthPickerGridRow, CellTrigger: MonthPickerCellTrigger }
+const MonthRangePicker = { Root: MonthRangePickerRoot, Header: MonthRangePickerHeader, Heading: MonthRangePickerHeading, Grid: MonthRangePickerGrid, Cell: MonthRangePickerCell, Next: MonthRangePickerNext, Prev: MonthRangePickerPrev, GridBody: MonthRangePickerGridBody, GridRow: MonthRangePickerGridRow, CellTrigger: MonthRangePickerCellTrigger }
+const YearPicker = { Root: YearPickerRoot, Header: YearPickerHeader, Heading: YearPickerHeading, Grid: YearPickerGrid, Cell: YearPickerCell, Next: YearPickerNext, Prev: YearPickerPrev, GridBody: YearPickerGridBody, GridRow: YearPickerGridRow, CellTrigger: YearPickerCellTrigger }
+const YearRangePicker = { Root: YearRangePickerRoot, Header: YearRangePickerHeader, Heading: YearRangePickerHeading, Grid: YearRangePickerGrid, Cell: YearRangePickerCell, Next: YearRangePickerNext, Prev: YearRangePickerPrev, GridBody: YearRangePickerGridBody, GridRow: YearRangePickerGridRow, CellTrigger: YearRangePickerCellTrigger }
 
 const _props = withDefaults(defineProps<CalendarProps<R, M>>(), {
   type: 'date',
@@ -194,6 +201,19 @@ function cycleView() {
   const max = VIEWS.indexOf(maxView)
   const next = VIEWS.indexOf(view.value) >= max ? minView.value : VIEWS[VIEWS.indexOf(view.value) + 1]!
   view.value = next
+  keepFocus('[data-slot="heading"] button')
+}
+
+const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
+
+// Each view is a different picker, so the focused element is gone after a switch
+async function keepFocus(selector: string) {
+  if (!rootRef.value?.$el.contains(document.activeElement)) return
+  await nextTick()
+  // Focus falls back to the body when the old picker goes, anywhere else means something else took it
+  const active = document.activeElement
+  if (active && active !== document.body && !rootRef.value?.$el.contains(active)) return
+  rootRef.value?.$el.querySelector(selector)?.focus()
 }
 
 function resolveDateValue(value: DateValue | DateValue[] | DateRange | null | undefined): DateValue | undefined {
@@ -227,8 +247,15 @@ function setPlaceholder(date: DateValue) {
   emits('update:placeholder', date)
 }
 
+// The picker keeps an uncontrolled value internally and is replaced on each view change.
+const uncontrolledValue = shallowRef(props.modelValue ?? props.defaultValue)
+watch(() => props.modelValue, (value) => {
+  uncontrolledValue.value = value
+})
+
 function onSelect(value: DateValue | DateRange) {
   if (isMinView.value) {
+    uncontrolledValue.value = value as CalendarDefaultValue<R, M>
     emits('update:modelValue', value as CalendarModelValue<R, M>)
     return
   }
@@ -238,6 +265,7 @@ function onSelect(value: DateValue | DateRange) {
     setPlaceholder(resolved)
   }
   setView(VIEWS[VIEWS.indexOf(view.value) - 1]!)
+  keepFocus('[data-focused]')
 }
 
 function paginateYear(date: DateValue, sign: -1 | 1) {
@@ -260,7 +288,7 @@ const omittedProps = ['type', 'placeholder', 'range', 'modelValue', 'defaultValu
 // Only declared by the day `Calendar` / `RangeCalendar` primitives, omitted in other views to avoid fallthrough attributes.
 const dayOnlyProps = ['pagedNavigation', 'weekStartsOn', 'weekdayFormat', 'fixedWeeks', 'numberOfMonths', 'isDateDisabled', 'isDateUnavailable', 'isDateHighlightable', 'disableDaysOutsideCurrentView', 'maximumDays']
 const monthOnlyProps = ['isMonthDisabled', 'isMonthUnavailable']
-const yearOnlyProps = ['isYearDisabled', 'isYearUnavailable']
+const yearOnlyProps = ['isYearDisabled', 'isYearUnavailable', 'yearsPerPage']
 // Only declared by the range pickers, omitted when drilling above the terminal view since the picker is not a range picker there.
 const rangeOnlyProps = ['allowNonContiguousRanges', 'fixedDate']
 
@@ -293,6 +321,7 @@ const prevMonthIcon = computed(() => props.prevMonthIcon || (dir.value === 'rtl'
 
 const prevLabel = computed(() => view.value === 'day' ? t('calendar.prevMonth') : t('calendar.prevYear'))
 const nextLabel = computed(() => view.value === 'day' ? t('calendar.nextMonth') : t('calendar.nextYear'))
+const calendarLabel = computed(() => view.value === 'year' ? t('calendar.yearPicker') : view.value === 'month' ? t('calendar.monthPicker') : t('calendar.label'))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.calendar || {}) })({
@@ -306,10 +335,12 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.calendar || {}) 
 
 <template>
   <Picker.Root
+    ref="rootRef"
     v-slot="{ weekDays, grid, date }"
     v-bind="rootProps"
+    :calendar-label="calendarLabel"
     :model-value="(isMinView ? (props.modelValue as DateValue | DateValue[] | DateRange) : undefined)"
-    :default-value="(isMinView ? (props.defaultValue as DateValue | DateValue[] | DateRange) : undefined)"
+    :default-value="(isMinView ? (uncontrolledValue as DateValue | DateValue[] | DateRange) : undefined)"
     :placeholder="placeholder"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"

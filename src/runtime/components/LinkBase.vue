@@ -17,6 +17,7 @@ export interface LinkBaseProps {
 
 <script setup lang="ts">
 import { Primitive } from 'reka-ui'
+import { isUnsafeAs } from '../utils'
 
 const props = withDefaults(defineProps<LinkBaseProps>(), {
   as: 'button',
@@ -30,15 +31,20 @@ function onClickWrapper(e: MouseEvent) {
     return
   }
 
+  const results: unknown[] = []
+
   if (props.onClick) {
     for (const onClick of Array.isArray(props.onClick) ? props.onClick : [props.onClick]) {
-      onClick(e)
+      results.push(onClick(e))
     }
   }
 
   if (props.href && props.navigate && !props.isExternal) {
     props.navigate(e)
   }
+
+  // Returned so Vue routes async handler errors to `onErrorCaptured`
+  return Promise.all(results)
 }
 </script>
 
@@ -50,8 +56,8 @@ function onClickWrapper(e: MouseEvent) {
       'aria-disabled': disabled ? 'true' : undefined,
       'role': disabled ? 'link' : undefined,
       'tabindex': disabled ? -1 : undefined
-    } : as === 'button' ? {
-      as,
+    } : as === 'button' || isUnsafeAs(as) ? {
+      as: 'button',
       type,
       disabled
     } : {

@@ -1,3 +1,4 @@
+import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
 import { withTrailingSlash, withLeadingSlash, joinURL } from 'ufo'
 import type { GetItemKeys } from '../types/utils'
@@ -24,16 +25,11 @@ export function omit<Data extends object, Keys extends keyof Data>(data: Data, k
 }
 
 export function get(object: Record<string, any> | undefined, path: (string | number)[] | string, defaultValue?: any): any {
-  if (typeof path === 'string') {
-    path = path.split('.').map((key) => {
-      const numKey = Number(key)
-      return Number.isNaN(numKey) ? key : numKey
-    })
-  }
+  const keys = typeof path === 'string' ? path.split('.') : path
 
   let result: any = object
 
-  for (const key of path) {
+  for (const key of keys) {
     if (result === undefined || result === null) {
       return defaultValue
     }
@@ -45,18 +41,33 @@ export function get(object: Record<string, any> | undefined, path: (string | num
 }
 
 export function set(object: Record<string, any>, path: (string | number)[] | string, value: any): void {
-  if (typeof path === 'string') {
-    path = path.split('.').map((key) => {
-      const numKey = Number(key)
-      return Number.isNaN(numKey) ? key : numKey
-    })
+  const keys: string[] = []
+
+  for (const segment of typeof path === 'string' ? path.split('.') : path) {
+    const key = String(segment)
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      return
+    }
+
+    keys.push(key)
   }
 
-  path.reduce((acc, key, i) => {
-    if (acc[key] === undefined) acc[key] = {}
-    if (i === path.length - 1) acc[key] = value
-    return acc[key]
-  }, object)
+  let current = object
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i]!
+
+    if (i === keys.length - 1) {
+      current[key] = value
+      return
+    }
+
+    if (current[key] === null || (typeof current[key] !== 'object' && typeof current[key] !== 'function')) {
+      current[key] = /^(?:0|[1-9]\d*)$/.test(keys[i + 1]!) ? [] : {}
+    }
+
+    current = current[key]
+  }
 }
 
 export function looseToNumber(val: any): any {
@@ -204,6 +215,73 @@ export function resolveBaseURL(path?: string, baseURL?: string): string | undefi
     }
   }
   return path
+}
+
+/**
+ * Whether a value is a plain object Vue would compile from a `template` string at render time,
+ * or a forged VNode, like one parsed from JSON in untrusted markdown (`:as='{"template":"..."}'`).
+ * Components built by the app always carry a `render`, `ssrRender` or `setup` function.
+ */
+export function isUnsafeComponent(value: unknown): boolean {
+  if (!value || typeof value !== 'object') return false
+
+  const component = value as Record<string, any>
+  if (typeof component.render === 'function' || typeof component.ssrRender === 'function' || typeof component.setup === 'function') return false
+
+  // A VNode or built-in (Teleport, Suspense, KeepAlive) marker is never valid `as` or icon data:
+  // a forged one would render its `type` and `props` as is, `innerHTML` included.
+  // Vue also unwraps a `__v_raw` key in development, after this check (a real reactive proxy
+  // doesn't own it). The built-ins themselves carry functions (`process`), JSON never does.
+  if ((component.__v_isVNode || component.__isTeleport || component.__isSuspense || component.__isKeepAlive || Object.hasOwn(component, '__v_raw')) && !Object.values(component).some(item => typeof item === 'function')) return true
+
+  // Vue's full build also compiles an element-like `template` (`nodeType` + `innerHTML`)
+  return typeof component.template === 'string'
+    || (typeof component.template === 'object' && component.template !== null)
+    || isUnsafeComponent(component.extends)
+    || (Array.isArray(component.mixins) && component.mixins.some(isUnsafeComponent))
+}
+
+// Elements that run or load code from their content or attributes (`srcdoc`, `data`, …)
+const UNSAFE_TAGS = new Set(['script', 'style', 'iframe', 'frame', 'frameset', 'object', 'embed', 'applet', 'base', 'link', 'meta', 'noscript'])
+
+/**
+ * Whether a value is unsafe to render as an element or component through `as`:
+ * an unsafe component object, or a tag like `script` or `iframe`.
+ */
+export function isUnsafeAs(value: unknown): boolean {
+  // A string that isn't a plain tag name (`img src=x onerror=…`) ends up as raw markup in the opening tag
+  if (typeof value === 'string') return !/^[a-z][a-z0-9-]*$/i.test(value) || UNSAFE_TAGS.has(value.toLowerCase())
+  return isUnsafeComponent(value)
+}
+
+/**
+ * Drops attributes holding a value `isUnsafeComponent` rejects (or an `as` that `isUnsafeAs`
+ * rejects), for components forwarding `$attrs` to a Reka part that renders its `as`.
+ */
+export function omitUnsafeAttrs(attrs: Record<string, unknown>): Record<string, unknown> {
+  return Object.fromEntries(Object.entries(attrs).filter(([key, value]) => key === 'as' ? !isUnsafeAs(value) : !isUnsafeComponent(value)))
+}
+
+/**
+ * Resolves an `as` prop that accepts either a single element / component (applied to `root`)
+ * or an object targeting multiple elements, e.g. `{ root: 'div', title: 'h3' }`.
+ */
+export function resolveAs<T extends { root: any }>(as: any, defaults: T): T {
+  if (isUnsafeAs(as)) return defaults
+
+  if (
+    typeof as === 'string'
+    || typeof as === 'function'
+    || typeof as?.render === 'function'
+    || typeof as?.setup === 'function'
+    // Components inheriting their `render` or `setup`
+    || !!as?.extends
+    || !!as?.mixins
+  ) {
+    return { ...defaults, root: as }
+  }
+
+  return defu(Object.fromEntries(Object.entries(as ?? {}).filter(([, value]) => !isUnsafeAs(value))), defaults) as T
 }
 
 export * from './content'

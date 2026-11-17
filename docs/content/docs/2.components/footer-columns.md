@@ -56,6 +56,10 @@ props:
 ---
 ::
 
+::tip
+The column label is rendered as an `h3` by default. Use the `as` prop with an object to change it, for example `:as="{ label: 'h4' }"`{lang="ts-type"}. You can also set the root element this way: `:as="{ root: 'div', label: 'h4' }"`{lang="ts-type"}.
+::
+
 ## API
 
 ### Props

@@ -60,4 +60,41 @@ describe('highlight', () => {
     expect(highlight({ label: 'foo', matches: [] }, 'foo', 'label')).toBeUndefined()
     expect(highlight({ label: 'foo' }, 'foo', 'label')).toBeUndefined()
   })
+
+  describe('truncation from the start', () => {
+    // Matches a high surrogate not followed by a low one, or a low surrogate not
+    // preceded by a high one — i.e. half of an astral character.
+    const LONE_SURROGATE = /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]/
+
+    function highlightAfterFiller(filler: string, count: number) {
+      const value = filler.repeat(count) + 'match'
+      const index = value.indexOf('match')
+
+      return highlight({ label: value, matches: [{ key: 'label', value, indices: [[index, index + 4]] }] }, 'match', 'label')
+    }
+
+    it('never splits an astral character, at any truncation boundary', () => {
+      // Truncating by UTF-16 code unit used to slice the pair in half whenever the
+      // boundary landed between its surrogates — from 7 emoji onward, and every
+      // length after that.
+      const split = Array.from({ length: 40 }, (_, i) => i + 1)
+        .filter(count => LONE_SURROGATE.test(highlightAfterFiller('\u{1F600}', count) ?? ''))
+
+      expect(split).toEqual([])
+    })
+
+    it('keeps emoji before the match intact', () => {
+      const result = highlightAfterFiller('\u{1F600}', 20)
+
+      expect(result).toContain('<mark>match</mark>')
+      expect(result).not.toContain('�')
+      expect(result?.replace(/^\.\.\./, '')).not.toMatch(LONE_SURROGATE)
+    })
+
+    it('still truncates a long prefix down to an ellipsis', () => {
+      const result = highlightAfterFiller('a', 50)
+
+      expect(result).toMatch(/^\.\.\.a+<mark>match<\/mark>$/)
+    })
+  })
 })

@@ -17,6 +17,7 @@ export interface LinkBaseProps {
 <script setup lang="ts">
 import { Primitive } from 'reka-ui'
 import { Link as InertiaLink } from '@inertiajs/vue3'
+import { isUnsafeAs } from '../../../utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -32,11 +33,16 @@ function onClickWrapper(e: MouseEvent) {
     return
   }
 
+  const results: unknown[] = []
+
   if (props.onClick) {
     for (const onClick of Array.isArray(props.onClick) ? props.onClick : [props.onClick]) {
-      onClick(e)
+      results.push(onClick(e))
     }
   }
+
+  // Returned so Vue routes async handler errors to `onErrorCaptured`
+  return Promise.all(results)
 }
 </script>
 
@@ -64,8 +70,8 @@ function onClickWrapper(e: MouseEvent) {
       'rel': rel,
       'target': target,
       ...$attrs
-    } : as === 'button' ? {
-      as,
+    } : as === 'button' || isUnsafeAs(as) ? {
+      as: 'button',
       type,
       disabled,
       ...$attrs

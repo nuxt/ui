@@ -65,14 +65,16 @@ export interface PopoverSlots<M extends PopoverMode = PopoverMode> {
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from '../composables/useForwardProps'
-import { Popover, HoverCard } from 'reka-ui/namespaced'
-import { reactivePick } from '@vueuse/core'
+import { PopoverRoot, PopoverTrigger, PopoverPortal, PopoverContent, PopoverArrow, PopoverAnchor, HoverCardRoot, HoverCardTrigger, HoverCardPortal, HoverCardContent, HoverCardArrow } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { usePortal } from '../composables/usePortal'
 import { pointerDownOutside } from '../utils/overlay'
 import { tv } from '../utils/tv'
+
+const Popover = { Root: PopoverRoot, Trigger: PopoverTrigger, Portal: PopoverPortal, Content: PopoverContent, Arrow: PopoverArrow, Anchor: PopoverAnchor }
+const HoverCard = { Root: HoverCardRoot, Trigger: HoverCardTrigger, Portal: HoverCardPortal, Content: HoverCardContent, Arrow: HoverCardArrow }
 
 const _props = withDefaults(defineProps<PopoverProps<M>>(), {
   portal: true,
@@ -88,8 +90,7 @@ const props = useComponentProps<PopoverProps<M>>('popover', _props)
 
 const appConfig = useAppConfig() as Popover['AppConfig']
 
-const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay', 'enableTouch') : reactivePick(props, 'defaultOpen', 'open', 'modal')
-const rootProps = useForwardProps(pick, emits)
+const rootProps = useForwardProps(props, props.mode === 'hover' ? ['defaultOpen', 'open', 'openDelay', 'closeDelay', 'enableTouch'] : ['defaultOpen', 'open', 'modal'], emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps)
 const contentEvents = computed(() => {

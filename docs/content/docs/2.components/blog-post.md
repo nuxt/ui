@@ -55,6 +55,10 @@ props:
 ---
 ::
 
+::tip
+The title is rendered as an `h2` by default. Use the `as` prop with an object to change it, for example `:as="{ title: 'h3' }"`{lang="ts-type"}. You can also set the root element this way: `:as="{ root: 'div', title: 'h3' }"`{lang="ts-type"}.
+::
+
 ### Description
 
 Use the `description` prop to display the description of the BlogPost.
@@ -145,8 +149,11 @@ props:
 
 Use the `image` prop to display an image in the BlogPost.
 
-::note
-If [`@nuxt/image`](https://image.nuxt.com/get-started/installation) is installed, the `<NuxtImg>` component will be used instead of the native `img` tag.
+::framework-only
+#nuxt
+:::note
+If [`@nuxt/image`](/docs/getting-started/integrations/image) is installed, the `<NuxtImg>` component will be used instead of the native `img` tag.
+:::
 ::
 
 ::component-code

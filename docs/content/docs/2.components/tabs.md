@@ -186,7 +186,7 @@ external:
 externalTypes:
   - TabsItem[]
 props:
-  size: md
+  size: xl
   variant: pill
   content: false
   items:

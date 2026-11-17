@@ -17,6 +17,15 @@ describe('useToast', () => {
   })
 
   describe('add', () => {
+    // Only `Date` is faked so the animation window does not depend on how long the test takes.
+    beforeEach(() => {
+      vi.useFakeTimers({ toFake: ['Date'] })
+    })
+
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+
     it('returns a toast with a generated id and open state', () => {
       const body = toast.add({ title: 'Hello' })
 
@@ -41,11 +50,36 @@ describe('useToast', () => {
     it('increments _duplicate instead of adding a toast with an existing id', async () => {
       toast.add({ id: 'dup', title: 'First' })
       await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+      vi.setSystemTime(Date.now() + 200)
 
       toast.add({ id: 'dup', title: 'Second' })
 
       expect(toast.toasts.value).toHaveLength(1)
       expect(toast.toasts.value[0]!.title).toBe('Second')
+      expect(toast.toasts.value[0]!._duplicate).toBe(1)
+    })
+
+    it('does not increment _duplicate while the toast is still entering', async () => {
+      toast.add({ id: 'dup', title: 'First' })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      toast.add({ id: 'dup', title: 'Second' })
+
+      expect(toast.toasts.value).toHaveLength(1)
+      expect(toast.toasts.value[0]!.title).toBe('Second')
+      expect(toast.toasts.value[0]!._duplicate).toBeUndefined()
+    })
+
+    it('increments _duplicate once for a toast added twice in the same tick', async () => {
+      toast.add({ id: 'dup', title: 'First' })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+      vi.setSystemTime(Date.now() + 200)
+
+      // An even count would leave `data-pulsing` unchanged and the pulse would not replay.
+      toast.add({ id: 'dup', title: 'Second' })
+      toast.add({ id: 'dup', title: 'Third' })
+
+      expect(toast.toasts.value[0]!.title).toBe('Third')
       expect(toast.toasts.value[0]!._duplicate).toBe(1)
     })
 
@@ -59,7 +93,7 @@ describe('useToast', () => {
 
       expect(toast.toasts.value).toHaveLength(1)
       expect(toast.toasts.value[0]!.title).toBe('Second')
-      expect(toast.toasts.value[0]!._duplicate).toBe(1)
+      expect(toast.toasts.value[0]!._duplicate).toBeUndefined()
     })
 
     it('does not duplicate a toast added from two useToast instances in the same tick', async () => {
@@ -74,7 +108,7 @@ describe('useToast', () => {
 
       expect(toast.toasts.value).toHaveLength(1)
       expect(toast.toasts.value[0]!.title).toBe('Second')
-      expect(toast.toasts.value[0]!._duplicate).toBe(1)
+      expect(toast.toasts.value[0]!._duplicate).toBeUndefined()
     })
   })
 
@@ -189,6 +223,91 @@ describe('useToast', () => {
 
       expect(() => toast.remove('missing')).not.toThrow()
       expect(toast.toasts.value).toHaveLength(1)
+    })
+  })
+
+  describe('promise', () => {
+    function deferred<T>() {
+      let resolve!: (value: T) => void
+      let reject!: (error: unknown) => void
+      const promise = new Promise<T>((res, rej) => {
+        resolve = res
+        reject = rej
+      })
+      return { promise, resolve, reject }
+    }
+
+    it('shows a loading toast that stays open', async () => {
+      const { promise } = deferred<undefined>()
+      toast.promise(promise, { loading: 'Saving' })
+
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+      expect(toast.toasts.value[0]).toMatchObject({ title: 'Saving', icon: 'i-lucide-loader-circle', duration: 0 })
+      expect(toast.toasts.value[0]!.ui?.icon).toContain('animate-spin')
+    })
+
+    it('updates the toast with the resolved value', async () => {
+      const { promise, resolve } = deferred<string>()
+      toast.promise(promise, { loading: 'Saving', success: name => ({ title: `Saved ${name}`, color: 'success' }) })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      resolve('file')
+      await promise
+
+      expect(toast.toasts.value[0]).toMatchObject({ title: 'Saved file', color: 'success', icon: undefined, duration: undefined })
+      expect(toast.toasts.value[0]!.ui?.icon).toBeUndefined()
+    })
+
+    it('updates the toast with the error and returns the rejected promise', async () => {
+      const { promise, reject } = deferred<undefined>()
+      const result = toast.promise(promise, { loading: 'Saving', error: (error: any) => error.message })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      reject(new Error('Failed'))
+
+      await expect(result).rejects.toThrow('Failed')
+      expect(toast.toasts.value[0]!.title).toBe('Failed')
+    })
+
+    it('applies the settled state when the promise settles before the toast is displayed', async () => {
+      toast.promise(Promise.resolve(), { loading: 'Saving', success: 'Saved' })
+
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+      expect(toast.toasts.value[0]).toMatchObject({ title: 'Saved', icon: undefined })
+    })
+
+    it('closes the toast when the settled state is omitted', async () => {
+      const { promise, resolve } = deferred<undefined>()
+      toast.promise(promise, { loading: 'Saving' })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      resolve(undefined)
+      await promise
+
+      expect(toast.toasts.value[0]!.open).toBe(false)
+    })
+
+    it('keeps the queue running when a queued toast is closed before it is displayed', async () => {
+      toast.add({ id: 'a', title: 'A' })
+      // Queued behind `a`, then dropped from the queue when the promise settles while the queue waits for the next tick.
+      toast.promise(Promise.resolve(), { loading: 'Saving' })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      toast.add({ id: 'b', title: 'B' })
+
+      await vi.waitFor(() => expect(toast.toasts.value.map(t => t.id)).toEqual(['a', 'b']))
+    })
+
+    it('does not reopen a toast dismissed while loading', async () => {
+      const { promise, resolve } = deferred<undefined>()
+      toast.promise(promise, { loading: { id: 'p', title: 'Saving' }, success: 'Saved' })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      toast.remove('p')
+      resolve(undefined)
+      await promise
+
+      expect(toast.toasts.value[0]).toMatchObject({ title: 'Saving', open: false })
     })
   })
 

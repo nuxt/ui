@@ -10,23 +10,44 @@ export type Messages = {
   banner: {
     close: string
   }
+  breadcrumb: {
+    label: string
+  }
   calendar: {
+    label: string
+    monthPicker: string
     nextMonth: string
     nextYear: string
     prevMonth: string
     prevYear: string
+    yearPicker: string
   }
   carousel: {
     dots: string
     goto: string
     next: string
     prev: string
+    roledescription: string
+    slide: string
+  }
+  chatAttachment: {
+    uploading: string
+    error: string
+  }
+  chatMessages: {
+    autoScroll: string
   }
   chatPrompt: {
     placeholder: string
+    queue: string
+    sendNow: string
+    edit: string
+    remove: string
   }
   chatPromptSubmit: {
     label: string
+    reload: string
+    stop: string
   }
   colorMode: {
     dark: string
@@ -41,6 +62,7 @@ export type Messages = {
     noData: string
     noMatch: string
     placeholder: string
+    results: string
   }
   contentSearch: {
     description?: string
@@ -94,14 +116,37 @@ export type Messages = {
     open: string
     title?: string
   }
+  inputDate: {
+    day: string
+    dayPeriod: string
+    era: string
+    hour: string
+    minute: string
+    month: string
+    second: string
+    timeZoneName: string
+    year: string
+  }
   inputMenu: {
     create: string
     noData: string
     noMatch: string
+    trigger: string
   }
   inputNumber: {
     decrement: string
     increment: string
+    roledescription: string
+  }
+  inputRating: {
+    rate: string
+  }
+  inputTime: {
+    dayPeriod: string
+    hour: string
+    minute: string
+    second: string
+    timeZoneName: string
   }
   listbox: {
     noData: string
@@ -111,17 +156,29 @@ export type Messages = {
   modal: {
     close: string
   }
+  pagination: {
+    first: string
+    last: string
+    next: string
+    page: string
+    prev: string
+  }
+  pinInput: {
+    input: string
+  }
   pricingTable: {
     caption: string
   }
   prose: {
     codeCollapse: {
       closeText: string
+      label: string
       name: string
       openText: string
     }
     collapsible: {
       closeText: string
+      label: string
       name: string
       openText: string
     }
@@ -148,14 +205,30 @@ export type Messages = {
     noMatch: string
     search: string
   }
+  skeleton: {
+    label: string
+  }
   slideover: {
     close: string
+  }
+  slider: {
+    max: string
+    min: string
+    thumb: string
+    value: string
+  }
+  stepper: {
+    label: string
   }
   table: {
     noData: string
   }
   toast: {
     close: string
+  }
+  toaster: {
+    label: string
+    viewport: string
   }
 }
 

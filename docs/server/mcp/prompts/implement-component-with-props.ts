@@ -1,7 +1,11 @@
+import { defineMcpPrompt } from '@nuxtjs/mcp-toolkit/server'
+import { useEvent } from 'nitropack/runtime'
 import { z } from 'zod'
 import { kebabCase } from 'scule'
 import { queryCollection } from '@nuxt/content/server'
 import { normalizeComponentName } from '~~/server/utils/normalizeComponentName'
+import { SITE_URL } from '../../utils/site'
+import { fetchComponentMetadata } from '../../utils/componentMeta'
 
 export default defineMcpPrompt({
   description: 'Generate complete component implementation with proper props and styling',

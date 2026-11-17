@@ -1,5 +1,149 @@
 # Changelog
 
+## [4.12.2](https://github.com/nuxt/ui/compare/v4.12.1...v4.12.2) (2026-11-16)
+
+### Bug Fixes
+
+* **components:** ignore malformed tag names and element-like templates ([bbd4e6e](https://github.com/nuxt/ui/commit/bbd4e6e98fbc40bb1942cc85674d09f02142c022))
+* **components:** keep attributes added after mount ([b93b4d2](https://github.com/nuxt/ui/commit/b93b4d2b643b65fedb2e2e38a96379d50ba70023))
+
+## [4.12.1](https://github.com/nuxt/ui/compare/v4.12.0...v4.12.1) (2026-11-16)
+
+### Bug Fixes
+
+* **components:** ignore components compiled from a template string ([7e07a52](https://github.com/nuxt/ui/commit/7e07a529fe0d7e176ae0deab07835dd66afd39ab))
+* **ContentSearch:** stop escaping result text twice ([#7374](https://github.com/nuxt/ui/issues/7374)) ([21ee243](https://github.com/nuxt/ui/commit/21ee24361252a5e3100ca52cdcd2c3bebadc9cf4))
+
+## [4.12.0](https://github.com/nuxt/ui/compare/v4.11.3...v4.12.0) (2026-10-15)
+
+### Features
+
+* **App:** follow the `@nuxtjs/i18n` locale ([#7152](https://github.com/nuxt/ui/issues/7152)) ([43ba8a0](https://github.com/nuxt/ui/commit/43ba8a07ee6561613045c36c6e3015ceecf873c9))
+* **Calendar:** add `yearsPerPage` prop ([#7138](https://github.com/nuxt/ui/issues/7138)) ([cc4acae](https://github.com/nuxt/ui/commit/cc4acae75c9e18705e97ff0b7af9b2dd5af3f290))
+* **Chart:** new component ([#7022](https://github.com/nuxt/ui/issues/7022)) ([8b37286](https://github.com/nuxt/ui/commit/8b372869000484efbb9f687f9095782351ab2acf))
+* **ChatReasoning:** add `autoOpen` prop ([#7049](https://github.com/nuxt/ui/issues/7049)) ([dad748e](https://github.com/nuxt/ui/commit/dad748e230314aed88fc555da93089185d49c1a3))
+* **CheckboxGroup:** add `max` prop ([#7145](https://github.com/nuxt/ui/issues/7145)) ([63a0c05](https://github.com/nuxt/ui/commit/63a0c0563ea225d31d32019ccf3fdc9a455bb44c))
+* **components:** add `loop` prop ([#7128](https://github.com/nuxt/ui/issues/7128)) ([a96f56f](https://github.com/nuxt/ui/commit/a96f56f7649b0794dba5337a4d483efeb228d58b))
+* **components:** allow controlling heading element via `as` prop ([#7048](https://github.com/nuxt/ui/issues/7048)) ([623d6d2](https://github.com/nuxt/ui/commit/623d6d2bc35ad0d1e4afbc3dca039786aa3be240))
+* **ContextMenu:** add `open` and `pressOpenDelay` props ([#7148](https://github.com/nuxt/ui/issues/7148)) ([73c489b](https://github.com/nuxt/ui/commit/73c489b64460430a0924e7897cfc33145e1458d0))
+* **FileUpload:** add `reject` event for dropped files ([#7164](https://github.com/nuxt/ui/issues/7164)) ([c8f5ffc](https://github.com/nuxt/ui/commit/c8f5ffc69430a77da34e498337f8e93a6dced4a9))
+* **FileUpload:** support custom file items in `v-model` ([#6927](https://github.com/nuxt/ui/issues/6927)) ([a352073](https://github.com/nuxt/ui/commit/a352073b458614937e489e5ec4770b00f75f4376))
+* **InputMenu:** add default slot ([#6969](https://github.com/nuxt/ui/issues/6969)) ([3274113](https://github.com/nuxt/ui/commit/32741135b1ceafd1ca41ba4eef6684310608162a))
+* **InputNumber:** add `startingValue` and `allowInvalid` props ([#7146](https://github.com/nuxt/ui/issues/7146)) ([d856ec3](https://github.com/nuxt/ui/commit/d856ec3d5f37bef9f9eab44dbf2396286ab26e25))
+* **module:** export prose components from `@nuxt/ui/components/prose` ([#7143](https://github.com/nuxt/ui/issues/7143)) ([5c302c3](https://github.com/nuxt/ui/commit/5c302c3bb83661226b74008a17741e8e001b3925))
+* **NavigationMenu:** add `viewport` prop ([#7123](https://github.com/nuxt/ui/issues/7123)) ([4a3464e](https://github.com/nuxt/ui/commit/4a3464e3619321cb44c3a017db12250a906ccac4))
+* **ProsePrompt:** add `prompt` prop ([#7172](https://github.com/nuxt/ui/issues/7172)) ([8c92e5f](https://github.com/nuxt/ui/commit/8c92e5f9299c6c28ced1eebfd74e1d35805ac1c6))
+* **Sidebar:** add `breakpoint` prop ([#7155](https://github.com/nuxt/ui/issues/7155)) ([2113daa](https://github.com/nuxt/ui/commit/2113daa41f2dfc13ffb2c37d9d1610002229c24b))
+* **Toast:** add `closeOnClick` to actions ([#7147](https://github.com/nuxt/ui/issues/7147)) ([378873a](https://github.com/nuxt/ui/commit/378873a28d5db444c52873b21a71551609f11aa0))
+
+### Bug Fixes
+
+* **App:** forward `nonce` prop ([#7137](https://github.com/nuxt/ui/issues/7137)) ([9271533](https://github.com/nuxt/ui/commit/927153310901c0922a593336ef5f92cbb428761f))
+* **Chart:** render tooltip above center slot ([5cf6b3a](https://github.com/nuxt/ui/commit/5cf6b3a9dfba74c6280190156ae43eba2af644ce))
+* **ChatMessages/ChatPromptSubmit:** add accessible names to icon buttons ([#7153](https://github.com/nuxt/ui/issues/7153)) ([3cd30e0](https://github.com/nuxt/ui/commit/3cd30e013affa172acc2048710109690d83b042c))
+* **ColorModeButton:** resolve label after mount ([#7167](https://github.com/nuxt/ui/issues/7167)) ([9a12b1f](https://github.com/nuxt/ui/commit/9a12b1fbcef56286c4b824fecd0c7a50dee6e53b))
+* **components:** localize hardcoded accessibility labels ([#7177](https://github.com/nuxt/ui/issues/7177)) ([fc7137c](https://github.com/nuxt/ui/commit/fc7137cd47d37d4b7af52b7d9dffa63be51d45e8))
+* **components:** prevent empty trailing slot when loading ([#7027](https://github.com/nuxt/ui/issues/7027)) ([1f46ce1](https://github.com/nuxt/ui/commit/1f46ce11fa0ead45de6c4d3bf2a3761c9d7188e9))
+* **components:** spin trailing loading icon with avatar ([#7168](https://github.com/nuxt/ui/issues/7168)) ([2fc9ba0](https://github.com/nuxt/ui/commit/2fc9ba0cb8edae7cbc804a7ae6477361ef20defa))
+* **ContentSearch/DashboardSearch:** handle `undefined` selection when an item is toggled off ([#7170](https://github.com/nuxt/ui/issues/7170)) ([14f13af](https://github.com/nuxt/ui/commit/14f13af6b8e1e58bb239ce03eb51adbbbcef37a6))
+* **ContentToc:** raise list min height ([#7113](https://github.com/nuxt/ui/issues/7113)) ([2b535b0](https://github.com/nuxt/ui/commit/2b535b0187d8755233748c5835733b13152709ac))
+* **Drawer:** don't disable body pointer events with `noBodyStyles` ([#7150](https://github.com/nuxt/ui/issues/7150)) ([04f253e](https://github.com/nuxt/ui/commit/04f253edb99d24993eb74bb83ca5418a77b24997))
+* **Drawer:** emit `after:leave` and `after:enter` when the animation ends ([#7107](https://github.com/nuxt/ui/issues/7107)) ([5cd317b](https://github.com/nuxt/ui/commit/5cd317bfee044346ac3d3005b1348ff5b5f0d2d9))
+* **Editor:** align link styles with prose ([f943f20](https://github.com/nuxt/ui/commit/f943f2059f2eea1dcf3fc9d992f5269103d7a096))
+* **FileUpload:** make the `dropzone` prop reactive ([#7055](https://github.com/nuxt/ui/issues/7055)) ([f4322e7](https://github.com/nuxt/ui/commit/f4322e7a3577939f43be0781170a4827af15122c))
+* **Form:** accept empty values in `state` type ([#7165](https://github.com/nuxt/ui/issues/7165)) ([a59a3a3](https://github.com/nuxt/ui/commit/a59a3a3e00cc95f03f596d80013b05fb3abc63c1))
+* **Kbd:** avoid hydration mismatch for platform-specific keys ([#7166](https://github.com/nuxt/ui/issues/7166)) ([78e72fb](https://github.com/nuxt/ui/commit/78e72fb9b7a1012146f6713bba850f8024cbd8d5))
+* **Link:** promote queued prefetch on interaction ([#7124](https://github.com/nuxt/ui/issues/7124)) ([974cc0d](https://github.com/nuxt/ui/commit/974cc0d9fa22a45e450e3171c3d9024275c4ec75))
+* **Listbox:** add accessible name to listbox ([#7193](https://github.com/nuxt/ui/issues/7193)) ([6bbb358](https://github.com/nuxt/ui/commit/6bbb358e1749a54d5d06df7397b7e78394756626))
+* **Pagination:** localize `aria-label` of controls and pages ([#7151](https://github.com/nuxt/ui/issues/7151)) ([d2d3da0](https://github.com/nuxt/ui/commit/d2d3da0db012b8a21a003eace1b81f00e4135f32))
+* **ProseA:** hide underline on focus and around inline code ([3cd61ed](https://github.com/nuxt/ui/commit/3cd61edc6d051501ee2393513b987ab44953821b))
+* **SelectMenu:** keep controls outside the listbox ([#7096](https://github.com/nuxt/ui/issues/7096)) ([ded6848](https://github.com/nuxt/ui/commit/ded6848ef6bd06e724d28d425df12204b06f8328))
+* **SelectMenu:** keep menu open when focus moves outside ([#7095](https://github.com/nuxt/ui/issues/7095)) ([26016e8](https://github.com/nuxt/ui/commit/26016e8d4242426c3f1085a20eb7c33f55f92360))
+* **Slideover:** only cap width from `sm` breakpoint ([#7156](https://github.com/nuxt/ui/issues/7156)) ([608a3d3](https://github.com/nuxt/ui/commit/608a3d3c93feef128d82d2cfcb2a2afc60aab982))
+* **Table:** measure virtualized rows with variable heights ([#7204](https://github.com/nuxt/ui/issues/7204)) ([0e487d6](https://github.com/nuxt/ui/commit/0e487d62d5cc3149e2f7ed8eb0e2520981fd6a89))
+* **Table:** respect `defaultColumn` cell and header ([#7198](https://github.com/nuxt/ui/issues/7198)) ([da9125c](https://github.com/nuxt/ui/commit/da9125cabe1d7e3814cde33c4af8d8b3a8bdb8bb))
+* **theme:** remove unknown and conflicting classes ([96d0a50](https://github.com/nuxt/ui/commit/96d0a50c7df17efe111fc9fc7198a31ff47a8cfc))
+* **Tree:** pass `disabled` to tree item ([#7139](https://github.com/nuxt/ui/issues/7139)) ([db30f7f](https://github.com/nuxt/ui/commit/db30f7f4402e80e94b7325f0a16bca1f554a6229))
+* **useToast:** skip pulse while toast is animating ([#7195](https://github.com/nuxt/ui/issues/7195)) ([e51d3a9](https://github.com/nuxt/ui/commit/e51d3a9491e7f70e8f19ecda373bdc813ea8c65a))
+* **useTour:** accept any CSS selector as step target ([#7144](https://github.com/nuxt/ui/issues/7144)) ([8a7270d](https://github.com/nuxt/ui/commit/8a7270d6604b5f7fd4ab07d52a57bd47736480d0))
+
+### Performance Improvements
+
+* **components:** import Reka UI primitives by name instead of from `reka-ui/namespaced` ([#7176](https://github.com/nuxt/ui/issues/7176)) ([896d609](https://github.com/nuxt/ui/commit/896d60962266a62012bc89bb53a8e65e863b2921))
+* **components:** pick link props without a reactive proxy ([#7208](https://github.com/nuxt/ui/issues/7208)) ([68d0467](https://github.com/nuxt/ui/commit/68d0467eff78a3bb4d4fda2dddf8d938577b28c4))
+* **DashboardSearch/ContentSearch:** lazy load modal and command palette ([#7161](https://github.com/nuxt/ui/issues/7161)) ([6f50933](https://github.com/nuxt/ui/commit/6f50933451bfa1150a303378682f5282c04820d7))
+* **Header/DashboardSidebar/Sidebar:** lazy load menu overlay ([#7160](https://github.com/nuxt/ui/issues/7160)) ([691899a](https://github.com/nuxt/ui/commit/691899a81fdfce05c8218f4924fcf9c32e329a1a))
+* **Toaster:** lazy load toast component ([#7163](https://github.com/nuxt/ui/issues/7163)) ([1b09a26](https://github.com/nuxt/ui/commit/1b09a2678353c53107831998b9610e8898fe2ed9))
+* **useComponentProps:** skip prop resolution for Vue internal flags ([#7186](https://github.com/nuxt/ui/issues/7186)) ([c029710](https://github.com/nuxt/ui/commit/c029710988bc6f472e74e1d3db92d0e5fcdfef6e))
+
+## [4.11.3](https://github.com/nuxt/ui/compare/v4.11.2...v4.11.3) (2026-10-01)
+
+### Bug Fixes
+
+* **App:** apply the `dir` prop to the provided locale ([#6767](https://github.com/nuxt/ui/issues/6767)) ([93c40df](https://github.com/nuxt/ui/commit/93c40df0a7ed2cffad2b86f81cc27f9c5c038d41))
+* **ChatPrompt:** add `method="post"` to prevent input leaking via GET before hydration ([#7078](https://github.com/nuxt/ui/issues/7078)) ([57f7699](https://github.com/nuxt/ui/commit/57f7699315833854a4f4421c60763d365805e0e7))
+* **CheckboxGroup/RadioGroup:** lift a hovered table item above its neighbors ([#7073](https://github.com/nuxt/ui/issues/7073)) ([926097a](https://github.com/nuxt/ui/commit/926097afa3f5d06b896675fd29289e495ac3741d))
+* **ContentSearch/DashboardSearch:** use translated search label as dialog title ([#7062](https://github.com/nuxt/ui/issues/7062)) ([3c55cf2](https://github.com/nuxt/ui/commit/3c55cf230dc623bdbfd1918357ec04f137afd290))
+* **DashboardSidebar/Header:** use translated toggle label as menu dialog title ([#7082](https://github.com/nuxt/ui/issues/7082)) ([51e98da](https://github.com/nuxt/ui/commit/51e98da7f9707e112bb6a7b61bb3a9cca4139dd3))
+* **EditorToolbar:** use tooltip text as `aria-label` on icon-only buttons ([#7009](https://github.com/nuxt/ui/issues/7009)) ([7f0250e](https://github.com/nuxt/ui/commit/7f0250eab69d04c42e137aa85c103e3dc83eec60))
+* **Form:** include nested forms in parent `dirty` state ([#6545](https://github.com/nuxt/ui/issues/6545)) ([8977394](https://github.com/nuxt/ui/commit/897739491a24642c6678cf6ce10e1638ff883d35))
+* **Form:** keep dirty state and validation in sync with input ([#7033](https://github.com/nuxt/ui/issues/7033)) ([56b1156](https://github.com/nuxt/ui/commit/56b1156a9abaeb587221ac018d6c335c58a353be))
+* **Form:** merge unnamed nested forms into a parent without schema ([#7034](https://github.com/nuxt/ui/issues/7034)) ([384fdc1](https://github.com/nuxt/ui/commit/384fdc12591a3124653438ec361438610b3dfe07))
+* **module:** detect kebab-case components in Pug templates ([#7045](https://github.com/nuxt/ui/issues/7045)) ([42ba532](https://github.com/nuxt/ui/commit/42ba53272e84a316d6ea06ef7ab9a56b8afcb1ef))
+* **module:** generate classes prefixed by `usePrefix` ([#7074](https://github.com/nuxt/ui/issues/7074)) ([77c92de](https://github.com/nuxt/ui/commit/77c92de2e52cbe247986c53cb25334d7fe4202ec))
+* **module:** use `@custom-variant` for `light` and `dark` variants ([#7023](https://github.com/nuxt/ui/issues/7023)) ([584016b](https://github.com/nuxt/ui/commit/584016bdec75b1eb799d30ec95eb85ed3b49d38b))
+* **ProseA:** only round corners on focus ([3da141c](https://github.com/nuxt/ui/commit/3da141cbd174c28c46d9209872a0693ee6ede01e))
+* **Select/SelectMenu:** keep focus moved on selection ([#7083](https://github.com/nuxt/ui/issues/7083)) ([6138bf0](https://github.com/nuxt/ui/commit/6138bf09d8c9a4e7d971cb76a88fbe6b67619c8e))
+* **Table:** keep footer separator above pinned columns ([#7047](https://github.com/nuxt/ui/issues/7047)) ([e8756fd](https://github.com/nuxt/ui/commit/e8756fd3a8aaab3cb434f1dfe8d32559330f38a9))
+* **theme:** drop double quotes from class strings ([#7039](https://github.com/nuxt/ui/issues/7039)) ([5a04c6c](https://github.com/nuxt/ui/commit/5a04c6c432be5b6e793366a9338b83f20c7847b7))
+* **useFilter:** keep labels and separators in place while sorting ([#6995](https://github.com/nuxt/ui/issues/6995)) ([032a152](https://github.com/nuxt/ui/commit/032a152119530795d39d1f97458baf375ff7ee5e))
+* **useOverlay:** resolve every pending promise when reopened ([#7057](https://github.com/nuxt/ui/issues/7057)) ([2f50c2e](https://github.com/nuxt/ui/commit/2f50c2ed57df88224d0580995e5155025e282b7c))
+* **utils:** prevent prototype pollution in `set` and `setAtPath` ([#7077](https://github.com/nuxt/ui/issues/7077)) ([4bfd115](https://github.com/nuxt/ui/commit/4bfd115418fdbd2c4419bac1b53aa7dcdc7e8f8a))
+
+## [4.11.2](https://github.com/nuxt/ui/compare/v4.11.1...v4.11.2) (2026-09-22)
+
+### Bug Fixes
+
+* **components:** allow partial `ui` overrides on items ([#6979](https://github.com/nuxt/ui/issues/6979)) ([c617565](https://github.com/nuxt/ui/commit/c617565279e4a1346832443edb518ec1699e7504))
+* **components:** fall back to `md` for custom sizes in virtualizer ([#6917](https://github.com/nuxt/ui/issues/6917)) ([9076ca2](https://github.com/nuxt/ui/commit/9076ca2d353a385c1d8686654eaecd6f65a16b56))
+* **DashboardNavbar:** render title only when defined ([#6958](https://github.com/nuxt/ui/issues/6958)) ([7c4c6e3](https://github.com/nuxt/ui/commit/7c4c6e3568f074cfee7a603e034895892a8ab252))
+* **FieldGroup:** add `defaultVariants` in theme ([#6938](https://github.com/nuxt/ui/issues/6938)) ([0317d50](https://github.com/nuxt/ui/commit/0317d508f077360724ccd4bb54d62b414088c334))
+* **Form:** clear only the targeted field inside a nested form ([#6923](https://github.com/nuxt/ui/issues/6923)) ([2b29c33](https://github.com/nuxt/ui/commit/2b29c33f45cdfe6e9d2ca0bafba6a6d49d299ff4))
+* **Input/Textarea:** keep `0` with `nullable` and `optional` modifiers ([#6871](https://github.com/nuxt/ui/issues/6871)) ([6d6737a](https://github.com/nuxt/ui/commit/6d6737af38d517f1d5bae9a4a0e063d169c17890))
+* **InputDate/InputTime:** emit focus and blur when focus enters or leaves the field ([#6855](https://github.com/nuxt/ui/issues/6855)) ([8e4546e](https://github.com/nuxt/ui/commit/8e4546e3b775ce91a8a2f9198cc70f9f94158bc1))
+* **InputMenu:** ignore `multiple` in autocomplete mode ([#6971](https://github.com/nuxt/ui/issues/6971)) ([27a3ef7](https://github.com/nuxt/ui/commit/27a3ef7ea5f688b42815595e6c49469f900e3a20))
+* **InputMenu:** prevent tags input from adding the search term on enter ([#6776](https://github.com/nuxt/ui/issues/6776)) ([b3d4342](https://github.com/nuxt/ui/commit/b3d4342d9b588b85c69410dd14f0f7bba4a83adb))
+* **InputMenu:** round corners inside a FieldGroup in multiple mode ([#6968](https://github.com/nuxt/ui/issues/6968)) ([619c732](https://github.com/nuxt/ui/commit/619c7328106736bf799d70c4fc628f1378f5185d))
+* **Link:** propagate click handler errors to Vue error handling ([#6993](https://github.com/nuxt/ui/issues/6993)) ([074152b](https://github.com/nuxt/ui/commit/074152b7b65f7878fb4117b5bf31555476463b43))
+* **PinInput:** emit blur whenever focus leaves the group ([#6858](https://github.com/nuxt/ui/issues/6858)) ([22efd35](https://github.com/nuxt/ui/commit/22efd35d12336b507afaa5fc9498c90df4292ea0))
+* **SelectMenu/InputMenu:** ignore clear button when disabled ([#6986](https://github.com/nuxt/ui/issues/6986)) ([9ea37c1](https://github.com/nuxt/ui/commit/9ea37c1653cf0fdae78a2edd7dd95fcb85b2a033))
+* **SelectMenu:** open menu on arrow keys ([#6933](https://github.com/nuxt/ui/issues/6933)) ([cf9e838](https://github.com/nuxt/ui/commit/cf9e8385931b085b86d67553f42e11e2c84e8647))
+* **SelectMenu:** remove the inherited "Show popup" aria-label ([aab2d10](https://github.com/nuxt/ui/commit/aab2d10dad9dc811f4fb4abb88cd00514e6b1a30)), closes [#6962](https://github.com/nuxt/ui/issues/6962)
+* **Table:** emit `aria-sort` on sortable th elements ([#6879](https://github.com/nuxt/ui/issues/6879)) ([74ad017](https://github.com/nuxt/ui/commit/74ad017f045ac499683a4713efd0bb59ead543d7))
+* **Table:** inset row focus outline ([#6973](https://github.com/nuxt/ui/issues/6973)) ([a96823d](https://github.com/nuxt/ui/commit/a96823da9f350d17ebaba321cae1cfc4de62eccc))
+* **Table:** make rows with a select event keyboard accessible ([#6838](https://github.com/nuxt/ui/issues/6838)) ([187c34f](https://github.com/nuxt/ui/commit/187c34f0234a769da2c7c344f93d6c603d0bb514))
+* **Toaster:** prevent `onClick` from being called twice ([#6980](https://github.com/nuxt/ui/issues/6980)) ([796f79d](https://github.com/nuxt/ui/commit/796f79d4956405c5aeada2176486396eb935c83e))
+* **vue:** resolve explicit component imports to their Vue overrides ([#6999](https://github.com/nuxt/ui/issues/6999)) ([27a5fe4](https://github.com/nuxt/ui/commit/27a5fe43333de0b1ba8388dbb4101fe4604503f9))
+
+## [4.11.1](https://github.com/nuxt/ui/compare/v4.11.0...v4.11.1) (2026-09-07)
+
+### Bug Fixes
+
+* **ChatMessages:** add missing `color` to `user` and `assistant` props ([#6920](https://github.com/nuxt/ui/issues/6920)) ([bbf1e14](https://github.com/nuxt/ui/commit/bbf1e14906158453db54e1692740372edf092268))
+* **Checkbox/RadioGroup:** add `flex-wrap` on `list` and `card` variants ([#6913](https://github.com/nuxt/ui/issues/6913)) ([90c45a6](https://github.com/nuxt/ui/commit/90c45a66e6f69855980ace5e162af61629eb929e))
+* **Checkbox/RadioGroup:** use `border-default` on `card` and `table` variants ([#6884](https://github.com/nuxt/ui/issues/6884)) ([9bdb89b](https://github.com/nuxt/ui/commit/9bdb89b0c7585a3a9189ca42c75561396789f927))
+* **CommandPalette:** keep astral characters intact when truncating search results ([#6817](https://github.com/nuxt/ui/issues/6817)) ([e4cb042](https://github.com/nuxt/ui/commit/e4cb042b0e31a7ebb9e2d6eb904dc58339ec1a6b))
+* **Form:** omit method attribute on nested forms ([#6888](https://github.com/nuxt/ui/issues/6888)) ([a494a97](https://github.com/nuxt/ui/commit/a494a97daf9d9dffe9dc38c4755c8964e666ed46))
+* **InputNumber:** work uncontrolled with only a default value ([#6859](https://github.com/nuxt/ui/issues/6859)) ([2d4782b](https://github.com/nuxt/ui/commit/2d4782ba926ff911a2a7178372c062a3e7150fff))
+* **Link:** restore prefetching with Nuxt 4.5 custom slot ([#6921](https://github.com/nuxt/ui/issues/6921)) ([c4ee0ea](https://github.com/nuxt/ui/commit/c4ee0ea3164a965940ab2f058fab47e8c756444a))
+* **Link:** wait for `onNuxtReady` before observing visibility ([#6922](https://github.com/nuxt/ui/issues/6922)) ([612ab1c](https://github.com/nuxt/ui/commit/612ab1cb03f2aba546d57a2e1813d73cf205ac43))
+* **NavigationMenu:** avoid duplicate accordion trigger on items without `to` ([#6862](https://github.com/nuxt/ui/issues/6862)) ([726e142](https://github.com/nuxt/ui/commit/726e1420accfa81d2c438074dab2212a92e956c7))
+* **ProseCodeTree:** invoke default slot from render ([#6906](https://github.com/nuxt/ui/issues/6906)) ([fbb9e22](https://github.com/nuxt/ui/commit/fbb9e22032072fb2bb03fb86496809070f54d7b2))
+* **Select/SelectMenu:** add responsive text size ([#6903](https://github.com/nuxt/ui/issues/6903)) ([e791d30](https://github.com/nuxt/ui/commit/e791d302bac0a761d1e53a281cc99d669bc823ee))
+* **SelectMenu:** prevent search input focus on open with `autofocus: false` ([#6905](https://github.com/nuxt/ui/issues/6905)) ([6caa6a9](https://github.com/nuxt/ui/commit/6caa6a9522d50b301ca031e760b2d53f714eb87b))
+* **Slider:** emit a number for a single thumb ([#6890](https://github.com/nuxt/ui/issues/6890)) ([3d2de0c](https://github.com/nuxt/ui/commit/3d2de0ce790f3fd90a95447b7145bf25c9ee4b3a))
+* **Table:** exclude hidden columns from colspan ([#6894](https://github.com/nuxt/ui/issues/6894)) ([2e8f533](https://github.com/nuxt/ui/commit/2e8f533dc684531844e3fa7a5ef7c0e53b7b6797))
+
 ## [4.11.0](https://github.com/nuxt/ui/compare/v4.10.0...v4.11.0) (2026-08-21)
 
 ### Features

@@ -11,6 +11,7 @@ const { status, search, init } = useSearchCollection('docs', {
 })
 
 const { links, groups, searchTerm } = useSearch()
+const { open } = useContentSearch()
 const { track } = useAnalytics()
 
 const fuse = {
@@ -21,7 +22,18 @@ const fuse = {
   }
 }
 
-onNuxtReady(init)
+// The index is the SQLite wasm and the whole docs dump, about 850 KB: it
+// loads on the first open, not on every page view. The modal mounts on that
+// open too and stays mounted from then on, so the search keeps its state.
+const opened = ref(false)
+watch(open, (value) => {
+  if (!value) return
+
+  opened.value = true
+  if (status.value === 'idle') {
+    init()
+  }
+}, { immediate: true })
 
 watchDebounced(searchTerm, (term) => {
   if (term) {
@@ -40,6 +52,6 @@ watchDebounced(searchTerm, (term) => {
     :search-status="status"
     :fuse="fuse"
     :transition="false"
-    :unmount-on-hide="false"
+    :unmount-on-hide="!opened"
   />
 </template>

@@ -184,12 +184,7 @@ it('passes accessibility tests', async () => {
 
 When component changes require snapshot updates:
 
-1. Run tests: `pnpm run test`
-2. Review changes carefully
-3. Press `u` to update snapshots
-4. Commit updated snapshots
-
-**Never manually edit snapshot files.**
+Run `pnpm run test run -u <spec>` on the affected specs only, then review the snapshot diff before committing. Don't hand-edit snapshot files, regenerate them so they match the real render output.
 
 ## Running Tests
 
@@ -200,9 +195,10 @@ pnpm run test
 # Run specific test file
 pnpm run test Button
 
-# Run with coverage
-pnpm run test -- --coverage
-
 # Watch mode
 pnpm run test -- --watch
 ```
+
+## Bundle Size
+
+`pnpm run size` builds the small Nuxt and Vue apps in `test/bundle` against the current `dist` and prints their client JS and CSS sizes. On pull requests, the `bundle-size` workflow measures both the base branch and the PR with the real build and comments the difference.

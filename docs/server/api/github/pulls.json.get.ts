@@ -1,3 +1,4 @@
+import { defineCachedEventHandler } from 'nitropack/runtime'
 import { Octokit } from '@octokit/rest'
 
 function isUserABot(user: any) {

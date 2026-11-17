@@ -44,7 +44,7 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `UScrollArea` | Scrollable area with custom scrollbar |
 | `UTimeline` | Timeline display for events and activity |
 | `UUser` | User display — avatar + name + description |
-| `UTheme` | Theme provider — scoped color overrides for children |
+| `UTheme` | Scoped `ui` class overrides and prop defaults for a subtree |
 
 ## Form
 
@@ -57,9 +57,12 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `USelectMenu` | Rich searchable dropdown, multi-select, groups |
 | `UInputMenu` | Autocomplete / combobox |
 | `UInputNumber` | Numeric input with +/- controls |
+| `UInputRating` | Rating input |
 | `UInputDate` | Date picker with calendar |
 | `UInputTime` | Time picker (12/24h) |
 | `UInputTags` | Tag/chip input |
+| `UListbox` | Selectable list with search and virtualization |
+| `ULocaleSelect` | Select to switch between locales |
 | `UPinInput` | Verification code input |
 | `UCheckbox` | Single boolean checkbox |
 | `UCheckboxGroup` | Multiple checkboxes |

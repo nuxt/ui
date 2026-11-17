@@ -1,8 +1,10 @@
+import { defineMcpTool } from '@nuxtjs/mcp-toolkit/server'
+import { createError } from 'h3'
 import { z } from 'zod'
 import { camelCase } from 'scule'
 
 export default defineMcpTool({
-  description: 'Retrieves specific UI example implementation code and details',
+  description: 'Retrieves the source code of a UI example. Returns the code as a string only, without metadata. Use `list-examples` to find the exact example name.',
   annotations: {
     readOnlyHint: true,
     destructiveHint: false,

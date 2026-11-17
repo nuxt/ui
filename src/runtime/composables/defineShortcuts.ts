@@ -146,8 +146,8 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
     const shiftableKey = useCode ? shiftableCodes.includes(e.code) : shiftableKeys.includes(e.key.toLowerCase())
 
     let chainedKey
-    // push either code or key depending on layoutIndependent flag
-    chainedInputs.value.push(layoutIndependent ? e.code : e.key)
+    // push either code or key depending on layoutIndependent flag, keys are lowercased like the config
+    chainedInputs.value.push(layoutIndependent ? e.code : e.key.toLowerCase())
     // try matching a chained shortcut
     if (chainedInputs.value.length >= 2) {
       chainedKey = chainedInputs.value.slice(-2).join('-')

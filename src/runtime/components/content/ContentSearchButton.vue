@@ -120,13 +120,13 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.contentSearchBut
       </template>
 
       <template #trailing="{ ui: uiProxy }">
-        <div data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+        <span data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :ui="uiProxy">
             <template v-if="props.kbds?.length">
               <UKbd v-for="(kbd, index) in props.kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
             </template>
           </slot>
-        </div>
+        </span>
       </template>
     </UButton>
   </DefineButtonTemplate>

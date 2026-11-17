@@ -194,6 +194,8 @@ props:
 The loading animation is automatically disabled when the user prefers reduced motion, the bar is displayed as a full width pulse instead.
 ::
 
+When the table is loading and has no data, the empty state is hidden. Use the `#loading` slot to display content in its place.
+
 ### Sticky
 
 Use the `sticky` prop to make the header or footer sticky.
@@ -473,6 +475,8 @@ class: '!p-0'
 
 You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the sorting state using the TanStack Table [Sorting APIs](https://tanstack.com/table/v8/docs/api/features/sorting).
 
+Set `enableSorting: true` on those columns as well. This puts `aria-sort` on the `<th>` so screen readers can read the current sort state of the column: `none`, `ascending` or `descending`. The `Button` stays the control that changes it.
+
 ::component-example
 ---
 prettier: true
@@ -480,7 +484,7 @@ collapse: true
 name: 'table-column-sorting-example'
 highlights:
   - 90
-  - 105
+  - 106
 class: '!p-0'
 ---
 ::
@@ -497,8 +501,8 @@ prettier: true
 collapse: true
 name: 'table-column-sorting-reusable-example'
 highlights:
-  - 110
-  - 161
+  - 115
+  - 166
 class: '!p-0'
 ---
 ::
@@ -676,7 +680,7 @@ class: '!p-0'
 
 ### With virtualization :badge{label="4.1+" class="align-text-top"}
 
-Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`. You can also pass other [TanStack Virtual options](https://tanstack.com/virtual/latest/docs/api/virtualizer#optional-options) to customize the virtualization behavior. The `sticky` prop works in combination with `virtualize` to keep the header or footer visible while scrolling through large datasets.
+Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`. You can also pass other [TanStack Virtual options](https://tanstack.com/virtual/v3/docs/api/virtualizer#optional-options) to customize the virtualization behavior. The `sticky` prop works in combination with `virtualize` to keep the header or footer visible while scrolling through large datasets.
 
 ::warning
 Row pinning is not supported when virtualization is enabled.
@@ -694,6 +698,10 @@ class: '!p-0'
 
 ::note
 A height constraint is required on the table for virtualization to work properly (e.g. `class="h-[400px]"`).
+::
+
+::tip
+Rows are measured as they render, so `estimateSize` only needs to be a close guess. Rows can have variable heights, and you can pass a custom `measureElement` to control how each one is measured (the height of its expanded row is added to it).
 ::
 
 ### With external scroll element :badge{label="4.10+" class="align-text-top"}

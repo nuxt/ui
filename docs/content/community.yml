@@ -2,8 +2,12 @@ title: Community
 description: Explore amazing projects built around Nuxt UI by the community.
 navigation: false
 hero:
-  title: Community
-  description: Explore amazing projects built around Nuxt UI by the community.
+  badge:
+    label: Tools, presets and integrations
+    icon: i-lucide-puzzle
+  lead: Made by the
+  accent: Community
+  description: 'Tools, presets and integrations built around Nuxt UI by the community: DevTools, Figma, forms, charts and more. Yours belongs here too.'
 items:
   - label: 'Compodium'
     description: 'Preview, customize, and generate Nuxt UI component code directly within Nuxt DevTools for faster development.'

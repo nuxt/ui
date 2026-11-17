@@ -8,15 +8,15 @@
     />
 
     <UAvatar
-      src="https://github.com/romhml.png"
-      alt="Romain Hamel"
+      src="https://github.com/HugoRCD.png"
+      alt="Hugo Richard"
       loading="lazy"
       class="rounded-none squircle"
     />
 
     <UAvatar
-      src="https://github.com/noook.png"
-      alt="Neil Richter"
+      src="https://github.com/atinux.png"
+      alt="Sébastien Chopin"
       loading="lazy"
       class="rounded-none squircle"
     />

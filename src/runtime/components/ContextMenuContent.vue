@@ -39,8 +39,7 @@ interface ContextMenuContentEmits extends RekaContextMenuContentEmits {}
 
 <script setup lang="ts" generic="T extends ArrayOrNested<ContextMenuItem>">
 import { computed, toRef } from 'vue'
-import { ContextMenu } from 'reka-ui/namespaced'
-import { useForwardPropsEmits } from 'reka-ui'
+import { ContextMenuPortal, ContextMenuContent, ContextMenuItem as RekaContextMenuItem, ContextMenuGroup, ContextMenuSeparator, ContextMenuCheckboxItem, ContextMenuItemIndicator, ContextMenuLabel, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { FieldGroupReset } from '../composables/useFieldGroup'
@@ -54,6 +53,8 @@ import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
 import UContextMenuContent from './ContextMenuContent.vue'
+
+const ContextMenu = { Portal: ContextMenuPortal, Content: ContextMenuContent, Item: RekaContextMenuItem, Group: ContextMenuGroup, Separator: ContextMenuSeparator, CheckboxItem: ContextMenuCheckboxItem, ItemIndicator: ContextMenuItemIndicator, Label: ContextMenuLabel, Sub: ContextMenuSub, SubContent: ContextMenuSubContent, SubTrigger: ContextMenuSubTrigger }
 
 const props = defineProps<ContextMenuContentProps<T>>()
 const emits = defineEmits<ContextMenuContentEmits>()
@@ -79,8 +80,8 @@ const groups = computed<ContextMenuItem[][]>(() =>
 </script>
 
 <template>
-  <DefineItemTemplate v-slot="{ item, active, index }">
-    <slot :name="((item.slot || 'item') as keyof ContextMenuSlots<T>)" :item="item" :index="index" :ui="ui">
+  <DefineItemTemplate v-slot="{ item, active = false, index }">
+    <slot :name="((item.slot || 'item') as keyof ContextMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
       <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof ContextMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
         <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, loading: true })" />
         <UIcon v-else-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, active })" />

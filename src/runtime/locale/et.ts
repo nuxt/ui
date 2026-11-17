@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Sulge'
     },
+    breadcrumb: {
+      label: 'navigeerimisrada'
+    },
     calendar: {
+      label: 'Sündmuse kuupäev',
+      monthPicker: 'Kuu valik',
       nextMonth: 'Järgmine kuu',
       nextYear: 'Järgmine aasta',
       prevMonth: 'Eelmine kuu',
-      prevYear: 'Eelmine aasta'
+      prevYear: 'Eelmine aasta',
+      yearPicker: 'Aasta valik'
     },
     carousel: {
-      dots: 'Valige kuvatav slaid',
+      dots: 'Vali kuvatav slaid',
       goto: 'Mine slaidile {slide}',
-      next: 'Järg',
-      prev: 'Eel'
+      next: 'Järgmine',
+      prev: 'Eelmine',
+      roledescription: 'karussell',
+      slide: 'slaid'
+    },
+    chatAttachment: {
+      uploading: 'Üleslaadimine',
+      error: 'Üleslaadimine ebaõnnestus'
+    },
+    chatMessages: {
+      autoScroll: 'Keri alla'
     },
     chatPrompt: {
-      placeholder: 'Siia kirjutage oma sõnum…'
+      placeholder: 'Kirjuta oma sõnum siia…',
+      queue: 'Järjekorras sõnumid',
+      sendNow: 'Saada kohe',
+      edit: 'Muuda',
+      remove: 'Eemalda'
     },
     chatPromptSubmit: {
-      label: 'Saada'
+      label: 'Saada',
+      reload: 'Proovi uuesti',
+      stop: 'Peata genereerimine'
     },
     chatReasoning: {
       thinking: 'Mõtleb…',
@@ -51,7 +72,8 @@ export default defineLocale<Messages>({
       close: 'Sulge',
       noData: 'Pole andmeid',
       noMatch: 'Pole vastavaid andmeid',
-      placeholder: 'Sisesta käsk või otsi…'
+      placeholder: 'Sisesta käsk või otsi…',
+      results: 'Tulemused'
     },
     contentSearch: {
       links: 'Lingid',
@@ -95,14 +117,37 @@ export default defineLocale<Messages>({
       close: 'Sulge menüü',
       open: 'Ava menüü'
     },
+    inputDate: {
+      day: 'päev',
+      dayPeriod: 'AM/PM',
+      era: 'ajastu',
+      hour: 'tund',
+      minute: 'minut',
+      month: 'kuu',
+      second: 'sekund',
+      timeZoneName: 'ajavöönd',
+      year: 'aasta'
+    },
     inputMenu: {
       create: 'Loo "{label}"',
       noData: 'Pole andmeid',
-      noMatch: 'Pole vastavaid andmeid'
+      noMatch: 'Pole vastavaid andmeid',
+      trigger: 'Kuva valikud'
     },
     inputNumber: {
       decrement: 'Vähenda',
-      increment: 'Suurenda'
+      increment: 'Suurenda',
+      roledescription: 'numbriväli'
+    },
+    inputRating: {
+      rate: 'Hinnang {value} {length}-st'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'tund',
+      minute: 'minut',
+      second: 'sekund',
+      timeZoneName: 'ajavöönd'
     },
     listbox: {
       noData: 'Pole andmeid',
@@ -112,17 +157,29 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Sulge'
     },
+    pagination: {
+      first: 'Esimene lehekülg',
+      last: 'Viimane lehekülg',
+      next: 'Järgmine lehekülg',
+      page: 'Lehekülg {page}',
+      prev: 'Eelmine lehekülg'
+    },
+    pinInput: {
+      input: 'PIN-kood, märk {index} {length}-st'
+    },
     pricingTable: {
-      caption: 'Hinna plaanide võrdlus'
+      caption: 'Hinnaplaanide võrdlus'
     },
     prose: {
       codeCollapse: {
         closeText: 'Ahenda',
+        label: '{text} {name}',
         name: 'kood',
         openText: 'Laienda'
       },
       collapsible: {
         closeText: 'Peida',
+        label: '{text} {name}',
         name: 'omadused',
         openText: 'Näita'
       },
@@ -144,14 +201,30 @@ export default defineLocale<Messages>({
       noMatch: 'Pole vastavaid andmeid',
       search: 'Otsi…'
     },
+    skeleton: {
+      label: 'laadimine'
+    },
     slideover: {
       close: 'Sulge'
+    },
+    slider: {
+      max: 'Maksimum',
+      min: 'Miinimum',
+      thumb: 'Liugur',
+      value: 'Väärtus {index} {total}-st'
+    },
+    stepper: {
+      label: 'edenemine'
     },
     table: {
       noData: 'Pole andmeid'
     },
     toast: {
       close: 'Sulge'
+    },
+    toaster: {
+      label: 'Teavitus',
+      viewport: 'Teavitused ({hotkey})'
     }
   }
 })

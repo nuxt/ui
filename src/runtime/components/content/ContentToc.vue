@@ -11,7 +11,7 @@ type ContentToc = ComponentConfig<typeof theme, AppConfig, 'contentToc'>
 
 export type ContentTocLink = TocLink & {
   class?: any
-  ui?: Pick<ContentToc['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkText'>
+  ui?: Partial<Pick<ContentToc['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkText'>>
 }
 
 export interface ContentTocProps<T extends ContentTocLink = ContentTocLink> extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open'> {
@@ -74,7 +74,7 @@ export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
 <script setup lang="ts" generic="T extends ContentTocLink">
 import { computed, onUnmounted, useTemplateRef, watch, nextTick } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { createReusableTemplate } from '@vueuse/core'
 import { useRouter, useAppConfig, useNuxtApp } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
@@ -95,7 +95,7 @@ const slots = defineSlots<ContentTocSlots<T>>()
 
 const props = useComponentProps<ContentTocProps<T>>('contentToc', _props)
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'open', 'defaultOpen'), emits)
+const rootProps = useForwardProps(props, ['as', 'open', 'defaultOpen'], emits)
 
 const { t } = useLocale()
 const router = useRouter()

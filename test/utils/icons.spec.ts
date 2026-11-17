@@ -43,18 +43,14 @@ describe('getClientBundleIcons', () => {
     expect(names).toHaveLength(new Set(Object.values(defaultIcons)).size)
   })
 
-  it('keeps overrides that stay in a shipped (trusted) collection', () => {
+  it('keeps overrides that stay in a shipped collection', () => {
     const names = getClientBundleIcons({ loading: 'i-lucide-loader', close: 'lucide:x' })
 
     expect(names).toContain('lucide:loader')
     expect(names).toContain('lucide:x')
   })
 
-  it('skips overrides from collections Nuxt UI does not ship defaults in', () => {
-    // `heroicons` is single-word and would convert safely, but `svg-spinners` would
-    // mis-convert to `svg:...`. Without `@nuxt/icon`'s collection list we can't tell them
-    // apart, so we only trust shipped collections (`lucide`) and leave everything else to
-    // runtime loading rather than emit a wrong name `@nuxt/icon` would drop and warn about.
+  it('splits overrides from any collection `@nuxt/icon` knows', () => {
     const names = getClientBundleIcons({
       check: 'i-heroicons-check',
       loading: 'i-svg-spinners-90-ring',
@@ -62,7 +58,11 @@ describe('getClientBundleIcons', () => {
       close: 'material-symbols:x'
     })
 
-    expect(names).toEqual([])
+    expect(names).toEqual(['heroicons:check', 'svg-spinners:90-ring', 'material-symbols:menu', 'material-symbols:x'])
+  })
+
+  it('skips dashed overrides from an unknown collection', () => {
+    expect(getClientBundleIcons({ logo: 'i-acme-icons-logo' })).toEqual([])
   })
 
   it('ignores values that are not icon names', () => {

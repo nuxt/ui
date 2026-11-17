@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Закрити'
     },
+    breadcrumb: {
+      label: 'навігаційний ланцюжок'
+    },
     calendar: {
+      label: 'Дата події',
+      monthPicker: 'Вибір місяця',
       nextMonth: 'Наступний місяць',
       nextYear: 'Наступний рік',
       prevMonth: 'Попередній місяць',
-      prevYear: 'Попередній рік'
+      prevYear: 'Попередній рік',
+      yearPicker: 'Вибір року'
     },
     carousel: {
       dots: 'Виберіть слайд для відображення',
-      goto: 'Перейти до {slide}',
+      goto: 'Перейти до слайда {slide}',
       next: 'Далі',
-      prev: 'Назад'
+      prev: 'Назад',
+      roledescription: 'карусель',
+      slide: 'слайд'
+    },
+    chatAttachment: {
+      uploading: 'Завантаження',
+      error: 'Не вдалося завантажити'
+    },
+    chatMessages: {
+      autoScroll: 'Прокрутити вниз'
     },
     chatPrompt: {
-      placeholder: 'Введіть ваше повідомлення тут…'
+      placeholder: 'Введіть ваше повідомлення тут…',
+      queue: 'Повідомлення в черзі',
+      sendNow: 'Надіслати зараз',
+      edit: 'Редагувати',
+      remove: 'Видалити'
     },
     chatPromptSubmit: {
-      label: 'Відправити'
+      label: 'Відправити',
+      reload: 'Повторити',
+      stop: 'Зупинити генерацію'
     },
     chatReasoning: {
       thinking: 'Думає…',
@@ -51,7 +72,8 @@ export default defineLocale<Messages>({
       close: 'Закрити',
       noData: 'Немає даних',
       noMatch: 'Збігів не знайдено',
-      placeholder: 'Введіть команду або шукайте…'
+      placeholder: 'Введіть команду або шукайте…',
+      results: 'Результати'
     },
     contentSearch: {
       links: 'Посилання',
@@ -95,14 +117,37 @@ export default defineLocale<Messages>({
       close: 'Закрити меню',
       open: 'Відкрити меню'
     },
+    inputDate: {
+      day: 'день',
+      dayPeriod: 'AM/PM',
+      era: 'ера',
+      hour: 'година',
+      minute: 'хвилина',
+      month: 'місяць',
+      second: 'секунда',
+      timeZoneName: 'часовий пояс',
+      year: 'рік'
+    },
     inputMenu: {
       create: 'Створити "{label}"',
       noData: 'Немає даних',
-      noMatch: 'Збігів не знайдено'
+      noMatch: 'Збігів не знайдено',
+      trigger: 'Показати варіанти'
     },
     inputNumber: {
       decrement: 'Зменшити',
-      increment: 'Збільшити'
+      increment: 'Збільшити',
+      roledescription: 'числове поле'
+    },
+    inputRating: {
+      rate: 'Оцінити на {value} з {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'година',
+      minute: 'хвилина',
+      second: 'секунда',
+      timeZoneName: 'часовий пояс'
     },
     listbox: {
       noData: 'Немає даних',
@@ -112,17 +157,29 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Закрити'
     },
+    pagination: {
+      first: 'Перша сторінка',
+      last: 'Остання сторінка',
+      next: 'Наступна сторінка',
+      page: 'Сторінка {page}',
+      prev: 'Попередня сторінка'
+    },
+    pinInput: {
+      input: 'PIN-код, символ {index} з {length}'
+    },
     pricingTable: {
-      caption: 'Порівняння планів цін'
+      caption: 'Порівняння тарифних планів'
     },
     prose: {
       codeCollapse: {
         closeText: 'Згорнути',
+        label: '{text} {name}',
         name: 'код',
         openText: 'Розгорнути'
       },
       collapsible: {
         closeText: 'Сховати',
+        label: '{text} {name}',
         name: 'властивості',
         openText: 'Показати'
       },
@@ -136,7 +193,7 @@ export default defineLocale<Messages>({
     },
     sidebar: {
       close: 'Закрити',
-      toggle: 'Перемикнути'
+      toggle: 'Перемкнути'
     },
     selectMenu: {
       create: 'Створити "{label}"',
@@ -144,14 +201,30 @@ export default defineLocale<Messages>({
       noMatch: 'Збігів не знайдено',
       search: 'Пошук…'
     },
+    skeleton: {
+      label: 'завантаження'
+    },
     slideover: {
       close: 'Закрити'
+    },
+    slider: {
+      max: 'Максимум',
+      min: 'Мінімум',
+      thumb: 'Повзунок',
+      value: 'Значення {index} з {total}'
+    },
+    stepper: {
+      label: 'прогрес'
     },
     table: {
       noData: 'Немає даних'
     },
     toast: {
       close: 'Закрити'
+    },
+    toaster: {
+      label: 'Сповіщення',
+      viewport: 'Сповіщення ({hotkey})'
     }
   }
 })

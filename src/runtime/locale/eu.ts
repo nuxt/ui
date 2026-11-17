@@ -16,28 +16,49 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Itxi'
     },
+    breadcrumb: {
+      label: 'nabigazio-bidea'
+    },
     calendar: {
+      label: 'Gertaeraren data',
+      monthPicker: 'Hilabete-hautatzailea',
       nextMonth: 'Hurrengo hilabetea',
       nextYear: 'Hurrengo urtea',
-      prevMonth: 'Aurretiko hilabetea',
-      prevYear: 'Aurretiko urtea'
+      prevMonth: 'Aurreko hilabetea',
+      prevYear: 'Aurreko urtea',
+      yearPicker: 'Urte-hautatzailea'
     },
     carousel: {
       dots: 'Erakutsi beharreko diapositiba aukeratu',
-      goto: 'Joan diapositibara {slide}',
+      goto: 'Joan {slide}. diapositibara',
       next: 'Hurrengoa',
-      prev: 'Aurretikoa'
+      prev: 'Aurrekoa',
+      roledescription: 'karrusela',
+      slide: 'diapositiba'
+    },
+    chatAttachment: {
+      uploading: 'Igotzen',
+      error: 'Ezin izan da igo'
+    },
+    chatMessages: {
+      autoScroll: 'Korritu behera'
     },
     chatPrompt: {
-      placeholder: 'Idatzi zure mezua hemen…'
+      placeholder: 'Idatzi zure mezua hemen…',
+      queue: 'Ilaran dauden mezuak',
+      sendNow: 'Bidali orain',
+      edit: 'Editatu',
+      remove: 'Kendu'
     },
     chatPromptSubmit: {
-      label: 'Bidali'
+      label: 'Bidali',
+      reload: 'Saiatu berriro',
+      stop: 'Gelditu sortzea'
     },
     chatReasoning: {
       thinking: 'Pentsatzen…',
       thought: 'Pentsatu du',
-      thoughtFor: '{duration} pentsatzen'
+      thoughtFor: '{duration} pentsatu du'
     },
     colorMode: {
       dark: 'Iluna',
@@ -51,7 +72,8 @@ export default defineLocale<Messages>({
       close: 'Itxi',
       noData: 'Daturik gabe',
       noMatch: 'Ez da datu bat ere aurkitu',
-      placeholder: 'Idatzi komando bat edo bilatu…'
+      placeholder: 'Idatzi komando bat edo bilatu…',
+      results: 'Emaitzak'
     },
     contentSearch: {
       links: 'Estekak',
@@ -75,7 +97,7 @@ export default defineLocale<Messages>({
       label: 'Bilatu…'
     },
     dashboardSidebarCollapse: {
-      collapse: 'Alboko barra itxi',
+      collapse: 'Alboko barra tolestu',
       expand: 'Alboko barra zabaldu'
     },
     dashboardSidebarToggle: {
@@ -95,14 +117,37 @@ export default defineLocale<Messages>({
       close: 'Menua itxi',
       open: 'Menua zabaldu'
     },
+    inputDate: {
+      day: 'eguna',
+      dayPeriod: 'AM/PM',
+      era: 'aroa',
+      hour: 'ordua',
+      minute: 'minutua',
+      month: 'hilabetea',
+      second: 'segundoa',
+      timeZoneName: 'ordu-zona',
+      year: 'urtea'
+    },
     inputMenu: {
       create: 'Sortu {label}',
       noData: 'Daturik gabe',
-      noMatch: 'Ez da datu bat ere aurkitu'
+      noMatch: 'Ez da datu bat ere aurkitu',
+      trigger: 'Erakutsi aukerak'
     },
     inputNumber: {
       decrement: 'Murriztu',
-      increment: 'Handitu'
+      increment: 'Handitu',
+      roledescription: 'zenbaki-eremua'
+    },
+    inputRating: {
+      rate: 'Baloratu {length}(e)tik {value}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'ordua',
+      minute: 'minutua',
+      second: 'segundoa',
+      timeZoneName: 'ordu-zona'
     },
     listbox: {
       noData: 'Daturik gabe',
@@ -112,25 +157,37 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Itxi'
     },
+    pagination: {
+      first: 'Lehen orria',
+      last: 'Azken orria',
+      next: 'Hurrengo orria',
+      page: '{page}. orria',
+      prev: 'Aurreko orria'
+    },
+    pinInput: {
+      input: 'PIN kodea, {length}(e)tik {index}. karakterea'
+    },
     pricingTable: {
-      caption: 'Prezio-plana alderatzea'
+      caption: 'Prezio-planen alderaketa'
     },
     prose: {
       codeCollapse: {
-        closeText: 'Murriztu',
+        closeText: 'Tolestu',
+        label: '{text} {name}',
         name: 'kodea',
         openText: 'Zabaldu'
       },
       collapsible: {
         closeText: 'Ezkutatu',
+        label: '{text} {name}',
         name: 'propietateak',
         openText: 'Erakutsi'
       },
       pre: {
-        copy: 'Kopiatu kodea clipboard-era'
+        copy: 'Kopiatu kodea arbelera'
       },
       prompt: {
-        copy: 'Kopiatu prompt',
+        copy: 'Kopiatu prompta',
         openIn: '{name}(e)n ireki'
       }
     },
@@ -144,14 +201,30 @@ export default defineLocale<Messages>({
       noMatch: 'Ez da datu bat ere aurkitu',
       search: 'Bilatu…'
     },
+    skeleton: {
+      label: 'kargatzen'
+    },
     slideover: {
       close: 'Itxi'
+    },
+    slider: {
+      max: 'Maximoa',
+      min: 'Minimoa',
+      thumb: 'Graduatzailea',
+      value: '{total}(e)tik {index}. balioa'
+    },
+    stepper: {
+      label: 'aurrerapena'
     },
     table: {
       noData: 'Daturik gabe'
     },
     toast: {
       close: 'Itxi'
+    },
+    toaster: {
+      label: 'Jakinarazpena',
+      viewport: 'Jakinarazpenak ({hotkey})'
     }
   }
 })

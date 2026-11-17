@@ -8,6 +8,7 @@ describe('PageSection', () => {
   renderEach(PageSection, [
     // Props
     ['with as', { props: { as: 'div' } }],
+    ['with as object', { props: { title: 'Title', as: { root: 'div', title: 'h3' } } }],
     ['with headline', { props: { headline: 'Headline' } }],
     ['with icon', { props: { icon: 'i-lucide-house' } }],
     ['with title', { props: { title: 'Title' } }],

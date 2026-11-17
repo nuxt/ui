@@ -2,6 +2,7 @@ import { toRaw } from 'vue'
 import type { StandardSchemaV1 } from '@standard-schema/spec'
 import type { Struct } from 'superstruct'
 import type { FormSchema, ValidateReturnSchema } from '../types/form'
+import { get, set } from './index'
 
 export function isSuperStructSchema(schema: any): schema is Struct<any, any> {
   return (
@@ -79,14 +80,8 @@ export function getAtPath<T extends object>(
   path?: string
 ) {
   if (!path) return data
-  const value = path
-    .split('.')
-    .reduce(
-      (value, key) => (value as any)?.[key],
-      data as any
-    )
 
-  return value
+  return get(data, path)
 }
 
 export function setAtPath<T extends object>(
@@ -97,27 +92,7 @@ export function setAtPath<T extends object>(
   if (!path) return Object.assign(data, value)
   if (!data) return data
 
-  const keys = path.split('.')
-  let current = data as Record<string, any>
-
-  // Navigate to the parent of the target property
-  for (let i = 0; i < keys.length - 1; i++) {
-    const key = keys[i]!
-    if (current[key] === undefined || current[key] === null) {
-      // If the next key is a number, initialize as array
-      if (i + 1 < keys.length && !Number.isNaN(Number(keys[i + 1]))) {
-        current[key] = []
-      } else {
-        current[key] = {}
-      }
-    }
-
-    current = current[key]
-  }
-
-  // Set the final value
-  const lastKey = keys[keys.length - 1]!
-  current[lastKey] = value
+  set(data, path, value)
 
   return data
 }

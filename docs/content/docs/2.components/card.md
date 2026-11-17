@@ -68,6 +68,10 @@ slots:
 :placeholder{class="h-32"}
 ::
 
+::tip
+The title is rendered as a `div` by default. Use the `as` prop with an object to render it as a heading, for example `:as="{ title: 'h3' }"`{lang="ts-type"}. You can also set the root element this way: `:as="{ root: 'section', title: 'h3' }"`{lang="ts-type"}.
+::
+
 ### Description :badge{label="4.7+" class="align-text-top"}
 
 Use the `description` prop to set the description of the Card's header.

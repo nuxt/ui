@@ -9,30 +9,51 @@ export default defineLocale<Messages>({
       close: 'Fechar'
     },
     authForm: {
-      hidePassword: 'Ocultar senha',
-      showPassword: 'Mostrar senha',
+      hidePassword: 'Ocultar palavra-passe',
+      showPassword: 'Mostrar palavra-passe',
       submit: 'Continuar'
     },
     banner: {
       close: 'Fechar'
     },
+    breadcrumb: {
+      label: 'trilho de navegação'
+    },
     calendar: {
+      label: 'Data do evento',
+      monthPicker: 'Seletor de mês',
       nextMonth: 'Próximo mês',
       nextYear: 'Próximo ano',
       prevMonth: 'Mês anterior',
-      prevYear: 'Ano anterior'
+      prevYear: 'Ano anterior',
+      yearPicker: 'Seletor de ano'
     },
     carousel: {
-      dots: 'Escolher slide para exibir',
+      dots: 'Escolher diapositivo a mostrar',
       goto: 'Ir ao diapositivo {slide}',
       next: 'Próximo',
-      prev: 'Anterior'
+      prev: 'Anterior',
+      roledescription: 'carrossel',
+      slide: 'diapositivo'
+    },
+    chatAttachment: {
+      uploading: 'A carregar',
+      error: 'Falha ao carregar'
+    },
+    chatMessages: {
+      autoScroll: 'Deslocar para baixo'
     },
     chatPrompt: {
-      placeholder: 'Escreva a sua mensagem aqui…'
+      placeholder: 'Escreva a sua mensagem aqui…',
+      queue: 'Mensagens em fila',
+      sendNow: 'Enviar agora',
+      edit: 'Editar',
+      remove: 'Remover'
     },
     chatPromptSubmit: {
-      label: 'Enviar'
+      label: 'Enviar',
+      reload: 'Tentar novamente',
+      stop: 'Parar geração'
     },
     chatReasoning: {
       thinking: 'A pensar…',
@@ -51,7 +72,8 @@ export default defineLocale<Messages>({
       close: 'Fechar',
       noData: 'Sem dados',
       noMatch: 'Nenhum dado correspondente',
-      placeholder: 'Digite um comando ou pesquise…'
+      placeholder: 'Escreva um comando ou pesquise…',
+      results: 'Resultados'
     },
     contentSearch: {
       links: 'Links',
@@ -95,14 +117,37 @@ export default defineLocale<Messages>({
       close: 'Fechar menu',
       open: 'Abrir menu'
     },
+    inputDate: {
+      day: 'dia',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'hora',
+      minute: 'minuto',
+      month: 'mês',
+      second: 'segundo',
+      timeZoneName: 'fuso horário',
+      year: 'ano'
+    },
     inputMenu: {
       create: 'Criar "{label}"',
       noData: 'Sem dados',
-      noMatch: 'Nenhum dado correspondente'
+      noMatch: 'Nenhum dado correspondente',
+      trigger: 'Mostrar opções'
     },
     inputNumber: {
       decrement: 'Decrementar',
-      increment: 'Incrementar'
+      increment: 'Incrementar',
+      roledescription: 'campo numérico'
+    },
+    inputRating: {
+      rate: 'Avaliar com {value} de {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'hora',
+      minute: 'minuto',
+      second: 'segundo',
+      timeZoneName: 'fuso horário'
     },
     listbox: {
       noData: 'Sem dados',
@@ -112,17 +157,29 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Fechar'
     },
+    pagination: {
+      first: 'Primeira página',
+      last: 'Última página',
+      next: 'Próxima página',
+      page: 'Página {page}',
+      prev: 'Página anterior'
+    },
+    pinInput: {
+      input: 'código PIN, carácter {index} de {length}'
+    },
     pricingTable: {
       caption: 'Comparação de planos de preços'
     },
     prose: {
       codeCollapse: {
         closeText: 'Recolher',
+        label: '{text} {name}',
         name: 'código',
         openText: 'Expandir'
       },
       collapsible: {
         closeText: 'Ocultar',
+        label: '{text} {name}',
         name: 'propriedades',
         openText: 'Mostrar'
       },
@@ -144,14 +201,30 @@ export default defineLocale<Messages>({
       noMatch: 'Nenhum dado correspondente',
       search: 'Pesquisar…'
     },
+    skeleton: {
+      label: 'a carregar'
+    },
     slideover: {
       close: 'Fechar'
+    },
+    slider: {
+      max: 'Máximo',
+      min: 'Mínimo',
+      thumb: 'Cursor',
+      value: 'Valor {index} de {total}'
+    },
+    stepper: {
+      label: 'progresso'
     },
     table: {
       noData: 'Sem dados'
     },
     toast: {
       close: 'Fechar'
+    },
+    toaster: {
+      label: 'Notificação',
+      viewport: 'Notificações ({hotkey})'
     }
   }
 })

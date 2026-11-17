@@ -1,3 +1,5 @@
+import { defineEventHandler } from 'nuxt/server'
+
 type Country = {
   name: string
   code: string
@@ -200,4 +202,4 @@ const countries: Country[] = [
   { name: 'Zimbabwe', code: 'ZW', emoji: '🇿🇼' }
 ]
 
-export default eventHandler(async () => countries)
+export default defineEventHandler(async () => countries)

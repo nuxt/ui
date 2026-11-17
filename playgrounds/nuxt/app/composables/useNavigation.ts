@@ -13,6 +13,8 @@ const components = [
   'calendar',
   'card',
   'carousel',
+  'chart',
+  'chat-attachment',
   'chat-message',
   'chat-prompt',
   'chat-reasoning',
@@ -91,6 +93,8 @@ const components = [
   'theme',
   'timeline',
   'toast',
+  'toggle',
+  'toggle-group',
   'tooltip',
   'tree',
   'user'
@@ -99,7 +103,7 @@ const components = [
 export const useNavigation = () => {
   const appConfig = useAppConfig()
 
-  const items = [{ label: 'Home', icon: 'i-lucide-home', to: '/' }, { label: 'Chat', icon: 'i-lucide-message-circle', to: '/chat' }]
+  const items = [{ label: 'Home', icon: 'i-lucide-home', to: '/' }, { label: 'Chat', icon: 'i-lucide-message-circle', to: '/chat' }, { label: 'Typography', icon: 'i-lucide-type', to: '/typography' }]
   const groups = computed(() => [
     { id: 'links', items },
     { id: 'components', label: 'Components', items: components },

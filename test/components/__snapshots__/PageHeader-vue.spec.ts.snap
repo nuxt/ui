@@ -13,6 +13,19 @@ exports[`PageHeader > renders with as correctly 1`] = `
 </section>"
 `;
 
+exports[`PageHeader > renders with as object correctly 1`] = `
+"<section data-slot="root" class="relative border-b border-default py-8">
+  <!--v-if-->
+  <div data-slot="container" class="">
+    <div data-slot="wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <h2 data-slot="title" class="text-3xl sm:text-4xl text-pretty font-bold text-highlighted">Title</h2>
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</section>"
+`;
+
 exports[`PageHeader > renders with class correctly 1`] = `
 "<div data-slot="root" class="relative border-b border-default py-12">
   <!--v-if-->

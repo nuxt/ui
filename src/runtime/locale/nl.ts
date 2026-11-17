@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Sluiten'
     },
+    breadcrumb: {
+      label: 'kruimelpad'
+    },
     calendar: {
+      label: 'Evenementdatum',
+      monthPicker: 'Maandkiezer',
       nextMonth: 'Volgende maand',
       nextYear: 'Volgend jaar',
       prevMonth: 'Vorige maand',
-      prevYear: 'Vorig jaar'
+      prevYear: 'Vorig jaar',
+      yearPicker: 'Jaarkiezer'
     },
     carousel: {
       dots: 'Kies dia om weer te geven',
       goto: 'Ga naar dia {slide}',
       next: 'Volgende',
-      prev: 'Vorige'
+      prev: 'Vorige',
+      roledescription: 'carrousel',
+      slide: 'dia'
+    },
+    chatAttachment: {
+      uploading: 'Uploaden',
+      error: 'Uploaden mislukt'
+    },
+    chatMessages: {
+      autoScroll: 'Naar beneden scrollen'
     },
     chatPrompt: {
-      placeholder: 'Schrijf hier je bericht…'
+      placeholder: 'Schrijf hier je bericht…',
+      queue: 'Berichten in de wachtrij',
+      sendNow: 'Nu verzenden',
+      edit: 'Bewerken',
+      remove: 'Verwijderen'
     },
     chatPromptSubmit: {
-      label: 'Versturen'
+      label: 'Versturen',
+      reload: 'Opnieuw proberen',
+      stop: 'Genereren stoppen'
     },
     chatReasoning: {
       thinking: 'Aan het denken…',
@@ -51,7 +72,8 @@ export default defineLocale<Messages>({
       close: 'Sluiten',
       noData: 'Geen gegevens',
       noMatch: 'Geen overeenkomende gegevens',
-      placeholder: 'Typ een commando of zoek…'
+      placeholder: 'Typ een commando of zoek…',
+      results: 'Resultaten'
     },
     contentSearch: {
       links: 'Links',
@@ -95,14 +117,37 @@ export default defineLocale<Messages>({
       close: 'Menu sluiten',
       open: 'Menu openen'
     },
+    inputDate: {
+      day: 'dag',
+      dayPeriod: 'AM/PM',
+      era: 'tijdperk',
+      hour: 'uur',
+      minute: 'minuut',
+      month: 'maand',
+      second: 'seconde',
+      timeZoneName: 'tijdzone',
+      year: 'jaar'
+    },
     inputMenu: {
       create: '"{label}" creëren',
       noData: 'Geen gegevens',
-      noMatch: 'Geen overeenkomende gegevens'
+      noMatch: 'Geen overeenkomende gegevens',
+      trigger: 'Opties tonen'
     },
     inputNumber: {
       decrement: 'Verlagen',
-      increment: 'Verhogen'
+      increment: 'Verhogen',
+      roledescription: 'getalveld'
+    },
+    inputRating: {
+      rate: 'Beoordeel met {value} van {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'uur',
+      minute: 'minuut',
+      second: 'seconde',
+      timeZoneName: 'tijdzone'
     },
     listbox: {
       noData: 'Geen gegevens',
@@ -112,19 +157,31 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Sluiten'
     },
+    pagination: {
+      first: 'Eerste pagina',
+      last: 'Laatste pagina',
+      next: 'Volgende pagina',
+      page: 'Pagina {page}',
+      prev: 'Vorige pagina'
+    },
+    pinInput: {
+      input: 'pincode, teken {index} van {length}'
+    },
     pricingTable: {
       caption: 'Prijsplanvergelijking'
     },
     prose: {
       codeCollapse: {
-        closeText: 'Invouwen',
-        name: 'code',
-        openText: 'Uitvouwen'
+        closeText: 'invouwen',
+        label: '{name} {text}',
+        name: 'Code',
+        openText: 'uitvouwen'
       },
       collapsible: {
-        closeText: 'Verbergen',
-        name: 'eigenschappen',
-        openText: 'Tonen'
+        closeText: 'verbergen',
+        label: '{name} {text}',
+        name: 'Eigenschappen',
+        openText: 'tonen'
       },
       pre: {
         copy: 'Code naar klembord kopiëren'
@@ -144,14 +201,30 @@ export default defineLocale<Messages>({
       noMatch: 'Geen overeenkomende gegevens',
       search: 'Zoeken…'
     },
+    skeleton: {
+      label: 'laden'
+    },
     slideover: {
       close: 'Sluiten'
+    },
+    slider: {
+      max: 'Maximum',
+      min: 'Minimum',
+      thumb: 'Schuifregelaar',
+      value: 'Waarde {index} van {total}'
+    },
+    stepper: {
+      label: 'voortgang'
     },
     table: {
       noData: 'Geen gegevens'
     },
     toast: {
       close: 'Sluiten'
+    },
+    toaster: {
+      label: 'Melding',
+      viewport: 'Meldingen ({hotkey})'
     }
   }
 })

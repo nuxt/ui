@@ -53,7 +53,13 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * - next to the close button when orientation is `horizontal`
    * `{ size: 'xs' }`{lang="ts-type"}
    */
-  actions?: ButtonProps[]
+  actions?: (ButtonProps & {
+    /**
+     * Whether the toast closes when the action is clicked.
+     * @defaultValue true
+     */
+    closeOnClick?: boolean
+  })[]
   /**
    * The time in milliseconds before the toast automatically closes. Overrides the global `toaster.duration`.
    *
@@ -86,7 +92,6 @@ export interface ToastSlots {
 import { ref, computed, onMounted, useTemplateRef } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
@@ -109,7 +114,7 @@ const props = useComponentProps('toast', _props)
 const { t } = useLocale()
 const appConfig = useAppConfig() as Toast['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
+const rootProps = useForwardProps(props, ['as', 'defaultOpen', 'open', 'duration', 'type'], emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.toast || {}) })({
@@ -171,7 +176,14 @@ defineExpose({
 
       <div v-if="props.orientation === 'vertical' && (props.actions?.length || !!slots.actions)" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
         <slot name="actions">
-          <ToastAction v-for="(action, index) in props.actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
+          <ToastAction
+            v-for="({ closeOnClick, ...action }, index) in props.actions"
+            :key="index"
+            :alt-text="action.label || 'Action'"
+            :close-on-click="closeOnClick"
+            as-child
+            @click.stop
+          >
             <UButton size="xs" :color="props.color" v-bind="action" />
           </ToastAction>
         </slot>
@@ -181,7 +193,14 @@ defineExpose({
     <div v-if="(props.orientation === 'horizontal' && (props.actions?.length || !!slots.actions)) || props.close" data-slot="actions" :class="ui.actions({ class: props.ui?.actions, orientation: 'horizontal' })">
       <template v-if="props.orientation === 'horizontal' && (props.actions?.length || !!slots.actions)">
         <slot name="actions">
-          <ToastAction v-for="(action, index) in props.actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
+          <ToastAction
+            v-for="({ closeOnClick, ...action }, index) in props.actions"
+            :key="index"
+            :alt-text="action.label || 'Action'"
+            :close-on-click="closeOnClick"
+            as-child
+            @click.stop
+          >
             <UButton size="xs" :color="props.color" v-bind="action" />
           </ToastAction>
         </slot>

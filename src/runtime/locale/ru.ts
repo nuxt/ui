@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Закрыть'
     },
+    breadcrumb: {
+      label: 'навигационная цепочка'
+    },
     calendar: {
+      label: 'Дата события',
+      monthPicker: 'Выбор месяца',
       nextMonth: 'Следующий месяц',
       nextYear: 'Следующий год',
       prevMonth: 'Предыдущий месяц',
-      prevYear: 'Предыдущий год'
+      prevYear: 'Предыдущий год',
+      yearPicker: 'Выбор года'
     },
     carousel: {
       dots: 'Выберите слайд для отображения',
-      goto: 'Перейти к {slide}',
+      goto: 'Перейти к слайду {slide}',
       next: 'Далее',
-      prev: 'Назад'
+      prev: 'Назад',
+      roledescription: 'карусель',
+      slide: 'слайд'
+    },
+    chatAttachment: {
+      uploading: 'Загрузка',
+      error: 'Не удалось загрузить'
+    },
+    chatMessages: {
+      autoScroll: 'Прокрутить вниз'
     },
     chatPrompt: {
-      placeholder: 'Введите ваше сообщение здесь…'
+      placeholder: 'Введите ваше сообщение здесь…',
+      queue: 'Сообщения в очереди',
+      sendNow: 'Отправить сейчас',
+      edit: 'Редактировать',
+      remove: 'Удалить'
     },
     chatPromptSubmit: {
-      label: 'Отправить'
+      label: 'Отправить',
+      reload: 'Повторить',
+      stop: 'Остановить генерацию'
     },
     chatReasoning: {
       thinking: 'Размышляет…',
@@ -51,7 +72,8 @@ export default defineLocale<Messages>({
       close: 'Закрыть',
       noData: 'Нет данных',
       noMatch: 'Совпадений не найдено',
-      placeholder: 'Введите команду или выполните поиск…'
+      placeholder: 'Введите команду или выполните поиск…',
+      results: 'Результаты'
     },
     contentSearch: {
       links: 'Ссылки',
@@ -95,14 +117,37 @@ export default defineLocale<Messages>({
       close: 'Закрыть меню',
       open: 'Открыть меню'
     },
+    inputDate: {
+      day: 'день',
+      dayPeriod: 'AM/PM',
+      era: 'эра',
+      hour: 'час',
+      minute: 'минута',
+      month: 'месяц',
+      second: 'секунда',
+      timeZoneName: 'часовой пояс',
+      year: 'год'
+    },
     inputMenu: {
       create: 'Создать "{label}"',
       noData: 'Нет данных',
-      noMatch: 'Совпадений не найдено'
+      noMatch: 'Совпадений не найдено',
+      trigger: 'Показать варианты'
     },
     inputNumber: {
       decrement: 'Уменьшить',
-      increment: 'Увеличить'
+      increment: 'Увеличить',
+      roledescription: 'числовое поле'
+    },
+    inputRating: {
+      rate: 'Оценить на {value} из {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'час',
+      minute: 'минута',
+      second: 'секунда',
+      timeZoneName: 'часовой пояс'
     },
     listbox: {
       noData: 'Нет данных',
@@ -112,17 +157,29 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Закрыть'
     },
+    pagination: {
+      first: 'Первая страница',
+      last: 'Последняя страница',
+      next: 'Следующая страница',
+      page: 'Страница {page}',
+      prev: 'Предыдущая страница'
+    },
+    pinInput: {
+      input: 'PIN-код, символ {index} из {length}'
+    },
     pricingTable: {
-      caption: 'Сравнение ценных планов'
+      caption: 'Сравнение тарифных планов'
     },
     prose: {
       codeCollapse: {
         closeText: 'Свернуть',
+        label: '{text} {name}',
         name: 'код',
         openText: 'Развернуть'
       },
       collapsible: {
         closeText: 'Скрыть',
+        label: '{text} {name}',
         name: 'свойства',
         openText: 'Показать'
       },
@@ -144,14 +201,30 @@ export default defineLocale<Messages>({
       noMatch: 'Совпадений не найдено',
       search: 'Поиск…'
     },
+    skeleton: {
+      label: 'загрузка'
+    },
     slideover: {
       close: 'Закрыть'
+    },
+    slider: {
+      max: 'Максимум',
+      min: 'Минимум',
+      thumb: 'Ползунок',
+      value: 'Значение {index} из {total}'
+    },
+    stepper: {
+      label: 'прогресс'
     },
     table: {
       noData: 'Нет данных'
     },
     toast: {
       close: 'Закрыть'
+    },
+    toaster: {
+      label: 'Уведомление',
+      viewport: 'Уведомления ({hotkey})'
     }
   }
 })

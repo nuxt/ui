@@ -64,8 +64,8 @@ const target = computed(() => props.target || (!!props.to && typeof props.to ===
       <span class="absolute inset-0" aria-hidden="true" />
     </ULink>
 
-    <UIcon v-if="props.icon" :name="props.icon" :class="ui.icon({ class: props.ui?.icon })" />
-    <UIcon v-if="!!props.to && target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.externalIcon({ class: props.ui?.externalIcon })" />
+    <UIcon v-if="props.icon" :name="props.icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+    <UIcon v-if="!!props.to && target === '_blank'" :name="appConfig.ui.icons.external" data-slot="externalIcon" :class="ui.externalIcon({ class: props.ui?.externalIcon })" />
 
     <slot mdc-unwrap="p" />
   </div>

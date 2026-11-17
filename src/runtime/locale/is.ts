@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Loka'
     },
+    breadcrumb: {
+      label: 'brauðmolaslóð'
+    },
     calendar: {
+      label: 'Dagsetning viðburðar',
+      monthPicker: 'Mánaðaval',
       nextMonth: 'Næsti mánuður',
       nextYear: 'Næsta ár',
       prevMonth: 'Fyrri mánuður',
-      prevYear: 'Fyrra ár'
+      prevYear: 'Fyrra ár',
+      yearPicker: 'Ársval'
     },
     carousel: {
       dots: 'Veldu mynd til að sýna',
       goto: 'Fara á mynd {slide}',
       next: 'Næsta',
-      prev: 'Fyrri'
+      prev: 'Fyrri',
+      roledescription: 'hringekja',
+      slide: 'mynd'
+    },
+    chatAttachment: {
+      uploading: 'Hleður upp',
+      error: 'Upphleðsla mistókst'
+    },
+    chatMessages: {
+      autoScroll: 'Skruna niður'
     },
     chatPrompt: {
-      placeholder: 'Skrifaðu skilaboðin þín hér…'
+      placeholder: 'Skrifaðu skilaboðin þín hér…',
+      queue: 'Skilaboð í biðröð',
+      sendNow: 'Senda núna',
+      edit: 'Breyta',
+      remove: 'Fjarlægja'
     },
     chatPromptSubmit: {
-      label: 'Senda fyrirspurn'
+      label: 'Senda fyrirspurn',
+      reload: 'Reyna aftur',
+      stop: 'Stöðva myndun'
     },
     chatReasoning: {
       thinking: 'Hugsar…',
@@ -51,7 +72,8 @@ export default defineLocale<Messages>({
       close: 'Loka',
       noData: 'Engin gögn',
       noMatch: 'Engin gögn fundust',
-      placeholder: 'Sláðu inn skipun eða leitaðu…'
+      placeholder: 'Sláðu inn skipun eða leitaðu…',
+      results: 'Niðurstöður'
     },
     contentSearch: {
       links: 'Tenglar',
@@ -95,14 +117,37 @@ export default defineLocale<Messages>({
       close: 'Loka valmynd',
       open: 'Opna valmynd'
     },
+    inputDate: {
+      day: 'dagur',
+      dayPeriod: 'AM/PM',
+      era: 'tímabil',
+      hour: 'klukkustund',
+      minute: 'mínúta',
+      month: 'mánuður',
+      second: 'sekúnda',
+      timeZoneName: 'tímabelti',
+      year: 'ár'
+    },
     inputMenu: {
       create: 'Búa til "{label}"',
       noData: 'Engin gögn',
-      noMatch: 'Engin gögn fundust'
+      noMatch: 'Engin gögn fundust',
+      trigger: 'Sýna valkosti'
     },
     inputNumber: {
       decrement: 'Minnka',
-      increment: 'Auka'
+      increment: 'Auka',
+      roledescription: 'talnareitur'
+    },
+    inputRating: {
+      rate: 'Gefa einkunnina {value} af {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'klukkustund',
+      minute: 'mínúta',
+      second: 'sekúnda',
+      timeZoneName: 'tímabelti'
     },
     listbox: {
       noData: 'Engin gögn',
@@ -112,18 +157,30 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Loka'
     },
+    pagination: {
+      first: 'Fyrsta síða',
+      last: 'Síðasta síða',
+      next: 'Næsta síða',
+      page: 'Síða {page}',
+      prev: 'Fyrri síða'
+    },
+    pinInput: {
+      input: 'PIN-númer, stafur {index} af {length}'
+    },
     pricingTable: {
       caption: 'Samanburður verðflokka'
     },
     prose: {
       codeCollapse: {
         closeText: 'Fella saman',
-        name: 'kóði',
+        label: '{text} {name}',
+        name: 'kóða',
         openText: 'Stækka'
       },
       collapsible: {
         closeText: 'Fela',
-        name: 'eiginleikar',
+        label: '{text} {name}',
+        name: 'eiginleika',
         openText: 'Sýna'
       },
       pre: {
@@ -144,14 +201,30 @@ export default defineLocale<Messages>({
       noMatch: 'Engin gögn fundust',
       search: 'Leita…'
     },
+    skeleton: {
+      label: 'hleður'
+    },
     slideover: {
       close: 'Loka'
+    },
+    slider: {
+      max: 'Hámark',
+      min: 'Lágmark',
+      thumb: 'Sleði',
+      value: 'Gildi {index} af {total}'
+    },
+    stepper: {
+      label: 'framvinda'
     },
     table: {
       noData: 'Engin gögn'
     },
     toast: {
       close: 'Loka'
+    },
+    toaster: {
+      label: 'Tilkynning',
+      viewport: 'Tilkynningar ({hotkey})'
     }
   }
 })

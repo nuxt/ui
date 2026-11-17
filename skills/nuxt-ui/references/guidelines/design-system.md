@@ -233,7 +233,7 @@ export default defineAppConfig({
 Override theme for a section of the component tree without affecting the rest of the app. Renders no DOM element — uses `provide`/`inject`:
 
 ```vue
-<UTheme :ui="{ button: { slots: { base: 'rounded-full' } } }">
+<UTheme :ui="{ button: { base: 'rounded-full' } }">
   <UButton label="Rounded" />
   <UButton label="Also rounded" />
 </UTheme>
@@ -311,7 +311,7 @@ export default defineNuxtConfig({
 For dynamic components (e.g., `<component :is="...">`), pass an array of component names to guarantee they're included:
 
 ```ts
-componentDetection: ['Modal', 'Dropdown', 'Popover']
+componentDetection: ['Modal', 'DropdownMenu', 'Popover']
 ```
 
 ## CSS `@theme` customization

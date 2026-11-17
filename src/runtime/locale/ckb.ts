@@ -17,23 +17,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'داخستن'
     },
+    breadcrumb: {
+      label: 'ڕێڕەوی پەڕەکان'
+    },
     calendar: {
+      label: 'بەرواری ڕووداو',
+      monthPicker: 'هەڵبژاردنی مانگ',
       nextMonth: 'مانگی داهاتوو',
       nextYear: 'ساڵی داهاتوو',
       prevMonth: 'مانگی پێشوو',
-      prevYear: 'ساڵی پێشوو'
+      prevYear: 'ساڵی پێشوو',
+      yearPicker: 'هەڵبژاردنی ساڵ'
     },
     carousel: {
       dots: 'سلایدێک هەڵبژێرە بۆ پیشاندان',
       goto: 'بڕۆ بۆ سلایدی {slide}',
       next: 'دواتر',
-      prev: 'پێشتر'
+      prev: 'پێشتر',
+      roledescription: 'کارۆسێل',
+      slide: 'سلاید'
+    },
+    chatAttachment: {
+      uploading: 'بارکردن',
+      error: 'بارکردن سەرکەوتوو نەبوو'
+    },
+    chatMessages: {
+      autoScroll: 'بۆ خوارەوە بڕۆ'
     },
     chatPrompt: {
-      placeholder: 'نامەکەت لێرە بنوسە…'
+      placeholder: 'نامەکەت لێرە بنوسە…',
+      queue: 'نامە ڕیزکراوەکان',
+      sendNow: 'ئێستا بنێرە',
+      edit: 'دەستکاری',
+      remove: 'لابردن'
     },
     chatPromptSubmit: {
-      label: 'ناردن'
+      label: 'ناردن',
+      reload: 'دووبارە هەوڵبدەرەوە',
+      stop: 'وەستاندنی دروستکردن'
     },
     chatReasoning: {
       thinking: 'بیرکردنەوە…',
@@ -52,7 +73,8 @@ export default defineLocale<Messages>({
       close: 'داخستن',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      placeholder: 'فەرمانێک بنووسە یان بگەڕێ…'
+      placeholder: 'فەرمانێک بنووسە یان بگەڕێ…',
+      results: 'ئەنجامەکان'
     },
     contentSearch: {
       links: 'بەستەرەکان',
@@ -96,14 +118,37 @@ export default defineLocale<Messages>({
       close: 'داخستنی پێڕست',
       open: 'کردنەوەی پێڕست'
     },
+    inputDate: {
+      day: 'ڕۆژ',
+      dayPeriod: 'AM/PM',
+      era: 'سەردەم',
+      hour: 'کاتژمێر',
+      minute: 'خولەک',
+      month: 'مانگ',
+      second: 'چرکە',
+      timeZoneName: 'ناوچەی کات',
+      year: 'ساڵ'
+    },
     inputMenu: {
-      create: '"{label}" زیادکردنی',
+      create: 'زیادکردنی "{label}"',
       noData: 'هیچ داتایەک نییە',
-      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە'
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
+      trigger: 'پیشاندانی هەڵبژاردەکان'
     },
     inputNumber: {
       decrement: 'کەمکردنەوە',
-      increment: 'زیادکردن'
+      increment: 'زیادکردن',
+      roledescription: 'خانەی ژمارە'
+    },
+    inputRating: {
+      rate: 'هەڵسەنگاندن بە {value} لە {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'کاتژمێر',
+      minute: 'خولەک',
+      second: 'چرکە',
+      timeZoneName: 'ناوچەی کات'
     },
     listbox: {
       noData: 'هیچ داتایەک نییە',
@@ -113,19 +158,31 @@ export default defineLocale<Messages>({
     modal: {
       close: 'داخستن'
     },
+    pagination: {
+      first: 'پەڕەی یەکەم',
+      last: 'پەڕەی کۆتایی',
+      next: 'پەڕەی دواتر',
+      page: 'پەڕە {page}',
+      prev: 'پەڕەی پێشوو'
+    },
+    pinInput: {
+      input: 'کۆدی PIN، پیتی {index} لە {length}'
+    },
     pricingTable: {
       caption: 'بەراورکردنی پلانی نرخدانان'
     },
     prose: {
       codeCollapse: {
-        closeText: 'داخستن',
+        closeText: 'داخستنی',
+        label: '{text} {name}',
         name: 'کۆد',
-        openText: 'فراوانکردن'
+        openText: 'فراوانکردنی'
       },
       collapsible: {
-        closeText: 'شاردنەوە',
+        closeText: 'شاردنەوەی',
+        label: '{text} {name}',
         name: 'تایبەتمەندییەکان',
-        openText: 'پیشاندان'
+        openText: 'پیشاندانی'
       },
       pre: {
         copy: 'لەبەرگرتنەوەی کۆد'
@@ -140,19 +197,35 @@ export default defineLocale<Messages>({
       toggle: 'گۆڕین'
     },
     selectMenu: {
-      create: '"{label}" زیادکردنی',
+      create: 'زیادکردنی "{label}"',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
       search: 'گەڕان…'
     },
+    skeleton: {
+      label: 'بارکردن'
+    },
     slideover: {
       close: 'داخستن'
+    },
+    slider: {
+      max: 'زۆرترین',
+      min: 'کەمترین',
+      thumb: 'دەستگرە',
+      value: 'بەهای {index} لە {total}'
+    },
+    stepper: {
+      label: 'پێشکەوتن'
     },
     table: {
       noData: 'هیچ داتایەک نییە'
     },
     toast: {
       close: 'داخستن'
+    },
+    toaster: {
+      label: 'ئاگادارکردنەوە',
+      viewport: 'ئاگادارکردنەوەکان ({hotkey})'
     }
   }
 })

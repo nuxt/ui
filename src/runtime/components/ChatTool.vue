@@ -36,6 +36,17 @@ export interface ChatToolProps extends Pick<CollapsibleRootProps, 'defaultOpen' 
    */
   loadingIcon?: IconProps['name']
   /**
+   * Whether the tool call failed.
+   * @defaultValue false
+   */
+  error?: boolean
+  /**
+   * The icon displayed when the tool call failed.
+   * @defaultValue appConfig.ui.icons.error
+   * @IconifyIcon
+   */
+  errorIcon?: IconProps['name']
+  /**
    * Whether the tool content is currently streaming.
    * @defaultValue false
    */
@@ -84,14 +95,18 @@ import { ref, computed, watch } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { omitUnsafeAttrs } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 import UIcon from './Icon.vue'
 import UChatShimmer from './ChatShimmer.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const _props = withDefaults(defineProps<ChatToolProps>(), {
   open: undefined,
   loading: false,
+  error: false,
   streaming: false,
   variant: 'inline',
   chevron: 'trailing',
@@ -108,7 +123,8 @@ const appConfig = useAppConfig() as ChatTool['AppConfig']
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatTool || {}) })({
   variant: props.variant,
   chevron: props.chevron,
-  loading: props.loading
+  loading: props.loading,
+  error: props.error && !props.loading
 }))
 
 const isControlled = computed(() => props.open !== undefined)
@@ -120,19 +136,25 @@ function setOpen(value: boolean) {
   emits('update:open', value)
 }
 
-const hasContent = computed(() => !!slots.default)
+// Read on every render, `slots` isn't reactive and a conditional default slot can appear later
+const hasContent = () => !!slots.default
 
 // Auto-open when actions first appear (e.g. a pending tool approval) so the content
 // is visible while the user decides. Uncontrolled only, respects an explicit `defaultOpen`,
 // and fires once so the user can still collapse it.
 watch(() => !!props.actions?.length, (hasActions) => {
-  if (hasActions && hasContent.value && props.open === undefined && props.defaultOpen === undefined) {
+  if (hasActions && hasContent() && props.open === undefined && props.defaultOpen === undefined) {
     internalOpen.value = true
   }
 }, { immediate: true })
 
 const resolvedLoadingIcon = computed(() => props.loadingIcon || appConfig.ui.icons?.loading)
-const resolvedIcon = computed(() => props.loading ? resolvedLoadingIcon.value : props.icon)
+const resolvedIcon = computed(() => {
+  if (props.loading) return resolvedLoadingIcon.value
+  if (props.error) return props.errorIcon || appConfig.ui.icons?.error
+
+  return props.icon
+})
 const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.chevronDown)
 </script>
 
@@ -144,23 +166,24 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
     :unmount-on-hide="props.unmountOnHide"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
+    v-bind="omitUnsafeAttrs($attrs)"
     @update:open="setOpen"
   >
-    <CollapsibleTrigger as-child :disabled="!hasContent">
+    <CollapsibleTrigger as-child :disabled="!hasContent()">
       <button
         type="button"
         data-slot="trigger"
         :class="ui.trigger({ class: props.ui?.trigger })"
       >
-        <span v-if="resolvedIcon || (hasContent && props.chevron === 'leading')" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+        <span v-if="resolvedIcon || (hasContent() && props.chevron === 'leading')" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <UIcon
             v-if="resolvedIcon"
             :name="resolvedIcon"
             data-slot="leadingIcon"
-            :class="ui.leadingIcon({ class: props.ui?.leadingIcon, alone: !(hasContent && props.chevron === 'leading') })"
+            :class="ui.leadingIcon({ class: props.ui?.leadingIcon, alone: !(hasContent() && props.chevron === 'leading') })"
           />
           <UIcon
-            v-if="hasContent && props.chevron === 'leading'"
+            v-if="hasContent() && props.chevron === 'leading'"
             :name="chevronIconName"
             data-slot="chevronIcon"
             :class="ui.chevronIcon({ class: props.ui?.chevronIcon, alone: !resolvedIcon })"
@@ -174,7 +197,7 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
         </span>
 
         <UIcon
-          v-if="hasContent && props.chevron === 'trailing'"
+          v-if="hasContent() && props.chevron === 'trailing'"
           :name="chevronIconName"
           data-slot="trailingIcon"
           :class="ui.trailingIcon({ class: props.ui?.trailingIcon })"
@@ -191,7 +214,7 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
     <div
       v-if="props.actions?.length || !!slots.actions"
       data-slot="actions"
-      :data-state="hasContent && isOpen ? 'open' : 'closed'"
+      :data-state="hasContent() && isOpen ? 'open' : 'closed'"
       :class="ui.actions({ class: props.ui?.actions })"
     >
       <slot name="actions">

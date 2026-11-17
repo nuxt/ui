@@ -16,23 +16,44 @@ export default defineLocale<Messages>({
     banner: {
       close: 'Zamknij'
     },
+    breadcrumb: {
+      label: 'ścieżka nawigacji'
+    },
     calendar: {
-      nextMonth: 'Przyszły miesiąc',
-      nextYear: 'Przyszły rok',
+      label: 'Data wydarzenia',
+      monthPicker: 'Wybór miesiąca',
+      nextMonth: 'Następny miesiąc',
+      nextYear: 'Następny rok',
       prevMonth: 'Poprzedni miesiąc',
-      prevYear: 'Poprzedni rok'
+      prevYear: 'Poprzedni rok',
+      yearPicker: 'Wybór roku'
     },
     carousel: {
       dots: 'Wybierz slajd do wyświetlenia',
-      goto: 'Idź do {slide}',
+      goto: 'Przejdź do slajdu {slide}',
       next: 'Następny',
-      prev: 'Poprzedni'
+      prev: 'Poprzedni',
+      roledescription: 'karuzela',
+      slide: 'slajd'
+    },
+    chatAttachment: {
+      uploading: 'Przesyłanie',
+      error: 'Nie udało się przesłać'
+    },
+    chatMessages: {
+      autoScroll: 'Przewiń na dół'
     },
     chatPrompt: {
-      placeholder: 'Tutaj wpisz swoją wiadomość…'
+      placeholder: 'Tutaj wpisz swoją wiadomość…',
+      queue: 'Wiadomości w kolejce',
+      sendNow: 'Wyślij teraz',
+      edit: 'Edytuj',
+      remove: 'Usuń'
     },
     chatPromptSubmit: {
-      label: 'Wyślij'
+      label: 'Wyślij',
+      reload: 'Spróbuj ponownie',
+      stop: 'Zatrzymaj generowanie'
     },
     chatReasoning: {
       thinking: 'Myśli…',
@@ -51,7 +72,8 @@ export default defineLocale<Messages>({
       close: 'Zamknij',
       noData: 'Brak danych',
       noMatch: 'Brak pasujących danych',
-      placeholder: 'Wpisz polecenie lub wyszukaj…'
+      placeholder: 'Wpisz polecenie lub wyszukaj…',
+      results: 'Wyniki'
     },
     contentSearch: {
       links: 'Linki',
@@ -95,14 +117,37 @@ export default defineLocale<Messages>({
       close: 'Zamknij menu',
       open: 'Otwórz menu'
     },
+    inputDate: {
+      day: 'dzień',
+      dayPeriod: 'AM/PM',
+      era: 'era',
+      hour: 'godzina',
+      minute: 'minuta',
+      month: 'miesiąc',
+      second: 'sekunda',
+      timeZoneName: 'strefa czasowa',
+      year: 'rok'
+    },
     inputMenu: {
       create: 'Utwórz "{label}"',
       noData: 'Brak danych',
-      noMatch: 'Brak pasujących danych'
+      noMatch: 'Brak pasujących danych',
+      trigger: 'Pokaż opcje'
     },
     inputNumber: {
       decrement: 'Zmniejsz',
-      increment: 'Zwiększ'
+      increment: 'Zwiększ',
+      roledescription: 'pole liczbowe'
+    },
+    inputRating: {
+      rate: 'Oceń na {value} z {length}'
+    },
+    inputTime: {
+      dayPeriod: 'AM/PM',
+      hour: 'godzina',
+      minute: 'minuta',
+      second: 'sekunda',
+      timeZoneName: 'strefa czasowa'
     },
     listbox: {
       noData: 'Brak danych',
@@ -112,17 +157,29 @@ export default defineLocale<Messages>({
     modal: {
       close: 'Zamknij'
     },
+    pagination: {
+      first: 'Pierwsza strona',
+      last: 'Ostatnia strona',
+      next: 'Następna strona',
+      page: 'Strona {page}',
+      prev: 'Poprzednia strona'
+    },
+    pinInput: {
+      input: 'kod PIN, znak {index} z {length}'
+    },
     pricingTable: {
       caption: 'Porównanie planów cenowych'
     },
     prose: {
       codeCollapse: {
         closeText: 'Zwiń',
+        label: '{text} {name}',
         name: 'kod',
         openText: 'Rozwiń'
       },
       collapsible: {
         closeText: 'Ukryj',
+        label: '{text} {name}',
         name: 'właściwości',
         openText: 'Pokaż'
       },
@@ -144,14 +201,30 @@ export default defineLocale<Messages>({
       noMatch: 'Brak pasujących danych',
       search: 'Szukaj…'
     },
+    skeleton: {
+      label: 'ładowanie'
+    },
     slideover: {
       close: 'Zamknij'
+    },
+    slider: {
+      max: 'Maksimum',
+      min: 'Minimum',
+      thumb: 'Suwak',
+      value: 'Wartość {index} z {total}'
+    },
+    stepper: {
+      label: 'postęp'
     },
     table: {
       noData: 'Brak danych'
     },
     toast: {
       close: 'Zamknij'
+    },
+    toaster: {
+      label: 'Powiadomienie',
+      viewport: 'Powiadomienia ({hotkey})'
     }
   }
 })

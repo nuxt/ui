@@ -19,8 +19,11 @@ The Error component uses the `--ui-header-height` CSS variable to position itsel
 
 Use the `error` prop to display an error message.
 
+::framework-only
+#nuxt
 ::note{to="https://nuxt.com/docs/guide/directory-structure/error" target="_blank"}
 In most cases, you will receive the `error` prop in your `error.vue` file.
+::
 ::
 
 ::component-code
@@ -30,11 +33,15 @@ hide:
 prettier: true
 props:
   error:
-    statusCode: 404
-    statusMessage: 'Page not found'
+    status: 404
+    statusText: 'Page not found'
     message: 'The page you are looking for does not exist.'
   class: '!min-h-96'
 ---
+::
+
+::tip
+The status message is rendered as an `h1` by default. Use the `as` prop with an object to change it, for example `:as="{ statusMessage: 'h2' }"`{lang="ts-type"}. You can also set the root element this way: `:as="{ root: 'div', statusMessage: 'h2' }"`{lang="ts-type"}.
 ::
 
 ### Icon :badge{label="4.8+" class="align-text-top"}
@@ -47,14 +54,14 @@ hide:
   - class
 prettier: true
 ignore:
-  - error.statusCode
-  - error.statusMessage
+  - error.status
+  - error.statusText
   - error.message
 props:
   icon: 'i-lucide-file-x'
   error:
-    statusCode: 404
-    statusMessage: 'Page not found'
+    status: 404
+    statusText: 'Page not found'
     message: 'The page you are looking for does not exist.'
   class: '!min-h-96'
 ---
@@ -68,13 +75,13 @@ hide:
   - class
 prettier: true
 ignore:
-  - error.statusCode
-  - error.statusMessage
+  - error.status
+  - error.statusText
   - error.message
 props:
   error:
-    statusCode: 404
-    statusMessage: 'Page not found'
+    status: 404
+    statusText: 'Page not found'
     message: 'The page you are looking for does not exist.'
   class: '!min-h-96'
 slots:
@@ -98,8 +105,8 @@ prettier: true
 hide:
   - class
 ignore:
-  - error.statusCode
-  - error.statusMessage
+  - error.status
+  - error.statusText
   - error.message
   - clear.color
   - clear.size
@@ -112,8 +119,8 @@ props:
     icon: i-lucide-arrow-left
     class: 'rounded-full'
   error:
-    statusCode: 404
-    statusMessage: 'Page not found'
+    status: 404
+    statusText: 'Page not found'
     message: 'The page you are looking for does not exist.'
   class: '!min-h-96'
 ---
@@ -129,14 +136,14 @@ prettier: true
 hide:
   - class
 ignore:
-  - error.statusCode
-  - error.statusMessage
+  - error.status
+  - error.statusText
   - error.message
 props:
   redirect: '/docs/getting-started'
   error:
-    statusCode: 404
-    statusMessage: 'Page not found'
+    status: 404
+    statusText: 'Page not found'
     message: 'The page you are looking for does not exist.'
   class: '!min-h-96'
 ---
@@ -183,7 +190,7 @@ const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection('docs').path(route.path).first()
 })
 if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({ status: 404, statusText: 'Page not found', fatal: true })
 }
 </script>
 ```

@@ -1,9 +1,12 @@
-import { describe, it, expect, vi, afterAll, test } from 'vitest'
+import { describe, it, expect, vi, afterAll, afterEach, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { flushPromises } from '@vue/test-utils'
 import { renderEach } from '../component-render'
 import { CalendarDate } from '@internationalized/date'
 import InputDate from '../../src/runtime/components/InputDate.vue'
+import type { FormInputEvents } from '../../src/module'
+import { renderForm } from '../utils/form'
 import theme from '#build/ui/input-date'
 
 describe('InputDate', () => {
@@ -12,6 +15,10 @@ describe('InputDate', () => {
   const date = new Date('2025-01-01')
 
   vi.setSystemTime(date)
+
+  afterEach(() => {
+    vi.setSystemTime(date)
+  })
 
   afterAll(() => {
     vi.useRealTimers()
@@ -64,6 +71,75 @@ describe('InputDate', () => {
 
       await wrapper.setValue(date)
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[date]] })
+    })
+
+    test('focus and blur events when focus enters and leaves the field, not between segments', async () => {
+      const wrapper = await mountSuspended(InputDate)
+      const segments = wrapper.findAll('[data-segment]').filter(segment => segment.attributes('data-segment') !== 'literal')
+      const [first, second] = segments
+
+      // Vue skips native events stamped at the exact time their listener was attached
+      vi.setSystemTime(new Date(date.getTime() + 1000))
+
+      first!.element.dispatchEvent(new FocusEvent('focusin', { bubbles: true, relatedTarget: null }))
+      first!.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: second!.element }))
+      second!.element.dispatchEvent(new FocusEvent('focusin', { bubbles: true, relatedTarget: first!.element }))
+      second!.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }))
+
+      expect(wrapper.emitted()).toMatchObject({ focus: [[{ type: 'focusin' }]], blur: [[{ type: 'focusout' }]] })
+    })
+  })
+
+  describe('form integration', async () => {
+    async function createForm(validateOn?: FormInputEvents[]) {
+      const wrapper = await renderForm({
+        props: {
+          validateOn,
+          validateOnInputDelay: 0,
+          async validate(state: any) {
+            if (!state.value) {
+              return [{ name: 'value', message: 'Error message' }]
+            }
+            return []
+          }
+        },
+        slotTemplate: `
+        <UFormField name="value">
+          <UInputDate id="input" v-model="state.value" />
+        </UFormField>
+        `
+      })
+
+      const input = wrapper.findComponent({ name: 'DateFieldRoot' })
+      const segments = wrapper.findAll('[data-segment]').filter(segment => segment.attributes('data-segment') !== 'literal')
+
+      // Vue skips native events stamped at the exact time their listener was attached
+      vi.setSystemTime(new Date(date.getTime() + 1000))
+
+      return { wrapper, input, segments }
+    }
+
+    test('validate on blur works', async () => {
+      const { wrapper, input, segments } = await createForm(['blur'])
+      const last = segments[segments.length - 1]!
+
+      last.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }))
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      await input.vm.$emit('update:modelValue', new CalendarDate(2025, 1, 1))
+      last.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }))
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on blur ignores focus moving between segments', async () => {
+      const { wrapper, segments } = await createForm(['blur'])
+      const [first, second] = segments
+
+      first!.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: second!.element }))
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
     })
   })
 

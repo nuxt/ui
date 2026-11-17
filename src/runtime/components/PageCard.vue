@@ -13,7 +13,7 @@ export interface PageCardProps {
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
+  as?: any | { root?: any, title?: any }
   /**
    * The icon displayed above the title.
    * @IconifyIcon
@@ -70,14 +70,15 @@ export interface PageCardSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, effectScope, ref, shallowRef, watch, onMounted, onBeforeUnmount } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useMouseInElement, pausableFilter } from '@vueuse/core'
+import { useMouseInElement } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
-import { getSlotChildrenText } from '../utils'
+import { getSlotChildrenText, resolveAs } from '../utils'
 import { tv } from '../utils/tv'
+import { requestIdleCallback, cancelIdleCallback } from '../utils/prefetch'
 import ULink from './Link.vue'
 import UIcon from './Icon.vue'
 
@@ -91,24 +92,45 @@ const slots = defineSlots<PageCardSlots>()
 const props = useComponentProps('pageCard', _props)
 
 const cardRef = ref<HTMLElement>()
-const motionControl = pausableFilter()
 
 const appConfig = useAppConfig() as PageCard['AppConfig']
-const { elementX, elementY } = useMouseInElement(cardRef, {
-  eventFilter: motionControl.eventFilter
+
+const idle = ref(false)
+let idleId: ReturnType<typeof requestIdleCallback>
+
+onMounted(() => {
+  idleId = requestIdleCallback(() => {
+    idle.value = true
+  })
 })
+
+onBeforeUnmount(() => {
+  cancelIdleCallback(idleId)
+})
+
+const mouse = shallowRef<ReturnType<typeof useMouseInElement>>()
+
+watch(() => props.spotlight && idle.value, (enabled, _, onCleanup) => {
+  if (!enabled) {
+    return
+  }
+  const scope = effectScope(true)
+  mouse.value = scope.run(() => useMouseInElement(cardRef))
+  onCleanup(() => {
+    scope.stop()
+    mouse.value = undefined
+  })
+})
+
+const elementX = computed(() => mouse.value?.elementX.value ?? 0)
+const elementY = computed(() => mouse.value?.elementY.value ?? 0)
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const spotlight = computed(() => props.spotlight && (elementX.value !== 0 || elementY.value !== 0))
 
-watch(() => props.spotlight, (value) => {
-  if (value) {
-    motionControl.resume()
-  } else {
-    motionControl.pause()
-  }
-}, { immediate: true })
+// eslint-disable-next-line vue/no-dupe-keys
+const as = computed(() => resolveAs(props.as, { root: 'div', title: 'div' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageCard || {}) })({
@@ -132,7 +154,7 @@ const ariaLabel = computed(() => {
 <template>
   <Primitive
     ref="cardRef"
-    :as="props.as"
+    :as="as.root"
     v-bind="!props.to ? $attrs : {}"
     :data-orientation="props.orientation"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
@@ -156,11 +178,11 @@ const ariaLabel = computed(() => {
 
         <div v-if="!!slots.body || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="body" :class="ui.body({ class: props.ui?.body })">
           <slot name="body">
-            <div v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+            <Primitive v-if="props.title || !!slots.title" :as="as.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
               <slot name="title">
                 {{ props.title }}
               </slot>
-            </div>
+            </Primitive>
 
             <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
               <slot name="description">
