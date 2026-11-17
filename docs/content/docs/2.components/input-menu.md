@@ -167,7 +167,7 @@ props:
 Use the `by` prop to compare objects by a field instead of reference when the `model-value` is an object.
 ::
 
-::tip
+::note
 The `#leading`, `#default` and `#trailing` slots receive the selected item as `item`, so you can still read its other properties when `model-value` only holds its key.
 ::
 
