@@ -72,10 +72,10 @@ export interface PageCardSlots {
 <script setup lang="ts">
 import { computed, effectScope, ref, shallowRef, watch, onMounted, onBeforeUnmount } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useMouseInElement } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { usePrefix } from '../composables/usePrefix'
+import { useSpotlight } from '../composables/useSpotlight'
 import { getSlotChildrenText, resolveAs } from '../utils'
 import { tv } from '../utils/tv'
 import { requestIdleCallback, cancelIdleCallback } from '../utils/prefetch'
@@ -108,14 +108,18 @@ onBeforeUnmount(() => {
   cancelIdleCallback(idleId)
 })
 
-const mouse = shallowRef<ReturnType<typeof useMouseInElement>>()
+const mouse = shallowRef<ReturnType<typeof useSpotlight>>()
 
 watch(() => props.spotlight && idle.value, (enabled, _, onCleanup) => {
   if (!enabled) {
     return
   }
   const scope = effectScope(true)
-  mouse.value = scope.run(() => useMouseInElement(cardRef))
+  mouse.value = scope.run(() => useSpotlight(() => {
+    // Read `as` to establish reactive dependency: the root element changes with it
+    void as.value.root
+    return cardRef.value
+  }))
   onCleanup(() => {
     scope.stop()
     mouse.value = undefined
