@@ -37,6 +37,7 @@ function getEmojiFlag(locale: string): string {
     nb: 'no', // Norwegian Bokmål -> Norway
     sl: 'si', // Slovenian -> Slovenia
     sq: 'al', // Albanian -> Albania
+    sr: 'rs', // Serbian -> Serbia
     sv: 'se', // Swedish -> Sweden
     tg: 'tj', // Tajik -> Tajikistan
     uk: 'ua', // Ukrainian -> Ukraine
@@ -44,10 +45,10 @@ function getEmojiFlag(locale: string): string {
     vi: 'vn' // Vietnamese -> Vietnam
   }
 
-  // If locale has a country code (e.g., en-GB), extract and use it
+  // If locale has a country code (e.g., en-GB), extract and use it, a four-letter subtag is a script (e.g., sr-Latn)
   if (locale.includes('-')) {
     const countryCode = locale.split('-')[1]?.toLowerCase()
-    if (countryCode) {
+    if (countryCode?.length === 2) {
       return countryCode.toUpperCase()
         .split('')
         .map(char => String.fromCodePoint(0x1F1A5 + char.charCodeAt(0)))
