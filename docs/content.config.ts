@@ -71,7 +71,8 @@ export const collections = {
       framework: z.enum(['nuxt', 'vue']).optional(),
       navigation: z.object({
         title: z.string().optional(),
-        badge: z.string().optional()
+        badge: z.string().optional(),
+        updated: z.boolean().optional()
       }),
       links: z.array(Button),
       // External navigation entries (e.g. the Figma page): the sidebar link

@@ -18,6 +18,13 @@ const { navigationByCategory } = useNavigation(navigation!)
       <FrameworkTabs />
     </div>
 
-    <UContentNavigation :navigation="navigationByCategory" highlight :ui="{ linkTrailingBadge: 'font-semibold uppercase' }" />
+    <UContentNavigation :navigation="navigationByCategory" highlight :ui="{ linkTrailingBadge: 'font-semibold uppercase' }">
+      <template #link-title="{ link }">
+        {{ link.title }}
+        <span v-if="link.updated" class="ms-1.5 inline-block size-1.5 rounded-full bg-(--ui-text-dimmed) align-middle">
+          <span class="sr-only">Updated</span>
+        </span>
+      </template>
+    </UContentNavigation>
   </template>
 </template>
