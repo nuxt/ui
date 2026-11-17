@@ -72,7 +72,7 @@ export const collections = {
       navigation: z.object({
         title: z.string().optional(),
         badge: z.string().optional(),
-        updated: z.boolean().optional()
+        changed: z.string().optional()
       }),
       links: z.array(Button),
       // External navigation entries (e.g. the Figma page): the sidebar link
