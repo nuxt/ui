@@ -31,13 +31,13 @@ jobs:
           && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         ) || (
           github.event_name == 'workflow_dispatch'
-          && !startsWith(github.ref, 'refs/tags/')
+          && (github.ref == 'refs/heads/v4' || github.ref == 'refs/heads/v5')
         )
       )
     runs-on: ubuntu-latest
-    # one updater at a time, so an older run can't finish last and overwrite the release branch
+    # one updater at a time per branch, so an older run can't finish last and overwrite the release branch
     concurrency:
-      group: release-pr
+      group: release-pr-${{ github.ref_name }}
       cancel-in-progress: false
     permissions:
       contents: write
@@ -50,7 +50,7 @@ jobs:
           persist-credentials: false
 
       # uppt starts the changelog at the newest tag by date on any branch, so a tag
-      # cut elsewhere (4.12.1 and 4.12.2 from a side branch, v5 alphas for v4)
+      # cut elsewhere (4.12.1 and 4.12.2 from a side branch, v5 betas for v4)
       # would drop every commit older than it
       - name: Keep only tags reachable from the branch
         run: git tag --no-merged HEAD | xargs -r git tag -d
@@ -100,13 +100,48 @@ jobs:
       - id: pack
         uses: danielroe/uppt/pack@427b736befa839b403dd145f2a7c16dbf3fd4482 # v0.6.13
 
+  # lint, typecheck and test the tag before anything reaches npm
+  check:
+    if: github.event_name == 'workflow_dispatch' && startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Install node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Prepare
+        run: pnpm run dev:prepare
+
+      - parallel:
+          - name: Lint
+            run: pnpm run lint
+          - name: Typecheck
+            run: pnpm run typecheck
+          - name: Test
+            run: pnpm run test run
+
   # stage the prebuilt tarball to npm via OIDC
   publish:
     if: |
       github.event_name == 'workflow_dispatch'
       && startsWith(github.ref, 'refs/tags/v')
       && needs.pack.outputs.files != '[]'
-    needs: pack
+    needs: [pack, check]
     runs-on: ubuntu-latest
     concurrency:
       group: publish-${{ github.ref }}
