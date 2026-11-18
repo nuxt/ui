@@ -184,7 +184,7 @@ props:
 
 ### With animated toggle
 
-Use the `#toggle` slot to replace the default toggle button with a custom animated hamburger icon using [Motion Vue](https://motion.dev/docs/vue/motion-component).
+Use the `#toggle` slot to replace the default toggle button with a custom hamburger icon that turns into a cross with CSS transitions.
 
 ::component-example
 ---
