@@ -174,7 +174,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.lo
 :::
 ::
 
-### Error :badge{label="Soon" class="align-text-top"}
+### Error :badge{label="4.13+" class="align-text-top"}
 
 Use the `error` prop to show that the tool call failed, for example when the part state is `output-error`. Use the `error-icon` prop to customize the error icon.
 
@@ -191,7 +191,7 @@ props:
 ---
 ::
 
-### Error Icon :badge{label="Soon" class="align-text-top"}
+### Error Icon :badge{label="4.13+" class="align-text-top"}
 
 Use the `error-icon` prop to customize the error icon. Defaults to `i-lucide-circle-x`.
 

@@ -166,7 +166,7 @@ function updateToast(id: string | number) {
 </script>
 ```
 
-### promise() :badge{label="Soon" class="align-text-top"}
+### promise() :badge{label="4.13+" class="align-text-top"}
 
 `promise<T>(promise: Promise<T>, options: ToastPromiseOptions<T>): Promise<T>`{lang="ts-type"}
 

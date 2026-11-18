@@ -361,7 +361,7 @@ name: 'toast-callback-example'
 ---
 ::
 
-### With promise :badge{label="Soon" class="align-text-top"}
+### With promise :badge{label="4.13+" class="align-text-top"}
 
 Use `toast.promise` to display a loading toast that updates when the promise resolves or rejects.
 

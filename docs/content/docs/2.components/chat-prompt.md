@@ -44,7 +44,7 @@ props:
 ---
 ::
 
-### Files :badge{label="Soon" class="align-text-top"}
+### Files :badge{label="4.13+" class="align-text-top"}
 
 Use the `v-model:files` directive to let users attach files. They can paste them in the textarea or drop them on the prompt, and each one shows above the textarea as a [ChatAttachment](/docs/components/chat-attachment) they can remove. The `#footer` slot receives an `open` function to pick files from a button.
 
@@ -108,7 +108,7 @@ async function onSubmit() {
 ```
 ::
 
-### Queue :badge{label="Soon" class="align-text-top"}
+### Queue :badge{label="4.13+" class="align-text-top"}
 
 Use the `v-model:queue` directive to queue the messages submitted while the chat is `submitted` or `streaming` instead of ignoring them. They show in a panel attached above the prompt, where the user can send one now, put it back in the prompt to edit it, or remove it. The `send` event is emitted when one is picked to be sent now, after it moved to the front of the queue.
 
@@ -182,7 +182,7 @@ async function onSubmit() {
 </template>
 ```
 
-### With queued messages :badge{label="Soon" class="align-text-top"}
+### With queued messages :badge{label="4.13+" class="align-text-top"}
 
 The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Bind `v-model:queue` to keep them instead: the prompt lists the queued messages in a panel above it, where the user can send one now, edit it or remove it, and you send the next one once the chat is `ready` again.
 

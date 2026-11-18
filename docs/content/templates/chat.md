@@ -1450,7 +1450,7 @@ onMounted(() => {
 
 The [`UChatTool`](/docs/components/chat-tool) component shows the tool name and a shimmer while it runs. The `isToolStreaming` utility from `@nuxt/ui/utils/ai` detects if a tool call is still running. When a tool waits for approval, the `actions` prop displays the approve and deny buttons, which answer with `addToolApprovalResponse`. The `sendAutomaticallyWhen` option then sends the responses back to the server so the conversation continues.
 
-## Queuing messages :badge{label="Soon" class="align-text-top"}
+## Queuing messages :badge{label="4.13+" class="align-text-top"}
 
 The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Bind `v-model:queue` to keep them instead, then send the next one once the chat is `ready` again:
 
@@ -1623,7 +1623,7 @@ onMounted(() => {
 
 The prompt lists the queued messages in a panel above it, where users can send one now, put it back in the prompt to edit it, or remove it. Picking one to send now emits `send` with that message at the front of the queue, so `onSend` stops the current response and the `status` watcher sends it. A response waiting for a tool approval is `ready` too, so the prompt gets the `submitted` status until the user answers, which keeps new messages in the queue, and `sendNext` waits as well. After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response.
 
-## Attaching files :badge{label="Soon" class="align-text-top"}
+## Attaching files :badge{label="4.13+" class="align-text-top"}
 
 Bind `v-model:files` on the prompt to let users attach images and PDFs. They can paste them, drop them on the prompt or pick them with the button in the `#footer` slot:
 
