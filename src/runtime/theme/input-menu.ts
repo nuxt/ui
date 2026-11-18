@@ -10,8 +10,11 @@ export default extendTheme(input, {
     // The tags sit on the reading line, so their row gives back the difference,
     // and keeps the height of the field when it only holds the input
     tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
-    trailing: () => 'group flex items-center pe-(--ui-control-px) disabled:cursor-not-allowed focus:outline-none',
+    trailing: () => 'group group/input-menu flex items-center pe-(--ui-control-px) disabled:cursor-not-allowed focus:outline-none',
     trailingClear: 'p-0',
+    // The chevron turns over while the menu is open, the named group keeps an open
+    // ancestor from turning it
+    trailingIcon: 'group-data-[state=open]/input-menu:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     arrow: 'fill-bg stroke-default',
     content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-overlay shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col cursor-default',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1',

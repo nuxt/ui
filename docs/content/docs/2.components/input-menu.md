@@ -823,16 +823,6 @@ name: 'input-menu-search-term-example'
 ---
 ::
 
-### With rotating icon
-
-Here is an example with a rotating icon that indicates the open state of the InputMenu.
-
-::component-example
----
-name: 'input-menu-icon-example'
----
-::
-
 ### With floating label :badge{label="4.12+" class="align-text-top"}
 
 You can use the `#default` slot to add a floating label to the InputMenu.

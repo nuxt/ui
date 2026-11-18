@@ -28,11 +28,11 @@ const to = ref('savings')
       </UFormField>
 
       <UFormField label="From">
-        <USelect v-model="from" :items="accounts" class="w-full" :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }" />
+        <USelect v-model="from" :items="accounts" class="w-full" />
       </UFormField>
 
       <UFormField label="To">
-        <USelect v-model="to" :items="accounts" class="w-full" :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }" />
+        <USelect v-model="to" :items="accounts" class="w-full" />
       </UFormField>
 
       <div class="space-y-1.5 text-sm">

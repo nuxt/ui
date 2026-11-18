@@ -849,16 +849,6 @@ name: 'select-menu-search-term-example'
 ---
 ::
 
-### With rotating icon
-
-Here is an example with a rotating icon that indicates the open state of the SelectMenu.
-
-::component-example
----
-name: 'select-menu-icon-example'
----
-::
-
 ### With create item
 
 Use the `create-item` prop to enable users to add custom values that aren't in the predefined options.

@@ -826,8 +826,7 @@ const pageTitles: Record<Page, string> = {
               class="data-[state=open]:bg-soft"
               :ui="{
                 value: 'capitalize',
-                itemLabel: 'capitalize',
-                trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
+                itemLabel: 'capitalize'
               }"
             />
           </template>
@@ -945,7 +944,6 @@ const pageTitles: Record<Page, string> = {
               <USelect
                 v-model="customerStatusFilter"
                 :items="customerStatusItems"
-                :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
                 placeholder="Filter status"
                 class="min-w-28"
               />

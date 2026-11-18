@@ -747,16 +747,6 @@ name: 'select-open-example'
 In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can toggle the Select by pressing :kbd{value="O"}.
 ::
 
-### With rotating icon
-
-Here is an example with a rotating icon that indicates the open state of the Select.
-
-::component-example
----
-name: 'select-icon-example'
----
-::
-
 ### With fetched items
 
 You can fetch items from an API and use them in the Select.
