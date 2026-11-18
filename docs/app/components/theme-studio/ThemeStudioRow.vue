@@ -229,7 +229,6 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
       :content="{ bodyLock: false, disableOutsidePointerEvents: false }"
       :aria-label="ariaLabel ?? label"
       class="flex-1 group"
-      :ui="{ trailingIcon: 'transition-transform duration-200 group-data-[state=open]:rotate-180' }"
     >
       <template v-if="!!slots.leading" #leading>
         <slot name="leading" />

@@ -5,7 +5,7 @@ export default defineTheme({
     root: 'relative my-5 bg-default [&>div]:my-0 [&_pre]:max-h-[80vh] [&_pre]:pb-12',
     footer: 'h-16 absolute inset-x-px bottom-px rounded-b-md flex items-center justify-center',
     trigger: 'group relative',
-    triggerIcon: 'group-data-[state=open]:rotate-180'
+    triggerIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none'
   },
   variants: {
     open: {
