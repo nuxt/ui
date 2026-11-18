@@ -235,7 +235,7 @@ export interface SelectMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
 import { useTemplateRef, useId, computed, ref, onMounted, onScopeDispose, toRef, toRaw, watch, nextTick } from 'vue'
-import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope } from 'reka-ui'
+import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
 import { createReusableTemplate } from '@vueuse/core'
@@ -249,6 +249,7 @@ import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { compare, get, getDisplayValue, getSelectedItem, isArrayOfArray, looseToNumber, omitUnsafeAttrs } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
+import { ComboboxVirtualizer, loadVirtualizers } from '../utils/lazy-virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -273,6 +274,8 @@ const emits = defineEmits<SelectMenuEmits<T, VK, M, Mod, C>>()
 const slots = defineSlots<SelectMenuSlots<T, VK, M, Mod, C>>()
 
 const props = useComponentProps<SelectMenuProps<T, VK, M, Mod, C>>('selectMenu', _props)
+
+if (props.virtualize) loadVirtualizers().catch(() => {})
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 

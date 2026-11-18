@@ -1,8 +1,9 @@
-import { describe, it, expect, vi } from 'vitest'
+import { beforeAll, describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import CommandPalette from '../../src/runtime/components/CommandPalette.vue'
+import { loadVirtualizer } from '../utils/virtualizer'
 import theme from '#build/ui/command-palette'
 
 describe('CommandPalette', () => {
@@ -102,6 +103,8 @@ describe('CommandPalette', () => {
   const groupsWithSlot = groups.map(g => g.id === 'users' ? { ...g, slot: 'users' } : g)
 
   const props = { groups }
+
+  beforeAll(() => loadVirtualizer(CommandPalette, { props: { ...props, virtualize: true } }))
 
   renderEach(CommandPalette, [
     // Props

@@ -161,7 +161,7 @@ export type ListboxSlots<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<Li
 
 <script setup lang="ts" generic="T extends ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
 import { computed, toRaw, toRef } from 'vue'
-import { ListboxRoot, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter } from 'reka-ui'
+import { ListboxRoot, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { createReusableTemplate } from '@vueuse/core'
 import { defu } from 'defu'
@@ -172,6 +172,7 @@ import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { get, isArrayOfArray, looseToNumber, omit, pick } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
+import { ListboxVirtualizer } from '../utils/lazy-virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'

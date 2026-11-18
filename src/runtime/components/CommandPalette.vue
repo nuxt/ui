@@ -236,7 +236,7 @@ export type CommandPaletteSlots<T extends CommandPaletteItem = CommandPaletteIte
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
 import { computed, ref, useTemplateRef, toRef, watch, nextTick } from 'vue'
-import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator } from 'reka-ui'
+import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxItem, ListboxItemIndicator } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
 import { createReusableTemplate, refDebounced, refThrottled } from '@vueuse/core'
@@ -248,6 +248,7 @@ import { omit, get } from '../utils'
 import { highlight } from '../utils/search'
 import { pickLinkProps } from '../utils/link'
 import { getEstimateSize } from '../utils/virtualizer'
+import { ListboxVirtualizer } from '../utils/lazy-virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
