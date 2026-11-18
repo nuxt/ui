@@ -80,6 +80,10 @@ export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((
     return false
   }
 
+  if (value === null || currentValue === null) {
+    return value === currentValue
+  }
+
   if (typeof value === 'string') {
     return value === currentValue
   }
