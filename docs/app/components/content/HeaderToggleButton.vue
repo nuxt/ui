@@ -12,7 +12,7 @@ onMounted(() => requestAnimationFrame(() => requestAnimationFrame(() => {
 const crossed = computed(() => props.open && ready.value)
 
 // Each line turns around its own center; the overshoot approximates the spring the toggle used to have.
-const line = 'outline-hidden origin-center [transform-box:fill-box] transition-[translate,rotate,opacity] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none'
+const line = 'origin-center [transform-box:fill-box] transition-[translate,rotate,opacity] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none'
 </script>
 
 <template>
@@ -38,7 +38,6 @@ const line = 'outline-hidden origin-center [transform-box:fill-box] transition-[
         y1="6"
         x2="20"
         y2="6"
-        tabindex="-1"
         :class="[line, crossed && 'translate-y-1.5 rotate-45']"
       />
       <line
@@ -46,7 +45,6 @@ const line = 'outline-hidden origin-center [transform-box:fill-box] transition-[
         y1="12"
         x2="20"
         y2="12"
-        tabindex="-1"
         :class="[line, crossed && 'opacity-0']"
       />
       <line
@@ -54,7 +52,6 @@ const line = 'outline-hidden origin-center [transform-box:fill-box] transition-[
         y1="18"
         x2="20"
         y2="18"
-        tabindex="-1"
         :class="[line, crossed && '-translate-y-1.5 -rotate-45']"
       />
     </svg>

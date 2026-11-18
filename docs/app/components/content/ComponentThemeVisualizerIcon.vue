@@ -27,24 +27,18 @@ withDefaults(defineProps<{
       y1="12"
       x2="20"
       y2="12"
-      class="outline-none"
-      tabindex="-1"
     />
     <line
       x1="4"
       y1="12"
       x2="20"
       y2="12"
-      class="outline-none"
-      tabindex="-1"
     />
 
     <!-- Eye shape (with blink) -->
     <path
       d="M2.062 12.348a1 1 0 0 1 0-.696a10.75 10.75 0 0 1 19.876 0a1 1 0 0 1 0 .696a10.75 10.75 0 0 1-19.876 0"
       fill="none"
-      class="outline-none"
-      tabindex="-1"
     />
 
     <!-- Pupil -->
@@ -53,8 +47,6 @@ withDefaults(defineProps<{
       cy="12"
       r="3"
       fill="none"
-      class="outline-none"
-      tabindex="-1"
     />
   </svg>
 </template>
