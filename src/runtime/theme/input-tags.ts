@@ -15,13 +15,13 @@ export default defineTheme({
     tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
     // After the input in the DOM, so the input keeps the first tab stop. The
     // invisible character gives the leading the baseline of the text, see `input.ts`
-    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-[calc(var(--ui-control-px)-var(--ui-field-pad))] [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(min(var(--ui-control-px),var(--ui-control-py))-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
+    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
-    // A button in the leading or the trailing is square whatever its size, at least 4px
-    // from every edge, and its icon sits where an icon of the field would: the slot keeps
-    // the padding and the icon of the field, the button reads them
-    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-[calc(var(--ui-control-px)-var(--ui-field-pad))] [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(min(var(--ui-control-px),var(--ui-control-py))-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm',
+    // A button in the leading or the trailing is square whatever its size, 4px from the
+    // top and the bottom, its icon where an icon of the field would be and never closer
+    // than 4px to the side: the slot keeps the padding and the icon of the field
+    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm',
     trailingIcon: 'shrink-0 text-faint',
     item: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-strong bg-soft text-default data-disabled:cursor-not-allowed wrap-anywhere data-[state=active]:bg-strong',
     itemText: '',
