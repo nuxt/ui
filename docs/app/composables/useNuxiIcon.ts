@@ -1,4 +1,3 @@
-import { useAnimate } from 'motion-v'
 import { useElementVisibility, useEventListener, useRafFn } from '@vueuse/core'
 
 /**
@@ -8,6 +7,18 @@ import { useElementVisibility, useEventListener, useRafFn } from '@vueuse/core'
  * per mood.
  */
 export type NuxiMood = 'idle' | 'happy' | 'excited' | 'thinking' | 'sleeping' | 'surprised'
+
+type Keyframes = number | Array<number | null>
+
+interface BodyKeyframes {
+  y?: Keyframes
+  rotate?: Keyframes
+  scale?: Keyframes
+  scaleX?: Keyframes
+  scaleY?: Keyframes
+}
+
+type Ease = 'easeIn' | [number, number, number, number]
 
 type LookDir = 'center' | 'left' | 'right' | 'up'
 
@@ -73,11 +84,49 @@ type EmitFn = (event: 'moodChange', mood: NuxiMood) => void
 
 export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
   const maskId = useId()
-  const [svgEl, animate] = useAnimate()
+  const svgEl = shallowRef<SVGSVGElement>()
+
+  // Where the body rests between easter eggs: a keyframe of `null` starts from here.
+  const body = { y: 0, rotate: 0, scaleX: 1, scaleY: 1 }
+
+  /**
+   * Plays the easter eggs with the Web Animations API, in the shape of motion's `animate()`: each of
+   * `translate`, `rotate` and `scale` runs as its own animation, the ease applies between keyframes,
+   * and a single value animates from where the body is.
+   */
+  async function animate(selector: string, keyframes: BodyKeyframes, { duration, ease }: { duration: number, ease?: Ease }) {
+    const el = svgEl.value?.querySelector<SVGElement>(selector)
+    if (!el) return
+
+    const { scale, ...rest } = keyframes
+    const values: Omit<BodyKeyframes, 'scale'> = scale === undefined ? rest : { scaleX: scale, scaleY: scale, ...rest }
+    const frames = Object.fromEntries(Object.entries(values).map(([key, value]) => {
+      const from = body[key as keyof typeof body]
+      return [key, (Array.isArray(value) ? value : [null, value]).map(v => v ?? from)]
+    })) as Partial<Record<keyof typeof body, number[]>>
+    for (const [key, list] of Object.entries(frames)) body[key as keyof typeof body] = list.at(-1)!
+
+    const scaleFrames = frames.scaleX || frames.scaleY
+      ? zip(frames.scaleX ?? [body.scaleX], frames.scaleY ?? [body.scaleY], (x, y) => `${x} ${y}`)
+      : undefined
+    const tracks = [
+      ['translate', frames.y?.map(v => `0 ${v}px`)],
+      ['rotate', frames.rotate?.map(v => `${v}deg`)],
+      ['scale', scaleFrames]
+    ].filter((track): track is [string, string[]] => !!track[1])
+
+    const easing = !ease ? 'ease-out' : ease === 'easeIn' ? 'ease-in' : `cubic-bezier(${ease.join(', ')})`
+    await Promise.all(tracks.map(async ([property, list]) => {
+      // The end value goes inline first: the animation runs over it, and it stays once the animation ends.
+      el.style.setProperty(property, list.at(-1)!)
+      // `easing` inside the keyframes applies between each pair of them, as motion's `ease` does.
+      if (duration > 0) await el.animate({ [property]: list, easing }, { duration: duration * 1000 }).finished
+    }))
+  }
 
   // Below `lg` the button is only CSS-hidden, so the icon stays mounted with a
   // zeroed rect. Nothing animates, listens or schedules while it is out of view.
-  const isElementVisible = useElementVisibility(() => svgEl.value as unknown as SVGSVGElement | undefined)
+  const isElementVisible = useElementVisibility(svgEl)
   const isPageVisible = ref(true)
   const isAwake = computed(() => isElementVisible.value && isPageVisible.value)
 
@@ -322,7 +371,7 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
     if (!isAwake.value) return
 
     if (!svgEl.value || isHovered.value) return
-    const rect = (svgEl.value as unknown as Element).getBoundingClientRect()
+    const rect = svgEl.value.getBoundingClientRect()
     const cx = rect.left + rect.width / 2
     const cy = rect.top + rect.height / 2
     const dx = e.clientX - cx
@@ -553,4 +602,11 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
     handleMouseLeave,
     handleSvgClick
   }
+}
+
+/** Pairs two keyframe lists, stretching a shorter one by holding its first and last values. */
+function zip(a: number[], b: number[], join: (a: number, b: number) => string): string[] {
+  const length = Math.max(a.length, b.length)
+  const at = (list: number[], i: number) => list.length === length ? list[i]! : i === 0 ? list[0]! : list.at(-1)!
+  return Array.from({ length }, (_, i) => join(at(a, i), at(b, i)))
 }

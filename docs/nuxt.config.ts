@@ -22,7 +22,6 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     'nuxt-og-image',
     'nuxt-schema-org',
-    'motion-v/nuxt',
     '@vercel/analytics',
     '@vercel/speed-insights'
   ],

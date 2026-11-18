@@ -2,15 +2,17 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: 'flex flex-col min-h-0 min-w-0 divide-y divide-default',
-    // The input sits flush in the palette, above a full-width divider
-    filter: 'rounded-none',
-    // The filter is taller than the button: the close keeps the same inset on
-    // every side, the back keeps its padding so its icon lines up with the items
-    close: 'me-1',
-    back: '',
+    root: 'flex flex-col min-h-0 min-w-0',
+    // A field as large as an item, inset like the items: its padding is theirs, so its
+    // icon and text line up with them
+    // It holds the focus as long as the menu is open, so it shows no focus outline
+    filter: 'mx-1 mt-1 has-[>:focus-visible]:outline-0',
+    // The back and the close take back the inset of the field, so their icon sits where
+    // the search icon does
+    back: '-ms-1',
+    close: '-me-1',
     content: 'relative overflow-hidden flex flex-col',
-    footer: 'p-1',
+    footer: 'p-1 border-t border-default',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
     group: 'p-1 isolate',
     empty: 'text-center text-muted',
@@ -42,7 +44,7 @@ export default defineTheme({
     size: {
       xs: {
         content: '[--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)]',
-        filter: '[&>input]:h-10',
+        filter: '[--ui-control-px:var(--ui-control-py-xs)]',
         empty: 'py-3 text-xs',
         label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-xs--leading)-var(--ui-control-text-xs--line-height))/2)] text-[calc(var(--ui-control-text-xs)-0.125rem)]/[calc(var(--ui-control-text-xs--leading)-0.25rem)] gap-(--ui-control-gap)',
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) gap-(--ui-control-gap)',
@@ -56,7 +58,7 @@ export default defineTheme({
       },
       sm: {
         content: '[--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)]',
-        filter: '[&>input]:h-11',
+        filter: '[--ui-control-px:var(--ui-control-py-sm)]',
         empty: 'py-4 text-xs',
         label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-sm--leading)-var(--ui-control-text-sm--line-height))/2)] text-[calc(var(--ui-control-text-sm)-0.125rem)]/[calc(var(--ui-control-text-sm--leading)-0.25rem)] gap-(--ui-control-gap)',
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height) gap-(--ui-control-gap)',
@@ -70,7 +72,7 @@ export default defineTheme({
       },
       md: {
         content: '[--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)]',
-        filter: '[&>input]:h-12',
+        filter: '[--ui-control-px:var(--ui-control-py-md)]',
         empty: 'py-6 text-sm',
         label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-md--leading)-var(--ui-control-text-md--line-height))/2)] text-[calc(var(--ui-control-text-md)-0.125rem)]/[calc(var(--ui-control-text-md--leading)-0.25rem)] gap-(--ui-control-gap)',
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) gap-(--ui-control-gap)',
@@ -84,7 +86,7 @@ export default defineTheme({
       },
       lg: {
         content: '[--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)]',
-        filter: '[&>input]:h-13',
+        filter: '[--ui-control-px:var(--ui-control-py-lg)]',
         empty: 'py-7 text-sm',
         label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-lg--leading)-var(--ui-control-text-lg--line-height))/2)] text-[calc(var(--ui-control-text-lg)-0.125rem)]/[calc(var(--ui-control-text-lg--leading)-0.25rem)] gap-(--ui-control-gap)',
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height) gap-(--ui-control-gap)',
@@ -98,7 +100,7 @@ export default defineTheme({
       },
       xl: {
         content: '[--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)]',
-        filter: '[&>input]:h-14',
+        filter: '[--ui-control-px:var(--ui-control-py-xl)]',
         empty: 'py-8 text-base',
         label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-xl--leading)-var(--ui-control-text-xl--line-height))/2)] text-[calc(var(--ui-control-text-xl)-0.125rem)]/[calc(var(--ui-control-text-xl--leading)-0.25rem)] gap-(--ui-control-gap)',
         item: 'p-(--ui-control-py) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height) gap-(--ui-control-gap)',
