@@ -52,16 +52,10 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   lazy: true
 })
 
-function getStatusIcon(value: string) {
-  return statuses.find(status => status.value === value)?.icon || 'i-lucide-user'
-}
-
-function getUserAvatar(value: string) {
-  return users.value?.find(user => user.value === value)?.avatar || {}
-}
-
 const value = ref('Apple')
 const valueMultiple = ref([fruits[0]!, vegetables[0]!])
+const statusKey = ref('todo')
+const statusKeys = ref(['todo', 'done'])
 </script>
 
 <template>
@@ -100,8 +94,8 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
       :items="statuses"
       v-bind="props"
     >
-      <template #leading="{ modelValue, ui }">
-        <UIcon v-if="modelValue" :name="getStatusIcon(modelValue)" :class="ui.leadingIcon()" />
+      <template #leading="{ item, ui }">
+        <UIcon v-if="item" :name="item.icon" :class="ui.leadingIcon()" />
       </template>
     </USelect>
     <USelect
@@ -111,8 +105,21 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
       :items="users"
       v-bind="props"
     >
-      <template #leading="{ modelValue, ui }">
-        <UAvatar v-if="modelValue" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="getUserAvatar(modelValue)" />
+      <template #leading="{ item, ui }">
+        <UAvatar v-if="item" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="item.avatar" />
+      </template>
+    </USelect>
+    <USelect v-model="statusKey" :items="statuses" v-bind="props">
+      <template #leading="{ item, ui }">
+        <UIcon v-if="item" :name="item.icon" :class="ui.leadingIcon()" />
+      </template>
+      <template #default="{ modelValue, item }">
+        {{ item?.label }} ({{ modelValue }})
+      </template>
+    </USelect>
+    <USelect v-model="statusKeys" :items="statuses" multiple v-bind="props">
+      <template #default="{ item }">
+        {{ item.map(i => i.label).join(' + ') }}
       </template>
     </USelect>
   </Matrix>
