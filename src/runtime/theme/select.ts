@@ -10,7 +10,9 @@ export default defineTheme({
     leading: `flex items-center before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
-    trailing: 'ms-auto flex items-center',
+    // Around the chevron, the trailing is a box like the buttons of a field: square, 4px
+    // from the top and the bottom, its icon on the padding of the box
+    trailing: 'ms-auto flex items-center has-[>[data-slot$=trailingIcon]]:-my-[calc(var(--ui-control-py)-(--spacing(1)))] has-[>[data-slot$=trailingIcon]]:-me-[calc(var(--ui-control-py)-(--spacing(1)))] has-[>[data-slot$=trailingIcon]]:p-[calc(var(--ui-control-py)-(--spacing(1)))] has-[>[data-slot$=trailingIcon]]:rounded-sm has-[>[data-slot$=trailingIcon]]:[--ui-accent:var(--ui-neutral)] has-[>[data-slot$=trailingIcon]]:hover:bg-accent-strong transition-colors',
     trailingIcon: 'shrink-0 text-faint',
     value: 'truncate pointer-events-none',
     placeholder: 'truncate text-faint',
