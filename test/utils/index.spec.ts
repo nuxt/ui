@@ -125,6 +125,12 @@ describe('compare', () => {
     expect(compare({ id: 1 }, { id: 2 }, 'id')).toBe(false)
   })
 
+  it('only matches null with null', () => {
+    expect(compare({ label: 'Status' }, null, 'value')).toBe(false)
+    expect(compare<any>({ id: 1 }, null, (a, b) => a.id === b.id)).toBe(false)
+    expect(compare(null, null, 'value')).toBe(true)
+  })
+
   it('falls back to deep equality', () => {
     expect(compare({ a: [1] }, { a: [1] })).toBe(true)
     expect(compare({ a: 1 }, { a: 2 })).toBe(false)
@@ -174,6 +180,10 @@ describe('getDisplayValue', () => {
 
   it('finds the item with `valueKey` and reads `labelKey`', () => {
     expect(getDisplayValue(items, 2, { valueKey: 'value', labelKey: 'label' })).toBe('Two')
+  })
+
+  it('does not match a label item for a null value with `by`', () => {
+    expect(getDisplayValue([{ type: 'label', label: 'Status' }, ...items], null, { by: 'value', labelKey: 'label' })).toBeUndefined()
   })
 
   it('reads `labelKey` from an object value', () => {
