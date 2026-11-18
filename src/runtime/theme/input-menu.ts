@@ -12,8 +12,11 @@ export default extendTheme(input, {
     tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
     // The trigger is the button of the field, 4px inside the box, and holds the clear or the
     // chevron: its hover is a step above the fill of the box
-    trailing: () => 'group flex items-center me-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-accent:var(--ui-neutral)] p-[calc(var(--ui-control-py)-(--spacing(1)))] rounded-sm enabled:hover:bg-accent-strong enabled:active:bg-accent-strong disabled:cursor-not-allowed focus:outline-none transition-colors',
+    trailing: () => 'group group/input-menu flex items-center me-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-accent:var(--ui-neutral)] p-[calc(var(--ui-control-py)-(--spacing(1)))] rounded-sm enabled:hover:bg-accent-strong enabled:active:bg-accent-strong disabled:cursor-not-allowed focus:outline-none transition-colors',
     trailingClear: 'p-0',
+    // The chevron turns over while the menu is open, the named group keeps an open
+    // ancestor from turning it
+    trailingIcon: 'group-data-[state=open]/input-menu:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     arrow: 'fill-bg stroke-default',
     content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-overlay shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col cursor-default',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1',

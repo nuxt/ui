@@ -5,13 +5,15 @@ import { defineTheme } from '../utils/theme'
 // `base` is the box, the `<button>` of the trigger
 export default defineTheme({
   slots: {
-    base: 'group relative inline-flex items-center rounded-md text-strong disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) transition-colors',
+    base: 'group group/select relative inline-flex items-center rounded-md text-strong disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) transition-colors',
     // The invisible character gives the leading the baseline of the text, see `input.ts`
     leading: `flex items-center before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
     trailing: 'ms-auto flex items-center',
-    trailingIcon: 'shrink-0 text-faint',
+    // The chevron turns over while the menu is open, the named group keeps an open
+    // ancestor from turning it
+    trailingIcon: 'shrink-0 text-faint group-data-[state=open]/select:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     value: 'truncate pointer-events-none',
     placeholder: 'truncate text-faint',
     arrow: 'fill-bg stroke-default',

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { motion } from 'motion-v'
-import type { VariantType } from 'motion-v'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const route = useRoute()
@@ -27,26 +25,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
   target: '_blank'
 }])
 
-const variants: { [k: string]: VariantType | ((custom: unknown) => VariantType) } = {
-  normal: {
-    rotate: 0,
-    y: 0,
-    opacity: 1
-  },
-  close: (custom: unknown) => {
-    const c = custom as number
-    return {
-      rotate: c === 1 ? 45 : c === 3 ? -45 : 0,
-      y: c === 1 ? 6 : c === 3 ? -6 : 0,
-      opacity: c === 2 ? 0 : 1,
-      transition: {
-        type: 'spring',
-        stiffness: 260,
-        damping: 20
-      }
-    }
-  }
-}
+const line = 'origin-center transform-fill transition-[translate,rotate,opacity] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none'
 </script>
 
 <template>
@@ -91,35 +70,26 @@ const variants: { [k: string]: VariantType | ((custom: unknown) => VariantType) 
           stroke-linecap="round"
           stroke-linejoin="round"
         >
-          <motion.line
+          <line
             x1="4"
             y1="6"
             x2="20"
             y2="6"
-            :variants="variants"
-            :animate="open ? 'close' : 'normal'"
-            :custom="1"
-            tabindex="-1"
+            :class="[line, open && 'translate-y-1.5 rotate-45 starting:translate-y-0 starting:rotate-0']"
           />
-          <motion.line
+          <line
             x1="4"
             y1="12"
             x2="20"
             y2="12"
-            :variants="variants"
-            :animate="open ? 'close' : 'normal'"
-            :custom="2"
-            tabindex="-1"
+            :class="[line, open && 'opacity-0 starting:opacity-100']"
           />
-          <motion.line
+          <line
             x1="4"
             y1="18"
             x2="20"
             y2="18"
-            :variants="variants"
-            :animate="open ? 'close' : 'normal'"
-            :custom="3"
-            tabindex="-1"
+            :class="[line, open && '-translate-y-1.5 -rotate-45 starting:translate-y-0 starting:rotate-0']"
           />
         </svg>
       </UButton>
