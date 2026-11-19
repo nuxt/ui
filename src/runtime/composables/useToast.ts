@@ -200,7 +200,8 @@ export function useToast() {
       }
 
       // Reset what the loading state set, a field the settled state doesn't pass would otherwise keep its loading value.
-      const body = { icon: undefined, duration: undefined, ui: loading.ui, ...resolved }
+      const reset = Object.fromEntries(Object.keys(loading).filter(key => key !== 'id' && key !== 'open').map(key => [key, undefined]))
+      const body = { ...reset, icon: undefined, duration: undefined, ui: loading.ui, ...resolved }
 
       const queued = queue.find(t => t.id === toast.id)
       if (queued) {

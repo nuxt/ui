@@ -269,6 +269,44 @@ describe('useToast', () => {
       expect(toast.toasts.value[0]!.title).toBe('Failed')
     })
 
+    it('resets the fields set by the loading state when the promise resolves', async () => {
+      const { promise, resolve } = deferred<undefined>()
+      toast.promise(promise, {
+        loading: { id: 'p', title: 'Uploading', description: 'Uploading 3 files', close: false, actions: [{ label: 'Cancel' }] },
+        success: 'Uploaded'
+      })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      resolve(undefined)
+      await promise
+
+      expect(toast.toasts.value[0]).toMatchObject({ id: 'p', title: 'Uploaded', description: undefined, close: undefined, actions: undefined, open: true })
+    })
+
+    it('resets the fields set by the loading state when the promise rejects', async () => {
+      const { promise, reject } = deferred<undefined>()
+      const result = toast.promise(promise, {
+        loading: { title: 'Uploading', description: 'Uploading 3 files', close: false, actions: [{ label: 'Cancel' }] },
+        error: { title: 'Upload failed', color: 'error' }
+      })
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+
+      reject(new Error('Failed'))
+      await expect(result).rejects.toThrow('Failed')
+
+      expect(toast.toasts.value[0]).toMatchObject({ title: 'Upload failed', color: 'error', description: undefined, close: undefined, actions: undefined })
+    })
+
+    it('resets the fields set by the loading state when the promise settles before the toast is displayed', async () => {
+      toast.promise(Promise.resolve(), {
+        loading: { id: 'p', title: 'Uploading', description: 'Uploading 3 files', close: false, actions: [{ label: 'Cancel' }] },
+        success: 'Uploaded'
+      })
+
+      await vi.waitFor(() => expect(toast.toasts.value).toHaveLength(1))
+      expect(toast.toasts.value[0]).toMatchObject({ id: 'p', title: 'Uploaded', description: undefined, close: undefined, actions: undefined, open: true })
+    })
+
     it('applies the settled state when the promise settles before the toast is displayed', async () => {
       toast.promise(Promise.resolve(), { loading: 'Saving', success: 'Saved' })
 
