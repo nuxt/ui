@@ -6,9 +6,9 @@
    token, except the focus outline and the two hovers, set in `accent.css`.
    `text-primary` and `text-accent` read the color's text before the color, so
    text can be darker than the solid while `bg-primary` stays on it.
-   The neutral surfaces and borders read `--ui-layer-*` first, which only
-   `bg-overlay` sets: it points them at the overlay tokens on a floating layer,
-   and they fall through to the page tokens while those are unset. */
+   The neutral surfaces and borders read `--ui-layer-*` first, which `bg-overlay`
+   and `field-layer` set: they point them one step up on a floating layer or a
+   filled field, and they fall through to the page tokens while those are unset. */
 @theme default inline {
   --color-primary-50: var(--ui-color-primary-50);
   --color-primary-100: var(--ui-color-primary-100);

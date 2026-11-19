@@ -10,29 +10,32 @@ export default extendTheme(select, {
     focusScope: 'flex flex-col min-h-0 focus:outline-none',
     viewport: () => 'relative scroll-py-1 overflow-y-auto flex-1',
     content: (content: string) => [content, 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)'],
-    trailingClear: 'p-0',
+    // 4px inside the box like the buttons of a field, the margins give back the room it takes
+    // The trailing hands it the values of the field, the button sets its own
+    trailing: (prev: string) => [prev, '[--ui-field-pad:calc(var(--ui-field-py)-(--spacing(1)))] [--ui-field-inset:min(var(--ui-field-pad),calc(var(--ui-control-px)-(--spacing(1))))] [--ui-field-icon-size:var(--ui-control-icon-size)]'],
+    trailingClear: '-my-(--ui-field-pad) -me-(--ui-field-inset) p-(--ui-field-pad) rounded-sm [--ui-control-icon-size:var(--ui-field-icon-size)]',
     empty: 'p-[calc(var(--ui-control-py)+(--spacing(1)))] text-center text-muted'
   },
   variants: {
     size: {
       xs: {
-        filter: '[--ui-control-px:var(--ui-control-py-xs)]',
+        filter: '[--ui-control-px:calc(var(--ui-control-px-xs)-(--spacing(1)))]',
         empty: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)'
       },
       sm: {
-        filter: '[--ui-control-px:var(--ui-control-py-sm)]',
+        filter: '[--ui-control-px:calc(var(--ui-control-px-sm)-(--spacing(1)))]',
         empty: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)'
       },
       md: {
-        filter: '[--ui-control-px:var(--ui-control-py-md)]',
+        filter: '[--ui-control-px:calc(var(--ui-control-px-md)-(--spacing(1)))]',
         empty: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)'
       },
       lg: {
-        filter: '[--ui-control-px:var(--ui-control-py-lg)]',
+        filter: '[--ui-control-px:calc(var(--ui-control-px-lg)-(--spacing(1)))]',
         empty: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height)'
       },
       xl: {
-        filter: '[--ui-control-px:var(--ui-control-py-xl)]',
+        filter: '[--ui-control-px:calc(var(--ui-control-px-xl)-(--spacing(1)))]',
         empty: 'text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)'
       }
     },

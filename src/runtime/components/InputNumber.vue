@@ -37,8 +37,8 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue,
    */
   orientation?: InputNumber['variants']['orientation']
   /**
-   * Configure the increment button. The `color` and `size` are inherited.
-   * @defaultValue { variant: 'link' }
+   * Configure the increment button. The `size` is inherited.
+   * @defaultValue { color: 'neutral', variant: 'ghost' }
    */
   increment?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
@@ -50,8 +50,8 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue,
   /** Disable the increment button. */
   incrementDisabled?: boolean
   /**
-   * Configure the decrement button. The `color` and `size` are inherited.
-   * @defaultValue { variant: 'link' }
+   * Configure the decrement button. The `size` is inherited.
+   * @defaultValue { color: 'neutral', variant: 'ghost' }
    */
   decrement?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
@@ -242,9 +242,9 @@ defineExpose({
         <slot name="increment">
           <UButton
             :icon="incrementIcon"
-            :color="color"
+            color="neutral"
             :size="size"
-            variant="link"
+            variant="ghost"
             :aria-label="t('inputNumber.increment')"
             v-bind="typeof props.increment === 'object' ? props.increment : undefined"
           />
@@ -257,9 +257,9 @@ defineExpose({
         <slot name="decrement">
           <UButton
             :icon="decrementIcon"
-            :color="color"
+            color="neutral"
             :size="size"
-            variant="link"
+            variant="ghost"
             :aria-label="t('inputNumber.decrement')"
             v-bind="typeof props.decrement === 'object' ? props.decrement : undefined"
           />

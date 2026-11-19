@@ -1,5 +1,6 @@
 /* What Tailwind can't take inside a cascade layer: the sources it scans, the
-   `light` / `dark` variants, the theme tokens and the `bg-overlay` utility.
+   `light` / `dark` variants, the theme tokens and the `bg-overlay` and `field-layer`
+   utilities.
    Import it at the top level, `@nuxt/ui` does both halves. */
 @import './sources.css';
 @import '#build/ui.css';
@@ -24,4 +25,15 @@
   --ui-layer-bg-strong: var(--ui-overlay-bg-strong, color-mix(in oklab, var(--ui-layer-bg-soft), var(--ui-text-strong) 10%));
   --ui-layer-border-default: var(--ui-overlay-border-default, color-mix(in oklab, var(--ui-bg-overlay) 0%, var(--ui-border-strong)));
   --ui-layer-border-strong: var(--ui-overlay-border-strong, color-mix(in oklab, var(--ui-layer-border-default), var(--ui-text-strong) 10%));
+}
+
+/* A field whose box is filled with `bg-soft`: its leading, trailing and steppers move
+   one step up through `--ui-layer-*`, so a neutral button keeps a fill above the box.
+   The box stores that step, a variable can't read its parent's value of itself. */
+@utility field-layer {
+  --ui-field-layer: var(--ui-layer-bg-strong, var(--ui-bg-strong));
+  & > :is([data-slot$='-leading'], [data-slot$='-trailing'], [data-slot$='-increment'], [data-slot$='-decrement']) {
+    --ui-layer-bg-soft: var(--ui-field-layer);
+    --ui-layer-bg-strong: color-mix(in oklab, var(--ui-layer-bg-soft), var(--ui-text-strong) 10%);
+  }
 }
