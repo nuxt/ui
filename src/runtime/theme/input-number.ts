@@ -8,8 +8,9 @@ export default defineTheme({
     base: 'w-full min-w-0 flex-1 self-stretch border-0 bg-transparent text-strong outline-none placeholder:text-faint px-(--ui-control-px) py-(--ui-control-py) disabled:cursor-not-allowed',
     // After the input in the DOM, so the input keeps the first tab stop. The invisible
     // character gives the leading the baseline of the text, see `input.ts`
-    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-1 before:content-['x'] before:w-0 before:invisible`,
-    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-1',
+    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-1 [&>button:not(:has(>[data-slot=button-label]))]:ms-(--ui-field-gap) [&>button:not(:has(>[data-slot=button-label]))]:-me-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:relative [--ui-field-pad:calc(var(--ui-field-py)-(--spacing(1)))] [--ui-field-gap:max(calc(var(--ui-control-px)-var(--ui-field-pad)-(--spacing(1))),0px)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
+    // A button there is sized like in `input.ts`
+    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-1 [&>button:not(:has(>[data-slot=button-label]))]:me-(--ui-field-gap) [--ui-field-pad:calc(var(--ui-field-py)-(--spacing(1)))] [--ui-field-gap:max(calc(var(--ui-control-px)-var(--ui-field-pad)-(--spacing(1))),0px)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm',
     increment: 'flex items-center',
     decrement: 'flex items-center'
   },
@@ -17,17 +18,17 @@ export default defineTheme({
     ...fieldGroupVariantRoot,
     color: colorVariant({ root: '' }),
     size: {
-      xs: { root: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:calc(var(--ui-control-py-xs)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-xs--line-height)+var(--ui-control-text-step,0px))]' },
-      sm: { root: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:calc(var(--ui-control-py-sm)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)] text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-sm--line-height)+var(--ui-control-text-step,0px))]' },
-      md: { root: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:calc(var(--ui-control-py-md)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-md--line-height)+var(--ui-control-text-step,0px))]' },
-      lg: { root: '[--ui-control-px:var(--ui-control-px-lg)] [--ui-control-py:calc(var(--ui-control-py-lg)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)] text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-lg--line-height)+var(--ui-control-text-step,0px))]' },
-      xl: { root: '[--ui-control-px:var(--ui-control-px-xl)] [--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)] text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)' }
+      xs: { root: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:calc(var(--ui-control-py-xs)-var(--ui-control-text-step,0px)/2)] [--ui-field-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-xs--line-height)+var(--ui-control-text-step,0px))]' },
+      sm: { root: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:calc(var(--ui-control-py-sm)-var(--ui-control-text-step,0px)/2)] [--ui-field-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)] text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-sm--line-height)+var(--ui-control-text-step,0px))]' },
+      md: { root: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:calc(var(--ui-control-py-md)-var(--ui-control-text-step,0px)/2)] [--ui-field-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-md--line-height)+var(--ui-control-text-step,0px))]' },
+      lg: { root: '[--ui-control-px:var(--ui-control-px-lg)] [--ui-control-py:calc(var(--ui-control-py-lg)-var(--ui-control-text-step,0px)/2)] [--ui-field-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)] text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-lg--line-height)+var(--ui-control-text-step,0px))]' },
+      xl: { root: '[--ui-control-px:var(--ui-control-px-xl)] [--ui-control-py:var(--ui-control-py-xl)] [--ui-field-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)] text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)' }
     },
     variant: {
       outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width) has-[>:focus-visible]:ring-accent' },
-      soft: { root: 'bg-tint hover:bg-soft has-[>:focus]:bg-soft has-[>:disabled]:bg-tint outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width)' },
-      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width) has-[>:focus-visible]:ring-accent' },
-      ghost: { root: 'bg-transparent hover:bg-soft has-[>:focus]:bg-soft has-[>:disabled]:bg-transparent dark:has-[>:disabled]:bg-transparent outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width)' },
+      soft: { root: 'bg-tint hover:bg-soft has-[>:focus]:bg-soft hover:field-layer has-[>:focus]:field-layer has-[>:disabled]:bg-tint outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width)' },
+      subtle: { root: 'bg-soft field-layer ring ring-inset ring-strong outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width) has-[>:focus-visible]:ring-accent' },
+      ghost: { root: 'bg-transparent hover:bg-soft has-[>:focus]:bg-soft hover:field-layer has-[>:focus]:field-layer has-[>:disabled]:bg-transparent dark:has-[>:disabled]:bg-transparent outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width)' },
       none: { root: 'bg-transparent' }
     },
     // The box dims as a whole, so its buttons don't dim a second time
@@ -41,19 +42,17 @@ export default defineTheme({
       // The decrement comes after the input in the DOM, so the input keeps the first tab stop
       horizontal: {
         base: 'text-center',
-        increment: 'pe-1',
-        decrement: `order-first ps-1 before:content-['x'] before:w-0 before:invisible`
+        increment: 'pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-pad:calc(var(--ui-field-py)-(--spacing(1)))] [--ui-field-gap:max(calc(var(--ui-control-px)-var(--ui-field-pad)-(--spacing(1))),0px)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-(--ui-field-pad) [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm',
+        decrement: `order-first ps-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] before:content-['x'] before:w-0 before:invisible [--ui-field-pad:calc(var(--ui-field-py)-(--spacing(1)))] [--ui-field-gap:max(calc(var(--ui-control-px)-var(--ui-field-pad)-(--spacing(1))),0px)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-(--ui-field-pad) [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm`
       },
-      // Both buttons share a column at the end. Each is taller than its half of the
-      // box, so a negative margin lets them overlap without making the box taller.
-      // The leading and the trailing take a column each, empty when they are not there
+      // Both buttons stack in one column at the end, each half the box minus its 4px inset
       vertical: {
         root: 'inline-grid grid-cols-[auto_1fr_auto_auto] grid-rows-2',
         leading: 'col-start-1 row-span-2',
         base: 'col-start-2 row-span-2',
         trailing: 'col-start-3 row-span-2',
-        increment: 'col-start-4 row-start-1 self-start mb-[calc(var(--ui-control-py)-var(--ui-control-icon-size)/2)] pe-1 [&>button]:py-0 scale-80',
-        decrement: 'col-start-4 row-start-2 self-end mt-[calc(var(--ui-control-py)-var(--ui-control-icon-size)/2)] pe-1 [&>button]:py-0 scale-80'
+        increment: 'col-start-4 row-start-1 flex pt-1 pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-pad:calc(var(--ui-field-py)-(--spacing(1)))] [--ui-field-gap:max(calc(var(--ui-control-px)-var(--ui-field-pad)-(--spacing(1))),0px)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:w-[calc(2*var(--ui-field-pad)+var(--ui-field-icon-size))] [&>button]:p-0 [&>button]:justify-center [&>button]:[--ui-control-icon-size:calc(var(--ui-field-pad)+var(--ui-field-icon-size)/2)] [&>button]:rounded-sm',
+        decrement: 'col-start-4 row-start-2 flex pb-1 pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-pad:calc(var(--ui-field-py)-(--spacing(1)))] [--ui-field-gap:max(calc(var(--ui-control-px)-var(--ui-field-pad)-(--spacing(1))),0px)] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:w-[calc(2*var(--ui-field-pad)+var(--ui-field-icon-size))] [&>button]:p-0 [&>button]:justify-center [&>button]:[--ui-control-icon-size:calc(var(--ui-field-pad)+var(--ui-field-icon-size)/2)] [&>button]:rounded-sm'
       }
     },
     highlight: {

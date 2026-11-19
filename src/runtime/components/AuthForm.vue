@@ -311,8 +311,7 @@ defineExpose({
               <template #trailing>
                 <UButton
                   color="neutral"
-                  variant="link"
-                  size="sm"
+                  variant="ghost"
                   :icon="passwordVisibility[field.name] ? appConfig.ui.icons.eyeOff : appConfig.ui.icons.eye"
                   :aria-label="passwordVisibility[field.name] ? t('authForm.hidePassword') : t('authForm.showPassword')"
                   :aria-pressed="!!passwordVisibility[field.name]"

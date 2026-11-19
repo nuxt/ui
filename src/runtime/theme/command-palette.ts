@@ -4,13 +4,11 @@ export default defineTheme({
   slots: {
     root: 'flex flex-col min-h-0 min-w-0',
     // A field as large as an item, inset like the items: its padding is theirs, so its
-    // icon and text line up with them
+    // icon and text line up with them. With no trigger, the items keep the padding of their size
     // It holds the focus as long as the menu is open, so it shows no focus outline
     filter: 'mx-1 mt-1 has-[>:focus-visible]:outline-0',
-    // The back and the close take back the inset of the field, so their icon sits where
-    // the search icon does
-    back: '-ms-1',
-    close: '-me-1',
+    back: '',
+    close: '',
     content: 'relative overflow-hidden flex flex-col focus:outline-none',
     footer: 'p-1 border-t border-default',
     viewport: 'relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none',

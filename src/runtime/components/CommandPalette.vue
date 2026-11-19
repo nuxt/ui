@@ -103,7 +103,7 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
   closeIcon?: IconProps['name']
   /**
    * Display a button to navigate back in history.
-   * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
+   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
   back?: boolean | Omit<ButtonProps, LinkPropsKeys>
@@ -607,7 +607,7 @@ function onSelect(e: Event, item: T) {
               :size="props.size"
               :icon="props.backIcon || appConfig.ui.icons.arrowLeft"
               color="neutral"
-              variant="link"
+              variant="ghost"
               :aria-label="t('commandPalette.back')"
               v-bind="(typeof props.back === 'object' ? props.back : {})"
               data-slot="command-palette-back"

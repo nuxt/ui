@@ -759,7 +759,7 @@ defineExpose({
                 as="span"
                 :icon="props.clearIcon || appConfig.ui.icons.close"
                 :size="size"
-                variant="link"
+                variant="ghost"
                 color="neutral"
                 tabindex="-1"
                 v-bind="clearProps"

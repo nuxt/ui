@@ -10,7 +10,8 @@ export default extendTheme(input, {
     // The tags sit on the reading line, so their row gives back the difference,
     // and keeps the height of the field when it only holds the input
     tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
-    trailing: () => 'group group/input-menu flex items-center pe-(--ui-control-px) disabled:cursor-not-allowed focus:outline-none',
+    // The trigger holds the clear or the chevron, in a button box 4px inside the field
+    trailing: () => 'group group/input-menu flex items-center me-[max(calc(var(--ui-control-px)-var(--ui-field-py)+(--spacing(1))),--spacing(1))] [--ui-accent:var(--ui-neutral)] p-[calc(var(--ui-field-py)-(--spacing(1)))] rounded-sm enabled:hover:bg-accent-soft enabled:active:bg-accent-soft disabled:cursor-not-allowed focus:outline-none transition-colors',
     trailingClear: 'p-0',
     // The chevron turns over while the menu is open, the named group keeps an open
     // ancestor from turning it
@@ -40,9 +41,9 @@ export default extendTheme(input, {
     // The input takes the focus, up to two levels down from the box
     variant: {
       outline: { root: () => 'bg-default ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width) has-[input:focus-visible]:ring-accent' },
-      soft: { root: () => 'bg-tint hover:bg-soft has-[input:focus]:bg-soft has-[input:disabled]:bg-tint outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width)' },
-      subtle: { root: () => 'bg-soft ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width) has-[input:focus-visible]:ring-accent' },
-      ghost: { root: () => 'bg-transparent hover:bg-soft has-[input:focus]:bg-soft has-[input:disabled]:bg-transparent dark:has-[input:disabled]:bg-transparent outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width)' }
+      soft: { root: () => 'bg-tint hover:bg-soft has-[input:focus]:bg-soft hover:field-layer has-[input:focus]:field-layer has-[input:disabled]:bg-tint outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width)' },
+      subtle: { root: () => 'bg-soft field-layer ring ring-inset ring-strong outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width) has-[input:focus-visible]:ring-accent' },
+      ghost: { root: () => 'bg-transparent hover:bg-soft has-[input:focus]:bg-soft hover:field-layer has-[input:focus]:field-layer has-[input:disabled]:bg-transparent dark:has-[input:disabled]:bg-transparent outline-accent-focus has-[input:focus-visible]:outline-(length:--ui-focus-width)' }
     },
     // Next to a leading or a trailing, the padding of the container is the gap to it
     leading: {
@@ -67,9 +68,9 @@ export default extendTheme(input, {
     },
     size: {
       xs: {
-        content: '[--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)]',
-        label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-xs--leading)-var(--ui-control-text-xs--line-height))/2)] text-[calc(var(--ui-control-text-xs)-0.125rem)]/[calc(var(--ui-control-text-xs--leading)-0.25rem)] gap-(--ui-control-gap)',
-        item: 'p-(--ui-control-py) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) gap-(--ui-control-gap)',
+        content: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)]',
+        label: 'px-[calc(var(--ui-control-px)-(--spacing(1)))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-xs--leading)-var(--ui-control-text-xs--line-height))/2)] text-[calc(var(--ui-control-text-xs)-0.125rem)]/[calc(var(--ui-control-text-xs--leading)-0.25rem)] gap-(--ui-control-gap)',
+        item: 'px-[calc(var(--ui-control-px)-(--spacing(1)))] py-(--ui-control-py) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) gap-(--ui-control-gap)',
         itemDescription: 'leading-(--ui-control-text-xs--leading)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
@@ -80,9 +81,9 @@ export default extendTheme(input, {
         empty: 'text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height)'
       },
       sm: {
-        content: '[--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)]',
-        label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-sm--leading)-var(--ui-control-text-sm--line-height))/2)] text-[calc(var(--ui-control-text-sm)-0.125rem)]/[calc(var(--ui-control-text-sm--leading)-0.25rem)] gap-(--ui-control-gap)',
-        item: 'p-(--ui-control-py) text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height) gap-(--ui-control-gap)',
+        content: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)]',
+        label: 'px-[calc(var(--ui-control-px)-(--spacing(1)))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-sm--leading)-var(--ui-control-text-sm--line-height))/2)] text-[calc(var(--ui-control-text-sm)-0.125rem)]/[calc(var(--ui-control-text-sm--leading)-0.25rem)] gap-(--ui-control-gap)',
+        item: 'px-[calc(var(--ui-control-px)-(--spacing(1)))] py-(--ui-control-py) text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height) gap-(--ui-control-gap)',
         itemDescription: 'leading-(--ui-control-text-sm--leading)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
@@ -93,9 +94,9 @@ export default extendTheme(input, {
         empty: 'text-(length:--ui-control-text-sm)/(--ui-control-text-sm--line-height)'
       },
       md: {
-        content: '[--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)]',
-        label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-md--leading)-var(--ui-control-text-md--line-height))/2)] text-[calc(var(--ui-control-text-md)-0.125rem)]/[calc(var(--ui-control-text-md--leading)-0.25rem)] gap-(--ui-control-gap)',
-        item: 'p-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) gap-(--ui-control-gap)',
+        content: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)]',
+        label: 'px-[calc(var(--ui-control-px)-(--spacing(1)))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-md--leading)-var(--ui-control-text-md--line-height))/2)] text-[calc(var(--ui-control-text-md)-0.125rem)]/[calc(var(--ui-control-text-md--leading)-0.25rem)] gap-(--ui-control-gap)',
+        item: 'px-[calc(var(--ui-control-px)-(--spacing(1)))] py-(--ui-control-py) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) gap-(--ui-control-gap)',
         itemDescription: 'leading-(--ui-control-text-md--leading)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
@@ -106,9 +107,9 @@ export default extendTheme(input, {
         empty: 'text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height)'
       },
       lg: {
-        content: '[--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)]',
-        label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-lg--leading)-var(--ui-control-text-lg--line-height))/2)] text-[calc(var(--ui-control-text-lg)-0.125rem)]/[calc(var(--ui-control-text-lg--leading)-0.25rem)] gap-(--ui-control-gap)',
-        item: 'p-(--ui-control-py) text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height) gap-(--ui-control-gap)',
+        content: '[--ui-control-px:var(--ui-control-px-lg)] [--ui-control-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)]',
+        label: 'px-[calc(var(--ui-control-px)-(--spacing(1)))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-lg--leading)-var(--ui-control-text-lg--line-height))/2)] text-[calc(var(--ui-control-text-lg)-0.125rem)]/[calc(var(--ui-control-text-lg--leading)-0.25rem)] gap-(--ui-control-gap)',
+        item: 'px-[calc(var(--ui-control-px)-(--spacing(1)))] py-(--ui-control-py) text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height) gap-(--ui-control-gap)',
         itemDescription: 'leading-(--ui-control-text-lg--leading)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
@@ -119,9 +120,9 @@ export default extendTheme(input, {
         empty: 'text-(length:--ui-control-text-lg)/(--ui-control-text-lg--line-height)'
       },
       xl: {
-        content: '[--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)]',
-        label: 'px-(--ui-control-py) py-[calc(var(--ui-control-py)-(var(--ui-control-text-xl--leading)-var(--ui-control-text-xl--line-height))/2)] text-[calc(var(--ui-control-text-xl)-0.125rem)]/[calc(var(--ui-control-text-xl--leading)-0.25rem)] gap-(--ui-control-gap)',
-        item: 'p-(--ui-control-py) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height) gap-(--ui-control-gap)',
+        content: '[--ui-control-px:var(--ui-control-px-xl)] [--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)]',
+        label: 'px-[calc(var(--ui-control-px)-(--spacing(1)))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-xl--leading)-var(--ui-control-text-xl--line-height))/2)] text-[calc(var(--ui-control-text-xl)-0.125rem)]/[calc(var(--ui-control-text-xl--leading)-0.25rem)] gap-(--ui-control-gap)',
+        item: 'px-[calc(var(--ui-control-px)-(--spacing(1)))] py-(--ui-control-py) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height) gap-(--ui-control-gap)',
         itemDescription: 'leading-(--ui-control-text-xl--leading)',
         itemLeadingIcon: 'size-(--ui-control-icon-size)',
         itemLeadingChip: 'size-(--ui-control-icon-size)',
