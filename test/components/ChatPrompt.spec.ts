@@ -56,7 +56,7 @@ describe('ChatPrompt', () => {
       slots: { default: () => h(ChatPromptSubmit, { status: 'streaming', onStop }) },
       attachTo: document.body
     })
-    const button = () => wrapper.find('button[aria-label]')
+    const button = () => wrapper.findAll('button').at(-1)!
 
     expect(button().attributes('aria-label')).toBe('Stop generating')
 
@@ -67,7 +67,19 @@ describe('ChatPrompt', () => {
     await button().trigger('click')
     expect(onStop).not.toHaveBeenCalled()
     expect(wrapper.emitted('update:queue')?.[0]).toEqual([[{ text: 'Next question' }]])
+
+    await wrapper.setProps({ modelValue: '' })
+    expect(button().attributes('aria-label')).toBe('Stop generating')
     wrapper.unmount()
+  })
+
+  it('sends from `UChatPromptSubmit` while submitted when the prompt only has files', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: '', files: [new File(['a'], 'notes.txt')], queue: [], status: 'submitted' },
+      slots: { default: () => h(ChatPromptSubmit, { status: 'submitted' }) }
+    })
+
+    expect(wrapper.find('button[aria-label="Send prompt"]').exists()).toBe(true)
   })
 
   it('keeps `UChatPromptSubmit` on stop while streaming without `v-model:queue`', async () => {
