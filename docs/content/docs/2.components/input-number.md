@@ -208,7 +208,7 @@ props:
 
 ### Increment / Decrement
 
-Use the `increment` and `decrement` props to customize the increment and decrement buttons with any [Button](/docs/components/button) props. Defaults to `{ variant: 'ghost' }`{lang="ts-type"}.
+Use the `increment` and `decrement` props to customize the increment and decrement buttons with any [Button](/docs/components/button) props. Defaults to `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}.
 
 ::component-code
 ---
