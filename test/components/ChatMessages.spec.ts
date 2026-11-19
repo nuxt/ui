@@ -125,7 +125,8 @@ describe('ChatMessages', () => {
     const status = ref<'ready' | 'submitted'>('ready')
     const Parent = defineComponent({
       setup() {
-        return () => h('div', { style: 'overflow-y: auto' }, [h(ChatMessages, { messages: messages.value, status: status.value, shouldScrollToBottom: false }, { footer: () => 'Prompt' })])
+        // The top padding scrolls out of view, the room depends on the message's scroll margin instead
+        return () => h('div', { style: 'overflow-y: auto; padding-top: 16px' }, [h(ChatMessages, { messages: messages.value, status: status.value, shouldScrollToBottom: false }, { footer: () => 'Prompt' })])
       }
     })
 
@@ -136,6 +137,7 @@ describe('ChatMessages', () => {
     const footer = wrapper.find('[data-slot="footer"]').element
     const footerHeight = vi.spyOn(footer as HTMLElement, 'offsetHeight', 'get').mockReturnValue(200)
     for (const article of wrapper.findAll('article')) {
+      (article.element as HTMLElement).style.scrollMarginTop = '24px'
       vi.spyOn(article.element as HTMLElement, 'offsetHeight', 'get').mockReturnValue(50)
     }
 
@@ -149,7 +151,7 @@ describe('ChatMessages', () => {
     await new Promise(resolve => requestAnimationFrame(resolve))
     await nextTick()
 
-    expect((wrapper.find('[role="log"]').element as HTMLElement).style.getPropertyValue('--last-message-height')).toBe('350px')
+    expect((wrapper.find('[role="log"]').element as HTMLElement).style.getPropertyValue('--last-message-height')).toBe('326px')
     expect(scrollTo).toHaveBeenCalledOnce()
 
     wrapper.unmount()
