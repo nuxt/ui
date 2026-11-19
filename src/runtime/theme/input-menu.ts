@@ -11,7 +11,7 @@ export default extendTheme(input, {
     // and keeps the height of the field when it only holds the input
     tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
     // The trigger holds the clear or the chevron, in a button box 4px inside the field
-    trailing: () => 'group group/input-menu flex items-center me-[calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1)))] [--ui-accent:var(--ui-neutral)] p-[calc(var(--ui-control-py)-(--spacing(1)))] rounded-sm enabled:hover:bg-accent-soft enabled:active:bg-accent-soft disabled:cursor-not-allowed focus:outline-none transition-colors',
+    trailing: () => 'group group/input-menu flex items-center me-[max(calc(var(--ui-control-px)-var(--ui-control-py)+(--spacing(1))),--spacing(1))] [--ui-accent:var(--ui-neutral)] p-[calc(var(--ui-control-py)-(--spacing(1)))] rounded-sm enabled:hover:bg-accent-soft enabled:active:bg-accent-soft disabled:cursor-not-allowed focus:outline-none transition-colors',
     trailingClear: 'p-0',
     // The chevron turns over while the menu is open, the named group keeps an open
     // ancestor from turning it

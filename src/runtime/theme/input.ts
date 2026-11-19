@@ -16,11 +16,11 @@ export default defineTheme({
     // the leading the baseline of the text, so an icon doesn't move the box
     // A button there overlaps the padding of the input by its own, so the text starts
     // where it does after an icon
-    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] has-[>button]:-me-(--ui-field-pad) [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
+    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [&>button:not(:has(>[data-slot=button-label]))]:-me-(--ui-field-pad) [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
     // A button there is square, 4px inside the box, its icon where a field icon would be
-    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm',
+    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm',
     trailingIcon: 'shrink-0 text-faint'
   },
   variants: {
