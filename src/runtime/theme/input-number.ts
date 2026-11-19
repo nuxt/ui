@@ -9,9 +9,7 @@ export default defineTheme({
     // After the input in the DOM, so the input keeps the first tab stop. The invisible
     // character gives the leading the baseline of the text, see `input.ts`
     leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] has-[>button]:-me-(--ui-field-pad) [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
-    // A button in the leading or the trailing is square whatever its size, 4px from the
-    // top and the bottom, its icon where an icon of the field would be and never closer
-    // than 4px to the side: the slot keeps the padding and the icon of the field
+    // A button there is sized like in `input.ts`
     trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm',
     increment: 'flex items-center',
     decrement: 'flex items-center'
@@ -41,17 +39,13 @@ export default defineTheme({
       }
     },
     orientation: {
-      // The decrement comes after the input in the DOM, so the input keeps the first tab stop.
-      // The buttons sit 4px inside the box like a button in the leading or the trailing
+      // The decrement comes after the input in the DOM, so the input keeps the first tab stop
       horizontal: {
         base: 'text-center',
         increment: 'pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-(--ui-field-pad) [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm',
         decrement: `order-first ps-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] before:content-['x'] before:w-0 before:invisible [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-(--ui-field-pad) [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm`
       },
-      // Both buttons share a column at the end, stacked 4px inside the box: each takes
-      // half of it with an icon as tall, as wide as a button of the field and centered
-      // where an icon of the field would be. The leading and the trailing take a column
-      // each, empty when they are not there
+      // Both buttons stack in one column at the end, each half the box minus its 4px inset
       vertical: {
         root: 'inline-grid grid-cols-[auto_1fr_auto_auto] grid-rows-2',
         leading: 'col-start-1 row-span-2',

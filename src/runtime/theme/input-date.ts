@@ -10,8 +10,7 @@ export default defineTheme({
     segment: 'rounded-sm text-center outline-hidden data-placeholder:text-faint data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-(--ui-disabled-opacity) transition-colors',
     // After the segments in the DOM, so they keep the first tab stops. The invisible
     // character gives the leading the baseline of the text, see `input.ts`. The box
-    // has the padding here, so a button eats into it to sit as it does in an input,
-    // never closer than 4px to the side
+    // has the padding here, so a button eats into it to sit as it does in an input
     leading: `order-first flex items-center before:content-['x'] before:w-0 before:invisible has-[>button]:-my-(--ui-control-py) has-[>button]:-ms-[min(var(--ui-field-pad),calc(var(--ui-control-px)-(--spacing(1))))] has-[>button]:-me-(--ui-field-pad) [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',

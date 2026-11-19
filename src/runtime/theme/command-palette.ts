@@ -4,11 +4,9 @@ export default defineTheme({
   slots: {
     root: 'flex flex-col min-h-0 min-w-0',
     // A field as large as an item, inset like the items: its padding is theirs, so its
-    // icon and text line up with them, and with the icon of a back or a close button.
-    // With no trigger to line up with, the items keep the padding of their size
+    // icon and text line up with them. With no trigger, the items keep the padding of their size
     // It holds the focus as long as the menu is open, so it shows no focus outline
     filter: 'mx-1 mt-1 has-[>:focus-visible]:outline-0',
-    // The field sizes the back and the close like any button in its leading or trailing
     back: '',
     close: '',
     content: 'relative overflow-hidden flex flex-col',
