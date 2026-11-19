@@ -11,10 +11,10 @@ export default defineTheme({
     // After the segments in the DOM, so they keep the first tab stops. The invisible
     // character gives the leading the baseline of the text, see `input.ts`. The box
     // has the padding here, so a button eats into it to sit as it does in an input
-    leading: `order-first flex items-center before:content-['x'] before:w-0 before:invisible has-[>button]:-my-(--ui-control-py) has-[>button]:-ms-[min(var(--ui-field-pad),calc(var(--ui-control-px)-(--spacing(1))))] [&>button:not(:has(>[data-slot=button-label]))]:-me-(--ui-field-pad) [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm`,
+    leading: `order-first flex items-center before:content-['x'] before:w-0 before:invisible has-[>button]:-my-(--ui-control-py) has-[>button]:-ms-[calc(var(--ui-control-px)-(--spacing(1)))] [&>button:not(:has(>[data-slot=button-label]))]:ms-[max(calc(var(--ui-control-px)-var(--ui-field-pad)-(--spacing(1))),0px)] [&>button:not(:has(>[data-slot=button-label]))]:-me-(--ui-field-pad) [--ui-field-pad:calc(var(--ui-field-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
-    trailing: 'ms-auto flex items-center has-[>button]:-my-(--ui-control-py) has-[>button]:-me-[min(var(--ui-field-pad),calc(var(--ui-control-px)-(--spacing(1))))] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm',
+    trailing: 'ms-auto flex items-center has-[>button]:-my-(--ui-control-py) has-[>button]:-me-[calc(var(--ui-control-px)-(--spacing(1)))] [&>button:not(:has(>[data-slot=button-label]))]:me-[max(calc(var(--ui-control-px)-var(--ui-field-pad)-(--spacing(1))),0px)] [--ui-field-pad:calc(var(--ui-field-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm',
     trailingIcon: 'shrink-0 text-faint',
     separatorIcon: 'shrink-0 size-4 text-muted'
   },
@@ -23,7 +23,7 @@ export default defineTheme({
     // The segments sit closer than the content of another field
     size: {
       xs: {
-        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:calc(--spacing(1.25)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:--spacing(0.25)] [--ui-control-icon-size:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-xs--line-height)+var(--ui-control-text-step,0px))]',
+        root: '[--ui-control-px:--spacing(2)] [--ui-control-py:calc(--spacing(1.25)-var(--ui-control-text-step,0px)/2)] [--ui-field-py:--spacing(1.25)] [--ui-control-gap:--spacing(0.25)] [--ui-control-icon-size:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-xs--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
         // The separator of a range follows the 14px line, so it doesn't grow the box
@@ -31,7 +31,7 @@ export default defineTheme({
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       sm: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:calc(--spacing(1.75)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon-size:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-sm--line-height)+var(--ui-control-text-step,0px))]',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:calc(--spacing(1.75)-var(--ui-control-text-step,0px)/2)] [--ui-field-py:--spacing(1.75)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon-size:--spacing(3.5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-sm--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
         // The separator of a range follows the 14px line, so it doesn't grow the box
@@ -39,19 +39,19 @@ export default defineTheme({
         segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
       },
       md: {
-        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:calc(--spacing(2)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-md--line-height)+var(--ui-control-text-step,0px))]',
+        root: '[--ui-control-px:--spacing(2.5)] [--ui-control-py:calc(--spacing(2)-var(--ui-control-text-step,0px)/2)] [--ui-field-py:--spacing(2)] [--ui-control-gap:--spacing(0.5)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-md--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       lg: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:calc(--spacing(2.5)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:--spacing(0.75)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-lg--line-height)+var(--ui-control-text-step,0px))]',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:calc(--spacing(2.5)-var(--ui-control-text-step,0px)/2)] [--ui-field-py:--spacing(2.5)] [--ui-control-gap:--spacing(0.75)] [--ui-control-icon-size:--spacing(4)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-lg--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
         segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
       },
       xl: {
-        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2.5)] [--ui-control-gap:--spacing(0.75)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)',
+        root: '[--ui-control-px:--spacing(3)] [--ui-control-py:--spacing(2.5)] [--ui-field-py:--spacing(2.5)] [--ui-control-gap:--spacing(0.75)] [--ui-control-icon-size:--spacing(5)] px-(--ui-control-px) py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
         segment: 'data-[segment=day]:w-10 data-[segment=month]:w-10 data-[segment=year]:w-12'

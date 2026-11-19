@@ -15,11 +15,11 @@ export default defineTheme({
     tags: 'flex flex-wrap items-center flex-1 min-w-0 gap-(--ui-control-gap) px-(--ui-control-px) py-(--ui-control-py)',
     // After the input in the DOM, so the input keeps the first tab stop. The
     // invisible character gives the leading the baseline of the text, see `input.ts`
-    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [&>button:not(:has(>[data-slot=button-label]))]:-me-(--ui-field-pad) [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
+    leading: `order-first flex items-center ps-(--ui-control-px) has-[>button]:ps-1 [&>button:not(:has(>[data-slot=button-label]))]:ms-[max(calc(var(--ui-control-px)-var(--ui-field-pad)-(--spacing(1))),0px)] [&>button:not(:has(>[data-slot=button-label]))]:-me-(--ui-field-pad) [--ui-field-pad:calc(var(--ui-field-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm before:content-['x'] before:w-0 before:invisible`,
     leadingIcon: 'shrink-0 text-faint',
     leadingAvatar: 'shrink-0',
     // A button there is sized like in `input.ts`
-    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm',
+    trailing: 'flex items-center pe-(--ui-control-px) has-[>button]:pe-1 [&>button:not(:has(>[data-slot=button-label]))]:me-[max(calc(var(--ui-control-px)-var(--ui-field-pad)-(--spacing(1))),0px)] [--ui-field-pad:calc(var(--ui-field-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:p-(--ui-field-pad) [&>button:not(:has(>[data-slot=button-label]))]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button:not(:has(>[data-slot=button-label]))]:rounded-sm',
     trailingIcon: 'shrink-0 text-faint',
     item: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-strong bg-soft text-default data-disabled:cursor-not-allowed wrap-anywhere data-[state=active]:bg-strong',
     itemText: '',
@@ -30,7 +30,7 @@ export default defineTheme({
     ...fieldGroupVariantRoot,
     size: {
       xs: {
-        root: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:calc(var(--ui-control-py-xs)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-xs--line-height)+var(--ui-control-text-step,0px))]',
+        root: '[--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:calc(var(--ui-control-py-xs)-var(--ui-control-text-step,0px)/2)] [--ui-field-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] text-[calc(var(--ui-control-text-xs)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-xs--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
         tags: 'min-h-[calc(var(--ui-control-text-xs--line-height)+var(--ui-control-text-step,0px)+2*var(--ui-control-py))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-xs--leading)-var(--ui-control-text-xs--line-height))/2)]',
@@ -38,7 +38,7 @@ export default defineTheme({
         itemDeleteIcon: 'size-(--ui-control-text-xs)'
       },
       sm: {
-        root: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:calc(var(--ui-control-py-sm)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)] text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-sm--line-height)+var(--ui-control-text-step,0px))]',
+        root: '[--ui-control-px:var(--ui-control-px-sm)] [--ui-control-py:calc(var(--ui-control-py-sm)-var(--ui-control-text-step,0px)/2)] [--ui-field-py:var(--ui-control-py-sm)] [--ui-control-gap:var(--ui-control-gap-sm)] [--ui-control-icon-size:var(--ui-control-icon-size-sm)] text-[calc(var(--ui-control-text-sm)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-sm--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
         tags: 'min-h-[calc(var(--ui-control-text-sm--line-height)+var(--ui-control-text-step,0px)+2*var(--ui-control-py))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-sm--leading)-var(--ui-control-text-sm--line-height))/2)]',
@@ -46,7 +46,7 @@ export default defineTheme({
         itemDeleteIcon: 'size-(--ui-control-text-sm)'
       },
       md: {
-        root: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:calc(var(--ui-control-py-md)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-md--line-height)+var(--ui-control-text-step,0px))]',
+        root: '[--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:calc(var(--ui-control-py-md)-var(--ui-control-text-step,0px)/2)] [--ui-field-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] text-[calc(var(--ui-control-text-md)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-md--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
         tags: 'min-h-[calc(var(--ui-control-text-md--line-height)+var(--ui-control-text-step,0px)+2*var(--ui-control-py))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-md--leading)-var(--ui-control-text-md--line-height))/2)]',
@@ -54,7 +54,7 @@ export default defineTheme({
         itemDeleteIcon: 'size-(--ui-control-text-md)'
       },
       lg: {
-        root: '[--ui-control-px:var(--ui-control-px-lg)] [--ui-control-py:calc(var(--ui-control-py-lg)-var(--ui-control-text-step,0px)/2)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)] text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-lg--line-height)+var(--ui-control-text-step,0px))]',
+        root: '[--ui-control-px:var(--ui-control-px-lg)] [--ui-control-py:calc(var(--ui-control-py-lg)-var(--ui-control-text-step,0px)/2)] [--ui-field-py:var(--ui-control-py-lg)] [--ui-control-gap:var(--ui-control-gap-lg)] [--ui-control-icon-size:var(--ui-control-icon-size-lg)] text-[calc(var(--ui-control-text-lg)+var(--ui-control-text-step,0px))]/[calc(var(--ui-control-text-lg--line-height)+var(--ui-control-text-step,0px))]',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
         tags: 'min-h-[calc(var(--ui-control-text-lg--line-height)+var(--ui-control-text-step,0px)+2*var(--ui-control-py))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-lg--leading)-var(--ui-control-text-lg--line-height))/2)]',
@@ -62,7 +62,7 @@ export default defineTheme({
         itemDeleteIcon: 'size-(--ui-control-text-lg)'
       },
       xl: {
-        root: '[--ui-control-px:var(--ui-control-px-xl)] [--ui-control-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)] text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)',
+        root: '[--ui-control-px:var(--ui-control-px-xl)] [--ui-control-py:var(--ui-control-py-xl)] [--ui-field-py:var(--ui-control-py-xl)] [--ui-control-gap:var(--ui-control-gap-xl)] [--ui-control-icon-size:var(--ui-control-icon-size-xl)] text-(length:--ui-control-text-xl)/(--ui-control-text-xl--line-height)',
         leadingIcon: 'size-(--ui-control-icon-size)',
         trailingIcon: 'size-(--ui-control-icon-size)',
         tags: 'min-h-[calc(var(--ui-control-text-xl--line-height)+2*var(--ui-control-py))] py-[calc(var(--ui-control-py)-(var(--ui-control-text-xl--leading)-var(--ui-control-text-xl--line-height))/2)]',
