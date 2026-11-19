@@ -11,7 +11,9 @@ export default extendTheme(select, {
     viewport: () => 'relative scroll-py-1 overflow-y-auto flex-1',
     content: (content: string) => [content, 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)'],
     // 4px inside the box like the buttons of a field, the margins give back the room it takes
-    trailingClear: '-my-[calc(var(--ui-control-py)-(--spacing(1)))] -me-[min(calc(var(--ui-control-py)-(--spacing(1))),calc(var(--ui-control-px)-(--spacing(1))))] p-[calc(var(--ui-control-py)-(--spacing(1)))] rounded-sm',
+    // The trailing hands it the values of the field, the button sets its own
+    trailing: (prev: string) => [prev, '[--ui-field-pad:calc(var(--ui-field-py)-(--spacing(1)))] [--ui-field-inset:min(var(--ui-field-pad),calc(var(--ui-control-px)-(--spacing(1))))] [--ui-field-icon-size:var(--ui-control-icon-size)]'],
+    trailingClear: '-my-(--ui-field-pad) -me-(--ui-field-inset) p-(--ui-field-pad) rounded-sm [--ui-control-icon-size:var(--ui-field-icon-size)]',
     empty: 'p-[calc(var(--ui-control-py)+(--spacing(1)))] text-center text-muted'
   },
   variants: {
