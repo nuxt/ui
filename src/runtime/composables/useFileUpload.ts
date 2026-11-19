@@ -118,7 +118,11 @@ export function useFileUpload(options: UseFileUploadOptions) {
 
       const scope = effectScope()
       scope.run(() => {
-        const { isOverDropZone } = useDropZone(dropzoneRef, { onDrop: files => onDrop(files, true) })
+        const { isOverDropZone } = useDropZone(dropzoneRef, {
+          // Only handle drags carrying files, so text can still be dragged into a textarea.
+          checkValidity: items => Array.from(items).some(item => item.kind === 'file'),
+          onDrop: files => onDrop(files, true)
+        })
 
         watch(isOverDropZone, (value) => {
           isDragging.value = value
