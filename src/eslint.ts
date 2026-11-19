@@ -21,6 +21,8 @@ const GRAYS = ['slate', 'gray', 'zinc', 'stone', 'taupe', 'mauve', 'mist', 'oliv
 const HUES = ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
 
 const COLOR_UTILITY = '(?:bg|text|border(?:-[xytrblse]|-bs|-be)?|ring(?:-offset)?|outline|divide|fill|stroke|from|via|to|shadow|inset-shadow|inset-ring|decoration|accent|caret|placeholder)'
+// These numeric utilities can overlap custom palette names and set non-color properties.
+const NON_COLOR_NUMERIC_CLASS = '(?:bg-(?:linear|conic)|outline-offset|ring-offset|border-(?:[xytrblse]|bs|be|spacing(?:-[xy])?)|divide-[xy])-\\d{2,3}(?:/\\S+)?!?$'
 // A class with its variants, `md:hover:bg-red-500/50`
 const CLASS = (utility: string, color: string) => `^(?:\\S*:)?!?-?(${utility})-(${color})(?:-\\d{2,3})?(?:\\/\\S+)?!?$`
 
@@ -58,9 +60,15 @@ const GRAY_TOKENS: Record<string, string> = {
 
 function paletteRestrictions(colors: Record<string, string>) {
   // The first alias wins when two point at the same palette, `primary` before the others
-  const aliasOf: Record<string, string> = {}
+  const aliasOf = new Map<string, string>()
+  const palettes = new Set(HUES)
   for (const [alias, palette] of Object.entries(colors)) {
-    aliasOf[palette] ??= alias
+    if (!aliasOf.has(palette)) {
+      aliasOf.set(palette, alias)
+    }
+    if (palette && !GRAYS.includes(palette) && !Object.hasOwn(colors, palette)) {
+      palettes.add(palette)
+    }
   }
   const restrict: { pattern: string, message: string }[] = []
 
@@ -91,13 +99,16 @@ function paletteRestrictions(colors: Record<string, string>) {
     message: '"$0" uses a raw palette color. Use a semantic token or the `neutral` color instead.'
   })
 
-  for (const hue of HUES) {
-    const alias = aliasOf[hue]
+  for (const palette of palettes) {
+    const alias = aliasOf.get(palette)
+    const palettePattern = palette.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    // Custom palette names can also name utilities like `bg-cover`.
+    const shadePattern = `(?:-\\d{2,3})${HUES.includes(palette) ? '?' : ''}`
     restrict.push({
-      pattern: `^((?:\\S*:)?!?-?)(${COLOR_UTILITY})-${hue}((?:-\\d{2,3})?(?:\\/\\S+)?!?)$`,
+      pattern: `^((?:\\S*:)?!?-?)(?!${NON_COLOR_NUMERIC_CLASS})(${COLOR_UTILITY})-${palettePattern}(${shadePattern}(?:\\/\\S+)?!?)$`,
       message: alias
-        ? `"$0" uses a raw palette color. \`${alias}\` points at \`${hue}\`, use \`$1$2-${alias}$3\` instead.`
-        : `"$0" uses a raw palette color. Point a color alias at \`${hue}\` in \`ui.colors\` and use the alias instead.`
+        ? `"$0" uses a raw palette color. \`${alias}\` points at \`${palette}\`, use \`$1$2-${alias}$3\` instead.`
+        : `"$0" uses a raw palette color. Point a color alias at \`${palette}\` in \`ui.colors\` and use the alias instead.`
     })
   }
 
