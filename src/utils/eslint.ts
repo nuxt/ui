@@ -48,7 +48,7 @@ export interface NuxtUIESLintOptions {
 export function readAppConfigColors(code: string): Record<string, string> {
   const block = code.replace(/\/\*[\s\S]*?\*\/|^\s*\/\/.*$/gm, '').match(/\bcolors\s*:\s*\{([^{}]*)\}/)?.[1]
   const colors: Record<string, string> = {}
-  for (const [, alias, palette] of block?.matchAll(/([\w-]+)\s*:\s*["'`]([a-z]+)["'`]/g) ?? []) {
+  for (const [, alias, palette] of block?.matchAll(/([\w-]+)\s*:\s*["'`]([a-z]+(?:-[a-z]+)*)["'`]/g) ?? []) {
     colors[alias!] = palette!
   }
   return colors
