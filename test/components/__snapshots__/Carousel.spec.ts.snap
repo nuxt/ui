@@ -71,7 +71,7 @@ exports[`Carousel > renders with dots correctly 1`] = `
   </div>
   <div data-slot="controls" class="">
     <!--v-if-->
-    <div role="tablist" aria-label="Choose slide to display" data-slot="dots" class="absolute inset-x-0 -bottom-7 flex flex-wrap items-center justify-center gap-3"></div>
+    <div role="tablist" aria-label="Choose slide to display" data-slot="dots" class="absolute inset-x-0 -bottom-7 isolate flex flex-wrap items-center justify-center gap-3"></div>
   </div>
 </div>"
 `;
