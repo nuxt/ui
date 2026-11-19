@@ -35,10 +35,10 @@ export default defineTheme({
   variants: {
     ...fieldGroupVariantWithHiddenInput,
     variant: {
-      outline: { base: 'bg-default hover:bg-soft disabled:bg-default ring ring-inset ring-strong outline-accent-focus focus-visible:outline-(length:--ui-focus-width) focus-visible:ring-accent' },
-      soft: { base: 'bg-tint hover:bg-soft focus:bg-soft disabled:bg-tint outline-accent-focus focus-visible:outline-(length:--ui-focus-width)' },
-      subtle: { base: 'bg-soft hover:bg-strong/75 disabled:bg-soft ring ring-inset ring-strong outline-accent-focus focus-visible:outline-(length:--ui-focus-width) focus-visible:ring-accent' },
-      ghost: { base: 'bg-transparent hover:bg-soft focus:bg-soft disabled:bg-transparent dark:disabled:bg-transparent outline-accent-focus focus-visible:outline-(length:--ui-focus-width)' },
+      outline: { base: 'bg-default hover:bg-soft hover:field-layer disabled:bg-default ring ring-inset ring-strong outline-accent-focus focus-visible:outline-(length:--ui-focus-width) focus-visible:ring-accent' },
+      soft: { base: 'bg-tint hover:bg-soft focus:bg-soft hover:field-layer focus:field-layer disabled:bg-tint outline-accent-focus focus-visible:outline-(length:--ui-focus-width)' },
+      subtle: { base: 'bg-soft field-layer hover:bg-strong/75 disabled:bg-soft ring ring-inset ring-strong outline-accent-focus focus-visible:outline-(length:--ui-focus-width) focus-visible:ring-accent' },
+      ghost: { base: 'bg-transparent hover:bg-soft focus:bg-soft hover:field-layer focus:field-layer disabled:bg-transparent dark:disabled:bg-transparent outline-accent-focus focus-visible:outline-(length:--ui-focus-width)' },
       none: { base: 'bg-transparent focus:outline-none' }
     },
     color: colorVariant({ base: '' }),

@@ -28,9 +28,9 @@ export default defineTheme({
     },
     variant: {
       outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width) has-[>:focus-visible]:ring-accent' },
-      soft: { root: 'bg-tint hover:bg-soft has-[>:focus]:bg-soft has-[>:disabled]:bg-tint outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width)' },
-      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width) has-[>:focus-visible]:ring-accent' },
-      ghost: { root: 'bg-transparent hover:bg-soft has-[>:focus]:bg-soft has-[>:disabled]:bg-transparent dark:has-[>:disabled]:bg-transparent outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width)' },
+      soft: { root: 'bg-tint hover:bg-soft has-[>:focus]:bg-soft hover:field-layer has-[>:focus]:field-layer has-[>:disabled]:bg-tint outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width)' },
+      subtle: { root: 'bg-soft field-layer ring ring-inset ring-strong outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width) has-[>:focus-visible]:ring-accent' },
+      ghost: { root: 'bg-transparent hover:bg-soft has-[>:focus]:bg-soft hover:field-layer has-[>:focus]:field-layer has-[>:disabled]:bg-transparent dark:has-[>:disabled]:bg-transparent outline-accent-focus has-[>:focus-visible]:outline-(length:--ui-focus-width)' },
       none: { root: 'bg-transparent' }
     },
     // The box dims as a whole, so its buttons don't dim a second time
@@ -42,12 +42,11 @@ export default defineTheme({
     },
     orientation: {
       // The decrement comes after the input in the DOM, so the input keeps the first tab stop.
-      // The buttons sit 4px inside the box like a button in the leading or the trailing,
-      // and their hover is a step above the fill of the box
+      // The buttons sit 4px inside the box like a button in the leading or the trailing
       horizontal: {
         base: 'text-center',
-        increment: 'pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-(--ui-field-pad) [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong',
-        decrement: `order-first ps-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] before:content-['x'] before:w-0 before:invisible [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-(--ui-field-pad) [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong`
+        increment: 'pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-(--ui-field-pad) [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm',
+        decrement: `order-first ps-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] before:content-['x'] before:w-0 before:invisible [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:p-(--ui-field-pad) [&>button]:[--ui-control-icon-size:var(--ui-field-icon-size)] [&>button]:rounded-sm`
       },
       // Both buttons share a column at the end, stacked 4px inside the box: each takes
       // half of it with an icon as tall, as wide as a button of the field and centered
@@ -58,8 +57,8 @@ export default defineTheme({
         leading: 'col-start-1 row-span-2',
         base: 'col-start-2 row-span-2',
         trailing: 'col-start-3 row-span-2',
-        increment: 'col-start-4 row-start-1 flex pt-1 pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:w-[calc(2*var(--ui-field-py)+var(--ui-field-icon-size)-(--spacing(2)))] [&>button]:p-0 [&>button]:justify-center [&>button]:[--ui-control-icon-size:calc(var(--ui-field-py)+var(--ui-field-icon-size)/2-(--spacing(1)))] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong',
-        decrement: 'col-start-4 row-start-2 flex pb-1 pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:w-[calc(2*var(--ui-field-py)+var(--ui-field-icon-size)-(--spacing(2)))] [&>button]:p-0 [&>button]:justify-center [&>button]:[--ui-control-icon-size:calc(var(--ui-field-py)+var(--ui-field-icon-size)/2-(--spacing(1)))] [&>button]:rounded-sm [&>button]:enabled:hover:bg-accent-strong [&>button]:enabled:active:bg-accent-strong'
+        increment: 'col-start-4 row-start-1 flex pt-1 pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:w-[calc(2*var(--ui-field-py)+var(--ui-field-icon-size)-(--spacing(2)))] [&>button]:p-0 [&>button]:justify-center [&>button]:[--ui-control-icon-size:calc(var(--ui-field-py)+var(--ui-field-icon-size)/2-(--spacing(1)))] [&>button]:rounded-sm',
+        decrement: 'col-start-4 row-start-2 flex pb-1 pe-[max(calc(var(--ui-control-px)-var(--ui-field-pad)),--spacing(1))] [--ui-field-py:var(--ui-control-py)] [--ui-field-pad:calc(var(--ui-control-py)-(--spacing(1)))] [--ui-field-icon-size:var(--ui-control-icon-size)] [&>button]:w-[calc(2*var(--ui-field-py)+var(--ui-field-icon-size)-(--spacing(2)))] [&>button]:p-0 [&>button]:justify-center [&>button]:[--ui-control-icon-size:calc(var(--ui-field-py)+var(--ui-field-icon-size)/2-(--spacing(1)))] [&>button]:rounded-sm'
       }
     },
     highlight: {

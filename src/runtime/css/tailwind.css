@@ -25,3 +25,16 @@
   --ui-layer-border-default: var(--ui-overlay-border-default, color-mix(in oklab, var(--ui-bg-overlay) 0%, var(--ui-border-strong)));
   --ui-layer-border-strong: var(--ui-overlay-border-strong, color-mix(in oklab, var(--ui-layer-border-default), var(--ui-text-strong) 10%));
 }
+
+/* A field while its box is filled with `bg-soft`. What sits in its leading, its
+   trailing or its steppers moves one step up the ramp through `--ui-layer-*`, so
+   a neutral button keeps a fill above the box, whatever its variant. The box keeps
+   the page tokens: it stores the step above the one it sits on for its children,
+   since a variable can't read its parent's value of itself. */
+@utility field-layer {
+  --ui-field-layer: var(--ui-layer-bg-strong, var(--ui-bg-strong));
+  & > :is([data-slot$='-leading'], [data-slot$='-trailing'], [data-slot$='-increment'], [data-slot$='-decrement']) {
+    --ui-layer-bg-soft: var(--ui-field-layer);
+    --ui-layer-bg-strong: color-mix(in oklab, var(--ui-layer-bg-soft), var(--ui-text-strong) 10%);
+  }
+}

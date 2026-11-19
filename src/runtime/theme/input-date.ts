@@ -60,9 +60,9 @@ export default defineTheme({
     },
     variant: {
       outline: { root: 'bg-default ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width) has-focus-visible:ring-accent', segment: 'focus:bg-soft' },
-      soft: { root: 'bg-tint hover:bg-soft has-focus:bg-soft data-disabled:bg-tint outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width)', segment: 'focus:bg-strong' },
-      subtle: { root: 'bg-soft ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width) has-focus-visible:ring-accent', segment: 'focus:bg-strong' },
-      ghost: { root: 'bg-transparent hover:bg-soft has-focus:bg-soft data-disabled:bg-transparent dark:data-disabled:bg-transparent outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width)', segment: 'focus:bg-strong' },
+      soft: { root: 'bg-tint hover:bg-soft has-focus:bg-soft hover:field-layer has-focus:field-layer data-disabled:bg-tint outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width)', segment: 'focus:bg-strong' },
+      subtle: { root: 'bg-soft field-layer ring ring-inset ring-strong outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width) has-focus-visible:ring-accent', segment: 'focus:bg-strong' },
+      ghost: { root: 'bg-transparent hover:bg-soft has-focus:bg-soft hover:field-layer has-focus:field-layer data-disabled:bg-transparent dark:data-disabled:bg-transparent outline-accent-focus has-focus-visible:outline-(length:--ui-focus-width)', segment: 'focus:bg-strong' },
       none: { root: 'bg-transparent has-focus:outline-none', segment: 'focus:bg-soft' }
     },
     color: colorVariant({ root: '' }),

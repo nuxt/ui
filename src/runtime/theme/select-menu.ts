@@ -11,8 +11,8 @@ export default extendTheme(select, {
     viewport: () => 'relative scroll-py-1 overflow-y-auto flex-1',
     content: (content: string) => [content, 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)'],
     // A button 4px inside the box, like the other buttons of a field: it gives back to the
-    // box the room it takes past the line, and its hover is a step above the fill of the box
-    trailingClear: '-my-[calc(var(--ui-control-py)-(--spacing(1)))] -me-[calc(var(--ui-control-py)-(--spacing(1)))] p-[calc(var(--ui-control-py)-(--spacing(1)))] rounded-sm hover:bg-accent-strong active:bg-accent-strong',
+    // box the room it takes past the line
+    trailingClear: '-my-[calc(var(--ui-control-py)-(--spacing(1)))] -me-[calc(var(--ui-control-py)-(--spacing(1)))] p-[calc(var(--ui-control-py)-(--spacing(1)))] rounded-sm',
     empty: 'p-[calc(var(--ui-control-py)+(--spacing(1)))] text-center text-muted'
   },
   variants: {
