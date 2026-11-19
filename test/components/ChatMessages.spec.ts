@@ -69,9 +69,9 @@ describe('ChatMessages', () => {
   })
 
   it.each([
-    ['without', undefined, 'absolute'],
-    ['with', () => 'Prompt', 'sticky']
-  ])('positions the auto scroll button %s a footer', async (_, footer, position) => {
+    ['without', undefined, 'root'],
+    ['with', () => 'Prompt', 'footer']
+  ])('positions the auto scroll button %s a footer', async (_, footer, parent) => {
     const Parent = defineComponent({
       setup() {
         return () => h('div', { style: 'overflow-y: auto' }, [h(ChatMessages, { ...props, shouldScrollToBottom: false }, footer ? { footer } : {})])
@@ -86,9 +86,11 @@ describe('ChatMessages', () => {
     wrapper.element.dispatchEvent(new Event('scroll'))
     await nextTick()
 
-    const viewport = wrapper.find('[data-slot="viewport"]').classes()
-    expect(viewport).toContain(position)
-    expect(viewport.includes('top-[86%]')).toBe(position === 'absolute')
+    const viewport = wrapper.find('[data-slot="viewport"]')
+    expect(viewport.classes()).toContain('absolute')
+    expect(viewport.classes().includes('top-[86%]')).toBe(parent === 'root')
+    // Out of the list's flow with a footer, so it doesn't add a gap while it shows
+    expect(viewport.element.parentElement?.dataset.slot).toBe(parent)
 
     wrapper.unmount()
   })
