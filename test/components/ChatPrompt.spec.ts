@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { defineComponent, h, ref } from 'vue'
+import { defineComponent, h, nextTick, ref } from 'vue'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -32,6 +32,12 @@ describe('ChatPrompt', () => {
   function paste(files: File[], text = '') {
     const event = new Event('paste', { bubbles: true, cancelable: true }) as ClipboardEvent
     Object.defineProperty(event, 'clipboardData', { value: { files, getData: (type: string) => type === 'text/plain' ? text : '' } })
+    return event
+  }
+
+  function drag(type: string, dataTransfer: DataTransfer) {
+    const event = new Event(type, { bubbles: true, cancelable: true }) as DragEvent
+    Object.defineProperty(event, 'dataTransfer', { value: dataTransfer })
     return event
   }
 
@@ -244,6 +250,56 @@ describe('ChatPrompt', () => {
     wrapper.find('textarea').element.dispatchEvent(paste([file]))
 
     expect(wrapper.emitted('update:files')?.[0]).toEqual([[file]])
+  })
+
+  it('adds the files of a drop', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { files: [] }
+    })
+
+    const file = new File(['a'], 'notes.txt', { type: 'text/plain' })
+    const dataTransfer = new DataTransfer()
+    dataTransfer.items.add(file)
+    const textarea = wrapper.find('textarea').element
+
+    const enter = drag('dragenter', dataTransfer)
+    textarea.dispatchEvent(enter)
+    await nextTick()
+
+    expect(enter.defaultPrevented).toBe(true)
+    expect(wrapper.attributes('data-dragging')).toBe('true')
+
+    const drop = drag('drop', dataTransfer)
+    textarea.dispatchEvent(drop)
+    await nextTick()
+
+    expect(drop.defaultPrevented).toBe(true)
+    expect(wrapper.attributes('data-dragging')).toBe('false')
+    expect(wrapper.emitted('update:files')?.[0]).toEqual([[file]])
+  })
+
+  it('leaves a text drag to the browser', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { files: [] }
+    })
+
+    const dataTransfer = new DataTransfer()
+    dataTransfer.setData('text/plain', 'Some text')
+    const textarea = wrapper.find('textarea').element
+
+    const enter = drag('dragenter', dataTransfer)
+    textarea.dispatchEvent(enter)
+    await nextTick()
+
+    expect(wrapper.attributes('data-dragging')).toBe('false')
+
+    const over = drag('dragover', dataTransfer)
+    const drop = drag('drop', dataTransfer)
+    textarea.dispatchEvent(over)
+    textarea.dispatchEvent(drop)
+
+    expect([enter, over, drop].map(event => event.defaultPrevented)).toEqual([false, false, false])
+    expect(wrapper.emitted('update:files')).toBeUndefined()
   })
 
   it('removes a file from its attachment', async () => {
