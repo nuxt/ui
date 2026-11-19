@@ -63,8 +63,10 @@ const twinkles = TWINKLES.map(([col, row], index) => ({
 // computed: `slots` isn't reactive, so there would be nothing to recompute.
 const ui = {
   // the top padding sits on the root: the container's own responsive padding
-  // is zeroed per breakpoint, and a `pt` there would lose to the theme's `py`
-  root: 'overflow-hidden border-b border-default pt-14 sm:pt-22',
+  // is zeroed per breakpoint, and a `pt` there would lose to the theme's `py`.
+  // A short desktop screen (1080p at 125%) gets the phone's padding, so
+  // the content under the hero shows above the fold.
+  root: 'overflow-hidden border-b border-default pt-14 sm:pt-22 lg:[@media(max-height:820px)]:pt-14',
   // the second column only exists for a default slot: without one the text
   // keeps the width, and the placeholder that would fill it gets no gap
   container: ['py-0 sm:py-0 lg:py-0', slots.default ? 'gap-8 sm:gap-y-8 lg:gap-x-9' : 'gap-0 sm:gap-0 lg:grid-cols-1'],
@@ -140,7 +142,7 @@ const ui = {
     <template #bottom>
       <slot name="bottom" />
 
-      <div class="h-14 sm:h-22" />
+      <div class="h-14 sm:h-22 lg:[@media(max-height:820px)]:h-14" />
     </template>
   </UPageHero>
 </template>
