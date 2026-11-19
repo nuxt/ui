@@ -488,7 +488,9 @@ function navigate(item: T) {
     label: item.label,
     slot: item.slot,
     placeholder: item.placeholder,
-    items: item.children
+    items: item.children,
+    // Children come from the item itself so the `ignoreFilter` prop doesn't apply to them
+    ignoreFilter: false
   } as any)
 
   searchTerm.value = ''

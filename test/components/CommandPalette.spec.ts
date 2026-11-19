@@ -189,6 +189,31 @@ describe('CommandPalette', () => {
     expect(labels).toEqual(['Add new folder', 'bug', 'feature', 'enhancement', 'benjamincanac'])
   })
 
+  it('filters children of an item when ignoreFilter is set', async () => {
+    const wrapper = await mountSuspended(CommandPalette, {
+      props: {
+        groups: [{ id: 'fruits', items: [{ label: 'Fruits', children: [{ label: 'apple' }, { label: 'banana' }] }, { label: 'Vegetables' }] }],
+        ignoreFilter: true
+      }
+    })
+    const input = wrapper.find('input')
+    const labels = async (searchTerm: string) => {
+      await input.setValue(searchTerm)
+      await new Promise(resolve => setTimeout(resolve, 30))
+      return wrapper.findAll('[data-slot="itemLabelBase"]').map(label => label.text())
+    }
+
+    expect(await labels('apple')).toEqual(['Fruits', 'Vegetables'])
+
+    await input.setValue('')
+    await wrapper.find('[data-slot="item"]').trigger('click')
+    expect(await labels('apple')).toEqual(['apple'])
+
+    await input.setValue('')
+    await input.trigger('keydown', { key: 'Backspace' })
+    expect(await labels('apple')).toEqual(['Fruits', 'Vegetables'])
+  })
+
   // Results arriving after mount (e.g. `useLazyFetch({ server: false })`) must
   // re-highlight the first item without scrolling the whole page to a palette
   // that is below the fold and was never interacted with.
