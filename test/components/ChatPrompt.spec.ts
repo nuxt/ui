@@ -4,6 +4,7 @@ import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import ChatPrompt from '../../src/runtime/components/ChatPrompt.vue'
+import ChatPromptSubmit from '../../src/runtime/components/ChatPromptSubmit.vue'
 import theme from '#build/ui/chat-prompt'
 
 describe('ChatPrompt', () => {
@@ -46,6 +47,36 @@ describe('ChatPrompt', () => {
     expect(wrapper.emitted('update:queue')?.[0]).toEqual([[{ text: 'Next question', files }]])
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([''])
     expect(wrapper.emitted('update:files')?.[0]).toEqual([[]])
+  })
+
+  it('queues from `UChatPromptSubmit` while streaming when the prompt has text', async () => {
+    const onStop = vi.fn()
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: '', queue: [], status: 'streaming' },
+      slots: { default: () => h(ChatPromptSubmit, { status: 'streaming', onStop }) },
+      attachTo: document.body
+    })
+    const button = () => wrapper.find('button[aria-label]')
+
+    expect(button().attributes('aria-label')).toBe('Stop generating')
+
+    await wrapper.setProps({ modelValue: 'Next question' })
+    expect(button().attributes('aria-label')).toBe('Send prompt')
+    expect(button().attributes('type')).toBe('submit')
+
+    await button().trigger('click')
+    expect(onStop).not.toHaveBeenCalled()
+    expect(wrapper.emitted('update:queue')?.[0]).toEqual([[{ text: 'Next question' }]])
+    wrapper.unmount()
+  })
+
+  it('keeps `UChatPromptSubmit` on stop while streaming without `v-model:queue`', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: 'Next question', status: 'streaming' },
+      slots: { default: () => h(ChatPromptSubmit, { status: 'streaming' }) }
+    })
+
+    expect(wrapper.find('button[aria-label]').attributes('aria-label')).toBe('Stop generating')
   })
 
   describe('queued messages', () => {

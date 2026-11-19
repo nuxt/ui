@@ -103,7 +103,7 @@ export interface ChatPromptSlots extends TextareaSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, toRaw, toRef, useId, useTemplateRef } from 'vue'
+import { computed, provide, ref, toRaw, toRef, useId, useTemplateRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useElementSize } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -113,6 +113,7 @@ import { useFileUpload, isFileAccepted } from '../composables/useFileUpload'
 import { useIMEGuard } from '../composables/useIMEGuard'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
+import { chatPromptQueueingInjectionKey } from '../utils/chat'
 import { tv } from '../utils/tv'
 import UTextarea from './Textarea.vue'
 import UChatAttachment from './ChatAttachment.vue'
@@ -209,6 +210,8 @@ function onPaste(event: ClipboardEvent) {
 }
 
 const isBusy = computed(() => props.status === 'submitted' || props.status === 'streaming')
+
+provide(chatPromptQueueingInjectionKey, computed(() => isBusy.value && queue.value !== undefined && (model.value.trim() !== '' || !!files.value?.length)))
 
 function submit(e?: Event) {
   if (model.value.trim() === '' && !files.value?.length) {
