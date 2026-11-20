@@ -14,9 +14,9 @@ linkWorkspacePackages: true
 catalogMode: strict
 
 catalog:
-  "@ai-sdk/anthropic": ^4.0.99
-  "@ai-sdk/gateway": ^4.0.138
-  "@ai-sdk/vue": ^4.0.165
+  "@ai-sdk/anthropic": ^4.0.106
+  "@ai-sdk/gateway": ^4.0.150
+  "@ai-sdk/vue": ^4.0.173
   "@codspeed/vitest-plugin": ^6.1.1
   "@comark/vue": ^0.9.1
   "@floating-ui/dom": ^1.8.0
@@ -85,7 +85,7 @@ catalog:
   "@vueuse/integrations": ^14.4.0
   "@vueuse/nuxt": ^14.4.0
   "@vueuse/shared": ^14.4.0
-  ai: ^7.0.165
+  ai: ^7.0.173
   capture-website: ^5.1.0
   citty: ^0.2.2
   colortranslator: ^5.0.0

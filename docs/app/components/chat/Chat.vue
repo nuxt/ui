@@ -3,7 +3,6 @@ import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { useChat as useAIChat } from '@ai-sdk/vue'
 import { getTextFromMessage, isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
-import type { ChatPromptQueueItem } from '@nuxt/ui'
 import type { DocsChatMessage, DocsChatTools } from '~~/server/api/ai.post'
 
 const input = ref('')
@@ -75,8 +74,21 @@ function processThemeToolCalls() {
   }
 }
 
-const { messages: chatMessages, status, error, sendMessage, regenerate, stop, clearError } = useAIChat<DocsChatMessage>({
+const {
+  messages: chatMessages,
+  status,
+  error,
+  sendMessage,
+  regenerate,
+  stop,
+  clearError,
+  experimental_queuedMessages,
+  experimental_removeQueuedMessage,
+  experimental_sendQueuedMessageNow
+} = useAIChat<DocsChatMessage>({
   messages: messages.value,
+  // Messages sent while a response streams wait in `experimental_queuedMessages`, the AI SDK sends them one at a time
+  experimental_queue: true,
   transport: new DefaultChatTransport<DocsChatMessage>({
     api: '/api/ai',
     body: () => ({ framework: framework.value })
@@ -116,28 +128,11 @@ watchEffect(() => {
 
 const canClear = computed(() => messages.value.length > 0)
 
-// Messages sent while a response streams wait here: `UChatPrompt` queues a submit
-// while the chat is busy, the AI SDK would otherwise start a second request
-// next to the current one. A queued question keeps the page it was asked on.
-const queue = ref<ChatPromptQueueItem[]>([])
-
-watch(() => queue.value.length, () => {
-  for (const item of queue.value) {
-    item.currentPage ??= currentPage.value
-  }
-})
-
 function send(text: string, page: string) {
   track('AI Chat Message Sent')
 
+  // A queued question keeps the page it was asked on
   sendMessage({ text, metadata: { currentPage: page } })
-}
-
-function sendNext() {
-  const next = queue.value.shift()
-  if (next) {
-    send(next.text.trim(), next.currentPage)
-  }
 }
 
 function onSubmit() {
@@ -150,22 +145,6 @@ function onSubmit() {
   send(text, currentPage.value)
 }
 
-watch(status, (value) => {
-  if (value === 'ready') {
-    sendNext()
-  }
-})
-
-// A queued message picked to be sent now is at the front of the queue, it goes
-// out once the current response stops
-function onSend() {
-  if (status.value === 'submitted' || status.value === 'streaming') {
-    stop()
-  } else {
-    sendNext()
-  }
-}
-
 // Sync external messages (e.g. from search→chat flow) into the chat instance.
 // When the last synced message is from the user, auto-regenerate the assistant response.
 // _skipSync prevents loops when onFinish writes back to the shared messages ref.
@@ -173,11 +152,11 @@ watch(messages, (newMessages) => {
   if (_skipSync) return
 
   // A question asked from the search palette or "Explain this page" while a
-  // response streams waits in the queue, syncing would restart the chat mid-answer
+  // response streams goes to the queue, syncing would restart the chat mid-answer
   const last = newMessages.at(-1)
   if (last?.role === 'user' && (status.value === 'submitted' || status.value === 'streaming')) {
     pending.value = false
-    queue.value.push({ text: getTextFromMessage(last), currentPage: last.metadata?.currentPage ?? currentPage.value })
+    send(getTextFromMessage(last), last.metadata?.currentPage ?? currentPage.value)
     return
   }
 
@@ -308,9 +287,11 @@ function clearMessages() {
   if (status.value === 'streaming' || status.value === 'submitted') {
     stop()
   }
+  for (const message of experimental_queuedMessages.value) {
+    experimental_removeQueuedMessage(message.id)
+  }
   messages.value = []
   chatMessages.value = []
-  queue.value = []
   // A failed response would otherwise keep the empty prompt disabled
   clearError()
   _themeApplied.clear()
@@ -446,7 +427,7 @@ function clearMessages() {
           <UChatPrompt
             ref="promptRef"
             v-model="input"
-            v-model:queue="queue"
+            :queue="experimental_queuedMessages"
             :status="status"
             :error="error"
             :placeholder="status === 'submitted' || status === 'streaming' ? 'Queue a follow-up...' : 'Ask me anything...'"
@@ -455,7 +436,8 @@ function clearMessages() {
             size="sm"
             autofocus
             @submit="onSubmit"
-            @send="onSend"
+            @send="message => experimental_sendQueuedMessageNow(message.id)"
+            @remove="message => experimental_removeQueuedMessage(message.id)"
           >
             <template #footer>
               <ULink to="https://vercel.com/ai-gateway" target="_blank" class="inline-flex items-center gap-1 text-xs text-dimmed hover:text-muted">
