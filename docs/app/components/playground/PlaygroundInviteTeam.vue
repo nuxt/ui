@@ -55,8 +55,7 @@ const link = 'https://app.nuxt.com/invite/x8f2k'
           <UButton
             :icon="appConfig.ui.icons.copy"
             color="neutral"
-            variant="link"
-            size="sm"
+            variant="ghost"
             aria-label="Copy link"
             @click="toast.add({ title: 'Invite link copied' })"
           />
