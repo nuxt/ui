@@ -269,7 +269,7 @@ function onSubmit() {
 ```
 ::
 
-The chat waits for an answer to a [tool approval](/docs/components/chat-tool#with-approval-flow) before it sends the next message. Stopping the response or an error pauses the queue until the next message is sent, and editing a message or regenerating a response clears it. A queued message with files can't be put back in the prompt, the chat keeps its file parts instead of the files.
+The chat waits for an answer to a [tool approval](/docs/components/chat-tool#with-approval-flow) before it sends the next message. Stopping the response or an error pauses the queue until the next message is sent or one is sent now. Retrying a failed response, editing a message or regenerating one clears it. A queued message with files can't be put back in the prompt, the chat keeps its file parts instead of the files.
 
 ## API
 

@@ -144,7 +144,7 @@ describe('ChatPrompt', () => {
     })
 
     it('keeps the message while the chat errored', async () => {
-      const wrapper = await mountSuspended(ChatPrompt, { props: { queue, error: new Error('Error') } })
+      const wrapper = await mountSuspended(ChatPrompt, { props: { queue, 'error': new Error('Error'), 'onUpdate:queue': () => {} } })
       const item = wrapper.findAll('[data-slot="queueItem"]')[1]!
 
       await item.findAll('button').at(-3)!.trigger('click')
@@ -228,6 +228,13 @@ describe('ChatPrompt', () => {
 
       expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['Second\nDraft'])
       expect(wrapper.emitted('remove')?.[0]).toEqual([queue[1]])
+    })
+
+    it('emits send while the chat errored to resume the queue', async () => {
+      const { wrapper, item } = await mountQueue({ error: new Error('Error') })
+      await item.findAll('button').at(-3)!.trigger('click')
+
+      expect(wrapper.emitted('send')?.[0]).toEqual([queue[1]])
     })
 
     it('does not edit a message with file parts', async () => {

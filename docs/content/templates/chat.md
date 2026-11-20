@@ -1606,7 +1606,7 @@ onMounted(() => {
 
 The prompt lists the queued messages in a panel above it, where users can send one now, put it back in the prompt to edit it, or remove it. A message submitted while the chat is busy still goes through `handleSubmit`, and `sendMessage` queues it. Picking one to send now emits `send`, so `experimental_sendQueuedMessageNow` stops the current response and sends it next, and removing one or putting it back in the prompt emits `remove`.
 
-The chat also waits for an answer to a tool approval before it sends the next message. Stopping the response or an error pauses the queue until the next message is sent, and editing a message or regenerating a response clears it.
+The chat also waits for an answer to a tool approval before it sends the next message. Stopping the response or an error pauses the queue until the next message is sent or one is sent now. Retrying a failed response, editing a message or regenerating one clears it.
 
 ::note
 The queue of the AI SDK is experimental and kept in memory, so it is lost on reload.

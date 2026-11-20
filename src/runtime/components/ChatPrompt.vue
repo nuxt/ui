@@ -305,6 +305,8 @@ function getQueuedLabel(item: T) {
 
 // Sending and editing wait like the textarea while the prompt is disabled or the chat errored
 const queueDisabled = computed(() => Boolean(props.error) || props.disabled)
+// The AI SDK pauses its queue on an error, sending a message now is how the user resumes it
+const sendQueuedDisabled = computed(() => props.disabled || (Boolean(props.error) && ownsQueue))
 
 // Without `v-model:files`, or past the `multiple` limit, a queued message with files can't go back to the prompt as a whole
 function canEditQueued(item: T) {
@@ -314,7 +316,7 @@ function canEditQueued(item: T) {
 
 // Moves a queued message to the front, the app stops the current response and sends it
 function sendQueued(index: number) {
-  if (queueDisabled.value) {
+  if (sendQueuedDisabled.value) {
     return
   }
 
@@ -437,7 +439,7 @@ defineExpose({
                 color="neutral"
                 variant="link"
                 size="xs"
-                :disabled="queueDisabled"
+                :disabled="sendQueuedDisabled"
                 :aria-label="t('chatPrompt.sendNow')"
                 :aria-describedby="getQueueKey(item)"
                 @click="sendQueued(index)"
