@@ -55,10 +55,12 @@ afterAll(async () => {
   }
 })
 
-it('registers the ESLint config with a file URL for Node ESM', () => {
+it('registers the ESLint config with a file URL for Node ESM', async () => {
   expect(config?.imports).toEqual([
     { from: expect.stringMatching(/^file:\/\/.*\/eslint\.mjs$/), name: 'default', as: 'nuxtUI' }
   ])
+  const { default: nuxtUI } = await import(/* @vite-ignore */ config!.imports[0]!.from)
+  expect(nuxtUI).toBeTypeOf('function')
 })
 
 it('passes palettes with hyphens and digits from app.config.ts to ESLint', () => {
