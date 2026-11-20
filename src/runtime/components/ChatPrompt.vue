@@ -386,7 +386,7 @@ defineExpose({
               <UButton
                 :icon="appConfig.ui.icons.arrowUp"
                 color="neutral"
-                variant="link"
+                variant="ghost"
                 size="xs"
                 :disabled="queueDisabled"
                 :aria-label="t('chatPrompt.sendNow')"
@@ -396,7 +396,7 @@ defineExpose({
               <UButton
                 :icon="appConfig.ui.icons.edit"
                 color="neutral"
-                variant="link"
+                variant="ghost"
                 size="xs"
                 :disabled="!canEditQueued(item)"
                 :aria-label="t('chatPrompt.edit')"
@@ -406,7 +406,7 @@ defineExpose({
               <UButton
                 :icon="appConfig.ui.icons.trash"
                 color="neutral"
-                variant="link"
+                variant="ghost"
                 size="xs"
                 :aria-label="t('chatPrompt.remove')"
                 :aria-describedby="getQueueKey(item)"

@@ -37,7 +37,7 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
   orientation?: Toast['variants']['orientation']
   /**
    * Display a close button to dismiss the toast.
-   * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
+   * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
   close?: boolean | Omit<ButtonProps, LinkPropsKeys>
@@ -242,7 +242,8 @@ defineExpose({
             v-if="props.close"
             :icon="props.closeIcon || appConfig.ui.icons.close"
             color="neutral"
-            variant="link"
+            variant="ghost"
+            size="xs"
             :aria-label="t('toast.close')"
             v-bind="(typeof props.close === 'object' ? props.close : {})"
             data-slot="toast-close"

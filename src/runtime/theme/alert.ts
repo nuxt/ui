@@ -10,7 +10,7 @@ export default defineTheme({
     icon: 'shrink-0 size-4',
     avatar: 'shrink-0',
     actions: 'flex flex-wrap gap-1.5 shrink-0',
-    close: 'p-0'
+    close: '-m-(--ui-control-py)'
   },
   variants: {
     color: colorVariant({ root: '' }),
