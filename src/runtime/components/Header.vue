@@ -143,6 +143,7 @@ function toggleOpen() {
         color="neutral"
         variant="ghost"
         :aria-label="open ? t('header.close') : t('header.open')"
+        :aria-expanded="open"
         :icon="open ? appConfig.ui.icons.close : appConfig.ui.icons.menu"
         v-bind="(typeof props.toggle === 'object' ? props.toggle : {})"
         data-slot="toggle"
