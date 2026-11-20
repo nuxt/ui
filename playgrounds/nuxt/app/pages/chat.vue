@@ -97,6 +97,7 @@ function clearMessages() {
   for (const message of experimental_queuedMessages.value) {
     experimental_removeQueuedMessage(message.id)
   }
+  filesByUrl.clear()
   messages.value = []
 }
 
