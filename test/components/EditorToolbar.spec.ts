@@ -97,7 +97,7 @@ describe('EditorToolbar', () => {
 
   it('exposes pressed state for formatting buttons as the selection changes', async ({ onTestFinished }) => {
     const editor = new Editor({
-      content: '<p>Plain <strong><em>Styled</em></strong></p>',
+      content: '<p>Plain <a href="https://example.com"><strong><em>Styled</em></strong></a></p>',
       extensions: [StarterKit]
     })
     onTestFinished(() => editor.destroy())
@@ -105,75 +105,37 @@ describe('EditorToolbar', () => {
     const wrapper = await mountSuspended(EditorToolbarWrapper, {
       props: {
         editor,
-        items: [{
-          kind: 'mark',
-          mark: 'bold',
-          label: 'Bold'
-        }, {
-          kind: 'mark',
-          mark: 'italic',
-          tooltip: { text: 'Italic' }
-        }, {
-          kind: 'undo',
-          label: 'Undo'
-        }, {
-          'aria-label': 'Formatting',
-          'items': [{ kind: 'mark', mark: 'bold', label: 'Bold' }]
-        }]
+        items: [
+          { kind: 'mark', mark: 'bold', label: 'Bold' },
+          { kind: 'mark', mark: 'italic', tooltip: { text: 'Italic' } },
+          { kind: 'link', label: 'Link' },
+          { kind: 'undo', label: 'Undo' },
+          { 'aria-label': 'Link options', 'items': [{ kind: 'link', label: 'Link' }] }
+        ]
       }
     })
     onTestFinished(() => wrapper.unmount())
 
-    const [bold, italic, undo, menu] = wrapper.findAll('[role=toolbar] button')
-    expect(bold!.attributes('aria-pressed')).toBe('false')
-    expect(italic!.attributes('aria-pressed')).toBe('false')
+    const [bold, italic, link, undo, dropdown] = wrapper.findAll('[role=toolbar] button')
+    const expectPressed = (states: string[]) => vi.waitFor(() => {
+      expect([bold, italic, link].map(button => button!.attributes('aria-pressed'))).toEqual(states)
+    })
+
+    editor.commands.setTextSelection({ from: 1, to: 6 })
+    await expectPressed(['false', 'false', 'false'])
 
     editor.commands.setTextSelection({ from: 7, to: 13 })
-    await vi.waitFor(() => {
-      expect(bold!.attributes('aria-pressed')).toBe('true')
-      expect(italic!.attributes('aria-pressed')).toBe('true')
-    })
+    await expectPressed(['true', 'true', 'true'])
     expect(undo!.attributes('aria-pressed')).toBeUndefined()
-    expect(menu!.attributes('aria-pressed')).toBeUndefined()
-
-    editor.commands.setTextSelection({ from: 1, to: 6 })
-    await vi.waitFor(() => {
-      expect(bold!.attributes('aria-pressed')).toBe('false')
-      expect(italic!.attributes('aria-pressed')).toBe('false')
-    })
-  })
-
-  it('exposes pressed state for plain, linked, and mixed selections', async ({ onTestFinished }) => {
-    const editor = new Editor({
-      content: '<p>Plain <a href="https://example.com">Linked</a></p>',
-      extensions: [StarterKit]
-    })
-    onTestFinished(() => editor.destroy())
-
-    const wrapper = await mountSuspended(EditorToolbar, {
-      props: {
-        editor,
-        items: [{ kind: 'link', label: 'Link' }, {
-          'aria-label': 'Link options',
-          'items': [{ kind: 'link', label: 'Link' }]
-        }]
-      }
-    })
-    onTestFinished(() => wrapper.unmount())
-
-    const button = wrapper.get('button:not([aria-haspopup])')
-    const dropdown = wrapper.get('button[aria-haspopup="menu"]')
-
-    editor.commands.setTextSelection({ from: 1, to: 6 })
-    await vi.waitFor(() => expect(button.attributes('aria-pressed')).toBe('false'))
-
-    editor.commands.setTextSelection({ from: 7, to: 13 })
-    await vi.waitFor(() => expect(button.attributes('aria-pressed')).toBe('true'))
-    expect(dropdown.attributes('aria-pressed')).toBeUndefined()
+    expect(dropdown!.attributes('aria-pressed')).toBeUndefined()
 
     editor.commands.setTextSelection({ from: 1, to: 13 })
-    await vi.waitFor(() => expect(button.attributes('aria-pressed')).toBe('mixed'))
-    expect(dropdown.attributes('aria-pressed')).toBeUndefined()
+    await expectPressed(['false', 'false', 'mixed'])
+
+    editor.commands.setTextSelection(9)
+    editor.commands.unsetMark('link')
+    expect(editor.getAttributes('link').href).toBe('https://example.com')
+    await expectPressed(['true', 'true', 'false'])
   })
 
   describe('accessible name', () => {
