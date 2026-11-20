@@ -1,9 +1,10 @@
-import { describe, it, expect, test } from 'vitest'
+import { beforeAll, describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import { flushPromises, mount } from '@vue/test-utils'
 import InputMenu from '../../src/runtime/components/InputMenu.vue'
+import { loadVirtualizer } from '../utils/virtualizer'
 import { UButton, UFieldGroup } from '#components'
 import type { FormInputEvents } from '../../src/module'
 import { renderForm } from '../utils/form'
@@ -39,6 +40,8 @@ describe('InputMenu', () => {
   const itemsWithDescription = [...items.map(item => ({ ...item, description: 'Description' }))]
 
   const props = { open: true, portal: false, items }
+
+  beforeAll(() => loadVirtualizer(InputMenu, { props: { ...props, virtualize: true } }))
 
   renderEach(InputMenu, [
     // Props

@@ -145,6 +145,7 @@ import { useForwardProps } from '../../composables/useForwardProps'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
 import { useLazyOverlay } from '../../composables/useLazyOverlay'
+import { loadVirtualizers } from '../../utils/lazy-virtualizer'
 import { lazyOverlays, loadOverlay } from '../../utils/lazy-overlay'
 import { omit, transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
@@ -201,7 +202,7 @@ const loadCommandPalette = () => import('../CommandPalette.vue')
 const UModal = lazyOverlays.modal
 const UCommandPalette = defineAsyncComponent(loadCommandPalette)
 
-const renderModal = useLazyOverlay(() => open.value || (attrs.open !== undefined && attrs.open !== false) || props.unmountOnHide === false, () => Promise.all([loadOverlay('modal'), loadCommandPalette()]))
+const renderModal = useLazyOverlay(() => open.value || (attrs.open !== undefined && attrs.open !== false) || props.unmountOnHide === false, () => Promise.all([loadOverlay('modal'), loadCommandPalette(), props.virtualize && loadVirtualizers()]))
 
 const commandPaletteRef = useTemplateRef('commandPaletteRef')
 
