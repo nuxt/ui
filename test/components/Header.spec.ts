@@ -58,6 +58,17 @@ describe('Header', () => {
     expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
   })
 
+  it('sets `aria-expanded` on the toggle', async () => {
+    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } } })
+    const toggle = wrapper.find('[data-slot="toggle"]')
+
+    expect(toggle.attributes('aria-expanded')).toBe('false')
+
+    await toggle.trigger('click')
+
+    expect(toggle.attributes('aria-expanded')).toBe('true')
+  })
+
   it('mounts the menu before opening with `unmountOnHide: false`', async () => {
     const wrapper = await mountSuspended(Header, { props: { menu: { portal: false, unmountOnHide: false } }, slots: { body: () => 'Body slot' } })
     await vi.dynamicImportSettled()
