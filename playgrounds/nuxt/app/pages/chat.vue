@@ -2,7 +2,7 @@
 import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
-import { isPartStreaming, isToolStreaming, isToolApprovalPending, toFileUIParts } from '@nuxt/ui/utils/ai'
+import { getTextFromMessage, isPartStreaming, isToolStreaming, isToolApprovalPending, toFileUIParts } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
 
@@ -10,9 +10,21 @@ const toast = useToast()
 
 const input = ref('')
 const files = ref<File[]>([])
-const queue = ref<ChatPromptQueueItem[]>([])
 
-const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
+const {
+  messages,
+  status,
+  error,
+  sendMessage,
+  regenerate,
+  stop,
+  addToolApprovalResponse,
+  experimental_queuedMessages,
+  experimental_removeQueuedMessage,
+  experimental_sendQueuedMessageNow
+} = useChat({
+  // Messages sent while a response is in progress wait in `experimental_queuedMessages`
+  experimental_queue: true,
   sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
   onError(error) {
     let message = error.message
@@ -31,86 +43,61 @@ const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalR
   }
 })
 
-async function onSubmit() {
-  const text = input.value
-  const submitted = files.value
-
-  // Cleared before the files are read, so a second submit meanwhile has nothing to send
-  input.value = ''
-  files.value = []
-
-  // A queued message whose files are still being read goes first
-  if (sending) {
-    queue.value.push({ text, files: submitted })
-    return
-  }
-
-  await dispatch({ text, files: submitted })
-}
-
-// Reading files is async and the chat only turns busy once `sendMessage` runs,
-// so one message is dispatched at a time and clearing the chat drops it
-let sending = false
+// The file behind each file part, so a queued message goes back to the prompt with its files
+const filesByUrl = new Map<string, File>()
+// Reading the files is async, each message waits for the one before it to keep the order
+let reading = Promise.resolve()
+// Clearing the chat drops the messages whose files are still read
 let generation = 0
 
-async function dispatch(item: ChatPromptQueueItem) {
+function send({ text, files }: ChatPromptQueueItem) {
   const current = generation
-  sending = true
-
-  try {
-    const parts = await toFileUIParts(item.files ?? [])
+  reading = reading.then(async () => {
+    const parts = await toFileUIParts(files ?? [])
     if (current !== generation) return
 
+    parts.forEach((part, index) => filesByUrl.set(part.url, files![index]!))
     // An empty text part is rejected by some providers, send the files alone
-    sendMessage(item.text.trim() ? { text: item.text, files: parts } : { files: parts })
-  } catch (error) {
-    if (current === generation) {
-      queue.value.unshift(item)
-    }
+    sendMessage(text.trim() ? { text, files: parts } : { files: parts })
+  }).catch((error) => {
     toast.add({ description: (error as Error).message, icon: 'i-lucide-alert-circle', color: 'error' })
-  } finally {
-    sending = false
+  })
+}
 
-    // A cleared chat stays `ready`, a message queued during the read would wait forever
-    if (current !== generation && status.value === 'ready') {
-      sendNext()
+function onSubmit() {
+  send({ text: input.value, files: files.value })
+  input.value = ''
+  files.value = []
+}
+
+// The chat holds the queue, the prompt lists it and edits it
+const queue = computed<ChatPromptQueueItem[]>({
+  get: () => experimental_queuedMessages.value.map(message => ({
+    id: message.id,
+    text: getTextFromMessage(message),
+    files: message.parts.flatMap(part => part.type === 'file' && filesByUrl.has(part.url) ? [filesByUrl.get(part.url)!] : [])
+  })),
+  set: (next) => {
+    for (const item of queue.value.filter(item => !next.some(({ id }) => id === item.id))) {
+      experimental_removeQueuedMessage(item.id)
     }
-  }
-}
 
-// A response waiting for a tool approval is `ready` too, a new message would leave the approval unanswered
-const awaitingApproval = computed(() => messages.value.at(-1)?.parts.some(part => isToolUIPart(part) && isToolApprovalPending(part)) ?? false)
-
-function sendNext() {
-  if (sending || awaitingApproval.value) return
-
-  const item = queue.value.shift()
-  if (item) {
-    dispatch(item)
-  }
-}
-
-watch(status, (value) => {
-  if (value === 'ready') {
-    sendNext()
+    // A message submitted while the chat is busy
+    for (const item of next.filter(({ id }) => !id)) {
+      send(item)
+    }
   }
 })
-
-function onSend() {
-  if (status.value === 'submitted' || status.value === 'streaming') {
-    stop()
-  } else {
-    sendNext()
-  }
-}
 
 function clearMessages() {
   if (status.value === 'streaming' || status.value === 'submitted') {
     stop()
   }
   generation++
+  for (const message of experimental_queuedMessages.value) {
+    experimental_removeQueuedMessage(message.id)
+  }
   messages.value = []
-  queue.value = []
 }
 
 function getEmailToolText(state: string): string {
@@ -273,7 +260,7 @@ function generateMessages() {
           :error="error"
           variant="subtle"
           @submit="onSubmit"
-          @send="onSend"
+          @send="item => experimental_sendQueuedMessageNow(item.id)"
         >
           <template #footer="{ open }">
             <UButton
