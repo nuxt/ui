@@ -3,7 +3,6 @@ import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { useChat as useAIChat } from '@ai-sdk/vue'
 import { getTextFromMessage, isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
-import type { ChatPromptQueueItem } from '@nuxt/ui'
 import type { DocsChatMessage, DocsChatTools } from '~~/server/api/ai.post'
 
 const input = ref('')
@@ -135,21 +134,6 @@ function send(text: string, page: string) {
   // A queued question keeps the page it was asked on
   sendMessage({ text, metadata: { currentPage: page } })
 }
-
-// The chat holds the queue, the prompt lists it and edits it
-const queue = computed<ChatPromptQueueItem[]>({
-  get: () => experimental_queuedMessages.value.map(message => ({ id: message.id, text: getTextFromMessage(message) })),
-  set: (next) => {
-    for (const item of queue.value.filter(item => !next.some(({ id }) => id === item.id))) {
-      experimental_removeQueuedMessage(item.id)
-    }
-
-    // A question submitted while the chat is busy
-    for (const item of next.filter(({ id }) => !id)) {
-      send(item.text.trim(), currentPage.value)
-    }
-  }
-})
 
 function onSubmit() {
   const text = input.value.trim()
@@ -443,7 +427,7 @@ function clearMessages() {
           <UChatPrompt
             ref="promptRef"
             v-model="input"
-            v-model:queue="queue"
+            :queue="experimental_queuedMessages"
             :status="status"
             :error="error"
             :placeholder="status === 'submitted' || status === 'streaming' ? 'Queue a follow-up...' : 'Ask me anything...'"
@@ -452,7 +436,8 @@ function clearMessages() {
             size="sm"
             autofocus
             @submit="onSubmit"
-            @send="item => experimental_sendQueuedMessageNow(item.id)"
+            @send="message => experimental_sendQueuedMessageNow(message.id)"
+            @remove="message => experimental_removeQueuedMessage(message.id)"
           >
             <template #footer>
               <ULink to="https://vercel.com/ai-gateway" target="_blank" class="inline-flex items-center gap-1 text-xs text-dimmed hover:text-muted">

@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
-import { getTextFromMessage, isPartStreaming, isToolStreaming, isToolApprovalPending, toFileUIParts } from '@nuxt/ui/utils/ai'
+import { isPartStreaming, isToolStreaming, isToolApprovalPending, toFileUIParts } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
 
@@ -43,51 +42,28 @@ const {
   }
 })
 
-// The file behind each file part, so a queued message goes back to the prompt with its files
-const filesByUrl = new Map<string, File>()
 // Reading the files is async, each message waits for the one before it to keep the order
 let reading = Promise.resolve()
 // Clearing the chat drops the messages whose files are still read
 let generation = 0
 
-function send({ text, files }: ChatPromptQueueItem) {
+function onSubmit() {
+  const text = input.value
+  const submitted = files.value
   const current = generation
+  input.value = ''
+  files.value = []
+
   reading = reading.then(async () => {
-    const parts = await toFileUIParts(files ?? [])
+    const parts = await toFileUIParts(submitted)
     if (current !== generation) return
 
-    parts.forEach((part, index) => filesByUrl.set(part.url, files![index]!))
     // An empty text part is rejected by some providers, send the files alone
     sendMessage(text.trim() ? { text, files: parts } : { files: parts })
   }).catch((error) => {
     toast.add({ description: (error as Error).message, icon: 'i-lucide-alert-circle', color: 'error' })
   })
 }
-
-function onSubmit() {
-  send({ text: input.value, files: files.value })
-  input.value = ''
-  files.value = []
-}
-
-// The chat holds the queue, the prompt lists it and edits it
-const queue = computed<ChatPromptQueueItem[]>({
-  get: () => experimental_queuedMessages.value.map(message => ({
-    id: message.id,
-    text: getTextFromMessage(message),
-    files: message.parts.flatMap(part => part.type === 'file' && filesByUrl.has(part.url) ? [filesByUrl.get(part.url)!] : [])
-  })),
-  set: (next) => {
-    for (const item of queue.value.filter(item => !next.some(({ id }) => id === item.id))) {
-      experimental_removeQueuedMessage(item.id)
-    }
-
-    // A message submitted while the chat is busy
-    for (const item of next.filter(({ id }) => !id)) {
-      send(item)
-    }
-  }
-})
 
 function clearMessages() {
   if (status.value === 'streaming' || status.value === 'submitted') {
@@ -97,7 +73,6 @@ function clearMessages() {
   for (const message of experimental_queuedMessages.value) {
     experimental_removeQueuedMessage(message.id)
   }
-  filesByUrl.clear()
   messages.value = []
 }
 
@@ -255,13 +230,14 @@ function generateMessages() {
         <UChatPrompt
           v-model="input"
           v-model:files="files"
-          v-model:queue="queue"
+          :queue="experimental_queuedMessages"
           accept="image/*,application/pdf"
           :status="status"
           :error="error"
           variant="subtle"
           @submit="onSubmit"
-          @send="item => experimental_sendQueuedMessageNow(item.id)"
+          @send="message => experimental_sendQueuedMessageNow(message.id)"
+          @remove="message => experimental_removeQueuedMessage(message.id)"
         >
           <template #footer="{ open }">
             <UButton

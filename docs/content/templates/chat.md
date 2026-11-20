@@ -1450,19 +1450,18 @@ onMounted(() => {
 
 The [`UChatTool`](/docs/components/chat-tool) component shows the tool name and a shimmer while it runs. The `isToolStreaming` utility from `@nuxt/ui/utils/ai` detects if a tool call is still running. When a tool waits for approval, the `actions` prop displays the approve and deny buttons, which answer with `addToolApprovalResponse`. The `sendAutomaticallyWhen` option then sends the responses back to the server so the conversation continues.
 
-## Queuing messages :badge{label="4.13+" class="align-text-top"}
+## Queuing messages :badge{label="Soon" class="align-text-top"}
 
-By default, calling `sendMessage` during a response starts a second request next to the current one, and with `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Enable the experimental `experimental_queue` option of `useChat` so the chat holds these messages and sends them one at a time, then bind its queue to `v-model:queue`:
+By default, calling `sendMessage` during a response starts a second request next to the current one, and with `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Enable the experimental `experimental_queue` option of `useChat` so the chat holds these messages and sends them one at a time, then pass them to the `queue` prop of the prompt:
 
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {2,5,19-30,32-33,57-70,133,138}
+```vue [app/pages/chat/[id].vue] {18-29,31-32,117,122-123}
 <script setup lang="ts">
-import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
-import { getTextFromMessage, isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 
 const route = useRoute()
 const toast = useToast()
@@ -1511,21 +1510,6 @@ const {
       description: error.message,
       color: 'error'
     })
-  }
-})
-
-// The chat holds the queue, the prompt lists it and edits it
-const queue = computed<ChatPromptQueueItem[]>({
-  get: () => experimental_queuedMessages.value.map(message => ({ id: message.id, text: getTextFromMessage(message) })),
-  set: (next) => {
-    for (const item of queue.value.filter(item => !next.some(({ id }) => id === item.id))) {
-      experimental_removeQueuedMessage(item.id)
-    }
-
-    // A message submitted while the chat is busy
-    for (const item of next.filter(({ id }) => !id)) {
-      sendMessage({ text: item.text })
-    }
   }
 })
 
@@ -1590,12 +1574,13 @@ onMounted(() => {
           <template #footer>
             <UChatPrompt
               v-model="input"
-              v-model:queue="queue"
+              :queue="experimental_queuedMessages"
               :status="status"
               :error="error"
               variant="subtle"
               @submit="handleSubmit"
-              @send="item => experimental_sendQueuedMessageNow(item.id)"
+              @send="message => experimental_sendQueuedMessageNow(message.id)"
+              @remove="message => experimental_removeQueuedMessage(message.id)"
             >
               <template #footer>
                 <ModelSelect v-model="model" />
@@ -1619,7 +1604,7 @@ onMounted(() => {
 :::
 ::
 
-The prompt lists the queued messages in a panel above it, where users can send one now, put it back in the prompt to edit it, or remove it. The `queue` computed maps these edits to the chat: a removed message goes through `experimental_removeQueuedMessage`, and a message submitted while the chat is busy through `sendMessage`, which queues it. Picking one to send now emits `send`, so `experimental_sendQueuedMessageNow` stops the current response and sends it next.
+The prompt lists the queued messages in a panel above it, where users can send one now, put it back in the prompt to edit it, or remove it. A message submitted while the chat is busy still goes through `handleSubmit`, and `sendMessage` queues it. Picking one to send now emits `send`, so `experimental_sendQueuedMessageNow` stops the current response and sends it next, and removing one or putting it back in the prompt emits `remove`.
 
 The chat also waits for an answer to a tool approval before it sends the next message. Stopping the response or an error pauses the queue until the next message is sent, and editing a message or regenerating a response clears it.
 
@@ -1627,19 +1612,18 @@ The chat also waits for an answer to a tool approval before it sends the next me
 The queue of the AI SDK is experimental and kept in memory, so it is lost on reload.
 ::
 
-## Attaching files :badge{label="4.13+" class="align-text-top"}
+## Attaching files :badge{label="Soon" class="align-text-top"}
 
 Bind `v-model:files` on the prompt to let users attach images and PDFs. They can paste them, drop them on the prompt or pick them with the button in the `#footer` slot:
 
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {5,18,58-83,87-91,99,124-132,168-169,176-183}
+```vue [app/pages/chat/[id].vue] {4,17,57-78,100-108,143,145,153-160}
 <script setup lang="ts">
-import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
-import { getTextFromMessage, isPartStreaming, isToolStreaming, toFileUIParts } from '@nuxt/ui/utils/ai'
+import { isPartStreaming, isToolStreaming, toFileUIParts } from '@nuxt/ui/utils/ai'
 
 const route = useRoute()
 const toast = useToast()
@@ -1692,15 +1676,18 @@ const {
   }
 })
 
-// The file behind each file part, so a queued message goes back to the prompt with its files
-const filesByUrl = new Map<string, File>()
 // Reading the files is async, each message waits for the one before it to keep the order
 let reading = Promise.resolve()
 
-function send({ text, files }: ChatPromptQueueItem) {
+function handleSubmit(e: Event) {
+  e.preventDefault()
+  const text = input.value
+  const submitted = files.value
+  input.value = ''
+  files.value = []
+
   reading = reading.then(async () => {
-    const parts = await toFileUIParts(files ?? [])
-    parts.forEach((part, index) => filesByUrl.set(part.url, files![index]!))
+    const parts = await toFileUIParts(submitted)
     // An empty text part is rejected by some providers, send the files alone
     sendMessage(text.trim() ? { text, files: parts } : { files: parts })
   }).catch((error) => {
@@ -1711,32 +1698,6 @@ function send({ text, files }: ChatPromptQueueItem) {
     })
   })
 }
-
-function handleSubmit(e: Event) {
-  e.preventDefault()
-  send({ text: input.value, files: files.value })
-  input.value = ''
-  files.value = []
-}
-
-// The chat holds the queue, the prompt lists it and edits it
-const queue = computed<ChatPromptQueueItem[]>({
-  get: () => experimental_queuedMessages.value.map(message => ({
-    id: message.id,
-    text: getTextFromMessage(message),
-    files: message.parts.flatMap(part => part.type === 'file' && filesByUrl.has(part.url) ? [filesByUrl.get(part.url)!] : [])
-  })),
-  set: (next) => {
-    for (const item of queue.value.filter(item => !next.some(({ id }) => id === item.id))) {
-      experimental_removeQueuedMessage(item.id)
-    }
-
-    // A message submitted while the chat is busy
-    for (const item of next.filter(({ id }) => !id)) {
-      send(item)
-    }
-  }
-})
 
 onMounted(() => {
   if (chatData.value?.messages.length === 1) {
@@ -1801,14 +1762,15 @@ onMounted(() => {
           <template #footer>
             <UChatPrompt
               v-model="input"
-              v-model:queue="queue"
               v-model:files="files"
+              :queue="experimental_queuedMessages"
               accept="image/*,application/pdf"
               :status="status"
               :error="error"
               variant="subtle"
               @submit="handleSubmit"
-              @send="item => experimental_sendQueuedMessageNow(item.id)"
+              @send="message => experimental_sendQueuedMessageNow(message.id)"
+              @remove="message => experimental_removeQueuedMessage(message.id)"
             >
               <template #footer="{ open }">
                 <UButton
@@ -1839,7 +1801,7 @@ onMounted(() => {
 :::
 ::
 
-Each file shows above the textarea as a [`UChatAttachment`](/docs/components/chat-attachment) until the message is sent. The `toFileUIParts` utility from `@nuxt/ui/utils/ai` reads the files as data URLs, which `sendMessage` sends as file parts the models can read. Submitted and queued messages both go through `send`, which reads the files of a message once the one before it is sent, so the chat gets them in order. The `filesByUrl` map keeps the file behind each part, so a queued message put back in the prompt keeps its files. In the conversation, the `#files` slot of [`UChatMessages`](/docs/components/chat-messages) renders the file parts of each message.
+Each file shows above the textarea as a [`UChatAttachment`](/docs/components/chat-attachment) until the message is sent. The `toFileUIParts` utility from `@nuxt/ui/utils/ai` reads the files as data URLs, which `sendMessage` sends as file parts the models can read. `handleSubmit` reads the files of a message once the one before it is sent, so the chat gets them in order, queued or not. A queued message with files can't be put back in the prompt, since the chat keeps its file parts. In the conversation, the `#files` slot of [`UChatMessages`](/docs/components/chat-messages) renders the file parts of each message.
 
 ::note
 The file parts are stored in the database with the rest of the message. For large files, upload them to a storage like [NuxtHub Blob](https://hub.nuxt.com/docs/blob) and send their URL instead.

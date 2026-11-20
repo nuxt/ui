@@ -112,6 +112,8 @@ async function onSubmit() {
 
 Use the `v-model:queue` directive to queue the messages submitted while the chat is `submitted` or `streaming` instead of ignoring them. They show in a panel attached above the prompt, where the user can send one now, put it back in the prompt to edit it, or remove it. The `send` event is emitted when one is picked to be sent now, after it moved to the front of the queue. While the prompt holds a message to queue, a [ChatPromptSubmit](/docs/components/chat-prompt-submit) inside it queues the message instead of stopping the response.
 
+When the app keeps the queue, like the AI SDK does, pass it to the `queue` prop without `v-model`. The prompt then leaves it untouched: it emits `submit` while the chat is busy, `send` when one is picked to be sent now and `remove` when one is removed or put back in the prompt. The items can be messages from the AI SDK, the prompt lists their text.
+
 ::component-example
 ---
 collapse: true
@@ -120,7 +122,7 @@ name: 'chat-prompt-queue-example'
 ::
 
 ::tip{to="#with-queued-messages"}
-The AI SDK can hold the queue for you, check the **With queued messages** example.
+Check the **With queued messages** example to use the queue of the AI SDK.
 ::
 
 ## Examples
@@ -182,17 +184,15 @@ async function onSubmit() {
 </template>
 ```
 
-### With queued messages :badge{label="4.13+" class="align-text-top"}
+### With queued messages :badge{label="Soon" class="align-text-top"}
 
-By default, calling `sendMessage` during a response starts a second request next to the current one, and with `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Enable the experimental `experimental_queue` option of `useChat` so the chat holds these messages and sends them one at a time, then bind its queue to `v-model:queue`: the prompt lists the queued messages in a panel above it, where the user can send one now, edit it or remove it.
+By default, calling `sendMessage` during a response starts a second request next to the current one, and with `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Enable the experimental `experimental_queue` option of `useChat` so the chat holds these messages and sends them one at a time, then pass them to the `queue` prop: the prompt emits `submit` as usual, `send` when one is picked to be sent now and `remove` when one is removed or put back in the prompt.
 
 ::framework-only
 #nuxt
 ```vue
 <script setup lang="ts">
-import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { useChat } from '@ai-sdk/vue'
-import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
 const input = ref('')
 
@@ -207,21 +207,6 @@ const {
   experimental_sendQueuedMessageNow
 } = useChat({ experimental_queue: true })
 
-// The chat holds the queue, the prompt lists it and edits it
-const queue = computed<ChatPromptQueueItem[]>({
-  get: () => experimental_queuedMessages.value.map(message => ({ id: message.id, text: getTextFromMessage(message) })),
-  set: (next) => {
-    for (const item of queue.value.filter(item => !next.some(({ id }) => id === item.id))) {
-      experimental_removeQueuedMessage(item.id)
-    }
-
-    // A message submitted while the chat is busy
-    for (const item of next.filter(({ id }) => !id)) {
-      sendMessage({ text: item.text })
-    }
-  }
-})
-
 function onSubmit() {
   sendMessage({ text: input.value })
   input.value = ''
@@ -231,11 +216,12 @@ function onSubmit() {
 <template>
   <UChatPrompt
     v-model="input"
-    v-model:queue="queue"
+    :queue="experimental_queuedMessages"
     :status="status"
     :error="error"
     @submit="onSubmit"
-    @send="item => experimental_sendQueuedMessageNow(item.id)"
+    @send="message => experimental_sendQueuedMessageNow(message.id)"
+    @remove="message => experimental_removeQueuedMessage(message.id)"
   >
     <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
   </UChatPrompt>
@@ -245,10 +231,8 @@ function onSubmit() {
 #vue
 ```vue
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import type { ChatPromptQueueItem } from '@nuxt/ui'
+import { ref } from 'vue'
 import { useChat } from '@ai-sdk/vue'
-import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
 const input = ref('')
 
@@ -263,21 +247,6 @@ const {
   experimental_sendQueuedMessageNow
 } = useChat({ experimental_queue: true })
 
-// The chat holds the queue, the prompt lists it and edits it
-const queue = computed<ChatPromptQueueItem[]>({
-  get: () => experimental_queuedMessages.value.map(message => ({ id: message.id, text: getTextFromMessage(message) })),
-  set: (next) => {
-    for (const item of queue.value.filter(item => !next.some(({ id }) => id === item.id))) {
-      experimental_removeQueuedMessage(item.id)
-    }
-
-    // A message submitted while the chat is busy
-    for (const item of next.filter(({ id }) => !id)) {
-      sendMessage({ text: item.text })
-    }
-  }
-})
-
 function onSubmit() {
   sendMessage({ text: input.value })
   input.value = ''
@@ -287,11 +256,12 @@ function onSubmit() {
 <template>
   <UChatPrompt
     v-model="input"
-    v-model:queue="queue"
+    :queue="experimental_queuedMessages"
     :status="status"
     :error="error"
     @submit="onSubmit"
-    @send="item => experimental_sendQueuedMessageNow(item.id)"
+    @send="message => experimental_sendQueuedMessageNow(message.id)"
+    @remove="message => experimental_removeQueuedMessage(message.id)"
   >
     <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
   </UChatPrompt>
@@ -299,7 +269,7 @@ function onSubmit() {
 ```
 ::
 
-The chat waits for an answer to a [tool approval](/docs/components/chat-tool#with-approval-flow) before it sends the next message. Stopping the response or an error pauses the queue until the next message is sent, and editing a message or regenerating a response clears it.
+The chat waits for an answer to a [tool approval](/docs/components/chat-tool#with-approval-flow) before it sends the next message. Stopping the response or an error pauses the queue until the next message is sent, and editing a message or regenerating a response clears it. A queued message with files can't be put back in the prompt, the chat keeps its file parts instead of the files.
 
 ## API
 
