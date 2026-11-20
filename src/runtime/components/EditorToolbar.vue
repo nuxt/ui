@@ -252,6 +252,7 @@ function getActiveChildItem(item: EditorToolbarDropdownItem): EditorToolbarItem 
 
 function getButtonProps(item: EditorToolbarItem) {
   const baseProps = omit(item as any, ['kind', 'mark', 'align', 'level', 'href', 'src', 'pos', 'items', 'slot', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'tooltip', 'onClick'])
+  let ariaPressed: boolean | 'mixed' | undefined
 
   // For dropdown items, use the active child's icon if available
   if ('items' in item && item.items?.length) {
@@ -262,10 +263,18 @@ function getButtonProps(item: EditorToolbarItem) {
     if (activeChild?.label && baseProps.label !== undefined) {
       baseProps.label = activeChild.label
     }
+  } else if ('kind' in item && ['mark', 'heading', 'textAlign', 'blockquote', 'bulletList', 'orderedList', 'taskList', 'codeBlock', 'link'].includes(item.kind)) {
+    ariaPressed = isActive(item)
+    const editor = props.editor
+    // Tiptap reports a partially linked selection as inactive.
+    if (item.kind === 'link' && !ariaPressed && editor?.isEditable && !editor.state.selection.empty && editor.getAttributes('link').href) {
+      ariaPressed = 'mixed'
+    }
   }
 
   return defu(baseProps, {
     'aria-label': baseProps.label ? undefined : item.tooltip?.text,
+    'aria-pressed': ariaPressed,
     'color': props.color,
     'activeColor': props.activeColor,
     'activeVariant': props.activeVariant,

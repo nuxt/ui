@@ -4,7 +4,8 @@ import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import { TooltipProvider } from 'reka-ui'
-import type { Editor } from '@tiptap/vue-3'
+import { Editor } from '@tiptap/vue-3'
+import StarterKit from '@tiptap/starter-kit'
 import EditorToolbar from '../../src/runtime/components/EditorToolbar.vue'
 
 // Items carrying a `tooltip` mount a `UTooltip`, which requires a provider (normally `UApp`).
@@ -92,6 +93,49 @@ describe('EditorToolbar', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('exposes pressed state for formatting buttons as the selection changes', async ({ onTestFinished }) => {
+    const editor = new Editor({
+      content: '<p>Plain <a href="https://example.com"><strong><em>Styled</em></strong></a></p>',
+      extensions: [StarterKit]
+    })
+    onTestFinished(() => editor.destroy())
+
+    const wrapper = await mountSuspended(EditorToolbarWrapper, {
+      props: {
+        editor,
+        items: [
+          { kind: 'mark', mark: 'bold', label: 'Bold' },
+          { kind: 'mark', mark: 'italic', tooltip: { text: 'Italic' } },
+          { kind: 'link', label: 'Link' },
+          { kind: 'undo', label: 'Undo' },
+          { 'aria-label': 'Link options', 'items': [{ kind: 'link', label: 'Link' }] }
+        ]
+      }
+    })
+    onTestFinished(() => wrapper.unmount())
+
+    const [bold, italic, link, undo, dropdown] = wrapper.findAll('[role=toolbar] button')
+    const expectPressed = (states: string[]) => vi.waitFor(() => {
+      expect([bold, italic, link].map(button => button!.attributes('aria-pressed'))).toEqual(states)
+    })
+
+    editor.commands.setTextSelection({ from: 1, to: 6 })
+    await expectPressed(['false', 'false', 'false'])
+
+    editor.commands.setTextSelection({ from: 7, to: 13 })
+    await expectPressed(['true', 'true', 'true'])
+    expect(undo!.attributes('aria-pressed')).toBeUndefined()
+    expect(dropdown!.attributes('aria-pressed')).toBeUndefined()
+
+    editor.commands.setTextSelection({ from: 1, to: 13 })
+    await expectPressed(['false', 'false', 'mixed'])
+
+    editor.commands.setTextSelection(9)
+    editor.commands.unsetMark('link')
+    expect(editor.getAttributes('link').href).toBe('https://example.com')
+    await expectPressed(['true', 'true', 'false'])
   })
 
   describe('accessible name', () => {
