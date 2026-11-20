@@ -121,9 +121,9 @@ if (router?.afterEach) {
   let removeAfterEach: (() => void) | undefined
 
   onMounted(() => {
-    removeAfterEach = router.afterEach((to) => {
-      // A guard can abort the navigation, which leaves the current route as it was
-      if (to.fullPath !== router.currentRoute.value.fullPath) return
+    removeAfterEach = router.afterEach((_to, _from, failure) => {
+      // Only a duplicated navigation (`NavigationFailureType.duplicated`) still closes the menu, not an aborted or cancelled one
+      if (failure && failure.type !== 16) return
 
       closeOnNavigation()
     })

@@ -100,6 +100,24 @@ describe('DashboardSidebar', () => {
     wrapper.unmount()
   })
 
+  it('closes the menu on a navigation to an equivalent URL of the current page', async () => {
+    const wrapper = await mountSuspended(DashboardWrapper, { props: { menu: { portal: false } } })
+    await vi.dynamicImportSettled()
+
+    const router = (wrapper.vm as any).$router
+    const removeRoute = router.addRoute({ path: '/docs', component: { template: '<div />' } })
+    await router.push('/docs/')
+    await wrapper.setProps({ open: true } as any)
+
+    await router.push('/docs')
+
+    expect(wrapper.findComponent(DashboardSidebar).emitted('update:open')).toEqual([[false]])
+
+    await router.push('/')
+    removeRoute?.()
+    wrapper.unmount()
+  })
+
   it('keeps the menu open when a guard aborts the navigation', async () => {
     const wrapper = await mountSuspended(DashboardWrapper, { props: { open: true, menu: { portal: false } } })
     await vi.dynamicImportSettled()
@@ -107,6 +125,7 @@ describe('DashboardSidebar', () => {
     const router = (wrapper.vm as any).$router
     const removeGuard = router.beforeEach(() => false)
     await router.push('/?aborted')
+    await router.push({ path: router.currentRoute.value.path, force: true })
     removeGuard()
 
     expect(wrapper.findComponent(DashboardSidebar).emitted('update:open')).toBeUndefined()
