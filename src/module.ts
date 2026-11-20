@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises'
+import { pathToFileURL } from 'node:url'
 import { join } from 'pathe'
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addPluginTemplate, findPath, getLayerDirectories, hasNuxtModule, logger, resolvePath, tryResolveModule, directoryToURL } from '@nuxt/kit'
@@ -384,12 +385,14 @@ export default defineNuxtModule<ModuleOptions>({
           }
           // Through the package export, `./eslint.mjs` next to `src/module.ts` doesn't exist when the module is stubbed
           const config = await tryResolveModule(`${name}/eslint`, import.meta.url) ?? resolve('./eslint.mjs')
+          // Node ESM requires a file URL for Windows drive paths. The generator uses single-quoted imports.
+          const from = pathToFileURL(config).href.replaceAll('\'', '%27')
           // Declared by `@nuxt/eslint`, called again on `builder:generateApp` so the order of the modules doesn't matter
           nuxt.hook('eslint:config:addons' as any, (addons: { name: string, getConfigs: () => unknown }[]) => {
             addons.push({
               name: 'nuxt-ui',
               getConfigs: () => ({
-                imports: [{ from: config, name: 'default', as: 'nuxtUI' }],
+                imports: [{ from, name: 'default', as: 'nuxtUI' }],
                 configs: [`...nuxtUI(${JSON.stringify({ ...eslintOptions, colors: { ...colors, ...eslintOptions.colors }, entryPoint })})`]
               })
             })
