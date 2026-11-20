@@ -128,21 +128,21 @@ function closeOnNavigation() {
   open.value = false
 }
 
-// `afterEach` also runs for a link to the current page, which leaves `route.fullPath` as it was
+watch(() => route.fullPath, closeOnNavigation)
+
+// A link to the current page leaves `route.fullPath` as it was, but still runs `afterEach`
 if (router?.afterEach) {
   let removeAfterEach: (() => void) | undefined
 
   onMounted(() => {
-    removeAfterEach = router.afterEach((_to, _from, failure) => {
-      // Only a duplicated navigation (`NavigationFailureType.duplicated`) still closes the menu, not an aborted or cancelled one
-      if (failure && failure.type !== 16) return
+    removeAfterEach = router.afterEach((to, from, failure) => {
+      // Vue Router reports it as a duplicated navigation (`NavigationFailureType.duplicated`), Nuxt's router without pages as a successful one
+      if (failure ? failure.type !== 16 : to.fullPath !== from.fullPath) return
 
       closeOnNavigation()
     })
   })
   onBeforeUnmount(() => removeAfterEach?.())
-} else {
-  watch(() => route.fullPath, closeOnNavigation)
 }
 
 // eslint-disable-next-line vue/no-dupe-keys

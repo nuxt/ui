@@ -88,6 +88,32 @@ describe('DashboardSidebar', () => {
     expect(wrapper.find('[role="dialog"]').text()).toContain('Default slot')
   })
 
+  it('closes the menu on a navigation to another page once the route updates', async ({ task, skip }) => {
+    // Nuxt's router without pages updates the route before `afterEach` runs, so only Vue Router can tell the two apart
+    if (task.file.projectName === 'nuxt') skip()
+
+    const wrapper = await mountSuspended(DashboardWrapper, { props: { open: true, menu: { portal: false } } })
+    await vi.dynamicImportSettled()
+
+    const router = (wrapper.vm as any).$router
+    const removeRoute = router.addRoute({ path: '/docs', component: { template: '<div />' } })
+    // Nuxt with pages updates the route outside `<NuxtPage>` after `afterEach`, once the new page has resolved
+    let closedInAfterEach
+    const removeAfterEach = router.afterEach(() => {
+      closedInAfterEach = !!wrapper.findComponent(DashboardSidebar).emitted('update:open')
+    })
+    await router.push('/docs')
+    removeAfterEach()
+    await wrapper.vm.$nextTick()
+
+    expect(closedInAfterEach).toBe(false)
+    expect(wrapper.findComponent(DashboardSidebar).emitted('update:open')).toEqual([[false]])
+
+    await router.push('/')
+    removeRoute?.()
+    wrapper.unmount()
+  })
+
   it('closes the menu on a navigation to the current page', async () => {
     const wrapper = await mountSuspended(DashboardWrapper, { props: { open: true, menu: { portal: false } } })
     await vi.dynamicImportSettled()
