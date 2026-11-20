@@ -1,15 +1,17 @@
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
 import { join } from 'pathe'
 import { defineNuxtModule, loadNuxt } from '@nuxt/kit'
+import type { Nuxt } from '@nuxt/schema'
 import { afterAll, beforeAll, expect, it } from 'vitest'
 import ui from '../../src/module'
 
 type AddonConfig = { imports: { from: string }[], configs: string[] }
 let config: AddonConfig | undefined
+let rootDir: string | undefined
+let nuxt: Nuxt | undefined
 
 beforeAll(async () => {
-  const rootDir = await mkdtemp(join(process.cwd(), 'node_modules/.nuxt-ui-eslint-'))
-  afterAll(() => rm(rootDir, { recursive: true, force: true }))
+  rootDir = await mkdtemp(join(process.cwd(), 'node_modules/.nuxt-ui-eslint-'))
 
   await mkdir(join(rootDir, 'app'))
   await writeFile(join(rootDir, 'app/app.config.ts'), `
@@ -27,7 +29,7 @@ beforeAll(async () => {
 
   // Stand in for @nuxt/eslint and inspect the import passed to its config generator.
   const eslint = defineNuxtModule({ meta: { name: '@nuxt/eslint' } })
-  const nuxt = await loadNuxt({
+  nuxt = await loadNuxt({
     cwd: rootDir,
     rcFile: false,
     ready: false,
@@ -38,14 +40,19 @@ beforeAll(async () => {
       ui: { eslint: { entryPoint }, fonts: false, colorMode: false }
     }
   })
-  afterAll(() => nuxt.close())
-
   await nuxt.ready()
 
   const addons: { name: string, getConfigs: () => AddonConfig }[] = []
   await nuxt.callHook('eslint:config:addons' as any, addons)
   config = addons.find(addon => addon.name === 'nuxt-ui')?.getConfigs()
 }, 20000)
+
+afterAll(async () => {
+  await nuxt?.close()
+  if (rootDir) {
+    await rm(rootDir, { recursive: true, force: true })
+  }
+})
 
 it('registers the ESLint config with a file URL for Node ESM', () => {
   expect(config?.imports).toEqual([
