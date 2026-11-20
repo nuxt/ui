@@ -35,12 +35,12 @@ describe('DashboardSidebar', () => {
       ['with resizable', { props: { resizable: true } }],
       ['with collapsedSize', { props: { collapsed: true, collapsedSize: 10 } }],
       ['with collapsible', { props: { collapsible: true } }],
-      ['with mode modal', { props: { open: true, mode: 'modal' as const, menu: { portal: false } } }],
-      ['with mode slideover', { props: { open: true, mode: 'slideover' as const, menu: { portal: false } } }],
-      ['with mode drawer', { props: { open: true, mode: 'drawer' as const, menu: { portal: false } } }],
+      ['with mode modal', { props: { open: true, autoClose: false, mode: 'modal' as const, menu: { portal: false } } }],
+      ['with mode slideover', { props: { open: true, autoClose: false, mode: 'slideover' as const, menu: { portal: false } } }],
+      ['with mode drawer', { props: { open: true, autoClose: false, mode: 'drawer' as const, menu: { portal: false } } }],
       ['without toggle', { props: { toggle: false, menu: { portal: false } } }],
       ['with toggle', { props: { toggle: { color: 'primary' as const, variant: 'solid' as const }, menu: { portal: false } } }],
-      ['with toggleSide', { props: { open: true, toggleSide: 'right' as const, menu: { portal: false } } }],
+      ['with toggleSide', { props: { open: true, autoClose: false, toggleSide: 'right' as const, menu: { portal: false } } }],
       ['with class', { props: { class: 'border-none' } }],
       ['with ui', { props: { ui: { body: 'py-4' } } }],
       // Slots
@@ -86,6 +86,18 @@ describe('DashboardSidebar', () => {
     await vi.dynamicImportSettled()
 
     expect(wrapper.find('[role="dialog"]').text()).toContain('Default slot')
+  })
+
+  it('closes the menu on a navigation to the current page', async () => {
+    const wrapper = await mountSuspended(DashboardWrapper, { props: { open: true, menu: { portal: false } } })
+    await vi.dynamicImportSettled()
+
+    const router = (wrapper.vm as any).$router
+    await router.push(router.currentRoute.value.fullPath)
+
+    expect(wrapper.findComponent(DashboardSidebar).emitted('update:open')).toEqual([[false]])
+
+    wrapper.unmount()
   })
 
   it('passes accessibility tests', async () => {

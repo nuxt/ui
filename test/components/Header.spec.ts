@@ -10,9 +10,9 @@ describe('Header', () => {
     // Props
     ['with title', { props: { title: 'Documentation' } }],
     ['with to', { props: { to: '/docs' } }],
-    ['with mode modal', { props: { open: true, mode: 'modal', menu: { portal: false } } }],
-    ['with mode slideover', { props: { open: true, mode: 'slideover', menu: { portal: false } } }],
-    ['with mode drawer', { props: { open: true, mode: 'drawer', menu: { portal: false } } }],
+    ['with mode modal', { props: { open: true, autoClose: false, mode: 'modal', menu: { portal: false } } }],
+    ['with mode slideover', { props: { open: true, autoClose: false, mode: 'slideover', menu: { portal: false } } }],
+    ['with mode drawer', { props: { open: true, autoClose: false, mode: 'drawer', menu: { portal: false } } }],
     ['without toggle', { props: { toggle: false } }],
     ['with toggle', { props: { toggle: { color: 'primary', variant: 'solid' } } }],
     ['with toggleSide', { props: { toggleSide: 'left' } }],
@@ -63,6 +63,18 @@ describe('Header', () => {
     await vi.dynamicImportSettled()
 
     expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
+  })
+
+  it('closes the menu on a navigation to the current page', async () => {
+    const wrapper = await mountSuspended(Header, { props: { open: true, menu: { portal: false } } })
+    await vi.dynamicImportSettled()
+
+    const router = (wrapper.vm as any).$router
+    await router.push(router.currentRoute.value.fullPath)
+
+    expect(wrapper.emitted('update:open')).toEqual([[false]])
+
+    wrapper.unmount()
   })
 
   it('passes accessibility tests', async () => {

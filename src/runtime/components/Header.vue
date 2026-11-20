@@ -64,11 +64,11 @@ export interface HeaderSlots {
 </script>
 
 <script setup lang="ts" generic="T extends HeaderMode">
-import { computed, watch, toRef } from 'vue'
+import { computed, watch, toRef, onMounted, onBeforeUnmount } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig, useRoute } from '#imports'
+import { useAppConfig, useRoute, useRouter } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { useLazyOverlay } from '../composables/useLazyOverlay'
@@ -97,6 +97,7 @@ const props = useComponentProps<HeaderProps<T>>('header', _props)
 const open = defineModel<boolean>('open', { default: false })
 
 const route = useRoute()
+const router = useRouter()
 const { t, locale } = useLocale()
 const appConfig = useAppConfig() as Header['AppConfig']
 
@@ -109,11 +110,23 @@ const ariaLabel = computed(() => {
   return (slotText || props.title || 'Nuxt UI').trim()
 })
 
-watch(() => route.fullPath, () => {
+function closeOnNavigation() {
   if (!props.autoClose) return
 
   open.value = false
-})
+}
+
+// `afterEach` also runs for a link to the current page, which leaves `route.fullPath` as it was
+if (router?.afterEach) {
+  let removeAfterEach: (() => void) | undefined
+
+  onMounted(() => {
+    removeAfterEach = router.afterEach(closeOnNavigation)
+  })
+  onBeforeUnmount(() => removeAfterEach?.())
+} else {
+  watch(() => route.fullPath, closeOnNavigation)
+}
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.header || {}) })())

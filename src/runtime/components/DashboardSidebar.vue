@@ -56,10 +56,10 @@ export interface DashboardSidebarSlots {
 </script>
 
 <script setup lang="ts" generic="T extends DashboardSidebarMode">
-import { ref, computed, toRef, useId, watch } from 'vue'
+import { ref, computed, toRef, useId, watch, onMounted, onBeforeUnmount } from 'vue'
 import { defu } from 'defu'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig, useRuntimeHook, useRoute } from '#imports'
+import { useAppConfig, useRuntimeHook, useRoute, useRouter } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useResizable } from '../composables/useResizable'
 import { useLocale } from '../composables/useLocale'
@@ -93,6 +93,7 @@ const open = defineModel<boolean>('open', { default: false })
 const collapsed = defineModel<boolean>('collapsed', { default: false })
 
 const route = useRoute()
+const router = useRouter()
 const { t, locale } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebar['AppConfig']
 
@@ -121,11 +122,23 @@ useRuntimeHook('dashboard:sidebar:collapse', (value: boolean) => {
 watch(open, () => dashboardContext.sidebarOpen!.value = open.value, { immediate: true })
 watch(isCollapsed, () => dashboardContext.sidebarCollapsed!.value = isCollapsed.value, { immediate: true })
 
-watch(() => route.fullPath, () => {
+function closeOnNavigation() {
   if (!props.autoClose) return
 
   open.value = false
-})
+}
+
+// `afterEach` also runs for a link to the current page, which leaves `route.fullPath` as it was
+if (router?.afterEach) {
+  let removeAfterEach: (() => void) | undefined
+
+  onMounted(() => {
+    removeAfterEach = router.afterEach(closeOnNavigation)
+  })
+  onBeforeUnmount(() => removeAfterEach?.())
+} else {
+  watch(() => route.fullPath, closeOnNavigation)
+}
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSidebar || {}) })({
