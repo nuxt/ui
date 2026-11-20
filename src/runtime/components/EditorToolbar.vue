@@ -252,9 +252,11 @@ function getActiveChildItem(item: EditorToolbarDropdownItem): EditorToolbarItem 
 
 function getButtonProps(item: EditorToolbarItem) {
   const baseProps = omit(item as any, ['kind', 'mark', 'align', 'level', 'href', 'src', 'pos', 'items', 'slot', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'tooltip', 'onClick'])
+  const hasDropdown = 'items' in item && !!item.items?.length
+  const isFormattingButton = !hasDropdown && 'kind' in item && ['mark', 'heading', 'textAlign', 'blockquote', 'bulletList', 'orderedList', 'taskList', 'codeBlock'].includes(item.kind)
 
   // For dropdown items, use the active child's icon if available
-  if ('items' in item && item.items?.length) {
+  if (hasDropdown) {
     const activeChild = getActiveChildItem(item)
     if (activeChild?.icon) {
       baseProps.icon = activeChild.icon
@@ -266,6 +268,7 @@ function getButtonProps(item: EditorToolbarItem) {
 
   return defu(baseProps, {
     'aria-label': baseProps.label ? undefined : item.tooltip?.text,
+    'aria-pressed': isFormattingButton ? isActive(item) : undefined,
     'color': props.color,
     'activeColor': props.activeColor,
     'activeVariant': props.activeVariant,
