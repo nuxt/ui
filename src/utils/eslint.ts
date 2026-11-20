@@ -46,7 +46,8 @@ export interface NuxtUIESLintOptions {
  * only evaluated at runtime, so a value that isn't a string literal is left out.
  */
 export function readAppConfigColors(code: string): Record<string, string> {
-  const block = code.replace(/\/\*[\s\S]*?\*\/|^\s*\/\/.*$/gm, '').match(/\bcolors\s*:\s*\{([^{}]*)\}/)?.[1]
+  // Strings are matched first so a `//` inside one, like a URL, isn't read as a comment
+  const block = code.replace(/(["'`])(?:\\.|(?!\1)[^\\])*\1|\/\*[\s\S]*?\*\/|\/\/.*$/gm, match => match[0] === '/' ? '' : match).match(/\bcolors\s*:\s*\{([^{}]*)\}/)?.[1]
   const colors: Record<string, string> = {}
   for (const [, alias, palette] of block?.matchAll(/([\w-]+)\s*:\s*["'`]([\w-]+)["'`]/g) ?? []) {
     colors[alias!] = palette!

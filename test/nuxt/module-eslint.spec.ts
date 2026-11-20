@@ -13,7 +13,14 @@ beforeAll(async () => {
 
   await mkdir(join(rootDir, 'app'))
   await writeFile(join(rootDir, 'app/app.config.ts'), `
-    export default defineAppConfig({ ui: { colors: { primary: 'my-brand', secondary: 'brand2' } } })
+    export default defineAppConfig({
+      ui: {
+        colors: {
+          primary: 'my-brand', // primary: 'green'
+          secondary: 'brand2'
+        }
+      }
+    })
   `)
 
   const entryPoint = join(process.cwd(), 'test/fixtures/consumer/minimal/app/assets/css/main.css')
