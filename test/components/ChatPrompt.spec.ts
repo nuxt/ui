@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { defineComponent, h, nextTick, ref } from 'vue'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import type { UIMessage } from 'ai'
 import { renderEach } from '../component-render'
 import ChatPrompt from '../../src/runtime/components/ChatPrompt.vue'
 import ChatPromptSubmit from '../../src/runtime/components/ChatPromptSubmit.vue'
@@ -44,7 +45,7 @@ describe('ChatPrompt', () => {
   it('queues a submit while streaming with `v-model:queue`', async () => {
     const files = [new File(['a'], 'notes.txt')]
     const wrapper = await mountSuspended(ChatPrompt, {
-      props: { modelValue: 'Next question', files, queue: [], status: 'streaming' }
+      props: { 'modelValue': 'Next question', files, 'queue': [], 'status': 'streaming', 'onUpdate:queue': () => {} }
     })
 
     await wrapper.find('textarea').trigger('keydown', { key: 'Enter' })
@@ -58,7 +59,7 @@ describe('ChatPrompt', () => {
   it('queues from `UChatPromptSubmit` while streaming when the prompt has text', async () => {
     const onStop = vi.fn()
     const wrapper = await mountSuspended(ChatPrompt, {
-      props: { modelValue: '', queue: [], status: 'streaming' },
+      props: { 'modelValue': '', 'queue': [], 'status': 'streaming', 'onUpdate:queue': () => {} },
       slots: { default: () => h(ChatPromptSubmit, { status: 'streaming', onStop }) },
       attachTo: document.body
     })
@@ -101,7 +102,7 @@ describe('ChatPrompt', () => {
     const queue = [{ text: 'First' }, { text: 'Second' }]
 
     async function mountQueue() {
-      const wrapper = await mountSuspended(ChatPrompt, { props: { modelValue: 'Draft', queue } })
+      const wrapper = await mountSuspended(ChatPrompt, { props: { 'modelValue': 'Draft', queue, 'onUpdate:queue': () => {} } })
       return { wrapper, item: wrapper.findAll('[data-slot="queueItem"]')[1]! }
     }
 
@@ -133,7 +134,7 @@ describe('ChatPrompt', () => {
     it('moves the message to the front with a bound `v-model:queue`', async () => {
       const model = ref([...queue])
       const Parent = defineComponent({
-        setup: () => () => h(ChatPrompt, { 'queue': model.value, 'onUpdate:queue': (value?: typeof queue) => (model.value = value ?? []) })
+        setup: () => () => h(ChatPrompt, { 'queue': model.value, 'onUpdate:queue': (value?: any[]) => (model.value = value ?? []) })
       })
 
       const wrapper = await mountSuspended(Parent)
@@ -177,6 +178,67 @@ describe('ChatPrompt', () => {
 
       expect(wrapper.emitted('send')).toBeUndefined()
       expect(wrapper.emitted('update:queue')?.[0]).toEqual([[queue[0]]])
+    })
+  })
+
+  describe('with a queue the app keeps', () => {
+    const queue: UIMessage[] = [
+      { id: '1', role: 'user', parts: [{ type: 'text', text: 'First' }] },
+      { id: '2', role: 'user', parts: [{ type: 'text', text: 'Second' }] }
+    ]
+
+    async function mountQueue(props: Record<string, any> = {}) {
+      const wrapper = await mountSuspended(ChatPrompt, { props: { modelValue: 'Draft', queue: [...queue], ...props } })
+      return { wrapper, item: wrapper.findAll('[data-slot="queueItem"]')[1]! }
+    }
+
+    it('lists the text of the messages', async () => {
+      const { wrapper } = await mountQueue()
+
+      expect(wrapper.findAll('[data-slot="queueItemLabel"]').map(label => label.text())).toEqual(['First', 'Second'])
+    })
+
+    it('emits a submit while streaming for the app to queue', async () => {
+      const { wrapper } = await mountQueue({ modelValue: 'Next question', status: 'streaming' })
+      await wrapper.find('textarea').trigger('keydown', { key: 'Enter' })
+
+      expect(wrapper.emitted('submit')).toHaveLength(1)
+      expect(wrapper.emitted('update:queue')).toBeUndefined()
+    })
+
+    it('emits send without moving the message', async () => {
+      const { wrapper, item } = await mountQueue()
+      await item.findAll('button').at(-3)!.trigger('click')
+
+      expect(wrapper.emitted('send')?.[0]).toEqual([queue[1]])
+      expect(wrapper.emitted('update:queue')).toBeUndefined()
+    })
+
+    it('emits remove', async () => {
+      const { wrapper, item } = await mountQueue()
+      await item.findAll('button').at(-1)!.trigger('click')
+
+      expect(wrapper.emitted('remove')?.[0]).toEqual([queue[1]])
+      expect(wrapper.emitted('update:queue')).toBeUndefined()
+    })
+
+    it('puts the message back in the prompt and emits remove on edit', async () => {
+      const { wrapper, item } = await mountQueue()
+      await item.findAll('button').at(-2)!.trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['Second\nDraft'])
+      expect(wrapper.emitted('remove')?.[0]).toEqual([queue[1]])
+    })
+
+    it('does not edit a message with file parts', async () => {
+      const wrapper = await mountSuspended(ChatPrompt, {
+        props: { files: [], queue: [{ id: '1', role: 'user', parts: [{ type: 'file', mediaType: 'image/png', filename: 'a.png', url: 'data:image/png;base64,' }] }] }
+      })
+
+      expect(wrapper.find('[data-slot="queueItemLabel"]').text()).toBe('a.png')
+
+      await wrapper.findAll('[data-slot="queueItem"] button').at(-2)!.trigger('click')
+      expect(wrapper.emitted('remove')).toBeUndefined()
     })
   })
 
