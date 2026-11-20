@@ -60,6 +60,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSidebar
       ...buttonProps,
       'icon': props.icon || (sidebarCollapsed ? appConfig.ui.icons.panelOpen : appConfig.ui.icons.panelClose),
       'aria-label': sidebarCollapsed ? t('dashboardSidebarCollapse.expand') : t('dashboardSidebarCollapse.collapse'),
+      'aria-expanded': !sidebarCollapsed,
       ...$attrs
     }"
     :class="ui({ class: [props.ui?.base, props.class], side: props.side })"

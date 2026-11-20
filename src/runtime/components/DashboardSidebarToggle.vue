@@ -62,6 +62,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSidebar
       ...buttonProps,
       'icon': props.icon || (sidebarOpen ? appConfig.ui.icons.close : appConfig.ui.icons.menu),
       'aria-label': sidebarOpen ? t('dashboardSidebarToggle.close') : t('dashboardSidebarToggle.open'),
+      'aria-expanded': sidebarOpen,
       ...$attrs
     }"
     :class="ui({ class: [props.ui?.base, props.class], side: props.side })"
