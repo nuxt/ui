@@ -11,9 +11,14 @@ describe('i18n plugin', () => {
     ['en-US', 'en'],
     [{ code: 'en', language: 'en-GB' }, 'en_gb'],
     [{ code: 'zh-Hant', language: 'zh-TW' }, 'zh_tw'],
+    ['zh-Hant-TW', 'zh_tw'],
+    ['zh-Hans-CN', 'zh_cn'],
+    [{ code: 'en', language: 'en-Latn-GB' }, 'en_gb'],
+    [{ code: 'en-GB', language: 'en-Latn' }, 'en_gb'],
     ['fa', 'fa_ir'],
     ['nb', 'nb_no'],
     ['zh', undefined],
+    ['zh-Hant', undefined],
     ['xx', undefined]
   ])('resolves %j to %s', (locale, key) => {
     expect(resolveLocaleKey(locale, keys)).toBe(key)
