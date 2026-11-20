@@ -8,7 +8,7 @@ export default (options: Required<ModuleOptions>) => ({
     back: 'p-0',
     content: 'relative overflow-hidden flex flex-col focus:outline-none',
     footer: 'p-1',
-    viewport: 'relative scroll-py-1 overflow-y-auto overscroll-contain flex-1 focus:outline-none',
+    viewport: 'relative scroll-py-1 overflow-y-auto overscroll-y-contain flex-1 focus:outline-none',
     group: 'p-1 isolate',
     empty: 'text-center text-muted',
     label: 'font-semibold text-highlighted',
