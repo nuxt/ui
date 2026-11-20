@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Koʻrsatish uchun slaydni tanlang',
-      goto: '{slide}-slaydga o\'tish',
       next: 'Oldinga',
       prev: 'Ortga',
       roledescription: 'karusel',
-      slide: 'slayd'
+      slide: 'slayd',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'Yuklanmoqda',

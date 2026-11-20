@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Chọn slide để hiển thị',
-      goto: 'Đi tới ô {slide}',
       next: 'Sau',
       prev: 'Trước',
       roledescription: 'băng chuyền',
-      slide: 'slide'
+      slide: 'slide',
+      slideLabel: '{slide} trên {total}'
     },
     chatAttachment: {
       uploading: 'Đang tải lên',

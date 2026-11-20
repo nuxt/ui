@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Zgjidh slajdin për të shfaqur',
-      goto: 'Shko te slajdi {slide}',
       next: 'Tjetri',
       prev: 'Para',
       roledescription: 'karusel',
-      slide: 'slajd'
+      slide: 'slajd',
+      slideLabel: '{slide} nga {total}'
     },
     chatAttachment: {
       uploading: 'Po ngarkohet',

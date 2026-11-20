@@ -2,9 +2,9 @@ import { defineTheme } from '../utils/theme'
 
 export default defineTheme({
   slots: {
-    root: 'relative focus:outline-none',
-    viewport: 'overflow-hidden',
-    container: 'flex items-start',
+    root: 'relative',
+    viewport: 'focus:outline-none',
+    container: 'items-start',
     item: 'min-w-0 shrink-0 basis-full',
     controls: '',
     arrows: '',
@@ -16,16 +16,21 @@ export default defineTheme({
   variants: {
     orientation: {
       vertical: {
-        container: 'flex-col -mt-4',
+        container: '-mt-4',
         item: 'pt-4',
         prev: 'top-4 sm:-top-12 left-1/2 -translate-x-1/2 rotate-90 rtl:-rotate-90',
         next: 'bottom-4 sm:-bottom-12 left-1/2 -translate-x-1/2 rotate-90 rtl:-rotate-90'
       },
       horizontal: {
-        container: 'flex-row -ms-4',
+        container: '-ms-4',
         item: 'ps-4',
         prev: 'inset-s-4 sm:-inset-s-12 top-1/2 -translate-y-1/2',
         next: 'inset-e-4 sm:-inset-e-12 top-1/2 -translate-y-1/2'
+      }
+    },
+    fade: {
+      true: {
+        item: 'transition-opacity duration-300 ease-out'
       }
     },
     active: {

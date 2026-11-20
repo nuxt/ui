@@ -31,11 +31,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'اسلاید مورد نظر برای نمایش را انتخاب کنید',
-      goto: 'رفتن به اسلاید {slide}',
       next: 'بعدی',
       prev: 'قبلی',
       roledescription: 'کاروسل',
-      slide: 'اسلاید'
+      slide: 'اسلاید',
+      slideLabel: '{slide} از {total}'
     },
     chatAttachment: {
       uploading: 'در حال بارگذاری',

@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'প্রদর্শনের জন্য স্লাইড নির্বাচন করুন',
-      goto: 'স্লাইড {slide} এ যান',
       next: 'পরবর্তী',
       prev: 'পূর্ববর্তী',
       roledescription: 'ক্যারোসেল',
-      slide: 'স্লাইড'
+      slide: 'স্লাইড',
+      slideLabel: '{total} এর মধ্যে {slide}'
     },
     chatAttachment: {
       uploading: 'আপলোড হচ্ছে',

@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Göstərmək üçün slayd seçin',
-      goto: 'Slayd {slide} keç',
       next: 'Növbəti',
       prev: 'Əvvəlki',
       roledescription: 'karusel',
-      slide: 'slayd'
+      slide: 'slayd',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'Yüklənir',

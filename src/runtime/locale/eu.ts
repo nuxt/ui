@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Erakutsi beharreko diapositiba aukeratu',
-      goto: 'Joan diapositibara {slide}',
       next: 'Hurrengoa',
       prev: 'Aurretikoa',
       roledescription: 'karrusela',
-      slide: 'diapositiba'
+      slide: 'diapositiba',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'Igotzen',

@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Kies dia om weer te geven',
-      goto: 'Ga naar dia {slide}',
       next: 'Volgende',
       prev: 'Vorige',
       roledescription: 'carrousel',
-      slide: 'dia'
+      slide: 'dia',
+      slideLabel: '{slide} van {total}'
     },
     chatAttachment: {
       uploading: 'Uploaden',

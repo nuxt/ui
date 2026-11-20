@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: '选择要显示的幻灯片',
-      goto: '跳转到第 {slide} 页',
       next: '下一页',
       prev: '上一页',
       roledescription: '轮播',
-      slide: '幻灯片'
+      slide: '幻灯片',
+      slideLabel: '第 {slide} 张，共 {total} 张'
     },
     chatAttachment: {
       uploading: '正在上传',

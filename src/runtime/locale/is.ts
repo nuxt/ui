@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Veldu mynd til að sýna',
-      goto: 'Fara á mynd {slide}',
       next: 'Næsta',
       prev: 'Fyrri',
       roledescription: 'hringekja',
-      slide: 'mynd'
+      slide: 'mynd',
+      slideLabel: '{slide} af {total}'
     },
     chatAttachment: {
       uploading: 'Hleður upp',

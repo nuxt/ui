@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Vyberte snímku na zobrazenie',
-      goto: 'Prejsť na {slide}',
       next: 'Nasledujúci',
       prev: 'Predchádzajúci',
       roledescription: 'karusel',
-      slide: 'snímka'
+      slide: 'snímka',
+      slideLabel: '{slide} z {total}'
     },
     chatAttachment: {
       uploading: 'Nahrávanie',

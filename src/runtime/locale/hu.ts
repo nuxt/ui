@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Válassza ki a megjelenítendő diát',
-      goto: 'Ugrás ide {slide}',
       next: 'Következő',
       prev: 'Előző',
       roledescription: 'körhinta',
-      slide: 'dia'
+      slide: 'dia',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'Feltöltés',

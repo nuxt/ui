@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Pilih slide untuk ditampilkan',
-      goto: 'Pergi ke slide {slide}',
       next: 'Berikutnya',
       prev: 'Sebelumnya',
       roledescription: 'korsel',
-      slide: 'slide'
+      slide: 'slide',
+      slideLabel: '{slide} dari {total}'
     },
     chatAttachment: {
       uploading: 'Mengunggah',

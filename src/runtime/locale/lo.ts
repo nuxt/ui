@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'ເລືອກສະໄລ້ທີ່ຈະສະແດງ',
-      goto: 'ໄປທີ່ສະໄລ້ {slide}',
       next: 'ຕໍ່ໄປ',
       prev: 'ກ່ອນໜ້າ',
       roledescription: 'ຄາຣູເຊວ',
-      slide: 'ສະໄລ້'
+      slide: 'ສະໄລ້',
+      slideLabel: '{slide} ຈາກ {total}'
     },
     chatAttachment: {
       uploading: 'ກຳລັງອັບໂຫຼດ',
