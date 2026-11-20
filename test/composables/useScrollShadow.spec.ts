@@ -2,17 +2,22 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { ref } from 'vue'
 import { useScrollShadow } from '../../src/runtime/composables/useScrollShadow'
 
-const { arrivedState } = vi.hoisted(() => ({
+const { arrivedState, measure, resizeObserver } = vi.hoisted(() => ({
   arrivedState: {
     top: true,
     bottom: true,
     left: true,
     right: true
-  }
+  },
+  measure: vi.fn(),
+  resizeObserver: { callback: undefined as (() => void) | undefined }
 }))
 
 vi.mock('@vueuse/core', () => ({
-  useScroll: () => ({ arrivedState })
+  useScroll: () => ({ arrivedState, measure }),
+  useResizeObserver: (_target: unknown, callback: () => void) => {
+    resizeObserver.callback = callback
+  }
 }))
 
 function createMockElement(props: {
@@ -35,6 +40,8 @@ describe('useScrollShadow', () => {
     arrivedState.bottom = true
     arrivedState.left = true
     arrivedState.right = true
+    measure.mockClear()
+    resizeObserver.callback = undefined
   })
 
   describe('style', () => {
@@ -134,6 +141,16 @@ describe('useScrollShadow', () => {
       const el = ref(createMockElement({ scrollHeight: 300, clientHeight: 100 }))
       const { isOverflowing } = useScrollShadow(el, { orientation: 'horizontal' })
       expect(isOverflowing.value).toBe(false)
+    })
+  })
+
+  describe('resize', () => {
+    it('measures the scroll state again when the element resizes', () => {
+      useScrollShadow(ref(createMockElement()))
+      expect(measure).not.toHaveBeenCalled()
+
+      resizeObserver.callback?.()
+      expect(measure).toHaveBeenCalledOnce()
     })
   })
 
