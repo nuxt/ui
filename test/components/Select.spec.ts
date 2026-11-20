@@ -270,7 +270,7 @@ describe('Select', () => {
       // menu first, so the click lands while the menu reads as closed. The
       // trigger must not answer that click by synthesizing another
       // `pointerdown`, which is what reopened the menu.
-      await trigger.trigger('pointerdown')
+      await trigger.trigger('pointerdown', { pointerId: 1 })
       await trigger.trigger('click')
       await flushPromises()
 
@@ -292,10 +292,10 @@ describe('Select', () => {
         pointerDowns++
       })
 
-      // Releasing on the trigger is followed by a `click` on it, so the flag
+      // Releasing on the trigger is followed by a `click` on it, so the id
       // has to survive the `pointerup` for the click to be seen as real.
-      await trigger.trigger('pointerdown')
-      await trigger.trigger('pointerup')
+      await trigger.trigger('pointerdown', { pointerId: 1 })
+      await trigger.trigger('pointerup', { pointerId: 1 })
       await trigger.trigger('click')
       await flushPromises()
 
@@ -326,8 +326,8 @@ describe('Select', () => {
 
       // A right-click fires `pointerdown` and `pointerup` but no `click`, so it
       // must not count as the start of a real click.
-      await trigger.trigger('pointerdown', { button: 2 })
-      await trigger.trigger('pointerup', { button: 2 })
+      await trigger.trigger('pointerdown', { button: 2, pointerId: 1 })
+      await trigger.trigger('pointerup', { button: 2, pointerId: 1 })
       await trigger.trigger('click')
       await flushPromises()
 
@@ -357,8 +357,8 @@ describe('Select', () => {
 
       // Pressing the trigger and releasing elsewhere ends the gesture with no
       // `click` on the trigger.
-      await trigger.trigger('pointerdown')
-      document.body.dispatchEvent(new PointerEvent('pointerup', { bubbles: true }))
+      await trigger.trigger('pointerdown', { pointerId: 1 })
+      document.body.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, pointerId: 1 }))
       await trigger.trigger('click')
       await flushPromises()
 
@@ -387,15 +387,45 @@ describe('Select', () => {
       })
 
       // Touch scrolling cancels the sequence, so no `click` follows and the
-      // "saw a real pointerdown" flag must not survive into the next
-      // interaction, or the label click after it would stop opening the menu.
-      await trigger.trigger('pointerdown')
-      await trigger.trigger('pointercancel')
+      // active pointerId must not survive into the next interaction, or the
+      // label click after it would stop opening the menu.
+      await trigger.trigger('pointerdown', { pointerId: 1 })
+      await trigger.trigger('pointercancel', { pointerId: 1 })
       await trigger.trigger('click')
       await flushPromises()
 
       // The real press plus the one synthesized for the label-style click.
       expect(pointerDowns).toBe(2)
+    })
+
+    test('a concurrent pointer release does not clear the active pointer', async () => {
+      // Attached so the document-level `pointerup` listener fires.
+      const wrapper = await mountSuspended(Select, {
+        props: { items: ['Option 1', 'Option 2'], open: false, portal: false },
+        attachTo: document.body
+      })
+
+      const trigger = wrapper.find('[data-slot="base"]')
+      const el = trigger.element
+
+      let pointerDowns = 0
+      el.addEventListener('pointerdown', () => {
+        pointerDowns++
+      })
+
+      // Mouse pointer A presses the trigger. Touch pointer B releases
+      // elsewhere before A finishes. B's `pointerup` must not clear A's
+      // active state, or A's subsequent click would synthesize a second
+      // `pointerdown` and reopen the menu.
+      await trigger.trigger('pointerdown', { pointerId: 1 })
+      document.body.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, pointerId: 2 }))
+      await trigger.trigger('click')
+      await flushPromises()
+
+      // Only the original press — the concurrent release did not interfere.
+      expect(pointerDowns).toBe(1)
+
+      wrapper.unmount()
     })
   })
 

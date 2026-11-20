@@ -322,9 +322,11 @@ function isSelectItem(item: SelectItem): item is Exclude<SelectItem, SelectValue
   return typeof item === 'object' && item !== null
 }
 
-// Set by a real pointer press on the trigger. A `<label for>` click forwards only a
-// `click`, never a `pointerdown`, and that absence is what tells the two apart.
-let triggerSawPointerDown = false
+// Tracks the pointerId of a real pointer press on the trigger. A `<label for>` click
+// forwards only a `click`, never a `pointerdown`, and that absence tells the two apart.
+// Using pointerId instead of a boolean prevents concurrent pointers (e.g. mouse + touch)
+// from interfering with each other: an unrelated pointer's release cannot clear the flag.
+let activePointerId: number | null = null
 
 function onTriggerPointerDown(event: PointerEvent) {
   // Only a primary press without Ctrl ends in a `click` on the trigger. A right-click,
@@ -333,15 +335,20 @@ function onTriggerPointerDown(event: PointerEvent) {
     return
   }
 
-  triggerSawPointerDown = true
-  document.addEventListener('pointerup', onDocumentPointerUp, { capture: true, once: true })
+  activePointerId = event.pointerId
+  document.addEventListener('pointerup', onDocumentPointerUp, { capture: true })
 }
 
-// A press released outside the trigger fires no `click` on it either, so the flag
+// A press released outside the trigger fires no `click` on it either, so the id
 // has to be cleared here or it would make the next label click look like a real press.
+// Only the pointer that started the press can end it — ignore unrelated pointers.
 function onDocumentPointerUp(event: PointerEvent) {
+  if (event.pointerId !== activePointerId) {
+    return
+  }
+  document.removeEventListener('pointerup', onDocumentPointerUp, { capture: true })
   if (!triggerRef.value?.$el?.contains(event.target as Node | null)) {
-    triggerSawPointerDown = false
+    activePointerId = null
   }
 }
 
@@ -352,10 +359,13 @@ onScopeDispose(() => {
 })
 
 // A cancelled sequence (touch scrolling, the browser taking over the gesture)
-// fires no `click`, so without this the flag would outlive the interaction and
+// fires no `click`, so without this the id would outlive the interaction and
 // make the next label click look like a real pointer press.
-function onTriggerPointerCancel() {
-  triggerSawPointerDown = false
+function onTriggerPointerCancel(event: PointerEvent) {
+  if (event.pointerId === activePointerId) {
+    activePointerId = null
+    document.removeEventListener('pointerup', onDocumentPointerUp, { capture: true })
+  }
 }
 
 function onTriggerClick(open: boolean) {
@@ -370,12 +380,12 @@ function onTriggerClick(open: boolean) {
   // `pointerdown` has already closed the menu, so `open` is `false` by the time `click`
   // fires and the menu would immediately reopen. Requiring the absence of a real
   // `pointerdown` keeps the label case working without reopening on a genuine click.
-  const forwardedFromLabel = !triggerSawPointerDown
+  const forwardedFromLabel = activePointerId === null
   if (!open && forwardedFromLabel) {
     triggerRef.value?.$el?.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0 }))
   }
   // Reset last: the synthesized `pointerdown` above re-enters `onTriggerPointerDown`.
-  triggerSawPointerDown = false
+  activePointerId = null
 }
 
 function onCloseAutoFocus(event: Event) {
