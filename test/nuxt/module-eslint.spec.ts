@@ -13,7 +13,7 @@ beforeAll(async () => {
 
   await mkdir(join(rootDir, 'app'))
   await writeFile(join(rootDir, 'app/app.config.ts'), `
-    export default defineAppConfig({ ui: { colors: { primary: 'my-brand' } } })
+    export default defineAppConfig({ ui: { colors: { primary: 'my-brand', secondary: 'brand2' } } })
   `)
 
   const entryPoint = join(process.cwd(), 'test/fixtures/consumer/minimal/app/assets/css/main.css')
@@ -46,7 +46,7 @@ it('registers the ESLint config with a file URL for Node ESM', () => {
   ])
 })
 
-it('passes a hyphenated palette from app.config.ts to ESLint', () => {
+it('passes palettes with hyphens and digits from app.config.ts to ESLint', () => {
   const options = JSON.parse(config?.configs[0]?.slice('...nuxtUI('.length, -1) ?? '{}')
-  expect(options).toMatchObject({ colors: { primary: 'my-brand' } })
+  expect(options).toMatchObject({ colors: { primary: 'my-brand', secondary: 'brand2' } })
 })
