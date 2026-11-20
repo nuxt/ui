@@ -345,14 +345,70 @@ function isSelectItem(item: SelectItem): item is Exclude<SelectItem, SelectValue
   return typeof item === 'object' && item !== null
 }
 
+// Tracks the pointerId of a real pointer press on the trigger. A `<label for>` click
+// forwards only a `click`, never a `pointerdown`, and that absence tells the two apart.
+// Using pointerId instead of a boolean prevents concurrent pointers (e.g. mouse + touch)
+// from interfering with each other: an unrelated pointer's release cannot clear the flag.
+let activePointerId: number | null = null
+
+function onTriggerPointerDown(event: PointerEvent) {
+  // Only a primary press without Ctrl ends in a `click` on the trigger. A right-click,
+  // or Ctrl+click on macOS, opens the context menu instead and fires no `click`.
+  if (event.button !== 0 || event.ctrlKey) {
+    return
+  }
+
+  activePointerId = event.pointerId
+  document.addEventListener('pointerup', onDocumentPointerUp, { capture: true })
+}
+
+// A press released outside the trigger fires no `click` on it either, so the id
+// has to be cleared here or it would make the next label click look like a real press.
+// Only the pointer that started the press can end it — ignore unrelated pointers.
+function onDocumentPointerUp(event: PointerEvent) {
+  if (event.pointerId !== activePointerId) {
+    return
+  }
+  document.removeEventListener('pointerup', onDocumentPointerUp, { capture: true })
+  if (!triggerRef.value?.$el?.contains(event.target as Node | null)) {
+    activePointerId = null
+  }
+}
+
+onScopeDispose(() => {
+  if (typeof document !== 'undefined') {
+    document.removeEventListener('pointerup', onDocumentPointerUp, { capture: true })
+  }
+})
+
+// A cancelled sequence (touch scrolling, the browser taking over the gesture)
+// fires no `click`, so without this the id would outlive the interaction and
+// make the next label click look like a real pointer press.
+function onTriggerPointerCancel(event: PointerEvent) {
+  if (event.pointerId === activePointerId) {
+    activePointerId = null
+    document.removeEventListener('pointerup', onDocumentPointerUp, { capture: true })
+  }
+}
+
 function onTriggerClick(open: boolean) {
   // A real pointer click opens the menu via `pointerdown` (so `open` is already `true`
   // here), and keyboard activation opens via `keydown`. A `<label for>` click only
   // forwards a `click` with no `pointerdown`, so the menu is still closed. In that case
   // re-dispatch a `pointerdown` to open it, matching SelectMenu (Combobox opens on click).
-  if (!open) {
+  //
+  // `open` alone is not enough to detect that. While the menu is open, Reka's
+  // dismissable layer normally makes the trigger unclickable, but a `pointer-events`
+  // utility on the trigger or an ancestor lets the click through: the outside
+  // `pointerdown` has already closed the menu, so `open` is `false` by the time `click`
+  // fires and the menu would immediately reopen. Requiring the absence of a real
+  // `pointerdown` keeps the label case working without reopening on a genuine click.
+  const forwardedFromLabel = activePointerId === null
+  if (!open && forwardedFromLabel) {
     triggerRef.value?.$el?.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0 }))
   }
+  // Reset last: the synthesized `pointerdown` above re-enters `onTriggerPointerDown`.
+  activePointerId = null
 }
 
 function onCloseAutoFocus(event: Event) {
@@ -393,6 +449,8 @@ defineExpose({
       data-slot="base"
       :class="ui.base({ class: [props.ui?.base, props.class] })"
       v-bind="{ ...omitUnsafeAttrs($attrs), ...ariaAttrs }"
+      @pointerdown="onTriggerPointerDown"
+      @pointercancel="onTriggerPointerCancel"
       @click="onTriggerClick(open)"
     >
       <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
