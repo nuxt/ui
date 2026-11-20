@@ -100,6 +100,20 @@ describe('DashboardSidebar', () => {
     wrapper.unmount()
   })
 
+  it('keeps the menu open when a guard aborts the navigation', async () => {
+    const wrapper = await mountSuspended(DashboardWrapper, { props: { open: true, menu: { portal: false } } })
+    await vi.dynamicImportSettled()
+
+    const router = (wrapper.vm as any).$router
+    const removeGuard = router.beforeEach(() => false)
+    await router.push('/?aborted')
+    removeGuard()
+
+    expect(wrapper.findComponent(DashboardSidebar).emitted('update:open')).toBeUndefined()
+
+    wrapper.unmount()
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(DashboardWrapper, {
       props: {

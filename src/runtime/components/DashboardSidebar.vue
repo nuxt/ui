@@ -133,7 +133,12 @@ if (router?.afterEach) {
   let removeAfterEach: (() => void) | undefined
 
   onMounted(() => {
-    removeAfterEach = router.afterEach(closeOnNavigation)
+    removeAfterEach = router.afterEach((to) => {
+      // A guard can abort the navigation, which leaves the current route as it was
+      if (to.fullPath !== router.currentRoute.value.fullPath) return
+
+      closeOnNavigation()
+    })
   })
   onBeforeUnmount(() => removeAfterEach?.())
 } else {
