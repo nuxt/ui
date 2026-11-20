@@ -19,7 +19,8 @@ beforeAll(async () => {
       ui: {
         colors: {
           primary: 'my-brand', // primary: 'green'
-          secondary: 'brand2'
+          secondary: 'brand2',
+          'brand-accent': 'pink'
         }
       }
     })
@@ -62,5 +63,5 @@ it('registers the ESLint config with a file URL for Node ESM', () => {
 
 it('passes palettes with hyphens and digits from app.config.ts to ESLint', () => {
   const options = JSON.parse(config?.configs[0]?.slice('...nuxtUI('.length, -1) ?? '{}')
-  expect(options).toMatchObject({ colors: { primary: 'my-brand', secondary: 'brand2' } })
+  expect(options).toMatchObject({ colors: { 'primary': 'my-brand', 'secondary': 'brand2', 'brand-accent': 'pink' } })
 })
