@@ -120,7 +120,7 @@ name: 'chat-prompt-queue-example'
 ::
 
 ::tip{to="#with-queued-messages"}
-Sending the queued messages is up to you, check the **With queued messages** example for a recipe with the AI SDK.
+The AI SDK can hold the queue for you, check the **With queued messages** example.
 ::
 
 ## Examples
@@ -184,7 +184,7 @@ async function onSubmit() {
 
 ### With queued messages :badge{label="4.13+" class="align-text-top"}
 
-The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Bind `v-model:queue` to keep them instead: the prompt lists the queued messages in a panel above it, where the user can send one now, edit it or remove it, and you send the next one once the chat is `ready` again.
+By default, calling `sendMessage` during a response starts a second request next to the current one, and with `status`, `UChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Enable the experimental `experimental_queue` option of `useChat` so the chat holds these messages and sends them one at a time, then bind its queue to `v-model:queue`: the prompt lists the queued messages in a panel above it, where the user can send one now, edit it or remove it.
 
 ::framework-only
 #nuxt
@@ -192,37 +192,39 @@ The AI SDK doesn't queue messages: calling `sendMessage` during a response start
 <script setup lang="ts">
 import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { useChat } from '@ai-sdk/vue'
+import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
 const input = ref('')
-const queue = ref<ChatPromptQueueItem[]>([])
 
-const { status, error, sendMessage, regenerate, stop } = useChat()
+const {
+  status,
+  error,
+  sendMessage,
+  regenerate,
+  stop,
+  experimental_queuedMessages,
+  experimental_removeQueuedMessage,
+  experimental_sendQueuedMessageNow
+} = useChat({ experimental_queue: true })
+
+// The chat holds the queue, the prompt lists it and edits it
+const queue = computed<ChatPromptQueueItem[]>({
+  get: () => experimental_queuedMessages.value.map(message => ({ id: message.id, text: getTextFromMessage(message) })),
+  set: (next) => {
+    for (const item of queue.value.filter(item => !next.some(({ id }) => id === item.id))) {
+      experimental_removeQueuedMessage(item.id)
+    }
+
+    // A message submitted while the chat is busy
+    for (const item of next.filter(({ id }) => !id)) {
+      sendMessage({ text: item.text })
+    }
+  }
+})
 
 function onSubmit() {
   sendMessage({ text: input.value })
   input.value = ''
-}
-
-function sendNext() {
-  const item = queue.value.shift()
-  if (item) {
-    sendMessage({ text: item.text })
-  }
-}
-
-watch(status, (value) => {
-  if (value === 'ready') {
-    sendNext()
-  }
-})
-
-// The message picked to be sent now is at the front of the queue
-function onSend() {
-  if (status.value === 'submitted' || status.value === 'streaming') {
-    stop()
-  } else {
-    sendNext()
-  }
 }
 </script>
 
@@ -233,7 +235,7 @@ function onSend() {
     :status="status"
     :error="error"
     @submit="onSubmit"
-    @send="onSend"
+    @send="item => experimental_sendQueuedMessageNow(item.id)"
   >
     <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
   </UChatPrompt>
@@ -243,40 +245,42 @@ function onSend() {
 #vue
 ```vue
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import type { ChatPromptQueueItem } from '@nuxt/ui'
 import { useChat } from '@ai-sdk/vue'
+import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
 const input = ref('')
-const queue = ref<ChatPromptQueueItem[]>([])
 
-const { status, error, sendMessage, regenerate, stop } = useChat()
+const {
+  status,
+  error,
+  sendMessage,
+  regenerate,
+  stop,
+  experimental_queuedMessages,
+  experimental_removeQueuedMessage,
+  experimental_sendQueuedMessageNow
+} = useChat({ experimental_queue: true })
+
+// The chat holds the queue, the prompt lists it and edits it
+const queue = computed<ChatPromptQueueItem[]>({
+  get: () => experimental_queuedMessages.value.map(message => ({ id: message.id, text: getTextFromMessage(message) })),
+  set: (next) => {
+    for (const item of queue.value.filter(item => !next.some(({ id }) => id === item.id))) {
+      experimental_removeQueuedMessage(item.id)
+    }
+
+    // A message submitted while the chat is busy
+    for (const item of next.filter(({ id }) => !id)) {
+      sendMessage({ text: item.text })
+    }
+  }
+})
 
 function onSubmit() {
   sendMessage({ text: input.value })
   input.value = ''
-}
-
-function sendNext() {
-  const item = queue.value.shift()
-  if (item) {
-    sendMessage({ text: item.text })
-  }
-}
-
-watch(status, (value) => {
-  if (value === 'ready') {
-    sendNext()
-  }
-})
-
-// The message picked to be sent now is at the front of the queue
-function onSend() {
-  if (status.value === 'submitted' || status.value === 'streaming') {
-    stop()
-  } else {
-    sendNext()
-  }
 }
 </script>
 
@@ -287,7 +291,7 @@ function onSend() {
     :status="status"
     :error="error"
     @submit="onSubmit"
-    @send="onSend"
+    @send="item => experimental_sendQueuedMessageNow(item.id)"
   >
     <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
   </UChatPrompt>
@@ -295,11 +299,7 @@ function onSend() {
 ```
 ::
 
-After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response. Stopping the response sends the next queued message right away.
-
-::note
-With [tool approval](/docs/components/chat-tool#with-approval-flow), a response waiting for the user's answer is `ready` too. Skip `sendNext` while the last message has a part in the `approval-requested` state, a new message would leave the approval unanswered.
-::
+The chat waits for an answer to a [tool approval](/docs/components/chat-tool#with-approval-flow) before it sends the next message. Stopping the response or an error pauses the queue until the next message is sent, and editing a message or regenerating a response clears it.
 
 ## API
 
