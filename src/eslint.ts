@@ -24,7 +24,7 @@ const COLOR_UTILITY = '(?:bg|text|border(?:-[xytrblse]|-bs|-be)?|ring(?:-offset)
 // These numeric utilities can overlap custom palette names and set non-color properties.
 const NON_COLOR_NUMERIC_CLASS = '(?:bg-(?:linear|conic)|outline-offset|ring-offset|border-(?:[xytrblse]|bs|be|spacing(?:-[xy])?)|divide-[xy])-\\d{2,3}(?:/\\S+)?!?$'
 // A class with its variants, `md:hover:bg-red-500/50`
-const CLASS = (utility: string, color: string) => `^(?:\\S*:)?!?-?(${utility})-(${color})(?:-\\d{2,3})?(?:\\/\\S+)?!?$`
+const CLASS = (utility: string, color: string, start = '^') => `${start}(?:\\S*:)?!?-?(${utility})-(${color})(?:-\\d{2,3})?(?:\\/\\S+)?!?$`
 
 type Shades = Record<number, string | string[]>
 
@@ -58,7 +58,11 @@ const GRAY_TOKENS: Record<string, string> = {
   ring: '`ring-default`, `ring-muted`, `ring-accented` or `ring-inverted`'
 }
 
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
 function paletteRestrictions(colors: Record<string, string>) {
+  // `neutral` can point at a custom palette, its classes map to the semantic tokens like Tailwind's grays
+  const neutral = colors.neutral && ![...GRAYS, ...HUES].includes(colors.neutral) && !Object.hasOwn(colors, colors.neutral) ? colors.neutral : undefined
   // The first alias wins when two point at the same palette, `primary` before the others
   const aliasOf = new Map<string, string>()
   const palettes = new Set(HUES)
@@ -66,42 +70,44 @@ function paletteRestrictions(colors: Record<string, string>) {
     if (!aliasOf.has(palette)) {
       aliasOf.set(palette, alias)
     }
-    if (palette && !GRAYS.includes(palette) && !Object.hasOwn(colors, palette)) {
+    if (palette && palette !== neutral && !GRAYS.includes(palette) && !Object.hasOwn(colors, palette)) {
       palettes.add(palette)
     }
   }
   const restrict: { pattern: string, message: string }[] = []
 
-  const grays = GRAYS.join('|')
+  // Like the other custom palettes, it needs a shade and skips the numeric utilities its name can overlap
+  const grays = [...GRAYS, ...neutral ? [`${escapeRegExp(neutral)}(?=-\\d{2,3})`] : []].join('|')
+  const start = neutral ? `^(?!(?:\\S*:)?!?-?${NON_COLOR_NUMERIC_CLASS})` : '^'
   // The token keeps the class's other variants and modifiers, `md:hover:text-gray-500/50` is `md:hover:text-muted/50`
   for (const [utility, modes] of SHADE_TOKENS) {
     for (const [shade, tokens] of Object.entries(modes.dark)) {
       restrict.push({
-        pattern: `^((?:\\S*:)?)dark:((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
+        pattern: `${start}((?:\\S*:)?)dark:((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
         message: `"$0" uses a raw palette color. In dark mode it's ${[tokens].flat().map(token => `\`$1$2$3$4-${token}$5\``).join(' or ')}. When its light mode class maps to the same token, use the token for both, it follows the color mode.`
       })
     }
     for (const [shade, tokens] of Object.entries(modes.light)) {
       restrict.push({
-        pattern: `^(?!(?:\\S*:)?dark:)((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
+        pattern: `${start}(?!(?:\\S*:)?dark:)((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
         message: `"$0" uses a raw palette color. Use ${[tokens].flat().map(token => `\`$1$2$3-${token}$4\``).join(' or ')} instead.`
       })
     }
   }
   for (const [utility, tokens] of Object.entries(GRAY_TOKENS)) {
     restrict.push({
-      pattern: CLASS(utility === 'border' ? 'border(?:-[xytrblse]|-bs|-be)?' : utility, grays),
+      pattern: CLASS(utility === 'border' ? 'border(?:-[xytrblse]|-bs|-be)?' : utility, grays, start),
       message: `"$0" uses a raw palette color. Use a semantic token instead: ${tokens}.`
     })
   }
   restrict.push({
-    pattern: CLASS(COLOR_UTILITY, grays),
+    pattern: CLASS(COLOR_UTILITY, grays, start),
     message: '"$0" uses a raw palette color. Use a semantic token or the `neutral` color instead.'
   })
 
   for (const palette of palettes) {
     const alias = aliasOf.get(palette)
-    const palettePattern = palette.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const palettePattern = escapeRegExp(palette)
     // Custom palette names can also name utilities like `bg-cover`.
     const shadePattern = `(?:-\\d{2,3})${HUES.includes(palette) ? '?' : ''}`
     restrict.push({

@@ -63,3 +63,35 @@ it.each([
     { ruleId: 'better-tailwindcss/no-restricted-classes', message: expect.stringContaining(`use \`${suggestion}\` instead`) }
   ])
 })
+
+it('suggests semantic tokens for the custom palette neutral points at', () => {
+  const config = nuxtUI({
+    entryPoint: 'test/fixtures/consumer/minimal/app/assets/css/main.css',
+    colors: { neutral: 'brand-gray' },
+    rules: { 'no-conflicting-classes': 'off' }
+  })
+  const messages = new Linter().verify(
+    'const classes = "bg-brand-gray-100 dark:bg-brand-gray-900 md:text-brand-gray-500/50 fill-brand-gray-500 bg-brand-gray"',
+    config
+  )
+
+  expect(messages).toMatchObject([
+    { message: expect.stringContaining('Use `bg-elevated` instead') },
+    { message: expect.stringContaining('In dark mode it\'s `bg-default`') },
+    { message: expect.stringContaining('Use `md:text-muted/50` instead') },
+    { message: expect.stringContaining('Use a semantic token or the `neutral` color instead') }
+  ])
+})
+
+it('preserves numeric utilities when the custom neutral palette is offset', () => {
+  const config = nuxtUI({
+    entryPoint: 'test/fixtures/consumer/minimal/app/assets/css/main.css',
+    colors: { neutral: 'offset' },
+    rules: { 'no-conflicting-classes': 'off' }
+  })
+  const messages = new Linter().verify('const classes = "outline-offset-50 ring-offset-50 bg-offset-100"', config)
+
+  expect(messages).toMatchObject([
+    { message: expect.stringContaining('Use `bg-elevated` instead') }
+  ])
+})
