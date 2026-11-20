@@ -143,6 +143,39 @@ describe('EditorToolbar', () => {
     })
   })
 
+  it('exposes pressed state for plain, linked, and mixed selections', async ({ onTestFinished }) => {
+    const editor = new Editor({
+      content: '<p>Plain <a href="https://example.com">Linked</a></p>',
+      extensions: [StarterKit]
+    })
+    onTestFinished(() => editor.destroy())
+
+    const wrapper = await mountSuspended(EditorToolbar, {
+      props: {
+        editor,
+        items: [{ kind: 'link', label: 'Link' }, {
+          'aria-label': 'Link options',
+          'items': [{ kind: 'link', label: 'Link' }]
+        }]
+      }
+    })
+    onTestFinished(() => wrapper.unmount())
+
+    const button = wrapper.get('button:not([aria-haspopup])')
+    const dropdown = wrapper.get('button[aria-haspopup="menu"]')
+
+    editor.commands.setTextSelection({ from: 1, to: 6 })
+    await vi.waitFor(() => expect(button.attributes('aria-pressed')).toBe('false'))
+
+    editor.commands.setTextSelection({ from: 7, to: 13 })
+    await vi.waitFor(() => expect(button.attributes('aria-pressed')).toBe('true'))
+    expect(dropdown.attributes('aria-pressed')).toBeUndefined()
+
+    editor.commands.setTextSelection({ from: 1, to: 13 })
+    await vi.waitFor(() => expect(button.attributes('aria-pressed')).toBe('mixed'))
+    expect(dropdown.attributes('aria-pressed')).toBeUndefined()
+  })
+
   describe('accessible name', () => {
     // A tooltip is a pointer-hover affordance only: it never reaches assistive technology,
     // so an icon-only button configured the documented way must still be named.
