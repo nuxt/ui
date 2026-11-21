@@ -10,7 +10,7 @@ exports[`RadioGroup > renders with ariaLabel correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -21,7 +21,7 @@ exports[`RadioGroup > renders with ariaLabel correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -32,7 +32,7 @@ exports[`RadioGroup > renders with ariaLabel correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -52,7 +52,7 @@ exports[`RadioGroup > renders with as correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -63,7 +63,7 @@ exports[`RadioGroup > renders with as correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -74,7 +74,7 @@ exports[`RadioGroup > renders with as correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -94,7 +94,7 @@ exports[`RadioGroup > renders with class correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -105,7 +105,7 @@ exports[`RadioGroup > renders with class correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -116,7 +116,7 @@ exports[`RadioGroup > renders with class correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -134,7 +134,7 @@ exports[`RadioGroup > renders with defaultValue correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -145,7 +145,7 @@ exports[`RadioGroup > renders with defaultValue correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -156,7 +156,7 @@ exports[`RadioGroup > renders with defaultValue correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -176,7 +176,7 @@ exports[`RadioGroup > renders with description correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <p data-slot="description" class="text-muted">Description 0</p>
       </div>
@@ -187,7 +187,7 @@ exports[`RadioGroup > renders with description correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <p data-slot="description" class="text-muted">Description 1</p>
       </div>
@@ -198,7 +198,7 @@ exports[`RadioGroup > renders with description correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <p data-slot="description" class="text-muted">Description 2</p>
       </div>
@@ -218,7 +218,7 @@ exports[`RadioGroup > renders with description slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Description slot</label>
         <!--v-if-->
       </div>
@@ -229,7 +229,7 @@ exports[`RadioGroup > renders with description slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Description slot</label>
         <!--v-if-->
       </div>
@@ -240,7 +240,7 @@ exports[`RadioGroup > renders with description slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Description slot</label>
         <!--v-if-->
       </div>
@@ -260,7 +260,7 @@ exports[`RadioGroup > renders with descriptionKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <p data-slot="description" class="text-muted">1</p>
       </div>
@@ -271,7 +271,7 @@ exports[`RadioGroup > renders with descriptionKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <p data-slot="description" class="text-muted">2</p>
       </div>
@@ -282,7 +282,7 @@ exports[`RadioGroup > renders with descriptionKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <p data-slot="description" class="text-muted">3</p>
       </div>
@@ -302,7 +302,7 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 1</label>
         <!--v-if-->
       </div>
@@ -313,7 +313,7 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 2</label>
         <!--v-if-->
       </div>
@@ -324,7 +324,7 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 3</label>
         <!--v-if-->
       </div>
@@ -341,7 +341,7 @@ exports[`RadioGroup > renders with highlight indicator hidden correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none sr-only size-4 ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center">
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -352,7 +352,7 @@ exports[`RadioGroup > renders with highlight indicator hidden correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center">
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -363,7 +363,7 @@ exports[`RadioGroup > renders with highlight indicator hidden correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center">
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -381,7 +381,7 @@ exports[`RadioGroup > renders with horizontal variant card correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -392,7 +392,7 @@ exports[`RadioGroup > renders with horizontal variant card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -403,7 +403,7 @@ exports[`RadioGroup > renders with horizontal variant card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -422,7 +422,7 @@ exports[`RadioGroup > renders with horizontal variant list correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -433,7 +433,7 @@ exports[`RadioGroup > renders with horizontal variant list correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -444,7 +444,7 @@ exports[`RadioGroup > renders with horizontal variant list correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -461,7 +461,7 @@ exports[`RadioGroup > renders with horizontal variant table correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -472,7 +472,7 @@ exports[`RadioGroup > renders with horizontal variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -483,7 +483,7 @@ exports[`RadioGroup > renders with horizontal variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -501,7 +501,7 @@ exports[`RadioGroup > renders with icon card correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
@@ -511,7 +511,7 @@ exports[`RadioGroup > renders with icon card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
@@ -521,7 +521,7 @@ exports[`RadioGroup > renders with icon card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
@@ -541,7 +541,7 @@ exports[`RadioGroup > renders with icon correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
     </div>
@@ -551,7 +551,7 @@ exports[`RadioGroup > renders with icon correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
     </div>
@@ -561,7 +561,7 @@ exports[`RadioGroup > renders with icon correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -577,7 +577,7 @@ exports[`RadioGroup > renders with icon table correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
       </div>
@@ -587,7 +587,7 @@ exports[`RadioGroup > renders with icon table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
       </div>
@@ -597,7 +597,7 @@ exports[`RadioGroup > renders with icon table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
       </div>
@@ -615,7 +615,7 @@ exports[`RadioGroup > renders with indicator end correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full me-2">
+      <div data-slot="wrapper" class="w-full self-baseline me-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -626,7 +626,7 @@ exports[`RadioGroup > renders with indicator end correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full me-2">
+      <div data-slot="wrapper" class="w-full self-baseline me-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -637,7 +637,7 @@ exports[`RadioGroup > renders with indicator end correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full me-2">
+      <div data-slot="wrapper" class="w-full self-baseline me-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -655,7 +655,7 @@ exports[`RadioGroup > renders with indicator hidden correctly 1`] = `
       <div data-slot="container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center">
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -666,7 +666,7 @@ exports[`RadioGroup > renders with indicator hidden correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center">
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -677,7 +677,7 @@ exports[`RadioGroup > renders with indicator hidden correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center">
+      <div data-slot="wrapper" class="w-full self-baseline flex flex-col items-center gap-1 text-center">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -695,7 +695,7 @@ exports[`RadioGroup > renders with indicator start correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -706,7 +706,7 @@ exports[`RadioGroup > renders with indicator start correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -717,7 +717,7 @@ exports[`RadioGroup > renders with indicator start correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -737,7 +737,7 @@ exports[`RadioGroup > renders with items correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -748,7 +748,7 @@ exports[`RadioGroup > renders with items correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -759,7 +759,7 @@ exports[`RadioGroup > renders with items correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -779,7 +779,7 @@ exports[`RadioGroup > renders with label slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Label slot</label>
         <!--v-if-->
       </div>
@@ -790,7 +790,7 @@ exports[`RadioGroup > renders with label slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Label slot</label>
         <!--v-if-->
       </div>
@@ -801,7 +801,7 @@ exports[`RadioGroup > renders with label slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Label slot</label>
         <!--v-if-->
       </div>
@@ -821,7 +821,7 @@ exports[`RadioGroup > renders with labelKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">1</label>
         <!--v-if-->
       </div>
@@ -832,7 +832,7 @@ exports[`RadioGroup > renders with labelKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">2</label>
         <!--v-if-->
       </div>
@@ -843,7 +843,7 @@ exports[`RadioGroup > renders with labelKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">3</label>
         <!--v-if-->
       </div>
@@ -863,7 +863,7 @@ exports[`RadioGroup > renders with legend slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Legend slot</label>
         <!--v-if-->
       </div>
@@ -874,7 +874,7 @@ exports[`RadioGroup > renders with legend slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Legend slot</label>
         <!--v-if-->
       </div>
@@ -885,7 +885,7 @@ exports[`RadioGroup > renders with legend slot correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Legend slot</label>
         <!--v-if-->
       </div>
@@ -903,7 +903,7 @@ exports[`RadioGroup > renders with modelValue correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -914,7 +914,7 @@ exports[`RadioGroup > renders with modelValue correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -925,7 +925,7 @@ exports[`RadioGroup > renders with modelValue correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -942,7 +942,7 @@ exports[`RadioGroup > renders with neutral variant card correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-inverted after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -953,7 +953,7 @@ exports[`RadioGroup > renders with neutral variant card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -964,7 +964,7 @@ exports[`RadioGroup > renders with neutral variant card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -982,7 +982,7 @@ exports[`RadioGroup > renders with neutral variant card highlight correctly 1`] 
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none size-4 ring-inverted" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-inverted after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -993,7 +993,7 @@ exports[`RadioGroup > renders with neutral variant card highlight correctly 1`] 
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1004,7 +1004,7 @@ exports[`RadioGroup > renders with neutral variant card highlight correctly 1`] 
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1023,7 +1023,7 @@ exports[`RadioGroup > renders with neutral variant list correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-inverted/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-inverted" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-inverted after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1034,7 +1034,7 @@ exports[`RadioGroup > renders with neutral variant list correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1045,7 +1045,7 @@ exports[`RadioGroup > renders with neutral variant list correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1063,7 +1063,7 @@ exports[`RadioGroup > renders with neutral variant list highlight correctly 1`] 
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden size-4 outline-inverted/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-inverted ring-inverted" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-inverted after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1074,7 +1074,7 @@ exports[`RadioGroup > renders with neutral variant list highlight correctly 1`] 
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1085,7 +1085,7 @@ exports[`RadioGroup > renders with neutral variant list highlight correctly 1`] 
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1102,7 +1102,7 @@ exports[`RadioGroup > renders with neutral variant table correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-inverted after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1113,7 +1113,7 @@ exports[`RadioGroup > renders with neutral variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1124,7 +1124,7 @@ exports[`RadioGroup > renders with neutral variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1142,7 +1142,7 @@ exports[`RadioGroup > renders with neutral variant table highlight correctly 1`]
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none size-4 ring-inverted" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-inverted after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1153,7 +1153,7 @@ exports[`RadioGroup > renders with neutral variant table highlight correctly 1`]
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1164,7 +1164,7 @@ exports[`RadioGroup > renders with neutral variant table highlight correctly 1`]
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1182,7 +1182,7 @@ exports[`RadioGroup > renders with primary variant card correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1193,7 +1193,7 @@ exports[`RadioGroup > renders with primary variant card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1204,7 +1204,7 @@ exports[`RadioGroup > renders with primary variant card correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1222,7 +1222,7 @@ exports[`RadioGroup > renders with primary variant card highlight correctly 1`] 
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none size-4 ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1233,7 +1233,7 @@ exports[`RadioGroup > renders with primary variant card highlight correctly 1`] 
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1244,7 +1244,7 @@ exports[`RadioGroup > renders with primary variant card highlight correctly 1`] 
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1263,7 +1263,7 @@ exports[`RadioGroup > renders with primary variant list correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1274,7 +1274,7 @@ exports[`RadioGroup > renders with primary variant list correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1285,7 +1285,7 @@ exports[`RadioGroup > renders with primary variant list correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1303,7 +1303,7 @@ exports[`RadioGroup > renders with primary variant list highlight correctly 1`] 
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1314,7 +1314,7 @@ exports[`RadioGroup > renders with primary variant list highlight correctly 1`] 
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1325,7 +1325,7 @@ exports[`RadioGroup > renders with primary variant list highlight correctly 1`] 
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1342,7 +1342,7 @@ exports[`RadioGroup > renders with primary variant table correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1353,7 +1353,7 @@ exports[`RadioGroup > renders with primary variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1364,7 +1364,7 @@ exports[`RadioGroup > renders with primary variant table correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1382,7 +1382,7 @@ exports[`RadioGroup > renders with primary variant table highlight correctly 1`]
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none size-4 ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 1</div>
         <!--v-if-->
@@ -1393,7 +1393,7 @@ exports[`RadioGroup > renders with primary variant table highlight correctly 1`]
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 2</div>
         <!--v-if-->
@@ -1404,7 +1404,7 @@ exports[`RadioGroup > renders with primary variant table highlight correctly 1`]
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if-->
         <div data-slot="label" class="block font-medium text-default">Option 3</div>
         <!--v-if-->
@@ -1425,7 +1425,7 @@ exports[`RadioGroup > renders with required correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1436,7 +1436,7 @@ exports[`RadioGroup > renders with required correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1447,7 +1447,7 @@ exports[`RadioGroup > renders with required correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1465,7 +1465,7 @@ exports[`RadioGroup > renders with size lg correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4.5 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1476,7 +1476,7 @@ exports[`RadioGroup > renders with size lg correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1487,7 +1487,7 @@ exports[`RadioGroup > renders with size lg correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1505,7 +1505,7 @@ exports[`RadioGroup > renders with size md correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1516,7 +1516,7 @@ exports[`RadioGroup > renders with size md correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1527,7 +1527,7 @@ exports[`RadioGroup > renders with size md correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1545,7 +1545,7 @@ exports[`RadioGroup > renders with size sm correctly 1`] = `
       <div data-slot="container" class="flex items-center h-4"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-3.5 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1556,7 +1556,7 @@ exports[`RadioGroup > renders with size sm correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1567,7 +1567,7 @@ exports[`RadioGroup > renders with size sm correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1585,7 +1585,7 @@ exports[`RadioGroup > renders with size xl correctly 1`] = `
       <div data-slot="container" class="flex items-center h-6"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-5 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-2"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1596,7 +1596,7 @@ exports[`RadioGroup > renders with size xl correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1607,7 +1607,7 @@ exports[`RadioGroup > renders with size xl correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1625,7 +1625,7 @@ exports[`RadioGroup > renders with size xs correctly 1`] = `
       <div data-slot="container" class="flex items-center h-4"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-3 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1636,7 +1636,7 @@ exports[`RadioGroup > renders with size xs correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1647,7 +1647,7 @@ exports[`RadioGroup > renders with size xs correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1667,7 +1667,7 @@ exports[`RadioGroup > renders with ui correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-4">
+      <div data-slot="wrapper" class="w-full self-baseline ms-4">
         <!--v-if--><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1678,7 +1678,7 @@ exports[`RadioGroup > renders with ui correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-4">
+      <div data-slot="wrapper" class="w-full self-baseline ms-4">
         <!--v-if--><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1689,7 +1689,7 @@ exports[`RadioGroup > renders with ui correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-4">
+      <div data-slot="wrapper" class="w-full self-baseline ms-4">
         <!--v-if--><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
@@ -1707,7 +1707,7 @@ exports[`RadioGroup > renders with valueKey correctly 1`] = `
       <div data-slot="container" class="flex items-center h-5"><button id="v-0:Option 1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="Option 1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:Option 1" data-slot="label" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
@@ -1718,7 +1718,7 @@ exports[`RadioGroup > renders with valueKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:Option 2" data-slot="label" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
@@ -1729,7 +1729,7 @@ exports[`RadioGroup > renders with valueKey correctly 1`] = `
         </button>
         <!--v-if-->
       </div>
-      <div data-slot="wrapper" class="w-full ms-2">
+      <div data-slot="wrapper" class="w-full self-baseline ms-2">
         <!--v-if--><label for="v-0:Option 3" data-slot="label" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>

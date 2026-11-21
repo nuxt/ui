@@ -398,7 +398,7 @@ exports[`Table > renders with column pinning and footer correctly 1`] = `
               </button>
               <!--v-if-->
             </div>
-            <div data-slot="wrapper" class="w-full ms-2 text-sm">
+            <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
               <!--v-if--><label for="v-0" data-slot="label" class="block font-medium text-default">Select all</label>
               <!--v-if-->
             </div>
@@ -589,7 +589,7 @@ exports[`Table > renders with columns correctly 1`] = `
               </button>
               <!--v-if-->
             </div>
-            <div data-slot="wrapper" class="w-full ms-2 text-sm">
+            <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
               <!--v-if--><label for="v-0" data-slot="label" class="block font-medium text-default">Select all</label>
               <!--v-if-->
             </div>
@@ -854,7 +854,7 @@ exports[`Table > renders with empty slot correctly 1`] = `
               </button>
               <!--v-if-->
             </div>
-            <div data-slot="wrapper" class="w-full ms-2 text-sm">
+            <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
               <!--v-if--><label for="v-0" data-slot="label" class="block font-medium text-default">Select all</label>
               <!--v-if-->
             </div>
@@ -1689,7 +1689,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
               </button>
               <!--v-if-->
             </div>
-            <div data-slot="wrapper" class="w-full ms-2 text-sm">
+            <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
               <!--v-if--><label for="v-0" data-slot="label" class="block font-medium text-default">Select all</label>
               <!--v-if-->
             </div>
@@ -1754,7 +1754,7 @@ exports[`Table > renders with loading without data correctly 1`] = `
               </button>
               <!--v-if-->
             </div>
-            <div data-slot="wrapper" class="w-full ms-2 text-sm">
+            <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
               <!--v-if--><label for="v-0" data-slot="label" class="block font-medium text-default">Select all</label>
               <!--v-if-->
             </div>
@@ -1819,7 +1819,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
               </button>
               <!--v-if-->
             </div>
-            <div data-slot="wrapper" class="w-full ms-2 text-sm">
+            <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
               <!--v-if--><label for="v-0" data-slot="label" class="block font-medium text-default">Select all</label>
               <!--v-if-->
             </div>
@@ -2253,7 +2253,7 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
               </button>
               <!--v-if-->
             </div>
-            <div data-slot="wrapper" class="w-full ms-2 text-sm">
+            <div data-slot="wrapper" class="w-full self-baseline ms-2 text-sm">
               <!--v-if--><label for="v-0" data-slot="label" class="block font-medium text-default">Select all</label>
               <!--v-if-->
             </div>
