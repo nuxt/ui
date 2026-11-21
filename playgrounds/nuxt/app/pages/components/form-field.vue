@@ -14,6 +14,9 @@ const feedbacks = [
   { required: true },
   { description: 'This is a description' },
   { error: 'This is an error' },
+  { error: 'This is an error with prefix', errorPrefix: 'Error:' },
+  { error: 'This is an error with icon', errorIcon: 'i-lucide-circle-alert' },
+  { error: 'This is an error with prefix and icon', errorPrefix: 'Error:', errorIcon: 'i-lucide-circle-alert' },
   { hint: 'This is a hint' },
   { help: 'Help! I need somebody!' }
 ]
