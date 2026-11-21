@@ -2,6 +2,7 @@
 import type { TreeItem } from '@nuxt/ui'
 import { useSortable } from '@vueuse/integrations/useSortable'
 
+const expanded = ref(['app/', 'components/'])
 const items = shallowRef<TreeItem[]>([
   {
     label: 'app/',
@@ -31,12 +32,13 @@ const items = shallowRef<TreeItem[]>([
 function flatten(items: TreeItem[], parent = items): { item: TreeItem, parent: TreeItem[], index: number }[] {
   return items.flatMap((item, index) => [
     { item, parent, index },
-    ...(item.children?.length && item.defaultExpanded ? flatten(item.children, item.children) : [])
+    ...(item.children?.length && expanded.value.includes(item.label!) ? flatten(item.children, item.children) : [])
   ])
 }
 
-function moveItem(oldIndex: number, newIndex: number) {
+function moveItem(oldIndex?: number, newIndex?: number) {
   if (oldIndex === newIndex) return
+  if (oldIndex === undefined || newIndex === undefined) return
 
   const flat = flatten(items.value)
   const source = flat[oldIndex]
@@ -60,10 +62,10 @@ const tree = useTemplateRef<HTMLElement>('tree')
 useSortable(tree, items, {
   animation: 150,
   ghostClass: 'opacity-50',
-  onUpdate: (e: any) => moveItem(e.oldIndex, e.newIndex)
+  onUpdate: e => moveItem(e.oldIndex, e.newIndex)
 })
 </script>
 
 <template>
-  <UTree ref="tree" :nested="false" :unmount-on-hide="false" :items="items" />
+  <UTree ref="tree" v-model:expanded="expanded" :nested="false" :items="items" />
 </template>
