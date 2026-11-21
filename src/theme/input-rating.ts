@@ -49,6 +49,12 @@ export default (options: Required<ModuleOptions>) => ({
         item: 'outline-inverted/25'
       }
     },
+    variant: {
+      solid: {
+        icon: '**:fill-current'
+      },
+      outline: {}
+    },
     readonly: {
       true: {
         root: 'cursor-default',
@@ -73,6 +79,7 @@ export default (options: Required<ModuleOptions>) => ({
   }],
   defaultVariants: {
     color: 'primary',
+    variant: 'outline',
     size: 'md'
   }
 })

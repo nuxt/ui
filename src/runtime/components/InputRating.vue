@@ -37,6 +37,10 @@ export interface InputRatingProps extends Pick<RatingRootProps, 'length' | 'step
    */
   color?: InputRating['variants']['color']
   /**
+   * @defaultValue 'outline'
+   */
+  variant?: InputRating['variants']['variant']
+  /**
    * @defaultValue 'md'
    */
   size?: InputRating['variants']['size']
@@ -87,7 +91,11 @@ defineSlots<InputRatingSlots>()
 const props = useComponentProps<InputRatingProps>('inputRating', _props)
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as InputRating['AppConfig']
+const appConfig = useAppConfig() as InputRating['AppConfig'] & {
+  icon?: {
+    customize?: Exclude<IconProps['customize'], boolean | null | undefined>
+  }
+}
 
 const rootProps = useForwardProps(props, ['as', 'length', 'step', 'hoverable', 'clearable', 'required', 'modelValue', 'defaultValue'], emits)
 
@@ -106,12 +114,20 @@ const rootDisabled = computed(() => disabled.value || props.readonly)
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputRating || {}) })({
   size: size.value,
   color: color.value,
+  variant: props.variant,
   orientation: props.orientation,
   readonly: props.readonly && !disabled.value,
   disabled: disabled.value
 }))
 
 const starIcon = computed(() => props.icon ?? appConfig.ui.icons.star)
+
+function fillIcon(content: string, name?: string, prefix?: string, provider?: string) {
+  const customized = typeof appConfig.icon?.customize === 'function'
+    ? appConfig.icon.customize(content, name, prefix, provider)
+    : content
+  return customized.replace(/fill="none"/g, 'fill="currentColor"')
+}
 
 function onUpdate(value: number) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -163,7 +179,9 @@ function onUpdate(value: number) {
       >
         <slot name="item" :index="item" :filled="true">
           <UIcon
+            :key="props.variant"
             :name="starIcon"
+            :customize="props.variant === 'solid' ? fillIcon : undefined"
             data-slot="icon"
             :class="ui.icon({ class: props.ui?.icon })"
           />
