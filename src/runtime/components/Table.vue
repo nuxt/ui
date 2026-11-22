@@ -223,6 +223,7 @@ export type TableSlots<T extends TableData = TableData> = {
   'empty'?: (props?: {}) => VNode[]
   'loading'?: (props?: {}) => VNode[]
   'caption'?: (props?: {}) => VNode[]
+  'colgroup'?: (props?: {}) => VNode[]
   'body-top'?: (props?: {}) => VNode[]
   'body-bottom'?: (props?: {}) => VNode[]
 } & DynamicHeaderFooterSlots<T> & DynamicCellSlots<T>
@@ -735,6 +736,8 @@ defineExpose({
           {{ props.caption }}
         </slot>
       </caption>
+
+      <slot name="colgroup" />
 
       <thead data-slot="thead" :class="ui.thead({ class: [props.ui?.thead] })">
         <tr v-for="headerGroup in headerGroups" :key="headerGroup.id" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">

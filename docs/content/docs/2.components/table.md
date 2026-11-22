@@ -454,6 +454,23 @@ class: '!p-0'
 ---
 ::
 
+### With column widths :badge{label="Soon" class="align-text-top"}
+
+Use the `#colgroup` slot to set individual column widths, including columns under a shared header. To keep widths independent of cell content, apply `w-full table-fixed` to the table through `ui.base`.
+
+::note
+When you hide, reorder, or [pin columns](#with-column-pinning), render the `<col>` elements in the order the visible columns appear. For resizing, bind each `<col>` width to `column.getSize()`. When pinning columns, match their rendered widths to their TanStack sizes so sticky offsets line up.
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-colgroup-example'
+class: '!p-0'
+---
+::
+
 ### With column span
 
 You can use the `colspan` and `rowspan` properties in the column `meta` to merge cells. These properties accept a static value or a function that receives the cell and returns the span value.
