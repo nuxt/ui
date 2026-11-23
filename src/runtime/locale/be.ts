@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Закрыць',
       toggle: 'Пераключыць'
     },
+    selection: {
+      summary: 'Выбрана: {count}'
+    },
     selectMenu: {
       create: 'Стварыць "{label}"',
       noData: 'Няма даных',

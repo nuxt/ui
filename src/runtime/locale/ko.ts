@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: '닫기',
       toggle: '토글'
     },
+    selection: {
+      summary: '{count}개 선택됨'
+    },
     selectMenu: {
       create: '"{label}" 생성',
       noData: '데이터가 없습니다.',

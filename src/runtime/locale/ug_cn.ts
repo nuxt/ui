@@ -205,6 +205,9 @@ export default defineLocale<Messages>({
       close: 'تاقاش',
       toggle: 'ئالماشتۇرۇش'
     },
+    selection: {
+      summary: 'تاللانغان: {count}'
+    },
     selectMenu: {
       create: '"{label}" نى قۇرۇش',
       noData: 'سانلىق مەلۇمات يوق',

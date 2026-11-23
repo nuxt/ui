@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Zoumaachen',
       toggle: 'Ëmschalten'
     },
+    selection: {
+      summary: '{count} ausgewielt'
+    },
     selectMenu: {
       create: '"{label}" erstellen',
       noData: 'Keng Donnéeën',

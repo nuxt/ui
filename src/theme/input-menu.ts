@@ -28,6 +28,7 @@ export default (options: Required<ModuleOptions>) => {
       itemLabel: 'truncate',
       itemDescription: 'truncate text-muted',
       tagsItem: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-accented bg-elevated text-default data-disabled:cursor-not-allowed data-disabled:opacity-75',
+      selectionSummary: 'has-[~_[data-slot=tagsItem][data-state=active]]:bg-accented',
       tagsItemText: 'truncate',
       tagsItemDelete: ['inline-flex items-center rounded-xs text-dimmed hover:text-default hover:bg-accented/75 disabled:pointer-events-none', options.theme.transitions && 'transition-colors'],
       tagsItemDeleteIcon: 'shrink-0',

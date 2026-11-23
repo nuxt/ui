@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'बंद करें',
       toggle: 'टॉगल करें'
     },
+    selection: {
+      summary: 'चुने गए: {count}'
+    },
     selectMenu: {
       create: '"{label}" बनाएँ',
       noData: 'कोई डेटा नहीं',

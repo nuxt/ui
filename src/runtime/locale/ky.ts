@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Жабуу',
       toggle: 'Ачуу/жабуу'
     },
+    selection: {
+      summary: 'Тандалды: {count}'
+    },
     selectMenu: {
       create: '"{label}" жасоо',
       noData: 'Маалымат жок',

@@ -205,6 +205,9 @@ export default defineLocale<Messages>({
       close: 'داخستن',
       toggle: 'گۆڕین'
     },
+    selection: {
+      summary: 'هەڵبژێردراو: {count}'
+    },
     selectMenu: {
       create: 'زیادکردنی "{label}"',
       noData: 'هیچ داتایەک نییە',

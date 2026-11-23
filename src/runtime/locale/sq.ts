@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Mbyll',
       toggle: 'Ndërro'
     },
+    selection: {
+      summary: 'Të zgjedhura: {count}'
+    },
     selectMenu: {
       create: 'Krijo "{label}"',
       noData: 'Nuk ka të dhëna',

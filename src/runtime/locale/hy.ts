@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Փակել',
       toggle: 'Փոխարկել'
     },
+    selection: {
+      summary: 'Ընտրված՝ {count}'
+    },
     selectMenu: {
       create: 'Ստեղծել "{label}"',
       noData: 'Տվյալներ չկան',

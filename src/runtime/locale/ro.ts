@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Închide',
       toggle: 'Comută'
     },
+    selection: {
+      summary: 'Selectate: {count}'
+    },
     selectMenu: {
       create: 'Creează "{label}"',
       noData: 'Nu există date',

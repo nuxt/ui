@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Yopish',
       toggle: 'Almashtirish'
     },
+    selection: {
+      summary: 'Tanlangan: {count}'
+    },
     selectMenu: {
       create: '"{label}" yaratish',
       noData: 'Maʼlumot yoʻq',

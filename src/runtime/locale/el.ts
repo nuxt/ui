@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Κλείσιμο',
       toggle: 'Εναλλαγή'
     },
+    selection: {
+      summary: 'Επιλεγμένα: {count}'
+    },
     selectMenu: {
       create: 'Δημιουργία "{label}"',
       noData: 'Δεν υπάρχουν δεδομένα',

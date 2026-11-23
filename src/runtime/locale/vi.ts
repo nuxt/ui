@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Đóng',
       toggle: 'Mở/đóng'
     },
+    selection: {
+      summary: 'Đã chọn {count} mục'
+    },
     selectMenu: {
       create: 'Tạo "{label}"',
       noData: 'Không có dữ liệu',

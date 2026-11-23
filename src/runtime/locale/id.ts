@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Tutup',
       toggle: 'Alihkan'
     },
+    selection: {
+      summary: '{count} dipilih'
+    },
     selectMenu: {
       create: 'Buat "{label}"',
       noData: 'Tidak ada data',

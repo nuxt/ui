@@ -206,6 +206,9 @@ export default defineLocale<Messages>({
       close: 'დახურვა',
       toggle: 'გადართვა'
     },
+    selection: {
+      summary: 'არჩეულია: {count}'
+    },
     selectMenu: {
       create: 'დაამატე "{label}"', // "Create" translates as "შექმნა", but since we are simply adding new choice, creating sounds wrong, thus I chose to use "დაამატე", meaning "add".
       noData: 'მონაცემები არ არის',

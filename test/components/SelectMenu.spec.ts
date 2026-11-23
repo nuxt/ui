@@ -479,6 +479,39 @@ describe('SelectMenu', () => {
     })
   })
 
+  it('summarizes selections only above maxSelectedLabels', async () => {
+    const wrapper = mount(SelectMenu, {
+      props: {
+        items: ['Apple', 'Banana', 'Cherry'],
+        multiple: true,
+        maxSelectedLabels: 1,
+        modelValue: ['Apple', 'Banana']
+      }
+    })
+
+    expect(wrapper.get('[data-slot="value"]').text()).toBe('2 selected')
+
+    await wrapper.setProps({ modelValue: ['Apple'] })
+    expect(wrapper.get('[data-slot="value"]').text()).toBe('Apple')
+
+    await wrapper.setProps({ maxSelectedLabels: 0 })
+    expect(wrapper.get('[data-slot="value"]').text()).toBe('1 selected')
+  })
+
+  it('supports a custom selection summary', () => {
+    const wrapper = mount(SelectMenu, {
+      props: {
+        items: ['Apple', 'Banana'],
+        multiple: true,
+        maxSelectedLabels: 1,
+        modelValue: ['Apple', 'Banana']
+      },
+      slots: { 'selection-summary': ({ count }) => `${count} fruits` }
+    })
+
+    expect(wrapper.get('[data-slot="value"]').text()).toBe('2 fruits')
+  })
+
   describe('it should display correct label', () => {
     test.each([null, undefined, ''])('falsy model value %s should display placeholder', (modelValue) => {
       const wrapper = mount(SelectMenu, {

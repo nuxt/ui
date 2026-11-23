@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Itxi',
       toggle: 'Txandakatu'
     },
+    selection: {
+      summary: 'Hautatuta: {count}'
+    },
     selectMenu: {
       create: 'Sortu {label}',
       noData: 'Daturik gabe',

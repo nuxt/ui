@@ -202,6 +202,37 @@ props:
 Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 ::
 
+### Selection summary :badge{label="Soon" class="align-text-top"}
+
+Set `maxSelectedLabels` in multiple mode to show a count when the number of selected items exceeds the limit. Set it to `0` to show a summary whenever there is a selection. Use the `#selection-summary` slot to customize the text with the selected `count`.
+
+While the summary is visible, you can deselect items from the menu. When the input is empty, press Backspace to highlight the summary, then press it again to remove the last selected item.
+
+::component-code
+---
+prettier: true
+ignore:
+  - modelValue
+  - items
+  - multiple
+external:
+  - items
+  - modelValue
+props:
+  modelValue:
+    - Backlog
+    - Todo
+    - In Progress
+  multiple: true
+  maxSelectedLabels: 2
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
 ### Delete Icon
 
 With `multiple`, use the `delete-icon` prop to customize the delete [Icon](/docs/components/icon) in the tags. Defaults to `i-lucide-x`.

@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Закрити',
       toggle: 'Перемкнути'
     },
+    selection: {
+      summary: 'Вибрано: {count}'
+    },
     selectMenu: {
       create: 'Створити "{label}"',
       noData: 'Немає даних',

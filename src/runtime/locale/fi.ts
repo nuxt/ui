@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Sulje',
       toggle: 'Vaihda'
     },
+    selection: {
+      summary: 'Valittu: {count}'
+    },
     selectMenu: {
       create: 'Luo "{label}"',
       noData: 'Ei tietoja',

@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Tutup',
       toggle: 'Togol'
     },
+    selection: {
+      summary: '{count} dipilih'
+    },
     selectMenu: {
       create: 'Cipta "{label}"',
       noData: 'Tiada data',

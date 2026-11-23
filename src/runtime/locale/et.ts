@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Sulge',
       toggle: 'Lülita'
     },
+    selection: {
+      summary: 'Valitud: {count}'
+    },
     selectMenu: {
       create: 'Loo "{label}"',
       noData: 'Pole andmeid',

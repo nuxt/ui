@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Zavřít',
       toggle: 'Přepnout'
     },
+    selection: {
+      summary: 'Vybráno: {count}'
+    },
     selectMenu: {
       create: 'Vytvořit "{label}"',
       noData: 'Žádná data',

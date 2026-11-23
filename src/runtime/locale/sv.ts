@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Stäng',
       toggle: 'Växla'
     },
+    selection: {
+      summary: '{count} valda'
+    },
     selectMenu: {
       create: 'Skapa "{label}"',
       noData: 'Inga data',

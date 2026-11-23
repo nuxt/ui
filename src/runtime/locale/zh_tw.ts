@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: '關閉',
       toggle: '切換'
     },
+    selection: {
+      summary: '已選取 {count} 項'
+    },
     selectMenu: {
       create: '建立「{label}」',
       noData: '沒有資料',

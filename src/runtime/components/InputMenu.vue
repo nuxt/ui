@@ -157,6 +157,8 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
   modelModifiers?: Mod
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
+  /** Show a summary when the number of selected items exceeds this limit in multiple mode. */
+  maxSelectedLabels?: number
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /** Keep the mobile text size on all breakpoints. */
@@ -235,6 +237,7 @@ export interface InputMenuSlots<
   'leading'?: TriggerSlotProps<A, VK, M, Mod, C>
   'default'?: TriggerSlotProps<A, VK, M, Mod, C>
   'trailing'?: TriggerSlotProps<A, VK, M, Mod, C>
+  'selection-summary'?(props: { count: number, ui: InputMenu['ui'] }): VNode[]
   'empty'?(props: { searchTerm: string }): VNode[]
   'item'?: SlotProps<T>
   'item-leading'?: SlotProps<T>
@@ -412,6 +415,11 @@ function displayValue(value: GetItemValue<T, VK, ExcludeItem>): string {
     valueKey: props.valueKey,
     by: props.by
   }) ?? ''
+}
+
+// While the summary is visible, keep tags hidden but mounted for keyboard handling.
+function shouldSummarizeSelection(count: number) {
+  return props.maxSelectedLabels != null && count > Math.max(0, props.maxSelectedLabels)
 }
 
 const groups = computed<InputMenuItem[][]>(() =>
@@ -755,7 +763,25 @@ defineExpose({
         @focus="onFocus"
         @remove-tag="onRemoveTag($event, modelValue as GetModelValue<T, VK, true, ExcludeItem>)"
       >
-        <TagsInputItem v-for="(item, index) in tags" :key="index" :value="item" data-slot="tagsItem" :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
+        <span
+          v-if="shouldSummarizeSelection(tags.length)"
+          key="selection-summary"
+          data-slot="selectionSummary"
+          :class="[ui.tagsItem({ class: props.ui?.tagsItem }), ui.selectionSummary({ class: props.ui?.selectionSummary })]"
+        >
+          <slot name="selection-summary" :count="tags.length" :ui="ui">
+            {{ t('selection.summary', { count: tags.length }) }}
+          </slot>
+        </span>
+
+        <TagsInputItem
+          v-for="(item, index) in tags"
+          v-show="!shouldSummarizeSelection(tags.length)"
+          :key="index"
+          :value="item"
+          data-slot="tagsItem"
+          :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })"
+        >
           <TagsInputItemText data-slot="tagsItemText" :class="ui.tagsItemText({ class: [props.ui?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
             <slot name="tags-item-text" :item="(item as NestedItem<T>)" :index="index">
               {{ displayValue(item as GetItemValue<T, VK, ExcludeItem>) }}

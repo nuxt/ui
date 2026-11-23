@@ -208,6 +208,9 @@ export type Messages = {
     close: string
     toggle: string
   }
+  selection: {
+    summary: string
+  }
   selectMenu: {
     create: string
     noData: string

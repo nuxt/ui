@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Loka',
       toggle: 'Skipta'
     },
+    selection: {
+      summary: 'Valið: {count}'
+    },
     selectMenu: {
       create: 'Búa til "{label}"',
       noData: 'Engin gögn',

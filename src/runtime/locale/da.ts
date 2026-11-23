@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Luk',
       toggle: 'Skift'
     },
+    selection: {
+      summary: 'Valgt: {count}'
+    },
     selectMenu: {
       create: 'Opret "{label}"',
       noData: 'Ingen data',

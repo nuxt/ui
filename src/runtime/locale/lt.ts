@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Uždaryti',
       toggle: 'Perjungti'
     },
+    selection: {
+      summary: 'Pasirinkta: {count}'
+    },
     selectMenu: {
       create: 'Sukurti „{label}“',
       noData: 'Nėra duomenų',
