@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -41,6 +41,31 @@ describe('Editor', () => {
     editor.setEditable(false)
 
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+
+    wrapper.unmount()
+  })
+
+  it('calls onCreate and onUpdate props', async () => {
+    const onCreate = vi.fn()
+    const onUpdate = vi.fn()
+    const created = new Promise(resolve => onCreate.mockImplementation(resolve))
+    const wrapper = await mountSuspended(Editor, {
+      props: {
+        modelValue: '<p>Hello</p>',
+        onCreate,
+        onUpdate
+      }
+    })
+    const editor = wrapper.vm.editor!
+
+    await created
+
+    expect(onCreate).toHaveBeenCalledTimes(1)
+
+    editor.commands.setContent('<p>Hello world</p>')
+
+    expect(onUpdate).toHaveBeenCalledTimes(1)
+    expect(wrapper.emitted('update:modelValue')).toEqual([['<p>Hello world</p>']])
 
     wrapper.unmount()
   })
