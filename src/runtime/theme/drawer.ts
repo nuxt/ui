@@ -17,7 +17,7 @@ export default defineTheme({
     actions: 'flex items-center gap-1.5 shrink-0 ms-auto',
     body: 'flex-1',
     footer: 'flex flex-col gap-1.5',
-    close: ''
+    close: '-me-(--ui-control-py)'
   },
   variants: {
     side: {
