@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Zoumaachen'
     },
+    editorEmojiMenu: {
+      label: 'Emojien'
+    },
+    editorMentionMenu: {
+      label: 'Ernimmungen'
+    },
+    editorSuggestionMenu: {
+      label: 'Virschléi'
+    },
     error: {
       clear: 'Zréck op d\'Startsäit'
     },

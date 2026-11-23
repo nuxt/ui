@@ -108,6 +108,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'بستن'
     },
+    editorEmojiMenu: {
+      label: 'ایموجی‌ها'
+    },
+    editorMentionMenu: {
+      label: 'اشاره‌ها'
+    },
+    editorSuggestionMenu: {
+      label: 'پیشنهادها'
+    },
     error: {
       clear: 'بازگشت به صفحه اصلی'
     },

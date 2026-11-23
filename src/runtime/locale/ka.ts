@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'დახურვა'
     },
+    editorEmojiMenu: {
+      label: 'ემოჯები'
+    },
+    editorMentionMenu: {
+      label: 'მოხსენიებები'
+    },
+    editorSuggestionMenu: {
+      label: 'შემოთავაზებები'
+    },
     error: {
       // While "home" translates as "სახლი", I chose to use "მთავარი" (meaning "main") as contextually this sounds better.
       // If any Georgian prefers literal translation, please submit patch.

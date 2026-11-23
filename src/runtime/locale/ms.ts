@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Tutup'
     },
+    editorEmojiMenu: {
+      label: 'Emoji'
+    },
+    editorMentionMenu: {
+      label: 'Sebutan'
+    },
+    editorSuggestionMenu: {
+      label: 'Cadangan'
+    },
     error: {
       clear: 'Kembali ke laman utama'
     },

@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Бастан'
     },
+    editorEmojiMenu: {
+      label: 'Эмодзиҳо'
+    },
+    editorMentionMenu: {
+      label: 'Ёдовариҳо'
+    },
+    editorSuggestionMenu: {
+      label: 'Пешниҳодҳо'
+    },
     error: {
       clear: 'Бозгашт ба саҳифаи асосӣ'
     },

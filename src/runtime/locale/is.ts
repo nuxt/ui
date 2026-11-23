@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Loka'
     },
+    editorEmojiMenu: {
+      label: 'Tjáknmyndir'
+    },
+    editorMentionMenu: {
+      label: 'Tilvísanir'
+    },
+    editorSuggestionMenu: {
+      label: 'Tillögur'
+    },
     error: {
       clear: 'Til baka heim'
     },

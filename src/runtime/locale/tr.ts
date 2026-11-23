@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Kapat'
     },
+    editorEmojiMenu: {
+      label: 'Emojiler'
+    },
+    editorMentionMenu: {
+      label: 'Bahsetmeler'
+    },
+    editorSuggestionMenu: {
+      label: 'Öneriler'
+    },
     error: {
       clear: 'Ana sayfaya dön'
     },

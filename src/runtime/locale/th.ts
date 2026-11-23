@@ -102,6 +102,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'ปิด'
     },
+    editorEmojiMenu: {
+      label: 'อีโมจิ'
+    },
+    editorMentionMenu: {
+      label: 'การกล่าวถึง'
+    },
+    editorSuggestionMenu: {
+      label: 'คำแนะนำ'
+    },
     error: {
       clear: 'กลับไปยังหน้าหลัก'
     },

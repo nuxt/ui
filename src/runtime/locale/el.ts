@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Κλείσιμο'
     },
+    editorEmojiMenu: {
+      label: 'Emoji'
+    },
+    editorMentionMenu: {
+      label: 'Αναφορές'
+    },
+    editorSuggestionMenu: {
+      label: 'Προτάσεις'
+    },
     error: {
       clear: 'Επιστροφή στην αρχική'
     },

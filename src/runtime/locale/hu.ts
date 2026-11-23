@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Bezárás'
     },
+    editorEmojiMenu: {
+      label: 'Emojik'
+    },
+    editorMentionMenu: {
+      label: 'Említések'
+    },
+    editorSuggestionMenu: {
+      label: 'Javaslatok'
+    },
     error: {
       clear: 'Vissza a főoldalra'
     },

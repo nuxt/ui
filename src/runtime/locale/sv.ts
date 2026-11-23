@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Stäng'
     },
+    editorEmojiMenu: {
+      label: 'Emojier'
+    },
+    editorMentionMenu: {
+      label: 'Omnämnanden'
+    },
+    editorSuggestionMenu: {
+      label: 'Förslag'
+    },
     error: {
       clear: 'Tillbaka till startsidan'
     },

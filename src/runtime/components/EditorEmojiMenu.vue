@@ -31,6 +31,7 @@ export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmoj
 import { computed, h, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
 import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
+import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
@@ -42,6 +43,7 @@ const props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
 })
 
 const appConfig = useAppConfig() as EditorEmojiMenu['AppConfig']
+const { t } = useLocale()
 
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editorEmojiMenu || {}) })({
   size: props.size
@@ -66,6 +68,7 @@ onMounted(async () => {
     options: props.options,
     suggestion: props.suggestion,
     appendTo: props.appendTo,
+    label: toRef(() => t('editorEmojiMenu.label')),
     ui,
     onSelect: (editor, range, item) => {
       if (!item.emoji) return

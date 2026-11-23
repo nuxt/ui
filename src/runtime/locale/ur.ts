@@ -108,6 +108,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'بند کریں'
     },
+    editorEmojiMenu: {
+      label: 'ایموجیز'
+    },
+    editorMentionMenu: {
+      label: 'تذکرے'
+    },
+    editorSuggestionMenu: {
+      label: 'تجاویز'
+    },
     error: {
       clear: 'ہوم پیج پر واپس جائیں'
     },

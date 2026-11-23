@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Mbyll'
     },
+    editorEmojiMenu: {
+      label: 'Emoji'
+    },
+    editorMentionMenu: {
+      label: 'Përmendje'
+    },
+    editorSuggestionMenu: {
+      label: 'Sugjerime'
+    },
     error: {
       clear: 'Kthehu në kryefaqe'
     },

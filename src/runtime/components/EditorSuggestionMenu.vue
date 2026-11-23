@@ -54,6 +54,7 @@ export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = 
 import { computed, h, inject, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
 import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
+import { useLocale } from '../composables/useLocale'
 import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -66,6 +67,7 @@ const props = withDefaults(defineProps<EditorSuggestionMenuProps<T>>(), {
 })
 
 const appConfig = useAppConfig() as EditorSuggestionMenu['AppConfig']
+const { t } = useLocale()
 
 const handlers = inject('editorHandlers', computed(() => createHandlers()))
 
@@ -92,6 +94,7 @@ onMounted(async () => {
     options: props.options,
     suggestion: props.suggestion,
     appendTo: props.appendTo,
+    label: toRef(() => t('editorSuggestionMenu.label')),
     ui,
     onSelect: (editor, range, item) => {
       // Skip if it's a label (non-interactive)

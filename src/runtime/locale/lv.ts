@@ -102,6 +102,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Aizvērt'
     },
+    editorEmojiMenu: {
+      label: 'Emocijzīmes'
+    },
+    editorMentionMenu: {
+      label: 'Pieminējumi'
+    },
+    editorSuggestionMenu: {
+      label: 'Ieteikumi'
+    },
     error: {
       clear: 'Atpakaļ uz sākumlapu'
     },

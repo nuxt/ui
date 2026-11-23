@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: '閉じる'
     },
+    editorEmojiMenu: {
+      label: '絵文字'
+    },
+    editorMentionMenu: {
+      label: 'メンション'
+    },
+    editorSuggestionMenu: {
+      label: '候補'
+    },
     error: {
       clear: 'ホームに戻る'
     },

@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Đóng'
     },
+    editorEmojiMenu: {
+      label: 'Biểu tượng cảm xúc'
+    },
+    editorMentionMenu: {
+      label: 'Đề cập'
+    },
+    editorSuggestionMenu: {
+      label: 'Gợi ý'
+    },
     error: {
       clear: 'Quay lại trang chủ'
     },

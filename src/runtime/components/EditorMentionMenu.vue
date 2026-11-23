@@ -36,6 +36,7 @@ export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = Editor
 import { computed, h, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
 import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
+import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -50,6 +51,7 @@ const props = withDefaults(defineProps<EditorMentionMenuProps<T>>(), {
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig() as EditorMentionMenu['AppConfig']
+const { t } = useLocale()
 
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editorMentionMenu || {}) })({
   size: props.size
@@ -76,6 +78,7 @@ onMounted(async () => {
     suggestion: props.suggestion,
     appendTo: props.appendTo,
     searchTerm,
+    label: toRef(() => t('editorMentionMenu.label')),
     ui,
     onSelect: (editor, range, item) => {
       // Delete the trigger character and query text, then insert the mention
