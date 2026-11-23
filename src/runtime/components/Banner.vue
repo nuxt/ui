@@ -39,7 +39,7 @@ export interface BannerProps {
   color?: Banner['variants']['color']
   /**
    * Display a close button to dismiss the banner.
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @emits `close`
    * @defaultValue false
    */
@@ -197,7 +197,7 @@ function onClose() {
           <UButton
             v-if="props.close"
             :icon="props.closeIcon || appConfig.ui.icons.close"
-            size="md"
+            size="xs"
             color="neutral"
             variant="ghost"
             :aria-label="t('banner.close')"

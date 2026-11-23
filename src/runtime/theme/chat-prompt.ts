@@ -11,7 +11,7 @@ export default defineTheme({
     queueTriggerIcon: 'shrink-0 size-4 data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none',
     queueCount: 'text-faint tabular-nums',
     queueList: 'flex flex-col max-h-60 overflow-y-auto pb-1',
-    queueItem: 'group/queue flex items-center gap-2 h-7 ps-2 pe-0.5 rounded-sm hover:bg-soft',
+    queueItem: 'group/queue flex items-center gap-2 h-7 ps-2 pe-0.5 rounded-sm hover:bg-tint',
     queueItemLeading: 'shrink-0 size-3 rounded-full ring ring-strong',
     queueItemLabel: 'flex-1 min-w-0 truncate text-sm text-default',
     queueItemActions: 'flex items-center shrink-0 [@media(hover:hover)]:opacity-0 group-hover/queue:opacity-100 group-focus-within/queue:opacity-100 transition-opacity ease-out',
