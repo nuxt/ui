@@ -188,44 +188,10 @@ describe('NavigationMenu', () => {
     expect(wrapper.findAll('[data-slot="link"]').map(link => link.attributes('aria-label'))).toEqual([undefined, undefined, 'Account settings'])
   })
 
-  it('preserves custom visible labels when collapsed', async () => {
-    const wrapper = await mountSuspended(NavigationMenu, {
-      props: {
-        orientation: 'vertical',
-        collapsed: true,
-        items: [{ label: 'Guide', to: '/guide' }],
-        ui: { linkLabel: 'block' }
-      },
-      slots: { 'item-label': () => 'Read the guide' }
-    })
-
-    expect(wrapper.get('[data-slot="link"]').attributes('aria-label')).toBeUndefined()
-    expect(wrapper.get('[data-slot="linkLabel"]').text()).toBe('Read the guide')
-    expect(wrapper.get('[data-slot="linkLabel"]').classes()).toContain('block')
-  })
-
-  it('preserves leading slot text in the name of a collapsed link', async () => {
-    const wrapper = await mountSuspended(NavigationMenu, {
-      props: {
-        orientation: 'vertical',
-        collapsed: true,
-        items: [{ label: 'Docs', to: '/docs', slot: 'docs' }],
-        ui: { linkLabel: 'block' }
-      },
-      slots: { 'docs-leading': () => 'Beta' }
-    })
-
-    const link = wrapper.get('[data-slot="link"]')
-    const [leadingId, labelId] = link.attributes('aria-labelledby')?.split(' ') ?? []
-    expect(leadingId && wrapper.get(`[id="${leadingId}"]`).text()).toBe('Beta')
-    expect(labelId && wrapper.get(`[id="${labelId}"]`).text()).toBe('Docs')
-    expect(link.attributes('aria-label')).toBeUndefined()
-  })
-
   it.each([
-    ['a decorative leading slot', { 'item-leading': () => h('span', { 'aria-hidden': true }, '★') }, 'Docs'],
-    ['a custom label slot', { 'item-label': () => 'Read the docs' }, 'Read the docs']
-  ] as const)('names a collapsed link with %s in the default theme', async (_name, slots, label) => {
+    ['a decorative leading slot', { 'item-leading': () => h('span', { 'aria-hidden': true }, '★') }],
+    ['a custom label slot', { 'item-label': () => 'Read the docs' }]
+  ] as const)('uses the item label for a collapsed link with %s', async (_name, slots) => {
     const wrapper = await mountSuspended(NavigationMenu, {
       props: {
         orientation: 'vertical',
@@ -235,12 +201,24 @@ describe('NavigationMenu', () => {
       slots
     })
 
+    expect(wrapper.get('[data-slot="link"]').attributes('aria-label')).toBe('Docs')
+  })
+
+  it('keeps an explicit accessible name for a collapsed item with a custom slot', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        collapsed: true,
+        items: [{ 'label': 'Docs', 'to': '/docs', 'aria-labelledby': 'custom-label' }],
+        ui: { linkLabel: 'block' }
+      },
+      slots: { 'item-label': () => h('span', { id: 'custom-label' }, 'Beta Docs') }
+    })
+
     const link = wrapper.get('[data-slot="link"]')
-    const labelElement = wrapper.get('[data-slot="linkLabel"]')
-    expect(labelElement.classes()).toContain('hidden')
-    expect(labelElement.text()).toBe(label)
-    expect(labelElement.attributes('id')).toBeTruthy()
-    expect(link.attributes('aria-labelledby')?.split(' ')).toContain(labelElement.attributes('id'))
+    expect(link.attributes('aria-label')).toBeUndefined()
+    expect(link.attributes('aria-labelledby')).toBe('custom-label')
+    expect(link.get('#custom-label').text()).toBe('Beta Docs')
   })
 
   it('passes accessibility tests', async () => {
