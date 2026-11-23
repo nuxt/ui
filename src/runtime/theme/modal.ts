@@ -4,13 +4,13 @@ export default defineTheme({
   slots: {
     overlay: 'fixed inset-0',
     content: 'bg-overlay divide-y divide-default flex flex-col focus:outline-none',
-    header: 'flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)',
+    header: 'flex items-center gap-1.5 px-(--ui-gutter) py-[calc((var(--ui-header-height)-1lh)/2)] min-h-(--ui-header-height)',
     wrapper: 'min-w-0 flex-1',
     body: 'flex-1 p-(--ui-gutter)',
     footer: 'flex items-center gap-1.5 px-(--ui-gutter) py-4',
     title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))',
     description: 'mt-1 text-muted text-sm',
-    actions: 'flex items-center gap-1.5 shrink-0 ms-auto',
+    actions: 'flex items-center gap-1.5 shrink-0 ms-auto self-start h-lh',
     close: '-my-(--ui-control-py) -me-(--ui-control-py)'
   },
   variants: {

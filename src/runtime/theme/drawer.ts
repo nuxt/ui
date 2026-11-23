@@ -10,11 +10,11 @@ export default defineTheme({
     handle: 'relative flex shrink-0 before:absolute cursor-grab active:cursor-grabbing group-data-swiping/drawer:cursor-grabbing transition-opacity ease-out group-data-stacked/drawer:opacity-0 after:shrink-0 after:rounded-full after:bg-strong after:opacity-70 after:transition-opacity after:ease-out hover:after:opacity-100 active:after:opacity-100',
     // Fades back in once the drawer has grown back, so nothing moves while visible.
     container: 'w-full flex-1 min-h-0 flex flex-col gap-4 p-4 overflow-y-auto transition-opacity duration-300 ease-out delay-200 group-data-stacked/drawer:opacity-0 group-data-stacked/drawer:delay-0 group-data-stacked/drawer:duration-100',
-    header: 'flex items-center gap-1.5 min-h-8',
+    header: 'flex items-center gap-1.5',
     wrapper: 'min-w-0 flex-1',
     title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))',
     description: 'mt-1 text-muted text-sm',
-    actions: 'flex items-center gap-1.5 shrink-0 ms-auto',
+    actions: 'flex items-center gap-1.5 shrink-0 ms-auto self-start h-lh',
     body: 'flex-1',
     footer: 'flex flex-col gap-1.5',
     close: '-my-(--ui-control-py) -me-(--ui-control-py)'

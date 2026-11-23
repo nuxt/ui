@@ -51,7 +51,7 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
   /**
    * Display a close button to collapse the sidebar.
    * Only renders when `collapsible` is not `none`.
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue false
    */
   close?: boolean | Omit<ButtonProps, LinkPropsKeys>
@@ -262,6 +262,7 @@ const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as Modal
               :icon="props.closeIcon || appConfig.ui.icons.close"
               color="neutral"
               variant="ghost"
+              size="xs"
               :aria-label="t('sidebar.close')"
               v-bind="(typeof props.close === 'object' ? props.close : {})"
               data-slot="sidebar-close"
