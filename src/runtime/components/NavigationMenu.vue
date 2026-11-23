@@ -237,7 +237,7 @@ export type NavigationMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<NavigationMenuItem>, K extends SingleOrMultipleType = SingleOrMultipleType, O extends Orientation = Orientation">
-import { computed, defineAsyncComponent, toRef, onMounted, onBeforeUnmount } from 'vue'
+import { computed, toRef } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
@@ -247,13 +247,14 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { get, isArrayOfArray } from '../utils'
 import { tv } from '../utils/tv'
 import { pickLinkProps } from '../utils/link'
-import { requestIdleCallback, cancelIdleCallback } from '../utils/prefetch'
 import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
 import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UBadge from './Badge.vue'
 import UChip from './Chip.vue'
+import UPopover from './Popover.vue'
+import UTooltip from './Tooltip.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -319,36 +320,6 @@ const lists = computed<NavigationMenuItem[][]>(() =>
       : [props.items]
     : []
 )
-
-const loadPopover = () => import('./Popover.vue')
-const loadTooltip = () => import('./Tooltip.vue')
-
-// Only the items of a collapsed vertical menu and the horizontal items with a `tooltip` render them, so most menus
-// never load them.
-const UPopover = defineAsyncComponent(loadPopover)
-const UTooltip = defineAsyncComponent(loadTooltip)
-
-// A vertical menu that can show them preloads them once idle, so its items don't wait for them when it collapses.
-let idleId: ReturnType<typeof requestIdleCallback>
-
-onMounted(() => {
-  if (props.orientation !== 'vertical') return
-
-  const items = lists.value.flat()
-  const popover = !!props.popover || items.some(item => item.popover)
-  const tooltip = !!props.tooltip || items.some(item => item.tooltip)
-
-  if (!popover && !tooltip) return
-
-  idleId = requestIdleCallback(() => {
-    if (popover) loadPopover().catch(() => {})
-    if (tooltip) loadTooltip().catch(() => {})
-  })
-})
-
-onBeforeUnmount(() => {
-  cancelIdleCallback(idleId)
-})
 
 function getItemValue(item: NavigationMenuItem, index: number, level: number, listIndex: number) {
   const prefix = lists.value.length > 1 ? `group-${listIndex}-` : ''
