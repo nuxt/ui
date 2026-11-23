@@ -11,7 +11,7 @@ export default defineTheme({
     icon: 'size-4 shrink-0 text-accent-contrast pointer-events-none',
     title: 'text-sm text-accent-contrast font-medium truncate',
     actions: 'flex gap-1.5 shrink-0 isolate',
-    close: 'text-accent-contrast hover:bg-default/10 focus-visible:bg-default/10 -me-1.5 lg:me-0'
+    close: 'text-accent-contrast hover:bg-default/10 focus-visible:bg-default/10 -me-(--ui-control-py)'
   },
   variants: {
     color: colorVariant({ root: '' }),
