@@ -92,4 +92,31 @@ describe('useLazyFuse', () => {
       vi.doUnmock('fuse.js')
     }
   })
+
+  it('tries again on the next search after a failed import', async () => {
+    let fail = true
+    const factory = vi.fn(async () => {
+      if (fail) throw new Error('offline')
+
+      return vi.importActual('fuse.js')
+    })
+
+    vi.doMock('fuse.js', factory)
+
+    try {
+      const { labels, term } = await mountWith('ban', items)
+
+      await new Promise(resolve => setTimeout(resolve))
+      expect(labels()).toEqual(['apple', 'banana', 'cherry'])
+
+      fail = false
+      term.value = 'cher'
+      await new Promise(resolve => setTimeout(resolve))
+      await nextTick()
+
+      expect(labels()).toEqual(['cherry'])
+    } finally {
+      vi.doUnmock('fuse.js')
+    }
+  })
 })
