@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: '關閉'
     },
+    editorEmojiMenu: {
+      label: '表情符號'
+    },
+    editorMentionMenu: {
+      label: '提及'
+    },
+    editorSuggestionMenu: {
+      label: '建議'
+    },
     error: {
       clear: '返回首頁'
     },

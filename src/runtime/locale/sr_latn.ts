@@ -102,6 +102,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Zatvori'
     },
+    editorEmojiMenu: {
+      label: 'Emodžiji'
+    },
+    editorMentionMenu: {
+      label: 'Pominjanja'
+    },
+    editorSuggestionMenu: {
+      label: 'Predlozi'
+    },
     error: {
       clear: 'Nazad na početnu'
     },

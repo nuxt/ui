@@ -108,6 +108,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'تاقاش'
     },
+    editorEmojiMenu: {
+      label: 'ئىموجىلار'
+    },
+    editorMentionMenu: {
+      label: 'تىلغا ئېلىشلار'
+    },
+    editorSuggestionMenu: {
+      label: 'تەكلىپلەر'
+    },
     error: {
       clear: 'باش بەتكە قايتىش'
     },

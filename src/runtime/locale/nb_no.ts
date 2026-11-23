@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Lukk'
     },
+    editorEmojiMenu: {
+      label: 'Emojier'
+    },
+    editorMentionMenu: {
+      label: 'Omtaler'
+    },
+    editorSuggestionMenu: {
+      label: 'Forslag'
+    },
     error: {
       clear: 'Tilbake til forsiden'
     },

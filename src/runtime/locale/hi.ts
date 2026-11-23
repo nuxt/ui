@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'बंद करें'
     },
+    editorEmojiMenu: {
+      label: 'इमोजी'
+    },
+    editorMentionMenu: {
+      label: 'उल्लेख'
+    },
+    editorSuggestionMenu: {
+      label: 'सुझाव'
+    },
     error: {
       clear: 'होम पेज पर वापस जाएं'
     },

@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Itxi'
     },
+    editorEmojiMenu: {
+      label: 'Emojiak'
+    },
+    editorMentionMenu: {
+      label: 'Aipamenak'
+    },
+    editorSuggestionMenu: {
+      label: 'Iradokizunak'
+    },
     error: {
       clear: 'Hasierara itzuli'
     },

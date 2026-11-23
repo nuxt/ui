@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'បិទ'
     },
+    editorEmojiMenu: {
+      label: 'អេម៉ូជិ'
+    },
+    editorMentionMenu: {
+      label: 'ការលើកឡើង'
+    },
+    editorSuggestionMenu: {
+      label: 'ការណែនាំ'
+    },
     error: {
       clear: 'ត្រឡប់ទៅទំព័រដើម'
     },

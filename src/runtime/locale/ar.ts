@@ -108,6 +108,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'إغلاق'
     },
+    editorEmojiMenu: {
+      label: 'الرموز التعبيرية'
+    },
+    editorMentionMenu: {
+      label: 'الإشارات'
+    },
+    editorSuggestionMenu: {
+      label: 'الاقتراحات'
+    },
     error: {
       clear: 'العودة إلى الصفحة الرئيسية'
     },

@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Хаах'
     },
+    editorEmojiMenu: {
+      label: 'Эможи'
+    },
+    editorMentionMenu: {
+      label: 'Дурдалтууд'
+    },
+    editorSuggestionMenu: {
+      label: 'Санал болголт'
+    },
     error: {
       clear: 'Нүүр хуудас руу буцах'
     },

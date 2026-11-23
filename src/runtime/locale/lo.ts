@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'ປິດ'
     },
+    editorEmojiMenu: {
+      label: 'ອີໂມຈິ'
+    },
+    editorMentionMenu: {
+      label: 'ການກ່າວເຖິງ'
+    },
+    editorSuggestionMenu: {
+      label: 'ຄຳແນະນຳ'
+    },
     error: {
       clear: 'ກັບໄປໜ້າຫຼັກ'
     },

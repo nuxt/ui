@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Yopish'
     },
+    editorEmojiMenu: {
+      label: 'Emojilar'
+    },
+    editorMentionMenu: {
+      label: 'Tilga olishlar'
+    },
+    editorSuggestionMenu: {
+      label: 'Takliflar'
+    },
     error: {
       clear: 'Bosh sahifaga qaytish'
     },

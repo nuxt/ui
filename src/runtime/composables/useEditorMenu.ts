@@ -80,12 +80,20 @@ export interface EditorMenuOptions<T = any> {
    */
   appendTo?: HTMLElement | (() => HTMLElement)
   /**
+   * The accessible name of the menu.
+   */
+  label?: MaybeRef<string | undefined>
+  /**
    * UI styles computed ref
    */
   ui: ComputedRef<any>
 }
 
+// The menu only renders on the client, so a counter gives each instance unique group label ids
+let menuId = 0
+
 export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
+  const id = `editor-menu-${++menuId}`
   const filteredItems: Ref<T[]> = ref([])
   const selectedIndex = ref(0)
   const menuState = ref<'closed' | 'open'>('closed')
@@ -438,16 +446,21 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
         return h('div', {
           'class': options.ui.value.content(),
           'role': 'listbox',
+          'aria-label': unref(options.label),
           'data-state': menuProps.state
         }, [
           h('div', {
             class: options.ui.value.viewport(),
             role: 'presentation'
-          }, groupsData.map((group, groupIndex) =>
-            h('div', {
-              key: `group-${groupIndex}`,
-              class: options.ui.value.group(),
-              role: 'group'
+          }, groupsData.map((group, groupIndex) => {
+            const labelIndex = group.findIndex(item => (item as any).type === 'label')
+            const labelId = labelIndex !== -1 ? `${id}-group-${groupIndex}-label` : undefined
+
+            return h('div', {
+              'key': `group-${groupIndex}`,
+              'class': options.ui.value.group(),
+              'role': 'group',
+              'aria-labelledby': labelId
             }, group.map((item, itemInGroupIndex) => {
               const itemData = item as any
 
@@ -455,6 +468,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
               if (itemData.type === 'label') {
                 return h('div', {
                   key: `label-${groupIndex}-${itemInGroupIndex}`,
+                  id: itemInGroupIndex === labelIndex ? labelId : undefined,
                   class: options.ui.value.label({ class: itemData.class })
                 }, options.renderItem(item, options.ui))
               }
@@ -462,9 +476,9 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
               // Render separator
               if (itemData.type === 'separator') {
                 return h('div', {
-                  key: `separator-${groupIndex}-${itemInGroupIndex}`,
-                  class: options.ui.value.separator({ class: itemData.class }),
-                  role: 'separator'
+                  'key': `separator-${groupIndex}-${itemInGroupIndex}`,
+                  'class': options.ui.value.separator({ class: itemData.class }),
+                  'aria-hidden': 'true'
                 })
               }
 
@@ -488,7 +502,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
                 }
               }, options.renderItem(item, options.ui))
             }))
-          ))
+          }))
         ])
       }
     }

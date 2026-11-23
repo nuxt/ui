@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Затвори'
     },
+    editorEmojiMenu: {
+      label: 'Емоджита'
+    },
+    editorMentionMenu: {
+      label: 'Споменавания'
+    },
+    editorSuggestionMenu: {
+      label: 'Предложения'
+    },
     error: {
       clear: 'Към началната страница'
     },

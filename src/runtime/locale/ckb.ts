@@ -108,6 +108,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'داخستن'
     },
+    editorEmojiMenu: {
+      label: 'ئیمۆجییەکان'
+    },
+    editorMentionMenu: {
+      label: 'ئاماژەکان'
+    },
+    editorSuggestionMenu: {
+      label: 'پێشنیارەکان'
+    },
     error: {
       clear: 'گەڕانەوە بۆ سەرەتا'
     },

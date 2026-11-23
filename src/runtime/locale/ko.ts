@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: '닫기'
     },
+    editorEmojiMenu: {
+      label: '이모지'
+    },
+    editorMentionMenu: {
+      label: '멘션'
+    },
+    editorSuggestionMenu: {
+      label: '제안'
+    },
     error: {
       clear: '홈으로 돌아가기'
     },

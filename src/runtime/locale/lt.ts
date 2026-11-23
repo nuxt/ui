@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Uždaryti'
     },
+    editorEmojiMenu: {
+      label: 'Jaustukai'
+    },
+    editorMentionMenu: {
+      label: 'Paminėjimai'
+    },
+    editorSuggestionMenu: {
+      label: 'Pasiūlymai'
+    },
     error: {
       clear: 'Grįžti į pradžią'
     },

@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Жабуу'
     },
+    editorEmojiMenu: {
+      label: 'Эмодзилер'
+    },
+    editorMentionMenu: {
+      label: 'Белгилөөлөр'
+    },
+    editorSuggestionMenu: {
+      label: 'Сунуштар'
+    },
     error: {
       clear: 'Башкы бетке кайтуу'
     },

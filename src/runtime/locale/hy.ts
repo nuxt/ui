@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Փակել'
     },
+    editorEmojiMenu: {
+      label: 'Էմոջիներ'
+    },
+    editorMentionMenu: {
+      label: 'Հիշատակումներ'
+    },
+    editorSuggestionMenu: {
+      label: 'Առաջարկներ'
+    },
     error: {
       clear: 'Վերադառնալ գլխավոր էջ'
     },

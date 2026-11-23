@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Bağla'
     },
+    editorEmojiMenu: {
+      label: 'Emojilər'
+    },
+    editorMentionMenu: {
+      label: 'İstinadlar'
+    },
+    editorSuggestionMenu: {
+      label: 'Təkliflər'
+    },
     error: {
       clear: 'Ana səhifəyə qayıt'
     },

@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Sulge'
     },
+    editorEmojiMenu: {
+      label: 'Emojid'
+    },
+    editorMentionMenu: {
+      label: 'Mainimised'
+    },
+    editorSuggestionMenu: {
+      label: 'Soovitused'
+    },
     error: {
       clear: 'Tagasi avalehele'
     },

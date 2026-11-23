@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Fermer'
     },
+    editorEmojiMenu: {
+      label: 'Émojis'
+    },
+    editorMentionMenu: {
+      label: 'Mentions'
+    },
+    editorSuggestionMenu: {
+      label: 'Suggestions'
+    },
     error: {
       clear: 'Retour à l\'accueil'
     },

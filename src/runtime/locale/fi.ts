@@ -107,6 +107,15 @@ export default defineLocale<Messages>({
     drawer: {
       close: 'Sulje'
     },
+    editorEmojiMenu: {
+      label: 'Emojit'
+    },
+    editorMentionMenu: {
+      label: 'Maininnat'
+    },
+    editorSuggestionMenu: {
+      label: 'Ehdotukset'
+    },
     error: {
       clear: 'Takaisin etusivulle'
     },

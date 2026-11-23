@@ -104,6 +104,15 @@ export type Messages = {
   drawer: {
     close: string
   }
+  editorEmojiMenu: {
+    label: string
+  }
+  editorMentionMenu: {
+    label: string
+  }
+  editorSuggestionMenu: {
+    label: string
+  }
   error: {
     clear: string
   }
