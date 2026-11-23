@@ -165,6 +165,62 @@ describe('NavigationMenu', () => {
     expect(wrapper.find('[data-slot="link"]').attributes('data-state')).toBe('open')
   })
 
+  it('names collapsed links and buttons from the configured item label', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        collapsed: true,
+        labelKey: 'title',
+        popover: true,
+        items: [
+          { title: 'Guide', to: '/guide' },
+          { title: 'Components', children: [{ title: 'Button', to: '/button' }] },
+          { 'title': 'Account', 'aria-label': 'Account settings' }
+        ]
+      }
+    })
+
+    const links = wrapper.findAll('[data-slot="link"]')
+    expect(links.map(link => link.element.tagName)).toEqual(['A', 'BUTTON', 'BUTTON'])
+    expect(links.map(link => link.attributes('aria-label'))).toEqual(['Guide', 'Components', 'Account settings'])
+
+    await wrapper.setProps({ collapsed: false })
+    expect(wrapper.findAll('[data-slot="link"]').map(link => link.attributes('aria-label'))).toEqual([undefined, undefined, 'Account settings'])
+  })
+
+  it('preserves custom visible labels when collapsed', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        collapsed: true,
+        items: [{ label: 'Guide', to: '/guide' }],
+        ui: { linkLabel: 'block' }
+      },
+      slots: { 'item-label': () => 'Read the guide' }
+    })
+
+    expect(wrapper.get('[data-slot="link"]').attributes('aria-label')).toBeUndefined()
+    expect(wrapper.get('[data-slot="linkLabel"]').text()).toBe('Read the guide')
+    expect(wrapper.get('[data-slot="linkLabel"]').classes()).toContain('block')
+  })
+
+  it('preserves leading slot text in the name of a collapsed link', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        collapsed: true,
+        items: [{ label: 'Docs', to: '/docs', slot: 'docs' }],
+        ui: { linkLabel: 'block' }
+      },
+      slots: { 'docs-leading': () => 'Beta' }
+    })
+
+    const link = wrapper.get('[data-slot="link"]')
+    expect(link.text()).toContain('Beta')
+    expect(link.text()).toContain('Docs')
+    expect(link.attributes('aria-label')).toBeUndefined()
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(NavigationMenu, {
       props: {
