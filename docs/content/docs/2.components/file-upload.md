@@ -246,6 +246,14 @@ props:
 ---
 ::
 
+::note
+The grid layout hides file names and sizes by default. Set `ui.fileWrapper` to `flex` to show both. Use the `#file-name` and `#file-size` slots to customize their content.
+::
+
+```vue
+<UFileUpload layout="grid" multiple :ui="{ fileWrapper: 'flex' }" />
+```
+
 ### Position
 
 Use the `position` prop to change the position of the files in the FileUpload. Defaults to `outside`.
