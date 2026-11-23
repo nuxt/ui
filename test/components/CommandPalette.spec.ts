@@ -1,11 +1,17 @@
-import { describe, it, expect, vi } from 'vitest'
+import { beforeAll, describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import CommandPalette from '../../src/runtime/components/CommandPalette.vue'
+import { loadFuse } from '../../src/runtime/utils/fuse'
 import theme from '#build/ui/command-palette'
 
 describe('CommandPalette', () => {
+  // The palette filters once `fuse.js` has loaded, which it does on demand
+  beforeAll(async () => {
+    await loadFuse()
+  })
+
   const sizes = Object.keys(theme.variants.size) as any
 
   const groups = [{

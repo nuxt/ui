@@ -240,12 +240,12 @@ import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupL
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
 import { createReusableTemplate, refDebounced, refThrottled } from '@vueuse/core'
-import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
 import { highlight } from '../utils/search'
+import { useLazyFuse } from '../utils/fuse'
 import { pickLinkProps } from '../utils/link'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
@@ -352,7 +352,7 @@ const items = computed(() => groups.value?.filter((group) => {
 // can opt in to avoid running fuzzy search on every keystroke.
 const fuseSearchTerm = refDebounced(searchTerm, () => props.searchDelay!)
 
-const { results: fuseResults } = useFuse<typeof items.value[number]>(fuseSearchTerm, items, fuse)
+const { results: fuseResults } = useLazyFuse<typeof items.value[number]>(fuseSearchTerm, items, fuse)
 
 const throttledFuseResults = refThrottled(fuseResults, 16, true)
 
