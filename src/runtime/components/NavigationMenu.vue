@@ -237,7 +237,7 @@ export type NavigationMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<NavigationMenuItem>, K extends SingleOrMultipleType = SingleOrMultipleType, O extends Orientation = Orientation">
-import { computed, toRef } from 'vue'
+import { computed, toRef, useId } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
@@ -292,13 +292,19 @@ const viewportProps = toRef(() => props.viewport)
 const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { ...(props.orientation === 'vertical' && { delayDuration: 0, content: { side: 'right' } }) }) as TooltipProps)
 const popoverProps = toRef(() => defu(typeof props.popover === 'boolean' ? {} : props.popover, { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }) as PopoverProps)
 
-const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean, trailingTrigger?: boolean }>()
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number, listIndex?: number }>({
+type ItemLabelIds = { label: string, leading?: string }
+
+const menuId = useId()
+
+const [DefineLeadingTemplate, ReuseLeadingTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean }>()
+const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean, trailingTrigger?: boolean, labelIds?: ItemLabelIds }>()
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number, listIndex?: number, labelIds?: ItemLabelIds }>({
   props: {
     item: Object,
     index: Number,
     level: Number,
-    listIndex: Number
+    listIndex: Number,
+    labelIds: Object
   }
 })
 
@@ -326,22 +332,33 @@ function getItemValue(item: NavigationMenuItem, index: number, level: number, li
   return get(item, props.valueKey as string) ?? (level > 0 ? `${prefix}item-${level}-${index}` : `${prefix}item-${index}`)
 }
 
-function getItemLinkProps(item: NavigationMenuItem) {
+function getItemLabelIds(item: NavigationMenuItem, index: number, listIndex: number): ItemLabelIds | undefined {
+  if (props.orientation !== 'vertical' || !props.collapsed || item.type === 'label' || item['aria-label'] != null || item['aria-labelledby'] != null) {
+    return
+  }
+
+  const slot = item.slot || 'item'
+  const hasLeading = !!slots[`${slot}-leading` as keyof NavigationMenuSlots<T>]
+  const hasLabel = !!slots[`${slot}-label` as keyof NavigationMenuSlots<T>]
+  if (slots[slot as keyof NavigationMenuSlots<T>] || (!hasLabel && !(hasLeading && get(item, props.labelKey as string)))) {
+    return
+  }
+
+  const label = `${menuId}-label-${listIndex}-${index}`
+  return { label, leading: hasLeading ? `${label}-leading` : undefined }
+}
+
+function getItemLinkProps(item: NavigationMenuItem, labelIds?: ItemLabelIds) {
   const isVertical = props.orientation === 'vertical'
   if (isVertical && !props.collapsed && item.children?.length && item.type === 'trigger') {
     return {}
   }
 
   const linkProps = pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)
-  if (!isVertical || !props.collapsed || linkProps['aria-labelledby'] != null) {
-    return linkProps
-  }
-
-  const slot = item.slot || 'item'
-  const hasCustomLabel = slots[slot as keyof NavigationMenuSlots<T>]
-    || slots[`${slot}-label` as keyof NavigationMenuSlots<T>]
-    || slots[`${slot}-leading` as keyof NavigationMenuSlots<T>]
-  if (!hasCustomLabel) {
+  if (labelIds) {
+    // Referencing the label directly keeps it in the accessible name even when hidden.
+    linkProps['aria-labelledby'] = labelIds.leading ? `${labelIds.leading} ${labelIds.label}` : labelIds.label
+  } else if (isVertical && props.collapsed && linkProps['aria-labelledby'] == null && !slots[(item.slot || 'item') as keyof NavigationMenuSlots<T>]) {
     linkProps['aria-label'] ??= get(item, props.labelKey as string)
   }
 
@@ -384,24 +401,32 @@ function onLinkClick(e: Event) {
 </script>
 
 <template>
-  <DefineLinkTemplate v-slot="{ item, active, index, trailingTrigger }">
+  <DefineLeadingTemplate v-slot="{ item, index, active }">
+    <slot :name="`${item.slot || 'item'}-leading` as keyof NavigationMenuSlots<T>" :item="item" :active="active" :index="index" :ui="ui">
+      <UAvatar v-if="item.avatar" :size="((item.ui?.linkLeadingAvatarSize || props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="linkLeadingAvatar" :class="ui.linkLeadingAvatar({ class: [props.ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active, disabled: !!item.disabled })" />
+      <UChip
+        v-else-if="item.icon && item.chip"
+        :size="((item.ui?.linkLeadingChipSize || props.ui?.linkLeadingChipSize || ui.linkLeadingChipSize()) as ChipProps['size'])"
+        inset
+        v-bind="typeof item.chip === 'object' ? item.chip : {}"
+        data-slot="linkLeadingChip"
+      >
+        <UIcon :name="item.icon" data-slot="linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })" />
+      </UChip>
+      <UIcon v-else-if="item.icon" :name="item.icon" data-slot="linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })" />
+    </slot>
+  </DefineLeadingTemplate>
+
+  <DefineLinkTemplate v-slot="{ item, active, index, trailingTrigger, labelIds }">
     <slot :name="((item.slot || 'item') as keyof NavigationMenuSlots<T>)" :item="item" :index="index" :active="active" :ui="ui">
-      <slot :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
-        <UAvatar v-if="item.avatar" :size="((item.ui?.linkLeadingAvatarSize || props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="linkLeadingAvatar" :class="ui.linkLeadingAvatar({ class: [props.ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active, disabled: !!item.disabled })" />
-        <UChip
-          v-else-if="item.icon && item.chip"
-          :size="((item.ui?.linkLeadingChipSize || props.ui?.linkLeadingChipSize || ui.linkLeadingChipSize()) as ChipProps['size'])"
-          inset
-          v-bind="typeof item.chip === 'object' ? item.chip : {}"
-          data-slot="linkLeadingChip"
-        >
-          <UIcon :name="item.icon" data-slot="linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })" />
-        </UChip>
-        <UIcon v-else-if="item.icon" :name="item.icon" data-slot="linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })" />
-      </slot>
+      <span v-if="labelIds?.leading" :id="labelIds.leading" class="contents">
+        <ReuseLeadingTemplate :item="item" :index="index" :active="active" />
+      </span>
+      <ReuseLeadingTemplate v-else :item="item" :index="index" :active="active" />
 
       <span
         v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>]"
+        :id="labelIds?.label"
         data-slot="linkLabel"
         :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })"
       >
@@ -438,7 +463,7 @@ function onLinkClick(e: Event) {
     </slot>
   </DefineLinkTemplate>
 
-  <DefineItemTemplate v-slot="{ item, index, level = 0, listIndex = 0 }">
+  <DefineItemTemplate v-slot="{ item, index, level = 0, listIndex = 0, labelIds }">
     <component
       :is="(props.orientation === 'vertical' && !props.collapsed) ? AccordionItem : NavigationMenuItem"
       as="li"
@@ -448,7 +473,7 @@ function onLinkClick(e: Event) {
       <div v-if="props.orientation === 'vertical' && item.type === 'label' && !props.collapsed" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
         <ReuseLinkTemplate :item="item" :index="index" :trailing-trigger="true" />
       </div>
-      <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="getItemLinkProps(item)" custom>
+      <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="getItemLinkProps(item, labelIds)" custom>
         <component
           :is="(props.orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) ? NavigationMenuTrigger : ((props.orientation === 'vertical' && item.children?.length && !props.collapsed && !(slotProps as any).href) ? AccordionTrigger : NavigationMenuLink)"
           as-child
@@ -458,7 +483,7 @@ function onLinkClick(e: Event) {
         >
           <UPopover v-if="props.orientation === 'vertical' && props.collapsed && item.children?.length && (!!props.popover || !!item.popover)" v-bind="{ ...popoverProps, ...(typeof item.popover === 'boolean' ? {} : item.popover || {}) }" :ui="{ content: ui.content({ class: [props.ui?.content, item.ui?.content] }) }">
             <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })">
-              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing-trigger="!!(slotProps as any).href" />
+              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :label-ids="labelIds" :trailing-trigger="!!(slotProps as any).href" />
             </ULinkBase>
 
             <template #content="{ close }">
@@ -495,11 +520,11 @@ function onLinkClick(e: Event) {
           </UPopover>
           <UTooltip v-else-if="(props.orientation === 'vertical' && props.collapsed && (!!props.tooltip || !!item.tooltip)) || (props.orientation === 'horizontal' && !!item.tooltip)" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
             <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })" @click="onLinkClick">
-              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing-trigger="!!(slotProps as any).href" />
+              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :label-ids="labelIds" :trailing-trigger="!!(slotProps as any).href" />
             </ULinkBase>
           </UTooltip>
           <ULinkBase v-else v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: props.orientation === 'horizontal' || level > 0 })" @click="onLinkClick">
-            <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing-trigger="!!(slotProps as any).href" />
+            <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :label-ids="labelIds" :trailing-trigger="!!(slotProps as any).href" />
           </ULinkBase>
         </component>
 
@@ -589,6 +614,7 @@ function onLinkClick(e: Event) {
           :item="item"
           :index="index"
           :list-index="listIndex"
+          :label-ids="getItemLabelIds(item, index, listIndex)"
           data-slot="item"
           :class="ui.item({ class: [props.ui?.item, item.ui?.item] })"
         />

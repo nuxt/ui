@@ -1,4 +1,4 @@
-import { nextTick } from 'vue'
+import { h, nextTick } from 'vue'
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -216,9 +216,31 @@ describe('NavigationMenu', () => {
     })
 
     const link = wrapper.get('[data-slot="link"]')
-    expect(link.text()).toContain('Beta')
-    expect(link.text()).toContain('Docs')
+    const [leadingId, labelId] = link.attributes('aria-labelledby')?.split(' ') ?? []
+    expect(leadingId && wrapper.get(`[id="${leadingId}"]`).text()).toBe('Beta')
+    expect(labelId && wrapper.get(`[id="${labelId}"]`).text()).toBe('Docs')
     expect(link.attributes('aria-label')).toBeUndefined()
+  })
+
+  it.each([
+    ['a decorative leading slot', { 'item-leading': () => h('span', { 'aria-hidden': true }, '★') }, 'Docs'],
+    ['a custom label slot', { 'item-label': () => 'Read the docs' }, 'Read the docs']
+  ] as const)('names a collapsed link with %s in the default theme', async (_name, slots, label) => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        collapsed: true,
+        items: [{ label: 'Docs', to: '/docs' }]
+      },
+      slots
+    })
+
+    const link = wrapper.get('[data-slot="link"]')
+    const labelElement = wrapper.get('[data-slot="linkLabel"]')
+    expect(labelElement.classes()).toContain('hidden')
+    expect(labelElement.text()).toBe(label)
+    expect(labelElement.attributes('id')).toBeTruthy()
+    expect(link.attributes('aria-labelledby')?.split(' ')).toContain(labelElement.attributes('id'))
   })
 
   it('passes accessibility tests', async () => {
