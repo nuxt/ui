@@ -10,7 +10,7 @@ export default defineTheme({
     wrapper: 'min-w-0 flex-1',
     title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) truncate',
     description: 'text-muted text-sm truncate',
-    actions: 'flex items-center gap-1.5 shrink-0',
+    actions: 'flex items-center gap-1.5 shrink-0 ms-auto',
     close: '-my-(--ui-control-py) -me-(--ui-control-py)',
     body: 'flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4',
     footer: 'flex items-center gap-1.5 overflow-hidden p-4',
