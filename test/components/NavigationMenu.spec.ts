@@ -1,15 +1,30 @@
-import { nextTick } from 'vue'
-import { describe, it, expect, test } from 'vitest'
+import { defineComponent, nextTick, ref } from 'vue'
+import { describe, it, expect, test, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { TooltipProvider } from 'reka-ui'
 import { renderEach } from '../component-render'
 import type { AppConfig } from '@nuxt/schema'
 import NavigationMenu from '../../src/runtime/components/NavigationMenu.vue'
+import Tooltip from '../../src/runtime/components/Tooltip.vue'
 import type { ComponentConfig } from '../../src/runtime/types/tv'
+import type { NavigationMenuItem } from '../../src/runtime/components/NavigationMenu.vue'
 import { expectSlotProps } from '../utils/types'
 import theme from '#build/ui/navigation-menu'
 
 type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>
+
+// Items with a `tooltip` mount a `UTooltip`, which requires a provider (normally `UApp`)
+const NavigationMenuWrapper = defineComponent({
+  components: {
+    TooltipProvider,
+    UNavigationMenu: NavigationMenu
+  },
+  inheritAttrs: false,
+  template: `<TooltipProvider>
+  <UNavigationMenu v-bind="$attrs" />
+</TooltipProvider>`
+})
 
 describe('NavigationMenu', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -157,12 +172,68 @@ describe('NavigationMenu', () => {
       }
     })
 
+    // Vue skips a bubbling event on handlers attached in the same millisecond it was dispatched
+    await new Promise(resolve => setTimeout(resolve, 1))
+
     const event = new MouseEvent('click', { bubbles: true, cancelable: true })
     wrapper.find('[data-slot="linkTrailing"]').element.dispatchEvent(event)
     await nextTick()
 
     expect(event.defaultPrevented).toBe(true)
     expect(wrapper.find('[data-slot="link"]').attributes('data-state')).toBe('open')
+  })
+
+  it('renders an item with a `tooltip` as a link until the tooltip loads', async () => {
+    const wrapper = await mountSuspended(NavigationMenuWrapper, {
+      props: {
+        items: [{ label: 'Docs', to: '/docs', tooltip: true }]
+      }
+    })
+
+    expect(wrapper.find('[data-slot="link"]').text()).toBe('Docs')
+
+    await vi.waitFor(() => expect(wrapper.findComponent(Tooltip).exists()).toBe(true))
+    expect(wrapper.find('[data-slot="link"]').text()).toBe('Docs')
+  })
+
+  it('loads the tooltip for items added after mount', async () => {
+    const items = ref<NavigationMenuItem[]>([])
+    const wrapper = await mountSuspended(defineComponent({
+      components: {
+        TooltipProvider,
+        UNavigationMenu: NavigationMenu
+      },
+      setup: () => ({ items }),
+      template: `<TooltipProvider>
+  <UNavigationMenu orientation="vertical" collapsed tooltip :items="items" />
+</TooltipProvider>`
+    }))
+
+    items.value = [{ label: 'Docs', icon: 'i-lucide-book-open', to: '/docs' }]
+
+    await vi.waitFor(() => expect(wrapper.findComponent(Tooltip).exists()).toBe(true))
+  })
+
+  it('keeps the links when the tooltip fails to load', async () => {
+    vi.resetModules()
+    vi.doMock('../../src/runtime/components/Tooltip.vue', () => {
+      throw new Error('offline')
+    })
+
+    try {
+      const { default: FreshNavigationMenu } = await import('../../src/runtime/components/NavigationMenu.vue')
+      const wrapper = await mountSuspended(FreshNavigationMenu, {
+        props: {
+          items: [{ label: 'Docs', to: '/docs', tooltip: true }]
+        }
+      })
+
+      await new Promise(resolve => setTimeout(resolve, 50))
+
+      expect(wrapper.find('[data-slot="link"]').text()).toBe('Docs')
+    } finally {
+      vi.doUnmock('../../src/runtime/components/Tooltip.vue')
+    }
   })
 
   it('passes accessibility tests', async () => {

@@ -234,10 +234,16 @@ export type NavigationMenuSlots<
 & DynamicSlots<MergeTypes<T>, 'label', { index: number, active: boolean, ui: NavigationMenu['ui'] }>
 & DynamicSlots<MergeTypes<T>, 'leading' | 'trailing' | 'content', { index: number, active: boolean, ui: NavigationMenu['ui'] }>
 
+type PopoverComponent = typeof import('./Popover.vue').default
+type TooltipComponent = typeof import('./Tooltip.vue').default
+
+// Shared by every menu once loaded, so a menu mounted afterwards renders them right away
+let Popover: PopoverComponent | undefined
+let Tooltip: TooltipComponent | undefined
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<NavigationMenuItem>, K extends SingleOrMultipleType = SingleOrMultipleType, O extends Orientation = Orientation">
-import { computed, defineAsyncComponent, toRef, onMounted, onBeforeUnmount } from 'vue'
+import { computed, shallowRef, toRef, watch, onMounted, onBeforeUnmount } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
@@ -320,30 +326,41 @@ const lists = computed<NavigationMenuItem[][]>(() =>
     : []
 )
 
-const loadPopover = () => import('./Popover.vue')
-const loadTooltip = () => import('./Tooltip.vue')
+// Only the items of a collapsed vertical menu and the horizontal items with a `tooltip` render them, so they load once
+// idle after mount. Until then, or if loading fails, these items render as plain links.
+const UPopover = shallowRef<PopoverComponent>()
+const UTooltip = shallowRef<TooltipComponent>()
 
-// Only the items of a collapsed vertical menu and the horizontal items with a `tooltip` render them, so most menus
-// never load them.
-const UPopover = defineAsyncComponent(loadPopover)
-const UTooltip = defineAsyncComponent(loadTooltip)
+function hasPopover(item: NavigationMenuItem) {
+  return props.orientation === 'vertical' && !!item.children?.length && (!!props.popover || !!item.popover)
+}
 
-// A vertical menu that can show them preloads them once idle, so its items don't wait for them when it collapses.
+function hasTooltip(item: NavigationMenuItem) {
+  return props.orientation === 'vertical' ? !hasPopover(item) && (!!props.tooltip || !!item.tooltip) : !!item.tooltip
+}
+
+const needsPopover = computed(() => lists.value.some(list => list.some(hasPopover)))
+const needsTooltip = computed(() => lists.value.some(list => list.some(hasTooltip)))
+
 let idleId: ReturnType<typeof requestIdleCallback>
 
 onMounted(() => {
-  if (props.orientation !== 'vertical') return
+  watch([needsPopover, needsTooltip], ([popover, tooltip]) => {
+    if (popover) UPopover.value ||= Popover
+    if (tooltip) UTooltip.value ||= Tooltip
 
-  const items = lists.value.flat()
-  const popover = !!props.popover || items.some(item => item.popover)
-  const tooltip = !!props.tooltip || items.some(item => item.tooltip)
+    if ((!popover || UPopover.value) && (!tooltip || UTooltip.value)) return
 
-  if (!popover && !tooltip) return
-
-  idleId = requestIdleCallback(() => {
-    if (popover) loadPopover().catch(() => {})
-    if (tooltip) loadTooltip().catch(() => {})
-  })
+    cancelIdleCallback(idleId)
+    idleId = requestIdleCallback(() => {
+      if (popover && !UPopover.value) {
+        import('./Popover.vue').then(module => UPopover.value = Popover = module.default).catch(() => {})
+      }
+      if (tooltip && !UTooltip.value) {
+        import('./Tooltip.vue').then(module => UTooltip.value = Tooltip = module.default).catch(() => {})
+      }
+    })
+  }, { immediate: true })
 })
 
 onBeforeUnmount(() => {
@@ -463,7 +480,7 @@ function onLinkClick(e: Event) {
           :disabled="item.disabled"
           @select="item.onSelect"
         >
-          <UPopover v-if="props.orientation === 'vertical' && props.collapsed && item.children?.length && (!!props.popover || !!item.popover)" v-bind="{ ...popoverProps, ...(typeof item.popover === 'boolean' ? {} : item.popover || {}) }" :ui="{ content: ui.content({ class: [props.ui?.content, item.ui?.content] }) }">
+          <UPopover v-if="UPopover && props.orientation === 'vertical' && props.collapsed && item.children?.length && (!!props.popover || !!item.popover)" v-bind="{ ...popoverProps, ...(typeof item.popover === 'boolean' ? {} : item.popover || {}) }" :ui="{ content: ui.content({ class: [props.ui?.content, item.ui?.content] }) }">
             <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })">
               <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing-trigger="!!(slotProps as any).href" />
             </ULinkBase>
@@ -500,12 +517,12 @@ function onLinkClick(e: Event) {
               </slot>
             </template>
           </UPopover>
-          <UTooltip v-else-if="(props.orientation === 'vertical' && props.collapsed && (!!props.tooltip || !!item.tooltip)) || (props.orientation === 'horizontal' && !!item.tooltip)" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
+          <UTooltip v-else-if="UTooltip && ((props.orientation === 'vertical' && props.collapsed && (!!props.tooltip || !!item.tooltip)) || (props.orientation === 'horizontal' && !!item.tooltip))" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
             <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })" @click="onLinkClick">
               <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing-trigger="!!(slotProps as any).href" />
             </ULinkBase>
           </UTooltip>
-          <ULinkBase v-else v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: props.orientation === 'horizontal' || level > 0 })" @click="onLinkClick">
+          <ULinkBase v-else v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: (props.orientation === 'horizontal' && !item.tooltip) || level > 0 })" @click="onLinkClick">
             <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :trailing-trigger="!!(slotProps as any).href" />
           </ULinkBase>
         </component>
