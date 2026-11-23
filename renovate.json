@@ -31,6 +31,15 @@
         "peerDependencies"
       ],
       "enabled": false
+    },
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchDepNames": [
+        "node"
+      ],
+      "enabled": false
     }
   ]
 }
