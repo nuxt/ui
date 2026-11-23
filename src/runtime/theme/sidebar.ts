@@ -6,7 +6,8 @@ export default defineTheme({
     gap: 'relative w-(--sidebar-width) bg-transparent',
     container: 'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width)',
     inner: 'flex size-full flex-col overflow-hidden divide-y divide-default',
-    header: 'flex items-center gap-1.5 overflow-hidden px-4 py-[calc((var(--ui-header-height)-1lh)/2)] min-h-(--ui-header-height)',
+    // One line of the title in the header height, less the 1px divider under it
+    header: 'flex items-center gap-1.5 overflow-hidden px-4 py-[calc((var(--ui-header-height)-1lh-1px)/2)] min-h-(--ui-header-height)',
     wrapper: 'min-w-0 flex-1',
     title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) truncate',
     description: 'text-muted text-sm truncate',

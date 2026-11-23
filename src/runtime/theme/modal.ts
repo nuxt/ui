@@ -4,7 +4,8 @@ export default defineTheme({
   slots: {
     overlay: 'fixed inset-0',
     content: 'bg-overlay divide-y divide-default flex flex-col focus:outline-none',
-    header: 'flex items-center gap-1.5 px-(--ui-gutter) py-[calc((var(--ui-header-height)-1lh)/2)] min-h-(--ui-header-height)',
+    // One line of the title in the header height, less the 1px divider under it
+    header: 'flex items-center gap-1.5 px-(--ui-gutter) py-[calc((var(--ui-header-height)-1lh-1px)/2)] min-h-(--ui-header-height)',
     wrapper: 'min-w-0 flex-1',
     body: 'flex-1 p-(--ui-gutter)',
     footer: 'flex items-center gap-1.5 px-(--ui-gutter) py-4',
