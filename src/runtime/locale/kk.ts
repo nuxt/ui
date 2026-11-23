@@ -111,7 +111,7 @@ export default defineLocale<Messages>({
       label: 'Эмодзилер'
     },
     editorMentionMenu: {
-      label: 'Атаулар'
+      label: 'Белгілеулер'
     },
     editorSuggestionMenu: {
       label: 'Ұсыныстар'

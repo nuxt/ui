@@ -111,7 +111,7 @@ export default defineLocale<Messages>({
       label: 'Emojilar'
     },
     editorMentionMenu: {
-      label: 'Eslatmalar'
+      label: 'Tilga olishlar'
     },
     editorSuggestionMenu: {
       label: 'Takliflar'

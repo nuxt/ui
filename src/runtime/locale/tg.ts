@@ -111,7 +111,7 @@ export default defineLocale<Messages>({
       label: 'Эмодзиҳо'
     },
     editorMentionMenu: {
-      label: 'Ёдовариҳо'
+      label: 'Зикрҳо'
     },
     editorSuggestionMenu: {
       label: 'Пешниҳодҳо'
