@@ -121,7 +121,7 @@ function openSlideover() {
       title="Slideover with custom close button"
       description="The `close` prop inherits from the Button props."
       :close="{ color: 'primary', variant: 'solid', size: 'xs' }"
-      :ui="{ close: 'top-3.5 rounded-full' }"
+      :ui="{ close: 'rounded-full' }"
       :side="side"
       :inset="inset"
     >

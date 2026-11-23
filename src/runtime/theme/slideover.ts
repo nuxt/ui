@@ -5,12 +5,13 @@ export default defineTheme({
     overlay: 'fixed inset-0 bg-backdrop',
     content: 'fixed bg-overlay divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none',
     header: 'flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)',
-    wrapper: '',
+    wrapper: 'min-w-0 flex-1',
     body: 'flex-1 overflow-y-auto p-(--ui-gutter)',
     footer: 'flex items-center gap-1.5 px-(--ui-gutter) py-4',
     title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))',
     description: 'mt-1 text-muted text-sm',
-    close: 'absolute top-4 inset-e-4'
+    actions: 'flex items-center gap-1.5 shrink-0 ms-auto',
+    close: ''
   },
   variants: {
     side: {

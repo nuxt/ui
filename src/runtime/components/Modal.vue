@@ -192,22 +192,24 @@ const ui = computed(() => tv(theme, overrides.value)({
                 </DialogDescription>
               </div>
 
-              <slot name="actions" />
+              <div v-if="!!slots.actions || props.close || !!slots.close" data-slot="modal-actions" :class="ui.actions({ class: props.ui?.actions })">
+                <slot name="actions" />
 
-              <DialogClose v-if="props.close || !!slots.close" as-child>
-                <slot name="close" :ui="ui">
-                  <UButton
-                    v-if="props.close"
-                    :icon="props.closeIcon || appConfig.ui.icons.close"
-                    color="neutral"
-                    variant="ghost"
-                    :aria-label="t('modal.close')"
-                    v-bind="(typeof props.close === 'object' ? props.close : {})"
-                    data-slot="modal-close"
-                    :class="ui.close({ class: props.ui?.close })"
-                  />
-                </slot>
-              </DialogClose>
+                <DialogClose v-if="props.close || !!slots.close" as-child>
+                  <slot name="close" :ui="ui">
+                    <UButton
+                      v-if="props.close"
+                      :icon="props.closeIcon || appConfig.ui.icons.close"
+                      color="neutral"
+                      variant="ghost"
+                      :aria-label="t('modal.close')"
+                      v-bind="(typeof props.close === 'object' ? props.close : {})"
+                      data-slot="modal-close"
+                      :class="ui.close({ class: props.ui?.close })"
+                    />
+                  </slot>
+                </DialogClose>
+              </div>
             </slot>
           </div>
 

@@ -89,7 +89,7 @@ function showToast() {
       <UButton label="Open without close button" color="neutral" variant="subtle" />
     </UModal>
 
-    <UModal title="Modal with custom close button" description="The `close` prop inherits from the Button props." :close="{ color: 'primary', variant: 'solid', size: 'xs' }" :ui="{ close: 'top-3.5 rounded-full' }">
+    <UModal title="Modal with custom close button" description="The `close` prop inherits from the Button props." :close="{ color: 'primary', variant: 'solid', size: 'xs' }" :ui="{ close: 'rounded-full' }">
       <UButton label="Open with custom close button" color="neutral" variant="outline" />
     </UModal>
 
