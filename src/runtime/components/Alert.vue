@@ -45,7 +45,7 @@ export interface AlertProps {
   actions?: ButtonProps[]
   /**
    * Display a close button to dismiss the alert.
-   * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
+   * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @emits 'update:open'
    * @defaultValue false
    */
@@ -142,7 +142,8 @@ const ui = computed(() => tv(theme, overrides.value)({
           v-if="props.close"
           :icon="props.closeIcon || appConfig.ui.icons.close"
           color="neutral"
-          variant="link"
+          variant="ghost"
+          size="xs"
           :aria-label="t('alert.close')"
           v-bind="(typeof props.close === 'object' ? props.close : {})"
           data-slot="alert-close"

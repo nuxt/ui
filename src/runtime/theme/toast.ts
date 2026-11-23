@@ -11,7 +11,7 @@ export default defineTheme({
     avatar: 'shrink-0',
     actions: 'flex gap-1.5 shrink-0',
     progress: 'absolute inset-x-0 bottom-0',
-    close: 'p-0'
+    close: '-my-(--ui-control-py) -me-(--ui-control-py)'
   },
   variants: {
     color: colorVariant({ root: '' }),

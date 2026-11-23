@@ -102,7 +102,7 @@ export interface FileUploadProps<M extends boolean = false, T extends FileUpload
   /**
    * Configure the delete button for the file.
    * When `layout` is `grid`, the default is `{ color: 'neutral', variant: 'solid', size: 'xs' }`{lang="ts-type"}
-   * When `layout` is `list`, the default is `{ color: 'neutral', variant: 'link' }`{lang="ts-type"}
+   * When `layout` is `list`, the default is `{ color: 'neutral', variant: 'ghost', size: 'xs' }`{lang="ts-type"}
    */
   fileDelete?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
@@ -365,8 +365,8 @@ defineExpose({
                       variant: 'solid',
                       size: 'xs'
                     } : {
-                      variant: 'link',
-                      size
+                      variant: 'ghost',
+                      size: 'xs'
                     }),
                     ...typeof props.fileDelete === 'object' ? props.fileDelete : undefined
                   }"
