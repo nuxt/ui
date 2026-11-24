@@ -9,11 +9,12 @@ exports[`Modal > renders with actions slot correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0"></h2><p id="reka-dialog-description-v-0-0-1"></p></span>
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <!--v-if-->Actions slot<button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+    <!--v-if-->
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start">Actions slot<button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -34,11 +35,12 @@ exports[`Modal > renders with body slot correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0"></h2><p id="reka-dialog-description-v-0-0-1"></p></span>
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <!--v-if--><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)] min-h-0 py-[calc((var(--ui-header-height)-1lh-1px)/2)_0] border-b-0">
+    <!--v-if-->
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <div data-slot="modal-body" class="flex-1 p-(--ui-gutter) overflow-y-auto">Body slot</div>
   <!--v-if-->
@@ -59,11 +61,12 @@ exports[`Modal > renders with class correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden bg-soft" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0"></h2><p id="reka-dialog-description-v-0-0-1"></p></span>
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <!--v-if--><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)] min-h-0 py-[calc((var(--ui-header-height)-1lh-1px)/2)_0] border-b-0">
+    <!--v-if-->
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -84,8 +87,9 @@ exports[`Modal > renders with close slot correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0"></h2><p id="reka-dialog-description-v-0-0-1"></p></span>
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <!--v-if-->Close slot
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)] min-h-0 py-[calc((var(--ui-header-height)-1lh-1px)/2)_0] border-b-0">
+    <!--v-if-->
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start">Close slot</div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -106,11 +110,12 @@ exports[`Modal > renders with closeIcon correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0"></h2><p id="reka-dialog-description-v-0-0-1"></p></span>
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <!--v-if--><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:trash shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)] min-h-0 py-[calc((var(--ui-header-height)-1lh-1px)/2)_0] border-b-0">
+    <!--v-if-->
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:trash shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -147,11 +152,12 @@ exports[`Modal > renders with default slot correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="reka-dialog-content-v-0-0-0" role="dialog" aria-describedby="reka-dialog-description-v-0-0-2" aria-labelledby="reka-dialog-title-v-0-0-1" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-1"></h2><p id="reka-dialog-description-v-0-0-2"></p></span>
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <!--v-if--><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)] min-h-0 py-[calc((var(--ui-header-height)-1lh-1px)/2)_0] border-b-0">
+    <!--v-if-->
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -173,14 +179,15 @@ exports[`Modal > renders with description correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <div data-slot="modal-wrapper" class="">
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+    <div data-slot="modal-wrapper" class="min-w-0 flex-1">
       <h2 id="reka-dialog-title-v-0-0-0" data-slot="modal-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title</h2>
       <p id="reka-dialog-description-v-0-0-1" data-slot="modal-description" class="mt-1 text-muted text-sm">Description</p>
-    </div><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+    </div>
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -201,14 +208,15 @@ exports[`Modal > renders with description slot correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0"></h2><!--v-if--></span>
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <div data-slot="modal-wrapper" class="">
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+    <div data-slot="modal-wrapper" class="min-w-0 flex-1">
       <!--v-if-->
       <p id="reka-dialog-description-v-0-0-1" data-slot="modal-description" class="mt-1 text-muted text-sm">Description slot</p>
-    </div><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+    </div>
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -229,11 +237,12 @@ exports[`Modal > renders with footer slot correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0"></h2><p id="reka-dialog-description-v-0-0-1"></p></span>
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <!--v-if--><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)] min-h-0 py-[calc((var(--ui-header-height)-1lh-1px)/2)_0] border-b-0">
+    <!--v-if-->
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <div data-slot="modal-footer" class="flex items-center gap-1.5 px-(--ui-gutter) py-4">Footer slot</div>
@@ -255,14 +264,15 @@ exports[`Modal > renders with fullscreen correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] inset-0 fixed" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <div data-slot="modal-wrapper" class="">
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+    <div data-slot="modal-wrapper" class="min-w-0 flex-1">
       <h2 id="reka-dialog-title-v-0-0-0" data-slot="modal-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title</h2>
       <p id="reka-dialog-description-v-0-0-1" data-slot="modal-description" class="mt-1 text-muted text-sm">Description</p>
-    </div><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+    </div>
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -283,7 +293,7 @@ exports[`Modal > renders with header slot correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0"></h2><p id="reka-dialog-description-v-0-0-1"></p></span>
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">Header slot</div>
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">Header slot</div>
   <!--v-if-->
   <!--v-if-->
 </div>
@@ -303,11 +313,12 @@ exports[`Modal > renders with open correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" style="pointer-events: auto;"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0"></h2><p id="reka-dialog-description-v-0-0-1"></p></span>
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <!--v-if--><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)] min-h-0 py-[calc((var(--ui-header-height)-1lh-1px)/2)_0] border-b-0">
+    <!--v-if-->
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -328,14 +339,15 @@ exports[`Modal > renders with scrollable and fullscreen correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop overflow-y-auto">
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] inset-0 relative" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
     <!--v-if-->
-    <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-      <div data-slot="modal-wrapper" class="">
+    <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+      <div data-slot="modal-wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0-0-0" data-slot="modal-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title</h2>
         <p id="reka-dialog-description-v-0-0-1" data-slot="modal-description" class="mt-1 text-muted text-sm">Description</p>
-      </div><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-        <!--v-if-->
-        <!--v-if-->
-      </button>
+      </div>
+      <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+          <!--v-if-->
+          <!--v-if-->
+        </button></div>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -356,14 +368,15 @@ exports[`Modal > renders with scrollable and without overlay correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] overflow-y-auto grid place-items-center p-4 sm:py-8">
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default relative" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
     <!--v-if-->
-    <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-      <div data-slot="modal-wrapper" class="">
+    <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+      <div data-slot="modal-wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0-0-0" data-slot="modal-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title</h2>
         <p id="reka-dialog-description-v-0-0-1" data-slot="modal-description" class="mt-1 text-muted text-sm">Description</p>
-      </div><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-        <!--v-if-->
-        <!--v-if-->
-      </button>
+      </div>
+      <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+          <!--v-if-->
+          <!--v-if-->
+        </button></div>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -384,14 +397,15 @@ exports[`Modal > renders with scrollable correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop overflow-y-auto grid place-items-center p-4 sm:py-8">
   <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default relative" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
     <!--v-if-->
-    <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-      <div data-slot="modal-wrapper" class="">
+    <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+      <div data-slot="modal-wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0-0-0" data-slot="modal-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title</h2>
         <p id="reka-dialog-description-v-0-0-1" data-slot="modal-description" class="mt-1 text-muted text-sm">Description</p>
-      </div><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-        <!--v-if-->
-        <!--v-if-->
-      </button>
+      </div>
+      <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+          <!--v-if-->
+          <!--v-if-->
+        </button></div>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -412,14 +426,15 @@ exports[`Modal > renders with title correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><!--v-if--><p id="reka-dialog-description-v-0-0-1"></p></span>
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <div data-slot="modal-wrapper" class="">
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+    <div data-slot="modal-wrapper" class="min-w-0 flex-1">
       <h2 id="reka-dialog-title-v-0-0-0" data-slot="modal-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title</h2>
       <!--v-if-->
-    </div><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+    </div>
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -440,14 +455,15 @@ exports[`Modal > renders with title slot correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><!--v-if--><p id="reka-dialog-description-v-0-0-1"></p></span>
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <div data-slot="modal-wrapper" class="">
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+    <div data-slot="modal-wrapper" class="min-w-0 flex-1">
       <h2 id="reka-dialog-title-v-0-0-0" data-slot="modal-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title slot</h2>
       <!--v-if-->
-    </div><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+    </div>
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -468,11 +484,12 @@ exports[`Modal > renders with ui correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0"></h2><p id="reka-dialog-description-v-0-0-1"></p></span>
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <!--v-if--><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 end-2"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)] min-h-0 py-[calc((var(--ui-header-height)-1lh-1px)/2)_0] border-b-0">
+    <!--v-if-->
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py) end-2"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -494,8 +511,8 @@ exports[`Modal > renders without close correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <div data-slot="modal-wrapper" class="">
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+    <div data-slot="modal-wrapper" class="min-w-0 flex-1">
       <h2 id="reka-dialog-title-v-0-0-0" data-slot="modal-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title</h2>
       <p id="reka-dialog-description-v-0-0-1" data-slot="modal-description" class="mt-1 text-muted text-sm">Description</p>
     </div>
@@ -521,14 +538,15 @@ exports[`Modal > renders without overlay correctly 1`] = `
 <!--v-if-->
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <div data-slot="modal-wrapper" class="">
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+    <div data-slot="modal-wrapper" class="min-w-0 flex-1">
       <h2 id="reka-dialog-title-v-0-0-0" data-slot="modal-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title</h2>
       <p id="reka-dialog-description-v-0-0-1" data-slot="modal-description" class="mt-1 text-muted text-sm">Description</p>
-    </div><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+    </div>
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <!--v-if-->
@@ -550,14 +568,15 @@ exports[`Modal > renders without transition correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 bg-backdrop"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div data-slot="modal-header" class="flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)">
-    <div data-slot="modal-wrapper" class="">
+  <div data-slot="modal-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+    <div data-slot="modal-wrapper" class="min-w-0 flex-1">
       <h2 id="reka-dialog-title-v-0-0-0" data-slot="modal-title" class="text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))">Title</h2>
       <p id="reka-dialog-description-v-0-0-1" data-slot="modal-description" class="mt-1 text-muted text-sm">Description</p>
-    </div><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-md)] [--ui-control-py:var(--ui-control-py-md)] [--ui-control-gap:var(--ui-control-gap-md)] [--ui-control-icon-size:var(--ui-control-icon-size-md)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-md)/(--ui-control-text-md--line-height) px-(--ui-control-py) absolute top-4 inset-e-4"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
+    </div>
+    <div data-slot="modal-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="modal-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><span class="iconify i-lucide:x shrink-0 size-(--ui-control-icon-size)" aria-hidden="true" data-slot="button-leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
   </div>
   <!--v-if-->
   <!--v-if-->

@@ -4,15 +4,23 @@ export default defineTheme({
   slots: {
     overlay: 'fixed inset-0',
     content: 'bg-overlay divide-y divide-default flex flex-col focus:outline-none',
-    header: 'flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height)',
-    wrapper: '',
+    // With a description, the title line sits where it would alone, so the close stays on it
+    header: 'group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]',
+    wrapper: 'min-w-0 flex-1',
     body: 'flex-1 p-(--ui-gutter)',
     footer: 'flex items-center gap-1.5 px-(--ui-gutter) py-4',
     title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))',
     description: 'mt-1 text-muted text-sm',
-    close: 'absolute top-4 inset-e-4'
+    actions: 'flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start',
+    close: '-my-(--ui-control-py) -me-(--ui-control-py)'
   },
   variants: {
+    // A header with only the close keeps it on the title line but drops its divider and bottom padding
+    title: {
+      false: {
+        header: 'min-h-0 py-[calc((var(--ui-header-height)-1lh-1px)/2)_0] border-b-0'
+      }
+    },
     transition: {
       true: {
         overlay: 'data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]',

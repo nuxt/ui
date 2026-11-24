@@ -56,7 +56,7 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'modal' | 'open' | 'd
   portal?: boolean | string | HTMLElement
   /**
    * Display a close button to dismiss the drawer.
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue false
    */
   close?: boolean | Omit<ButtonProps, LinkPropsKeys>
@@ -312,6 +312,7 @@ const ui = computed(() => tv(theme, overrides.value)({
                           :icon="props.closeIcon || appConfig.ui.icons.close"
                           color="neutral"
                           variant="ghost"
+                          size="xs"
                           :aria-label="t('drawer.close')"
                           v-bind="(typeof props.close === 'object' ? props.close : {})"
                           data-slot="drawer-close"

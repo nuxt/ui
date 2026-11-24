@@ -43,7 +43,7 @@ export interface SlideoverProps extends DialogRootProps {
   portal?: boolean | string | HTMLElement
   /**
    * Display a close button to dismiss the slideover.
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
   close?: boolean | Omit<ButtonProps, LinkPropsKeys>
@@ -134,6 +134,9 @@ const contentEvents = computed(() => {
   }
 })
 
+// A function and not a computed: slots aren't reactive in production, so it reads them on each render
+const hasTitle = () => !!slots.header || !!(props.title || slots.title) || !!(props.description || slots.description) || !!slots.actions
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
   transition: props.transition,
@@ -181,7 +184,7 @@ const ui = computed(() => tv(theme, overrides.value)({
           </VisuallyHidden>
 
           <slot name="content" :close="close">
-            <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || (props.close || !!slots.close)" data-slot="slideover-header" :class="ui.header({ class: props.ui?.header })">
+            <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || (props.close || !!slots.close) || !!slots.actions" data-slot="slideover-header" :class="ui.header({ class: props.ui?.header, title: hasTitle() })">
               <slot name="header" :close="close">
                 <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="slideover-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
                   <DialogTitle v-if="props.title || !!slots.title" data-slot="slideover-title" :class="ui.title({ class: props.ui?.title })">
@@ -197,22 +200,25 @@ const ui = computed(() => tv(theme, overrides.value)({
                   </DialogDescription>
                 </div>
 
-                <slot name="actions" />
+                <div v-if="!!slots.actions || props.close || !!slots.close" data-slot="slideover-actions" :class="ui.actions({ class: props.ui?.actions })">
+                  <slot name="actions" />
 
-                <DialogClose v-if="props.close || !!slots.close" as-child>
-                  <slot name="close" :ui="ui">
-                    <UButton
-                      v-if="props.close"
-                      :icon="props.closeIcon || appConfig.ui.icons.close"
-                      color="neutral"
-                      variant="ghost"
-                      :aria-label="t('slideover.close')"
-                      v-bind="(typeof props.close === 'object' ? props.close : {})"
-                      data-slot="slideover-close"
-                      :class="ui.close({ class: props.ui?.close })"
-                    />
-                  </slot>
-                </DialogClose>
+                  <DialogClose v-if="props.close || !!slots.close" as-child>
+                    <slot name="close" :ui="ui">
+                      <UButton
+                        v-if="props.close"
+                        :icon="props.closeIcon || appConfig.ui.icons.close"
+                        color="neutral"
+                        variant="ghost"
+                        size="xs"
+                        :aria-label="t('slideover.close')"
+                        v-bind="(typeof props.close === 'object' ? props.close : {})"
+                        data-slot="slideover-close"
+                        :class="ui.close({ class: props.ui?.close })"
+                      />
+                    </slot>
+                  </DialogClose>
+                </div>
               </slot>
             </div>
 

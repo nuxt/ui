@@ -51,7 +51,7 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
   /**
    * Display a close button to collapse the sidebar.
    * Only renders when `collapsible` is not `none`.
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue false
    */
   close?: boolean | Omit<ButtonProps, LinkPropsKeys>
@@ -202,6 +202,8 @@ function closeSidebar() {
   open.value = false
 }
 
+// A function and not a computed: slots aren't reactive in production, so it reads them on each render
+const hasTitle = () => !!slots.header || !!(props.title || slots.title) || !!(props.description || slots.description) || !!slots.actions
 const hasHeader = computed(() => !!slots.header || props.title || !!slots.title || props.description || !!slots.description || !!slots.actions || canClose.value || !!slots.close)
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -237,7 +239,7 @@ const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as Modal
 
 <template>
   <DefineContentTemplate>
-    <div v-if="hasHeader" data-slot="sidebar-header" :class="ui.header({ class: props.ui?.header })">
+    <div v-if="hasHeader" data-slot="sidebar-header" :class="ui.header({ class: props.ui?.header, title: hasTitle() })">
       <slot name="header" :state="state" :open="open" :close="closeSidebar">
         <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="sidebar-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
           <p v-if="props.title || !!slots.title" data-slot="sidebar-title" :class="ui.title({ class: props.ui?.title })">
@@ -253,7 +255,7 @@ const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as Modal
           </p>
         </div>
 
-        <div v-if="!!slots.actions || canClose" data-slot="sidebar-actions" :class="ui.actions({ class: props.ui?.actions })">
+        <div v-if="!!slots.actions || canClose || !!slots.close" data-slot="sidebar-actions" :class="ui.actions({ class: props.ui?.actions })">
           <slot name="actions" :state="state" />
 
           <slot name="close" :state="state" :ui="ui">
@@ -262,6 +264,7 @@ const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as Modal
               :icon="props.closeIcon || appConfig.ui.icons.close"
               color="neutral"
               variant="ghost"
+              size="xs"
               :aria-label="t('sidebar.close')"
               v-bind="(typeof props.close === 'object' ? props.close : {})"
               data-slot="sidebar-close"
