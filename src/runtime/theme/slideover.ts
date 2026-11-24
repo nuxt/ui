@@ -15,10 +15,10 @@ export default defineTheme({
     close: '-my-(--ui-control-py) -me-(--ui-control-py)'
   },
   variants: {
-    // Without a header, the actions row with the close sits in the corner of the content, the close icon on the gutter
-    header: {
+    // A header with only the close keeps it on the title line but drops its divider and bottom padding
+    title: {
       false: {
-        actions: 'absolute top-(--ui-gutter) inset-e-(--ui-gutter) min-h-0'
+        header: 'min-h-0 py-[calc((var(--ui-header-height)-1lh-1px)/2)_0] border-b-0'
       }
     },
     side: {

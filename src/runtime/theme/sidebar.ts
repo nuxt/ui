@@ -18,6 +18,12 @@ export default defineTheme({
     rail: 'absolute inset-y-0 z-20 hidden w-4 after:absolute after:inset-y-0 after:left-1/2 after:w-px hover:after:bg-(--ui-border-strong) after:transition-colors'
   },
   variants: {
+    // A header with only the close keeps it on the title line but drops its divider and bottom padding
+    title: {
+      false: {
+        header: 'min-h-0 py-[calc((var(--ui-header-height)-1lh-1px)/2)_0] border-b-0'
+      }
+    },
     transition: {
       true: {
         gap: 'transition-[width] duration-200 ease-out motion-reduce:transition-none',

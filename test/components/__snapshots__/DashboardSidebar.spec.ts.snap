@@ -201,7 +201,6 @@ exports[`DashboardSidebar > renders with mode modal correctly 1`] = `
   </div>
   <!--v-if-->
   <!---->
-  <!---->
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 bg-backdrop lg:hidden"></div>
@@ -230,7 +229,6 @@ exports[`DashboardSidebar > renders with mode slideover correctly 1`] = `
     <!--v-if-->
   </div>
   <!--v-if-->
-  <!---->
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" data-slot="slideover-overlay" class="fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] lg:hidden"></div>
@@ -333,7 +331,6 @@ exports[`DashboardSidebar > renders with toggleSide correctly 1`] = `
     <!--v-if-->
   </div>
   <!--v-if-->
-  <!---->
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" data-slot="slideover-overlay" class="fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] lg:hidden"></div>

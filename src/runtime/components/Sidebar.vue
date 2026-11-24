@@ -202,6 +202,8 @@ function closeSidebar() {
   open.value = false
 }
 
+// A function and not a computed: slots aren't reactive in production, so it reads them on each render
+const hasTitle = () => !!slots.header || !!(props.title || slots.title) || !!(props.description || slots.description) || !!slots.actions
 const hasHeader = computed(() => !!slots.header || props.title || !!slots.title || props.description || !!slots.description || !!slots.actions || canClose.value || !!slots.close)
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -237,7 +239,7 @@ const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as Modal
 
 <template>
   <DefineContentTemplate>
-    <div v-if="hasHeader" data-slot="sidebar-header" :class="ui.header({ class: props.ui?.header })">
+    <div v-if="hasHeader" data-slot="sidebar-header" :class="ui.header({ class: props.ui?.header, title: hasTitle() })">
       <slot name="header" :state="state" :open="open" :close="closeSidebar">
         <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="sidebar-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
           <p v-if="props.title || !!slots.title" data-slot="sidebar-title" :class="ui.title({ class: props.ui?.title })">
