@@ -70,7 +70,7 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Voltar',
       close: 'Fechar',
-      filterPlaceholder: 'Digite um comando ou pesquise…',
+      filterPlaceholder: 'Escreva um comando ou pesquise…',
       noData: 'Sem dados',
       noMatch: 'Nenhum dado correspondente',
 

@@ -159,7 +159,7 @@ export default defineLocale<Messages>({
       timeZoneName: 'zona horària'
     },
     listbox: {
-      filterPlaceholder: 'Cerca…',
+      filterPlaceholder: 'Cercar…',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents'
     },
@@ -206,7 +206,7 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Crear "{label}"',
-      filterPlaceholder: 'Cerca…',
+      filterPlaceholder: 'Cercar…',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents'
     },

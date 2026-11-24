@@ -70,7 +70,7 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'უკან',
       close: 'დახურვა',
-      filterPlaceholder: 'ჩაწერეთ ბრძანება ან ძიება…',
+      filterPlaceholder: 'ჩაწერეთ ბრძანება ან მოძებნეთ…',
       noData: 'მონაცემები არ არის',
       noMatch: 'შესატყვისი მონაცემები არ არის',
 

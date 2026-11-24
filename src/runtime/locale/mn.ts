@@ -70,7 +70,7 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Буцах',
       close: 'Хаах',
-      filterPlaceholder: 'Комманд бичих эсвэл хайлт хийх…',
+      filterPlaceholder: 'Команд бичих эсвэл хайлт хийх…',
       noData: 'Мэдээлэл байхгүй',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
 

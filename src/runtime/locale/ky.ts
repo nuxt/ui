@@ -70,7 +70,7 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Артка',
       close: 'Жабуу',
-      filterPlaceholder: 'Буйрук киргизиңиз же издөө…',
+      filterPlaceholder: 'Буйрук киргизиңиз же издеңиз…',
       noData: 'Маалымат жок',
       noMatch: 'Эч нерсе табылган жок',
 
