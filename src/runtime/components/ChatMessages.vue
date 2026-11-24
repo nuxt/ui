@@ -407,7 +407,7 @@ defineExpose({
   >
     <DefineViewportTemplate>
       <Presence :present="showAutoScroll">
-        <div :data-state="showAutoScroll ? 'open' : 'closed'" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+        <div :data-state="showAutoScroll ? 'open' : 'closed'" data-slot="chat-messages-viewport" :class="ui.viewport({ class: props.ui?.viewport })">
           <slot name="viewport" :ui="ui" :on-click="onAutoScrollClick">
             <UButton
               v-if="props.autoScroll"
@@ -416,7 +416,7 @@ defineExpose({
               variant="outline"
               :aria-label="t('chatMessages.autoScroll')"
               v-bind="(typeof props.autoScroll === 'object' ? props.autoScroll : {})"
-              data-slot="autoScroll"
+              data-slot="chat-messages-autoScroll"
               :class="ui.autoScroll({ class: props.ui?.autoScroll })"
               @click="onAutoScrollClick"
             />
@@ -460,7 +460,7 @@ defineExpose({
 
     <ReuseViewportTemplate v-if="!slots.footer" />
 
-    <div v-else ref="footerRef" aria-live="off" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-else ref="footerRef" aria-live="off" data-slot="chat-messages-footer" :class="ui.footer({ class: props.ui?.footer })">
       <!-- Anchored to the footer, out of the flow so it doesn't add a gap while it shows -->
       <ReuseViewportTemplate />
 

@@ -419,7 +419,7 @@ defineExpose({
         />
       </div>
 
-      <div v-if="props.dots" role="tablist" :aria-label="t('carousel.dots')" data-slot="dots" :class="ui.dots({ class: props.ui?.dots })">
+      <div v-if="props.dots" role="tablist" :aria-label="t('carousel.dots')" data-slot="carousel-dots" :class="ui.dots({ class: props.ui?.dots })">
         <template v-for="(_, index) in dotCount" :key="index">
           <button
             type="button"

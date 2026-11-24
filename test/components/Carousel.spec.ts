@@ -57,7 +57,7 @@ describe('Carousel', () => {
   })
   describe('dots before embla init', () => {
     function getDots(wrapper: { findAll: (selector: string) => { attributes: (name: string) => string | undefined }[] }) {
-      return wrapper.findAll('[data-slot="dot"]').map(dot => ({
+      return wrapper.findAll('[data-slot="carousel-dot"]').map(dot => ({
         selected: dot.attributes('aria-selected'),
         state: dot.attributes('data-state')
       }))
@@ -87,7 +87,7 @@ describe('Carousel', () => {
       error.mockRestore()
 
       expect(messages).not.toMatch(/hydration/i)
-      expect(container.querySelectorAll('[data-slot="dot"]')).toHaveLength(items.length)
+      expect(container.querySelectorAll('[data-slot="carousel-dot"]')).toHaveLength(items.length)
 
       app.unmount()
       container.remove()
@@ -111,12 +111,12 @@ describe('Carousel', () => {
       ['multiple items per view', { ui: { item: 'basis-1/3' } }, 4]
     ])('replaces the dots with embla scroll snaps on init with %s', async (_, extraProps, expected) => {
       // happy-dom has no layout, so give embla a 300px wide container, slides sized from their basis and no margins
-      const width = (el: HTMLElement) => el.dataset.slot === 'item' && el.classList.contains('basis-1/3') ? 100 : 300
+      const width = (el: HTMLElement) => el.dataset.slot === 'carousel-item' && el.classList.contains('basis-1/3') ? 100 : 300
       const offsetWidth = vi.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockImplementation(function (this: HTMLElement) {
         return width(this)
       })
       const offsetLeft = vi.spyOn(HTMLElement.prototype, 'offsetLeft', 'get').mockImplementation(function (this: HTMLElement) {
-        return this.dataset.slot === 'item' ? Array.prototype.indexOf.call(this.parentElement!.children, this) * width(this) : 0
+        return this.dataset.slot === 'carousel-item' ? Array.prototype.indexOf.call(this.parentElement!.children, this) * width(this) : 0
       })
       const getComputedStyle = vi.spyOn(window, 'getComputedStyle').mockImplementation(() => ({ getPropertyValue: () => '0px' }) as unknown as CSSStyleDeclaration)
 

@@ -104,7 +104,7 @@ describe('Calendar', () => {
 
       await wrapper.find('[data-reka-calendar-cell-trigger][data-value="2025-01-15"]').trigger('click')
       for (let i = 0; i < 3; i++) {
-        await wrapper.find('[data-slot="heading"] button').trigger('click')
+        await wrapper.find('[data-slot="calendar-heading"] button').trigger('click')
       }
 
       expect(wrapper.find('[data-reka-calendar-cell-trigger][data-selected]').attributes('data-value')).toBe('2025-01-15')
@@ -116,7 +116,7 @@ describe('Calendar', () => {
       await wrapper.find('[data-reka-calendar-cell-trigger][data-value="2025-01-15"]').trigger('click')
       await wrapper.setProps({ modelValue: undefined })
       for (let i = 0; i < 3; i++) {
-        await wrapper.find('[data-slot="heading"] button').trigger('click')
+        await wrapper.find('[data-slot="calendar-heading"] button').trigger('click')
       }
 
       expect(wrapper.find('[data-reka-calendar-cell-trigger][data-selected]').exists()).toBe(false)
@@ -177,7 +177,7 @@ describe('Calendar', () => {
       document.body.appendChild(input)
       const wrapper = await mountSuspended(Calendar, { props: { 'placeholder': new CalendarDate(2025, 6, 15), 'onUpdate:placeholder': () => nextTick(() => input.focus()) }, attachTo: document.body })
 
-      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      await wrapper.find('[data-slot="calendar-heading"] button').trigger('click')
       const month = wrapper.find('[data-reka-month-picker-cell-trigger][data-value="2025-03-01"]')
       ;(month.element as HTMLElement).focus()
       await month.trigger('click')
@@ -192,12 +192,12 @@ describe('Calendar', () => {
     test('keeps focus on the heading when switching views', async () => {
       const wrapper = await mountSuspended(Calendar, { attachTo: document.body })
 
-      const heading = wrapper.find('[data-slot="heading"] button')
+      const heading = wrapper.find('[data-slot="calendar-heading"] button')
       ;(heading.element as HTMLElement).focus()
       await heading.trigger('click')
       await nextTick()
 
-      expect(document.activeElement).toBe(wrapper.find('[data-slot="heading"] button').element)
+      expect(document.activeElement).toBe(wrapper.find('[data-slot="calendar-heading"] button').element)
 
       wrapper.unmount()
     })
@@ -206,7 +206,7 @@ describe('Calendar', () => {
       const wrapper = await mountSuspended(Calendar, { props: { placeholder: new CalendarDate(2025, 6, 15) }, attachTo: document.body })
 
       for (let i = 0; i < 2; i++) {
-        await wrapper.find('[data-slot="heading"] button').trigger('click')
+        await wrapper.find('[data-slot="calendar-heading"] button').trigger('click')
       }
       const year = wrapper.find('[data-reka-year-picker-cell-trigger][data-value^="2027"]')
       ;(year.element as HTMLElement).focus()

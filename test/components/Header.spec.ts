@@ -60,7 +60,7 @@ describe('Header', () => {
 
   it('sets `aria-expanded` on the toggle', async () => {
     const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } } })
-    const toggle = wrapper.find('[data-slot="toggle"]')
+    const toggle = wrapper.find('[data-slot="header-toggle"]')
 
     expect(toggle.attributes('aria-expanded')).toBe('false')
 

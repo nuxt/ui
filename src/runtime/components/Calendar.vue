@@ -201,7 +201,7 @@ function cycleView() {
   const max = VIEWS.indexOf(maxView)
   const next = VIEWS.indexOf(view.value) >= max ? minView.value : VIEWS[VIEWS.indexOf(view.value) + 1]!
   view.value = next
-  keepFocus('[data-slot="heading"] button')
+  keepFocus('[data-slot="calendar-heading"] button')
 }
 
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')

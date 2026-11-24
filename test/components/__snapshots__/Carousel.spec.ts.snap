@@ -57,6 +57,44 @@ exports[`Carousel > renders with class correctly 1`] = `
 </div>"
 `;
 
+exports[`Carousel > renders with dots and fade correctly 1`] = `
+"<div role="region" aria-roledescription="carousel" data-orientation="horizontal" tabindex="0" data-slot="carousel" class="relative focus:outline-none">
+  <div data-slot="carousel-viewport" class="overflow-hidden">
+    <div data-slot="carousel-container" class="flex items-start flex-row -ms-4" style="transform: translate3d(NaNpx,0px,0px);">
+      <div role="tabpanel" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" alt="Image 2" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" alt="Image 3" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" alt="Image 4" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" alt="Image 5" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" data-slot="carousel-item" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" alt="Image 6" width="300" height="300" class="rounded-lg"></div>
+    </div>
+  </div>
+  <div data-slot="carousel-controls" class="">
+    <!--v-if-->
+    <div role="tablist" aria-label="Choose slide to display" data-slot="carousel-dots" class="absolute inset-x-0 -bottom-7 isolate flex flex-wrap items-center justify-center gap-3"><button type="button" role="tab" aria-label="Go to slide 1" aria-selected="true" data-slot="carousel-dot" class="relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-(length:--ui-focus-width) transition data-[state=active]:bg-neutral" data-state="active"></button><button type="button" role="tab" aria-label="Go to slide 2" aria-selected="false" data-slot="carousel-dot" class="relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-(length:--ui-focus-width) transition"></button><button type="button" role="tab" aria-label="Go to slide 3" aria-selected="false" data-slot="carousel-dot" class="relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-(length:--ui-focus-width) transition"></button><button type="button" role="tab" aria-label="Go to slide 4" aria-selected="false" data-slot="carousel-dot" class="relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-(length:--ui-focus-width) transition"></button><button type="button" role="tab" aria-label="Go to slide 5" aria-selected="false" data-slot="carousel-dot" class="relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-(length:--ui-focus-width) transition"></button><button type="button" role="tab" aria-label="Go to slide 6" aria-selected="false" data-slot="carousel-dot" class="relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-(length:--ui-focus-width) transition"></button></div>
+  </div>
+</div>"
+`;
+
+exports[`Carousel > renders with dots and multiple items per view correctly 1`] = `
+"<div role="region" aria-roledescription="carousel" data-orientation="horizontal" tabindex="0" data-slot="carousel" class="relative focus:outline-none">
+  <div data-slot="carousel-viewport" class="overflow-hidden">
+    <div data-slot="carousel-container" class="flex items-start flex-row -ms-4" style="transform: translate3d(NaNpx,0px,0px);">
+      <div role="tabpanel" data-slot="carousel-item" class="min-w-0 shrink-0 ps-4 basis-1/3"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" data-slot="carousel-item" class="min-w-0 shrink-0 ps-4 basis-1/3"><img src="https://picsum.photos/600/600?random=2" alt="Image 2" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" data-slot="carousel-item" class="min-w-0 shrink-0 ps-4 basis-1/3"><img src="https://picsum.photos/600/600?random=3" alt="Image 3" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" data-slot="carousel-item" class="min-w-0 shrink-0 ps-4 basis-1/3"><img src="https://picsum.photos/600/600?random=4" alt="Image 4" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" data-slot="carousel-item" class="min-w-0 shrink-0 ps-4 basis-1/3"><img src="https://picsum.photos/600/600?random=5" alt="Image 5" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" data-slot="carousel-item" class="min-w-0 shrink-0 ps-4 basis-1/3"><img src="https://picsum.photos/600/600?random=6" alt="Image 6" width="300" height="300" class="rounded-lg"></div>
+    </div>
+  </div>
+  <div data-slot="carousel-controls" class="">
+    <!--v-if-->
+    <div role="tablist" aria-label="Choose slide to display" data-slot="carousel-dots" class="absolute inset-x-0 -bottom-7 isolate flex flex-wrap items-center justify-center gap-3"></div>
+  </div>
+</div>"
+`;
+
 exports[`Carousel > renders with dots correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" data-orientation="horizontal" tabindex="0" data-slot="carousel" class="relative focus:outline-none">
   <div data-slot="carousel-viewport" class="overflow-hidden">
@@ -71,7 +109,7 @@ exports[`Carousel > renders with dots correctly 1`] = `
   </div>
   <div data-slot="carousel-controls" class="">
     <!--v-if-->
-    <div role="tablist" aria-label="Choose slide to display" data-slot="carousel-dots" class="absolute inset-x-0 -bottom-7 flex flex-wrap items-center justify-center gap-3"></div>
+    <div role="tablist" aria-label="Choose slide to display" data-slot="carousel-dots" class="absolute inset-x-0 -bottom-7 isolate flex flex-wrap items-center justify-center gap-3"><button type="button" role="tab" aria-label="Go to slide 1" aria-selected="true" data-slot="carousel-dot" class="relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-(length:--ui-focus-width) transition data-[state=active]:bg-neutral" data-state="active"></button><button type="button" role="tab" aria-label="Go to slide 2" aria-selected="false" data-slot="carousel-dot" class="relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-(length:--ui-focus-width) transition"></button><button type="button" role="tab" aria-label="Go to slide 3" aria-selected="false" data-slot="carousel-dot" class="relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-(length:--ui-focus-width) transition"></button><button type="button" role="tab" aria-label="Go to slide 4" aria-selected="false" data-slot="carousel-dot" class="relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-(length:--ui-focus-width) transition"></button><button type="button" role="tab" aria-label="Go to slide 5" aria-selected="false" data-slot="carousel-dot" class="relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-(length:--ui-focus-width) transition"></button><button type="button" role="tab" aria-label="Go to slide 6" aria-selected="false" data-slot="carousel-dot" class="relative cursor-pointer size-3 bg-strong rounded-full after:absolute after:-inset-1.5 after:-z-1 outline-focus focus-visible:outline-(length:--ui-focus-width) transition"></button></div>
   </div>
 </div>"
 `;

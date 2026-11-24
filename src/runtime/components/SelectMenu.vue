@@ -752,7 +752,7 @@ defineExpose({
           </template>
         </slot>
 
-        <span v-if="isTrailing || !!slots.trailing || !!props.clear" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+        <span v-if="isTrailing || !!slots.trailing || !!props.clear" data-slot="select-menu-trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :item="resolveSelectedItem('trailing', modelValue)" :open="open" :ui="ui">
             <ComboboxCancel v-if="!!props.clear && !disabled && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" as-child>
               <UButton

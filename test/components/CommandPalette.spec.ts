@@ -200,13 +200,13 @@ describe('CommandPalette', () => {
     const labels = async (searchTerm: string) => {
       await input.setValue(searchTerm)
       await new Promise(resolve => setTimeout(resolve, 30))
-      return wrapper.findAll('[data-slot="itemLabelBase"]').map(label => label.text())
+      return wrapper.findAll('[data-slot="command-palette-itemLabelBase"]').map(label => label.text())
     }
 
     expect(await labels('apple')).toEqual(['Fruits', 'Vegetables'])
 
     await input.setValue('')
-    await wrapper.find('[data-slot="item"]').trigger('click')
+    await wrapper.find('[data-slot="command-palette-item"]').trigger('click')
     expect(await labels('apple')).toEqual(['apple'])
 
     await input.setValue('')
