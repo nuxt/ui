@@ -22,8 +22,10 @@ const GRAYS = ['slate', 'gray', 'zinc', 'stone', 'taupe', 'mauve', 'mist', 'oliv
 const HUES = ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
 
 const COLOR_UTILITY = '(?:bg|text|border(?:-[xytrblse]|-bs|-be)?|ring(?:-offset)?|outline|divide|fill|stroke|from|via|to|shadow|inset-shadow|inset-ring|decoration|accent|caret|placeholder)'
+// These numeric utilities can overlap custom palette names and set non-color properties.
+const NON_COLOR_NUMERIC_CLASS = '(?:bg-(?:linear|conic)|outline-offset|ring-offset|border-(?:[xytrblse]|bs|be|spacing(?:-[xy])?)|divide-[xy])-\\d{2,3}(?:/\\S+)?!?$'
 // A class with its variants, `md:hover:bg-red-500/50`
-const CLASS = (utility: string, color: string) => `^(?:\\S*:)?!?-?(${utility})-(${color})(?:-\\d{2,3})?(?:\\/\\S+)?!?$`
+const CLASS = (utility: string, color: string, start = '^') => `${start}(?:\\S*:)?!?-?(${utility})-(${color})(?:-\\d{2,3})?(?:\\/\\S+)?!?$`
 
 type Shades = Record<number, string | string[]>
 
@@ -109,62 +111,82 @@ function readColors(path: string, colors: Record<string, string> = { ...DEFAULT_
   return { colors, shades }
 }
 
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+// Skips the numeric utilities a custom palette name can overlap, `outline-offset-50` for an `offset` palette
+const SKIP_NON_COLOR = `^(?!(?:\\S*:)?!?-?${NON_COLOR_NUMERIC_CLASS})`
+
 function paletteRestrictions(colors: Record<string, string>, shades: Record<string, ModeShades> = {}) {
+  // `neutral` can point at a custom palette, its classes map to the semantic tokens like Tailwind's grays
+  const neutral = colors.neutral && ![...GRAYS, ...HUES].includes(colors.neutral) && !Object.hasOwn(colors, colors.neutral) ? colors.neutral : undefined
   // The first alias wins when two point at the same palette, `primary` before the others
-  const aliasOf: Record<string, string> = {}
+  const aliasOf = new Map<string, string>()
+  const palettes = new Set(HUES)
   for (const [alias, palette] of Object.entries(colors)) {
-    aliasOf[palette] ??= alias
+    if (!aliasOf.has(palette)) {
+      aliasOf.set(palette, alias)
+    }
+    // A palette of the app's own, `primary: brand`, not a gray nor another alias
+    if (palette && palette !== neutral && !GRAYS.includes(palette) && !Object.hasOwn(colors, palette)) {
+      palettes.add(palette)
+    }
   }
   const restrict: { pattern: string, message: string }[] = []
 
-  const grays = GRAYS.join('|')
+  // Like the other custom palettes, it needs a shade and skips the numeric utilities its name can overlap
+  const grays = [...GRAYS, ...neutral ? [`${escapeRegExp(neutral)}(?=-\\d{2,3})`] : []].join('|')
+  const start = neutral ? SKIP_NON_COLOR : '^'
   // The token keeps the class's other variants and modifiers, `md:hover:text-gray-500/50` is `md:hover:text-muted/50`
   for (const [utility, modes] of SHADE_TOKENS) {
     for (const [shade, tokens] of Object.entries(modes.dark)) {
       restrict.push({
-        pattern: `^((?:\\S*:)?)dark:((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
+        pattern: `${start}((?:\\S*:)?)dark:((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
         message: `"$0" uses a raw palette color. In dark mode it's ${[tokens].flat().map(token => `\`$1$2$3$4-${token}$5\``).join(' or ')}. When its light mode class maps to the same token, use the token for both, it follows the color mode.`
       })
     }
     for (const [shade, tokens] of Object.entries(modes.light)) {
       restrict.push({
-        pattern: `^(?!(?:\\S*:)?dark:)((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
+        pattern: `${start}(?!(?:\\S*:)?dark:)((?:\\S*:)?)(!?)(${utility})-(?:${grays})-${shade}((?:\\/\\S+)?!?)$`,
         message: `"$0" uses a raw palette color. Use ${[tokens].flat().map(token => `\`$1$2$3-${token}$4\``).join(' or ')} instead.`
       })
     }
   }
   for (const [utility, tokens] of Object.entries(GRAY_TOKENS)) {
     restrict.push({
-      pattern: CLASS(utility === 'border' ? 'border(?:-[xytrblse]|-bs|-be)?' : utility, grays),
+      pattern: CLASS(utility === 'border' ? 'border(?:-[xytrblse]|-bs|-be)?' : utility, grays, start),
       message: `"$0" uses a raw palette color. Use a semantic token instead: ${tokens}.`
     })
   }
   restrict.push({
-    pattern: CLASS(COLOR_UTILITY, grays),
+    pattern: CLASS(COLOR_UTILITY, grays, start),
     message: '"$0" uses a raw palette color. Use a semantic token or the `neutral` color instead.'
   })
 
-  for (const hue of HUES) {
-    const alias = aliasOf[hue]
+  for (const palette of palettes) {
+    const alias = aliasOf.get(palette)
+    const hue = escapeRegExp(palette)
+    // A custom palette name can also name a utility, `bg-cover`, so only its classes with a shade are flagged
+    const custom = !HUES.includes(palette)
+    const begin = custom ? SKIP_NON_COLOR : '^'
     // The alias's own shade is the alias itself, `bg-indigo-500` is `bg-tertiary`, which follows the color mode
     if (alias) {
       const [light, dark] = shades[alias] ?? defaultShades(alias)
       // `black` and `white` aren't shades of the palette
       if (/^\d+$/.test(light) && /^\d+$/.test(dark)) {
         restrict.push({
-          pattern: `^((?:\\S*:)?)dark:((?:\\S*:)?)(!?-?)(${COLOR_UTILITY})-${hue}-${dark}((?:\\/\\S+)?!?)$`,
-          message: `"$0" uses a raw palette color. In dark mode it's \`$1dark:$2$3$4-${alias}$5\`. When its light mode class is \`$4-${hue}-${light}\`, use \`$1$2$3$4-${alias}$5\` for both, it follows the color mode.`
+          pattern: `${begin}((?:\\S*:)?)dark:((?:\\S*:)?)(!?-?)(${COLOR_UTILITY})-${hue}-${dark}((?:\\/\\S+)?!?)$`,
+          message: `"$0" uses a raw palette color. In dark mode it's \`$1dark:$2$3$4-${alias}$5\`. When its light mode class is \`$4-${palette}-${light}\`, use \`$1$2$3$4-${alias}$5\` for both, it follows the color mode.`
         }, {
-          pattern: `^(?!(?:\\S*:)?dark:)((?:\\S*:)?!?-?)(${COLOR_UTILITY})-${hue}-${light}((?:\\/\\S+)?!?)$`,
-          message: `"$0" uses a raw palette color. \`${alias}\` points at \`${hue}\`, use \`$1$2-${alias}$3\` instead, it's \`${hue}-${light}\` in light mode and \`${hue}-${dark}\` in dark mode.`
+          pattern: `${begin}(?!(?:\\S*:)?dark:)((?:\\S*:)?!?-?)(${COLOR_UTILITY})-${hue}-${light}((?:\\/\\S+)?!?)$`,
+          message: `"$0" uses a raw palette color. \`${alias}\` points at \`${palette}\`, use \`$1$2-${alias}$3\` instead, it's \`${palette}-${light}\` in light mode and \`${palette}-${dark}\` in dark mode.`
         })
       }
     }
     restrict.push({
-      pattern: `^((?:\\S*:)?!?-?)(${COLOR_UTILITY})-${hue}((?:-\\d{2,3})?(?:\\/\\S+)?!?)$`,
+      pattern: `${begin}((?:\\S*:)?!?-?)(${COLOR_UTILITY})-${hue}((?:-\\d{2,3})${custom ? '' : '?'}(?:\\/\\S+)?!?)$`,
       message: alias
-        ? `"$0" uses a raw palette color. \`${alias}\` points at \`${hue}\`, use \`$1$2-${alias}$3\` instead.`
-        : `"$0" uses a raw palette color. Point a color alias at \`${hue}\` in \`@nuxt/ui/colors\`, or add one like \`tertiary: ${hue}\`, and use it instead.`
+        ? `"$0" uses a raw palette color. \`${alias}\` points at \`${palette}\`, use \`$1$2-${alias}$3\` instead.`
+        : `"$0" uses a raw palette color. Point a color alias at \`${palette}\` in \`@nuxt/ui/colors\`, or add one like \`tertiary: ${palette}\`, and use it instead.`
     })
   }
 

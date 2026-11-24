@@ -82,6 +82,56 @@ describe('nuxtUI', () => {
     expect(message(entryPoint, 'sky')).toContain('`primary` points at `sky`')
   })
 
+  // Whether `no-palette-colors` flags the class at all
+  const flagged = (entryPoint: string, cls: string) => {
+    const [, { restrict }] = nuxtUI({ entryPoint })[0]!.rules!['better-tailwindcss/no-restricted-classes'] as [string, { restrict: { pattern: string }[] }]
+    return restrict.some(({ pattern }) => new RegExp(pattern).test(cls))
+  }
+
+  it('suggests the alias of a custom palette', () => {
+    const entryPoint = file('custom.css', '@import "tailwindcss";\n@plugin "@nuxt/ui/colors" {\n  primary: brand;\n  secondary: primary;\n}')
+    expect(message(entryPoint, 'brand', 'bg-brand-600')).toContain('`primary` points at `brand`, use `bg-primary-600` instead.')
+    expect(message(entryPoint, 'brand', 'hover:bg-brand-600/50')).toContain('use `hover:bg-primary-600/50` instead.')
+    expect(message(entryPoint, 'brand', 'bg-brand-500')).toContain('use `bg-primary` instead, it\'s `brand-500` in light mode')
+    expect(flagged(entryPoint, 'bg-primary-500')).toBe(false)
+  })
+
+  it('only flags the classes with a shade of a custom palette that names a utility', () => {
+    const entryPoint = file('cover.css', '@import "tailwindcss";\n@plugin "@nuxt/ui/colors" {\n  primary: cover;\n}')
+    expect(flagged(entryPoint, 'bg-cover')).toBe(false)
+    expect(message(entryPoint, 'cover', 'bg-cover-600')).toContain('use `bg-primary-600` instead.')
+  })
+
+  it.each([
+    ['linear', ['bg-linear-50', 'hover:bg-linear-50/oklab']],
+    ['conic', ['bg-conic-50']],
+    ['offset', ['outline-offset-50', 'md:-outline-offset-50!', 'ring-offset-50']],
+    ['spacing', ['border-spacing-50']],
+    ['x', ['border-x-50', 'divide-x-50']]
+  ])('leaves the numeric utilities alone when a custom palette is `%s`', (palette, utilities) => {
+    const entryPoint = file(`numeric-${palette}.css`, `@import "tailwindcss";\n@plugin "@nuxt/ui/colors" {\n  primary: ${palette};\n}`)
+    for (const utility of utilities) {
+      expect(flagged(entryPoint, utility)).toBe(false)
+    }
+    expect(message(entryPoint, palette, `text-${palette}-600`)).toContain('use `text-primary-600` instead.')
+  })
+
+  it('suggests the semantic tokens for the custom palette `neutral` points at', () => {
+    const entryPoint = file('neutral.css', '@import "tailwindcss";\n@plugin "@nuxt/ui/colors" {\n  neutral: brand-gray;\n}')
+    expect(message(entryPoint, 'brand-gray', 'bg-brand-gray-100')).toContain('Use `bg-soft` instead')
+    expect(message(entryPoint, 'brand-gray', 'dark:bg-brand-gray-900')).toContain('In dark mode it\'s `bg-default`')
+    expect(message(entryPoint, 'brand-gray', 'md:text-brand-gray-500/50')).toContain('Use `md:text-muted/50` instead')
+    expect(message(entryPoint, 'brand-gray', 'fill-brand-gray-500')).toContain('Use a semantic token or the `neutral` color instead')
+    expect(flagged(entryPoint, 'bg-brand-gray')).toBe(false)
+  })
+
+  it('leaves the numeric utilities alone when `neutral` is `offset`', () => {
+    const entryPoint = file('neutral-offset.css', '@import "tailwindcss";\n@plugin "@nuxt/ui/colors" {\n  neutral: offset;\n}')
+    expect(flagged(entryPoint, 'outline-offset-50')).toBe(false)
+    expect(flagged(entryPoint, 'ring-offset-50')).toBe(false)
+    expect(message(entryPoint, 'offset', 'bg-offset-100')).toContain('Use `bg-soft` instead')
+  })
+
   // The classes `no-palette-colors` reports in `code`
   const lint = (code: string) => {
     const entryPoint = file('lint.css', '@import "tailwindcss";')
