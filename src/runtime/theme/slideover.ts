@@ -4,14 +4,14 @@ export default defineTheme({
   slots: {
     overlay: 'fixed inset-0 bg-backdrop',
     content: 'fixed bg-overlay divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none',
-    // One line of the title in the header height, less the 1px divider under it
-    header: 'flex items-center gap-1.5 px-(--ui-gutter) py-[calc((var(--ui-header-height)-1lh-1px)/2)] min-h-(--ui-header-height)',
+    // With a description, the title line sits where it would alone, so the close stays on it
+    header: 'group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]',
     wrapper: 'min-w-0 flex-1',
     body: 'flex-1 overflow-y-auto p-(--ui-gutter)',
     footer: 'flex items-center gap-1.5 px-(--ui-gutter) py-4',
     title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))',
     description: 'mt-1 text-muted text-sm',
-    actions: 'flex items-center gap-1.5 shrink-0 ms-auto self-start min-h-lh',
+    actions: 'flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start',
     close: '-my-(--ui-control-py) -me-(--ui-control-py)'
   },
   variants: {

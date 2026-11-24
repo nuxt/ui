@@ -11,11 +11,11 @@ export default defineTheme({
     // Fades back in once the drawer has grown back, so nothing moves while visible.
     container: 'w-full flex-1 min-h-0 flex flex-col gap-4 p-(--ui-gutter) overflow-y-auto transition-opacity duration-300 ease-out delay-200 group-data-stacked/drawer:opacity-0 group-data-stacked/drawer:delay-0 group-data-stacked/drawer:duration-100',
     // Its title sits as far from the top as in a Modal header
-    header: 'flex items-center gap-1.5 -mt-[calc(var(--ui-gutter)-(var(--ui-header-height)-1lh-1px)/2)]',
+    header: 'group/header flex items-center gap-1.5 -mt-[calc(var(--ui-gutter)-(var(--ui-header-height)-1lh-1px)/2)]',
     wrapper: 'min-w-0 flex-1',
     title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))',
     description: 'mt-1 text-muted text-sm',
-    actions: 'flex items-center gap-1.5 shrink-0 ms-auto self-start min-h-lh',
+    actions: 'flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start',
     body: 'flex-1',
     footer: 'flex flex-col gap-1.5',
     close: '-my-(--ui-control-py) -me-(--ui-control-py)'

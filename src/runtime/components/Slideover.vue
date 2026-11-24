@@ -181,7 +181,7 @@ const ui = computed(() => tv(theme, overrides.value)({
           </VisuallyHidden>
 
           <slot name="content" :close="close">
-            <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || (props.close || !!slots.close)" data-slot="slideover-header" :class="ui.header({ class: props.ui?.header })">
+            <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || (props.close || !!slots.close) || !!slots.actions" data-slot="slideover-header" :class="ui.header({ class: props.ui?.header })">
               <slot name="header" :close="close">
                 <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="slideover-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
                   <DialogTitle v-if="props.title || !!slots.title" data-slot="slideover-title" :class="ui.title({ class: props.ui?.title })">

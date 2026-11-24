@@ -6,12 +6,12 @@ export default defineTheme({
     gap: 'relative w-(--sidebar-width) bg-transparent',
     container: 'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width)',
     inner: 'flex size-full flex-col overflow-hidden divide-y divide-default',
-    // One line of the title in the header height, less the 1px divider under it
-    header: 'flex items-center gap-1.5 overflow-hidden px-4 py-[calc((var(--ui-header-height)-1lh-1px)/2)] min-h-(--ui-header-height)',
+    // With a description, the title line sits where it would alone, so the close stays on it
+    header: 'group/header flex items-center gap-1.5 overflow-hidden px-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]',
     wrapper: 'min-w-0 flex-1',
     title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold)) truncate',
     description: 'mt-1 text-muted text-sm truncate',
-    actions: 'flex items-center gap-1.5 shrink-0 ms-auto self-start min-h-lh',
+    actions: 'flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start',
     close: '-my-(--ui-control-py) -me-(--ui-control-py)',
     body: 'flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4',
     footer: 'flex items-center gap-1.5 overflow-hidden p-4',

@@ -253,7 +253,7 @@ const renderMenu = useLazyOverlay(() => openMobile.value || (props.menu as Modal
           </p>
         </div>
 
-        <div v-if="!!slots.actions || canClose" data-slot="sidebar-actions" :class="ui.actions({ class: props.ui?.actions })">
+        <div v-if="!!slots.actions || canClose || !!slots.close" data-slot="sidebar-actions" :class="ui.actions({ class: props.ui?.actions })">
           <slot name="actions" :state="state" />
 
           <slot name="close" :state="state" :ui="ui">
