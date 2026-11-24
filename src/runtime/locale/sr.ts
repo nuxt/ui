@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Изабери слајд за приказ',
-      goto: 'Иди на слајд {slide}',
       next: 'Следећи',
       prev: 'Претходни',
       roledescription: 'карусел',
-      slide: 'слајд'
+      slide: 'слајд',
+      slideLabel: '{slide} од {total}'
     },
     chatAttachment: {
       uploading: 'Отпремање',
