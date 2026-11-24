@@ -136,8 +136,14 @@ const contentEvents = computed(() => {
 
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 
+// Without a title, a description or actions, the close floats in the corner instead of making a header of its own
+const hasHeader = computed(() => !!slots.header || !!(props.title || slots.title) || !!(props.description || slots.description) || !!slots.actions)
+
+const [DefineCloseTemplate, ReuseCloseTemplate] = createReusableTemplate()
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({
+  header: hasHeader.value,
   transition: props.transition,
   fullscreen: props.fullscreen,
   overlay: props.overlay,
@@ -148,6 +154,24 @@ const ui = computed(() => tv(theme, overrides.value)({
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <DialogRoot v-slot="{ open, close }" v-bind="rootProps">
+    <DefineCloseTemplate>
+      <DialogClose v-if="props.close || !!slots.close" as-child>
+        <slot name="close" :ui="ui">
+          <UButton
+            v-if="props.close"
+            :icon="props.closeIcon || appConfig.ui.icons.close"
+            color="neutral"
+            variant="ghost"
+            size="xs"
+            :aria-label="t('modal.close')"
+            v-bind="(typeof props.close === 'object' ? props.close : {})"
+            data-slot="modal-close"
+            :class="ui.close({ class: props.ui?.close })"
+          />
+        </slot>
+      </DialogClose>
+    </DefineCloseTemplate>
+
     <DefineContentTemplate>
       <DialogContent
         data-slot="modal-content"
@@ -176,7 +200,7 @@ const ui = computed(() => tv(theme, overrides.value)({
         </VisuallyHidden>
 
         <slot name="content" :close="close">
-          <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || (props.close || !!slots.close) || !!slots.actions" data-slot="modal-header" :class="ui.header({ class: props.ui?.header })">
+          <div v-if="hasHeader" data-slot="modal-header" :class="ui.header({ class: props.ui?.header })">
             <slot name="header" :close="close">
               <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="modal-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
                 <DialogTitle v-if="props.title || !!slots.title" data-slot="modal-title" :class="ui.title({ class: props.ui?.title })">
@@ -195,24 +219,12 @@ const ui = computed(() => tv(theme, overrides.value)({
               <div v-if="!!slots.actions || props.close || !!slots.close" data-slot="modal-actions" :class="ui.actions({ class: props.ui?.actions })">
                 <slot name="actions" />
 
-                <DialogClose v-if="props.close || !!slots.close" as-child>
-                  <slot name="close" :ui="ui">
-                    <UButton
-                      v-if="props.close"
-                      :icon="props.closeIcon || appConfig.ui.icons.close"
-                      color="neutral"
-                      variant="ghost"
-                      size="xs"
-                      :aria-label="t('modal.close')"
-                      v-bind="(typeof props.close === 'object' ? props.close : {})"
-                      data-slot="modal-close"
-                      :class="ui.close({ class: props.ui?.close })"
-                    />
-                  </slot>
-                </DialogClose>
+                <ReuseCloseTemplate />
               </div>
             </slot>
           </div>
+
+          <ReuseCloseTemplate v-if="!hasHeader" />
 
           <div v-if="!!slots.body" data-slot="modal-body" :class="ui.body({ class: props.ui?.body })">
             <slot name="body" :close="close" />

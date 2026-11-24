@@ -3,6 +3,7 @@
 exports[`DashboardSearch > renders with class correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
+  <!---->
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
@@ -46,6 +47,7 @@ exports[`DashboardSearch > renders with class correctly 1`] = `
 
 exports[`DashboardSearch > renders with filter icon correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
+  <!---->
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -91,6 +93,7 @@ exports[`DashboardSearch > renders with filter icon correctly 1`] = `
 exports[`DashboardSearch > renders with filter placeholder correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
+  <!---->
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
@@ -134,6 +137,7 @@ exports[`DashboardSearch > renders with filter placeholder correctly 1`] = `
 
 exports[`DashboardSearch > renders with fullscreen correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
+  <!---->
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -179,6 +183,7 @@ exports[`DashboardSearch > renders with fullscreen correctly 1`] = `
 exports[`DashboardSearch > renders with groups correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
+  <!---->
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
@@ -222,6 +227,7 @@ exports[`DashboardSearch > renders with groups correctly 1`] = `
 
 exports[`DashboardSearch > renders with loading correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
+  <!---->
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -267,6 +273,7 @@ exports[`DashboardSearch > renders with loading correctly 1`] = `
 exports[`DashboardSearch > renders with loadingIcon correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
+  <!---->
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
@@ -310,6 +317,7 @@ exports[`DashboardSearch > renders with loadingIcon correctly 1`] = `
 
 exports[`DashboardSearch > renders with size lg correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
+  <!---->
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -355,6 +363,7 @@ exports[`DashboardSearch > renders with size lg correctly 1`] = `
 exports[`DashboardSearch > renders with size md correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
+  <!---->
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
@@ -398,6 +407,7 @@ exports[`DashboardSearch > renders with size md correctly 1`] = `
 
 exports[`DashboardSearch > renders with size sm correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
+  <!---->
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -443,6 +453,7 @@ exports[`DashboardSearch > renders with size sm correctly 1`] = `
 exports[`DashboardSearch > renders with size xl correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
+  <!---->
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
@@ -486,6 +497,7 @@ exports[`DashboardSearch > renders with size xl correctly 1`] = `
 
 exports[`DashboardSearch > renders with size xs correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
+  <!---->
   <!---->
   <!--v-if-->
   <!--teleport start-->
@@ -531,6 +543,7 @@ exports[`DashboardSearch > renders with size xs correctly 1`] = `
 exports[`DashboardSearch > renders with ui correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
   <!---->
+  <!---->
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" data-slot="modal-overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)] bg-backdrop"></div>
@@ -574,6 +587,7 @@ exports[`DashboardSearch > renders with ui correctly 1`] = `
 
 exports[`DashboardSearch > renders without colorMode correctly 1`] = `
 "<div data-slot="dashboard-group" class="fixed inset-0 flex overflow-hidden">
+  <!---->
   <!---->
   <!--v-if-->
   <!--teleport start-->

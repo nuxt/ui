@@ -15,6 +15,7 @@ exports[`Slideover > renders with actions slot correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -32,13 +33,10 @@ exports[`Slideover > renders with body slot correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="slideover-overlay" class="fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="right" data-slot="slideover-content" class="fixed bg-overlay divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none sm:max-w-md w-full inset-y-0 right-0 data-[state=open]:animate-[slide-in-from-right_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_200ms_var(--ease-out)]" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0"></h2><p id="reka-dialog-description-v-1"></p></span>
-  <div data-slot="slideover-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+  <!--v-if--><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py) absolute top-(--ui-gutter) inset-e-(--ui-gutter)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
     <!--v-if-->
-    <div data-slot="slideover-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
-        <!--v-if-->
-        <!--v-if-->
-      </button></div>
-  </div>
+    <!--v-if-->
+  </button>
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)">Body slot</div>
   <!--v-if-->
 </div>
@@ -67,6 +65,7 @@ exports[`Slideover > renders with bottom side correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -95,6 +94,7 @@ exports[`Slideover > renders with bottom side inset correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -112,13 +112,10 @@ exports[`Slideover > renders with class correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="slideover-overlay" class="fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="right" data-slot="slideover-content" class="fixed divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none sm:max-w-md w-full inset-y-0 right-0 data-[state=open]:animate-[slide-in-from-right_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_200ms_var(--ease-out)] bg-soft" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0"></h2><p id="reka-dialog-description-v-1"></p></span>
-  <div data-slot="slideover-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+  <!--v-if--><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py) absolute top-(--ui-gutter) inset-e-(--ui-gutter)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
     <!--v-if-->
-    <div data-slot="slideover-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
-        <!--v-if-->
-        <!--v-if-->
-      </button></div>
-  </div>
+    <!--v-if-->
+  </button>
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -136,11 +133,7 @@ exports[`Slideover > renders with close slot correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="slideover-overlay" class="fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="right" data-slot="slideover-content" class="fixed bg-overlay divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none sm:max-w-md w-full inset-y-0 right-0 data-[state=open]:animate-[slide-in-from-right_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_200ms_var(--ease-out)]" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0"></h2><p id="reka-dialog-description-v-1"></p></span>
-  <div data-slot="slideover-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
-    <!--v-if-->
-    <div data-slot="slideover-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start">Close slot</div>
-  </div>
-  <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
+  <!--v-if-->Close slot<div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
 
@@ -157,13 +150,10 @@ exports[`Slideover > renders with closeIcon correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="slideover-overlay" class="fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="right" data-slot="slideover-content" class="fixed bg-overlay divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none sm:max-w-md w-full inset-y-0 right-0 data-[state=open]:animate-[slide-in-from-right_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_200ms_var(--ease-out)]" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0"></h2><p id="reka-dialog-description-v-1"></p></span>
-  <div data-slot="slideover-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+  <!--v-if--><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py) absolute top-(--ui-gutter) inset-e-(--ui-gutter)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
     <!--v-if-->
-    <div data-slot="slideover-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
-        <!--v-if-->
-        <!--v-if-->
-      </button></div>
-  </div>
+    <!--v-if-->
+  </button>
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -195,13 +185,10 @@ exports[`Slideover > renders with default slot correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="slideover-overlay" class="fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="right" data-slot="slideover-content" class="fixed bg-overlay divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none sm:max-w-md w-full inset-y-0 right-0 data-[state=open]:animate-[slide-in-from-right_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_200ms_var(--ease-out)]" id="reka-dialog-content-v-0" role="dialog" aria-describedby="reka-dialog-description-v-2" aria-labelledby="reka-dialog-title-v-1" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-1"></h2><p id="reka-dialog-description-v-2"></p></span>
-  <div data-slot="slideover-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+  <!--v-if--><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py) absolute top-(--ui-gutter) inset-e-(--ui-gutter)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
     <!--v-if-->
-    <div data-slot="slideover-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
-        <!--v-if-->
-        <!--v-if-->
-      </button></div>
-  </div>
+    <!--v-if-->
+  </button>
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -230,6 +217,7 @@ exports[`Slideover > renders with description correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -257,6 +245,7 @@ exports[`Slideover > renders with description slot correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -274,13 +263,10 @@ exports[`Slideover > renders with footer slot correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="slideover-overlay" class="fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="right" data-slot="slideover-content" class="fixed bg-overlay divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none sm:max-w-md w-full inset-y-0 right-0 data-[state=open]:animate-[slide-in-from-right_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_200ms_var(--ease-out)]" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0"></h2><p id="reka-dialog-description-v-1"></p></span>
-  <div data-slot="slideover-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+  <!--v-if--><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py) absolute top-(--ui-gutter) inset-e-(--ui-gutter)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
     <!--v-if-->
-    <div data-slot="slideover-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
-        <!--v-if-->
-        <!--v-if-->
-      </button></div>
-  </div>
+    <!--v-if-->
+  </button>
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <div data-slot="slideover-footer" class="flex items-center gap-1.5 px-(--ui-gutter) py-4">Footer slot</div>
 </div>
@@ -299,6 +285,7 @@ exports[`Slideover > renders with header slot correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" data-slot="slideover-overlay" class="fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="right" data-slot="slideover-content" class="fixed bg-overlay divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none sm:max-w-md w-full inset-y-0 right-0 data-[state=open]:animate-[slide-in-from-right_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_200ms_var(--ease-out)]" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0"></h2><p id="reka-dialog-description-v-1"></p></span>
   <div data-slot="slideover-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">Header slot</div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -327,6 +314,7 @@ exports[`Slideover > renders with left side correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -355,6 +343,7 @@ exports[`Slideover > renders with left side inset correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -372,13 +361,10 @@ exports[`Slideover > renders with open correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="slideover-overlay" class="fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]"></div>
 <div data-dismissable-layer="" tabindex="-1" data-side="right" data-slot="slideover-content" class="fixed bg-overlay divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none sm:max-w-md w-full inset-y-0 right-0 data-[state=open]:animate-[slide-in-from-right_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_200ms_var(--ease-out)]" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open" style="pointer-events: auto;"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0"></h2><p id="reka-dialog-description-v-1"></p></span>
-  <div data-slot="slideover-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+  <!--v-if--><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py) absolute top-(--ui-gutter) inset-e-(--ui-gutter)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
     <!--v-if-->
-    <div data-slot="slideover-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
-        <!--v-if-->
-        <!--v-if-->
-      </button></div>
-  </div>
+    <!--v-if-->
+  </button>
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -407,6 +393,7 @@ exports[`Slideover > renders with right side correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -435,6 +422,7 @@ exports[`Slideover > renders with right side inset correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -462,6 +450,7 @@ exports[`Slideover > renders with title correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -489,6 +478,7 @@ exports[`Slideover > renders with title slot correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -517,6 +507,7 @@ exports[`Slideover > renders with top side correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -545,6 +536,7 @@ exports[`Slideover > renders with top side inset correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -562,13 +554,10 @@ exports[`Slideover > renders with ui correctly 1`] = `
 
 <div data-state="open" style="pointer-events: auto;" data-slot="slideover-overlay" class="fixed inset-0 bg-backdrop data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="right" data-slot="slideover-content" class="fixed bg-overlay divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none sm:max-w-md w-full inset-y-0 right-0 data-[state=open]:animate-[slide-in-from-right_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_200ms_var(--ease-out)]" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0"></h2><p id="reka-dialog-description-v-1"></p></span>
-  <div data-slot="slideover-header" class="group/header flex items-center gap-1.5 px-(--ui-gutter) py-4 min-h-(--ui-header-height) has-[>[data-slot$=-wrapper]>[data-slot$=-description]]:py-[calc((var(--ui-header-height)-1lh-1px)/2)]">
+  <!--v-if--><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py) absolute top-(--ui-gutter) end-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
     <!--v-if-->
-    <div data-slot="slideover-actions" class="flex items-center gap-1.5 shrink-0 ms-auto min-h-lh group-has-[>[data-slot$=-wrapper]>[data-slot$=-description]]/header:self-start"><button type="button" data-slot="slideover-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-(--ui-disabled-opacity) aria-disabled:opacity-(--ui-disabled-opacity) transition-colors outline-accent-focus focus-visible:outline-(length:--ui-focus-width) [--ui-accent:var(--ui-neutral)] text-accent-default hover:bg-accent-soft active:bg-accent-soft disabled:bg-transparent aria-disabled:bg-transparent [--ui-control-px:var(--ui-control-px-xs)] [--ui-control-py:var(--ui-control-py-xs)] [--ui-control-gap:var(--ui-control-gap-xs)] [--ui-control-icon-size:var(--ui-control-icon-size-xs)] py-(--ui-control-py) gap-(--ui-control-gap) text-(length:--ui-control-text-xs)/(--ui-control-text-xs--line-height) px-(--ui-control-py) -my-(--ui-control-py) -me-(--ui-control-py) end-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-(--ui-control-icon-size)"></svg>
-        <!--v-if-->
-        <!--v-if-->
-      </button></div>
-  </div>
+    <!--v-if-->
+  </button>
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -594,6 +583,7 @@ exports[`Slideover > renders without close correctly 1`] = `
     </div>
     <!--v-if-->
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -622,6 +612,7 @@ exports[`Slideover > renders without overlay correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
@@ -650,6 +641,7 @@ exports[`Slideover > renders without transition correctly 1`] = `
         <!--v-if-->
       </button></div>
   </div>
+  <!--v-if-->
   <div data-slot="slideover-body" class="flex-1 overflow-y-auto p-(--ui-gutter)"></div>
   <!--v-if-->
 </div>
