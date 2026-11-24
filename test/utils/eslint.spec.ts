@@ -107,6 +107,7 @@ describe('nuxtUI', () => {
     ['conic', ['bg-conic-50']],
     ['offset', ['outline-offset-50', 'md:-outline-offset-50!', 'ring-offset-50']],
     ['spacing', ['border-spacing-50']],
+    ['spacing-x', ['border-spacing-x-50']],
     ['x', ['border-x-50', 'divide-x-50']]
   ])('leaves the numeric utilities alone when a custom palette is `%s`', (palette, utilities) => {
     const entryPoint = file(`numeric-${palette}.css`, `@import "tailwindcss";\n@plugin "@nuxt/ui/colors" {\n  primary: ${palette};\n}`)
