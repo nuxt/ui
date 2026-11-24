@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ToggleProps as RekaToggleProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/toggle'
+import theme from '../theme/toggle'
 import type { ButtonProps, ButtonSlots } from './Button.vue'
 import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
@@ -42,8 +42,7 @@ export interface ToggleSlots extends ButtonSlots {}
 import { computed } from 'vue'
 import { Toggle } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { useFieldGroup } from '../composables/useFieldGroup'
@@ -61,9 +60,9 @@ const _props = withDefaults(defineProps<ToggleProps>(), {
 const emits = defineEmits<ToggleEmits>()
 const slots = defineSlots<ToggleSlots>()
 
-const props = useComponentProps('toggle', _props)
+const props = useComponentProps('toggle', _props, theme)
 
-const appConfig = useAppConfig() as Toggle['AppConfig']
+const overrides = useComponentOverrides((ui: Toggle['AppConfig']['ui']) => ui.toggle)
 
 const rootProps = useForwardProps(props, ['modelValue', 'defaultValue', 'required'], emits)
 const buttonProps = useForwardProps(reactiveOmit(props, 'id', 'modelValue', 'defaultValue', 'disabled', 'name', 'required', 'color', 'size', 'class'))
@@ -80,7 +79,7 @@ const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props
 
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.toggle || {}) }))
+const ui = computed(() => tv(theme, overrides.value)())
 
 function onUpdate(value: boolean) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -102,11 +101,12 @@ function onUpdate(value: boolean) {
   >
     <UButton
       :id="id"
+      data-slot="toggle"
       v-bind="{ ...buttonProps, ...ariaAttrs, ...$attrs }"
       :color="color"
       :size="size"
       :active="pressed"
-      :class="ui({ class: props.class })"
+      :class="ui.base({ class: props.class })"
     >
       <template v-for="(_, slotName) in slots" #[slotName]="slotData">
         <slot :name="slotName" v-bind="slotData" />

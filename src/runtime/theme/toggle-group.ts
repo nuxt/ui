@@ -20,11 +20,11 @@ export default defineTheme({
     fieldGroup: {
       horizontal: {
         root: 'gap-0 -space-x-px',
-        item: `${fieldGroupVariantWithHiddenInput.fieldGroup.horizontal.base} data-[state=on]:z-[1] focus-visible:z-[2]`
+        item: `${fieldGroupVariantWithHiddenInput.fieldGroup.horizontal.base} data-[state=on]:z-1 focus-visible:z-2`
       },
       vertical: {
         root: 'gap-0 -space-y-px',
-        item: `${fieldGroupVariantWithHiddenInput.fieldGroup.vertical.base} data-[state=on]:z-[1] focus-visible:z-[2]`
+        item: `${fieldGroupVariantWithHiddenInput.fieldGroup.vertical.base} data-[state=on]:z-1 focus-visible:z-2`
       }
     }
   }

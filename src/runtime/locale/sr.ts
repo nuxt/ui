@@ -65,9 +65,9 @@ export default defineLocale<Messages>({
     commandPalette: {
       back: 'Назад',
       close: 'Затвори',
+      filterPlaceholder: 'Унеси команду или претражи…',
       noData: 'Нема података',
       noMatch: 'Нема одговарајућих података',
-      placeholder: 'Унеси команду или претражи…',
       results: 'Резултати'
     },
     contentSearch: {
@@ -82,8 +82,8 @@ export default defineLocale<Messages>({
       title: 'На овој страници'
     },
     dropdownMenu: {
-      noMatch: 'Нема одговарајућих података',
-      search: 'Претражи…'
+      filterPlaceholder: 'Претражи…',
+      noMatch: 'Нема одговарајућих података'
     },
     dashboardSearch: {
       theme: 'Тема'
@@ -154,9 +154,9 @@ export default defineLocale<Messages>({
       timeZoneName: 'временска зона'
     },
     listbox: {
+      filterPlaceholder: 'Претражи…',
       noData: 'Нема података',
-      noMatch: 'Нема одговарајућих података',
-      search: 'Претражи…'
+      noMatch: 'Нема одговарајућих података'
     },
     modal: {
       close: 'Затвори'
@@ -206,9 +206,9 @@ export default defineLocale<Messages>({
     },
     selectMenu: {
       create: 'Креирај "{label}"',
+      filterPlaceholder: 'Претражи…',
       noData: 'Нема података',
-      noMatch: 'Нема одговарајућих података',
-      search: 'Претражи…'
+      noMatch: 'Нема одговарајућих података'
     },
     skeleton: {
       label: 'учитавање'

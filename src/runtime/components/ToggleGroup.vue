@@ -2,7 +2,7 @@
 import type { ToggleGroupRootProps, ToggleGroupRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/toggle-group'
+import theme from '../theme/toggle-group'
 import type { ButtonProps, ButtonSlots } from './Button.vue'
 import type { LinkPropsKeys } from './Link.vue'
 import type { AcceptableValue, GetItemKeys } from '../types/utils'
@@ -84,8 +84,7 @@ export interface ToggleGroupSlots<T extends ToggleGroupItem = ToggleGroupItem> {
 import { computed, provide, useId } from 'vue'
 import { ToggleGroupRoot, ToggleGroupItem as RToggleGroupItem } from 'reka-ui'
 import { defu } from 'defu'
-import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { fieldGroupInjectionKey, useFieldGroup } from '../composables/useFieldGroup'
 import { useFormField } from '../composables/useFormField'
@@ -107,9 +106,9 @@ const _props = withDefaults(defineProps<ToggleGroupProps<T>>(), {
 const emits = defineEmits<ToggleGroupEmits>()
 const slots = defineSlots<ToggleGroupSlots<T>>()
 
-const props = useComponentProps<ToggleGroupProps<T>>('toggleGroup', _props)
+const props = useComponentProps<ToggleGroupProps<T>>('toggleGroup', _props, theme)
 
-const appConfig = useAppConfig() as ToggleGroup['AppConfig']
+const overrides = useComponentOverrides((ui: ToggleGroup['AppConfig']['ui']) => ui.toggleGroup)
 
 const rootProps = useForwardProps(props, ['as', 'type', 'modelValue', 'defaultValue', 'loop', 'rovingFocus', 'orientation', 'required'], emits)
 
@@ -127,7 +126,7 @@ const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.toggleGroup || {}) })({
+const ui = computed(() => tv(theme, overrides.value)({
   orientation: props.orientation,
   fieldGroup: props.attached ? props.orientation : undefined
 }))
@@ -172,7 +171,7 @@ function onUpdate(value: any) {
     :name="disabled ? undefined : name"
     :disabled="disabled"
     :aria-labelledby="($attrs['aria-labelledby'] as string | undefined) ?? ($attrs['aria-label'] ? undefined : labelId)"
-    data-slot="root"
+    data-slot="toggle-group"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
   >
@@ -187,7 +186,7 @@ function onUpdate(value: any) {
       <UButton
         v-bind="getButtonProps(item)"
         :active="pressed"
-        data-slot="item"
+        data-slot="toggle-group-item"
         :class="ui.item({ class: [props.ui?.item, item.class] })"
       >
         <template v-if="!!slots.leading" #leading="{ ui: buttonUi }">

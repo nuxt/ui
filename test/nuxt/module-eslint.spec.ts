@@ -1,4 +1,4 @@
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
+import { mkdtemp, rm } from 'node:fs/promises'
 import { join } from 'pathe'
 import { defineNuxtModule, loadNuxt } from '@nuxt/kit'
 import type { Nuxt } from '@nuxt/schema'
@@ -12,19 +12,6 @@ let nuxt: Nuxt | undefined
 
 beforeAll(async () => {
   rootDir = await mkdtemp(join(process.cwd(), 'node_modules/.nuxt-ui-eslint-'))
-
-  await mkdir(join(rootDir, 'app'))
-  await writeFile(join(rootDir, 'app/app.config.ts'), `
-    export default defineAppConfig({
-      ui: {
-        colors: {
-          primary: 'my-brand', // primary: 'green'
-          secondary: 'brand2',
-          'brand-accent': 'pink'
-        }
-      }
-    })
-  `)
 
   const entryPoint = join(process.cwd(), 'test/fixtures/consumer/minimal/app/assets/css/main.css')
 
@@ -61,9 +48,4 @@ it('registers the ESLint config with a file URL for Node ESM', async () => {
   ])
   const { default: nuxtUI } = await import(/* @vite-ignore */ config!.imports[0]!.from)
   expect(nuxtUI).toBeTypeOf('function')
-})
-
-it('passes palettes with hyphens and digits from app.config.ts to ESLint', () => {
-  const options = JSON.parse(config?.configs[0]?.slice('...nuxtUI('.length, -1) ?? '{}')
-  expect(options).toMatchObject({ colors: { 'primary': 'my-brand', 'secondary': 'brand2', 'brand-accent': 'pink' } })
 })
