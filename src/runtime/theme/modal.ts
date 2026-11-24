@@ -11,7 +11,7 @@ export default defineTheme({
     footer: 'flex items-center gap-1.5 px-(--ui-gutter) py-4',
     title: 'text-strong font-heading font-(--ui-font-weight-heading,--theme(--font-weight-semibold))',
     description: 'mt-1 text-muted text-sm',
-    actions: 'flex items-center gap-1.5 shrink-0 ms-auto self-start h-lh',
+    actions: 'flex items-center gap-1.5 shrink-0 ms-auto self-start min-h-lh',
     close: '-my-(--ui-control-py) -me-(--ui-control-py)'
   },
   variants: {
