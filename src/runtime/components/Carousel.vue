@@ -301,7 +301,26 @@ function onKeyDown(event: KeyboardEvent) {
 const canScrollNext = ref(false)
 const canScrollPrev = ref(false)
 const selectedIndex = ref<number>(0)
-const scrollSnaps = ref<number[]>([])
+const scrollSnaps = ref<number[]>()
+
+// Embla only knows the scroll snaps once mounted. When every slide fills the viewport there is
+// one snap per slide, so the dots can be rendered on the server and replaced on `init`. Any other
+// basis or flex sizing on a slide can change the snap count, so those dots wait for embla.
+const initialSnapCount = computed(() => {
+  if (!props.dots || !props.items?.length || !props.active || props.slidesToScroll !== 1 || Object.keys(props.breakpoints ?? {}).length) {
+    return 0
+  }
+
+  const fillsViewport = props.items.every((item) => {
+    const classes = ui.value.item({ class: [props.ui?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] }).split(' ')
+
+    return classes.includes('basis-full') && !classes.some(c => c !== 'basis-full' && /(?:^|[:!])(?:basis-|flex-(?:\d|auto|initial|none|\[))/.test(c))
+  })
+
+  return fillsViewport ? props.items.length : 0
+})
+
+const dotCount = computed(() => scrollSnaps.value?.length ?? initialSnapCount.value)
 
 function onInit(api: EmblaCarouselType) {
   scrollSnaps.value = api?.scrollSnapList() || []
@@ -401,7 +420,7 @@ defineExpose({
       </div>
 
       <div v-if="props.dots" role="tablist" :aria-label="t('carousel.dots')" data-slot="dots" :class="ui.dots({ class: props.ui?.dots })">
-        <template v-for="(_, index) in scrollSnaps" :key="index">
+        <template v-for="(_, index) in dotCount" :key="index">
           <button
             type="button"
             role="tab"
