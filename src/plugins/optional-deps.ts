@@ -12,8 +12,7 @@ const peers = Object.keys(peerDependencies)
  */
 export const optionalDependencies = [
   { component: 'Editor', prefix: '@tiptap/' },
-  { component: 'Table', prefix: '@tanstack/vue-table' },
-  { component: 'Carousel', prefix: 'embla-carousel' }
+  { component: 'Table', prefix: '@tanstack/vue-table' }
 ].map(dependency => ({
   ...dependency,
   packages: peers.filter(name => name.startsWith(dependency.prefix))

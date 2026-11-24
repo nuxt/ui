@@ -17,7 +17,7 @@ const items = [
     dots
     :items="items"
     :ui="{
-      container: 'transition-[height]',
+      viewport: 'transition-[height]',
       controls: 'absolute -top-8 inset-x-12',
       dots: '-top-7',
       dot: 'w-6 h-1'

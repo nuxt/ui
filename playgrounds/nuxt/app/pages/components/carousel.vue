@@ -11,7 +11,6 @@ const autoScroll = ref(false)
 const autoHeight = ref(false)
 const fade = ref(false)
 const wheelGestures = ref(false)
-const classNames = ref(false)
 const arrows = ref(false)
 const dots = ref(false)
 const bind = computed(() => ({
@@ -23,7 +22,6 @@ const bind = computed(() => ({
   autoHeight: autoHeight.value,
   fade: fade.value,
   wheelGestures: wheelGestures.value,
-  classNames: classNames.value,
   arrows: arrows.value,
   dots: dots.value
 }))
@@ -62,7 +60,7 @@ const options = computed(() => [{
   }
 }])
 
-const plugins = computed(() => [{
+const features = computed(() => [{
   label: 'Autoplay',
   type: 'checkbox' as const,
   checked: autoplay.value,
@@ -95,14 +93,6 @@ const plugins = computed(() => [{
     fade.value = !fade.value
   }
 }, {
-  label: 'Class Names',
-  type: 'checkbox' as const,
-  checked: classNames.value,
-  onSelect: (e: Event) => {
-    e.preventDefault()
-    classNames.value = !classNames.value
-  }
-}, {
   label: 'Wheel Gestures',
   type: 'checkbox' as const,
   checked: wheelGestures.value,
@@ -125,20 +115,15 @@ const items = Array.from({ length: 6 }).map((_, index) => ({
     <UDropdownMenu :items="options" :content="{ align: 'end' }" :modal="false">
       <UButton :label="`Options (${options.filter(option => option.checked).length})`" color="neutral" variant="outline" trailing-icon="i-lucide-chevron-down" />
     </UDropdownMenu>
-    <UDropdownMenu :items="plugins" :content="{ align: 'end' }" :modal="false">
-      <UButton :label="`Plugins (${plugins.filter(plugin => plugin.checked).length})`" color="neutral" variant="outline" trailing-icon="i-lucide-chevron-down" />
+    <UDropdownMenu :items="features" :content="{ align: 'end' }" :modal="false">
+      <UButton :label="`Features (${features.filter(feature => feature.checked).length})`" color="neutral" variant="outline" trailing-icon="i-lucide-chevron-down" />
     </UDropdownMenu>
     <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
   </Navbar>
 
   <div class="space-y-11 min-h-0">
-    <template v-if="classNames">
-      <UCarousel v-slot="{ item }" v-bind="bind" :items="items" :ui="{ item: 'basis-[70%] transition-opacity ease-in-out [&:not(.is-snapped)]:opacity-10', container: 'h-88' }" class="w-full max-w-xl mx-auto">
-        <img :src="item.src" class="rounded-lg">
-      </UCarousel>
-    </template>
-    <template v-else-if="autoHeight">
-      <UCarousel v-slot="{ item }" v-bind="bind" :items="items" :ui="{ container: 'transition-[height] duration-200' }" class="w-full max-w-md mx-auto">
+    <template v-if="autoHeight">
+      <UCarousel v-slot="{ item }" v-bind="bind" :items="items" :ui="{ viewport: 'transition-[height] duration-200' }" class="w-full max-w-md mx-auto">
         <img :src="item.src" class="rounded-lg">
       </UCarousel>
     </template>

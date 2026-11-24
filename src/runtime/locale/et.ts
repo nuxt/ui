@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Vali kuvatav slaid',
-      goto: 'Mine slaidile {slide}',
       next: 'Järgmine',
       prev: 'Eelmine',
       roledescription: 'karussell',
-      slide: 'slaid'
+      slide: 'slaid',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'Üleslaadimine',

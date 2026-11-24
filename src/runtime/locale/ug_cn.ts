@@ -31,11 +31,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'كۆرسىتىدىغان سلايدنى تاللاڭ',
-      goto: '{slide}-سلايدقا ئاتلاش',
       next: 'كېيىنكى',
       prev: 'ئالدىنقى',
       roledescription: 'ئايلانما كۆرسەتكۈچ',
-      slide: 'سلايد'
+      slide: 'سلايد',
+      slideLabel: '{slide} / {total}'
     },
     chatAttachment: {
       uploading: 'يۈكلەۋاتىدۇ',

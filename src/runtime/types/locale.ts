@@ -24,11 +24,11 @@ export type Messages = {
   }
   carousel: {
     dots: string
-    goto: string
     next: string
     prev: string
     roledescription: string
     slide: string
+    slideLabel: string
   }
   chatAttachment: {
     uploading: string

@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Επιλέξτε διαφάνεια για εμφάνιση',
-      goto: 'Μετάβαση στη διαφάνεια {slide}',
       next: 'Επόμενο',
       prev: 'Προηγούμενο',
       roledescription: 'καρουζέλ',
-      slide: 'διαφάνεια'
+      slide: 'διαφάνεια',
+      slideLabel: '{slide} από {total}'
     },
     chatAttachment: {
       uploading: 'Μεταφόρτωση',

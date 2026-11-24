@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'เลือกสไลด์ที่จะแสดง',
-      goto: 'ไปที่สไลด์ {slide}',
       next: 'ถัดไป',
       prev: 'ย้อนกลับ',
       roledescription: 'ภาพหมุนเวียน',
-      slide: 'สไลด์'
+      slide: 'สไลด์',
+      slideLabel: '{slide} จาก {total}'
     },
     chatAttachment: {
       uploading: 'กำลังอัปโหลด',

@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Scegli diapositiva da visualizzare',
-      goto: 'Vai alla diapositiva {slide}',
       next: 'Successiva',
       prev: 'Precedente',
       roledescription: 'carosello',
-      slide: 'diapositiva'
+      slide: 'diapositiva',
+      slideLabel: '{slide} di {total}'
     },
     chatAttachment: {
       uploading: 'Caricamento',

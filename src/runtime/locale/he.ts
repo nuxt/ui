@@ -31,11 +31,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'בחר שקופית להצגה',
-      goto: 'מעבר לשקופית {slide}',
       next: 'הבא',
       prev: 'הקודם',
       roledescription: 'קרוסלה',
-      slide: 'שקופית'
+      slide: 'שקופית',
+      slideLabel: '{slide} מתוך {total}'
     },
     chatAttachment: {
       uploading: 'מעלה',

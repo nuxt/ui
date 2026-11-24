@@ -31,11 +31,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'اختر الشريحة المراد عرضها',
-      goto: 'الذهاب إلى الشريحة {slide}',
       next: 'التالي',
       prev: 'السابق',
       roledescription: 'عرض شرائح',
-      slide: 'شريحة'
+      slide: 'شريحة',
+      slideLabel: '{slide} من {total}'
     },
     chatAttachment: {
       uploading: 'جارٍ الرفع',

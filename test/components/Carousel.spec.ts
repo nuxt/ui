@@ -1,8 +1,8 @@
-import { createSSRApp, defineComponent, h, nextTick } from 'vue'
-import { renderToString } from 'vue/server-renderer'
-import { describe, it, expect, vi } from 'vitest'
+import { defineComponent } from 'vue'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { flushPromises } from '@vue/test-utils'
 import { renderEach } from '../component-render'
 import Carousel from '../../src/runtime/components/Carousel.vue'
 
@@ -37,12 +37,91 @@ describe('Carousel', () => {
     ['with next', { props: { ...props, arrows: true, next: { color: 'primary' } } }],
     ['with nextIcon', { props: { ...props, arrows: true, nextIcon: 'i-lucide-arrow-right' } }],
     ['with dots', { props: { ...props, dots: true } }],
-    ['with dots and fade', { props: { ...props, dots: true, fade: true } }],
-    ['with dots and multiple items per view', { props: { ...props, dots: true, ui: { item: 'basis-1/3' } } }],
+    ['with defaultValue', { props: { ...props, dots: true, defaultValue: 2 } }],
+    ['with fade', { props: { ...props, fade: true } }],
     ['with as', { props: { ...props, as: 'nav' } }],
     ['with class', { props: { ...props, class: 'w-full max-w-xs' } }],
     ['with ui', { props: { ...props, ui: { viewport: 'h-[320px]' } } }]
   ])
+
+  it('emits update:modelValue when navigating', async () => {
+    const wrapper = await mountSuspended(Carousel, {
+      props: { items, arrows: true, dots: true }
+    })
+
+    await wrapper.find('[data-slot="carousel-next"]').trigger('click')
+    await flushPromises()
+    expect(wrapper.emitted('update:modelValue')?.[0]?.[0]).toBe(1)
+
+    await wrapper.findAll('[data-slot="carousel-dot"]')[4]!.trigger('click')
+    await flushPromises()
+    expect(wrapper.emitted('update:modelValue')?.[1]?.[0]).toBe(4)
+  })
+
+  it.each([false, true])('clamps the current slide when items shrink (fade: %s)', async (fade) => {
+    const wrapper = await mountSuspended(Carousel, {
+      props: { items, fade, defaultValue: 5 }
+    })
+
+    await wrapper.setProps({ items: items.slice(0, 2) })
+    await flushPromises()
+    expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBe(1)
+  })
+
+  it('renders the dots as tabs with one tab stop', async () => {
+    const wrapper = await mountSuspended(Carousel, {
+      props: { items, dots: true }
+    })
+
+    expect(wrapper.find('[data-slot="carousel-dots"]').attributes('role')).toBe('tablist')
+    const dots = wrapper.findAll('[data-slot="carousel-dot"]')
+    expect(dots.map(dot => dot.attributes('tabindex'))).toEqual(['0', '-1', '-1', '-1', '-1', '-1'])
+    expect(dots[0]!.attributes('aria-selected')).toBe('true')
+    expect(dots[0]!.attributes('aria-label')).toBe('1 of 6')
+
+    const slides = wrapper.findAll('[data-slot="carousel-item"]')
+    slides.forEach((slide, index) => {
+      expect(slide.attributes('role')).toBe('tabpanel')
+      expect(dots[index]!.attributes('aria-controls')).toBe(slide.attributes('id'))
+      expect(slide.attributes('aria-labelledby')).toBe(dots[index]!.attributes('id'))
+    })
+  })
+
+  it('emits settle once the slides rest', async () => {
+    const wrapper = await mountSuspended(Carousel, {
+      props: { items, arrows: true, fade: true }
+    })
+
+    await wrapper.find('[data-slot="carousel-next"]').trigger('click')
+    await flushPromises()
+    expect(wrapper.emitted('settle')?.at(-1)?.[0]).toBe(1)
+  })
+
+  it('renders the dot slot in each dot', async () => {
+    const wrapper = await mountSuspended(Carousel, {
+      props: { items, dots: true },
+      slots: { dot: ({ index, active }: { index: number, active: boolean }) => `${index}:${active}` }
+    })
+
+    expect(wrapper.findAll('[data-slot="carousel-dot"]').map(dot => dot.text())).toEqual(['0:true', '1:false', '2:false', '3:false', '4:false', '5:false'])
+  })
+
+  it('exposes navigation methods', async () => {
+    const wrapper = await mountSuspended(Carousel, {
+      props: { items }
+    })
+    const vm = wrapper.vm as unknown as { snapCount: number, canScrollPrev: boolean, scrollNext: () => boolean, scrollTo: (index: number) => boolean }
+
+    expect(vm.snapCount).toBe(6)
+    expect(vm.canScrollPrev).toBe(false)
+    expect(vm.scrollNext()).toBe(true)
+    await flushPromises()
+    expect(wrapper.emitted('update:modelValue')?.[0]?.[0]).toBe(1)
+    expect(vm.canScrollPrev).toBe(true)
+    expect(vm.scrollTo(4)).toBe(true)
+    await flushPromises()
+    expect(wrapper.emitted('update:modelValue')?.[1]?.[0]).toBe(4)
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CarouselWrapper, {
@@ -54,94 +133,5 @@ describe('Carousel', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-  describe('dots before embla init', () => {
-    function getDots(wrapper: { findAll: (selector: string) => { attributes: (name: string) => string | undefined }[] }) {
-      return wrapper.findAll('[data-slot="carousel-dot"]').map(dot => ({
-        selected: dot.attributes('aria-selected'),
-        state: dot.attributes('data-state')
-      }))
-    }
-
-    it('renders one dot per slide on the server with the first one active', async () => {
-      const html = await renderToString(createSSRApp({ render: () => h(Carousel, { items, dots: true }) }))
-
-      expect(html.match(/role="tab"/g)).toHaveLength(items.length)
-      expect(html.match(/aria-selected="true"/g)).toHaveLength(1)
-      expect(html).toMatch(/aria-selected="true"[^>]*data-state="active"/)
-    })
-
-    it('hydrates the server dots without mismatch', async () => {
-      const render = () => h(Carousel, { items, dots: true, fade: true })
-      const container = document.createElement('div')
-      container.innerHTML = await renderToString(createSSRApp({ render }))
-      document.body.appendChild(container)
-
-      const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
-      const error = vi.spyOn(console, 'error').mockImplementation(() => {})
-      const app = createSSRApp({ render })
-      app.mount(container)
-
-      const messages = [...warn.mock.calls, ...error.mock.calls].flat().join(' ')
-      warn.mockRestore()
-      error.mockRestore()
-
-      expect(messages).not.toMatch(/hydration/i)
-      expect(container.querySelectorAll('[data-slot="carousel-dot"]')).toHaveLength(items.length)
-
-      app.unmount()
-      container.remove()
-    })
-
-    it.each([
-      ['multiple items per view', { ui: { item: 'basis-1/3' } }],
-      ['responsive items per view', { ui: { item: 'sm:basis-1/2' } }],
-      ['an item per view override', { items: [...items.slice(0, 5), { ...items[5], class: 'basis-1/2' }] }],
-      ['slidesToScroll', { slidesToScroll: 2 }],
-      ['breakpoints', { breakpoints: { '(min-width: 768px)': { slidesToScroll: 2 } } }],
-      ['active false', { active: false }]
-    ])('renders no dots before init with %s', async (_, extraProps) => {
-      const wrapper = await mountSuspended(Carousel, { props: { items, dots: true, ...extraProps } })
-
-      expect(getDots(wrapper)).toHaveLength(0)
-    })
-
-    it.each([
-      ['one item per view', {}, items.length],
-      ['multiple items per view', { ui: { item: 'basis-1/3' } }, 4]
-    ])('replaces the dots with embla scroll snaps on init with %s', async (_, extraProps, expected) => {
-      // happy-dom has no layout, so give embla a 300px wide container, slides sized from their basis and no margins
-      const width = (el: HTMLElement) => el.dataset.slot === 'carousel-item' && el.classList.contains('basis-1/3') ? 100 : 300
-      const offsetWidth = vi.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockImplementation(function (this: HTMLElement) {
-        return width(this)
-      })
-      const offsetLeft = vi.spyOn(HTMLElement.prototype, 'offsetLeft', 'get').mockImplementation(function (this: HTMLElement) {
-        return this.dataset.slot === 'carousel-item' ? Array.prototype.indexOf.call(this.parentElement!.children, this) * width(this) : 0
-      })
-      const getComputedStyle = vi.spyOn(window, 'getComputedStyle').mockImplementation(() => ({ getPropertyValue: () => '0px' }) as unknown as CSSStyleDeclaration)
-
-      const wrapper = await mountSuspended(Carousel, { props: { items, dots: true, ...extraProps } })
-      const emblaApi = (wrapper.vm as any).emblaApi
-
-      await new Promise(resolve => setTimeout(resolve, 0))
-      await nextTick()
-
-      offsetWidth.mockRestore()
-      offsetLeft.mockRestore()
-      getComputedStyle.mockRestore()
-
-      expect(emblaApi.scrollSnapList()).toHaveLength(expected)
-      expect(getDots(wrapper)).toHaveLength(expected)
-      expect(getDots(wrapper)[0]).toEqual({ selected: 'true', state: 'active' })
-
-      emblaApi.scrollTo(2, true)
-      await nextTick()
-
-      expect(getDots(wrapper)[0]).toEqual({ selected: 'false', state: undefined })
-      expect(getDots(wrapper)[2]).toEqual({ selected: 'true', state: 'active' })
-      expect(wrapper.emitted('select')?.at(-1)).toEqual([2])
-
-      wrapper.unmount()
-    })
   })
 })

@@ -30,11 +30,11 @@ export default defineLocale<Messages>({
     },
     carousel: {
       dots: 'Välj bild att visa',
-      goto: 'Gå till bild {slide}',
       next: 'Nästa',
       prev: 'Föregående',
       roledescription: 'karusell',
-      slide: 'bild'
+      slide: 'bild',
+      slideLabel: '{slide} av {total}'
     },
     chatAttachment: {
       uploading: 'Laddar upp',
