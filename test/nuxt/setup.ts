@@ -1,8 +1,9 @@
 import * as matchers from 'vitest-axe/matchers'
 import type { AxeMatchers } from 'vitest-axe/matchers'
 
-import { expect } from 'vitest'
+import { beforeAll, expect } from 'vitest'
 import { configureAxe } from 'vitest-axe'
+import { preloadOverlayContent } from '../utils/overlays'
 
 declare module 'vitest' {
   export interface Assertion extends AxeMatchers {}
@@ -20,3 +21,5 @@ configureAxe({
 })
 
 expect.extend(matchers)
+
+beforeAll(preloadOverlayContent)

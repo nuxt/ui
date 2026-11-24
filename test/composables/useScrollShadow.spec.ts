@@ -13,7 +13,8 @@ const { arrivedState, measure, resizeObserver } = vi.hoisted(() => ({
   resizeObserver: { callback: undefined as (() => void) | undefined }
 }))
 
-vi.mock('@vueuse/core', () => ({
+vi.mock('@vueuse/core', async importOriginal => ({
+  ...await importOriginal<typeof import('@vueuse/core')>(),
   useScroll: () => ({ arrivedState, measure }),
   useResizeObserver: (_target: unknown, callback: () => void) => {
     resizeObserver.callback = callback

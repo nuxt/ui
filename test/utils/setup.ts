@@ -1,7 +1,8 @@
 import * as matchers from 'vitest-axe/matchers'
 
-import { expect } from 'vitest'
+import { beforeAll, expect } from 'vitest'
 import { configureAxe } from 'vitest-axe'
+import { preloadOverlayContent } from './overlays'
 
 // @ts-expect-error incomplete implementation
 window.IntersectionObserver = class IntersectionObserver {
@@ -38,3 +39,5 @@ configureAxe({
 })
 
 expect.extend(matchers)
+
+beforeAll(preloadOverlayContent)
