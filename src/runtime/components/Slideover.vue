@@ -164,7 +164,7 @@ const ui = computed(() => tv(theme, overrides.value)({
             :aria-label="t('slideover.close')"
             v-bind="(typeof props.close === 'object' ? props.close : {})"
             data-slot="slideover-close"
-            :class="ui.close({ class: props.ui?.close, header: hasHeader() })"
+            :class="ui.close({ class: props.ui?.close })"
           />
         </slot>
       </DialogClose>
@@ -230,7 +230,9 @@ const ui = computed(() => tv(theme, overrides.value)({
               </slot>
             </div>
 
-            <ReuseCloseTemplate v-if="!hasHeader()" />
+            <div v-if="!hasHeader() && (props.close || !!slots.close)" data-slot="slideover-actions" :class="ui.actions({ class: props.ui?.actions, header: false })">
+              <ReuseCloseTemplate />
+            </div>
 
             <div data-slot="slideover-body" :class="ui.body({ class: props.ui?.body })">
               <slot name="body" :close="close" />

@@ -166,7 +166,7 @@ const ui = computed(() => tv(theme, overrides.value)({
             :aria-label="t('modal.close')"
             v-bind="(typeof props.close === 'object' ? props.close : {})"
             data-slot="modal-close"
-            :class="ui.close({ class: props.ui?.close, header: hasHeader() })"
+            :class="ui.close({ class: props.ui?.close })"
           />
         </slot>
       </DialogClose>
@@ -224,7 +224,9 @@ const ui = computed(() => tv(theme, overrides.value)({
             </slot>
           </div>
 
-          <ReuseCloseTemplate v-if="!hasHeader()" />
+          <div v-if="!hasHeader() && (props.close || !!slots.close)" data-slot="modal-actions" :class="ui.actions({ class: props.ui?.actions, header: false })">
+            <ReuseCloseTemplate />
+          </div>
 
           <div v-if="!!slots.body" data-slot="modal-body" :class="ui.body({ class: props.ui?.body })">
             <slot name="body" :close="close" />
