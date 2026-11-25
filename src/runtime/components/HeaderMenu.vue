@@ -37,23 +37,22 @@ let locks = 0
 let restore: (() => void) | undefined
 
 function lockPage() {
-  if (locks++ || typeof document === 'undefined') return
-
-  const html = document.documentElement
-  const { overflow, scrollbarGutter } = html.style
-  html.style.overflow = 'hidden'
-  html.style.scrollbarGutter = 'stable'
-  restore = () => {
-    html.style.overflow = overflow
-    html.style.scrollbarGutter = scrollbarGutter
+  if (!locks++) {
+    const { style } = document.documentElement
+    const { overflow, scrollbarGutter } = style
+    style.overflow = 'hidden'
+    style.scrollbarGutter = 'stable'
+    restore = () => {
+      style.overflow = overflow
+      style.scrollbarGutter = scrollbarGutter
+    }
   }
-}
 
-function unlockPage() {
-  if (--locks) return
-
-  restore?.()
-  restore = undefined
+  return () => {
+    if (!--locks) {
+      restore?.()
+    }
+  }
 }
 </script>
 
@@ -95,22 +94,13 @@ function close() {
 const top = shallowRef<string>()
 
 // Lock `<html>`, not the `<body>` Reka locks for the overlays opened from the menu or the header,
-// so neither restores a value the other one set. Only a lock this menu took is released. The
-// gutter keeps the page from moving under the scrollbar.
-let locked = false
-
-function lock() {
-  if (locked || typeof document === 'undefined') return
-
-  locked = true
-  lockPage()
-}
+// so neither restores a value the other one set. The gutter keeps the page from moving under the
+// scrollbar.
+let release: (() => void) | undefined
 
 function unlock() {
-  if (!locked) return
-
-  locked = false
-  unlockPage()
+  release?.()
+  release = undefined
 }
 
 // Also runs once the header is mounted, for a menu that starts open
@@ -120,7 +110,9 @@ watch([open, inline, root], ([value, isInline, el], previous) => {
     return
   }
 
-  lock()
+  if (typeof document !== 'undefined') {
+    release ??= lockPage()
+  }
 
   if (!el) return
 
@@ -171,16 +163,13 @@ const overlayProps = computed(() => {
 // read out. The Drawer has none.
 const withHeader = computed(() => props.mode !== 'drawer' && !slots.content)
 
-const overlayUi = computed(() => {
-  const overlayUi = (props.overlay as ModalProps | undefined)?.ui as Record<string, any> | undefined
-
-  return {
-    ...overlayUi,
-    overlay: ui.value.overlay({ class: [overlayUi?.overlay, props.ui?.overlay] }),
-    content: ui.value.content({ class: [overlayUi?.content, props.ui?.content] }),
-    ...(withHeader.value ? { title: ['sr-only', overlayUi?.title], body: ui.value.body({ class: [overlayUi?.body, props.ui?.body] }) } : {})
-  }
-})
+// `overlay.ui` styles the other parts of the overlay, these ones come from the `ui` of HeaderMenu
+const overlayUi = computed(() => ({
+  ...(props.overlay as ModalProps | undefined)?.ui,
+  overlay: ui.value.overlay({ class: props.ui?.overlay }),
+  content: ui.value.content({ class: props.ui?.content }),
+  ...(withHeader.value ? { title: 'sr-only', body: ui.value.body({ class: props.ui?.body }) } : {})
+}))
 
 const renderOverlay = useLazyOverlay(
   () => !inline.value && (open.value || (props.overlay as ModalProps | undefined)?.unmountOnHide === false),
