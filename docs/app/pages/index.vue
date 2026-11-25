@@ -71,11 +71,13 @@ if (import.meta.server) {
           <div class="flex items-center gap-2">
             Works with
 
-            <UTooltip v-for="framework in frameworks" :key="framework.label" :text="framework.label">
-              <ULink :to="framework.to" :aria-label="framework.label" class="flex grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition">
-                <UIcon :name="framework.icon" class="size-3.5" />
-              </ULink>
-            </UTooltip>
+            <div class="flex items-center -m-1.25">
+              <UTooltip v-for="framework in frameworks" :key="framework.label" :text="framework.label">
+                <ULink :to="framework.to" :aria-label="framework.label" class="flex items-center justify-center size-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition">
+                  <UIcon :name="framework.icon" class="size-3.5" />
+                </ULink>
+              </UTooltip>
+            </div>
           </div>
 
           <template v-if="downloads">
