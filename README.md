@@ -34,6 +34,7 @@ Start your project from one of the Nuxt UI templates below, or browse them all o
 - [Changelog](https://github.com/nuxt-ui-templates/changelog): A changelog template to display your repository release notes from GitHub powered by Nuxt MDC.
 - [Editor](https://github.com/nuxt-ui-templates/editor): A rich text editor template powered by TipTap with support for markdown, HTML, and JSON content types.
 - [Calendar](https://github.com/nuxt-ui-templates/calendar): An Apple Calendar inspired template with day, week and month views, drag and drop and optimistic updates.
+- [Shop](https://github.com/nuxt-ui-templates/shop): A Shopify storefront template with products, collections, search, cart and customer accounts.
 
 ## Installation
 
