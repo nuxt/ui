@@ -132,17 +132,19 @@ let opener: HTMLElement | undefined
 
 const scrollLock = useScrollLock(() => typeof document !== 'undefined' ? document.body : null)
 
-watch(open, (value) => {
-  if (!underHeader.value || typeof document === 'undefined') return
+watch([open, underHeader], ([value, under]) => {
+  scrollLock.value = value && under
+}, { immediate: true })
 
-  scrollLock.value = value
+// Also runs once the root is mounted, for a menu that starts open
+watch([open, rootEl], ([value, el], previous) => {
+  if (!value || !underHeader.value || !el) return
 
-  if (value) {
-    const bottom = rootEl.value?.getBoundingClientRect().bottom
-    menuTop.value = bottom !== undefined ? `${Math.max(bottom, 0)}px` : undefined
+  menuTop.value = `${Math.max(el.getBoundingClientRect().bottom, 0)}px`
 
+  if (!previous?.[0]) {
     const active = document.activeElement as HTMLElement | null
-    opener = active && rootEl.value?.contains(active) ? active : undefined
+    opener = active && el.contains(active) ? active : undefined
   }
 }, { immediate: true, flush: 'sync' })
 

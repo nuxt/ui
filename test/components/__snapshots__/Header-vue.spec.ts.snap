@@ -170,7 +170,7 @@ exports[`Header > renders with mode modal correctly 1`] = `
 
 
 <!--v-if-->
-<div data-dismissable-layer="" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none inset-0 fixed lg:hidden top-(--ui-header-height) z-40" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-1" aria-labelledby="reka-dialog-title-v-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0">Open menu</h2><p id="reka-dialog-description-v-0-1"></p></span>
+<div data-dismissable-layer="" style="top: 0px;" tabindex="-1" data-slot="modal-content" class="bg-overlay divide-y divide-default flex flex-col focus:outline-none inset-0 fixed lg:hidden top-(--ui-header-height) z-40" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-1" aria-labelledby="reka-dialog-title-v-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0">Open menu</h2><p id="reka-dialog-description-v-0-1"></p></span>
   <div data-slot="header-body" class="p-(--ui-gutter) overflow-y-auto"></div>
 </div>
 
@@ -193,14 +193,14 @@ exports[`Header > renders with mode slideover correctly 1`] = `
       </button></div>
   </div>
 </header>
-<div data-slot="header-overlay" data-state="open" class="lg:hidden fixed inset-x-0 bottom-0 top-(--ui-header-height) z-40 bg-backdrop transition-[opacity,visibility] duration-200 ease-out starting:opacity-0 data-[state=closed]:invisible data-[state=closed]:opacity-0 motion-reduce:transition-none"></div>
+<div data-slot="header-overlay" data-state="open" class="lg:hidden fixed inset-x-0 bottom-0 top-(--ui-header-height) z-40 bg-backdrop transition-[opacity,visibility] duration-200 ease-out starting:opacity-0 data-[state=closed]:invisible data-[state=closed]:opacity-0 motion-reduce:transition-none" style="top: 0px;"></div>
 <!--v-if-->
 <!--teleport start-->
 
 
 
 <!--v-if-->
-<div data-dismissable-layer="" tabindex="-1" data-side="right" data-slot="slideover-content" class="fixed bg-overlay divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none sm:max-w-md w-full inset-y-0 right-0 data-[state=open]:animate-[slide-in-from-right_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_200ms_var(--ease-out)] lg:hidden top-(--ui-header-height) z-40" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-1" aria-labelledby="reka-dialog-title-v-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0">Open menu</h2><p id="reka-dialog-description-v-0-1"></p></span>
+<div data-dismissable-layer="" style="top: 0px;" tabindex="-1" data-side="right" data-slot="slideover-content" class="fixed bg-overlay divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none sm:max-w-md w-full inset-y-0 right-0 data-[state=open]:animate-[slide-in-from-right_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_200ms_var(--ease-out)] lg:hidden top-(--ui-header-height) z-40" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-1" aria-labelledby="reka-dialog-title-v-0-0" data-state="open"><span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0">Open menu</h2><p id="reka-dialog-description-v-0-1"></p></span>
   <div data-slot="header-body" class="p-(--ui-gutter) overflow-y-auto"></div>
 </div>
 
