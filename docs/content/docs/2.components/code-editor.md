@@ -97,7 +97,7 @@ props:
 
 ### Theme
 
-Use the `theme` prop to set the [Shiki theme](https://shiki.style/themes) used to color the tokens. Pass an object to use a different theme in light and dark mode. Defaults to `material-theme-lighter` and `material-theme-palenight`.
+Use the `theme` prop to set the [Shiki theme](https://shiki.style/themes) used to color the tokens. Pass an object to use a different theme in light and dark mode. Defaults to `nuxt-ui`, a theme built on CSS variables that follows your `primary` color and the color mode, see [Token colors](#token-colors).
 
 ::component-code
 ---
@@ -118,6 +118,23 @@ props:
 ::note
 Only the token colors of the theme are used, the background and the chrome of the editor follow your Nuxt UI theme.
 ::
+
+### Token colors
+
+The default `nuxt-ui` theme reads its colors from CSS variables, so the tokens change with your theme and the color mode without loading another theme. Keywords use your `primary` color and comments the muted text color. Override the variables to change them globally, for example in your `main.css`:
+
+```css [main.css]
+:root {
+  --ui-code-editor-token-keyword: var(--ui-secondary);
+  --ui-code-editor-token-string: var(--ui-success);
+}
+
+.dark {
+  --ui-code-editor-token-string: var(--ui-success);
+}
+```
+
+The variables are `--ui-code-editor-token-keyword`, `-function`, `-constant`, `-string`, `-string-expression`, `-parameter`, `-link`, `-inserted`, `-comment` and `-punctuation`. Set `--ui-code-editor-foreground` to color the remaining text, it inherits the text color of the variant by default.
 
 ### Placeholder
 
@@ -286,13 +303,29 @@ The CodeEditor integrates with the [Form](/docs/components/form) and [FormField]
 
 ### With extensions
 
-Use the `extensions` prop to pass additional [CodeMirror extensions](https://codemirror.net/docs/extensions/), they are appended after the built-in ones. This example binds :kbd{value="meta"} :kbd{value="S"} to a save command and highlights whitespace.
+Use the `extensions` prop to pass additional [CodeMirror extensions](https://codemirror.net/docs/extensions/), they take precedence over the built-in ones. This example binds :kbd{value="meta"} :kbd{value="S"} to a save command and highlights whitespace.
 
 :component-example{name="code-editor-extensions-example"}
 
 ::note
 The built-in extensions include the history, bracket matching and closing, the search panel, the active line and selection matches highlighting. The selection is drawn natively by the browser, add `drawSelection()` and `EditorState.allowMultipleSelections.of(true)` for multiple cursors. Pass the `indent-with-tab` prop to indent with the :kbd{value="Tab"} key, disabled by default as it traps the keyboard focus.
 ::
+
+### With built-in extensions replaced
+
+Pass a function to the `extensions` prop to receive the built-in extensions and return the list to use instead, to remove or reorder them. The props, the model and the highlighting keep working whatever it returns. This example removes the active line highlight and shows the whitespace.
+
+:component-example{name="code-editor-builtins-example"}
+
+::tip
+Define the array or the function in your script rather than inline in the template, a new value reconfigures the editor.
+::
+
+### With search slot
+
+Use the `search` slot to replace the content of the search panel opened with :kbd{value="meta"} :kbd{value="F"}. It receives the search `query` to bind your inputs to, the `findNext`, `findPrevious`, `selectAll`, `replaceNext`, `replaceAll` and `close` commands, and `readonly` to hide the replace controls. The first input of the panel is focused when it opens and :kbd{value="escape"} still closes it.
+
+:component-example{name="code-editor-search-slot-example"}
 
 ### Server-side rendering
 

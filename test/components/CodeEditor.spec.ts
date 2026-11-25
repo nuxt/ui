@@ -3,9 +3,10 @@ import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises } from '@vue/test-utils'
 import { createSSRApp, h, onServerPrefetch } from 'vue'
+import { openSearchPanel, searchPanelOpen } from '@codemirror/search'
 import { renderToString } from 'vue/server-renderer'
 import CodeEditor from '../../src/runtime/components/CodeEditor.vue'
-import { getCodeEditorHighlighter, prepareCodeEditorHighlighter } from '../../src/runtime/utils/code-editor'
+import { CODE_EDITOR_THEME, getCodeEditorHighlighter, prepareCodeEditorHighlighter, resolveCodeEditorThemes } from '../../src/runtime/utils/code-editor'
 import { renderEach } from '../component-render'
 import theme from '#build/ui/code-editor'
 
@@ -159,7 +160,7 @@ describe('CodeEditor', () => {
       const highlighter = await getCodeEditorHighlighter()
       await prepareCodeEditorHighlighter(highlighter, 'ts', { light: 'material-theme-lighter', dark: 'material-theme-palenight' })
 
-      const html = await renderSSR({ modelValue: 'const answer = 42', lang: 'ts', highlighter })
+      const html = await renderSSR({ modelValue: 'const answer = 42', lang: 'ts', highlighter, theme: { light: 'material-theme-lighter', dark: 'material-theme-palenight' } })
 
       expect(html).toContain('class="cm-shiki"')
       expect(html).toContain('--shiki-light:')
@@ -167,8 +168,18 @@ describe('CodeEditor', () => {
       expect(html).toContain('<span class="cm-shiki" style="--shiki-light:#')
     })
 
+    it('colors the tokens with the CSS variables of the default theme', async () => {
+      const highlighter = await getCodeEditorHighlighter()
+      await prepareCodeEditorHighlighter(highlighter, 'ts', resolveCodeEditorThemes(CODE_EDITOR_THEME))
+
+      const html = await renderSSR({ modelValue: 'const answer = 42', lang: 'ts', highlighter })
+
+      expect(html).toContain('--shiki-light:var(--ui-code-editor-token-keyword)')
+      expect(html).toContain('--shiki-dark:var(--ui-code-editor-token-keyword)')
+    })
+
     it('highlights with the shared highlighter once it has been prepared', async () => {
-      await prepareCodeEditorHighlighter(await getCodeEditorHighlighter(), 'json', { light: 'material-theme-lighter', dark: 'material-theme-palenight' })
+      await prepareCodeEditorHighlighter(await getCodeEditorHighlighter(), 'json', resolveCodeEditorThemes(CODE_EDITOR_THEME))
 
       const html = await renderSSR({ modelValue: '{ "ok": true }', lang: 'json' })
 
@@ -202,6 +213,60 @@ describe('CodeEditor', () => {
 
     expect(wrapper.vm.view!.state.readOnly).toBe(true)
     expect(wrapper.find('.cm-content').attributes('aria-readonly')).toBe('true')
+
+    wrapper.unmount()
+  })
+
+  test('appends the extensions to the built-in ones', async () => {
+    const wrapper = await mountSuspended(CodeEditor, {
+      props: { modelValue: 'a', extensions: [] }
+    })
+
+    expect(wrapper.find('.cm-activeLine').exists()).toBe(true)
+
+    wrapper.unmount()
+  })
+
+  test('replaces the built-in extensions with an extensions function', async () => {
+    const extensions = vi.fn(() => [])
+    const wrapper = await mountSuspended(CodeEditor, {
+      props: { modelValue: 'a', extensions }
+    })
+
+    expect(extensions).toHaveBeenCalledWith(expect.arrayContaining([expect.anything()]))
+    expect(wrapper.find('.cm-activeLine').exists()).toBe(false)
+
+    // The model still follows the document without the built-ins.
+    wrapper.vm.view!.dispatch({ changes: { from: 1, insert: 'b' } })
+    await flushPromises()
+    expect(wrapper.emitted('update:modelValue')).toEqual([['ab']])
+
+    wrapper.unmount()
+  })
+
+  test('renders the search slot in the search panel', async () => {
+    const wrapper = await mountSuspended(CodeEditor, {
+      props: { modelValue: 'foo bar foo' },
+      slots: {
+        search: ({ query, close }: any) => h('div', { 'data-test': 'search' }, [
+          h('input', { value: query.search, onInput: (event: Event) => { query.search = (event.target as HTMLInputElement).value } }),
+          h('button', { onClick: close }, 'Close')
+        ])
+      },
+      attachTo: document.body
+    })
+
+    openSearchPanel(wrapper.vm.view!)
+    await flushPromises()
+
+    const panel = wrapper.find('[data-test="search"]')
+    expect(panel.exists()).toBe(true)
+
+    await panel.find('input').setValue('foo')
+    expect(wrapper.findAll('.cm-searchMatch')).toHaveLength(2)
+
+    await panel.find('button').trigger('click')
+    expect(searchPanelOpen(wrapper.vm.view!.state)).toBe(false)
 
     wrapper.unmount()
   })

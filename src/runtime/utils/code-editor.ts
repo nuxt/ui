@@ -3,7 +3,7 @@ import { StateEffect } from '@codemirror/state'
 import type { DecorationSet, EditorView, ViewUpdate } from '@codemirror/view'
 import { Decoration, ViewPlugin } from '@codemirror/view'
 import type { GrammarState, HighlighterGeneric } from 'shiki'
-import { createHighlighter, createJavaScriptRegexEngine, isSpecialLang, stringifyTokenStyle } from 'shiki'
+import { createCssVariablesTheme, createHighlighter, createJavaScriptRegexEngine, isSpecialLang, stringifyTokenStyle } from 'shiki'
 
 export type CodeEditorHighlighter = HighlighterGeneric<any, any>
 
@@ -24,6 +24,20 @@ const MAX_LINE_LENGTH = 20_000
 export interface CodeEditorToken {
   content: string
   style?: string
+}
+
+/**
+ * The name of the default theme. Its colors are the `--ui-code-editor-token-*` CSS variables,
+ * so the tokens follow the app theme and the color mode without loading another theme.
+ */
+export const CODE_EDITOR_THEME = 'nuxt-ui'
+
+let cssVariablesTheme: ReturnType<typeof createCssVariablesTheme> | undefined
+
+function getCssVariablesTheme() {
+  cssVariablesTheme ??= createCssVariablesTheme({ name: CODE_EDITOR_THEME, variablePrefix: '--ui-code-editor-', fontStyle: true })
+
+  return cssVariablesTheme
 }
 
 let highlighter: Promise<CodeEditorHighlighter> | undefined
@@ -96,7 +110,7 @@ export async function prepareCodeEditorHighlighter(highlighter: CodeEditorHighli
   const loadedThemes = highlighter.getLoadedThemes()
   for (const theme of new Set([themes.light, themes.dark])) {
     if (!loadedThemes.includes(theme)) {
-      tasks.push(highlighter.loadTheme(theme))
+      tasks.push(highlighter.loadTheme(theme === CODE_EDITOR_THEME ? getCssVariablesTheme() : theme))
     }
   }
 

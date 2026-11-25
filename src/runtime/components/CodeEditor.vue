@@ -31,7 +31,8 @@ export interface CodeEditorProps {
   lang?: string
   /**
    * The Shiki theme used to color the tokens, or one theme per color mode.
-   * @defaultValue { light: 'material-theme-lighter', dark: 'material-theme-palenight' }
+   * The default `nuxt-ui` theme reads the `--ui-code-editor-token-*` CSS variables, so it follows your theme and the color mode.
+   * @defaultValue 'nuxt-ui'
    * @see https://shiki.style/themes
    */
   theme?: string | CodeEditorThemes
@@ -88,10 +89,12 @@ export interface CodeEditorProps {
    */
   indentWithTab?: boolean
   /**
-   * Additional CodeMirror extensions, appended after the built-in ones.
+   * Additional CodeMirror extensions, which take precedence over the built-in ones.
+   * Pass a function to receive the built-in extensions and return the list to use instead, to remove or reorder them.
+   * The props, the model and the highlighting keep working whatever it returns.
    * @see https://codemirror.net/docs/extensions/
    */
-  extensions?: Extension[]
+  extensions?: Extension[] | ((builtins: Extension[]) => Extension[])
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /** Keep the mobile text size on all breakpoints. */
@@ -109,8 +112,32 @@ export interface CodeEditorEmits {
   'change': [event: Event]
 }
 
+export interface CodeEditorSearchQuery {
+  search: string
+  replace: string
+  caseSensitive: boolean
+  regexp: boolean
+  wholeWord: boolean
+}
+
+export interface CodeEditorSearchSlotProps {
+  /** The search query, mutate it (or bind it with `v-model`) to search. */
+  query: CodeEditorSearchQuery
+  /** Whether the editor is read-only, the replace controls should be hidden. */
+  readonly: boolean
+  findNext: () => void
+  findPrevious: () => void
+  selectAll: () => void
+  replaceNext: () => void
+  replaceAll: () => void
+  close: () => void
+  ui: CodeEditor['ui']
+}
+
 export interface CodeEditorSlots {
   default?(props: { ui: CodeEditor['ui'] }): VNode[]
+  /** The content of the search panel opened with `Mod-f`, the first input inside it is focused when it opens. */
+  search?(props: CodeEditorSearchSlotProps): VNode[]
 }
 </script>
 
@@ -129,7 +156,7 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { omit } from '../utils'
-import { getCodeEditorHighlighter, getResolvedCodeEditorHighlighter, isCodeEditorHighlighterReady, prepareCodeEditorHighlighter, resolveCodeEditorThemes, shikiHighlight, tokenizeCodeEditorLines } from '../utils/code-editor'
+import { CODE_EDITOR_THEME, getCodeEditorHighlighter, getResolvedCodeEditorHighlighter, isCodeEditorHighlighterReady, prepareCodeEditorHighlighter, resolveCodeEditorThemes, shikiHighlight, tokenizeCodeEditorLines } from '../utils/code-editor'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 import UFieldGroup from './FieldGroup.vue'
@@ -254,8 +281,28 @@ function attributesExtension(): Extension {
   ]
 }
 
+// Everything that is not driven by a prop or needed by the model, so the `extensions` function can replace it.
+function builtinExtensions(): Extension[] {
+  return [
+    highlightSpecialChars(),
+    history(),
+    dropCursor(),
+    highlightActiveLine(),
+    highlightSelectionMatches(),
+    bracketMatching(),
+    closeBrackets(),
+    search({ top: false, createPanel: createSearchPanel }),
+    keymap.of([...closeBracketsKeymap, ...defaultKeymap, ...searchKeymap, ...historyKeymap])
+  ]
+}
+
 function extensionsExtension(): Extension {
-  return props.extensions ?? []
+  if (typeof props.extensions === 'function') {
+    return props.extensions(builtinExtensions())
+  }
+
+  // Listed first so their key bindings win over the default keymap.
+  return [...(props.extensions ?? []), ...builtinExtensions()]
 }
 
 function updateModel(value: string) {
@@ -315,15 +362,6 @@ function createState(doc: string): EditorState {
       compartments.attributes.of(attributesExtension()),
       compartments.highlight.of([]),
       compartments.extensions.of(extensionsExtension()),
-      highlightSpecialChars(),
-      history(),
-      dropCursor(),
-      highlightActiveLine(),
-      highlightSelectionMatches(),
-      bracketMatching(),
-      closeBrackets(),
-      search({ top: false, createPanel: createSearchPanel }),
-      keymap.of([...closeBracketsKeymap, ...defaultKeymap, ...searchKeymap, ...historyKeymap]),
       CodeMirrorView.updateListener.of(onUpdate),
       CodeMirrorView.domEventHandlers({ focus: onFocus, blur: onBlur })
     ]
@@ -339,7 +377,7 @@ function resolveLang(): string {
 }
 
 function resolveThemes(): CodeEditorThemes {
-  return resolveCodeEditorThemes(props.theme ?? { light: 'material-theme-lighter', dark: 'material-theme-palenight' })
+  return resolveCodeEditorThemes(props.theme ?? CODE_EDITOR_THEME)
 }
 
 // Bumped once the server has prepared the highlighter, so the fallback re-tokenizes.
@@ -402,7 +440,7 @@ async function loadHighlight() {
 const searchPanel = shallowRef<HTMLElement>()
 const searchInputRef = useTemplateRef<{ inputRef: HTMLInputElement | null }>('searchInputRef')
 const replaceInputRef = useTemplateRef<{ inputRef: HTMLInputElement | null }>('replaceInputRef')
-const query = reactive({ search: '', replace: '', caseSensitive: false, regexp: false, wholeWord: false })
+const query = reactive<CodeEditorSearchQuery>({ search: '', replace: '', caseSensitive: false, regexp: false, wholeWord: false })
 
 function syncQuery(searchQuery: SearchQuery) {
   Object.assign(query, {
@@ -425,9 +463,11 @@ function createSearchPanel(editor: EditorView): Panel {
     dom,
     top: false,
     mount() {
+      // The first input of the panel, which can come from the `search` slot.
       nextTick(() => {
-        searchInputRef.value?.inputRef?.focus()
-        searchInputRef.value?.inputRef?.select()
+        const input = dom.querySelector('input')
+        input?.focus()
+        input?.select()
       })
     },
     update(update) {
@@ -470,6 +510,18 @@ function runCommand(command: (editor: EditorView) => boolean) {
     command(view.value)
   }
 }
+
+const searchSlotProps = computed<CodeEditorSearchSlotProps>(() => ({
+  query,
+  readonly: readonly.value,
+  findNext: () => runCommand(findNext),
+  findPrevious: () => runCommand(findPrevious),
+  selectAll: () => runCommand(selectMatches),
+  replaceNext: () => runCommand(replaceNext),
+  replaceAll: () => runCommand(replaceAll),
+  close: () => runCommand(closeSearchPanel),
+  ui: ui.value
+}))
 
 let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
 
@@ -566,134 +618,136 @@ defineExpose({
     <slot :ui="ui" />
 
     <Teleport v-if="searchPanel" :to="searchPanel">
-      <UInput
-        ref="searchInputRef"
-        v-model="query.search"
-        main-field
-        :placeholder="t('codeEditor.search')"
-        :aria-label="t('codeEditor.search')"
-        :size="((props.ui?.searchControlSize || ui.searchControlSize()) as any)"
-        color="neutral"
-        data-slot="searchInput"
-        :class="ui.searchInput({ class: props.ui?.searchInput })"
-        :ui="{ trailing: 'pe-0' }"
-      >
-        <template #trailing>
-          <div :class="ui.searchToggles({ class: props.ui?.searchToggles })">
-            <UButton
-              :icon="appConfig.ui.icons.caseSensitive"
-              :aria-label="t('codeEditor.matchCase')"
-              :title="t('codeEditor.matchCase')"
-              :aria-pressed="query.caseSensitive"
-              :active="query.caseSensitive"
-              color="neutral"
-              variant="ghost"
-              active-color="primary"
-              active-variant="subtle"
-              size="xs"
-              square
-              @click="query.caseSensitive = !query.caseSensitive"
-            />
-            <UButton
-              :icon="appConfig.ui.icons.regex"
-              :aria-label="t('codeEditor.regexp')"
-              :title="t('codeEditor.regexp')"
-              :aria-pressed="query.regexp"
-              :active="query.regexp"
-              color="neutral"
-              variant="ghost"
-              active-color="primary"
-              active-variant="subtle"
-              size="xs"
-              square
-              @click="query.regexp = !query.regexp"
-            />
-            <UButton
-              :icon="appConfig.ui.icons.wholeWord"
-              :aria-label="t('codeEditor.wholeWord')"
-              :title="t('codeEditor.wholeWord')"
-              :aria-pressed="query.wholeWord"
-              :active="query.wholeWord"
-              color="neutral"
-              variant="ghost"
-              active-color="primary"
-              active-variant="subtle"
-              size="xs"
-              square
-              @click="query.wholeWord = !query.wholeWord"
-            />
-          </div>
-        </template>
-      </UInput>
-
-      <UFieldGroup :size="((props.ui?.searchControlSize || ui.searchControlSize()) as any)">
-        <UButton
-          :icon="appConfig.ui.icons.chevronUp"
-          :aria-label="t('codeEditor.prev')"
-          :title="t('codeEditor.prev')"
-          color="neutral"
-          variant="outline"
-          @click="runCommand(findPrevious)"
-        />
-        <UButton
-          :icon="appConfig.ui.icons.chevronDown"
-          :aria-label="t('codeEditor.next')"
-          :title="t('codeEditor.next')"
-          color="neutral"
-          variant="outline"
-          @click="runCommand(findNext)"
-        />
-      </UFieldGroup>
-
-      <UButton
-        :label="t('codeEditor.selectAll')"
-        :size="((props.ui?.searchControlSize || ui.searchControlSize()) as any)"
-        color="neutral"
-        variant="outline"
-        @click="runCommand(selectMatches)"
-      />
-
-      <template v-if="!readonly">
+      <slot name="search" v-bind="searchSlotProps">
         <UInput
-          ref="replaceInputRef"
-          v-model="query.replace"
-          :placeholder="t('codeEditor.replace')"
-          :aria-label="t('codeEditor.replace')"
+          ref="searchInputRef"
+          v-model="query.search"
+          main-field
+          :placeholder="t('codeEditor.search')"
+          :aria-label="t('codeEditor.search')"
           :size="((props.ui?.searchControlSize || ui.searchControlSize()) as any)"
           color="neutral"
-          data-slot="replaceInput"
+          data-slot="searchInput"
           :class="ui.searchInput({ class: props.ui?.searchInput })"
-        />
+          :ui="{ trailing: 'pe-0' }"
+        >
+          <template #trailing>
+            <div :class="ui.searchToggles({ class: props.ui?.searchToggles })">
+              <UButton
+                :icon="appConfig.ui.icons.caseSensitive"
+                :aria-label="t('codeEditor.matchCase')"
+                :title="t('codeEditor.matchCase')"
+                :aria-pressed="query.caseSensitive"
+                :active="query.caseSensitive"
+                color="neutral"
+                variant="ghost"
+                active-color="primary"
+                active-variant="subtle"
+                size="xs"
+                square
+                @click="query.caseSensitive = !query.caseSensitive"
+              />
+              <UButton
+                :icon="appConfig.ui.icons.regex"
+                :aria-label="t('codeEditor.regexp')"
+                :title="t('codeEditor.regexp')"
+                :aria-pressed="query.regexp"
+                :active="query.regexp"
+                color="neutral"
+                variant="ghost"
+                active-color="primary"
+                active-variant="subtle"
+                size="xs"
+                square
+                @click="query.regexp = !query.regexp"
+              />
+              <UButton
+                :icon="appConfig.ui.icons.wholeWord"
+                :aria-label="t('codeEditor.wholeWord')"
+                :title="t('codeEditor.wholeWord')"
+                :aria-pressed="query.wholeWord"
+                :active="query.wholeWord"
+                color="neutral"
+                variant="ghost"
+                active-color="primary"
+                active-variant="subtle"
+                size="xs"
+                square
+                @click="query.wholeWord = !query.wholeWord"
+              />
+            </div>
+          </template>
+        </UInput>
 
         <UFieldGroup :size="((props.ui?.searchControlSize || ui.searchControlSize()) as any)">
           <UButton
-            :icon="appConfig.ui.icons.replace"
-            :label="t('codeEditor.replaceNext')"
+            :icon="appConfig.ui.icons.chevronUp"
+            :aria-label="t('codeEditor.prev')"
+            :title="t('codeEditor.prev')"
             color="neutral"
             variant="outline"
-            @click="runCommand(replaceNext)"
+            @click="runCommand(findPrevious)"
           />
           <UButton
-            :icon="appConfig.ui.icons.replaceAll"
-            :label="t('codeEditor.replaceAll')"
+            :icon="appConfig.ui.icons.chevronDown"
+            :aria-label="t('codeEditor.next')"
+            :title="t('codeEditor.next')"
             color="neutral"
             variant="outline"
-            @click="runCommand(replaceAll)"
+            @click="runCommand(findNext)"
           />
         </UFieldGroup>
-      </template>
 
-      <UButton
-        :icon="appConfig.ui.icons.close"
-        :aria-label="t('codeEditor.close')"
-        :title="t('codeEditor.close')"
-        :size="((props.ui?.searchControlSize || ui.searchControlSize()) as any)"
-        color="neutral"
-        variant="ghost"
-        square
-        class="ms-auto"
-        @click="runCommand(closeSearchPanel)"
-      />
+        <UButton
+          :label="t('codeEditor.selectAll')"
+          :size="((props.ui?.searchControlSize || ui.searchControlSize()) as any)"
+          color="neutral"
+          variant="outline"
+          @click="runCommand(selectMatches)"
+        />
+
+        <template v-if="!readonly">
+          <UInput
+            ref="replaceInputRef"
+            v-model="query.replace"
+            :placeholder="t('codeEditor.replace')"
+            :aria-label="t('codeEditor.replace')"
+            :size="((props.ui?.searchControlSize || ui.searchControlSize()) as any)"
+            color="neutral"
+            data-slot="replaceInput"
+            :class="ui.searchInput({ class: props.ui?.searchInput })"
+          />
+
+          <UFieldGroup :size="((props.ui?.searchControlSize || ui.searchControlSize()) as any)">
+            <UButton
+              :icon="appConfig.ui.icons.replace"
+              :label="t('codeEditor.replaceNext')"
+              color="neutral"
+              variant="outline"
+              @click="runCommand(replaceNext)"
+            />
+            <UButton
+              :icon="appConfig.ui.icons.replaceAll"
+              :label="t('codeEditor.replaceAll')"
+              color="neutral"
+              variant="outline"
+              @click="runCommand(replaceAll)"
+            />
+          </UFieldGroup>
+        </template>
+
+        <UButton
+          :icon="appConfig.ui.icons.close"
+          :aria-label="t('codeEditor.close')"
+          :title="t('codeEditor.close')"
+          :size="((props.ui?.searchControlSize || ui.searchControlSize()) as any)"
+          color="neutral"
+          variant="ghost"
+          square
+          class="ms-auto"
+          @click="runCommand(closeSearchPanel)"
+        />
+      </slot>
     </Teleport>
   </Primitive>
 </template>
