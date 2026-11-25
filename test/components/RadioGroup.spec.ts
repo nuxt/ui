@@ -199,4 +199,27 @@ describe('RadioGroup', () => {
       expect(wrapper.find('[data-testid="custom-label"]').exists()).toBe(true)
     })
   })
+
+  describe('item description', () => {
+    const items = [
+      { value: 'a', label: 'At home', description: 'Use your equipment.' },
+      { value: 'b', label: 'Full gym', description: 'A shared equipment room.' }
+    ]
+
+    test.each(['list', 'card', 'table'] as const)('links the description with aria-describedby in the %s variant', async (variant) => {
+      const wrapper = await mountSuspended(RadioGroup, { props: { items, variant } })
+      const describedby = wrapper.find('[role="radio"]').attributes('aria-describedby')
+
+      expect(describedby, 'aria-describedby').toBeDefined()
+      expect(wrapper.get(`[id="${describedby}"]`).text()).toBe('Use your equipment.')
+    })
+
+    test.each(['card', 'table'] as const)('is labelled by the label only in the %s variant', async (variant) => {
+      const wrapper = await mountSuspended(RadioGroup, { props: { items, variant } })
+      const labelledby = wrapper.find('[role="radio"]').attributes('aria-labelledby')
+
+      expect(labelledby, 'aria-labelledby').toBeDefined()
+      expect(wrapper.get(`[id="${labelledby}"]`).text()).toBe('At home')
+    })
+  })
 })
