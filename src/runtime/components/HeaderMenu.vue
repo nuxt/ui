@@ -161,15 +161,20 @@ const overlayProps = computed(() => {
 
 // The Modal and the Slideover show their own close in a header of their own, the title is only
 // read out. The Drawer has none.
-const withHeader = computed(() => props.mode !== 'drawer' && !slots.content)
+// Slots aren't reactive, so this is read on render
+function withHeader() {
+  return props.mode !== 'drawer' && !slots.content
+}
 
 // `overlay.ui` styles the other parts of the overlay, these ones come from the `ui` of HeaderMenu
-const overlayUi = computed(() => ({
-  ...(props.overlay as ModalProps | undefined)?.ui,
-  overlay: ui.value.overlay({ class: props.ui?.overlay }),
-  content: ui.value.content({ class: props.ui?.content }),
-  ...(withHeader.value ? { title: 'sr-only', body: ui.value.body({ class: props.ui?.body }) } : {})
-}))
+function overlayUi() {
+  return {
+    ...(props.overlay as ModalProps | undefined)?.ui,
+    overlay: ui.value.overlay({ class: props.ui?.overlay }),
+    content: ui.value.content({ class: props.ui?.content }),
+    ...(withHeader() ? { title: 'sr-only', body: ui.value.body({ class: props.ui?.body }) } : {})
+  }
+}
 
 const renderOverlay = useLazyOverlay(
   () => !inline.value && (open.value || (props.overlay as ModalProps | undefined)?.unmountOnHide === false),
@@ -200,9 +205,9 @@ const renderOverlay = useLazyOverlay(
     :title="locale.messages.header?.title || t('header.open')"
     :description="locale.messages.header?.description"
     v-bind="overlayProps"
-    :ui="overlayUi"
+    :ui="overlayUi()"
   >
-    <template v-if="withHeader" #body>
+    <template v-if="withHeader()" #body>
       <slot />
     </template>
 

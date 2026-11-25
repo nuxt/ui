@@ -108,8 +108,10 @@ const root = computed(() => unrefElement(rootRef) as HTMLElement | undefined)
 
 provideHeaderContext({ open, root })
 
-// The toggle only shows when there is a menu to open
-const hasMenu = computed(() => !!slots.body || !!slots.menu)
+// The toggle only shows when there is a menu to open. Slots aren't reactive, read them on render.
+function hasMenu() {
+  return !!slots.body || !!slots.menu
+}
 
 function toggleOpen() {
   open.value = !open.value
@@ -124,7 +126,7 @@ function close() {
   <!-- The menu is a non-modal dialog: the header stays usable while it's open -->
   <DialogRoot v-model:open="open" :modal="false">
     <DefineToggleTemplate>
-      <slot v-if="hasMenu" name="toggle" :open="open" :toggle="toggleOpen" :ui="ui">
+      <slot v-if="hasMenu()" name="toggle" :open="open" :toggle="toggleOpen" :ui="ui">
         <DialogTrigger v-if="props.toggle" as-child>
           <UButton
             color="neutral"
