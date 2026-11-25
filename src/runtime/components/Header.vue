@@ -140,11 +140,13 @@ watch([open, underHeader], ([value, under]) => {
 watch([open, rootEl], ([value, el], previous) => {
   if (!value || !underHeader.value || !el) return
 
-  menuTop.value = `${Math.max(el.getBoundingClientRect().bottom, 0)}px`
+  // The root keeps its height, content in the `top` and `bottom` slots overflows it
+  const rect = el.getBoundingClientRect()
+  menuTop.value = `${Math.max(rect.top + Math.max(rect.height, el.scrollHeight), 0)}px`
 
   if (!previous?.[0]) {
     const active = document.activeElement as HTMLElement | null
-    opener = active && el.contains(active) ? active : undefined
+    opener = active && active !== document.body ? active : undefined
   }
 }, { immediate: true, flush: 'sync' })
 
