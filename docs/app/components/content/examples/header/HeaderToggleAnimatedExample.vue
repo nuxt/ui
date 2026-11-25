@@ -75,21 +75,21 @@ const line = 'origin-center transform-fill transition-[translate,rotate,opacity]
             y1="6"
             x2="20"
             y2="6"
-            :class="[line, open && 'translate-y-1.5 rotate-45 starting:translate-y-0 starting:rotate-0']"
+            :class="[line, open && 'translate-y-1.5 rotate-45']"
           />
           <line
             x1="4"
             y1="12"
             x2="20"
             y2="12"
-            :class="[line, open && 'opacity-0 starting:opacity-100']"
+            :class="[line, open && 'opacity-0']"
           />
           <line
             x1="4"
             y1="18"
             x2="20"
             y2="18"
-            :class="[line, open && '-translate-y-1.5 -rotate-45 starting:translate-y-0 starting:rotate-0']"
+            :class="[line, open && '-translate-y-1.5 -rotate-45']"
           />
         </svg>
       </UButton>

@@ -11,10 +11,21 @@ export default defineTheme({
     toggle: 'lg:hidden',
     content: 'lg:hidden',
     overlay: 'lg:hidden',
-    header: 'px-(--ui-gutter) h-(--ui-header-height) shrink-0 flex items-center justify-between gap-3',
     body: 'p-(--ui-gutter) overflow-y-auto'
   },
   variants: {
+    // The modal and the slideover open under the header, which stays above them. The header sets
+    // their `top` to where it ends when the menu opens, the header height is the fallback.
+    mode: {
+      modal: {
+        content: 'top-(--ui-header-height) z-40'
+      },
+      slideover: {
+        content: 'top-(--ui-header-height) z-40',
+        overlay: 'fixed inset-x-0 bottom-0 top-(--ui-header-height) z-40 bg-backdrop transition-[opacity,visibility] duration-200 ease-out starting:opacity-0 data-[state=closed]:invisible data-[state=closed]:opacity-0 motion-reduce:transition-none'
+      },
+      drawer: ''
+    },
     toggleSide: {
       left: {
         toggle: '-ms-1.5'

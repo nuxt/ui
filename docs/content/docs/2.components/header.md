@@ -117,7 +117,9 @@ slots:
 
 Use the `mode` prop to change the mode of the header menu. Defaults to `modal`.
 
-Use the `body` slot to fill the menu body (under the header) or the `content` slot to fill the entire menu.
+Use the `body` slot to fill the menu body or the `content` slot to fill the entire menu.
+
+In `modal` and `slideover` modes, the menu opens under the header, which stays in place with its toggle.
 
 ::tip{to="#props"}
 You can use the `menu` prop to customize the menu of the header, it will adapt depending on the mode you choose.

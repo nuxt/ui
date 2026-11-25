@@ -64,10 +64,11 @@ export interface HeaderSlots {
 </script>
 
 <script setup lang="ts" generic="T extends HeaderMode">
-import { computed, watch, toRef } from 'vue'
+import { computed, watch, toRef, shallowRef, useTemplateRef } from 'vue'
+import type { FocusOutsideEvent, PointerDownOutsideEvent } from 'reka-ui'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
-import { createReusableTemplate } from '@vueuse/core'
+import { createReusableTemplate, unrefElement, useScrollLock } from '@vueuse/core'
 import { useRoute } from '#imports'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
@@ -101,8 +102,6 @@ const { t, locale } = useLocale()
 const appConfig = useThemeConfig() as Header['AppConfig']
 const overrides = useComponentOverrides((ui: Header['AppConfig']['ui']) => ui.header)
 
-const [DefineLeftTemplate, ReuseLeftTemplate] = createReusableTemplate()
-const [DefineRightTemplate, ReuseRightTemplate] = createReusableTemplate()
 const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate()
 
 const ariaLabel = computed(() => {
@@ -117,7 +116,51 @@ watch(() => route.fullPath, () => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, overrides.value)())
+const ui = computed(() => tv(theme, overrides.value)({ mode: props.mode as HeaderMode }))
+
+const rootRef = useTemplateRef('rootRef')
+const rootEl = computed(() => unrefElement(rootRef) as HTMLElement | undefined)
+
+// The menu opens under the header instead of covering it, so the header and its toggle are only
+// mounted once. The drawer comes up from the bottom and keeps a modal of its own.
+const underHeader = computed(() => props.mode !== 'drawer')
+
+// Read where the header ends when the menu opens: a banner above it or its `top` and `bottom`
+// slots move it. The page can't scroll while the menu is open, so it stays right.
+const menuTop = shallowRef<string>()
+let opener: HTMLElement | undefined
+
+const scrollLock = useScrollLock(() => typeof document !== 'undefined' ? document.body : null)
+
+watch(open, (value) => {
+  if (!underHeader.value || typeof document === 'undefined') return
+
+  scrollLock.value = value
+
+  if (value) {
+    const bottom = rootEl.value?.getBoundingClientRect().bottom
+    menuTop.value = bottom !== undefined ? `${Math.max(bottom, 0)}px` : undefined
+
+    const active = document.activeElement as HTMLElement | null
+    opener = active && rootEl.value?.contains(active) ? active : undefined
+  }
+}, { immediate: true, flush: 'sync' })
+
+// The header stays reachable while the menu is open, so its toggle can close it
+function onInteractOutside(e: PointerDownOutsideEvent | FocusOutsideEvent) {
+  if (rootEl.value?.contains(e.target as Node)) {
+    e.preventDefault()
+  }
+}
+
+// Give the focus back to what opened the menu, the dialog has no trigger of its own
+function onCloseAutoFocus(e: Event) {
+  e.preventDefault()
+  if (opener?.isConnected) {
+    opener.focus()
+  }
+  opener = undefined
+}
 
 const { slideover: USlideover, modal: UModal, drawer: UDrawer } = lazyOverlays
 
@@ -127,7 +170,21 @@ const Menu = computed(() => ({
   drawer: UDrawer
 })[props.mode as HeaderMode])
 
-const menuProps = toRef(() => defu(props.menu, {}, props.mode === 'modal' ? { fullscreen: true, transition: false } : {}) as HeaderMenu<T>)
+const menuProps = toRef(() => defu(
+  props.menu,
+  underHeader.value
+    ? {
+        modal: false,
+        portal: false,
+        content: {
+          style: menuTop.value ? { top: menuTop.value } : undefined,
+          onInteractOutside,
+          onCloseAutoFocus
+        }
+      }
+    : {},
+  props.mode === 'modal' ? { fullscreen: true, transition: false } : {}
+) as HeaderMenu<T>)
 
 const renderMenu = useLazyOverlay(() => open.value || (props.menu as ModalProps | undefined)?.unmountOnHide === false, () => loadOverlay(props.mode as HeaderMode))
 
@@ -154,43 +211,43 @@ function toggleOpen() {
     </slot>
   </DefineToggleTemplate>
 
-  <DefineLeftTemplate>
-    <div data-slot="header-left" :class="ui.left({ class: props.ui?.left })">
-      <ReuseToggleTemplate v-if="props.toggleSide === 'left'" />
-
-      <slot name="left">
-        <ULink :to="props.to" :aria-label="ariaLabel" data-slot="header-title" :class="ui.title({ class: props.ui?.title })">
-          <slot name="title">
-            {{ props.title }}
-          </slot>
-        </ULink>
-      </slot>
-    </div>
-  </DefineLeftTemplate>
-
-  <DefineRightTemplate>
-    <div data-slot="header-right" :class="ui.right({ class: props.ui?.right })">
-      <slot name="right" />
-
-      <ReuseToggleTemplate v-if="props.toggleSide === 'right'" />
-    </div>
-  </DefineRightTemplate>
-
-  <Primitive :as="props.as" data-slot="header" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive ref="rootRef" :as="props.as" data-slot="header" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="top" />
 
     <UContainer data-slot="header-container" :class="ui.container({ class: props.ui?.container })">
-      <ReuseLeftTemplate />
+      <div data-slot="header-left" :class="ui.left({ class: props.ui?.left })">
+        <ReuseToggleTemplate v-if="props.toggleSide === 'left'" />
+
+        <slot name="left">
+          <ULink :to="props.to" :aria-label="ariaLabel" data-slot="header-title" :class="ui.title({ class: props.ui?.title })">
+            <slot name="title">
+              {{ props.title }}
+            </slot>
+          </ULink>
+        </slot>
+      </div>
 
       <div data-slot="header-center" :class="ui.center({ class: props.ui?.center })">
         <slot />
       </div>
 
-      <ReuseRightTemplate />
+      <div data-slot="header-right" :class="ui.right({ class: props.ui?.right })">
+        <slot name="right" />
+
+        <ReuseToggleTemplate v-if="props.toggleSide === 'right'" />
+      </div>
     </UContainer>
 
     <slot name="bottom" />
   </Primitive>
+
+  <div
+    v-if="renderMenu && props.mode === 'slideover'"
+    data-slot="header-overlay"
+    :data-state="open ? 'open' : 'closed'"
+    :style="menuTop ? { top: menuTop } : undefined"
+    :class="ui.overlay({ class: props.ui?.overlay })"
+  />
 
   <Menu
     v-if="renderMenu"
@@ -199,18 +256,12 @@ function toggleOpen() {
     :description="locale.messages.header?.description"
     v-bind="menuProps"
     :ui="{
-      overlay: ui.overlay({ class: props.ui?.overlay }),
+      overlay: props.mode === 'drawer' ? ui.overlay({ class: props.ui?.overlay }) : undefined,
       content: ui.content({ class: props.ui?.content })
     }"
   >
     <template #content="contentData">
       <slot name="content" v-bind="contentData">
-        <div v-if="props.mode !== 'drawer'" data-slot="header-header" :class="ui.header({ class: props.ui?.header })">
-          <ReuseLeftTemplate />
-
-          <ReuseRightTemplate />
-        </div>
-
         <div data-slot="header-body" :class="ui.body({ class: props.ui?.body })">
           <slot name="body" />
         </div>

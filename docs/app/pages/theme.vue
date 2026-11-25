@@ -114,7 +114,7 @@ const shareOpen = ref(false)
        widens with a Container past it so the views can show it: under 90rem
        the slider sizes the views, not the chrome around them -->
   <main class="max-w-(--studio-width) mx-auto w-full [--studio-width:max(var(--container-8xl),var(--ui-container-width))]">
-    <UHeader :menu="{ modal: false }" class="[--ui-container-width:var(--studio-width)]" :ui="{ root: () => 'h-(--ui-header-height) border-b border-transparent' }">
+    <UHeader class="[--ui-container-width:var(--studio-width)]" :ui="{ root: () => 'h-(--ui-header-height) border-b border-transparent' }">
       <template #left>
         <HeaderLogo />
       </template>

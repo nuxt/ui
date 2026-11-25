@@ -46,7 +46,7 @@ function toggleChat() {
 
       <!-- lazy for the theme engine it pulls: Vue keeps the server's button
              and hydrates it when the chunk lands. Not on idle, which would
-             defer every mount, and the mobile menu mounts this cluster again -->
+             defer every mount -->
       <LazyThemeStudioPresetPicker />
 
       <UTooltip text="Open on GitHub" class="hidden lg:flex" ignore-non-keyboard-focus>

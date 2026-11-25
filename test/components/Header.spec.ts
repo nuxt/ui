@@ -76,6 +76,37 @@ describe('Header', () => {
     expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
   })
 
+  it.each(['modal', 'slideover'] as const)('opens the %s menu under the header without mounting it again', async (mode) => {
+    const wrapper = await mountSuspended(Header, { props: { mode, menu: { portal: false } }, slots: { right: () => 'Right slot', body: () => 'Body slot' } })
+
+    await wrapper.find('[data-slot="header-toggle"]').trigger('click')
+    await vi.dynamicImportSettled()
+
+    expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
+    expect(wrapper.findAll('[data-slot="header-right"]')).toHaveLength(1)
+    expect(wrapper.findAll('[data-slot="header-toggle"]')).toHaveLength(1)
+    expect(document.body.style.overflow).toBe('hidden')
+
+    wrapper.unmount()
+  })
+
+  it('closes the menu with the header toggle', async () => {
+    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } }, slots: { body: () => 'Body slot' }, attachTo: document.body })
+    const toggle = wrapper.find('[data-slot="header-toggle"]')
+
+    await toggle.trigger('click')
+    await vi.dynamicImportSettled()
+    await new Promise(resolve => setTimeout(resolve))
+
+    // The pointer down on the toggle is outside the menu, it must not dismiss it before the click
+    await toggle.trigger('pointerdown')
+    await toggle.trigger('click')
+
+    expect(wrapper.emitted('update:open')).toEqual([[true], [false]])
+
+    wrapper.unmount()
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Header, {
       props: {
