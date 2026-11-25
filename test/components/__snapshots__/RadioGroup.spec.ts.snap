@@ -171,36 +171,36 @@ exports[`RadioGroup > renders with description correctly 1`] = `
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-1">
     <!--v-if-->
     <div data-slot="item" class="flex items-start flex-row text-sm">
-      <div data-slot="container" class="flex items-center h-5"><button id="v-0-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1">
+      <div data-slot="container" class="flex items-center h-5"><button id="v-0-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" aria-describedby="v-0-0-item-0-description" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1">
           <!---->
         </button>
         <!--v-if-->
       </div>
       <div data-slot="wrapper" class="w-full ms-2">
         <!--v-if--><label for="v-0-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
-        <p data-slot="description" class="text-muted">Description 0</p>
+        <p id="v-0-0-item-0-description" data-slot="description" class="text-muted">Description 0</p>
       </div>
     </div>
     <div data-slot="item" class="flex items-start flex-row text-sm">
-      <div data-slot="container" class="flex items-center h-5"><button id="v-0-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="2">
+      <div data-slot="container" class="flex items-center h-5"><button id="v-0-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" aria-describedby="v-0-0-item-1-description" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="2">
           <!---->
         </button>
         <!--v-if-->
       </div>
       <div data-slot="wrapper" class="w-full ms-2">
         <!--v-if--><label for="v-0-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
-        <p data-slot="description" class="text-muted">Description 1</p>
+        <p id="v-0-0-item-1-description" data-slot="description" class="text-muted">Description 1</p>
       </div>
     </div>
     <div data-slot="item" class="flex items-start flex-row text-sm">
-      <div data-slot="container" class="flex items-center h-5"><button id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="3">
+      <div data-slot="container" class="flex items-center h-5"><button id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" aria-describedby="v-0-0-item-2-description" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="3">
           <!---->
         </button>
         <!--v-if-->
       </div>
       <div data-slot="wrapper" class="w-full ms-2">
         <!--v-if--><label for="v-0-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
-        <p data-slot="description" class="text-muted">Description 2</p>
+        <p id="v-0-0-item-2-description" data-slot="description" class="text-muted">Description 2</p>
       </div>
     </div>
   </fieldset>
@@ -255,36 +255,36 @@ exports[`RadioGroup > renders with descriptionKey correctly 1`] = `
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-wrap flex-col gap-y-1">
     <!--v-if-->
     <div data-slot="item" class="flex items-start flex-row text-sm">
-      <div data-slot="container" class="flex items-center h-5"><button id="v-0-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1">
+      <div data-slot="container" class="flex items-center h-5"><button id="v-0-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" aria-describedby="v-0-0-item-0-description" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="1">
           <!---->
         </button>
         <!--v-if-->
       </div>
       <div data-slot="wrapper" class="w-full ms-2">
         <!--v-if--><label for="v-0-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
-        <p data-slot="description" class="text-muted">1</p>
+        <p id="v-0-0-item-0-description" data-slot="description" class="text-muted">1</p>
       </div>
     </div>
     <div data-slot="item" class="flex items-start flex-row text-sm">
-      <div data-slot="container" class="flex items-center h-5"><button id="v-0-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="2">
+      <div data-slot="container" class="flex items-center h-5"><button id="v-0-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" aria-describedby="v-0-0-item-1-description" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="2">
           <!---->
         </button>
         <!--v-if-->
       </div>
       <div data-slot="wrapper" class="w-full ms-2">
         <!--v-if--><label for="v-0-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
-        <p data-slot="description" class="text-muted">2</p>
+        <p id="v-0-0-item-1-description" data-slot="description" class="text-muted">2</p>
       </div>
     </div>
     <div data-slot="item" class="flex items-start flex-row text-sm">
-      <div data-slot="container" class="flex items-center h-5"><button id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="3">
+      <div data-slot="container" class="flex items-center h-5"><button id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" aria-describedby="v-0-0-item-2-description" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" value="3">
           <!---->
         </button>
         <!--v-if-->
       </div>
       <div data-slot="wrapper" class="w-full ms-2">
         <!--v-if--><label for="v-0-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
-        <p data-slot="description" class="text-muted">3</p>
+        <p id="v-0-0-item-2-description" data-slot="description" class="text-muted">3</p>
       </div>
     </div>
   </fieldset>

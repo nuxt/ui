@@ -233,6 +233,7 @@ function onUpdate(value: any) {
             :value="item.value"
             :disabled="item.disabled || disabled"
             :aria-labelledby="!isListVariant && (item.label || !!slots.label) ? `${id}-item-${index}-label` : undefined"
+            :aria-describedby="(item.description || !!slots.description) ? `${id}-item-${index}-description` : undefined"
             data-slot="base"
             :class="ui.base({ class: [props.ui?.base, item.ui?.base], disabled: item.disabled || disabled })"
           >
@@ -254,7 +255,7 @@ function onUpdate(value: any) {
               {{ item.label }}
             </slot>
           </component>
-          <p v-if="item.description || !!slots.description" data-slot="description" :class="ui.description({ class: [props.ui?.description, item.ui?.description], disabled: item.disabled || disabled })">
+          <p v-if="item.description || !!slots.description" :id="`${id}-item-${index}-description`" data-slot="description" :class="ui.description({ class: [props.ui?.description, item.ui?.description], disabled: item.disabled || disabled })">
             <slot name="description" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
               {{ item.description }}
             </slot>
