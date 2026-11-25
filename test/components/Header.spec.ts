@@ -32,13 +32,21 @@ describe('Header', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('sets `aria-expanded` on the toggle', async () => {
+  it('only shows the toggle with a menu', async () => {
     const wrapper = await mountSuspended(Header)
+
+    expect(wrapper.find('[data-slot="header-toggle"]').exists()).toBe(false)
+  })
+
+  it('sets `aria-expanded` on the toggle', async () => {
+    const wrapper = await mountSuspended(Header, { slots: { body: () => 'Body slot' } })
     const toggle = wrapper.find('[data-slot="header-toggle"]')
 
     expect(toggle.attributes('aria-expanded')).toBe('false')
 
     await toggle.trigger('click')
+
+    await vi.dynamicImportSettled()
 
     expect(toggle.attributes('aria-expanded')).toBe('true')
   })
@@ -49,12 +57,14 @@ describe('Header', () => {
     expect(wrapper.find('[data-slot="header-menu"]').exists()).toBe(false)
 
     await wrapper.find('[data-slot="header-toggle"]').trigger('click')
+    await vi.dynamicImportSettled()
 
-    expect(wrapper.find('[data-slot="header-menu"]').text()).toBe('Body slot')
+    expect(wrapper.find('[data-slot="header-menu-body"]').text()).toBe('Body slot')
     expect(wrapper.findAll('[data-slot="header-right"]')).toHaveLength(1)
     expect(wrapper.findAll('[data-slot="header-toggle"]')).toHaveLength(1)
 
     await wrapper.find('[data-slot="header-toggle"]').trigger('click')
+    await new Promise(resolve => setTimeout(resolve))
 
     expect(wrapper.find('[data-slot="header-menu"]').exists()).toBe(false)
   })

@@ -30,12 +30,14 @@ describe('HeaderMenu', () => {
   ] as [string, HeaderMenuProps][])('renders %s correctly', async (_, props) => {
     const wrapper = await mountMenu(props, {}, { props: { open: true } })
     await vi.dynamicImportSettled()
+    await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })
 
   it('renders with content slot correctly', async () => {
     const wrapper = await mountMenu({}, { content: () => 'Content slot' }, { props: { open: true } })
+    await vi.dynamicImportSettled()
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })
@@ -49,10 +51,14 @@ describe('HeaderMenu', () => {
     expect(document.documentElement.style.overflow).toBe('clip')
 
     await toggle.trigger('click')
+
+    await vi.dynamicImportSettled()
     expect(document.documentElement.style.overflow).toBe('hidden')
     expect(document.documentElement.style.scrollbarGutter).toBe('stable')
 
     await toggle.trigger('click')
+
+    await vi.dynamicImportSettled()
     expect(document.documentElement.style.overflow).toBe('clip')
     expect(document.documentElement.style.scrollbarGutter).toBe('')
 
@@ -66,12 +72,40 @@ describe('HeaderMenu', () => {
 
     ;(toggle.element as HTMLElement).focus()
     await toggle.trigger('click')
+    await vi.dynamicImportSettled()
     ;(wrapper.find('[data-slot="header-menu"] a').element as HTMLElement).focus()
 
     window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
-    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve))
 
     expect(wrapper.find('[data-slot="header-menu"]').exists()).toBe(false)
+    expect(document.activeElement).toBe(toggle.element)
+
+    wrapper.unmount()
+  })
+
+  it('closes with a `toggle` slot of the Header and gives it the focus back', async () => {
+    const wrapper = await mountSuspended(Header, {
+      attachTo: document.body,
+      slots: {
+        toggle: ({ toggle }: { toggle: () => void }) => h('button', { 'data-test': 'toggle', 'onClick': toggle }, 'Menu'),
+        menu: () => h(HeaderMenu, null, { default: () => h('a', { href: '#' }, 'Link') })
+      }
+    })
+    const toggle = wrapper.find('[data-test="toggle"]')
+
+    ;(toggle.element as HTMLElement).focus()
+    await toggle.trigger('click')
+    await vi.dynamicImportSettled()
+    await new Promise(resolve => setTimeout(resolve))
+
+    // The pointer down on the toggle is outside the menu, it must not dismiss it before the click
+    await toggle.trigger('pointerdown')
+    await toggle.trigger('click')
+    await vi.dynamicImportSettled()
+    await new Promise(resolve => setTimeout(resolve))
+
+    expect(wrapper.emitted('update:open')).toEqual([[true], [false]])
     expect(document.activeElement).toBe(toggle.element)
 
     wrapper.unmount()
@@ -110,6 +144,7 @@ describe('HeaderMenu', () => {
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountMenu({}, {}, { props: { open: true } })
+    await vi.dynamicImportSettled()
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
 

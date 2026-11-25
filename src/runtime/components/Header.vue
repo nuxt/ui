@@ -53,7 +53,7 @@ export interface HeaderSlots {
 
 <script setup lang="ts">
 import { computed, watch, useTemplateRef } from 'vue'
-import { Primitive } from 'reka-ui'
+import { DialogRoot, DialogTrigger, Primitive } from 'reka-ui'
 import { createReusableTemplate, unrefElement } from '@vueuse/core'
 import { useRoute } from '#imports'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
@@ -108,6 +108,9 @@ const root = computed(() => unrefElement(rootRef) as HTMLElement | undefined)
 
 provideHeaderContext({ open, root })
 
+// The toggle only shows when there is a menu to open
+const hasMenu = computed(() => !!slots.body || !!slots.menu)
+
 function toggleOpen() {
   open.value = !open.value
 }
@@ -118,56 +121,58 @@ function close() {
 </script>
 
 <template>
-  <DefineToggleTemplate>
-    <slot name="toggle" :open="open" :toggle="toggleOpen" :ui="ui">
-      <UButton
-        v-if="props.toggle"
-        color="neutral"
-        variant="ghost"
-        :aria-label="open ? t('header.close') : t('header.open')"
-        :aria-expanded="open"
-        :icon="open ? appConfig.ui.icons.close : appConfig.ui.icons.menu"
-        v-bind="(typeof props.toggle === 'object' ? props.toggle : {})"
-        data-slot="header-toggle"
-        :class="ui.toggle({ class: props.ui?.toggle, toggleSide: props.toggleSide })"
-        @click="toggleOpen"
-      />
+  <!-- The menu is a non-modal dialog: the header stays usable while it's open -->
+  <DialogRoot v-model:open="open" :modal="false">
+    <DefineToggleTemplate>
+      <slot v-if="hasMenu" name="toggle" :open="open" :toggle="toggleOpen" :ui="ui">
+        <DialogTrigger v-if="props.toggle" as-child>
+          <UButton
+            color="neutral"
+            variant="ghost"
+            :aria-label="open ? t('header.close') : t('header.open')"
+            :icon="open ? appConfig.ui.icons.close : appConfig.ui.icons.menu"
+            v-bind="(typeof props.toggle === 'object' ? props.toggle : {})"
+            data-slot="header-toggle"
+            :class="ui.toggle({ class: props.ui?.toggle, toggleSide: props.toggleSide })"
+          />
+        </DialogTrigger>
+      </slot>
+    </DefineToggleTemplate>
+
+    <Primitive ref="rootRef" :as="props.as" data-slot="header" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
+      <slot name="top" />
+
+      <UContainer data-slot="header-container" :class="ui.container({ class: props.ui?.container })">
+        <div data-slot="header-left" :class="ui.left({ class: props.ui?.left })">
+          <ReuseToggleTemplate v-if="props.toggleSide === 'left'" />
+
+          <slot name="left">
+            <ULink :to="props.to" :aria-label="ariaLabel" data-slot="header-title" :class="ui.title({ class: props.ui?.title })">
+              <slot name="title">
+                {{ props.title }}
+              </slot>
+            </ULink>
+          </slot>
+        </div>
+
+        <div data-slot="header-center" :class="ui.center({ class: props.ui?.center })">
+          <slot />
+        </div>
+
+        <div data-slot="header-right" :class="ui.right({ class: props.ui?.right })">
+          <slot name="right" />
+
+          <ReuseToggleTemplate v-if="props.toggleSide === 'right'" />
+        </div>
+      </UContainer>
+
+      <slot name="bottom" />
+    </Primitive>
+
+    <slot name="menu" :open="open" :close="close">
+      <UHeaderMenu v-if="!!slots.body">
+        <slot name="body" />
+      </UHeaderMenu>
     </slot>
-  </DefineToggleTemplate>
-
-  <Primitive ref="rootRef" :as="props.as" data-slot="header" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <slot name="top" />
-
-    <UContainer data-slot="header-container" :class="ui.container({ class: props.ui?.container })">
-      <div data-slot="header-left" :class="ui.left({ class: props.ui?.left })">
-        <ReuseToggleTemplate v-if="props.toggleSide === 'left'" />
-
-        <slot name="left">
-          <ULink :to="props.to" :aria-label="ariaLabel" data-slot="header-title" :class="ui.title({ class: props.ui?.title })">
-            <slot name="title">
-              {{ props.title }}
-            </slot>
-          </ULink>
-        </slot>
-      </div>
-
-      <div data-slot="header-center" :class="ui.center({ class: props.ui?.center })">
-        <slot />
-      </div>
-
-      <div data-slot="header-right" :class="ui.right({ class: props.ui?.right })">
-        <slot name="right" />
-
-        <ReuseToggleTemplate v-if="props.toggleSide === 'right'" />
-      </div>
-    </UContainer>
-
-    <slot name="bottom" />
-  </Primitive>
-
-  <slot name="menu" :open="open" :close="close">
-    <UHeaderMenu v-if="!!slots.body">
-      <slot name="body" />
-    </UHeaderMenu>
-  </slot>
+  </DialogRoot>
 </template>

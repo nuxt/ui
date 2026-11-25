@@ -34,8 +34,9 @@ export interface HeaderMenuSlots {
 </script>
 
 <script setup lang="ts" generic="T extends HeaderMenuMode">
-import { computed, watch, shallowRef, useId, useTemplateRef, onBeforeUnmount } from 'vue'
-import { onKeyStroke } from '@vueuse/core'
+import { computed, watch, shallowRef, onBeforeUnmount, defineAsyncComponent } from 'vue'
+import type { FocusOutsideEvent, PointerDownOutsideEvent } from 'reka-ui'
+import { injectDialogRootContext } from 'reka-ui'
 import { useComponentProps, useComponentOverrides } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { useLazyOverlay } from '../composables/useLazyOverlay'
@@ -57,18 +58,17 @@ const overrides = useComponentOverrides((ui: HeaderMenu['AppConfig']['ui']) => u
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)())
 
-const id = useId()
 const inline = computed(() => props.mode === 'inline')
+const dialog = injectDialogRootContext()
 
 function close() {
   open.value = false
 }
 
-// Inline, the menu is a panel under the header and not a dialog: the header stays usable, so its
-// toggle closes it, and the page under it is locked.
-const panelRef = useTemplateRef('panelRef')
+// Inline, the menu is a non-modal dialog under the header: Reka closes it on Escape after the
+// layers above it and gives the focus back to the toggle. The page under it is locked by hand,
+// Reka's lock turns off the pointer events of the page and the header with it.
 const top = shallowRef<string>()
-let opener: HTMLElement | undefined
 
 // Lock `<html>`, not the `<body>` Reka locks for the overlays opened from the menu or the header,
 // so neither restores a value the other one set. Only a lock this menu took is released. The
@@ -92,11 +92,6 @@ function lock() {
 // Also runs once the header is mounted, for a menu that starts open
 watch([open, inline, root], ([value, isInline, el], previous) => {
   if (!value || !isInline) {
-    // Give the focus back to what opened the menu when it was in it, before the panel unmounts
-    if (previous?.[0] && previous[1] && panelRef.value?.contains(document.activeElement) && opener?.isConnected) {
-      opener.focus()
-    }
-    opener = undefined
     unlock?.()
     return
   }
@@ -111,20 +106,26 @@ watch([open, inline, root], ([value, isInline, el], previous) => {
     top.value = `${Math.max(rect.top + Math.max(rect.height, el.scrollHeight), 0)}px`
   }
 
-  if (!previous?.[0]) {
+  // A `toggle` slot of the Header is no `DialogTrigger`, the focus goes back to what opened the menu
+  if (!previous?.[0] && !dialog.triggerElement.value?.isConnected) {
     const active = document.activeElement as HTMLElement | null
-    opener = active && active !== document.body ? active : undefined
+    dialog.triggerElement.value = active && el.contains(active) ? active : undefined
   }
 }, { immediate: true, flush: 'sync' })
 
 onBeforeUnmount(() => unlock?.())
 
-// A menu, a popover or a modal open above the menu closes first
-onKeyStroke('Escape', () => {
-  if (!open.value || !inline.value || document.querySelector('[data-dismissable-layer]:not([data-state="closed"])')) return
+// The header stays usable while the menu is open, its toggle closes it
+function onInteractOutside(e: PointerDownOutsideEvent | FocusOutsideEvent) {
+  if (root.value?.contains(e.target as Node)) {
+    e.preventDefault()
+  }
+}
 
-  close()
-})
+// The inline panel and its Reka Dialog code load once the page is idle, like the overlays
+const loadPanel = () => import('./internal/HeaderMenuPanel.vue')
+const HeaderMenuPanel = defineAsyncComponent(loadPanel)
+const renderPanel = useLazyOverlay(() => inline.value && open.value, () => inline.value ? loadPanel() : Promise.resolve())
 
 const { slideover: USlideover, modal: UModal, drawer: UDrawer } = lazyOverlays
 
@@ -162,23 +163,24 @@ const renderOverlay = useLazyOverlay(
 </script>
 
 <template>
-  <div
-    v-if="inline && open"
-    :id="id"
-    ref="panelRef"
+  <HeaderMenuPanel
+    v-if="inline && renderPanel"
     data-slot="header-menu"
+    :title="locale.messages.header?.title || t('header.open')"
+    :description="locale.messages.header?.description"
     :style="top ? { top } : undefined"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
+    @interact-outside="onInteractOutside"
   >
     <slot name="content" :close="close">
       <div data-slot="header-menu-body" :class="ui.body({ class: props.ui?.body })">
         <slot />
       </div>
     </slot>
-  </div>
+  </HeaderMenuPanel>
 
   <Overlay
-    v-else-if="!inline && renderOverlay"
+    v-else-if="renderOverlay"
     v-model:open="open"
     :title="locale.messages.header?.title || t('header.open')"
     :description="locale.messages.header?.description"
