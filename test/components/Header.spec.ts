@@ -76,7 +76,7 @@ describe('Header', () => {
     expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
   })
 
-  it.each(['modal', 'slideover'] as const)('opens the %s menu under the header without mounting it again', async (mode) => {
+  it.each(['modal', 'slideover'] as const)('opens the %s menu without mounting the header again', async (mode) => {
     const wrapper = await mountSuspended(Header, { props: { mode, menu: { portal: false } }, slots: { right: () => 'Right slot', body: () => 'Body slot' } })
 
     await wrapper.find('[data-slot="header-toggle"]').trigger('click')
@@ -85,7 +85,30 @@ describe('Header', () => {
     expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
     expect(wrapper.findAll('[data-slot="header-right"]')).toHaveLength(1)
     expect(wrapper.findAll('[data-slot="header-toggle"]')).toHaveLength(1)
-    expect(document.body.style.overflow).toBe('hidden')
+
+    wrapper.unmount()
+  })
+
+  it('locks the page while the modal menu is open', async () => {
+    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } } })
+
+    await wrapper.find('[data-slot="header-toggle"]').trigger('click')
+    expect(document.documentElement.style.overflow).toBe('hidden')
+    expect(document.documentElement.style.scrollbarGutter).toBe('stable')
+
+    await wrapper.find('[data-slot="header-toggle"]').trigger('click')
+    expect(document.documentElement.style.overflow).toBe('')
+    expect(document.documentElement.style.scrollbarGutter).toBe('')
+
+    wrapper.unmount()
+  })
+
+  it('keeps the modal menu fullscreen whatever `menu` sets', async () => {
+    const wrapper = await mountSuspended(Header, { props: { open: true, menu: { portal: false, fullscreen: false, scrollable: true } }, slots: { body: () => 'Body slot' } })
+    await vi.dynamicImportSettled()
+
+    expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
+    expect(wrapper.find('[data-slot="modal-content"]').classes()).toContain('inset-0')
 
     wrapper.unmount()
   })

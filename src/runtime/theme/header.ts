@@ -14,16 +14,13 @@ export default defineTheme({
     body: 'p-(--ui-gutter) overflow-y-auto'
   },
   variants: {
-    // The modal and the slideover open under the header, which stays above them. The header sets
-    // their `top` to where it ends when the menu opens, the header height is the fallback.
+    // The modal opens under the header, which stays above it. The header sets its `top` to where
+    // it ends when the menu opens, the header height is the fallback.
     mode: {
       modal: {
         content: 'top-(--ui-header-height) z-40'
       },
-      slideover: {
-        content: 'top-(--ui-header-height) z-40',
-        overlay: 'fixed inset-x-0 bottom-0 top-(--ui-header-height) z-40 bg-backdrop transition-[opacity,visibility] duration-200 ease-out starting:opacity-0 data-[state=closed]:invisible data-[state=closed]:opacity-0 motion-reduce:transition-none'
-      },
+      slideover: '',
       drawer: ''
     },
     toggleSide: {
