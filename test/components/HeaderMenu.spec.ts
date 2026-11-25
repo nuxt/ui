@@ -66,6 +66,31 @@ describe('HeaderMenu', () => {
     document.documentElement.style.overflow = ''
   })
 
+  it('keeps the page locked until the last inline menu closes', async () => {
+    const first = await mountMenu()
+    const second = await mountMenu()
+
+    await first.find('[data-slot="header-toggle"]').trigger('click')
+    await second.find('[data-slot="header-toggle"]').trigger('click')
+    await first.find('[data-slot="header-toggle"]').trigger('click')
+    expect(document.documentElement.style.overflow).toBe('hidden')
+
+    await second.find('[data-slot="header-toggle"]').trigger('click')
+    expect(document.documentElement.style.overflow).toBe('')
+
+    first.unmount()
+    second.unmount()
+  })
+
+  it('passes `class` to the overlay content', async () => {
+    const wrapper = await mountMenu({ mode: 'slideover', class: 'max-w-xs', overlay: { portal: false } }, {}, { props: { open: true } })
+    await vi.dynamicImportSettled()
+
+    expect(wrapper.find('[data-slot="slideover-content"]').classes()).toContain('max-w-xs')
+
+    wrapper.unmount()
+  })
+
   it('closes the inline menu with Escape and gives the focus back', async () => {
     const wrapper = await mountMenu({}, { default: () => h('a', { href: '#' }, 'Link') }, { attachTo: document.body })
     const toggle = wrapper.find('[data-slot="header-toggle"]')

@@ -31,6 +31,30 @@ export interface HeaderMenuSlots {
   default?(props?: {}): VNode[]
   content?(props: { close: () => void }): VNode[]
 }
+
+// One lock on `<html>` for every inline menu open at once, released when the last one closes
+let locks = 0
+let restore: (() => void) | undefined
+
+function lockPage() {
+  if (locks++ || typeof document === 'undefined') return
+
+  const html = document.documentElement
+  const { overflow, scrollbarGutter } = html.style
+  html.style.overflow = 'hidden'
+  html.style.scrollbarGutter = 'stable'
+  restore = () => {
+    html.style.overflow = overflow
+    html.style.scrollbarGutter = scrollbarGutter
+  }
+}
+
+function unlockPage() {
+  if (--locks) return
+
+  restore?.()
+  restore = undefined
+}
 </script>
 
 <script setup lang="ts" generic="T extends HeaderMenuMode">
@@ -73,26 +97,26 @@ const top = shallowRef<string>()
 // Lock `<html>`, not the `<body>` Reka locks for the overlays opened from the menu or the header,
 // so neither restores a value the other one set. Only a lock this menu took is released. The
 // gutter keeps the page from moving under the scrollbar.
-const html = typeof document !== 'undefined' ? document.documentElement : undefined
-let unlock: (() => void) | undefined
+let locked = false
 
 function lock() {
-  if (!html || unlock) return
+  if (locked || typeof document === 'undefined') return
 
-  const { overflow, scrollbarGutter } = html.style
-  html.style.overflow = 'hidden'
-  html.style.scrollbarGutter = 'stable'
-  unlock = () => {
-    html.style.overflow = overflow
-    html.style.scrollbarGutter = scrollbarGutter
-    unlock = undefined
-  }
+  locked = true
+  lockPage()
+}
+
+function unlock() {
+  if (!locked) return
+
+  locked = false
+  unlockPage()
 }
 
 // Also runs once the header is mounted, for a menu that starts open
 watch([open, inline, root], ([value, isInline, el], previous) => {
   if (!value || !isInline) {
-    unlock?.()
+    unlock()
     return
   }
 
@@ -113,7 +137,7 @@ watch([open, inline, root], ([value, isInline, el], previous) => {
   }
 }, { immediate: true, flush: 'sync' })
 
-onBeforeUnmount(() => unlock?.())
+onBeforeUnmount(unlock)
 
 // The header stays usable while the menu is open, its toggle closes it
 function onInteractOutside(e: PointerDownOutsideEvent | FocusOutsideEvent) {
@@ -137,8 +161,10 @@ const Overlay = computed(() => ({
 
 const overlayProps = computed(() => {
   const overlay = props.overlay as ModalProps | undefined
+  // `class` styles the content of the overlay, after the one of `overlay`
+  const modal = { ...overlay, class: [overlay?.class, props.class] }
 
-  return props.mode === 'modal' ? { fullscreen: true, transition: false, ...overlay } : overlay
+  return props.mode === 'modal' ? { fullscreen: true, transition: false, ...modal } : modal
 })
 
 // The Modal and the Slideover show their own close in a header of their own, the title is only
