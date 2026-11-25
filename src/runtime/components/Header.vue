@@ -246,7 +246,7 @@ function toggleOpen() {
   </Primitive>
 
   <div
-    v-if="renderMenu && props.mode === 'slideover'"
+    v-if="renderMenu && props.mode === 'slideover' && (menuProps as SlideoverProps).overlay !== false"
     data-slot="header-overlay"
     :data-state="open ? 'open' : 'closed'"
     :style="menuTop ? { top: menuTop } : undefined"
