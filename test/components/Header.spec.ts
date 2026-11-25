@@ -3,16 +3,13 @@ import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import Header from '../../src/runtime/components/Header.vue'
-import Modal from '../../src/runtime/components/Modal.vue'
 
 describe('Header', () => {
   renderEach(Header, [
     // Props
     ['with title', { props: { title: 'Documentation' } }],
     ['with to', { props: { to: '/docs' } }],
-    ['with mode modal', { props: { open: true, mode: 'modal', menu: { portal: false } } }],
-    ['with mode slideover', { props: { open: true, mode: 'slideover', menu: { portal: false } } }],
-    ['with mode drawer', { props: { open: true, mode: 'drawer', menu: { portal: false } } }],
+    ['with open', { props: { open: true }, slots: { body: () => 'Body slot' } }],
     ['without toggle', { props: { toggle: false } }],
     ['with toggle', { props: { toggle: { color: 'primary', variant: 'solid' } } }],
     ['with toggleSide', { props: { toggleSide: 'left' } }],
@@ -28,38 +25,15 @@ describe('Header', () => {
     ['with top slot', { slots: { top: () => 'Top slot' } }],
     ['with bottom slot', { slots: { bottom: () => 'Bottom slot' } }],
     ['with body slot', { slots: { body: () => 'Body slot' } }],
-    ['with content slot', { slots: { content: () => 'Content slot' } }]
+    ['with menu slot', { props: { open: true }, slots: { menu: () => 'Menu slot' } }]
   ], async (_, options) => {
     const wrapper = await mountSuspended(Header, options)
     await vi.dynamicImportSettled()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('labels the menu dialog with the translated toggle label', async () => {
-    const wrapper = await mountSuspended(Header, { props: { open: true, menu: { portal: false } } })
-    await vi.dynamicImportSettled()
-
-    const dialog = wrapper.find('[role="dialog"]')
-    const title = wrapper.find(`#${dialog.attributes('aria-labelledby')}`)
-    expect(title.text()).toBe('Open menu')
-    expect(wrapper.html()).not.toContain('header.')
-
-    wrapper.unmount()
-  })
-
-  it('mounts the menu once opened', async () => {
-    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } }, slots: { body: () => 'Body slot' } })
-
-    expect(wrapper.findComponent(Modal).exists()).toBe(false)
-
-    await wrapper.find('[data-slot="header-toggle"]').trigger('click')
-    await vi.dynamicImportSettled()
-
-    expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
-  })
-
   it('sets `aria-expanded` on the toggle', async () => {
-    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } } })
+    const wrapper = await mountSuspended(Header)
     const toggle = wrapper.find('[data-slot="header-toggle"]')
 
     expect(toggle.attributes('aria-expanded')).toBe('false')
@@ -69,65 +43,20 @@ describe('Header', () => {
     expect(toggle.attributes('aria-expanded')).toBe('true')
   })
 
-  it('mounts the menu before opening with `unmountOnHide: false`', async () => {
-    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false, unmountOnHide: false } }, slots: { body: () => 'Body slot' } })
-    await vi.dynamicImportSettled()
+  it('renders the `body` slot in a HeaderMenu under the header', async () => {
+    const wrapper = await mountSuspended(Header, { slots: { right: () => 'Right slot', body: () => 'Body slot' } })
 
-    expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
-  })
-
-  it.each(['modal', 'slideover'] as const)('opens the %s menu without mounting the header again', async (mode) => {
-    const wrapper = await mountSuspended(Header, { props: { mode, menu: { portal: false } }, slots: { right: () => 'Right slot', body: () => 'Body slot' } })
+    expect(wrapper.find('[data-slot="header-menu"]').exists()).toBe(false)
 
     await wrapper.find('[data-slot="header-toggle"]').trigger('click')
-    await vi.dynamicImportSettled()
 
-    expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
+    expect(wrapper.find('[data-slot="header-menu"]').text()).toBe('Body slot')
     expect(wrapper.findAll('[data-slot="header-right"]')).toHaveLength(1)
     expect(wrapper.findAll('[data-slot="header-toggle"]')).toHaveLength(1)
 
-    wrapper.unmount()
-  })
-
-  it('locks the page while the modal menu is open', async () => {
-    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } } })
-
     await wrapper.find('[data-slot="header-toggle"]').trigger('click')
-    expect(document.documentElement.style.overflow).toBe('hidden')
-    expect(document.documentElement.style.scrollbarGutter).toBe('stable')
 
-    await wrapper.find('[data-slot="header-toggle"]').trigger('click')
-    expect(document.documentElement.style.overflow).toBe('')
-    expect(document.documentElement.style.scrollbarGutter).toBe('')
-
-    wrapper.unmount()
-  })
-
-  it('keeps the modal menu fullscreen whatever `menu` sets', async () => {
-    const wrapper = await mountSuspended(Header, { props: { open: true, menu: { portal: false, fullscreen: false, scrollable: true } }, slots: { body: () => 'Body slot' } })
-    await vi.dynamicImportSettled()
-
-    expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
-    expect(wrapper.find('[data-slot="modal-content"]').classes()).toContain('inset-0')
-
-    wrapper.unmount()
-  })
-
-  it('closes the menu with the header toggle', async () => {
-    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } }, slots: { body: () => 'Body slot' }, attachTo: document.body })
-    const toggle = wrapper.find('[data-slot="header-toggle"]')
-
-    await toggle.trigger('click')
-    await vi.dynamicImportSettled()
-    await new Promise(resolve => setTimeout(resolve))
-
-    // The pointer down on the toggle is outside the menu, it must not dismiss it before the click
-    await toggle.trigger('pointerdown')
-    await toggle.trigger('click')
-
-    expect(wrapper.emitted('update:open')).toEqual([[true], [false]])
-
-    wrapper.unmount()
+    expect(wrapper.find('[data-slot="header-menu"]').exists()).toBe(false)
   })
 
   it('passes accessibility tests', async () => {

@@ -38,6 +38,7 @@ const skip: Record<string, string> = {
   Toast: 'requires ToastProvider context',
   Toaster: 'teleported toast provider',
   DashboardSearch: 'closed modal, renders nothing by default',
+  HeaderMenu: 'closed menu, requires Header context',
   EditorEmojiMenu: 'renderless, requires editor context',
   EditorMentionMenu: 'renderless, requires editor context',
   EditorSuggestionMenu: 'renderless, requires editor context'

@@ -139,6 +139,7 @@ export interface ThemeDefaults extends ThemeGlobalDefaults {
   form?: Partial<ComponentTypes.FormProps<any, any, any>>
   formField?: Partial<ComponentTypes.FormFieldProps>
   header?: Partial<ComponentTypes.HeaderProps>
+  headerMenu?: Partial<ComponentTypes.HeaderMenuProps>
   input?: Partial<ComponentTypes.InputProps>
   inputDate?: Partial<ComponentTypes.InputDateProps>
   inputMenu?: Partial<ComponentTypes.InputMenuProps>

@@ -44,6 +44,7 @@ const components = [
   'form-field',
   'form',
   'header',
+  'header-menu',
   'input-date',
   'input-menu',
   'input-number',
