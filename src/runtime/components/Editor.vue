@@ -270,6 +270,10 @@ const editor = useEditor({
   }
 })
 
+watch(() => props.editable, (editable) => {
+  editor.value?.setEditable(editable ?? true, false)
+})
+
 watch(() => props.modelValue, (newVal) => {
   if (!editor.value || newVal == null) {
     return
