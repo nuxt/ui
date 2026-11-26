@@ -136,6 +136,13 @@ function filterChildrenByFramework(item: ContentNavigationItem, framework: strin
   }
 }
 
+// A pulsing dot in the badge spot for pages with recent changes, see `modules/navigation-updated.ts`
+const updatedBadge = {
+  'role': 'img',
+  'aria-label': 'Updated',
+  'class': 'relative size-2 p-0 rounded-full ring-0 bg-primary before:absolute before:inset-0 before:rounded-full before:bg-primary before:animate-ping motion-reduce:before:animate-none'
+}
+
 function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavigationItem): ContentNavigationItem | ContentNavigationItem[] {
   if (item.shadow) {
     return item.children?.flatMap(child => processNavigationItem(child, item)) || []
@@ -144,7 +151,7 @@ function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavi
   return {
     ...item,
     title: parent?.title ? parent.title : item.title,
-    badge: parent?.badge || item.badge,
+    badge: parent?.badge || item.badge || (item.updated ? updatedBadge : undefined),
     class: [item.framework && `${item.framework}-only`].filter(Boolean),
     children: item.children?.length ? item.children?.flatMap(child => processNavigationItem(child)) : undefined
   }
