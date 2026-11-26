@@ -13,6 +13,7 @@ describe('Avatar', () => {
     // Props
     ['with src', { props: { src: 'https://github.com/benjamincanac.png' } }],
     ['with alt', { props: { alt: 'Benjamin Canac' } }],
+    ['with alt starting a word with an emoji', { props: { alt: 'Benjamin 👋' } }],
     ['with text', { props: { text: '+1' } }],
     ['with icon', { props: { icon: 'i-lucide-image' } }],
     ['with chip', { props: { chip: { text: '1' } } }],

@@ -62,7 +62,7 @@ const props = useComponentProps('avatar', _props)
 // eslint-disable-next-line vue/no-dupe-keys
 const as = computed(() => resolveAs<{ root: any, img?: any }>(props.as, { root: 'span' }))
 
-const fallback = computed(() => props.text || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
+const fallback = computed(() => props.text || Array.from((props.alt || '').split(' ').map(word => Array.from(word)[0] ?? '').join('')).slice(0, 2).join(''))
 
 const appConfig = useAppConfig() as Avatar['AppConfig']
 
