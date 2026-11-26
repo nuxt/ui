@@ -175,18 +175,21 @@ onBeforeUnmount(unlock)
 
 // Also runs once the root is mounted, for a menu that starts open
 watch([open, rootEl], ([value, el], previous) => {
-  if (!value || !underHeader.value || !el) return
+  if (!value || !underHeader.value || typeof document === 'undefined') return
+
+  // Before the root is mounted too, for a menu that starts open
+  if (!previous?.[0]) {
+    const active = document.activeElement as HTMLElement | null
+    opener = active && active !== document.body ? active : undefined
+    leftMenu = false
+  }
+
+  if (!el) return
 
   // The root keeps its height, content in the `top` and `bottom` slots overflows it
   const rect = el.getBoundingClientRect()
   if (rect.height) {
     menuTop.value = `${Math.max(rect.top + Math.max(rect.height, el.scrollHeight), 0)}px`
-  }
-
-  if (!previous?.[0]) {
-    const active = document.activeElement as HTMLElement | null
-    opener = active && active !== document.body ? active : undefined
-    leftMenu = false
   }
 }, { immediate: true, flush: 'sync' })
 
