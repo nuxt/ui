@@ -362,6 +362,7 @@ npm create nuxt@latest -- -t ui/editor     # Rich text editor
 npm create nuxt@latest -- -t ui/portfolio  # Portfolio
 npm create nuxt@latest -- -t ui/changelog  # Changelog
 npm create nuxt@latest -- -t ui/calendar   # Calendar
+npm create nuxt@latest -- -t ui/shop       # Shop (Shopify storefront)
 ```
 
 ## Responsive patterns

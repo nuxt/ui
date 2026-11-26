@@ -9,6 +9,39 @@ hero:
   description: Starters for Nuxt and Vue, from a bare setup to a dashboard, a SaaS site or a chat app. Preview one, then open it on GitHub or deploy it.
 navigation: false
 items:
+  - title: 'Shop'
+    description: "A Shopify storefront template with products, collections, search, cart and customer accounts."
+    icon: i-lucide-shopping-bag
+    framework: nuxt
+    features:
+      - title: Products, collections, search & cart
+        icon: i-lucide-shopping-cart
+      - title: Customer accounts & order history
+        icon: i-lucide-user
+      - title: Markets, languages & SEO
+        icon: i-lucide-globe
+    links:
+      - label: Preview
+        to: https://shop-template.nuxt.dev
+        target: _blank
+        trailingIcon: i-lucide-arrow-up-right
+    open_links:
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/shop
+        target: _blank
+        icon: i-simple-icons-github
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=shop&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fshop&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fshop-light.png&demo-url=https%3A%2F%2Fshop-template.nuxt.dev%2F&demo-title=Nuxt%20Shop%20Template&demo-description=A%20Shopify%20storefront%20template%20with%20products%2C%20collections%2C%20cart%20and%20customer%20accounts.
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/shop
+        target: _blank
+        icon: i-simple-icons-netlify
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/shop
+        target: _blank
+        icon: i-simple-icons-v0
   - title: 'Calendar'
     description: "An Apple Calendar-inspired template with day, week and month views, drag and drop and optimistic updates."
     icon: i-lucide-calendar
