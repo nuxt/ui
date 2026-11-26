@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'A gândit',
       thoughtFor: 'A gândit timp de {duration}'
     },
+    codeEditor: {
+      search: 'Caută…',
+      replace: 'Înlocuiește…',
+      matchCase: 'Potrivire majuscule/minuscule',
+      regexp: 'Folosește expresie regulată',
+      wholeWord: 'Cuvânt întreg',
+      prev: 'Potrivirea anterioară',
+      next: 'Potrivirea următoare',
+      selectAll: 'Selectează toate potrivirile',
+      replaceNext: 'Înlocuiește',
+      replaceAll: 'Înlocuiește tot',
+      close: 'Închide'
+    },
     colorMode: {
       dark: 'Întunecat',
       light: 'Luminos',

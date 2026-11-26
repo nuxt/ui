@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Pentsatu du',
       thoughtFor: '{duration} pentsatu du'
     },
+    codeEditor: {
+      search: 'Bilatu…',
+      replace: 'Ordeztu…',
+      matchCase: 'Maiuskulak/minuskulak bereizi',
+      regexp: 'Erabili adierazpen erregularra',
+      wholeWord: 'Hitz osoa',
+      prev: 'Aurreko bat-etortzea',
+      next: 'Hurrengo bat-etortzea',
+      selectAll: 'Hautatu bat-etortze guztiak',
+      replaceNext: 'Ordeztu',
+      replaceAll: 'Ordeztu guztiak',
+      close: 'Itxi'
+    },
     colorMode: {
       dark: 'Iluna',
       light: 'Argia',

@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Đã suy nghĩ',
       thoughtFor: 'Đã suy nghĩ {duration}'
     },
+    codeEditor: {
+      search: 'Tìm kiếm…',
+      replace: 'Thay thế…',
+      matchCase: 'Phân biệt chữ hoa chữ thường',
+      regexp: 'Dùng biểu thức chính quy',
+      wholeWord: 'Toàn bộ từ',
+      prev: 'Kết quả trước',
+      next: 'Kết quả tiếp theo',
+      selectAll: 'Chọn tất cả kết quả',
+      replaceNext: 'Thay thế',
+      replaceAll: 'Thay thế tất cả',
+      close: 'Đóng'
+    },
     colorMode: {
       dark: 'Tối',
       light: 'Sáng',

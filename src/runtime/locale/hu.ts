@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Gondolkodott',
       thoughtFor: '{duration} gondolkodott'
     },
+    codeEditor: {
+      search: 'Keresés…',
+      replace: 'Csere…',
+      matchCase: 'Kis- és nagybetűk megkülönböztetése',
+      regexp: 'Reguláris kifejezés használata',
+      wholeWord: 'Teljes szó',
+      prev: 'Előző találat',
+      next: 'Következő találat',
+      selectAll: 'Összes találat kijelölése',
+      replaceNext: 'Csere',
+      replaceAll: 'Összes cseréje',
+      close: 'Bezárás'
+    },
     colorMode: {
       dark: 'Sötét',
       light: 'Világos',

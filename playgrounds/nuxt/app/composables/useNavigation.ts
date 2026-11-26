@@ -25,6 +25,7 @@ const components = [
   'checkbox-group',
   'checkbox',
   'chip',
+  'code-editor',
   'collapsible',
   'color-mode',
   'color-picker',

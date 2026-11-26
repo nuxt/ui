@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Nachgedacht',
       thoughtFor: '{duration} nachgedacht'
     },
+    codeEditor: {
+      search: 'Suchen…',
+      replace: 'Ersetzen…',
+      matchCase: 'Groß-/Kleinschreibung beachten',
+      regexp: 'Regulären Ausdruck verwenden',
+      wholeWord: 'Nur ganzes Wort suchen',
+      prev: 'Vorheriger Treffer',
+      next: 'Nächster Treffer',
+      selectAll: 'Alle Treffer auswählen',
+      replaceNext: 'Ersetzen',
+      replaceAll: 'Alle ersetzen',
+      close: 'Schließen'
+    },
     colorMode: {
       dark: 'Dunkel',
       light: 'Hell',

@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Oʻyladi',
       thoughtFor: '{duration} davomida oʻyladi'
     },
+    codeEditor: {
+      search: 'Qidirish…',
+      replace: 'Almashtirish…',
+      matchCase: 'Katta-kichik harfni farqlash',
+      regexp: 'Muntazam ifodadan foydalanish',
+      wholeWord: 'Butun soʻz',
+      prev: 'Oldingi moslik',
+      next: 'Keyingi moslik',
+      selectAll: 'Barcha mosliklarni tanlash',
+      replaceNext: 'Almashtirish',
+      replaceAll: 'Barchasini almashtirish',
+      close: 'Yopish'
+    },
     colorMode: {
       dark: 'Qorongʻi',
       light: 'Yorugʻ',

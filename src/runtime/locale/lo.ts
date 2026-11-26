@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'ຄິດແລ້ວ',
       thoughtFor: 'ຄິດເປັນເວລາ {duration}'
     },
+    codeEditor: {
+      search: 'ຄົ້ນຫາ…',
+      replace: 'ແທນທີ່…',
+      matchCase: 'ຕົວພິມໃຫຍ່-ນ້ອຍຕ້ອງກົງກັນ',
+      regexp: 'ໃຊ້ regular expression',
+      wholeWord: 'ທັງຄຳ',
+      prev: 'ຜົນກົງກັນກ່ອນໜ້າ',
+      next: 'ຜົນກົງກັນຖັດໄປ',
+      selectAll: 'ເລືອກຜົນກົງກັນທັງໝົດ',
+      replaceNext: 'ແທນທີ່',
+      replaceAll: 'ແທນທີ່ທັງໝົດ',
+      close: 'ປິດ'
+    },
     colorMode: {
       dark: 'ມືດ',
       light: 'ແຈ້ງ',

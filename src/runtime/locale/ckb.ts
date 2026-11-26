@@ -61,6 +61,19 @@ export default defineLocale<Messages>({
       thought: 'بیری کردەوە',
       thoughtFor: 'بە ماوەی {duration} بیری کردەوە'
     },
+    codeEditor: {
+      search: 'گەڕان…',
+      replace: 'گۆڕین…',
+      matchCase: 'جیاکردنەوەی پیتی گەورە و بچووک',
+      regexp: 'بەکارهێنانی دەربڕینی ڕێکخراو',
+      wholeWord: 'وشەی تەواو',
+      prev: 'لێکچوونی پێشوو',
+      next: 'لێکچوونی داهاتوو',
+      selectAll: 'هەڵبژاردنی هەموو لێکچوونەکان',
+      replaceNext: 'گۆڕین',
+      replaceAll: 'گۆڕینی هەموو',
+      close: 'داخستن'
+    },
     colorMode: {
       dark: 'تاریک',
       light: 'ڕووناک',

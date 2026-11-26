@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'ভেবেছে',
       thoughtFor: '{duration} ভেবেছে'
     },
+    codeEditor: {
+      search: 'অনুসন্ধান করুন…',
+      replace: 'প্রতিস্থাপন…',
+      matchCase: 'অক্ষরের ধরন মেলান',
+      regexp: 'রেগুলার এক্সপ্রেশন ব্যবহার করুন',
+      wholeWord: 'সম্পূর্ণ শব্দ',
+      prev: 'পূর্ববর্তী মিল',
+      next: 'পরবর্তী মিল',
+      selectAll: 'সব মিল নির্বাচন করুন',
+      replaceNext: 'প্রতিস্থাপন',
+      replaceAll: 'সব প্রতিস্থাপন',
+      close: 'বন্ধ করুন'
+    },
     colorMode: {
       dark: 'গাঢ়',
       light: 'হালকা',

@@ -10,10 +10,17 @@
     "typecheck": "vue-tsc -b"
   },
   "dependencies": {
+    "@codemirror/autocomplete": "catalog:",
+    "@codemirror/commands": "catalog:",
+    "@codemirror/language": "catalog:",
+    "@codemirror/search": "catalog:",
+    "@codemirror/state": "catalog:",
+    "@codemirror/view": "catalog:",
     "@nuxt/ui": "catalog:",
     "@tanstack/charts": "catalog:",
     "@tiptap/extension-emoji": "catalog:",
     "@tiptap/extension-text-align": "catalog:",
+    "shiki": "catalog:",
     "tailwindcss": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:",

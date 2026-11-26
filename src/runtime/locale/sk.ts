@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Premýšľal',
       thoughtFor: 'Premýšľal {duration}'
     },
+    codeEditor: {
+      search: 'Hľadať…',
+      replace: 'Nahradiť…',
+      matchCase: 'Rozlišovať veľkosť písmen',
+      regexp: 'Použiť regulárny výraz',
+      wholeWord: 'Celé slovo',
+      prev: 'Predchádzajúca zhoda',
+      next: 'Ďalšia zhoda',
+      selectAll: 'Vybrať všetky zhody',
+      replaceNext: 'Nahradiť',
+      replaceAll: 'Nahradiť všetko',
+      close: 'Zatvoriť'
+    },
     colorMode: {
       dark: 'Tmavý',
       light: 'Svetlý',

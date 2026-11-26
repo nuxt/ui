@@ -61,6 +61,19 @@ export default defineLocale<Messages>({
       thought: 'فکر کرد',
       thoughtFor: 'به مدت {duration} فکر کرد'
     },
+    codeEditor: {
+      search: 'جستجو…',
+      replace: 'جایگزینی…',
+      matchCase: 'تطبیق حروف بزرگ و کوچک',
+      regexp: 'استفاده از عبارت باقاعده',
+      wholeWord: 'کلمه کامل',
+      prev: 'تطابق قبلی',
+      next: 'تطابق بعدی',
+      selectAll: 'انتخاب همه تطابق‌ها',
+      replaceNext: 'جایگزینی',
+      replaceAll: 'جایگزینی همه',
+      close: 'بستن'
+    },
     colorMode: {
       dark: 'تیره',
       light: 'روشن',

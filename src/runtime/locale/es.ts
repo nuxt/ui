@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Pensó',
       thoughtFor: 'Pensó durante {duration}'
     },
+    codeEditor: {
+      search: 'Buscar…',
+      replace: 'Reemplazar…',
+      matchCase: 'Coincidir mayúsculas y minúsculas',
+      regexp: 'Usar expresión regular',
+      wholeWord: 'Palabra completa',
+      prev: 'Coincidencia anterior',
+      next: 'Coincidencia siguiente',
+      selectAll: 'Seleccionar todas las coincidencias',
+      replaceNext: 'Reemplazar',
+      replaceAll: 'Reemplazar todo',
+      close: 'Cerrar'
+    },
     colorMode: {
       dark: 'Oscuro',
       light: 'Claro',

@@ -61,6 +61,19 @@ export default defineLocale<Messages>({
       thought: 'سوچا',
       thoughtFor: '{duration} سوچا'
     },
+    codeEditor: {
+      search: 'تلاش کریں…',
+      replace: 'تبدیل کریں…',
+      matchCase: 'حروف کی حالت ملائیں',
+      regexp: 'ریگولر ایکسپریشن استعمال کریں',
+      wholeWord: 'پورا لفظ',
+      prev: 'پچھلا مماثل',
+      next: 'اگلا مماثل',
+      selectAll: 'تمام مماثل منتخب کریں',
+      replaceNext: 'تبدیل کریں',
+      replaceAll: 'سب تبدیل کریں',
+      close: 'بند کریں'
+    },
     colorMode: {
       dark: 'تاریک',
       light: 'روشن',

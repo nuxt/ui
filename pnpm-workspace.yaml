@@ -17,6 +17,12 @@ catalog:
   "@ai-sdk/anthropic": ^4.0.107
   "@ai-sdk/gateway": ^4.0.152
   "@ai-sdk/vue": ^4.0.179
+  "@codemirror/autocomplete": ^6.20.3
+  "@codemirror/commands": ^6.11.1
+  "@codemirror/language": ^6.12.4
+  "@codemirror/search": ^6.7.2
+  "@codemirror/state": ^6.7.5
+  "@codemirror/view": ^6.43.12
   "@codspeed/vitest-plugin": ^6.1.1
   "@comark/vue": ^0.9.2
   "@floating-ui/dom": ^1.8.0

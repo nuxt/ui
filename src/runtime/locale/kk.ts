@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Ойланды',
       thoughtFor: '{duration} ойланды'
     },
+    codeEditor: {
+      search: 'Іздеу…',
+      replace: 'Ауыстыру…',
+      matchCase: 'Регистрді ескеру',
+      regexp: 'Тұрақты өрнекті пайдалану',
+      wholeWord: 'Тұтас сөз',
+      prev: 'Алдыңғы сәйкестік',
+      next: 'Келесі сәйкестік',
+      selectAll: 'Барлық сәйкестікті таңдау',
+      replaceNext: 'Ауыстыру',
+      replaceAll: 'Барлығын ауыстыру',
+      close: 'Жабу'
+    },
     colorMode: {
       dark: 'Қараңғы',
       light: 'Ашық',

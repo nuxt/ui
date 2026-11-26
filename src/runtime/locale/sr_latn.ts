@@ -55,6 +55,19 @@ export default defineLocale<Messages>({
       reload: 'Pokušaj ponovo',
       stop: 'Zaustavi generisanje'
     },
+    codeEditor: {
+      search: 'Pretraga…',
+      replace: 'Zameni…',
+      matchCase: 'Razlikuj velika i mala slova',
+      regexp: 'Koristi regularni izraz',
+      wholeWord: 'Cela reč',
+      prev: 'Prethodno podudaranje',
+      next: 'Sledeće podudaranje',
+      selectAll: 'Izaberi sva podudaranja',
+      replaceNext: 'Zameni',
+      replaceAll: 'Zameni sve',
+      close: 'Zatvori'
+    },
     colorMode: {
       dark: 'Tamno',
       light: 'Svetlo',

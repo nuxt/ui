@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Падумаў',
       thoughtFor: 'Думаў {duration}'
     },
+    codeEditor: {
+      search: 'Пошук…',
+      replace: 'Замяніць…',
+      matchCase: 'Улічваць рэгістр',
+      regexp: 'Выкарыстоўваць рэгулярны выраз',
+      wholeWord: 'Слова цалкам',
+      prev: 'Папярэдняе супадзенне',
+      next: 'Наступнае супадзенне',
+      selectAll: 'Выбраць усе супадзенні',
+      replaceNext: 'Замяніць',
+      replaceAll: 'Замяніць усе',
+      close: 'Закрыць'
+    },
     colorMode: {
       dark: 'Цёмная',
       light: 'Светлая',

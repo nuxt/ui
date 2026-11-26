@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Mõtles',
       thoughtFor: 'Mõtles {duration}'
     },
+    codeEditor: {
+      search: 'Otsi…',
+      replace: 'Asenda…',
+      matchCase: 'Tõstutundlik',
+      regexp: 'Kasuta regulaaravaldist',
+      wholeWord: 'Terve sõna',
+      prev: 'Eelmine vaste',
+      next: 'Järgmine vaste',
+      selectAll: 'Vali kõik vasted',
+      replaceNext: 'Asenda',
+      replaceAll: 'Asenda kõik',
+      close: 'Sulge'
+    },
     colorMode: {
       dark: 'Tume',
       light: 'Hele',

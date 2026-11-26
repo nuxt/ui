@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Ajatteli',
       thoughtFor: 'Ajatteli {duration}'
     },
+    codeEditor: {
+      search: 'Hae…',
+      replace: 'Korvaa…',
+      matchCase: 'Kirjainkoon erottelu',
+      regexp: 'Käytä säännöllistä lauseketta',
+      wholeWord: 'Koko sana',
+      prev: 'Edellinen osuma',
+      next: 'Seuraava osuma',
+      selectAll: 'Valitse kaikki osumat',
+      replaceNext: 'Korvaa',
+      replaceAll: 'Korvaa kaikki',
+      close: 'Sulje'
+    },
     colorMode: {
       dark: 'Tumma',
       light: 'Vaalea',

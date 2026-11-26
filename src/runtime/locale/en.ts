@@ -55,6 +55,19 @@ export default defineLocale<Messages>({
       reload: 'Retry',
       stop: 'Stop generating'
     },
+    codeEditor: {
+      search: 'Search…',
+      replace: 'Replace…',
+      matchCase: 'Match case',
+      regexp: 'Use regular expression',
+      wholeWord: 'Match whole word',
+      prev: 'Previous match',
+      next: 'Next match',
+      selectAll: 'Select all matches',
+      replaceNext: 'Replace',
+      replaceAll: 'Replace all',
+      close: 'Close'
+    },
     colorMode: {
       dark: 'Dark',
       light: 'Light',

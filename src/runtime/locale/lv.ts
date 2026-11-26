@@ -55,6 +55,19 @@ export default defineLocale<Messages>({
       reload: 'Mēģināt vēlreiz',
       stop: 'Apturēt ģenerēšanu'
     },
+    codeEditor: {
+      search: 'Meklēt…',
+      replace: 'Aizstāt…',
+      matchCase: 'Reģistrjutīgs',
+      regexp: 'Izmantot regulāro izteiksmi',
+      wholeWord: 'Viss vārds',
+      prev: 'Iepriekšējā atbilstība',
+      next: 'Nākamā atbilstība',
+      selectAll: 'Atlasīt visas atbilstības',
+      replaceNext: 'Aizstāt',
+      replaceAll: 'Aizstāt visu',
+      close: 'Aizvērt'
+    },
     colorMode: {
       dark: 'Tumšs',
       light: 'Gaišs',

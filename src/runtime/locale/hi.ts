@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'सोचा',
       thoughtFor: '{duration} सोचा'
     },
+    codeEditor: {
+      search: 'खोजें…',
+      replace: 'बदलें…',
+      matchCase: 'अक्षरों का आकार मिलाएँ',
+      regexp: 'रेगुलर एक्सप्रेशन का उपयोग करें',
+      wholeWord: 'पूरा शब्द',
+      prev: 'पिछला मिलान',
+      next: 'अगला मिलान',
+      selectAll: 'सभी मिलान चुनें',
+      replaceNext: 'बदलें',
+      replaceAll: 'सभी बदलें',
+      close: 'बंद करें'
+    },
     colorMode: {
       dark: 'गहरा',
       light: 'हल्का',

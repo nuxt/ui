@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Razmislil',
       thoughtFor: 'Razmišljal {duration}'
     },
+    codeEditor: {
+      search: 'Išči…',
+      replace: 'Zamenjaj…',
+      matchCase: 'Razlikuj velike in male črke',
+      regexp: 'Uporabi regularni izraz',
+      wholeWord: 'Cela beseda',
+      prev: 'Prejšnje ujemanje',
+      next: 'Naslednje ujemanje',
+      selectAll: 'Izberi vsa ujemanja',
+      replaceNext: 'Zamenjaj',
+      replaceAll: 'Zamenjaj vse',
+      close: 'Zapri'
+    },
     colorMode: {
       dark: 'Temno',
       light: 'Svetlo',

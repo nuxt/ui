@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Մտածեց',
       thoughtFor: 'Մտածեց {duration}'
     },
+    codeEditor: {
+      search: 'Որոնում…',
+      replace: 'Փոխարինել…',
+      matchCase: 'Հաշվի առնել տառաշարը',
+      regexp: 'Օգտագործել կանոնավոր արտահայտություն',
+      wholeWord: 'Ամբողջ բառ',
+      prev: 'Նախորդ համընկնում',
+      next: 'Հաջորդ համընկնում',
+      selectAll: 'Ընտրել բոլոր համընկնումները',
+      replaceNext: 'Փոխարինել',
+      replaceAll: 'Փոխարինել բոլորը',
+      close: 'Փակել'
+    },
     colorMode: {
       dark: 'Մուգ',
       light: 'Լուսավոր',

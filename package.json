@@ -209,6 +209,12 @@
     "vue-component-type-helpers": "catalog:"
   },
   "devDependencies": {
+    "@codemirror/autocomplete": "catalog:",
+    "@codemirror/commands": "catalog:",
+    "@codemirror/language": "catalog:",
+    "@codemirror/search": "catalog:",
+    "@codemirror/state": "catalog:",
+    "@codemirror/view": "catalog:",
     "@codspeed/vitest-plugin": "catalog:",
     "@nuxt/eslint-config": "catalog:",
     "@nuxt/image": "catalog:",
@@ -225,6 +231,7 @@
     "happy-dom": "catalog:",
     "jiti": "catalog:",
     "nuxt": "catalog:",
+    "shiki": "catalog:",
     "unbuild": "catalog:",
     "vitest": "catalog:",
     "vitest-axe": "catalog:",
@@ -233,6 +240,12 @@
     "vue-tsc": "catalog:"
   },
   "peerDependencies": {
+    "@codemirror/autocomplete": "^6",
+    "@codemirror/commands": "^6",
+    "@codemirror/language": "^6",
+    "@codemirror/search": "^6",
+    "@codemirror/state": "^6",
+    "@codemirror/view": "^6",
     "@inertiajs/vue3": "^2.0.7 || ^3",
     "@internationalized/date": "^3",
     "@internationalized/number": "^3",
@@ -258,6 +271,7 @@
     "ai": "^6 || ^7",
     "eslint-plugin-better-tailwindcss": "^4.10",
     "joi": "^18",
+    "shiki": "^3 || ^4",
     "superstruct": "^2",
     "tailwindcss": "^4",
     "typescript": "^5.6.3 || ^6 || ^7",
@@ -267,6 +281,24 @@
     "zod": "^3.24.0 || ^4"
   },
   "peerDependenciesMeta": {
+    "@codemirror/autocomplete": {
+      "optional": true
+    },
+    "@codemirror/commands": {
+      "optional": true
+    },
+    "@codemirror/language": {
+      "optional": true
+    },
+    "@codemirror/search": {
+      "optional": true
+    },
+    "@codemirror/state": {
+      "optional": true
+    },
+    "@codemirror/view": {
+      "optional": true
+    },
     "@inertiajs/vue3": {
       "optional": true
     },
@@ -289,6 +321,9 @@
       "optional": true
     },
     "joi": {
+      "optional": true
+    },
+    "shiki": {
       "optional": true
     },
     "valibot": {

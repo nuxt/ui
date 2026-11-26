@@ -61,6 +61,19 @@ export default defineLocale<Messages>({
       thought: 'חשב',
       thoughtFor: 'חשב במשך {duration}'
     },
+    codeEditor: {
+      search: 'חפש…',
+      replace: 'החלפה…',
+      matchCase: 'התאמת רישיות',
+      regexp: 'שימוש בביטוי רגולרי',
+      wholeWord: 'מילה שלמה',
+      prev: 'התאמה קודמת',
+      next: 'התאמה הבאה',
+      selectAll: 'בחירת כל ההתאמות',
+      replaceNext: 'החלפה',
+      replaceAll: 'החלפת הכול',
+      close: 'סגור'
+    },
     colorMode: {
       dark: 'כהה',
       light: 'בהיר',

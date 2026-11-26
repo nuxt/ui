@@ -61,6 +61,19 @@ export default defineLocale<Messages>({
       thought: 'ئويلاندى',
       thoughtFor: '{duration} ئويلاندى'
     },
+    codeEditor: {
+      search: 'ئىزدەش…',
+      replace: 'ئالماشتۇرۇش…',
+      matchCase: 'چوڭ-كىچىك ھەرپنى پەرقلەندۈرۈش',
+      regexp: 'مۇنتىزىم ئىپادە ئىشلىتىش',
+      wholeWord: 'پۈتۈن سۆز',
+      prev: 'ئالدىنقى ماسلىشىش',
+      next: 'كېيىنكى ماسلىشىش',
+      selectAll: 'بارلىق ماسلىشىشنى تاللاش',
+      replaceNext: 'ئالماشتۇرۇش',
+      replaceAll: 'ھەممىنى ئالماشتۇرۇش',
+      close: 'تاقاش'
+    },
     colorMode: {
       dark: 'قاراڭغۇ',
       light: 'يورۇق',

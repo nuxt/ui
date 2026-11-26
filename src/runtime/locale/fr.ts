@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Réflexion',
       thoughtFor: 'Réflexion pendant {duration}'
     },
+    codeEditor: {
+      search: 'Rechercher…',
+      replace: 'Remplacer…',
+      matchCase: 'Respecter la casse',
+      regexp: 'Utiliser une expression régulière',
+      wholeWord: 'Mot entier',
+      prev: 'Résultat précédent',
+      next: 'Résultat suivant',
+      selectAll: 'Sélectionner tous les résultats',
+      replaceNext: 'Remplacer',
+      replaceAll: 'Tout remplacer',
+      close: 'Fermer'
+    },
     colorMode: {
       dark: 'Sombre',
       light: 'Clair',
