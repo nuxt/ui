@@ -90,9 +90,11 @@ describe('ChatPrompt', () => {
 
   it('sends from `UChatPromptSubmit` after an error when the prompt has text', async () => {
     const onReload = vi.fn()
+    // The status is only bound on the button, like in the docs examples
     const wrapper = await mountSuspended(ChatPrompt, {
-      props: { modelValue: '', status: 'error' },
-      slots: { default: () => h(ChatPromptSubmit, { status: 'error', onReload }) }
+      props: { modelValue: '' },
+      slots: { default: () => h(ChatPromptSubmit, { status: 'error', onReload }) },
+      attachTo: document.body
     })
     const button = () => wrapper.find('button[aria-label]')
 
@@ -101,9 +103,10 @@ describe('ChatPrompt', () => {
     await wrapper.setProps({ modelValue: 'Next question' })
     expect(button().attributes('aria-label')).toBe('Send prompt')
 
-    await wrapper.find('form').trigger('submit')
+    await button().trigger('click')
     expect(wrapper.emitted('submit')).toHaveLength(1)
     expect(onReload).not.toHaveBeenCalled()
+    wrapper.unmount()
   })
 
   it('keeps `UChatPromptSubmit` on retry after an error with `error`', async () => {

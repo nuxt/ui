@@ -113,7 +113,7 @@ import { useFileUpload, isFileAccepted } from '../composables/useFileUpload'
 import { useIMEGuard } from '../composables/useIMEGuard'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
-import { chatPromptSendingInjectionKey } from '../utils/chat'
+import { chatPromptSubmitInjectionKey } from '../utils/chat'
 import { tv } from '../utils/tv'
 import UTextarea from './Textarea.vue'
 import UChatAttachment from './ChatAttachment.vue'
@@ -214,7 +214,10 @@ const isBusy = computed(() => props.status === 'submitted' || props.status === '
 const hasDraft = computed(() => model.value.trim() !== '' || !!files.value?.length)
 
 // After an error, a prompt left enabled without `error` sends a new message, the AI SDK clears the error on the next one
-provide(chatPromptSendingInjectionKey, computed(() => hasDraft.value && ((isBusy.value && queue.value !== undefined) || (props.status === 'error' && !props.error))))
+provide(chatPromptSubmitInjectionKey, computed(() => ({
+  queue: hasDraft.value && isBusy.value && queue.value !== undefined,
+  send: hasDraft.value && !props.error
+})))
 
 function submit(e?: Event) {
   if (!hasDraft.value) {
