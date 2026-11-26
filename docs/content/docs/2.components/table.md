@@ -121,6 +121,10 @@ highlights:
 When rendering components with `h`, you can either use the `resolveComponent` function or import from `#components`.
 ::
 
+#### Grouped column cell classes :badge{label="Soon" class="align-text-top"}
+
+Column groups can set `meta.class.td` to style all descendant cells. Functions receive the individual cell, and Tailwind utilities on nested groups and leaf columns take precedence over conflicting utilities from their parent groups.
+
 ### Meta
 
 Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/v8/docs/api/core/table#meta)) to pass properties like:
