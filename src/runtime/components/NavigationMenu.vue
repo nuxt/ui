@@ -326,6 +326,20 @@ function getItemValue(item: NavigationMenuItem, index: number, level: number, li
   return get(item, props.valueKey as string) ?? (level > 0 ? `${prefix}item-${level}-${index}` : `${prefix}item-${index}`)
 }
 
+function getItemLinkProps(item: NavigationMenuItem) {
+  const isVertical = props.orientation === 'vertical'
+  if (isVertical && !props.collapsed && item.children?.length && item.type === 'trigger') {
+    return {}
+  }
+
+  const linkProps = pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)
+  if (isVertical && props.collapsed && linkProps['aria-labelledby'] == null) {
+    linkProps['aria-label'] ??= get(item, props.labelKey as string)
+  }
+
+  return linkProps
+}
+
 function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0, listIndex = 0) {
   const indexes = list.reduce((acc: string[], item, index) => {
     if (item.defaultOpen || item.open) {
@@ -426,7 +440,7 @@ function onLinkClick(e: Event) {
       <div v-if="props.orientation === 'vertical' && item.type === 'label' && !props.collapsed" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
         <ReuseLinkTemplate :item="item" :index="index" :trailing-trigger="true" />
       </div>
-      <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="(props.orientation === 'vertical' && item.children?.length && !props.collapsed && item.type === 'trigger') ? {} : pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)" custom>
+      <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="getItemLinkProps(item)" custom>
         <component
           :is="(props.orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) ? NavigationMenuTrigger : ((props.orientation === 'vertical' && item.children?.length && !props.collapsed && !(slotProps as any).href) ? AccordionTrigger : NavigationMenuLink)"
           as-child

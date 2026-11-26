@@ -1,4 +1,4 @@
-import { nextTick } from 'vue'
+import { h, nextTick } from 'vue'
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -163,6 +163,62 @@ describe('NavigationMenu', () => {
 
     expect(event.defaultPrevented).toBe(true)
     expect(wrapper.find('[data-slot="link"]').attributes('data-state')).toBe('open')
+  })
+
+  it('names collapsed links and buttons from the configured item label', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        collapsed: true,
+        labelKey: 'title',
+        popover: true,
+        items: [
+          { title: 'Guide', to: '/guide' },
+          { title: 'Components', children: [{ title: 'Button', to: '/button' }] },
+          { 'title': 'Account', 'aria-label': 'Account settings' }
+        ]
+      }
+    })
+
+    const links = wrapper.findAll('[data-slot="link"]')
+    expect(links.map(link => link.element.tagName)).toEqual(['A', 'BUTTON', 'BUTTON'])
+    expect(links.map(link => link.attributes('aria-label'))).toEqual(['Guide', 'Components', 'Account settings'])
+
+    await wrapper.setProps({ collapsed: false })
+    expect(wrapper.findAll('[data-slot="link"]').map(link => link.attributes('aria-label'))).toEqual([undefined, undefined, 'Account settings'])
+  })
+
+  it.each([
+    ['a decorative leading slot', { 'item-leading': () => h('span', { 'aria-hidden': true }, '★') }],
+    ['a custom label slot', { 'item-label': () => 'Read the docs' }]
+  ] as const)('uses the item label for a collapsed link with %s', async (_name, slots) => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        collapsed: true,
+        items: [{ label: 'Docs', to: '/docs' }]
+      },
+      slots
+    })
+
+    expect(wrapper.get('[data-slot="link"]').attributes('aria-label')).toBe('Docs')
+  })
+
+  it('keeps an explicit accessible name for a collapsed item with a custom slot', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        collapsed: true,
+        items: [{ 'label': 'Docs', 'to': '/docs', 'aria-labelledby': 'custom-label' }],
+        ui: { linkLabel: 'block' }
+      },
+      slots: { 'item-label': () => h('span', { id: 'custom-label' }, 'Beta Docs') }
+    })
+
+    const link = wrapper.get('[data-slot="link"]')
+    expect(link.attributes('aria-label')).toBeUndefined()
+    expect(link.attributes('aria-labelledby')).toBe('custom-label')
+    expect(link.get('#custom-label').text()).toBe('Beta Docs')
   })
 
   it('passes accessibility tests', async () => {
