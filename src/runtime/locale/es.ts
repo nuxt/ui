@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Error al subir'
     },
     chatMessages: {
-      autoScroll: 'Desplazarse hacia abajo'
+      autoScroll: 'Desplazarse hacia abajo',
+      thinking: 'Pensando…'
     },
     chatPrompt: {
       placeholder: 'Escribe tu mensaje aquí…',

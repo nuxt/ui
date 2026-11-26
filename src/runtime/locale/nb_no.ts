@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Opplasting mislyktes'
     },
     chatMessages: {
-      autoScroll: 'Rull til bunnen'
+      autoScroll: 'Rull til bunnen',
+      thinking: 'Tenker…'
     },
     chatPrompt: {
       placeholder: 'Skriv din melding her…',

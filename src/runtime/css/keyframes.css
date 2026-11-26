@@ -627,6 +627,18 @@
   }
 }
 
+@keyframes chat-indicator {
+  0%,
+  40%,
+  100% {
+    opacity: 0.2;
+  }
+
+  20% {
+    opacity: 1;
+  }
+}
+
 /* ProseImg zoom: the image moves between its place in the page and the zoomed view through a view transition. */
 ::view-transition-group(*.ui-prose-img) {
   animation-duration: 300ms;

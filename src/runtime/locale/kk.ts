@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Жүктеу сәтсіз аяқталды'
     },
     chatMessages: {
-      autoScroll: 'Төмен айналдыру'
+      autoScroll: 'Төмен айналдыру',
+      thinking: 'Ойлануда…'
     },
     chatPrompt: {
       placeholder: 'Хабар енгізіңіз…',

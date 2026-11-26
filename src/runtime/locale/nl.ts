@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Uploaden mislukt'
     },
     chatMessages: {
-      autoScroll: 'Naar beneden scrollen'
+      autoScroll: 'Naar beneden scrollen',
+      thinking: 'Aan het denken…'
     },
     chatPrompt: {
       placeholder: 'Schrijf hier je bericht…',

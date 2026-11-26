@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Отпремање није успело'
     },
     chatMessages: {
-      autoScroll: 'Помери на дно'
+      autoScroll: 'Помери на дно',
+      thinking: 'Размишљам…'
     },
     chatPrompt: {
       placeholder: 'Унеси поруку овде…',

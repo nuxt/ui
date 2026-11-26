@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Gagal mengunggah'
     },
     chatMessages: {
-      autoScroll: 'Gulir ke bawah'
+      autoScroll: 'Gulir ke bawah',
+      thinking: 'Berpikir…'
     },
     chatPrompt: {
       placeholder: 'Tulis pesan Anda di sini…',

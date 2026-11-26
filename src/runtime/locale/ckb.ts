@@ -42,7 +42,8 @@ export default defineLocale<Messages>({
       error: 'بارکردن سەرکەوتوو نەبوو'
     },
     chatMessages: {
-      autoScroll: 'بۆ خوارەوە بڕۆ'
+      autoScroll: 'بۆ خوارەوە بڕۆ',
+      thinking: 'بیرکردنەوە…'
     },
     chatPrompt: {
       placeholder: 'نامەکەت لێرە بنوسە…',

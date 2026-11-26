@@ -42,7 +42,8 @@ export default defineLocale<Messages>({
       error: 'بارگذاری ناموفق بود'
     },
     chatMessages: {
-      autoScroll: 'پیمایش به پایین'
+      autoScroll: 'پیمایش به پایین',
+      thinking: 'در حال فکر کردن…'
     },
     chatPrompt: {
       placeholder: 'اینجا پیام خود را بنویسید…',
