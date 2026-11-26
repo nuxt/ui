@@ -224,6 +224,19 @@ describe('Table', () => {
     ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }]
   ])
 
+  it('renders the colgroup slot between the caption and grouped headers', async () => {
+    const wrapper = await mountSuspended(Table<typeof data[number]>, {
+      props: { data, columns: groupedHeaderColumns, caption: 'Payments' },
+      slots: {
+        colgroup: () => h('colgroup', [h('col', { class: 'w-24' }), h('col', { span: 3 })])
+      }
+    })
+
+    const table = wrapper.get('table').element
+    expect(Array.from(table.children, child => child.localName).slice(0, 3)).toEqual(['caption', 'colgroup', 'thead'])
+    expect(wrapper.get('colgroup > col').classes()).toContain('w-24')
+  })
+
   it('merges grouped headers with different depths', async () => {
     const wrapper = await mountSuspended(Table<typeof data[number]>, {
       props: { data, columns: groupedHeaderColumns },
