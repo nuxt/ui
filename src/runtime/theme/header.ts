@@ -8,9 +8,21 @@ export default defineTheme({
     center: 'hidden lg:flex',
     right: 'flex items-center justify-end lg:flex-1 gap-1.5',
     title: 'shrink-0 font-heading font-(--ui-font-weight-heading,--theme(--font-weight-bold)) text-xl text-strong flex items-end gap-1.5',
-    toggle: 'lg:hidden'
+    toggle: 'lg:hidden',
+    content: 'lg:hidden',
+    overlay: 'lg:hidden',
+    body: 'p-(--ui-gutter) overflow-y-auto'
   },
   variants: {
+    // The modal opens under the header, which stays above it. The header sets its `top` to where
+    // it ends when the menu opens, the header height is the fallback.
+    mode: {
+      modal: {
+        content: 'top-(--ui-header-height) z-40'
+      },
+      slideover: '',
+      drawer: ''
+    },
     toggleSide: {
       left: {
         toggle: '-ms-1.5'

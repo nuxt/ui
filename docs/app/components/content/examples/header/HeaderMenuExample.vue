@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import type { NavigationMenuItem, HeaderMenuProps } from '@nuxt/ui'
-
-defineProps<{
-  mode?: HeaderMenuProps['mode']
-}>()
+import type { NavigationMenuItem } from '@nuxt/ui'
 
 const route = useRoute()
 
@@ -53,10 +49,8 @@ const items = computed<NavigationMenuItem[]>(() => [{
       </UTooltip>
     </template>
 
-    <template #menu>
-      <UHeaderMenu :mode="mode">
-        <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
-      </UHeaderMenu>
+    <template #body>
+      <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
     </template>
   </UHeader>
 </template>

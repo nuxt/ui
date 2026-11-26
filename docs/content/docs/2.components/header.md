@@ -15,7 +15,7 @@ The Header component renders a `<header>` element.
 Its height is defined through a `--ui-header-height` CSS variable.
 ::
 
-Use the `left`, `default` and `right` slots to customize the header and the `body` or `menu` slots to customize the header menu.
+Use the `left`, `default` and `right` slots to customize the header and the `body` or `content` slots to customize the header menu.
 
 ::component-example
 ---
@@ -113,11 +113,17 @@ slots:
 ::
 ::
 
-### Menu
+### Mode
 
-Use the `body` slot to fill the menu the toggle opens below `lg`. It opens under the header, which stays in place with its toggle.
+Use the `mode` prop to change the mode of the header menu. Defaults to `modal`.
 
-Use the `menu` slot with a [HeaderMenu](/docs/components/header-menu) to open it in a Modal, a Slideover or a Drawer instead, or to customize it.
+Use the `body` slot to fill the menu body or the `content` slot to fill the entire menu.
+
+In `modal` mode, the menu opens under the header, which stays in place with its toggle.
+
+::tip{to="#props"}
+You can use the `menu` prop to customize the menu of the header, it will adapt depending on the mode you choose.
+::
 
 ::component-example
 ---
@@ -130,9 +136,8 @@ name: 'header-menu-example'
 options:
   - name: 'mode'
     label: 'mode'
-    default: 'inline'
+    default: 'drawer'
     items:
-      - inline
       - modal
       - slideover
       - drawer
