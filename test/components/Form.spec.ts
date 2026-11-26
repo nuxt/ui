@@ -184,6 +184,15 @@ describe('Form', () => {
       expect(passwordField.text()).toBe('')
     })
 
+    it('keeps a field invalid when its error has no message', async () => {
+      form.setErrors([{ name: 'email', message: '' }])
+      await nextTick()
+
+      const email = wrapper.find('#email')
+      expect(email.attributes('aria-invalid')).toBe('true')
+      expect(email.attributes('aria-describedby')).toBeUndefined()
+    })
+
     it('setErrors with regex works', async () => {
       form.setErrors([{ id: 'email', name: 'email', message: 'this is an error' }])
 
