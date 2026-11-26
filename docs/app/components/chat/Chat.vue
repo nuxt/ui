@@ -423,6 +423,7 @@ function clearMessages() {
             v-if="isReasoningUIPart(part)"
             :text="part.text"
             :streaming="isPartStreaming(part, streaming)"
+            chevron="leading"
           >
             <ChatMarkdown
               :value="part.text"
