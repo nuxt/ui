@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Огоҳинома',
       viewport: 'Огоҳиномаҳо ({hotkey})'
+    },
+    transferList: {
+      source: 'Дастрас',
+      target: 'Интихобшуда',
+      selectAll: 'Ҳамаро интихоб кардан',
+      moveToTarget: 'Қайдшудаҳоро ба интихобшуда гузаронидан',
+      moveAllToTarget: 'Ҳамаро ба интихобшуда гузаронидан',
+      moveToSource: 'Қайдшудаҳоро ба дастрас гузаронидан',
+      moveAllToSource: 'Ҳамаро ба дастрас гузаронидан'
     }
   }
 })

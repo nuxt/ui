@@ -181,6 +181,7 @@ export interface ThemeDefaults {
   toggle?: Partial<ComponentTypes.ToggleProps>
   toggleGroup?: Partial<ComponentTypes.ToggleGroupProps>
   tooltip?: Partial<ComponentTypes.TooltipProps>
+  transferList?: Partial<ComponentTypes.TransferListProps>
   tree?: Partial<ComponentTypes.TreeProps>
   user?: Partial<ComponentTypes.UserProps>
 }

@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'सूचना',
       viewport: 'सूचनाएं ({hotkey})'
+    },
+    transferList: {
+      source: 'उपलब्ध',
+      target: 'चुने गए',
+      selectAll: 'सभी चुनें',
+      moveToTarget: 'चिह्नित को चुने गए में ले जाएँ',
+      moveAllToTarget: 'सभी को चुने गए में ले जाएँ',
+      moveToSource: 'चिह्नित को उपलब्ध में ले जाएँ',
+      moveAllToSource: 'सभी को उपलब्ध में ले जाएँ'
     }
   }
 })

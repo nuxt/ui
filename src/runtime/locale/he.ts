@@ -235,6 +235,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'התראה',
       viewport: 'התראות ({hotkey})'
+    },
+    transferList: {
+      source: 'זמינים',
+      target: 'נבחרו',
+      selectAll: 'בחר הכל',
+      moveToTarget: 'העבר את המסומנים לנבחרים',
+      moveAllToTarget: 'העבר הכל לנבחרים',
+      moveToSource: 'העבר את המסומנים לזמינים',
+      moveAllToSource: 'העבר הכל לזמינים'
     }
   }
 })

@@ -235,6 +235,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'ئۇقتۇرۇش',
       viewport: 'ئۇقتۇرۇشلار ({hotkey})'
+    },
+    transferList: {
+      source: 'ئىشلەتكىلى بولىدىغان',
+      target: 'تاللانغان',
+      selectAll: 'ھەممىنى تاللاش',
+      moveToTarget: 'بەلگىلەنگەنلەرنى تاللانغانغا يۆتكەش',
+      moveAllToTarget: 'ھەممىنى تاللانغانغا يۆتكەش',
+      moveToSource: 'بەلگىلەنگەنلەرنى ئىشلەتكىلى بولىدىغانغا يۆتكەش',
+      moveAllToSource: 'ھەممىنى ئىشلەتكىلى بولىدىغانغا يۆتكەش'
     }
   }
 })

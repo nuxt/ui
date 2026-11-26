@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Obavijest',
       viewport: 'Obavijesti ({hotkey})'
+    },
+    transferList: {
+      source: 'Dostupno',
+      target: 'Odabrano',
+      selectAll: 'Odaberi sve',
+      moveToTarget: 'Premjesti označeno u odabrano',
+      moveAllToTarget: 'Premjesti sve u odabrano',
+      moveToSource: 'Premjesti označeno u dostupno',
+      moveAllToSource: 'Premjesti sve u dostupno'
     }
   }
 })

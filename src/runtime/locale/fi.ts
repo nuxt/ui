@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Ilmoitus',
       viewport: 'Ilmoitukset ({hotkey})'
+    },
+    transferList: {
+      source: 'Saatavilla',
+      target: 'Valitut',
+      selectAll: 'Valitse kaikki',
+      moveToTarget: 'Siirrä merkityt valittuihin',
+      moveAllToTarget: 'Siirrä kaikki valittuihin',
+      moveToSource: 'Siirrä merkityt saatavilla oleviin',
+      moveAllToSource: 'Siirrä kaikki saatavilla oleviin'
     }
   }
 })

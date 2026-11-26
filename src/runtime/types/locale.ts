@@ -239,6 +239,15 @@ export type Messages = {
     label: string
     viewport: string
   }
+  transferList: {
+    source: string
+    target: string
+    selectAll: string
+    moveToTarget: string
+    moveAllToTarget: string
+    moveToSource: string
+    moveAllToSource: string
+  }
 }
 
 export type Direction = 'ltr' | 'rtl'

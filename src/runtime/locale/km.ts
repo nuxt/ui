@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'ការជូនដំណឹង',
       viewport: 'ការជូនដំណឹង ({hotkey})'
+    },
+    transferList: {
+      source: 'អាចប្រើបាន',
+      target: 'បានជ្រើស',
+      selectAll: 'ជ្រើសទាំងអស់',
+      moveToTarget: 'ផ្លាស់ទីធាតុដែលបានគូសទៅបានជ្រើស',
+      moveAllToTarget: 'ផ្លាស់ទីទាំងអស់ទៅបានជ្រើស',
+      moveToSource: 'ផ្លាស់ទីធាតុដែលបានគូសទៅអាចប្រើបាន',
+      moveAllToSource: 'ផ្លាស់ទីទាំងអស់ទៅអាចប្រើបាន'
     }
   }
 })

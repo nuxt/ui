@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: '通知',
       viewport: '通知（{hotkey}）'
+    },
+    transferList: {
+      source: '可选',
+      target: '已选',
+      selectAll: '全选',
+      moveToTarget: '将选中项移至已选',
+      moveAllToTarget: '全部移至已选',
+      moveToSource: '将选中项移至可选',
+      moveAllToSource: '全部移至可选'
     }
   }
 })

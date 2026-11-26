@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'বিজ্ঞপ্তি',
       viewport: 'বিজ্ঞপ্তিসমূহ ({hotkey})'
+    },
+    transferList: {
+      source: 'উপলব্ধ',
+      target: 'নির্বাচিত',
+      selectAll: 'সব নির্বাচন করুন',
+      moveToTarget: 'চিহ্নিতগুলো নির্বাচিততে সরান',
+      moveAllToTarget: 'সবগুলো নির্বাচিততে সরান',
+      moveToSource: 'চিহ্নিতগুলো উপলব্ধতে সরান',
+      moveAllToSource: 'সবগুলো উপলব্ধতে সরান'
     }
   }
 })

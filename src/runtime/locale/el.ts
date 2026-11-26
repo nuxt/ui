@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Ειδοποίηση',
       viewport: 'Ειδοποιήσεις ({hotkey})'
+    },
+    transferList: {
+      source: 'Διαθέσιμα',
+      target: 'Επιλεγμένα',
+      selectAll: 'Επιλογή όλων',
+      moveToTarget: 'Μετακίνηση σημειωμένων στα επιλεγμένα',
+      moveAllToTarget: 'Μετακίνηση όλων στα επιλεγμένα',
+      moveToSource: 'Μετακίνηση σημειωμένων στα διαθέσιμα',
+      moveAllToSource: 'Μετακίνηση όλων στα διαθέσιμα'
     }
   }
 })

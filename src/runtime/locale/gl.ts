@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Notificación',
       viewport: 'Notificacións ({hotkey})'
+    },
+    transferList: {
+      source: 'Dispoñibles',
+      target: 'Escollidos',
+      selectAll: 'Seleccionar todo',
+      moveToTarget: 'Mover seleccionados a escollidos',
+      moveAllToTarget: 'Mover todo a escollidos',
+      moveToSource: 'Mover seleccionados a dispoñibles',
+      moveAllToSource: 'Mover todo a dispoñibles'
     }
   }
 })

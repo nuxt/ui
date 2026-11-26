@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Thông báo',
       viewport: 'Thông báo ({hotkey})'
+    },
+    transferList: {
+      source: 'Có sẵn',
+      target: 'Đã chọn',
+      selectAll: 'Chọn tất cả',
+      moveToTarget: 'Chuyển mục đã đánh dấu sang đã chọn',
+      moveAllToTarget: 'Chuyển tất cả sang đã chọn',
+      moveToSource: 'Chuyển mục đã đánh dấu sang có sẵn',
+      moveAllToSource: 'Chuyển tất cả sang có sẵn'
     }
   }
 })

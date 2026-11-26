@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Bildirim',
       viewport: 'Bildirimler ({hotkey})'
+    },
+    transferList: {
+      source: 'Mevcut',
+      target: 'Seçilen',
+      selectAll: 'Tümünü seç',
+      moveToTarget: 'İşaretlileri seçilenlere taşı',
+      moveAllToTarget: 'Tümünü seçilenlere taşı',
+      moveToSource: 'İşaretlileri mevcutlara taşı',
+      moveAllToSource: 'Tümünü mevcutlara taşı'
     }
   }
 })

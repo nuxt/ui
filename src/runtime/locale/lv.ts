@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Paziņojums',
       viewport: 'Paziņojumi ({hotkey})'
+    },
+    transferList: {
+      source: 'Pieejamie',
+      target: 'Izvēlētie',
+      selectAll: 'Atlasīt visu',
+      moveToTarget: 'Pārvietot atlasītos uz izvēlētajiem',
+      moveAllToTarget: 'Pārvietot visu uz izvēlētajiem',
+      moveToSource: 'Pārvietot atlasītos uz pieejamajiem',
+      moveAllToSource: 'Pārvietot visu uz pieejamajiem'
     }
   }
 })

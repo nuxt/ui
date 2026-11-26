@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Értesítés',
       viewport: 'Értesítések ({hotkey})'
+    },
+    transferList: {
+      source: 'Elérhető',
+      target: 'Kiválasztott',
+      selectAll: 'Összes kijelölése',
+      moveToTarget: 'Kijelöltek áthelyezése a kiválasztottakhoz',
+      moveAllToTarget: 'Összes áthelyezése a kiválasztottakhoz',
+      moveToSource: 'Kijelöltek áthelyezése az elérhetőkhöz',
+      moveAllToSource: 'Összes áthelyezése az elérhetőkhöz'
     }
   }
 })

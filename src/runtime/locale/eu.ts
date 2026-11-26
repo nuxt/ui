@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Jakinarazpena',
       viewport: 'Jakinarazpenak ({hotkey})'
+    },
+    transferList: {
+      source: 'Eskuragarri',
+      target: 'Aukeratuak',
+      selectAll: 'Hautatu guztiak',
+      moveToTarget: 'Eraman hautatuak aukeratuetara',
+      moveAllToTarget: 'Eraman guztiak aukeratuetara',
+      moveToSource: 'Eraman hautatuak eskuragarrietara',
+      moveAllToSource: 'Eraman guztiak eskuragarrietara'
     }
   }
 })

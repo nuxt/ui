@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Билдирме',
       viewport: 'Билдирмелер ({hotkey})'
+    },
+    transferList: {
+      source: 'Жеткиликтүү',
+      target: 'Тандалган',
+      selectAll: 'Баарын тандоо',
+      moveToTarget: 'Белгиленгендерди тандалганга жылдыруу',
+      moveAllToTarget: 'Баарын тандалганга жылдыруу',
+      moveToSource: 'Белгиленгендерди жеткиликтүүгө жылдыруу',
+      moveAllToSource: 'Баарын жеткиликтүүгө жылдыруу'
     }
   }
 })

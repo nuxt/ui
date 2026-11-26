@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Avisering',
       viewport: 'Aviseringar ({hotkey})'
+    },
+    transferList: {
+      source: 'Tillgängliga',
+      target: 'Valda',
+      selectAll: 'Markera alla',
+      moveToTarget: 'Flytta markerade till valda',
+      moveAllToTarget: 'Flytta alla till valda',
+      moveToSource: 'Flytta markerade till tillgängliga',
+      moveAllToSource: 'Flytta alla till tillgängliga'
     }
   }
 })

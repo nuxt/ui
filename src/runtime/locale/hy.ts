@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Ծանուցում',
       viewport: 'Ծանուցումներ ({hotkey})'
+    },
+    transferList: {
+      source: 'Հասանելի',
+      target: 'Ընտրված',
+      selectAll: 'Ընտրել բոլորը',
+      moveToTarget: 'Տեղափոխել նշվածները ընտրվածների մեջ',
+      moveAllToTarget: 'Տեղափոխել բոլորը ընտրվածների մեջ',
+      moveToSource: 'Տեղափոխել նշվածները հասանելիների մեջ',
+      moveAllToSource: 'Տեղափոխել բոլորը հասանելիների մեջ'
     }
   }
 })

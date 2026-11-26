@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Мэдэгдэл',
       viewport: 'Мэдэгдлүүд ({hotkey})'
+    },
+    transferList: {
+      source: 'Боломжтой',
+      target: 'Сонгосон',
+      selectAll: 'Бүгдийг сонгох',
+      moveToTarget: 'Тэмдэглэснийг сонгосон руу зөөх',
+      moveAllToTarget: 'Бүгдийг сонгосон руу зөөх',
+      moveToSource: 'Тэмдэглэснийг боломжтой руу зөөх',
+      moveAllToSource: 'Бүгдийг боломжтой руу зөөх'
     }
   }
 })

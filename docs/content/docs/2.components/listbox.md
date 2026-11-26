@@ -639,6 +639,10 @@ collapse: true
 
 You can compose two Listbox components with [Button](/docs/components/button) controls to build a transfer list pattern.
 
+::tip{to="/docs/components/transfer-list"}
+Use the [TransferList](/docs/components/transfer-list) component for a ready-made version with headers, "select all", bulk moves and double-click to move.
+::
+
 ::component-example
 ---
 name: 'listbox-transfer-list-example'

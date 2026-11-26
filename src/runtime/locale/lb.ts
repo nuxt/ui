@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Notifikatioun',
       viewport: 'Notifikatiounen ({hotkey})'
+    },
+    transferList: {
+      source: 'Disponibel',
+      target: 'Ausgewielt',
+      selectAll: 'Alles auswielen',
+      moveToTarget: 'Markéiert an Ausgewielt réckelen',
+      moveAllToTarget: 'Alles an Ausgewielt réckelen',
+      moveToSource: 'Markéiert an Disponibel réckelen',
+      moveAllToSource: 'Alles an Disponibel réckelen'
     }
   }
 })

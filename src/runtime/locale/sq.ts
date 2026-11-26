@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Njoftim',
       viewport: 'Njoftime ({hotkey})'
+    },
+    transferList: {
+      source: 'Të disponueshme',
+      target: 'Të zgjedhura',
+      selectAll: 'Zgjidh të gjitha',
+      moveToTarget: 'Zhvendos të shënuarat te të zgjedhurat',
+      moveAllToTarget: 'Zhvendos të gjitha te të zgjedhurat',
+      moveToSource: 'Zhvendos të shënuarat te të disponueshmet',
+      moveAllToSource: 'Zhvendos të gjitha te të disponueshmet'
     }
   }
 })

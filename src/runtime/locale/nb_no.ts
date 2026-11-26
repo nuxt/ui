@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Varsel',
       viewport: 'Varsler ({hotkey})'
+    },
+    transferList: {
+      source: 'Tilgjengelige',
+      target: 'Valgte',
+      selectAll: 'Velg alle',
+      moveToTarget: 'Flytt markerte til valgte',
+      moveAllToTarget: 'Flytt alle til valgte',
+      moveToSource: 'Flytt markerte til tilgjengelige',
+      moveAllToSource: 'Flytt alle til tilgjengelige'
     }
   }
 })

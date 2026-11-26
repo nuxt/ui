@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'ການແຈ້ງເຕືອນ',
       viewport: 'ການແຈ້ງເຕືອນ ({hotkey})'
+    },
+    transferList: {
+      source: 'ທີ່ມີຢູ່',
+      target: 'ທີ່ເລືອກແລ້ວ',
+      selectAll: 'ເລືອກທັງໝົດ',
+      moveToTarget: 'ຍ້າຍລາຍການທີ່ໝາຍໄປທີ່ເລືອກແລ້ວ',
+      moveAllToTarget: 'ຍ້າຍທັງໝົດໄປທີ່ເລືອກແລ້ວ',
+      moveToSource: 'ຍ້າຍລາຍການທີ່ໝາຍໄປທີ່ມີຢູ່',
+      moveAllToSource: 'ຍ້າຍທັງໝົດໄປທີ່ມີຢູ່'
     }
   }
 })

@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Teavitus',
       viewport: 'Teavitused ({hotkey})'
+    },
+    transferList: {
+      source: 'Saadaval',
+      target: 'Valitud',
+      selectAll: 'Vali kõik',
+      moveToTarget: 'Teisalda märgitud valitute hulka',
+      moveAllToTarget: 'Teisalda kõik valitute hulka',
+      moveToSource: 'Teisalda märgitud saadaolevate hulka',
+      moveAllToSource: 'Teisalda kõik saadaolevate hulka'
     }
   }
 })

@@ -235,6 +235,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'ئاگادارکردنەوە',
       viewport: 'ئاگادارکردنەوەکان ({hotkey})'
+    },
+    transferList: {
+      source: 'بەردەست',
+      target: 'هەڵبژێردراو',
+      selectAll: 'هەمووی هەڵبژێرە',
+      moveToTarget: 'دیاریکراوەکان بگوازەرەوە بۆ هەڵبژێردراو',
+      moveAllToTarget: 'هەمووی بگوازەرەوە بۆ هەڵبژێردراو',
+      moveToSource: 'دیاریکراوەکان بگوازەرەوە بۆ بەردەست',
+      moveAllToSource: 'هەمووی بگوازەرەوە بۆ بەردەست'
     }
   }
 })

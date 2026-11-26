@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Bildirishnoma',
       viewport: 'Bildirishnomalar ({hotkey})'
+    },
+    transferList: {
+      source: 'Mavjud',
+      target: 'Tanlangan',
+      selectAll: 'Hammasini tanlash',
+      moveToTarget: 'Belgilanganlarni tanlanganlarga ko‘chirish',
+      moveAllToTarget: 'Hammasini tanlanganlarga ko‘chirish',
+      moveToSource: 'Belgilanganlarni mavjudlarga ko‘chirish',
+      moveAllToSource: 'Hammasini mavjudlarga ko‘chirish'
     }
   }
 })

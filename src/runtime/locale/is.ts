@@ -234,6 +234,15 @@ export default defineLocale<Messages>({
     toaster: {
       label: 'Tilkynning',
       viewport: 'Tilkynningar ({hotkey})'
+    },
+    transferList: {
+      source: 'Tiltækt',
+      target: 'Valið',
+      selectAll: 'Velja allt',
+      moveToTarget: 'Færa merkt í valið',
+      moveAllToTarget: 'Færa allt í valið',
+      moveToSource: 'Færa merkt í tiltækt',
+      moveAllToSource: 'Færa allt í tiltækt'
     }
   }
 })
