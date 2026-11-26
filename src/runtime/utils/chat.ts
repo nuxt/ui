@@ -1,4 +1,5 @@
 import type { ComputedRef, InjectionKey } from 'vue'
 
-// Whether a submit from `UChatPrompt` would be queued right now, so `UChatPromptSubmit` sends instead of stopping
-export const chatPromptQueueingInjectionKey: InjectionKey<ComputedRef<boolean>> = Symbol('nuxt-ui.chat-prompt-queueing')
+// What a submit from `UChatPrompt` would do right now, so `UChatPromptSubmit` submits instead of stopping or retrying:
+// `queue` during a response with a queue, `send` after an error when the prompt holds a message and has no `error`
+export const chatPromptSubmitInjectionKey: InjectionKey<ComputedRef<{ queue: boolean, send: boolean }>> = Symbol('nuxt-ui.chat-prompt-submit')

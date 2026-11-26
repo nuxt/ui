@@ -88,6 +88,36 @@ describe('ChatPrompt', () => {
     expect(wrapper.find('button[aria-label="Send prompt"]').exists()).toBe(true)
   })
 
+  it('sends from `UChatPromptSubmit` after an error when the prompt has text', async () => {
+    const onReload = vi.fn()
+    // The status is only bound on the button, like in the docs examples
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: '' },
+      slots: { default: () => h(ChatPromptSubmit, { status: 'error', onReload }) },
+      attachTo: document.body
+    })
+    const button = () => wrapper.find('button[aria-label]')
+
+    expect(button().attributes('aria-label')).toBe('Retry')
+
+    await wrapper.setProps({ modelValue: 'Next question' })
+    expect(button().attributes('aria-label')).toBe('Send prompt')
+
+    await button().trigger('click')
+    expect(wrapper.emitted('submit')).toHaveLength(1)
+    expect(onReload).not.toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('keeps `UChatPromptSubmit` on retry after an error with `error`', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: 'Next question', status: 'error', error: new Error('Error') },
+      slots: { default: () => h(ChatPromptSubmit, { status: 'error' }) }
+    })
+
+    expect(wrapper.find('button[aria-label]').attributes('aria-label')).toBe('Retry')
+  })
+
   it('keeps `UChatPromptSubmit` on stop while streaming without `v-model:queue`', async () => {
     const wrapper = await mountSuspended(ChatPrompt, {
       props: { modelValue: 'Next question', status: 'streaming' },

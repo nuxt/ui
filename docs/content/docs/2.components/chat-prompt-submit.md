@@ -191,7 +191,7 @@ When its status is `error`{lang="ts-type"}, use the `error-color`, `error-varian
 - `errorIcon="i-lucide-rotate-ccw"`{lang="ts-type"}
 
 ::note
-The `reload` event is emitted when the user clicks on the Button.
+The `reload` event is emitted when the user clicks on the Button. Inside a [ChatPrompt](/docs/components/chat-prompt) without the `error` prop, the Button sends the message instead when the prompt holds one.
 ::
 
 ::component-code

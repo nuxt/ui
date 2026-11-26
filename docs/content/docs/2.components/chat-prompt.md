@@ -27,6 +27,7 @@ The ChatPrompt handles the following events:
 
 - The form is submitted when the user presses :kbd{value="enter"} or when the user clicks on the submit button. Set the `submit-on-enter` prop to `false` to submit with :kbd{value="ctrl"} + :kbd{value="enter"} (or :kbd{value="cmd"} + :kbd{value="enter"} on macOS) instead, allowing :kbd{value="enter"} to insert a newline.
 - The form is not submitted while the `status` prop is `submitted` or `streaming`, so pressing :kbd{value="enter"} during a response doesn't send a second message.
+- The textarea is disabled while the `error` prop is set. Leave it out to let the user send a new message after an error, a [ChatPromptSubmit](/docs/components/chat-prompt-submit) inside the prompt then sends when it holds a message and retries when it is empty.
 - The textarea is blurred when :kbd{value="escape"} is pressed and emits a `close` event.
 ::
 

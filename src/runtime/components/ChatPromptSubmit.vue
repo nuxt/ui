@@ -93,7 +93,7 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { transformUI } from '../utils'
-import { chatPromptQueueingInjectionKey } from '../utils/chat'
+import { chatPromptSubmitInjectionKey } from '../utils/chat'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -118,9 +118,9 @@ const appConfig = useAppConfig() as ChatPromptSubmit['AppConfig']
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'color', 'variant', 'status', 'disabled', 'streamingIcon', 'streamingColor', 'streamingVariant', 'submittedIcon', 'submittedColor', 'submittedVariant', 'errorIcon', 'errorColor', 'errorVariant', 'class', 'ui'))
 
-// Inside a `UChatPrompt` that would queue what is typed, the button submits it instead of stopping the response
-const queueing = inject(chatPromptQueueingInjectionKey, undefined)
-const currentStatus = computed(() => queueing?.value ? 'ready' : props.status)
+// Inside a `UChatPrompt` that would queue or send what is typed, the button submits it instead of stopping or retrying
+const prompt = inject(chatPromptSubmitInjectionKey, undefined)
+const currentStatus = computed(() => prompt?.value.queue || (props.status === 'error' && prompt?.value.send) ? 'ready' : props.status)
 
 const disabled = computed(() => currentStatus.value === 'ready' ? props.disabled : false)
 
