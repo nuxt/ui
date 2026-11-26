@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Бастан',
       toggle: 'Кушодан/бастан'
     },
+    selection: {
+      summary: 'Интихоб шуд: {count}'
+    },
     selectMenu: {
       create: 'Сохтани "{label}"',
       noData: 'Маълумот нест',

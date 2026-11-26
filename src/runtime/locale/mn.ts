@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Хаах',
       toggle: 'Сэлгэх'
     },
+    selection: {
+      summary: 'Сонгосон: {count}'
+    },
     selectMenu: {
       create: '"{label}" үүсгэх',
       noData: 'Мэдээлэл байхгүй',

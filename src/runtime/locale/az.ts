@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Bağla',
       toggle: 'Aç/bağla'
     },
+    selection: {
+      summary: 'Seçilənlərin sayı: {count}'
+    },
     selectMenu: {
       create: '"{label}" yarat',
       noData: 'Məlumat yoxdur',

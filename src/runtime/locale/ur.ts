@@ -205,6 +205,9 @@ export default defineLocale<Messages>({
       close: 'بند کریں',
       toggle: 'ٹوگل کریں'
     },
+    selection: {
+      summary: 'منتخب کردہ: {count}'
+    },
     selectMenu: {
       create: '"{label}" بنائیں',
       noData: 'کوئی ڈیٹا نہیں',

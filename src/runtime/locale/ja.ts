@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: '閉じる',
       toggle: '切り替え'
     },
+    selection: {
+      summary: '{count} 件選択済み'
+    },
     selectMenu: {
       create: '"{label}"を作成',
       noData: 'データがありません',

@@ -401,6 +401,86 @@ describe('InputMenu', () => {
     })
   })
 
+  it('summarizes multiple selections and restores tags at the limit', async () => {
+    const wrapper = mount(InputMenu, {
+      attachTo: document.body,
+      props: {
+        items: ['Apple', 'Banana', 'Cherry'],
+        multiple: true,
+        maxSelectedLabels: 1,
+        modelValue: ['Apple', 'Banana']
+      }
+    })
+
+    expect(wrapper.text()).toContain('2 selected')
+    expect(wrapper.findAll('[data-slot="tagsItem"]').filter(tag => tag.isVisible())).toHaveLength(0)
+    expect(wrapper.get('[data-slot="tagsInput"]').attributes('disabled')).toBeUndefined()
+
+    await wrapper.setProps({ modelValue: ['Apple'] })
+    const tag = wrapper.get('[data-slot="tagsItem"]')
+    expect(tag.isVisible()).toBe(true)
+    expect(tag.text()).toBe('Apple')
+    wrapper.unmount()
+  })
+
+  it('keeps two-step Backspace removal while the selection summary is shown', async () => {
+    const wrapper = mount(InputMenu, {
+      attachTo: document.body,
+      props: {
+        items: ['Apple', 'Banana'],
+        multiple: true,
+        maxSelectedLabels: 1,
+        modelValue: ['Apple', 'Banana']
+      }
+    })
+    await flushPromises()
+
+    const input = wrapper.get<HTMLInputElement>('[data-slot="tagsInput"]')
+    input.element.focus()
+    input.element.setSelectionRange(0, 0)
+    await input.trigger('keydown', { key: 'Backspace' })
+
+    const lastTag = wrapper.findAll('[data-slot="tagsItem"]').at(-1)
+    expect(lastTag?.attributes('data-state')).toBe('active')
+    expect(lastTag?.isVisible()).toBe(false)
+    expect(wrapper.emitted('remove-tag')).toBeUndefined()
+
+    await input.trigger('keydown', { key: 'Backspace' })
+    expect(wrapper.emitted('remove-tag')).toEqual([['Banana']])
+    expect(wrapper.emitted('update:modelValue')).toEqual([[['Apple']]])
+
+    await wrapper.setProps({ modelValue: ['Apple'] })
+    expect(wrapper.find('[data-slot="selectionSummary"]').exists()).toBe(false)
+    const tags = wrapper.findAll('[data-slot="tagsItem"]')
+    expect(tags.map(tag => tag.text())).toEqual(['Apple'])
+    expect(tags[0]?.isVisible()).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('supports a custom selection summary while keeping the selected options', async () => {
+    const wrapper = mount(InputMenu, {
+      attachTo: document.body,
+      props: {
+        items: ['Apple', 'Banana', 'Cherry'],
+        multiple: true,
+        maxSelectedLabels: 0,
+        modelValue: ['Apple', 'Banana'],
+        defaultOpen: true,
+        portal: false
+      },
+      slots: { 'selection-summary': ({ count }) => `${count} fruits` }
+    })
+
+    await flushPromises()
+    expect(wrapper.text()).toContain('2 fruits')
+    const selectedOptions = wrapper.findAll('[role="option"][aria-selected="true"]')
+    expect(selectedOptions.map(option => option.text())).toEqual(['Apple', 'Banana'])
+
+    await selectedOptions[0]!.trigger('click')
+    expect(wrapper.emitted('update:modelValue')).toEqual([[['Banana']]])
+    wrapper.unmount()
+  })
+
   describe('it should display correct label', () => {
     test.each([null, undefined, ''])('falsy model value %s should display placeholder', (modelValue) => {
       const wrapper = mount(InputMenu, {

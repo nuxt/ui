@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'បិទ',
       toggle: 'បិទ/បើក'
     },
+    selection: {
+      summary: 'បានជ្រើសរើស៖ {count}'
+    },
     selectMenu: {
       create: 'បង្កើត "{label}"',
       noData: 'មិនមានទិន្នន័យ',

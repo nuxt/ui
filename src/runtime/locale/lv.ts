@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Aizvērt',
       toggle: 'Pārslēgt'
     },
+    selection: {
+      summary: 'Atlasīts: {count}'
+    },
     selectMenu: {
       create: 'Izveidot "{label}"',
       noData: 'Nav datu',

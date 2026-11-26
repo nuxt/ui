@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Zatvori',
       toggle: 'Prebaci'
     },
+    selection: {
+      summary: 'Odabrano: {count}'
+    },
     selectMenu: {
       create: 'Stvori "{label}"',
       noData: 'Nema podataka',

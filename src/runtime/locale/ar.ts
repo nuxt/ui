@@ -205,6 +205,9 @@ export default defineLocale<Messages>({
       close: 'إغلاق',
       toggle: 'تبديل'
     },
+    selection: {
+      summary: 'المحدد: {count}'
+    },
     selectMenu: {
       create: 'إنشاء "{label}"',
       noData: 'لا توجد بيانات',

@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Lukk',
       toggle: 'Veksle'
     },
+    selection: {
+      summary: 'Valgt: {count}'
+    },
     selectMenu: {
       create: 'Opprett "{label}"',
       noData: 'Ingen data',

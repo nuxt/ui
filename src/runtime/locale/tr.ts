@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Kapat',
       toggle: 'Aç/kapat'
     },
+    selection: {
+      summary: '{count} seçim'
+    },
     selectMenu: {
       create: '"{label}" oluştur',
       noData: 'Veri yok',

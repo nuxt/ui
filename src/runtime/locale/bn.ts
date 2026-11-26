@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'বন্ধ করুন',
       toggle: 'টগল করুন'
     },
+    selection: {
+      summary: 'নির্বাচিত: {count}'
+    },
     selectMenu: {
       create: '"{label}" তৈরি করুন',
       noData: 'কোনো তথ্য নেই',

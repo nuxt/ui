@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Fechar',
       toggle: 'Alternar'
     },
+    selection: {
+      summary: 'Seleção: {count}'
+    },
     selectMenu: {
       create: 'Criar "{label}"',
       noData: 'Nenhum dado',

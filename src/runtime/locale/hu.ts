@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Bezárás',
       toggle: 'Váltás'
     },
+    selection: {
+      summary: 'Kiválasztva: {count}'
+    },
     selectMenu: {
       create: '"{label}" létrehozása',
       noData: 'Nincs adat',

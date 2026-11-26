@@ -204,6 +204,9 @@ export default defineLocale<Messages>({
       close: 'Schließen',
       toggle: 'Umschalten'
     },
+    selection: {
+      summary: '{count} ausgewählt'
+    },
     selectMenu: {
       create: '"{label}" erstellen',
       noData: 'Keine Daten',

@@ -150,6 +150,8 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   modelModifiers?: Mod
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
+  /** Show a summary when the number of selected items exceeds this limit in multiple mode. */
+  maxSelectedLabels?: number
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /** Keep the mobile text size on all breakpoints. */
@@ -221,6 +223,7 @@ export interface SelectMenuSlots<
   'leading'?: TriggerSlotProps<A, VK, M, Mod, C>
   'default'?: TriggerSlotProps<A, VK, M, Mod, C>
   'trailing'?: TriggerSlotProps<A, VK, M, Mod, C>
+  'selection-summary'?(props: { count: number, ui: SelectMenu['ui'] }): VNode[]
   'empty'?(props: { searchTerm: string }): VNode[]
   'item'?: SlotProps<T>
   'item-leading'?: SlotProps<T>
@@ -741,7 +744,12 @@ defineExpose({
         </span>
 
         <slot :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :item="resolveSelectedItem('default', modelValue)" :open="open" :ui="ui">
-          <template v-for="displayedModelValue in [displayValue(modelValue as any)]" :key="displayedModelValue">
+          <span v-if="props.multiple && props.maxSelectedLabels != null && Array.isArray(modelValue) && modelValue.length > Math.max(0, props.maxSelectedLabels)" data-slot="value" :class="ui.value({ class: props.ui?.value })">
+            <slot name="selection-summary" :count="modelValue.length" :ui="ui">
+              {{ t('selection.summary', { count: modelValue.length }) }}
+            </slot>
+          </span>
+          <template v-for="displayedModelValue in [displayValue(modelValue as any)]" v-else :key="displayedModelValue">
             <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" data-slot="value" :class="ui.value({ class: props.ui?.value })">
               {{ displayedModelValue }}
             </span>

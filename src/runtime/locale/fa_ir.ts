@@ -205,6 +205,9 @@ export default defineLocale<Messages>({
       close: 'بستن',
       toggle: 'تغییر وضعیت'
     },
+    selection: {
+      summary: 'انتخاب‌شده: {count}'
+    },
     selectMenu: {
       create: 'ایجاد "{label}"',
       noData: 'داده‌ای موجود نیست',
