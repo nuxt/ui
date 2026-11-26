@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'No s\'ha pogut pujar'
     },
     chatMessages: {
-      autoScroll: 'Desplaçar cap avall'
+      autoScroll: 'Desplaçar cap avall',
+      thinking: 'Pensant…'
     },
     chatPrompt: {
       placeholder: 'Escriu el teu missatge aquí…',

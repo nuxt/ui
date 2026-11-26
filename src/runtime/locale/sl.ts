@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Nalaganje ni uspelo'
     },
     chatMessages: {
-      autoScroll: 'Pomakni na dno'
+      autoScroll: 'Pomakni na dno',
+      thinking: 'Razmišlja…'
     },
     chatPrompt: {
       placeholder: 'Tukaj napišite svoje sporočilo…',

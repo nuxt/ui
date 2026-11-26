@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Ezin izan da igo'
     },
     chatMessages: {
-      autoScroll: 'Korritu behera'
+      autoScroll: 'Korritu behera',
+      thinking: 'Pentsatzen…'
     },
     chatPrompt: {
       placeholder: 'Idatzi zure mezua hemen…',

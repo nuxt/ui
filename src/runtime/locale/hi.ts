@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'अपलोड विफल रहा'
     },
     chatMessages: {
-      autoScroll: 'नीचे स्क्रॉल करें'
+      autoScroll: 'नीचे स्क्रॉल करें',
+      thinking: 'सोच रहा है…'
     },
     chatPrompt: {
       placeholder: 'यहाँ अपना संदेश लिखें…',

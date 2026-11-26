@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: '上传失败'
     },
     chatMessages: {
-      autoScroll: '滚动到底部'
+      autoScroll: '滚动到底部',
+      thinking: '思考中…'
     },
     chatPrompt: {
       placeholder: '在这里输入你的消息…',

@@ -390,7 +390,7 @@ Check the **Chat** overview page for installation instructions, server setup and
 
 ### With indicator slot
 
-Use the `#indicator` slot to customize the loading indicator with a [`ChatShimmer`](/docs/components/chat-shimmer) effect.
+Use the `#indicator` slot to customize the loading indicator, like cycling through status messages with a [`ChatShimmer`](/docs/components/chat-shimmer) effect.
 
 ::component-example
 ---

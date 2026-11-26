@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Tải lên thất bại'
     },
     chatMessages: {
-      autoScroll: 'Cuộn xuống dưới'
+      autoScroll: 'Cuộn xuống dưới',
+      thinking: 'Đang suy nghĩ…'
     },
     chatPrompt: {
       placeholder: 'Nhập tin nhắn của bạn ở đây…',

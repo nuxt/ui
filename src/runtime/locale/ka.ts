@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'ატვირთვა ვერ მოხერხდა'
     },
     chatMessages: {
-      autoScroll: 'ქვემოთ გადახვევა'
+      autoScroll: 'ქვემოთ გადახვევა',
+      thinking: 'ფიქრობს…'
     },
     chatPrompt: {
       placeholder: 'დაწერეთ თქვენი შეტყობინება აქ…',

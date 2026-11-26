@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Yükləmə alınmadı'
     },
     chatMessages: {
-      autoScroll: 'Aşağı sürüşdür'
+      autoScroll: 'Aşağı sürüşdür',
+      thinking: 'Düşünür…'
     },
     chatPrompt: {
       placeholder: 'Buraya mesajınızı yazın…',

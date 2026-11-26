@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Nahrávanie zlyhalo'
     },
     chatMessages: {
-      autoScroll: 'Posunúť nadol'
+      autoScroll: 'Posunúť nadol',
+      thinking: 'Premýšľa…'
     },
     chatPrompt: {
       placeholder: 'Tu napíšte svoju správu…',

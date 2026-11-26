@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Ngarkimi dështoi'
     },
     chatMessages: {
-      autoScroll: 'Lëviz poshtë'
+      autoScroll: 'Lëviz poshtë',
+      thinking: 'Po mendon…'
     },
     chatPrompt: {
       placeholder: 'Shkruaj mesazhin tënd këtu…',

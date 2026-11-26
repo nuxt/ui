@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Վերբեռնումը ձախողվեց'
     },
     chatMessages: {
-      autoScroll: 'Ոլորել ներքև'
+      autoScroll: 'Ոլորել ներքև',
+      thinking: 'Մտածում է…'
     },
     chatPrompt: {
       placeholder: 'Մուտքագրեք ձեր հաղորդագրությունը…',

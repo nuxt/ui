@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Sikertelen feltöltés'
     },
     chatMessages: {
-      autoScroll: 'Görgetés az aljára'
+      autoScroll: 'Görgetés az aljára',
+      thinking: 'Gondolkodik…'
     },
     chatPrompt: {
       placeholder: 'Írja be ide az üzenetét…',

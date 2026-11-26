@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'আপলোড ব্যর্থ হয়েছে'
     },
     chatMessages: {
-      autoScroll: 'নিচে স্ক্রোল করুন'
+      autoScroll: 'নিচে স্ক্রোল করুন',
+      thinking: 'ভাবছে…'
     },
     chatPrompt: {
       placeholder: 'এখানে আপনার বার্তা লিখুন…',

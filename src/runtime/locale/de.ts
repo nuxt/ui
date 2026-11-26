@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Hochladen fehlgeschlagen'
     },
     chatMessages: {
-      autoScroll: 'Nach unten scrollen'
+      autoScroll: 'Nach unten scrollen',
+      thinking: 'Denkt nach…'
     },
     chatPrompt: {
       placeholder: 'Schreiben Sie hier Ihre Nachricht…',

@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Eropluede feelgeschloen'
     },
     chatMessages: {
-      autoScroll: 'No ënnen scrollen'
+      autoScroll: 'No ënnen scrollen',
+      thinking: 'Denkt no…'
     },
     chatPrompt: {
       placeholder: 'Tippt hei Äre Message…',

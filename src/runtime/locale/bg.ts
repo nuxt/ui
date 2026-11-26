@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Неуспешно качване'
     },
     chatMessages: {
-      autoScroll: 'Превърти надолу'
+      autoScroll: 'Превърти надолу',
+      thinking: 'Мисли…'
     },
     chatPrompt: {
       placeholder: 'Въведете съобщение…',

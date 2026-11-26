@@ -42,7 +42,8 @@ export default defineLocale<Messages>({
       error: 'ההעלאה נכשלה'
     },
     chatMessages: {
-      autoScroll: 'גלול למטה'
+      autoScroll: 'גלול למטה',
+      thinking: 'חושב…'
     },
     chatPrompt: {
       placeholder: 'כתוב את ההודעה שלך כאן…',

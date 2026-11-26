@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Боргузорӣ ноком шуд'
     },
     chatMessages: {
-      autoScroll: 'Ба поён ҳаракат додан'
+      autoScroll: 'Ба поён ҳаракат додан',
+      thinking: 'Фикр мекунад…'
     },
     chatPrompt: {
       placeholder: 'Паём ворид кунед…',

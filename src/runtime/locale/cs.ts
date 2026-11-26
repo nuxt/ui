@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Nahrání se nezdařilo'
     },
     chatMessages: {
-      autoScroll: 'Posunout dolů'
+      autoScroll: 'Posunout dolů',
+      thinking: 'Přemýšlí…'
     },
     chatPrompt: {
       placeholder: 'Zde napište svůj text…',

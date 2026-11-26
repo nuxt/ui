@@ -614,6 +614,18 @@
   }
 }
 
+@keyframes chat-indicator {
+  0%,
+  40%,
+  100% {
+    opacity: 0.2;
+  }
+
+  20% {
+    opacity: 1;
+  }
+}
+
 /*
  * Reduced motion: keep the fade for comprehension, drop scale/slide movement
  * on enter/exit presence animations. Redefining the keyframes here covers every

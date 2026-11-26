@@ -105,6 +105,7 @@ import { useLocale } from '../composables/useLocale'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UChatMessage from './ChatMessage.vue'
+import UChatShimmer from './ChatShimmer.vue'
 import UButton from './Button.vue'
 
 const _props = withDefaults(defineProps<ChatMessagesProps<T>>(), {
@@ -450,9 +451,17 @@ defineExpose({
       <template #content>
         <slot name="indicator" :ui="ui">
           <div data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
-            <span />
-            <span />
-            <span />
+            <div aria-hidden="true" data-slot="indicatorGrid" :class="ui.indicatorGrid({ class: props.ui?.indicatorGrid })">
+              <span
+                v-for="i in 16"
+                :key="i"
+                data-slot="indicatorDot"
+                :class="ui.indicatorDot({ class: props.ui?.indicatorDot })"
+                :style="{ '--index': Math.floor((i - 1) / 4) + (i - 1) % 4 }"
+              />
+            </div>
+
+            <UChatShimmer :text="t('chatMessages.thinking')" data-slot="indicatorLabel" :class="ui.indicatorLabel({ class: props.ui?.indicatorLabel })" />
           </div>
         </slot>
       </template>

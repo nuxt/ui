@@ -36,6 +36,7 @@ export type Messages = {
   }
   chatMessages: {
     autoScroll: string
+    thinking: string
   }
   chatPrompt: {
     placeholder: string

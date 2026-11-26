@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Échec de l\'envoi'
     },
     chatMessages: {
-      autoScroll: 'Défiler vers le bas'
+      autoScroll: 'Défiler vers le bas',
+      thinking: 'Réflexion en cours…'
     },
     chatPrompt: {
       placeholder: 'Écrivez votre message ici…',

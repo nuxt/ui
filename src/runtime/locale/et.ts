@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Üleslaadimine ebaõnnestus'
     },
     chatMessages: {
-      autoScroll: 'Keri alla'
+      autoScroll: 'Keri alla',
+      thinking: 'Mõtleb…'
     },
     chatPrompt: {
       placeholder: 'Kirjuta oma sõnum siia…',

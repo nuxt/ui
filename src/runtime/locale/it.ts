@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Caricamento non riuscito'
     },
     chatMessages: {
-      autoScroll: 'Scorri in fondo'
+      autoScroll: 'Scorri in fondo',
+      thinking: 'Sto pensando…'
     },
     chatPrompt: {
       placeholder: 'Scrivi il tuo messaggio qui…',

@@ -42,7 +42,8 @@ export default defineLocale<Messages>({
       error: 'فشل الرفع'
     },
     chatMessages: {
-      autoScroll: 'التمرير إلى الأسفل'
+      autoScroll: 'التمرير إلى الأسفل',
+      thinking: 'يفكّر…'
     },
     chatPrompt: {
       placeholder: 'اكتب رسالتك هنا…',

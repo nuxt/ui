@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Augšupielāde neizdevās'
     },
     chatMessages: {
-      autoScroll: 'Ritināt uz leju'
+      autoScroll: 'Ritināt uz leju',
+      thinking: 'Domā…'
     },
     chatPrompt: {
       placeholder: 'Raksti savu ziņu šeit…',

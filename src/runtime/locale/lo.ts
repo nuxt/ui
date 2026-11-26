@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'ອັບໂຫຼດບໍ່ສຳເລັດ'
     },
     chatMessages: {
-      autoScroll: 'ເລື່ອນລົງລຸ່ມສຸດ'
+      autoScroll: 'ເລື່ອນລົງລຸ່ມສຸດ',
+      thinking: 'ກຳລັງຄິດ…'
     },
     chatPrompt: {
       placeholder: 'ພິມຂໍ້ຄວາມຂອງທ່ານທີ່ນີ້…',

@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: '上傳失敗'
     },
     chatMessages: {
-      autoScroll: '捲動到底部'
+      autoScroll: '捲動到底部',
+      thinking: '思考中…'
     },
     chatPrompt: {
       placeholder: '在這裡輸入你的訊息…',

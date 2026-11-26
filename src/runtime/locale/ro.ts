@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Încărcarea a eșuat'
     },
     chatMessages: {
-      autoScroll: 'Derulează în jos'
+      autoScroll: 'Derulează în jos',
+      thinking: 'Se gândește…'
     },
     chatPrompt: {
       placeholder: 'Scrie mesajul aici…',
