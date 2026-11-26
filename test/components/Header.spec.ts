@@ -33,6 +33,8 @@ describe('Header', () => {
     const wrapper = await mountSuspended(Header, options)
     await vi.dynamicImportSettled()
     expect(wrapper.html()).toMatchSnapshot()
+    // An open menu holds the page lock until it unmounts
+    wrapper.unmount()
   })
 
   it('labels the menu dialog with the translated toggle label', async () => {
@@ -56,10 +58,18 @@ describe('Header', () => {
     await vi.dynamicImportSettled()
 
     expect(wrapper.find('[role="dialog"]').text()).toContain('Body slot')
+
+    wrapper.unmount()
+  })
+
+  it('only shows the toggle with a menu', async () => {
+    const wrapper = await mountSuspended(Header)
+
+    expect(wrapper.find('[data-slot="header-toggle"]').exists()).toBe(false)
   })
 
   it('sets `aria-expanded` on the toggle', async () => {
-    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } } })
+    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } }, slots: { body: () => 'Body slot' } })
     const toggle = wrapper.find('[data-slot="header-toggle"]')
 
     expect(toggle.attributes('aria-expanded')).toBe('false')
@@ -67,6 +77,8 @@ describe('Header', () => {
     await toggle.trigger('click')
 
     expect(toggle.attributes('aria-expanded')).toBe('true')
+
+    wrapper.unmount()
   })
 
   it('mounts the menu before opening with `unmountOnHide: false`', async () => {
@@ -90,7 +102,7 @@ describe('Header', () => {
   })
 
   it('locks the page while the modal menu is open', async () => {
-    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } } })
+    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } }, slots: { body: () => 'Body slot' } })
 
     await wrapper.find('[data-slot="header-toggle"]').trigger('click')
     expect(document.documentElement.style.overflow).toBe('hidden')
@@ -101,6 +113,57 @@ describe('Header', () => {
     expect(document.documentElement.style.scrollbarGutter).toBe('')
 
     wrapper.unmount()
+  })
+
+  it('leaves a lock it did not take on the page', async () => {
+    document.documentElement.style.overflow = 'clip'
+    const wrapper = await mountSuspended(Header, { props: { menu: { portal: false } }, slots: { body: () => 'Body slot' } })
+    const toggle = wrapper.find('[data-slot="header-toggle"]')
+
+    expect(document.documentElement.style.overflow).toBe('clip')
+
+    await toggle.trigger('click')
+    expect(document.documentElement.style.overflow).toBe('hidden')
+
+    await toggle.trigger('click')
+    expect(document.documentElement.style.overflow).toBe('clip')
+
+    wrapper.unmount()
+    document.documentElement.style.overflow = ''
+  })
+
+  it('leaves the focus where a `menu.content.onCloseAutoFocus` that prevents it put it', async () => {
+    const other = document.createElement('button')
+    document.body.appendChild(other)
+    const wrapper = await mountSuspended(Header, {
+      attachTo: document.body,
+      props: {
+        menu: {
+          portal: false,
+          content: {
+            onCloseAutoFocus: (e: Event) => {
+              e.preventDefault()
+              other.focus()
+            }
+          }
+        }
+      },
+      slots: { body: () => 'Body slot' }
+    })
+    const toggle = wrapper.find('[data-slot="header-toggle"]')
+
+    ;(toggle.element as HTMLElement).focus()
+    await toggle.trigger('click')
+    await vi.dynamicImportSettled()
+    await new Promise(resolve => setTimeout(resolve))
+
+    await toggle.trigger('click')
+    await new Promise(resolve => setTimeout(resolve))
+
+    expect(document.activeElement).toBe(other)
+
+    wrapper.unmount()
+    other.remove()
   })
 
   it('keeps the modal menu fullscreen whatever `menu` sets', async () => {

@@ -61,13 +61,37 @@ export interface HeaderSlots {
   body?(props?: {}): VNode[]
   content?(props: { close?: () => void }): VNode[]
 }
+
+// One lock on `<html>` for every Header menu open at once, released when the last one closes. Only
+// the styles the first lock found are restored, never a lock another component holds.
+let locks = 0
+let restore: (() => void) | undefined
+
+function lockPage() {
+  if (!locks++) {
+    const { style } = document.documentElement
+    const { overflow, scrollbarGutter } = style
+    style.overflow = 'hidden'
+    style.scrollbarGutter = 'stable'
+    restore = () => {
+      style.overflow = overflow
+      style.scrollbarGutter = scrollbarGutter
+    }
+  }
+
+  return () => {
+    if (!--locks) {
+      restore?.()
+    }
+  }
+}
 </script>
 
 <script setup lang="ts" generic="T extends HeaderMode">
 import { computed, watch, toRef, shallowRef, useTemplateRef, onBeforeUnmount } from 'vue'
 import type { FocusOutsideEvent, PointerDownOutsideEvent } from 'reka-ui'
 import { Primitive } from 'reka-ui'
-import { createReusableTemplate, unrefElement, useScrollLock } from '@vueuse/core'
+import { createReusableTemplate, unrefElement } from '@vueuse/core'
 import { useRoute } from '#imports'
 import { useComponentProps, useComponentOverrides, useThemeConfig } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
@@ -132,28 +156,22 @@ let leftMenu = false
 
 // Lock `<html>`, not the `<body>` Reka locks for the overlays opened from the header, so neither
 // lock restores a value the other one set. The gutter keeps the page from moving under the scrollbar.
-const htmlEl = typeof document !== 'undefined' ? document.documentElement : null
-const scrollLock = useScrollLock(htmlEl)
-let scrollbarGutter: string | undefined
+let release: (() => void) | undefined
+
+function unlock() {
+  release?.()
+  release = undefined
+}
 
 watch([open, underHeader], ([value, under]) => {
-  const lock = value && under
-  if (!htmlEl || scrollLock.value === lock) return
-
-  if (lock) {
-    scrollbarGutter = htmlEl.style.scrollbarGutter
-    htmlEl.style.scrollbarGutter = 'stable'
-  } else {
-    htmlEl.style.scrollbarGutter = scrollbarGutter ?? ''
+  if (!value || !under) {
+    unlock()
+  } else if (typeof document !== 'undefined') {
+    release ??= lockPage()
   }
-  scrollLock.value = lock
 }, { immediate: true })
 
-onBeforeUnmount(() => {
-  if (htmlEl && scrollLock.value) {
-    htmlEl.style.scrollbarGutter = scrollbarGutter ?? ''
-  }
-})
+onBeforeUnmount(unlock)
 
 // Also runs once the root is mounted, for a menu that starts open
 watch([open, rootEl], ([value, el], previous) => {
@@ -225,6 +243,11 @@ const menuProps = toRef(() => {
       },
       onCloseAutoFocus: (e: Event) => {
         content?.onCloseAutoFocus?.(e)
+        // The caller moved the focus somewhere else
+        if (e.defaultPrevented) {
+          opener = undefined
+          return
+        }
         onCloseAutoFocus(e)
       }
     } as ModalProps['content']
@@ -233,12 +256,20 @@ const menuProps = toRef(() => {
   return modal as HeaderMenu<T>
 })
 
-const menuUi = computed(() => ({
-  overlay: ui.value.overlay({ class: props.ui?.overlay }),
-  content: ui.value.content({ class: props.ui?.content }),
-  // The slideover shows its own close in a header of its own, the title is only read out
-  ...(props.mode === 'slideover' && !slots.content ? { title: 'sr-only', body: ui.value.body({ class: props.ui?.body }) } : {})
-}))
+// Read on render, like the slots it depends on
+function menuUi() {
+  return {
+    overlay: ui.value.overlay({ class: props.ui?.overlay }),
+    content: ui.value.content({ class: props.ui?.content }),
+    // The slideover shows its own close in a header of its own, the title is only read out
+    ...(props.mode === 'slideover' && !slots.content ? { title: 'sr-only', body: ui.value.body({ class: props.ui?.body }) } : {})
+  }
+}
+
+// The toggle only shows when there is a menu to open. Slots aren't reactive, read them on render.
+function hasMenu() {
+  return !!slots.body || !!slots.content
+}
 
 const renderMenu = useLazyOverlay(() => open.value || (props.menu as ModalProps | undefined)?.unmountOnHide === false, () => loadOverlay(props.mode as HeaderMode))
 
@@ -249,7 +280,7 @@ function toggleOpen() {
 
 <template>
   <DefineToggleTemplate>
-    <slot name="toggle" :open="open" :toggle="toggleOpen" :ui="ui">
+    <slot v-if="hasMenu()" name="toggle" :open="open" :toggle="toggleOpen" :ui="ui">
       <UButton
         v-if="props.toggle"
         color="neutral"
@@ -301,7 +332,7 @@ function toggleOpen() {
     :title="locale.messages.header?.title || t('header.open')"
     :description="locale.messages.header?.description"
     v-bind="menuProps"
-    :ui="menuUi"
+    :ui="menuUi()"
   >
     <template v-if="props.mode === 'slideover' && !slots.content" #body>
       <slot name="body" />
