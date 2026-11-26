@@ -47,7 +47,7 @@ This component relies on the [`@internationalized/number`](https://react-spectru
 
 ### Model modifiers
 
-Use `v-model.optional` to store `undefined` when the field is cleared.
+Use `v-model.optional` to store `undefined` for a cleared field. The model receives the cleared value when the field loses focus or you press Enter.
 
 ```vue
 <UInputNumber v-model.optional="quantity" />
