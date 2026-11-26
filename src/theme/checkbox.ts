@@ -16,7 +16,9 @@ export default (options: Required<ModuleOptions>) => ({
     base: 'rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none',
     indicator: 'flex items-center justify-center size-full text-inverted',
     icon: 'shrink-0',
-    wrapper: 'w-full',
+    // Same as `radio-group`: take the root's baseline from the label, not from the control
+    // whose content changes on check, so a horizontal `FormField` doesn't shift.
+    wrapper: 'w-full self-baseline',
     label: 'block font-medium text-default',
     description: 'text-muted'
   },
