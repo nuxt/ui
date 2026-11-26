@@ -2,6 +2,8 @@
 
 exports[`Avatar > renders with alt correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span data-slot="fallback" class="font-medium truncate text-muted">BC</span></span>"`;
 
+exports[`Avatar > renders with alt starting a word with an emoji correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span data-slot="fallback" class="font-medium truncate text-muted">B👋</span></span>"`;
+
 exports[`Avatar > renders with as (object) correctly 1`] = `
 "<section data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base">
   <p src="https://github.com/benjamincanac.png" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></p>
