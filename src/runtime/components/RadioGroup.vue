@@ -226,12 +226,14 @@ function onUpdate(value: any) {
         </slot>
       </legend>
 
-      <component :is="isListVariant ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" data-slot="item" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], disabled: item.disabled || disabled })">
+      <component :is="isListVariant ? 'div' : Label" v-for="(item, index) in normalizedItems" :key="item.value" data-slot="item" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], disabled: item.disabled || disabled })">
         <div data-slot="container" :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
           <RRadioGroupItem
             :id="item.id"
             :value="item.value"
             :disabled="item.disabled || disabled"
+            :aria-labelledby="!isListVariant && (item.label || !!slots.label) ? `${id}-item-${index}-label` : undefined"
+            :aria-describedby="(item.description || !!slots.description) ? `${id}-item-${index}-description` : undefined"
             data-slot="base"
             :class="ui.base({ class: [props.ui?.base, item.ui?.base], disabled: item.disabled || disabled })"
           >
@@ -241,12 +243,19 @@ function onUpdate(value: any) {
 
         <div v-if="labelIcon(item) || (item.label || !!slots.label) || (item.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
           <UIcon v-if="labelIcon(item)" :name="labelIcon(item)" data-slot="icon" :class="ui.icon({ class: [props.ui?.icon, item.ui?.icon] })" />
-          <component :is="isListVariant ? Label : 'div'" v-if="item.label || !!slots.label" :for="isListVariant ? item.id : undefined" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label], disabled: item.disabled || disabled })">
+          <component
+            :is="isListVariant ? Label : 'div'"
+            v-if="item.label || !!slots.label"
+            :id="isListVariant ? undefined : `${id}-item-${index}-label`"
+            :for="isListVariant ? item.id : undefined"
+            data-slot="label"
+            :class="ui.label({ class: [props.ui?.label, item.ui?.label], disabled: item.disabled || disabled })"
+          >
             <slot name="label" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
               {{ item.label }}
             </slot>
           </component>
-          <p v-if="item.description || !!slots.description" data-slot="description" :class="ui.description({ class: [props.ui?.description, item.ui?.description], disabled: item.disabled || disabled })">
+          <p v-if="item.description || !!slots.description" :id="`${id}-item-${index}-description`" data-slot="description" :class="ui.description({ class: [props.ui?.description, item.ui?.description], disabled: item.disabled || disabled })">
             <slot name="description" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
               {{ item.description }}
             </slot>
