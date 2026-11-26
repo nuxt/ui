@@ -242,13 +242,18 @@ const editor = useEditor({
   contentType: contentType.value,
   extensions: extensions.value,
   editorProps: editorProps.value,
-  onCreate: ({ editor }) => {
+  onCreate: (event) => {
     // Force placeholder decorations to render immediately without needing focus
     if (props.placeholder) {
-      editor.view.dispatch(editor.state.tr)
+      event.editor.view.dispatch(event.editor.state.tr)
     }
+
+    props.onCreate?.(event)
   },
-  onUpdate: ({ editor, transaction, appendedTransactions }) => {
+  onUpdate: (event) => {
+    props.onUpdate?.(event)
+
+    const { editor, transaction, appendedTransactions } = event
     if (!transaction.docChanged && !appendedTransactions.some(tr => tr.docChanged)) {
       return
     }
