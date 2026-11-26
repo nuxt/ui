@@ -19,6 +19,34 @@ const AvatarGroupWrapper = defineComponent({
 </UAvatarGroup>`
 })
 
+const AvatarGroupOverflowTooltipWrapper = defineComponent({
+  components: {
+    UAvatar: Avatar,
+    UAvatarGroup: AvatarGroup
+  },
+  template: `<UAvatarGroup :max="2">
+  <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
+  <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
+  <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
+  <template #overflow="{ hiddenCount }">
+    <span :data-hidden-count="hiddenCount">+{{ hiddenCount }}</span>
+  </template>
+</UAvatarGroup>`
+})
+
+const AvatarGroupOverflowTextWrapper = defineComponent({
+  components: {
+    UAvatar: Avatar,
+    UAvatarGroup: AvatarGroup
+  },
+  template: `<UAvatarGroup :max="2">
+  <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
+  <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
+  <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
+  <template #overflow="{ hiddenCount }">{{ hiddenCount }} more</template>
+</UAvatarGroup>`
+})
+
 describe('AvatarGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const colors = Object.keys(theme.variants.color) as any
@@ -34,6 +62,22 @@ describe('AvatarGroup', () => {
     // Slots
     ['with default slot', {}]
   ])
+
+  it('exposes the hidden count to the overflow slot', async () => {
+    const wrapper = await mountSuspended(AvatarGroupOverflowTooltipWrapper)
+
+    const overflow = wrapper.find('[data-hidden-count="1"]')
+    expect(overflow.exists()).toBe(true)
+    expect(overflow.attributes('data-slot')).toBe('base')
+    expect(overflow.text()).toBe('+1')
+  })
+
+  it('renders text-only overflow slot content', async () => {
+    const wrapper = await mountSuspended(AvatarGroupOverflowTextWrapper)
+
+    expect(wrapper.text()).toContain('1 more')
+    expect(wrapper.text()).not.toContain('+1')
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(AvatarGroupWrapper, {
