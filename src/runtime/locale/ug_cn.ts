@@ -42,7 +42,8 @@ export default defineLocale<Messages>({
       error: 'يۈكلەش مەغلۇپ بولدى'
     },
     chatMessages: {
-      autoScroll: 'ئاستىغا سۈرۈش'
+      autoScroll: 'ئاستىغا سۈرۈش',
+      thinking: 'ئويلاۋاتىدۇ…'
     },
     chatPrompt: {
       placeholder: 'خەت كىرگۈزۈڭ…',

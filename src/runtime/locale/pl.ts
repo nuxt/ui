@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Nie udało się przesłać'
     },
     chatMessages: {
-      autoScroll: 'Przewiń na dół'
+      autoScroll: 'Przewiń na dół',
+      thinking: 'Myśli…'
     },
     chatPrompt: {
       placeholder: 'Tutaj wpisz swoją wiadomość…',

@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Не удалось загрузить'
     },
     chatMessages: {
-      autoScroll: 'Прокрутить вниз'
+      autoScroll: 'Прокрутить вниз',
+      thinking: 'Размышляет…'
     },
     chatPrompt: {
       placeholder: 'Введите ваше сообщение здесь…',

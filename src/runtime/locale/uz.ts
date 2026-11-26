@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Yuklab boʻlmadi'
     },
     chatMessages: {
-      autoScroll: 'Pastga oʻtish'
+      autoScroll: 'Pastga oʻtish',
+      thinking: 'Oʻylayapti…'
     },
     chatPrompt: {
       placeholder: 'Bu yerda savolingizni yozing…',

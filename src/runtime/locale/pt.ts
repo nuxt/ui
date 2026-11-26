@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Falha ao carregar'
     },
     chatMessages: {
-      autoScroll: 'Deslocar para baixo'
+      autoScroll: 'Deslocar para baixo',
+      thinking: 'A pensar…'
     },
     chatPrompt: {
       placeholder: 'Escreva a sua mensagem aqui…',

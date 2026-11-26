@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Prijenos nije uspio'
     },
     chatMessages: {
-      autoScroll: 'Pomakni na dno'
+      autoScroll: 'Pomakni na dno',
+      thinking: 'Razmišlja…'
     },
     chatPrompt: {
       placeholder: 'Upišite svoju poruku ovdje…',

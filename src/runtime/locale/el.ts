@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Η μεταφόρτωση απέτυχε'
     },
     chatMessages: {
-      autoScroll: 'Κύλιση προς τα κάτω'
+      autoScroll: 'Κύλιση προς τα κάτω',
+      thinking: 'Σκέφτεται…'
     },
     chatPrompt: {
       placeholder: 'Εδώ γράψτε το μήνυμά σας…',

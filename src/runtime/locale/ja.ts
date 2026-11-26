@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'アップロードに失敗しました'
     },
     chatMessages: {
-      autoScroll: '一番下までスクロール'
+      autoScroll: '一番下までスクロール',
+      thinking: '考えています…'
     },
     chatPrompt: {
       placeholder: 'ここにメッセージを入力してください…',

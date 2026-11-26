@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Nepavyko įkelti'
     },
     chatMessages: {
-      autoScroll: 'Slinkti žemyn'
+      autoScroll: 'Slinkti žemyn',
+      thinking: 'Mąsto…'
     },
     chatPrompt: {
       placeholder: 'Įveskite savo žinutę čia…',

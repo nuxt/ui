@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Upload failed'
     },
     chatMessages: {
-      autoScroll: 'Scroll to bottom'
+      autoScroll: 'Scroll to bottom',
+      thinking: 'Thinking…'
     },
     chatPrompt: {
       placeholder: 'Type your message here…',

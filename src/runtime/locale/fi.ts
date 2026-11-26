@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Lataus epäonnistui'
     },
     chatMessages: {
-      autoScroll: 'Vieritä alas'
+      autoScroll: 'Vieritä alas',
+      thinking: 'Ajattelee…'
     },
     chatPrompt: {
       placeholder: 'Kirjoita viestisi tähän…',

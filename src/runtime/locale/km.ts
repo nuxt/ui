@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'ការផ្ទុកឡើងបានបរាជ័យ'
     },
     chatMessages: {
-      autoScroll: 'រំកិលចុះក្រោម'
+      autoScroll: 'រំកិលចុះក្រោម',
+      thinking: 'កំពុងគិត…'
     },
     chatPrompt: {
       placeholder: 'វាយសាររបស់អ្នកនៅទីនេះ…',

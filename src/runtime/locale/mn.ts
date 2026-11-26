@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Байршуулж чадсангүй'
     },
     chatMessages: {
-      autoScroll: 'Доош гүйлгэх'
+      autoScroll: 'Доош гүйлгэх',
+      thinking: 'Бодож байна…'
     },
     chatPrompt: {
       placeholder: 'Энд мессежээ бичнэ үү…',

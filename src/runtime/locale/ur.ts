@@ -42,7 +42,8 @@ export default defineLocale<Messages>({
       error: 'اپ لوڈ ناکام ہو گیا'
     },
     chatMessages: {
-      autoScroll: 'نیچے سکرول کریں'
+      autoScroll: 'نیچے سکرول کریں',
+      thinking: 'سوچ رہا ہے…'
     },
     chatPrompt: {
       placeholder: 'یہاں اپنا پیغام لکھیں…',

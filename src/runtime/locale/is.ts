@@ -41,7 +41,8 @@ export default defineLocale<Messages>({
       error: 'Upphleðsla mistókst'
     },
     chatMessages: {
-      autoScroll: 'Skruna niður'
+      autoScroll: 'Skruna niður',
+      thinking: 'Hugsar…'
     },
     chatPrompt: {
       placeholder: 'Skrifaðu skilaboðin þín hér…',
