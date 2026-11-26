@@ -24,6 +24,15 @@ props:
 ---
 ::
 
+### Model modifiers
+
+For empty or whitespace-only text, `v-model.optional` stores `undefined` and `v-model.nullable` stores `null`.
+
+```vue
+<UTextarea v-model.optional="notes" />
+<UTextarea v-model.nullable="description" />
+```
+
 ### Rows
 
 Use the `rows` prop to set the number of rows. Defaults to `3`.
