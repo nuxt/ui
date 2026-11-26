@@ -11,10 +11,18 @@ export default defineTheme({
     toggle: 'lg:hidden',
     content: 'lg:hidden',
     overlay: 'lg:hidden',
-    header: 'px-(--ui-gutter) h-(--ui-header-height) shrink-0 flex items-center justify-between gap-3',
     body: 'p-(--ui-gutter) overflow-y-auto'
   },
   variants: {
+    // The modal opens under the header, which stays above it. The header sets its `top` to where
+    // it ends when the menu opens, the header height is the fallback.
+    mode: {
+      modal: {
+        content: 'top-(--ui-header-height) z-40'
+      },
+      slideover: '',
+      drawer: ''
+    },
     toggleSide: {
       left: {
         toggle: '-ms-1.5'
