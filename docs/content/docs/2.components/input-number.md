@@ -45,6 +45,14 @@ props:
 This component relies on the [`@internationalized/number`](https://react-spectrum.adobe.com/internationalized/number/index.html) package which provides utilities for formatting and parsing numbers across locales and numbering systems.
 ::
 
+### Model modifiers
+
+Use `v-model.optional` to store `undefined` when the field is cleared.
+
+```vue
+<UInputNumber v-model.optional="quantity" />
+```
+
 ### Min / Max
 
 Use the `min` and `max` props to set the minimum and maximum values of the InputNumber.

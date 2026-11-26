@@ -24,6 +24,15 @@ props:
 ---
 ::
 
+### Model modifiers
+
+For empty or whitespace-only input, `v-model.optional` stores `undefined` and `v-model.nullable` stores `null`.
+
+```vue
+<UInput v-model.optional="displayName" />
+<UInput v-model.nullable="nickname" />
+```
+
 ### Type
 
 Use the `type` prop to change the input type. Defaults to `text`.
