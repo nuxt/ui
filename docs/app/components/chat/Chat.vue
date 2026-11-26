@@ -411,7 +411,11 @@ function clearMessages() {
         </template>
 
         <template #indicator>
-          <UChatTool :icon="studioIcons.brain" text="Thinking..." streaming />
+          <div class="flex items-center gap-1.5">
+            <ChatIndicator />
+
+            <UChatShimmer text="Thinking..." class="text-sm" />
+          </div>
         </template>
 
         <template #part="{ part, message, streaming }">
@@ -419,7 +423,7 @@ function clearMessages() {
             v-if="isReasoningUIPart(part)"
             :text="part.text"
             :streaming="isPartStreaming(part, streaming)"
-            :icon="studioIcons.brain"
+            chevron="leading"
           >
             <ChatMarkdown
               :value="part.text"
