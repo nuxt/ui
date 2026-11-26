@@ -1,10 +1,11 @@
-import { describe, it, expect, test } from 'vitest'
+import { beforeAll, describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import type { Component } from 'vue'
 import { defineComponent, h, ref } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import SelectMenu from '../../src/runtime/components/SelectMenu.vue'
+import { loadVirtualizer } from '../utils/virtualizer'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
 import { flushPromises, mount } from '@vue/test-utils'
@@ -40,6 +41,8 @@ describe('SelectMenu', () => {
   const itemsWithDescription = [...items.map(item => ({ ...item, description: 'Description' }))]
 
   const props = { open: true, portal: false, items }
+
+  beforeAll(() => loadVirtualizer(SelectMenu, { props: { ...props, virtualize: true } }))
 
   renderEach(SelectMenu, [
     // Props

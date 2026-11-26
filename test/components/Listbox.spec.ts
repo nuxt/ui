@@ -1,4 +1,4 @@
-import { describe, it, expect, test } from 'vitest'
+import { beforeAll, describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises, mount } from '@vue/test-utils'
@@ -8,6 +8,7 @@ import { expectEmitPayloadType } from '../utils/types'
 import theme from '#build/ui/listbox'
 import type { FormInputEvents } from '../../src/module'
 import Listbox from '../../src/runtime/components/Listbox.vue'
+import { loadVirtualizer } from '../utils/virtualizer'
 
 describe('Listbox', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -33,6 +34,8 @@ describe('Listbox', () => {
   const itemsWithDescription = items.map(item => ({ ...item, description: 'Description' }))
 
   const props = { items }
+
+  beforeAll(() => loadVirtualizer(Listbox, { props: { ...props, virtualize: true } }))
 
   renderEach(Listbox, [
     // Props

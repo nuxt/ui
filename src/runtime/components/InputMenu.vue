@@ -251,7 +251,7 @@ export interface InputMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
 import { computed, ref, useAttrs, useTemplateRef, toRef, onMounted, onScopeDispose, toRaw, nextTick, watch } from 'vue'
-import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, ComboboxRoot, ComboboxInput, ComboboxAnchor, ComboboxEmpty, ComboboxTrigger, ComboboxCancel, ComboboxGroup, ComboboxLabel, ComboboxContent, ComboboxVirtualizer, ComboboxItem, ComboboxItemIndicator, ComboboxSeparator, ComboboxArrow, ComboboxPortal, AutocompleteRoot, AutocompleteInput, AutocompleteAnchor, AutocompleteEmpty, AutocompleteTrigger, AutocompleteCancel, AutocompleteGroup, AutocompleteLabel, AutocompleteContent, AutocompleteVirtualizer, AutocompleteItem, AutocompleteItemIndicator, AutocompleteSeparator, AutocompleteArrow, AutocompletePortal } from 'reka-ui'
+import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, ComboboxRoot, ComboboxInput, ComboboxAnchor, ComboboxEmpty, ComboboxTrigger, ComboboxCancel, ComboboxGroup, ComboboxLabel, ComboboxContent, ComboboxItem, ComboboxItemIndicator, ComboboxSeparator, ComboboxArrow, ComboboxPortal, AutocompleteRoot, AutocompleteInput, AutocompleteAnchor, AutocompleteEmpty, AutocompleteTrigger, AutocompleteCancel, AutocompleteGroup, AutocompleteLabel, AutocompleteContent, AutocompleteItem, AutocompleteItemIndicator, AutocompleteSeparator, AutocompleteArrow, AutocompletePortal } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
@@ -266,6 +266,7 @@ import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { compare, get, getDisplayValue, getSelectedItem, isArrayOfArray, looseToNumber } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
+import { ComboboxVirtualizer, loadVirtualizers } from '../utils/lazy-virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -273,7 +274,7 @@ import UButton from './Button.vue'
 import UChip from './Chip.vue'
 
 const Combobox = { Root: ComboboxRoot, Input: ComboboxInput, Anchor: ComboboxAnchor, Empty: ComboboxEmpty, Trigger: ComboboxTrigger, Cancel: ComboboxCancel, Group: ComboboxGroup, Label: ComboboxLabel, Content: ComboboxContent, Virtualizer: ComboboxVirtualizer, Item: ComboboxItem, ItemIndicator: ComboboxItemIndicator, Separator: ComboboxSeparator, Arrow: ComboboxArrow, Portal: ComboboxPortal }
-const Autocomplete = { Root: AutocompleteRoot, Input: AutocompleteInput, Anchor: AutocompleteAnchor, Empty: AutocompleteEmpty, Trigger: AutocompleteTrigger, Cancel: AutocompleteCancel, Group: AutocompleteGroup, Label: AutocompleteLabel, Content: AutocompleteContent, Virtualizer: AutocompleteVirtualizer, Item: AutocompleteItem, ItemIndicator: AutocompleteItemIndicator, Separator: AutocompleteSeparator, Arrow: AutocompleteArrow, Portal: AutocompletePortal }
+const Autocomplete = { Root: AutocompleteRoot, Input: AutocompleteInput, Anchor: AutocompleteAnchor, Empty: AutocompleteEmpty, Trigger: AutocompleteTrigger, Cancel: AutocompleteCancel, Group: AutocompleteGroup, Label: AutocompleteLabel, Content: AutocompleteContent, Virtualizer: ComboboxVirtualizer, Item: AutocompleteItem, ItemIndicator: AutocompleteItemIndicator, Separator: AutocompleteSeparator, Arrow: AutocompleteArrow, Portal: AutocompletePortal }
 
 defineOptions({ inheritAttrs: false })
 
@@ -293,6 +294,8 @@ const emits = defineEmits<InputMenuEmits<T, VK, M, Mod, C>>()
 const slots = defineSlots<InputMenuSlots<T, VK, M, Mod, C>>()
 
 const props = useComponentProps<InputMenuProps<T, VK, M, Mod, C>>('inputMenu', _props)
+
+if (props.virtualize) loadVirtualizers().catch(() => {})
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
